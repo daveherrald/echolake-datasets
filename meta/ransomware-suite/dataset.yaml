@@ -1,0 +1,60 @@
+defaults:
+  replay:
+    base_time: earliest
+    delta_factor: 1.0
+    target_time: now-1h
+  schema: raw
+dependencies:
+- dataset: github:daveherrald/echolake-datasets/splunk/ransomware-notes-bulk-creation
+  description: Ransom note creation detection
+  version: '*'
+- dataset: github:daveherrald/echolake-datasets/splunk/ryuk-test-files-detected
+  description: Ryuk ransomware test file detection
+  version: '*'
+- dataset: github:daveherrald/echolake-datasets/splunk/common-ransomware-extensions
+  description: File encryption with ransomware extensions
+  version: '*'
+- dataset: github:daveherrald/echolake-datasets/splunk/common-ransomware-notes
+  description: Common ransomware note patterns
+  version: '*'
+- dataset: github:daveherrald/echolake-datasets/splunk/clop-common-exec-parameter
+  description: Clop ransomware execution parameters
+  version: '*'
+- dataset: github:daveherrald/echolake-datasets/splunk/clop-ransomware-known-service-name
+  description: Clop ransomware service creation
+  version: '*'
+- dataset: github:daveherrald/echolake-datasets/splunk/ryuk-wake-on-lan-command
+  description: Ryuk Wake-on-LAN lateral movement
+  version: '*'
+files:
+  bundled: []
+  references: []
+metadata:
+  author: EchoLake Meta-Datasets
+  created: '2026-01-28'
+  description: Complete ransomware detection suite including multiple ransomware families (Ryuk, Clop, BlackCat, LockBit)
+    with file encryption, ransom note creation, and persistence techniques
+  mitre_attack:
+    tactics:
+    - impact
+    - defense-evasion
+    techniques:
+    - id: T1486
+      name: Data Encrypted for Impact
+      tactics:
+      - impact
+    - id: T1490
+      name: Inhibit System Recovery
+      tactics:
+      - impact
+    - id: T1489
+      name: Service Stop
+      tactics:
+      - impact
+  name: ransomware-suite
+  tags:
+  - ransomware
+  - malware
+  - impact
+  - meta-dataset
+  version: 1.0.0

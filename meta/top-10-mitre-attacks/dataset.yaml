@@ -1,0 +1,109 @@
+defaults:
+  replay:
+    base_time: earliest
+    delta_factor: 1.0
+    target_time: now-1h
+  schema: raw
+dependencies:
+- dataset: github:daveherrald/echolake-datasets/splunk/access-lsass-memory-for-dump-creation
+  description: T1003.001 - Credential dumping via LSASS
+  version: '*'
+- dataset: github:daveherrald/echolake-datasets/splunk/malicious-powershell-process-encoded-command
+  description: T1059.001 - PowerShell execution
+  version: '*'
+- dataset: github:daveherrald/echolake-datasets/splunk/windows-event-log-cleared
+  description: T1070.001 - Event log clearing
+  version: '*'
+- dataset: github:daveherrald/echolake-datasets/splunk/aws-console-login-failed-during-mfa-challenge
+  description: T1078.004 - Cloud account abuse
+  version: '*'
+- dataset: github:daveherrald/echolake-datasets/splunk/remote-desktop-network-traffic
+  description: T1021.001 - RDP lateral movement
+  version: '*'
+- dataset: github:daveherrald/echolake-datasets/splunk/windows-process-injection-wermgr-child-process
+  description: T1055 - Process injection
+  version: '*'
+- dataset: github:daveherrald/echolake-datasets/splunk/ransomware-notes-bulk-creation
+  description: T1486 - Ransomware encryption
+  version: '*'
+- dataset: github:daveherrald/echolake-datasets/splunk/registry-keys-used-for-persistence
+  description: T1547.001 - Registry persistence
+  version: '*'
+- dataset: github:daveherrald/echolake-datasets/splunk/disabling-defender-services
+  description: T1562.001 - Disabling security tools
+  version: '*'
+- dataset: github:daveherrald/echolake-datasets/splunk/log4shell-jndi-payload-injection-attempt
+  description: T1190 - Web application exploitation
+  version: '*'
+files:
+  bundled: []
+  references: []
+metadata:
+  author: EchoLake Meta-Datasets
+  created: '2026-01-28'
+  description: Top 10 most commonly observed MITRE ATT&CK techniques in real-world attacks - essential detection scenarios
+    for any SOC
+  mitre_attack:
+    tactics:
+    - initial-access
+    - execution
+    - persistence
+    - privilege-escalation
+    - defense-evasion
+    - credential-access
+    - lateral-movement
+    - impact
+    techniques:
+    - id: T1003.001
+      name: LSASS Memory
+      tactics:
+      - credential-access
+    - id: T1059.001
+      name: PowerShell
+      tactics:
+      - execution
+    - id: T1070.001
+      name: Clear Windows Event Logs
+      tactics:
+      - defense-evasion
+    - id: T1078.004
+      name: Cloud Accounts
+      tactics:
+      - defense-evasion
+      - persistence
+      - privilege-escalation
+      - initial-access
+    - id: T1021.001
+      name: Remote Desktop Protocol
+      tactics:
+      - lateral-movement
+    - id: T1055
+      name: Process Injection
+      tactics:
+      - defense-evasion
+      - privilege-escalation
+    - id: T1486
+      name: Data Encrypted for Impact
+      tactics:
+      - impact
+    - id: T1547.001
+      name: Registry Run Keys / Startup Folder
+      tactics:
+      - persistence
+      - privilege-escalation
+    - id: T1562.001
+      name: Disable or Modify Tools
+      tactics:
+      - defense-evasion
+    - id: T1190
+      name: Exploit Public-Facing Application
+      tactics:
+      - initial-access
+  name: top-10-mitre-attacks
+  tags:
+  - top-10
+  - essential
+  - mitre-attack
+  - soc
+  - meta-dataset
+  version: 1.0.0
