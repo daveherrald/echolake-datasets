@@ -1,0 +1,33 @@
+# Windows AD Domain Root ACL Deletion
+
+**Type:** TTP
+
+**Author:** Dean Luxton
+
+## Description
+
+ACL deletion performed on the domain root object, significant AD change with high impact. Following MS guidance all changes at this level should be reviewed. Drill into the logonID within EventCode 4624 for information on the source device during triage.
+
+## MITRE ATT&CK
+
+- T1222.001
+- T1484
+
+## Analytic Stories
+
+- Sneaky Active Directory Persistence Tricks
+
+## Data Sources
+
+- Windows Event Log Security 5136
+
+## Sample Data
+
+- **Source:** XmlWinEventLog:Security
+  **Sourcetype:** XmlWinEventLog
+  **URL:** https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1222.001/dacl_abuse/domain_root_acl_deletion_windows-security-xml.log
+
+
+---
+
+*Source: [Splunk Security Content](detections/endpoint/windows_ad_domain_root_acl_deletion.yml)*

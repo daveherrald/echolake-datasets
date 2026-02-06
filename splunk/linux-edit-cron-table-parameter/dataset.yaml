@@ -1,0 +1,35 @@
+metadata:
+  name: linux-edit-cron-table-parameter
+  version: 7.0.0
+  description: The following analytic detects the suspicious editing of cron jobs
+    in Linux using the crontab command-line parameter (-e). It identifies this activity
+    by monitoring command-line executions involving 'crontab' and the edit parameter.
+    This behavior is significant for a SOC as cron job manipulations can indicate
+    unauthorized persistence attempts or scheduled malicious actions. If confirmed
+    malicious, this activity could lead to system compromise, unauthorized access,
+    or broader network compromise.
+  author: Teoderick Contreras, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - linux-privilege-escalation
+  - linux-persistence-techniques
+  - linux-living-off-the-land
+  mitre_attack:
+    techniques:
+    - id: T1053.003
+      name: Technique T1053.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053.003/crontab_edit_parameter/sysmon_linux.log
+    description: Syslog:Linux-Sysmon/Operational - sysmon:linux
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

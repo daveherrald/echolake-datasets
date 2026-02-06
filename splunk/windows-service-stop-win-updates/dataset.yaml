@@ -1,0 +1,34 @@
+metadata:
+  name: windows-service-stop-win-updates
+  version: 5.0.0
+  description: The following analytic detects the disabling of Windows Update services,
+    such as "Update Orchestrator Service for Windows Update," "WaaSMedicSvc," and
+    "Windows Update." It leverages Windows System Event ID 7040 logs to identify changes
+    in service start modes to 'disabled.' This activity is significant as it can indicate
+    an adversary's attempt to evade defenses by preventing critical updates, leaving
+    the system vulnerable to exploits. If confirmed malicious, this could allow attackers
+    to maintain
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - cisa-aa23-347a
+  - redline-stealer
+  mitre_attack:
+    techniques:
+    - id: T1489
+      name: Technique T1489
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/redline/win_update_services_stop/system.log
+    description: XmlWinEventLog:System - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

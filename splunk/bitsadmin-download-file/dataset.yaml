@@ -1,0 +1,41 @@
+metadata:
+  name: bitsadmin-download-file
+  version: 14.0.0
+  description: The following analytic detects the use of `bitsadmin.exe` with the
+    `transfer` parameter to download a remote object. It leverages data from Endpoint
+    Detection and Response (EDR) agents, focusing on process and command-line telemetry.
+    This activity is significant because `bitsadmin.exe` can be exploited to download
+    and execute malicious files without immediate detection. If confirmed malicious,
+    an attacker could use this technique to download and execute payloads, potentially
+    leading to code exec
+  author: Michael Haag, Sittikorn S
+  tags:
+  - ttp
+  - splunk-security-content
+  - ingress-tool-transfer
+  - bits-jobs
+  - darkside-ransomware
+  mitre_attack:
+    techniques:
+    - id: T1197
+      name: Technique T1197
+    - id: T1105
+      name: Technique T1105
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1197/atomic_red_team/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1197/atomic_red_team/crowdstrike_falcon.log
+    description: crowdstrike - crowdstrike:events:sensor
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

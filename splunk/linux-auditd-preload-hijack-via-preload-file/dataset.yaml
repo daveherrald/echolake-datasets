@@ -1,0 +1,37 @@
+metadata:
+  name: linux-auditd-preload-hijack-via-preload-file
+  version: 9.0.0
+  description: 'The following analytic detects suspicious preload hijacking via the
+    `preload` file, which may indicate an attacker''s attempt to intercept or manipulate
+    library loading processes.
+
+    The `preload` file can be used to force the loading of specific libraries before
+    others, potentially allowing malicious code to execute or alter application behavior.
+
+    By monitoring for unusual or unauthorized modifications to the `preload` file,
+    this analytic helps identify attempts to hijack preload mechanisms, enablin'
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - voidlink-cloud-native-linux-malware
+  - linux-living-off-the-land
+  - linux-privilege-escalation
+  mitre_attack:
+    techniques:
+    - id: T1574.006
+      name: Technique T1574.006
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1574.006/auditd_path_preload_file/path_preload.log
+    description: auditd - auditd
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

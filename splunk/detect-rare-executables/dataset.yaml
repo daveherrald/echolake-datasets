@@ -1,0 +1,40 @@
+metadata:
+  name: detect-rare-executables
+  version: 11.0.0
+  description: 'The following analytic detects the execution of rare processes that
+    appear only once across the network within a specified timeframe.
+
+    It leverages data from Endpoint Detection and Response (EDR) agents, focusing
+    on process execution logs.
+
+    This activity is significant for a SOC as it helps identify potentially malicious
+    activities or unauthorized software, which could indicate a security breach or
+    ongoing attack.
+
+    If confirmed malicious, such rare processes could lead to data theft, privilege
+    esca'
+  author: Bhavin Patel, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - china-nexus-threat-activity
+  - unusual-processes
+  - snappybee
+  mitre_attack:
+    techniques:
+    - id: T1204
+      name: Technique T1204
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1204/rare_executables/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

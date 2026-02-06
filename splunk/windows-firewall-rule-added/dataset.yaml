@@ -1,0 +1,35 @@
+metadata:
+  name: windows-firewall-rule-added
+  version: 3.0.0
+  description: This detection identifies instances where a Windows Firewall rule is
+    added by monitoring Event ID 4946 in the Windows Security Event Log. Firewall
+    rule modifications can indicate legitimate administrative actions, but they may
+    also signal unauthorized changes, misconfigurations, or malicious activity such
+    as attackers allowing traffic for backdoors or persistence mechanisms. By analyzing
+    fields like RuleName, RuleId, Computer, and ProfileChanged, security teams can
+    determine whether the change a
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - shrinklocker
+  - medusa-ransomware
+  - netsupport-rmm-tool-abuse
+  mitre_attack:
+    techniques:
+    - id: T1562.004
+      name: Technique T1562.004
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.004/firewall_win_event/added_rule/MPSSVC_Rule-Level_Policy_Change-4946.log
+    description: XmlWinEventLog:Security - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

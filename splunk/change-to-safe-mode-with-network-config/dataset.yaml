@@ -1,0 +1,34 @@
+metadata:
+  name: change-to-safe-mode-with-network-config
+  version: 7.0.0
+  description: The following analytic detects the execution of a suspicious `bcdedit`
+    command that configures a host to boot in safe mode with network support. It leverages
+    data from Endpoint Detection and Response (EDR) agents, focusing on command-line
+    executions involving `bcdedit.exe` with specific parameters. This activity is
+    significant because it is a known technique used by BlackMatter ransomware to
+    force a compromised host into safe mode for continued encryption. If confirmed
+    malicious, this could allo
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - black-basta-ransomware
+  - blackmatter-ransomware
+  mitre_attack:
+    techniques:
+    - id: T1490
+      name: Technique T1490
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1552.002/autoadminlogon/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,35 @@
+metadata:
+  name: windows-file-transfer-protocol-in-non-common-process-path
+  version: 8.0.0
+  description: The following analytic detects FTP connections initiated by processes
+    located in non-standard installation paths on Windows systems. It leverages Sysmon
+    EventCode 3 to identify network connections where the process image path does
+    not match common directories like "Program Files" or "Windows\System32". This
+    activity is significant as FTP is often used by adversaries and malware, such
+    as AgentTesla, for Command and Control (C2) communications to exfiltrate stolen
+    data. If confirmed malicious, thi
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - agenttesla
+  - snake-keylogger
+  - hellcat-ransomware
+  mitre_attack:
+    techniques:
+    - id: T1071.003
+      name: Technique T1071.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/agent_tesla/agent_tesla_ftp/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

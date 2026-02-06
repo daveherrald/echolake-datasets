@@ -1,0 +1,37 @@
+metadata:
+  name: windows-process-execution-in-temp-dir
+  version: 7.0.0
+  description: The following analytic identifies processes running from %temp% directory
+    file paths. It leverages data from Endpoint Detection and Response (EDR) agents,
+    focusing on specific process paths within the Endpoint data model. This activity
+    is significant because adversaries often use unconventional file paths to execute
+    malicious code without requiring administrative privileges. If confirmed malicious,
+    this behavior could indicate an attempt to bypass security controls, leading to
+    unauthorized softw
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - agenttesla
+  - xworm
+  - njrat
+  mitre_attack:
+    techniques:
+    - id: T1543
+      name: Technique T1543
+    - id: T1036.005
+      name: Technique T1036.005
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1036/process_temp_path/process_temp_path.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

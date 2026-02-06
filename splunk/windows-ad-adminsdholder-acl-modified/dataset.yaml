@@ -1,0 +1,33 @@
+metadata:
+  name: windows-ad-adminsdholder-acl-modified
+  version: 8.0.0
+  description: The following analytic detects modifications to the Access Control
+    List (ACL) of the AdminSDHolder object in a Windows domain, specifically the addition
+    of new rules. It leverages EventCode 5136 from the Security Event Log, focusing
+    on changes to the nTSecurityDescriptor attribute. This activity is significant
+    because the AdminSDHolder object secures privileged group members, and unauthorized
+    changes can allow attackers to establish persistence and escalate privileges.
+    If confirmed malicious, th
+  author: Mauricio Velazco, Dean Luxton, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - sneaky-active-directory-persistence-tricks
+  mitre_attack:
+    techniques:
+    - id: T1546
+      name: Technique T1546
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1546/adminsdholder_modified/windows-security.log
+    description: XmlWinEventLog:Security - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,33 @@
+metadata:
+  name: windows-cisco-secure-endpoint-stop-immunet-service-via-sfc
+  version: 3.0.0
+  description: The following analytic detects the use of the `sfc.exe` utility, in
+    order to stop the Immunet Protect service. The Sfc.exe utility is part of Cisco
+    Secure Endpoint installation. This detection leverages telemetry from the endpoint,
+    focusing on command-line executions involving the `-k` parameter. This activity
+    is significant as it indicates potential tampering with defensive mechanisms.
+    If confirmed malicious, attackers could partially blind the EDR, enabling further
+    compromise and lateral movem
+  author: Nasreddine Bencherchali, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - security-solution-tampering
+  mitre_attack:
+    techniques:
+    - id: T1562.001
+      name: Technique T1562.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.001/cisco_secure_endpoint_tampering/sfc_tampering.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

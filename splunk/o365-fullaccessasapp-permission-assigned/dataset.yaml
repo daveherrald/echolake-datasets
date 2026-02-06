@@ -1,0 +1,36 @@
+metadata:
+  name: o365-fullaccessasapp-permission-assigned
+  version: 6.0.0
+  description: The following analytic detects the assignment of the 'full_access_as_app'
+    permission to an application registration in Office 365 Exchange Online. This
+    detection leverages Office 365 management activity logs and filters Azure Active
+    Directory workload events to identify when the specific permission, identified
+    by GUID 'dc890d15-9560-4a4c-9b7f-a736ec74ec40', is granted. This activity is significant
+    because it provides extensive control over Office 365 operations, including access
+    to all mailboxes
+  author: Mauricio Velazco, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - office-365-persistence-mechanisms
+  - nobelium-group
+  mitre_attack:
+    techniques:
+    - id: T1098.002
+      name: Technique T1098.002
+    - id: T1098.003
+      name: Technique T1098.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1098.002/o365_full_access_as_app_permission_assigned/o365_full_access_as_app_permission_assigned.log
+    description: o365:management:activity - o365:management:activity
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

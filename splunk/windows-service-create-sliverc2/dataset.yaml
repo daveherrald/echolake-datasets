@@ -1,0 +1,35 @@
+metadata:
+  name: windows-service-create-sliverc2
+  version: 8.0.0
+  description: 'The following analytic detects the creation of a Windows service named
+    "Sliver" with the description "Sliver Implant," indicative of SliverC2 lateral
+    movement using the PsExec module. It leverages Windows EventCode 7045 from the
+    System Event log to identify this activity. This behavior is significant as it
+    may indicate an adversary''s attempt to establish persistence or execute commands
+    remotely. If confirmed malicious, this activity could allow attackers to maintain
+    control over the compromised '
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - bishopfox-sliver-adversary-emulation-framework
+  - compromised-windows-host
+  - hellcat-ransomware
+  mitre_attack:
+    techniques:
+    - id: T1569.002
+      name: Technique T1569.002
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1055/sliver/sliver_windows-system.log
+    description: XmlWinEventLog:System - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

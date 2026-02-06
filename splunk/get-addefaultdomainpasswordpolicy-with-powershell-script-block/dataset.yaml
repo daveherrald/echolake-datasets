@@ -1,0 +1,33 @@
+metadata:
+  name: get-addefaultdomainpasswordpolicy-with-powershell-script-block
+  version: 7.0.0
+  description: 'The following analytic detects the execution of the `Get-ADDefaultDomainPasswordPolicy`
+    PowerShell cmdlet, which is used to retrieve the password policy in a Windows
+    domain. This detection leverages PowerShell Script Block Logging (EventCode=4104)
+    to identify the specific command execution. Monitoring this activity is significant
+    as it can indicate an attempt to gather domain policy information, which is often
+    a precursor to further malicious actions. If confirmed malicious, this activity
+    could '
+  author: Teoderick Contreras, Mauricio Velazco, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - active-directory-discovery
+  mitre_attack:
+    techniques:
+    - id: T1201
+      name: Technique T1201
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1201/pwd_policy_discovery/windows-powershell-xml.log
+    description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

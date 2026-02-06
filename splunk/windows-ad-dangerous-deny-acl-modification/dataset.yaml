@@ -1,0 +1,31 @@
+metadata:
+  name: windows-ad-dangerous-deny-acl-modification
+  version: 6.0.0
+  description: This detection identifies an Active Directory access-control list (ACL)
+    modification event, which applies permissions that deny the ability to enumerate
+    permissions of the object.
+  author: Dean Luxton
+  tags:
+  - ttp
+  - splunk-security-content
+  - sneaky-active-directory-persistence-tricks
+  mitre_attack:
+    techniques:
+    - id: T1222.001
+      name: Technique T1222.001
+    - id: T1484
+      name: Technique T1484
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1222.001/dacl_abuse/hidden_object_windows-security-xml.log
+    description: XmlWinEventLog:Security - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

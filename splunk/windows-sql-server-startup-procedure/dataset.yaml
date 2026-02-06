@@ -1,0 +1,33 @@
+metadata:
+  name: windows-sql-server-startup-procedure
+  version: 3.0.0
+  description: This detection identifies when a startup procedure is registered or
+    executed in SQL Server. Startup procedures automatically execute when SQL Server
+    starts, making them an attractive persistence mechanism for attackers. The detection
+    monitors for suspicious stored procedure names and patterns that may indicate
+    malicious activity, such as attempts to execute operating system commands or gain
+    elevated privileges.
+  author: Michael Haag, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - sql-server-abuse
+  - hellcat-ransomware
+  mitre_attack:
+    techniques:
+    - id: T1505.001
+      name: Technique T1505.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1505.001/simulation/sql_startupprocedure_widows-application.log
+    description: XmlWinEventLog:Application - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

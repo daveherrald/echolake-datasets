@@ -1,0 +1,35 @@
+metadata:
+  name: windows-msiexec-spawn-discovery-command
+  version: 11.0.0
+  description: The following analytic detects MSIExec spawning multiple discovery
+    commands, such as Cmd.exe or PowerShell.exe. This behavior is identified using
+    data from Endpoint Detection and Response (EDR) agents, focusing on process creation
+    events where MSIExec is the parent process. This activity is significant because
+    MSIExec typically does not spawn child processes other than itself, making this
+    behavior highly suspicious. If confirmed malicious, an attacker could use these
+    discovery commands to gather
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - windows-system-binary-proxy-execution-msiexec
+  - medusa-ransomware
+  - water-gamayun
+  mitre_attack:
+    techniques:
+    - id: T1218.007
+      name: Technique T1218.007
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218.007/atomic_red_team/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

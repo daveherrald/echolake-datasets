@@ -1,0 +1,35 @@
+metadata:
+  name: sam-database-file-access-attempt
+  version: 7.0.0
+  description: The following analytic detects attempts to access the SAM, SYSTEM,
+    or SECURITY database files within the `windows\system32\config` directory using
+    Windows Security EventCode 4663. This detection leverages Windows Security Event
+    logs to identify unauthorized access attempts. Monitoring this activity is crucial
+    as it indicates potential credential access attempts, possibly exploiting vulnerabilities
+    like CVE-2021-36934. If confirmed malicious, an attacker could extract user passwords,
+    leading to u
+  author: Michael Haag, Mauricio Velazco, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - credential-dumping
+  - graceful-wipe-out-attack
+  - rhysida-ransomware
+  mitre_attack:
+    techniques:
+    - id: T1003.002
+      name: Technique T1003.002
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1003.002/serioussam/windows-xml.log
+    description: XmlWinEventLog:Security - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

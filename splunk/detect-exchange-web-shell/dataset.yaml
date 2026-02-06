@@ -1,0 +1,39 @@
+metadata:
+  name: detect-exchange-web-shell
+  version: 13.0.0
+  description: The following analytic identifies the creation of suspicious .aspx
+    files in known drop locations for Exchange exploitation, specifically targeting
+    paths associated with HAFNIUM group and vulnerabilities like ProxyShell and ProxyNotShell.
+    It leverages data from the Endpoint datamodel, focusing on process and filesystem
+    events. This activity is significant as it may indicate a web shell deployment,
+    a common method for persistent access and remote code execution. If confirmed
+    malicious, attackers c
+  author: Michael Haag, Shannon Davis, David Dorsey, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - proxynotshell
+  - cisa-aa22-257a
+  - hafnium-group
+  mitre_attack:
+    techniques:
+    - id: T1133
+      name: Technique T1133
+    - id: T1190
+      name: Technique T1190
+    - id: T1505.003
+      name: Technique T1505.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1505.003/windows-sysmon_proxylogon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

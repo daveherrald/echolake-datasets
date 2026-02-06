@@ -1,0 +1,33 @@
+metadata:
+  name: circle-ci-disable-security-job
+  version: 5.0.0
+  description: The following analytic detects the disabling of security jobs in CircleCI
+    pipelines. It leverages CircleCI log data, renaming and extracting fields such
+    as job names, workflow IDs, user information, commit messages, URLs, and branches.
+    The detection identifies mandatory jobs for each workflow and checks if they were
+    executed. This activity is significant because disabling security jobs can allow
+    malicious code to bypass security checks, leading to potential data breaches,
+    system downtime, and re
+  author: Patrick Bareiss, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - dev-sec-ops
+  mitre_attack:
+    techniques:
+    - id: T1554
+      name: Technique T1554
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1554/circle_ci_disable_security_job/circle_ci_disable_security_job.json
+    description: circleci - circleci
+    format: jsonl
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

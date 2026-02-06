@@ -1,0 +1,36 @@
+metadata:
+  name: linux-proxy-socks-curl
+  version: 9.0.0
+  description: The following analytic detects the use of the `curl` command with proxy-related
+    arguments such as `-x`, `socks`, `--preproxy`, and `--proxy`. This detection leverages
+    data from Endpoint Detection and Response (EDR) agents, focusing on command-line
+    executions and process details. This activity is significant as it may indicate
+    an adversary attempting to use a proxy to evade network monitoring and obscure
+    their actions. If confirmed malicious, this behavior could allow attackers to
+    bypass security
+  author: Michael Haag, Splunk, 0xC0FFEEEE, Github Community
+  tags:
+  - ttp
+  - splunk-security-content
+  - linux-living-off-the-land
+  - ingress-tool-transfer
+  mitre_attack:
+    techniques:
+    - id: T1090
+      name: Technique T1090
+    - id: T1095
+      name: Technique T1095
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1105/atomic_red_team/curl-linux-sysmon.log
+    description: Syslog:Linux-Sysmon/Operational - sysmon:linux
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

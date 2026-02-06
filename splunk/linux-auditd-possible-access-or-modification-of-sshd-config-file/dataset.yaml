@@ -1,0 +1,40 @@
+metadata:
+  name: linux-auditd-possible-access-or-modification-of-sshd-config-file
+  version: 8.0.0
+  description: 'The following analytic detects access, deletion or modification of
+    the ssh_config file on Linux systems.
+
+    It leverages data from Linux Auditd, focusing on events of type PATH with a nametype
+    of ("NORMAL", "CREATE", "DELETE").
+
+    This activity could be significant because unauthorized changes to ssh_config
+    can allow threat actors to redirect port connections or use unauthorized keys,
+    potentially compromising the system.
+
+    Correlate this with related EXECVE or PROCTITLE events to identify the process
+    or'
+  author: Teoderick Contreras, Nasreddine Bencherchali, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - linux-living-off-the-land
+  - linux-privilege-escalation
+  - linux-persistence-techniques
+  mitre_attack:
+    techniques:
+    - id: T1098.004
+      name: Technique T1098.004
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1098.004/auditd_path_ssh_config/path_ssh_config.log
+    description: auditd - auditd
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

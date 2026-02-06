@@ -1,0 +1,35 @@
+metadata:
+  name: system-user-discovery-with-whoami
+  version: 7.0.0
+  description: The following analytic detects the execution of `whoami.exe` without
+    any arguments. It leverages data from Endpoint Detection and Response (EDR) agents,
+    focusing on process execution logs. This activity is significant because both
+    Red Teams and adversaries use `whoami.exe` to identify the current logged-in user,
+    aiding in situational awareness and Active Directory discovery. If confirmed malicious,
+    this behavior could indicate an attacker is gathering information to further compromise
+    the system
+  author: Mauricio Velazco, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - winter-vivern
+  - active-directory-discovery
+  - rhysida-ransomware
+  mitre_attack:
+    techniques:
+    - id: T1033
+      name: Technique T1033
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1033/AD_discovery/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

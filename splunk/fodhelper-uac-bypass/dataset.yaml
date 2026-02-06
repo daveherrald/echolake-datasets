@@ -1,0 +1,37 @@
+metadata:
+  name: fodhelper-uac-bypass
+  version: 11.0.0
+  description: The following analytic detects the execution of fodhelper.exe, which
+    is known to exploit a User Account Control (UAC) bypass by leveraging specific
+    registry keys. The detection method uses Endpoint Detection and Response (EDR)
+    telemetry to identify when fodhelper.exe spawns a child process and accesses the
+    registry keys. This activity is significant because it indicates a potential privilege
+    escalation attempt by an attacker. If confirmed malicious, the attacker could
+    execute commands with eleva
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - icedid
+  - valleyrat
+  - compromised-windows-host
+  mitre_attack:
+    techniques:
+    - id: T1112
+      name: Technique T1112
+    - id: T1548.002
+      name: Technique T1548.002
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1548.002/atomic_red_team/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

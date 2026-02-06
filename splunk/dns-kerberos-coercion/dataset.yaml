@@ -1,0 +1,40 @@
+metadata:
+  name: dns-kerberos-coercion
+  version: 1.0.0
+  description: Detects DNS-based Kerberos coercion attacks where adversaries inject
+    marshaled credential structures into DNS records to spoof SPNs and redirect authentication
+    such as in CVE-2025-33073. This detection leverages suricata looking for specific
+    CREDENTIAL_TARGET_INFORMATION structures in DNS queries.
+  author: Raven Tait, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - compromised-windows-host
+  - suspicious-dns-traffic
+  - local-privilege-escalation-with-krbrelayup
+  mitre_attack:
+    techniques:
+    - id: T1557.001
+      name: Technique T1557.001
+    - id: T1187
+      name: Technique T1187
+    - id: T1071.004
+      name: Technique T1071.004
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1071.004/kerberos_coercion/suricata.log
+    description: Suricata - suricata
+    format: text
+    schema: raw
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1071.004/kerberos_coercion/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

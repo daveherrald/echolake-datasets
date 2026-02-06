@@ -1,0 +1,35 @@
+metadata:
+  name: protocol-or-port-mismatch
+  version: 8.0.0
+  description: The following analytic identifies network traffic where the higher
+    layer protocol does not match the expected port, such as non-HTTP traffic on TCP
+    port 80. It leverages data from network traffic inspection technologies like Bro
+    or Palo Alto Networks firewalls. This activity is significant because it may indicate
+    attempts to bypass firewall restrictions or conceal malicious communications.
+    If confirmed malicious, this behavior could allow attackers to evade detection,
+    maintain persistence, or ex
+  author: Rico Valdez, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - prohibited-traffic-allowed-or-protocol-mismatch
+  - command-and-control
+  - cisco-secure-firewall-threat-defense-analytics
+  mitre_attack:
+    techniques:
+    - id: T1048.003
+      name: Technique T1048.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_secure_firewall_threat_defense/connection_event/connection_events.log
+    description: not_applicable - cisco:sfw:estreamer
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,32 @@
+metadata:
+  name: esxi-vib-acceptance-level-tampering
+  version: 2.0.0
+  description: This detection identifies changes to the VIB (vSphere Installation
+    Bundle) acceptance level on an ESXi host. Modifying the acceptance level, such
+    as setting it to CommunitySupported, lowers the system's integrity enforcement
+    and may allow the installation of unsigned or unverified software.
+  author: Raven Tait, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - esxi-post-compromise
+  - black-basta-ransomware
+  - china-nexus-threat-activity
+  mitre_attack:
+    techniques:
+    - id: T1562
+      name: Technique T1562
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562/esxi_vib_acceptance_level_tampering/esxi_vib_acceptance_level_tampering.log
+    description: vmware:esxlog - vmw-syslog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

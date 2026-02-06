@@ -1,0 +1,37 @@
+metadata:
+  name: mmc-lolbas-execution-process-spawn
+  version: 8.0.0
+  description: The following analytic identifies `mmc.exe` spawning a LOLBAS execution
+    process. It leverages data from Endpoint Detection and Response (EDR) agents,
+    focusing on process creation events where `mmc.exe` is the parent process. This
+    activity is significant because adversaries can abuse the DCOM protocol and MMC20
+    COM object to execute malicious code, using Windows native binaries documented
+    by the LOLBAS project. If confirmed malicious, this behavior could indicate lateral
+    movement, allowing attack
+  author: Mauricio Velazco, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - active-directory-lateral-movement
+  - living-off-the-land
+  - water-gamayun
+  mitre_attack:
+    techniques:
+    - id: T1021.003
+      name: Technique T1021.003
+    - id: T1218.014
+      name: Technique T1218.014
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1021.003/lateral_movement_lolbas/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

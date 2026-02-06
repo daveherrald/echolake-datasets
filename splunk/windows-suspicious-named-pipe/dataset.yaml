@@ -1,0 +1,37 @@
+metadata:
+  name: windows-suspicious-named-pipe
+  version: 1.0.0
+  description: "The following analytic detects the creation or connection to known\
+    \ suspicious named pipes.\nIt leverages Sysmon EventCodes 17 and 18 to identify\
+    \ known default pipe names used by malicious or suspicious tools.\nIf confirmed\
+    \ malicious, this could allow an attacker to abuse these to potentially gain privilege\
+    \ escalation, \npersistence, c2 communications, or further system compromise.\n"
+  author: Raven Tait, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - apt37-rustonotto-and-fadestealer
+  - blackbyte-ransomware
+  - brute-ratel-c4
+  mitre_attack:
+    techniques:
+    - id: T1559
+      name: Technique T1559
+    - id: T1021.002
+      name: Technique T1021.002
+    - id: T1055
+      name: Technique T1055
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1055/named_pipes/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

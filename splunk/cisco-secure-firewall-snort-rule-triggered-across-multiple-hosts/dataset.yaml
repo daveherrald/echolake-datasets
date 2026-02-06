@@ -1,0 +1,35 @@
+metadata:
+  name: cisco-secure-firewall-snort-rule-triggered-across-multiple-hosts
+  version: 3.0.0
+  description: This analytic identifies Snort intrusion signatures that have been
+    triggered by ten or more distinct internal IP addresses within a one-hour window.
+    It leverages Cisco Secure Firewall Threat Defense logs and focuses on the IntrusionEvent
+    event type to detect activity that may indicate broad targeting or mass exploitation
+    attempts. This behavior is often associated with opportunistic scanning, worm
+    propagation, or automated exploitation of known vulnerabilities across multiple
+    systems. If confirm
+  author: Nasreddine Bencherchali, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - cisco-secure-firewall-threat-defense-analytics
+  mitre_attack:
+    techniques:
+    - id: T1105
+      name: Technique T1105
+    - id: T1027
+      name: Technique T1027
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_secure_firewall_threat_defense/intrusion_event/intrusion_events.log
+    description: not_applicable - cisco:sfw:estreamer
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

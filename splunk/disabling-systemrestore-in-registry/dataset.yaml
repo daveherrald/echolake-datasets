@@ -1,0 +1,47 @@
+metadata:
+  name: disabling-systemrestore-in-registry
+  version: 12.0.0
+  description: The following analytic detects the modification of registry keys to
+    disable System Restore on a machine. It leverages data from the Endpoint.Registry
+    data model, specifically monitoring changes to registry paths associated with
+    System Restore settings. This activity is significant because disabling System
+    Restore can hinder recovery efforts and is a tactic often used by Remote Access
+    Trojans (RATs) to maintain persistence on an infected system. If confirmed malicious,
+    this action could prevent s
+  author: Teoderick Contreras, Splunk, Steven Dick
+  tags:
+  - ttp
+  - splunk-security-content
+  - windows-defense-evasion-tactics
+  - windows-registry-abuse
+  - njrat
+  mitre_attack:
+    techniques:
+    - id: T1490
+      name: Technique T1490
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.001/win_app_defender_disabling/windows-security.log
+    description: WinEventLog:Security - WinEventLog
+    format: text
+    schema: raw
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.001/win_app_defender_disabling/windows-system.log
+    description: WinEventLog:System - WinEventLog
+    format: text
+    schema: raw
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.001/win_app_defender_disabling/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.001/win_app_defender_disabling/windows-xml.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

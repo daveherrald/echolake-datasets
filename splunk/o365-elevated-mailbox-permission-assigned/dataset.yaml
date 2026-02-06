@@ -1,0 +1,33 @@
+metadata:
+  name: o365-elevated-mailbox-permission-assigned
+  version: 9.0.0
+  description: The following analytic identifies the assignment of elevated mailbox
+    permissions in an Office 365 environment via the Add-MailboxPermission operation.
+    It leverages logs from the Exchange workload in the o365_management_activity data
+    source, focusing on permissions such as FullAccess, ChangePermission, or ChangeOwner.
+    This activity is significant as it indicates potential unauthorized access or
+    control over mailboxes, which could lead to data exfiltration or privilege escalation.
+    If confirmed mal
+  author: Patrick Bareiss, Mauricio Velazco, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - office-365-collection-techniques
+  mitre_attack:
+    techniques:
+    - id: T1098.002
+      name: Technique T1098.002
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1114.002/suspicious_rights_delegation/suspicious_rights_delegation.json
+    description: o365:management:activity - o365:management:activity
+    format: jsonl
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

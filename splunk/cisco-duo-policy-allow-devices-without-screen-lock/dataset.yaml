@@ -1,0 +1,33 @@
+metadata:
+  name: cisco-duo-policy-allow-devices-without-screen-lock
+  version: 1.0.0
+  description: "The following analytic detects when a Duo policy is created or updated\
+    \ to allow devices without a screen lock requirement. It identifies this behavior\
+    \ \nby searching Duo administrator activity logs for policy creation or update\
+    \ events where the 'require_lock' setting is set to false. This action may indicate\
+    \ \na weakening of device security controls, potentially exposing the organization\
+    \ to unauthorized access if devices are lost or stolen. For a Security Operations\
+    \ \nCenter (SOC), identifying such"
+  author: Patrick Bareiss, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - cisco-duo-suspicious-activity
+  mitre_attack:
+    techniques:
+    - id: T1556
+      name: Technique T1556
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1556/cisco_duo_policy_allow_devices_without_screen_lock/cisco_duo_administrator.json
+    description: duo - cisco:duo:administrator
+    format: jsonl
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

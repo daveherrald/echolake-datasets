@@ -1,0 +1,33 @@
+metadata:
+  name: windows-modify-registry-usewuserver
+  version: 8.0.0
+  description: The following analytic detects a suspicious modification to the Windows
+    Update configuration registry key "UseWUServer." It leverages data from the Endpoint.Registry
+    data model to identify changes where the registry value is set to "0x00000001."
+    This activity is significant because it is commonly used by adversaries, including
+    malware like RedLine Stealer, to bypass detection mechanisms and potentially exploit
+    zero-day vulnerabilities. If confirmed malicious, this modification could allow
+    attack
+  author: Teoderick Contreras, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - redline-stealer
+  mitre_attack:
+    techniques:
+    - id: T1112
+      name: Technique T1112
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/redline/modify_registry/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

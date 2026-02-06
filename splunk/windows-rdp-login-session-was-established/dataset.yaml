@@ -1,0 +1,34 @@
+metadata:
+  name: windows-rdp-login-session-was-established
+  version: 2.0.0
+  description: The following analytic detects instances where a successful Remote
+    Desktop Protocol (RDP) login session was established, as indicated by Windows
+    Security Event ID 4624 with Logon Type 10. This event confirms that a user has
+    not only provided valid credentials but has also initiated a full interactive
+    RDP session. It is a key indicator of successful remote access to a Windows system.
+    When correlated with Event ID 1149, which logs RDP authentication success, this
+    analytic helps distinguish between
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - windows-rdp-artifacts-and-defense-evasion
+  - scattered-lapsus$-hunters
+  mitre_attack:
+    techniques:
+    - id: T1021.001
+      name: Technique T1021.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1021.001/rdp_session_established/4624_10_logon.log
+    description: XmlWinEventLog:Security - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

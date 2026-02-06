@@ -1,0 +1,42 @@
+metadata:
+  name: powershell-disable-security-monitoring
+  version: 11.0.0
+  description: 'The following analytic identifies attempts to disable Windows Defender
+
+    real-time behavior monitoring via PowerShell commands. It detects the use of specific
+
+    `Set-MpPreference` parameters that disable various security features. This activity
+
+    is significant as it is commonly used by malware such as RATs, bots, or Trojans
+
+    to evade detection by disabling antivirus protections. If confirmed malicious,
+    this
+
+    action could allow an attacker to operate undetected, leading to potential data
+
+    exfiltration, f'
+  author: Michael Haag, Nasreddine Bencherchali, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - ransomware
+  - revil-ransomware
+  - cisa-aa24-241a
+  mitre_attack:
+    techniques:
+    - id: T1562.001
+      name: Technique T1562.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.001/pwh_defender_disabling/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

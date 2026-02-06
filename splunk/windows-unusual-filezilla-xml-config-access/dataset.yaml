@@ -1,0 +1,33 @@
+metadata:
+  name: windows-unusual-filezilla-xml-config-access
+  version: 1.0.0
+  description: The following analytic identifies processes accessing FileZilla XML
+    config files such as recentservers.xml and sitemanager.xml. It leverages Windows
+    Security Event logs, specifically monitoring EventCode 4663, which tracks object
+    access events. This activity is significant because it can indicate unauthorized
+    access or manipulation of sensitive configuration files used by FileZilla, a popular
+    FTP client. If confirmed malicious, this could lead to data exfiltration, credential
+    theft, or further c
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - quasar-rat
+  mitre_attack:
+    techniques:
+    - id: T1552.001
+      name: Technique T1552.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1552.001/file_xml_config/filezilla_obj.log
+    description: XmlWinEventLog:Security - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

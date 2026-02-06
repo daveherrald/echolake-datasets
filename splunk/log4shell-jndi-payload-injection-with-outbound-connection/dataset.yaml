@@ -1,0 +1,40 @@
+metadata:
+  name: log4shell-jndi-payload-injection-with-outbound-connection
+  version: 5.0.0
+  description: The following analytic detects Log4Shell JNDI payload injections via
+    outbound connections. It identifies suspicious LDAP lookup functions in web logs,
+    such as `${jndi:ldap://PAYLOAD_INJECTED}`, and correlates them with network traffic
+    to known malicious IP addresses. This detection leverages the Web and Network_Traffic
+    data models in Splunk. Monitoring this activity is crucial as it targets vulnerabilities
+    in Java web applications using log4j, potentially leading to remote code execution.
+    If con
+  author: Jose Hernandez
+  tags:
+  - anomaly
+  - splunk-security-content
+  - log4shell-cve-2021-44228
+  - cisa-aa22-320a
+  mitre_attack:
+    techniques:
+    - id: T1190
+      name: Technique T1190
+    - id: T1133
+      name: Technique T1133
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/log4j_proxy_logs/log4j_proxy_logs.log
+    description: nginx - nginx:plus:kv
+    format: text
+    schema: raw
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/log4j_network_logs/log4j_network_logs.log
+    description: stream:Splunk_IP - stream:ip
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

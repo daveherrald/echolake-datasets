@@ -1,0 +1,36 @@
+metadata:
+  name: gcp-successful-single-factor-authentication
+  version: 9.0.0
+  description: The following analytic identifies a successful single-factor authentication
+    event against Google Cloud Platform (GCP) for an account without Multi-Factor
+    Authentication (MFA) enabled. It uses Google Workspace login event data to detect
+    instances where MFA is not utilized. This activity is significant as it may indicate
+    a misconfiguration, policy violation, or potential account takeover attempt. If
+    confirmed malicious, an attacker could gain unauthorized access to GCP resources,
+    potentially leadi
+  author: Bhavin Patel, Mauricio Velazco, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - gcp-account-takeover
+  - scattered-lapsus$-hunters
+  mitre_attack:
+    techniques:
+    - id: T1078.004
+      name: Technique T1078.004
+    - id: T1586.003
+      name: Technique T1586.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1078.004/gcp_single_factor_auth/gws_login.log
+    description: gws:reports:login - gws:reports:login
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

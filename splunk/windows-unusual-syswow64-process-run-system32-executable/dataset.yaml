@@ -1,0 +1,35 @@
+metadata:
+  name: windows-unusual-syswow64-process-run-system32-executable
+  version: 3.0.0
+  description: The following analytic detects an unusual process execution pattern
+    where a process running from C:\Windows\SysWOW64\ attempts to execute a binary
+    from C:\Windows\System32\. In a typical Windows environment, 32-bit processes
+    under SysWOW64 should primarily interact with 32-bit binaries within the same
+    directory. However, an execution flow where a 32-bit process spawns a 64-bit binary
+    from System32 can indicate potential process injection, privilege escalation,
+    evasion techniques, or unauthorized
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - darkgate-malware
+  - salt-typhoon
+  - china-nexus-threat-activity
+  mitre_attack:
+    techniques:
+    - id: T1036.009
+      name: Technique T1036.009
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1036.009/32bit_process_execute_64bit/32bit_spawn_64bit.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

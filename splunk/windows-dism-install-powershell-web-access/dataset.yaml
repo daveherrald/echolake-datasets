@@ -1,0 +1,33 @@
+metadata:
+  name: windows-dism-install-powershell-web-access
+  version: 7.0.0
+  description: The following analytic detects the installation of PowerShell Web Access
+    using the Deployment Image Servicing and Management (DISM) tool. It leverages
+    Sysmon EventID 1 to identify the execution of `dism.exe` with specific parameters
+    related to enabling the WindowsPowerShellWebAccess feature. This activity is significant
+    because enabling PowerShell Web Access can facilitate remote execution of PowerShell
+    commands, potentially allowing an attacker to gain unauthorized access to systems
+    and network
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - cisa-aa24-241a
+  mitre_attack:
+    techniques:
+    - id: T1548.002
+      name: Technique T1548.002
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1548.002/atomic_red_team/dism_pswa_4688_windows-security.log
+    description: XmlWinEventLog:Security - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

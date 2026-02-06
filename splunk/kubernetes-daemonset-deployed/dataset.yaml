@@ -1,0 +1,33 @@
+metadata:
+  name: kubernetes-daemonset-deployed
+  version: 5.0.0
+  description: The following analytic detects the creation of a DaemonSet in a Kubernetes
+    cluster. This behavior is identified by monitoring Kubernetes Audit logs for the
+    creation event of a DaemonSet. DaemonSets ensure a specific pod runs on every
+    node, making them a potential vector for persistent access. This activity is significant
+    for a SOC as it could indicate an attempt to maintain persistent access to the
+    Kubernetes infrastructure. If confirmed malicious, it could lead to persistent
+    attacks, service di
+  author: Patrick Bareiss, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - kubernetes-security
+  mitre_attack:
+    techniques:
+    - id: T1204
+      name: Technique T1204
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1204/kubernetes_audit_daemonset_created/kubernetes_audit_daemonset_created.json
+    description: kubernetes - _json
+    format: jsonl
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

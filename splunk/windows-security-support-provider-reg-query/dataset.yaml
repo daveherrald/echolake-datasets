@@ -1,0 +1,35 @@
+metadata:
+  name: windows-security-support-provider-reg-query
+  version: 7.0.0
+  description: The following analytic identifies command-line activity querying the
+    registry for Security Support Providers (SSPs) related to Local Security Authority
+    (LSA) protection and configuration. This detection leverages Endpoint Detection
+    and Response (EDR) telemetry, focusing on processes accessing specific LSA registry
+    paths. Monitoring this activity is crucial as adversaries and post-exploitation
+    tools like winpeas may use it to gather information on LSA protections, potentially
+    leading to credentia
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - windows-post-exploitation
+  - prestige-ransomware
+  - sneaky-active-directory-persistence-tricks
+  mitre_attack:
+    techniques:
+    - id: T1547.005
+      name: Technique T1547.005
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/winpeas/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

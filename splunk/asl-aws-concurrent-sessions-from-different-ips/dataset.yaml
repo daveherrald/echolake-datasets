@@ -1,0 +1,35 @@
+metadata:
+  name: asl-aws-concurrent-sessions-from-different-ips
+  version: 9.0.0
+  description: 'The following analytic identifies an AWS IAM account with concurrent
+    sessions originating from more than one unique IP address within a 5-minute span.
+    This detection leverages AWS CloudTrail logs, specifically the `DescribeEventAggregates`
+    API call, to identify multiple IP addresses associated with the same user session.
+    This behavior is significant as it may indicate a session hijacking attack, where
+    an adversary uses stolen session cookies to access AWS resources from a different
+    location. If '
+  author: Patrick Bareiss, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - compromised-user-account
+  - aws-identity-and-access-management-account-takeover
+  - scattered-lapsus$-hunters
+  mitre_attack:
+    techniques:
+    - id: T1185
+      name: Technique T1185
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1185/aws_concurrent_sessions_from_different_ips/asl_ocsf_cloudtrail.json
+    description: aws_asl - aws:asl
+    format: jsonl
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

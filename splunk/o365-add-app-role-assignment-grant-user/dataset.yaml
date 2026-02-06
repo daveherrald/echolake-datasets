@@ -1,0 +1,34 @@
+metadata:
+  name: o365-add-app-role-assignment-grant-user
+  version: 8.0.0
+  description: The following analytic detects the addition of an application role
+    assignment grant to a user in Office 365. It leverages data from the `o365_management_activity`
+    dataset, specifically monitoring the "Add app role assignment grant to user" operation.
+    This activity is significant as it can indicate unauthorized privilege escalation
+    or the assignment of sensitive roles to users. If confirmed malicious, this could
+    allow an attacker to gain elevated permissions, potentially leading to unauthorized
+    a
+  author: Rod Soto, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - office-365-persistence-mechanisms
+  - cloud-federated-credential-abuse
+  mitre_attack:
+    techniques:
+    - id: T1136.003
+      name: Technique T1136.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1136.003/o365_new_federation/o365_new_federation.json
+    description: o365 - o365:management:activity
+    format: jsonl
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,35 @@
+metadata:
+  name: linux-auditd-whoami-user-discovery
+  version: 5.0.0
+  description: The following analytic detects the suspicious use of the whoami command,
+    which may indicate an attacker trying to gather information about the current
+    user account on a compromised system. The whoami command is commonly used to verify
+    user privileges and identity, especially during initial stages of an attack to
+    assess the level of access. By monitoring for unusual or unauthorized executions
+    of whoami, this analytic helps in identifying potential reconnaissance activities,
+    enabling security team
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - linux-living-off-the-land
+  - linux-privilege-escalation
+  - linux-persistence-techniques
+  mitre_attack:
+    techniques:
+    - id: T1033
+      name: Technique T1033
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1033/linux_auditd_whoami_new/linux_auditd_new_whoami.log
+    description: auditd - auditd
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,35 @@
+metadata:
+  name: cisco-tftp-server-configuration-for-data-exfiltration
+  version: 1.0.0
+  description: This analytic detects the configuration of TFTP services on Cisco IOS
+    devices that could be used to exfiltrate sensitive configuration files. Threat
+    actors like Static Tundra have been observed configuring TFTP servers to make
+    device configuration files accessible for exfiltration after gaining initial access.
+    The detection specifically looks for commands that expose critical configuration
+    files such as startup-config, running-config, and other sensitive system information
+    through TFTP. This act
+  author: Bhavin Patel, Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - cisco-smart-install-remote-code-execution-cve-2018-0171
+  mitre_attack:
+    techniques:
+    - id: T1567
+      name: Technique T1567
+    - id: T1005
+      name: Technique T1005
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/cisco/cisco_smart_install/cisco_ios.log
+    description: cisco:ios - cisco:ios
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

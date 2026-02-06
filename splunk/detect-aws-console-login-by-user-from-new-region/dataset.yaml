@@ -1,0 +1,37 @@
+metadata:
+  name: detect-aws-console-login-by-user-from-new-region
+  version: 7.0.0
+  description: The following analytic identifies AWS console login attempts by users
+    from a new region. It leverages AWS CloudTrail events and compares current login
+    regions against a baseline of previously seen regions for each user. This activity
+    is significant as it may indicate unauthorized access attempts or compromised
+    credentials. If confirmed malicious, an attacker could gain unauthorized access
+    to AWS resources, potentially leading to data breaches, resource manipulation,
+    or further lateral movement w
+  author: Bhavin Patel, Eric McGinnis Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - suspicious-aws-login-activities
+  - suspicious-cloud-authentication-activities
+  - aws-identity-and-access-management-account-takeover
+  mitre_attack:
+    techniques:
+    - id: T1535
+      name: Technique T1535
+    - id: T1586.003
+      name: Technique T1586.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/suspicious_behaviour/abnormally_high_cloud_instances_launched/cloudtrail_behavioural_detections.json
+    description: aws_cloudtrail - aws:cloudtrail
+    format: jsonl
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

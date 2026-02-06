@@ -1,0 +1,33 @@
+metadata:
+  name: cisco-duo-admin-login-unusual-browser
+  version: 1.0.0
+  description: The following analytic identifies instances where a Duo admin logs
+    in using a browser other than Chrome, which is considered unusual based on typical
+    access patterns. Please adjust as needed to your environment. The detection leverages
+    Duo activity logs ingested via the Cisco Security Cloud App and filters for admin
+    login actions where the browser is not Chrome. By renaming and aggregating relevant
+    fields such as user, browser, IP address, and location, the analytic highlights
+    potentially suspic
+  author: Patrick Bareiss, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - cisco-duo-suspicious-activity
+  mitre_attack:
+    techniques:
+    - id: T1556
+      name: Technique T1556
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1556/cisco_duo_unusual_admin_login/cisco_duo_activity.json
+    description: duo - cisco:duo:activity
+    format: jsonl
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

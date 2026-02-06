@@ -1,0 +1,31 @@
+metadata:
+  name: windows-chrome-extension-allowed-registry-modification
+  version: 1.0.0
+  description: The following analytic detects modifications to the Windows registry
+    keys that control the Chrome Extension Install Allowlist. Unauthorized changes
+    to these keys may indicate attempts to bypass Chrome extension restrictions or
+    install unapproved extensions. This detection helps identify potential security
+    policy violations or malicious activity targeting Chrome extension settings.
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - browser-hijacking
+  mitre_attack:
+    techniques:
+    - id: T1185
+      name: Technique T1185
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1185/chrome_allow_list/chrome_extension_allow_list.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

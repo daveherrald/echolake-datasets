@@ -1,0 +1,35 @@
+metadata:
+  name: time-provider-persistence-registry
+  version: 11.0.0
+  description: The following analytic detects suspicious modifications to the time
+    provider registry for persistence and autostart. It leverages data from the Endpoint.Registry
+    data model, focusing on changes to the "CurrentControlSet\\Services\\W32Time\\TimeProviders"
+    registry path. This activity is significant because such modifications are uncommon
+    and can indicate an attempt to establish persistence on a compromised host. If
+    confirmed malicious, this technique allows an attacker to maintain access and
+    exec
+  author: Teoderick Contreras, Splunk, Steven Dick
+  tags:
+  - ttp
+  - splunk-security-content
+  - hermetic-wiper
+  - windows-privilege-escalation
+  - windows-persistence-techniques
+  mitre_attack:
+    techniques:
+    - id: T1547.003
+      name: Technique T1547.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1547.003/timeprovider_reg/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

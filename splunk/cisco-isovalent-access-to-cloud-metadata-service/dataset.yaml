@@ -1,0 +1,32 @@
+metadata:
+  name: cisco-isovalent-access-to-cloud-metadata-service
+  version: 2.0.0
+  description: The following analytic detects workloads accessing the cloud instance
+    metadata service at 169.254.169.254. This IP is used by AWS, GCP and Azure metadata
+    endpoints and is frequently abused in SSRF or lateral movement scenarios to obtain
+    credentials and sensitive environment details. Monitor unexpected access to this
+    service from application pods or namespaces where such behavior is atypical.
+  author: Bhavin Patel, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - cisco-isovalent-suspicious-activity
+  - voidlink-cloud-native-linux-malware
+  mitre_attack:
+    techniques:
+    - id: T1552.005
+      name: Technique T1552.005
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1552.005/isovalent_cloud_metadata/process_connect.log
+    description: not_applicable - cisco:isovalent:processConnect
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,32 @@
+metadata:
+  name: windows-known-abused-dll-loaded-suspiciously
+  version: 8.0.0
+  description: The following analytic detects when DLLs with known abuse history are
+    loaded from an unusual location. This activity may represent an attacker performing
+    a DLL search order or sideload hijacking technique. These techniques are used
+    to gain persistence as well as elevate privileges on the target system. This detection
+    relies on Sysmon EID7 and is compatible with all Officla Sysmon TA versions.
+  author: Steven Dick
+  tags:
+  - ttp
+  - splunk-security-content
+  - windows-defense-evasion-tactics
+  - living-off-the-land
+  mitre_attack:
+    techniques:
+    - id: T1574.001
+      name: Technique T1574.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1574.002/hijacklibs/hijacklibs_sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

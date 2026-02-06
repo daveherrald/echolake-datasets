@@ -1,0 +1,35 @@
+metadata:
+  name: windows-netsupport-rmm-dll-loaded-by-uncommon-process
+  version: 1.0.0
+  description: 'The following analytic detects the loading of specific dynamic-link
+    libraries (DLLs) associated with the NetSupport Remote Manager (RMM) tool by any
+    process on a Windows system.
+
+    Modules such as CryptPak.dll, HTCTL32.DLL, IPCTL32.DLL, keyshowhook.dll, pcicapi.DLL,
+    PCICL32.DLL, and TCCTL32.DLL, are integral to NetSupport''s functionality.
+
+    This detection is particularly valuable when these modules are loaded by processes
+    running from unusual directories (e.g., Downloads, ProgramData, or user-specifi'
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - netsupport-rmm-tool-abuse
+  mitre_attack:
+    techniques:
+    - id: T1036
+      name: Technique T1036
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1036/netsupport_modules/net_support_module.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

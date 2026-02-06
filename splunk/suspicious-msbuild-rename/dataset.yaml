@@ -1,0 +1,37 @@
+metadata:
+  name: suspicious-msbuild-rename
+  version: 11.0.0
+  description: The following analytic detects the execution of renamed instances of
+    msbuild.exe. It leverages data from Endpoint Detection and Response (EDR) agents,
+    focusing on process names and original file names within the Endpoint data model.
+    This activity is significant because msbuild.exe is a legitimate tool often abused
+    by attackers to execute malicious code while evading detection. If confirmed malicious,
+    this behavior could allow an attacker to execute arbitrary code, potentially leading
+    to system c
+  author: Michael Haag, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - trusted-developer-utilities-proxy-execution-msbuild
+  - masquerading---rename-system-utilities
+  - living-off-the-land
+  mitre_attack:
+    techniques:
+    - id: T1036.003
+      name: Technique T1036.003
+    - id: T1127.001
+      name: Technique T1127.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1127.001/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

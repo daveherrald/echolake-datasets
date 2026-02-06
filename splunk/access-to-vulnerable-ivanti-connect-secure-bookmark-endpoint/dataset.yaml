@@ -1,0 +1,33 @@
+metadata:
+  name: access-to-vulnerable-ivanti-connect-secure-bookmark-endpoint
+  version: 5.0.0
+  description: The following analytic identifies access to the /api/v1/configuration/users/user-roles/user-role/rest-userrole1/web/web-bookmarks/bookmark
+    endpoint, which is associated with CVE-2023-46805 and CVE-2024-21887 vulnerabilities.
+    It detects this activity by monitoring for GET requests that receive a 403 Forbidden
+    response with an empty body. This behavior is significant as it indicates potential
+    exploitation attempts against Ivanti Connect Secure systems. If confirmed malicious,
+    attackers could explo
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - ivanti-connect-secure-vpn-vulnerabilities
+  - cisa-aa24-241a
+  mitre_attack:
+    techniques:
+    - id: T1190
+      name: Technique T1190
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/ivanti/ivanti_bookmark_web_access.log
+    description: suricata - suricata
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

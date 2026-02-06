@@ -1,0 +1,33 @@
+metadata:
+  name: windows-dns-query-request-to-tinyurl
+  version: 1.0.0
+  description: "The following analytic detects a process located in a potentially\
+    \ suspicious location making DNS queries to known URL shortening services, specifically\
+    \ tinyurl.\nURL shorteners are frequently used by threat actors to obfuscate malicious\
+    \ destinations, including phishing pages, malware distribution sites, or command-and-control\
+    \ (C2) endpoints. \nWhile tinyurl.com is a legitimate service, its use in enterprise\
+    \ environments\u2014particularly by non-browser processes or scripts\u2014should\
+    \ be considered suspicio"
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - malicious-inno-setup-loader
+  mitre_attack:
+    techniques:
+    - id: T1105
+      name: Technique T1105
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1105/tinyurl_dns_query/tinyurl.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

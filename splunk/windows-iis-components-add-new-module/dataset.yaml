@@ -1,0 +1,34 @@
+metadata:
+  name: windows-iis-components-add-new-module
+  version: 10.0.0
+  description: 'The following analytic detects the execution of AppCmd.exe to install
+    a new module in IIS. This detection leverages data from Endpoint Detection and
+    Response (EDR) agents, focusing on process names and command-line executions.
+    This activity is significant as adversaries may use it to install webshells or
+    backdoors, leading to credit card scraping, persistence, and further post-exploitation.
+    If confirmed malicious, this could allow attackers to maintain persistent access,
+    execute arbitrary code, '
+  author: Michael Haag, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - iis-components
+  - ghostredirector-iis-module-and-rungan-backdoor
+  mitre_attack:
+    techniques:
+    - id: T1505.004
+      name: Technique T1505.004
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1505.004/appcmd_install-windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

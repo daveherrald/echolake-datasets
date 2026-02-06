@@ -1,0 +1,32 @@
+metadata:
+  name: windows-modify-registry-on-smart-card-group-policy
+  version: 6.0.0
+  description: This analytic is developed to detect suspicious registry modifications
+    targeting the "scforceoption" key. Altering this key enforces smart card login
+    for all users, potentially disrupting normal access methods. Unauthorized changes
+    to this setting could indicate an attempt to restrict access or force a specific
+    authentication method, possibly signifying malicious intent to manipulate system
+    security protocols.
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - shrinklocker
+  mitre_attack:
+    techniques:
+    - id: T1112
+      name: Technique T1112
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1112/smart_card_group_policy/scforceoption-reg.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

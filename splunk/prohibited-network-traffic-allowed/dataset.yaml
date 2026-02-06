@@ -1,0 +1,35 @@
+metadata:
+  name: prohibited-network-traffic-allowed
+  version: 10.0.0
+  description: The following analytic detects instances where network traffic, identified
+    by port and transport layer protocol as prohibited in the "lookup_interesting_ports"
+    table, is allowed. It uses the Network_Traffic data model to cross-reference traffic
+    data against predefined security policies. This activity is significant for a
+    SOC as it highlights potential misconfigurations or policy violations that could
+    lead to unauthorized access or data exfiltration. If confirmed malicious, this
+    could allow attac
+  author: Rico Valdez, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - prohibited-traffic-allowed-or-protocol-mismatch
+  - ransomware
+  - command-and-control
+  mitre_attack:
+    techniques:
+    - id: T1048
+      name: Technique T1048
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_secure_firewall_threat_defense/connection_event/connection_events.log
+    description: not_applicable - cisco:sfw:estreamer
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

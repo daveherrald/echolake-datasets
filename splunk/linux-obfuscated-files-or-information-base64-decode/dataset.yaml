@@ -1,0 +1,33 @@
+metadata:
+  name: linux-obfuscated-files-or-information-base64-decode
+  version: 9.0.0
+  description: The following analytic detects the use of the base64 decode command
+    on Linux systems, which is often used to deobfuscate files. It leverages data
+    from Endpoint Detection and Response (EDR) agents, focusing on command-line executions
+    that include "base64 -d" or "base64 --decode". This activity is significant as
+    it may indicate an attempt to hide malicious payloads or scripts. If confirmed
+    malicious, an attacker could use this technique to execute hidden code, potentially
+    leading to unauthorized a
+  author: Michael Haag, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - linux-living-off-the-land
+  mitre_attack:
+    techniques:
+    - id: T1027
+      name: Technique T1027
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1027/atomic_red_team/linux-sysmon.log
+    description: Syslog:Linux-Sysmon/Operational - sysmon:linux
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

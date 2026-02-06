@@ -1,0 +1,42 @@
+metadata:
+  name: windows-rmm-named-pipe
+  version: 1.0.0
+  description: 'The following analytic detects the creation or connection to known
+    suspicious named pipes, which is a technique often used by offensive tools.
+
+    It leverages Sysmon EventCodes 17 and 18 to identify  known default pipe names
+    used by RMM tools.
+
+    If confirmed malicious,  this could allow an attacker to abuse these to potentially
+    gain persistence, command and control, or further system compromise.
+
+    '
+  author: Raven Tait, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - cactus-ransomware
+  - cisa-aa24-241a
+  - command-and-control
+  mitre_attack:
+    techniques:
+    - id: T1559
+      name: Technique T1559
+    - id: T1021.002
+      name: Technique T1021.002
+    - id: T1055
+      name: Technique T1055
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1055/named_pipes/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

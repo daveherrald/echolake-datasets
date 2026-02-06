@@ -1,0 +1,33 @@
+metadata:
+  name: windows-modify-registry-updateserviceurlalternate
+  version: 8.0.0
+  description: The following analytic detects a suspicious modification to the Windows
+    Update configuration registry key, specifically targeting the UpdateServiceUrlAlternate
+    setting. It leverages data from the Endpoint.Registry datamodel to identify changes
+    to this registry path. This activity is significant because adversaries, including
+    malware like RedLine Stealer, exploit this technique to bypass detection and deploy
+    additional payloads. If confirmed malicious, this modification could allow attackers
+    to r
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - redline-stealer
+  mitre_attack:
+    techniques:
+    - id: T1112
+      name: Technique T1112
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/redline/modify_registry/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

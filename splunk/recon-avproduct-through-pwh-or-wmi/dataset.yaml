@@ -1,0 +1,35 @@
+metadata:
+  name: recon-avproduct-through-pwh-or-wmi
+  version: 11.0.0
+  description: 'The following analytic detects suspicious PowerShell script execution
+    via EventCode 4104, specifically targeting checks for installed anti-virus products
+    using WMI or PowerShell commands. This detection leverages PowerShell Script Block
+    Logging to identify scripts containing keywords like "SELECT," "WMIC," "AntiVirusProduct,"
+    or "AntiSpywareProduct." This activity is significant as it is commonly used by
+    malware and APT actors to map running security applications or services, potentially
+    aiding '
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - xworm
+  - ransomware
+  - hermetic-wiper
+  mitre_attack:
+    techniques:
+    - id: T1592
+      name: Technique T1592
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/t1592/pwh_av_recon/windows-powershell-xml.log
+    description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

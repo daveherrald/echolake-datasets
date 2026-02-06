@@ -1,0 +1,33 @@
+metadata:
+  name: windows-net-system-service-discovery
+  version: 1.0.0
+  description: The following analytic detects the enumeration of Windows services
+    using the net start command, which is a built-in utility that lists all running
+    services on a system. Adversaries, system administrators, or automated tools may
+    use this command to gain situational awareness of what services are active, identify
+    potential security software, or discover opportunities for privilege escalation
+    and lateral movement. The execution of net start is often associated with reconnaissance
+    activity during th
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - lamehug
+  mitre_attack:
+    techniques:
+    - id: T1007
+      name: Technique T1007
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/lamehug/T1007/net_start/net_start.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

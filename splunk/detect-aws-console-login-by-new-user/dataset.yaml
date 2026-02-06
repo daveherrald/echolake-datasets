@@ -1,0 +1,36 @@
+metadata:
+  name: detect-aws-console-login-by-new-user
+  version: 9.0.0
+  description: The following analytic detects AWS console login events by new users.
+    It leverages AWS CloudTrail events and compares them against a lookup file of
+    previously seen users based on ARN values. This detection is significant because
+    a new user logging into the AWS console could indicate the creation of new accounts
+    or potential unauthorized access. If confirmed malicious, this activity could
+    lead to unauthorized access to AWS resources, data exfiltration, or further exploitation
+    within the cloud env
+  author: Rico Valdez, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - suspicious-cloud-authentication-activities
+  - aws-identity-and-access-management-account-takeover
+  mitre_attack:
+    techniques:
+    - id: T1552
+      name: Technique T1552
+    - id: T1586.003
+      name: Technique T1586.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/suspicious_behaviour/abnormally_high_cloud_instances_launched/cloudtrail_behavioural_detections.json
+    description: aws_cloudtrail - aws:cloudtrail
+    format: jsonl
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

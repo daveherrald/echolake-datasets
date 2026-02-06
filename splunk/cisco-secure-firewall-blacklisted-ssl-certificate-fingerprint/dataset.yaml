@@ -1,0 +1,39 @@
+metadata:
+  name: cisco-secure-firewall-blacklisted-ssl-certificate-fingerprint
+  version: 3.0.0
+  description: The following analytic detects the use of known suspicious SSL certificates
+    in any observed event where the SSL_CertFingerprint field is present. It leverages
+    Cisco Secure Firewall logs and compares the SSL certificate SHA1 fingerprint against
+    a blacklist of certificates associated with malware distribution, command and
+    control (C2) infrastructure, or phishing campaigns. This activity is significant
+    as adversaries often reuse or self-sign certificates across malicious infrastructure,
+    allowing de
+  author: Nasreddine Bencherchali, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - cisco-secure-firewall-threat-defense-analytics
+  mitre_attack:
+    techniques:
+    - id: T1587.002
+      name: Technique T1587.002
+    - id: T1588.004
+      name: Technique T1588.004
+    - id: T1071.001
+      name: Technique T1071.001
+    - id: T1573.002
+      name: Technique T1573.002
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_secure_firewall_threat_defense/connection_event/connection_events.log
+    description: not_applicable - cisco:sfw:estreamer
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,35 @@
+metadata:
+  name: delete-shadowcopy-with-powershell
+  version: 8.0.0
+  description: 'The following analytic detects the use of PowerShell to delete shadow
+    copies via the WMIC PowerShell module. It leverages EventCode 4104 and searches
+    for specific keywords like "ShadowCopy," "Delete," or "Remove" within the ScriptBlockText.
+    This activity is significant because deleting shadow copies is a common tactic
+    used by ransomware, such as DarkSide, to prevent data recovery. If confirmed malicious,
+    this action could lead to irreversible data loss and hinder recovery efforts,
+    significantly '
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - darkside-ransomware
+  - ransomware
+  - revil-ransomware
+  mitre_attack:
+    techniques:
+    - id: T1490
+      name: Technique T1490
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/powershell_script_block_logging/single_event_delete_shadowcopy.log
+    description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

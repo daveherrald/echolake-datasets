@@ -1,0 +1,35 @@
+metadata:
+  name: detect-remote-access-software-usage-dns
+  version: 11.0.0
+  description: The following analytic detects DNS queries to domains associated with
+    known remote access software such as AnyDesk, GoToMyPC, LogMeIn, and TeamViewer.
+    This detection is crucial as adversaries often use these tools to maintain access
+    and control over compromised environments. Identifying such behavior is vital
+    for a Security Operations Center (SOC) because unauthorized remote access can
+    lead to data breaches, ransomware attacks, and other severe impacts if these threats
+    are not mitigated promptly
+  author: Steven Dick
+  tags:
+  - anomaly
+  - splunk-security-content
+  - insider-threat
+  - command-and-control
+  - ransomware
+  mitre_attack:
+    techniques:
+    - id: T1219
+      name: Technique T1219
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1219/screenconnect/screenconnect_sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

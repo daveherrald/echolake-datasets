@@ -1,0 +1,33 @@
+metadata:
+  name: windows-modify-registry-disable-rdp
+  version: 7.0.0
+  description: This analytic is developed to detect suspicious registry modifications
+    that disable Remote Desktop Protocol (RDP) by altering the "fDenyTSConnections"
+    key. Changing this key's value to 1 prevents remote connections, which can disrupt
+    remote management and access. Such modifications could indicate an attempt to
+    hinder remote administration or isolate the system from remote intervention, potentially
+    signifying malicious activity.
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - shrinklocker
+  - windows-rdp-artifacts-and-defense-evasion
+  mitre_attack:
+    techniques:
+    - id: T1112
+      name: Technique T1112
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1112/disable_rdp//fdenytsconnection-reg.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

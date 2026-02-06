@@ -1,0 +1,33 @@
+metadata:
+  name: cisco-isovalent-shell-execution
+  version: 1.0.0
+  description: The following analytic detects the execution of a shell inside a container
+    namespace within the Cisco Isovalent environment. It identifies this activity
+    by monitoring process execution logs for the execution of a shell (sh or bash)
+    inside a container namespace. This behavior is significant for a SOC as it could
+    allow an attacker to gain shell access to the container, potentially leading to
+    further compromise of the Kubernetes cluster. If confirmed malicious, this activity
+    could lead to data thef
+  author: Bhavin Patel, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - cisco-isovalent-suspicious-activity
+  mitre_attack:
+    techniques:
+    - id: T1543
+      name: Technique T1543
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_isovalent/cisco_isovalent.log
+    description: not_applicable - cisco:isovalent:processExec
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

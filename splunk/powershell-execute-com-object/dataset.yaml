@@ -1,0 +1,37 @@
+metadata:
+  name: powershell-execute-com-object
+  version: 8.0.0
+  description: The following analytic detects the execution of a COM CLSID through
+    PowerShell. It leverages EventCode 4104 and searches for specific script block
+    text indicating the creation of a COM object. This activity is significant as
+    it is commonly used by adversaries and malware, such as the Conti ransomware,
+    to execute commands, potentially for privilege escalation or bypassing User Account
+    Control (UAC). If confirmed malicious, this technique could allow attackers to
+    gain elevated privileges or persis
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - ransomware
+  - malicious-powershell
+  - hermetic-wiper
+  mitre_attack:
+    techniques:
+    - id: T1059.001
+      name: Technique T1059.001
+    - id: T1546.015
+      name: Technique T1546.015
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1546.015/pwh_com_object/windows-powershell-xml.log
+    description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,34 @@
+metadata:
+  name: windows-access-token-winlogon-duplicate-handle-in-uncommon-path
+  version: 9.0.0
+  description: The following analytic detects a process attempting to duplicate the
+    handle of winlogon.exe from an uncommon or public source path. This is identified
+    using Sysmon EventCode 10, focusing on processes targeting winlogon.exe with specific
+    access rights and excluding common system paths. This activity is significant
+    because it may indicate an adversary trying to escalate privileges by leveraging
+    the high-privilege tokens associated with winlogon.exe. If confirmed malicious,
+    this could allow the att
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - brute-ratel-c4
+  - pathwiper
+  mitre_attack:
+    techniques:
+    - id: T1134.001
+      name: Technique T1134.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/brute_ratel/brute_duplicate_token/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,34 @@
+metadata:
+  name: windows-cab-file-on-disk
+  version: 7.0.0
+  description: The following analytic detects .cab files being written to disk. It
+    leverages data from Endpoint Detection and Response (EDR) agents, focusing on
+    events where the file name is '*.cab' and the action is 'write'. This activity
+    is significant as .cab files can be used to deliver malicious payloads, including
+    embedded .url files that execute harmful code. If confirmed malicious, this behavior
+    could lead to unauthorized code execution and potential system compromise. Analysts
+    should review the file p
+  author: Michael Haag, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - darkgate-malware
+  - apt37-rustonotto-and-fadestealer
+  mitre_attack:
+    techniques:
+    - id: T1566.001
+      name: Technique T1566.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059/autoit/cab_files.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

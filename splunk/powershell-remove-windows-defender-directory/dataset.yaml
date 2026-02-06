@@ -1,0 +1,34 @@
+metadata:
+  name: powershell-remove-windows-defender-directory
+  version: 11.0.0
+  description: 'The following analytic detects a suspicious PowerShell command attempting
+    to delete the Windows Defender directory. It leverages PowerShell Script Block
+    Logging to identify commands containing "rmdir" and targeting the Windows Defender
+    path. This activity is significant as it may indicate an attempt to disable or
+    corrupt Windows Defender, a key security component. If confirmed malicious, this
+    action could allow an attacker to bypass endpoint protection, facilitating further
+    malicious activities '
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - data-destruction
+  - whispergate
+  mitre_attack:
+    techniques:
+    - id: T1562.001
+      name: Technique T1562.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/powershell_script_block_logging/sbl_xml.log
+    description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

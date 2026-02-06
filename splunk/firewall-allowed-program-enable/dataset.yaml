@@ -1,0 +1,35 @@
+metadata:
+  name: firewall-allowed-program-enable
+  version: 7.0.0
+  description: The following analytic detects the modification of a firewall rule
+    to allow the execution of a specific application. This detection leverages data
+    from Endpoint Detection and Response (EDR) agents, focusing on process creation
+    events with command-line arguments related to firewall rule changes. This activity
+    is significant as it may indicate an attempt to bypass firewall restrictions,
+    potentially allowing unauthorized applications to communicate over the network.
+    If confirmed malicious, this cou
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - blackbyte-ransomware
+  - njrat
+  - plugx
+  mitre_attack:
+    techniques:
+    - id: T1562.004
+      name: Technique T1562.004
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/vilsel/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

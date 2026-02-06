@@ -1,0 +1,34 @@
+metadata:
+  name: gsuite-outbound-email-with-attachment-to-external-domain
+  version: 7.0.0
+  description: The following analytic detects outbound emails with attachments sent
+    from an internal email domain to an external domain. It leverages Gsuite Gmail
+    logs, parsing the source and destination email domains, and flags emails with
+    fewer than 20 outbound instances. This activity is significant as it may indicate
+    potential data exfiltration or insider threats. If confirmed malicious, an attacker
+    could use this method to exfiltrate sensitive information, leading to data breaches
+    and compliance violation
+  author: Teoderick Contreras, Stanislav Miskovic, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - dev-sec-ops
+  - insider-threat
+  mitre_attack:
+    techniques:
+    - id: T1048.003
+      name: Technique T1048.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566.001/gsuite_outbound_email_to_external/gsuite_external_domain.log
+    description: http:gsuite - gsuite:gmail:bigquery
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

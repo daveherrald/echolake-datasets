@@ -1,0 +1,35 @@
+metadata:
+  name: detect-regasm-with-no-command-line-arguments
+  version: 12.0.0
+  description: The following analytic detects instances of regasm.exe running without
+    command line arguments. This behavior typically indicates process injection, where
+    another process manipulates regasm.exe. The detection leverages Endpoint Detection
+    and Response (EDR) data, focusing on process names and command-line executions.
+    This activity is significant as it may signal an attempt to evade detection or
+    execute malicious code. If confirmed malicious, attackers could achieve code execution,
+    potentially lead
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - suspicious-regsvcs-regasm-activity
+  - living-off-the-land
+  - handala-wiper
+  mitre_attack:
+    techniques:
+    - id: T1218.009
+      name: Technique T1218.009
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218.009/atomic_red_team/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

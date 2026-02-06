@@ -1,0 +1,35 @@
+metadata:
+  name: windows-suspicious-child-process-spawned-from-webserver
+  version: 7.0.0
+  description: The following analytic identifies the execution of suspicious processes
+    typically associated with WebShell activity on web servers. It detects when processes
+    like `cmd.exe`, `powershell.exe`, or `bash.exe` are spawned by web server processes
+    such as `w3wp.exe` or `nginx.exe`. This behavior is significant as it may indicate
+    an adversary exploiting a web application vulnerability to install a WebShell,
+    providing persistent access and command execution capabilities. If confirmed malicious,
+    this act
+  author: Steven Dick
+  tags:
+  - ttp
+  - splunk-security-content
+  - flax-typhoon
+  - blackbyte-ransomware
+  - cisa-aa22-257a
+  mitre_attack:
+    techniques:
+    - id: T1505.003
+      name: Technique T1505.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1505.003/generic_webshell_exploit/generic_webshell_exploit.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

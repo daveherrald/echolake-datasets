@@ -1,0 +1,41 @@
+metadata:
+  name: impacket-lateral-movement-smbexec-commandline-parameters
+  version: 8.0.0
+  description: The following analytic identifies suspicious command-line parameters
+    associated with the use of Impacket's smbexec.py for lateral movement. It leverages
+    data from Endpoint Detection and Response (EDR) agents, focusing on specific command-line
+    patterns indicative of Impacket tool usage. This activity is significant as both
+    Red Teams and adversaries use Impacket for remote code execution and lateral movement.
+    If confirmed malicious, this activity could allow attackers to execute commands
+    on remote
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - whispergate
+  - active-directory-lateral-movement
+  - volt-typhoon
+  mitre_attack:
+    techniques:
+    - id: T1021.002
+      name: Technique T1021.002
+    - id: T1021.003
+      name: Technique T1021.003
+    - id: T1047
+      name: Technique T1047
+    - id: T1543.003
+      name: Technique T1543.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1021.002/atomic_red_team/smbexec_windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

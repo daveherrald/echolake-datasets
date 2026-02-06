@@ -1,0 +1,35 @@
+metadata:
+  name: disable-defender-spynet-reporting
+  version: 11.0.0
+  description: The following analytic detects the modification of the registry to
+    disable Windows Defender SpyNet reporting. It leverages data from the Endpoint.Registry
+    data model, specifically monitoring changes to the registry path associated with
+    Windows Defender SpyNet settings. This activity is significant because disabling
+    SpyNet reporting can prevent Windows Defender from sending telemetry data, potentially
+    allowing malicious activities to go undetected. If confirmed malicious, this action
+    could enable
+  author: Teoderick Contreras, Splunk, Steven Dick
+  tags:
+  - ttp
+  - splunk-security-content
+  - azorult
+  - windows-registry-abuse
+  - qakbot
+  mitre_attack:
+    techniques:
+    - id: T1562.001
+      name: Technique T1562.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/icedid/disable_av/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

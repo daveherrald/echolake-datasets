@@ -1,0 +1,42 @@
+metadata:
+  name: windows-files-and-dirs-access-rights-modification-via-icacls
+  version: 9.0.0
+  description: 'The following analytic identifies the modification of security permissions
+
+    on files or directories using tools like icacls.exe, cacls.exe, or xcacls.exe.
+    It
+
+    leverages data from Endpoint Detection and Response (EDR) agents, focusing on
+    specific
+
+    command-line executions. This activity is significant as it is commonly used by
+
+    Advanced Persistent Threats (APTs) and coinminer scripts to evade detection and
+
+    maintain control over compromised systems. If confirmed malicious, this behavior
+
+    could allow att'
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - amadey
+  - defense-evasion-or-unauthorized-access-via-sddl-tampering
+  mitre_attack:
+    techniques:
+    - id: T1222.001
+      name: Technique T1222.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/amadey/access_permission/amadey_sysmon2.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

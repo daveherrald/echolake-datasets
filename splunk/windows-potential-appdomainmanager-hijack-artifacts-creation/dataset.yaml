@@ -1,0 +1,32 @@
+metadata:
+  name: windows-potential-appdomainmanager-hijack-artifacts-creation
+  version: 1.0.0
+  description: The following analytic detects the creation of an .exe file along with
+    its corresponding .exe.config and a .dll in the same directory, which is a common
+    pattern indicative of potential AppDomain hijacking or CLR code injection attempts.
+    This behavior may signal that a malicious actor is attempting to load a rogue
+    assembly into a legitimate application's AppDomain, allowing code execution under
+    the context of a trusted process.
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - sesameop
+  mitre_attack:
+    techniques:
+    - id: T1574.014
+      name: Technique T1574.014
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1574.014/appdomain_hijack_artifacts/appdomain_hijack.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

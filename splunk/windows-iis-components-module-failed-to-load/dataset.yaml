@@ -1,0 +1,33 @@
+metadata:
+  name: windows-iis-components-module-failed-to-load
+  version: 6.0.0
+  description: The following analytic detects when an IIS Module DLL fails to load
+    due to a configuration problem, identified by EventCode 2282. This detection leverages
+    Windows Application event logs to identify repeated failures in loading IIS modules.
+    Such failures can indicate misconfigurations or potential tampering with IIS components.
+    If confirmed malicious, this activity could lead to service disruptions or provide
+    an attacker with opportunities to exploit vulnerabilities within the IIS environment.
+    Im
+  author: Michael Haag, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - iis-components
+  mitre_attack:
+    techniques:
+    - id: T1505.004
+      name: Technique T1505.004
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1505.004/2282_windows-application.log
+    description: XmlWinEventLog:Application - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

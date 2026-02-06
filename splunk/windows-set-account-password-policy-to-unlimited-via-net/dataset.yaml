@@ -1,0 +1,35 @@
+metadata:
+  name: windows-set-account-password-policy-to-unlimited-via-net
+  version: 3.0.0
+  description: The following analytic detects the use of net.exe to update user account
+    policies to set passwords as non-expiring. It leverages data from Endpoint Detection
+    and Response (EDR) agents, focusing on command-line executions involving "/maxpwage:unlimited"
+    or "/maxpwage:49710", which achieve a similar outcome theoretically. This activity
+    is significant as it can indicate an attempt to maintain persistence, escalate
+    privileges, evade defenses, or facilitate lateral movement. If confirmed malicious,
+    t
+  author: Teoderick Contreras, Nasreddine Bencherchali, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - ransomware
+  - blackbyte-ransomware
+  - crypto-stealer
+  mitre_attack:
+    techniques:
+    - id: T1489
+      name: Technique T1489
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/azorult/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

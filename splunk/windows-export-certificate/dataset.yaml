@@ -1,0 +1,36 @@
+metadata:
+  name: windows-export-certificate
+  version: 7.0.0
+  description: The following analytic detects the export of a certificate from the
+    Windows Certificate Store. It leverages the Certificates Lifecycle log channel,
+    specifically event ID 1007, to identify this activity. Monitoring certificate
+    exports is crucial as certificates can be used for authentication to VPNs or private
+    resources. If malicious actors export certificates, they could potentially gain
+    unauthorized access to sensitive systems or data, leading to significant security
+    breaches.
+  author: Michael Haag, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - windows-certificate-services
+  mitre_attack:
+    techniques:
+    - id: T1552.004
+      name: Technique T1552.004
+    - id: T1649
+      name: Technique T1649
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1649/atomic_red_team/certificateservices-lifecycle.log
+    description: XmlWinEventLog:Microsoft-Windows-CertificateServicesClient-Lifecycle-System/Operational
+      - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,34 @@
+metadata:
+  name: script-execution-via-wmi
+  version: 10.0.0
+  description: The following analytic detects the execution of scripts via Windows
+    Management Instrumentation (WMI) by monitoring the process 'scrcons.exe'. This
+    detection leverages data from Endpoint Detection and Response (EDR) agents, focusing
+    on process creation events. WMI-based script execution is significant because
+    adversaries often use it to perform malicious activities stealthily, such as system
+    compromise, data exfiltration, or establishing persistence. If confirmed malicious,
+    this activity could al
+  author: Rico Valdez, Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - suspicious-wmi-use
+  - scattered-spider
+  mitre_attack:
+    techniques:
+    - id: T1047
+      name: Technique T1047
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1047/execution_scrcons/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

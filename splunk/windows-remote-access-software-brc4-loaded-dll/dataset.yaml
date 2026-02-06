@@ -1,0 +1,35 @@
+metadata:
+  name: windows-remote-access-software-brc4-loaded-dll
+  version: 6.0.0
+  description: The following analytic identifies the loading of four specific Windows
+    DLLs (credui.dll, dbghelp.dll, samcli.dll, winhttp.dll) by a non-standard process.
+    This detection leverages Sysmon EventCode 7 to monitor DLL load events and flags
+    when all four DLLs are loaded within a short time frame. This activity is significant
+    as it may indicate the presence of Brute Ratel C4, a sophisticated remote access
+    tool used for credential dumping and other malicious activities. If confirmed
+    malicious, this beha
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - brute-ratel-c4
+  mitre_attack:
+    techniques:
+    - id: T1219
+      name: Technique T1219
+    - id: T1003
+      name: Technique T1003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/brute_ratel/iso_version_dll_campaign/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

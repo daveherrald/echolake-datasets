@@ -1,0 +1,35 @@
+metadata:
+  name: detect-credential-dumping-through-lsass-access
+  version: 11.0.0
+  description: The following analytic detects attempts to read LSASS memory, indicative
+    of credential dumping. It leverages Sysmon EventCode 10, filtering for specific
+    access permissions (0x1010 and 0x1410) on the lsass.exe process. This activity
+    is significant because it suggests an attacker is trying to extract credentials
+    from LSASS memory, potentially leading to unauthorized access, data breaches,
+    and compromise of sensitive information. If confirmed malicious, this could enable
+    attackers to escalate privi
+  author: Patrick Bareiss, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - detect-zerologon-attack
+  - cisa-aa23-347a
+  - credential-dumping
+  mitre_attack:
+    techniques:
+    - id: T1003.001
+      name: Technique T1003.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1003.001/atomic_red_team/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

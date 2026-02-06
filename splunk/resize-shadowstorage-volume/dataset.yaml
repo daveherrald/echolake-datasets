@@ -1,0 +1,35 @@
+metadata:
+  name: resize-shadowstorage-volume
+  version: 7.0.0
+  description: The following analytic identifies the resizing of shadow storage volumes,
+    a technique used by ransomware like CLOP to prevent the recreation of shadow volumes.
+    This detection leverages data from Endpoint Detection and Response (EDR) agents,
+    focusing on command-line executions involving "vssadmin.exe" with parameters related
+    to resizing shadow storage. This activity is significant as it indicates an attempt
+    to hinder recovery efforts by manipulating shadow copies. If confirmed malicious,
+    this cou
+  author: Teoderick Contreras
+  tags:
+  - ttp
+  - splunk-security-content
+  - medusa-ransomware
+  - clop-ransomware
+  - compromised-windows-host
+  mitre_attack:
+    techniques:
+    - id: T1490
+      name: Technique T1490
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/clop/clop_a/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

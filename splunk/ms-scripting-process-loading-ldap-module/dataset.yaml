@@ -1,0 +1,33 @@
+metadata:
+  name: ms-scripting-process-loading-ldap-module
+  version: 7.0.0
+  description: The following analytic detects the execution of MS scripting processes
+    (wscript.exe or cscript.exe) loading LDAP-related modules (Wldap32.dll, adsldp.dll,
+    adsldpc.dll). It leverages Sysmon EventCode 7 to identify these specific DLL loads.
+    This activity is significant as it may indicate an attempt to query LDAP for host
+    information, a behavior observed in FIN7 implants. If confirmed malicious, this
+    could allow attackers to gather detailed Active Directory information, potentially
+    leading to furth
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - fin7
+  mitre_attack:
+    techniques:
+    - id: T1059.007
+      name: Technique T1059.007
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/fin7/fin7_js_2/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

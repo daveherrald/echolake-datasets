@@ -1,0 +1,35 @@
+metadata:
+  name: connectwise-screenconnect-path-traversal-windows-sacl
+  version: 7.0.0
+  description: The following analytic detects attempts to exploit the ConnectWise
+    ScreenConnect CVE-2024-1708 vulnerability using Windows SACL EventCode 4663. It
+    identifies path traversal attacks by monitoring file system events related to
+    the ScreenConnect service. This activity is significant as it allows unauthorized
+    access to sensitive files and directories, potentially leading to data exfiltration
+    or arbitrary code execution. If confirmed malicious, attackers could gain unauthorized
+    access to critical dat
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - connectwise-screenconnect-vulnerabilities
+  - compromised-windows-host
+  - seashell-blizzard
+  mitre_attack:
+    techniques:
+    - id: T1190
+      name: Technique T1190
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/screenconnect/4663_connectwise_aspx_app_extensions.log
+    description: XmlWinEventLog:Security - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

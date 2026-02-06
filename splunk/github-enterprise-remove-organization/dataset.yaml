@@ -1,0 +1,35 @@
+metadata:
+  name: github-enterprise-remove-organization
+  version: 2.0.0
+  description: 'The following analytic detects when a user removes an organization
+    from GitHub Enterprise. The detection monitors GitHub Enterprise audit logs for
+    organization deletion events, which could indicate unauthorized removal of critical
+    business resources. For a SOC, identifying organization removals is crucial as
+    it may signal account compromise, insider threats, or malicious attempts to disrupt
+    business operations by deleting entire organizational structures. The impact could
+    be severe, potentially '
+  author: Patrick Bareiss, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - github-malicious-activity
+  mitre_attack:
+    techniques:
+    - id: T1485
+      name: Technique T1485
+    - id: T1195
+      name: Technique T1195
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1485/github_remove_organization/github.json
+    description: http:github - httpevent
+    format: jsonl
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

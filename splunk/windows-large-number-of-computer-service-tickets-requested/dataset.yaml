@@ -1,0 +1,36 @@
+metadata:
+  name: windows-large-number-of-computer-service-tickets-requested
+  version: 7.0.0
+  description: 'The following analytic detects a high volume of Kerberos service ticket
+    requests, specifically more than 30, from a single source within a 5-minute window.
+    It leverages Event ID 4769, which logs when a Kerberos service ticket is requested,
+    focusing on requests with computer names as the Service Name. This behavior is
+    significant as it may indicate malicious activities such as lateral movement,
+    malware staging, or reconnaissance. If confirmed malicious, an attacker could
+    gain unauthorized access '
+  author: Mauricio Velazco, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - active-directory-privilege-escalation
+  - active-directory-lateral-movement
+  mitre_attack:
+    techniques:
+    - id: T1135
+      name: Technique T1135
+    - id: T1078
+      name: Technique T1078
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1135/large_number_computer_service_tickets/windows-security.log
+    description: XmlWinEventLog:Security - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

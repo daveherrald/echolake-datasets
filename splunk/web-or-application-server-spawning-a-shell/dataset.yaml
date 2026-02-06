@@ -1,0 +1,45 @@
+metadata:
+  name: web-or-application-server-spawning-a-shell
+  version: 2.0.0
+  description: 'The following analytic detects instances where Java, or Tomcat
+
+    processes spawn a Linux shell, which may indicate exploitation attempts, such
+    as
+
+    those related to CVE-2021-44228 (Log4Shell). This detection leverages Endpoint
+    Detection
+
+    and Response (EDR) telemetry, focusing on process names and parent-child process
+
+    relationships. This activity is significant as it can signify a compromised Java
+
+    application, potentially leading to unauthorized shell access. If confirmed malicious,
+
+    attackers could ex'
+  author: Michael Haag, Nasreddine Bencherchali, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - blackbyte-ransomware
+  - cisa-aa22-257a
+  - cisa-aa22-264a
+  mitre_attack:
+    techniques:
+    - id: T1190
+      name: Technique T1190
+    - id: T1133
+      name: Technique T1133
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/java/java_spawn_shell_nix.log
+    description: Syslog:Linux-Sysmon/Operational - sysmon:linux
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

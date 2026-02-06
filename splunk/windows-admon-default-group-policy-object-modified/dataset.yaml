@@ -1,0 +1,34 @@
+metadata:
+  name: windows-admon-default-group-policy-object-modified
+  version: 8.0.0
+  description: The following analytic detects modifications to the default Group Policy
+    Objects (GPOs) in an Active Directory environment. It leverages Splunk's Admon
+    to monitor updates to the "Default Domain Policy" and "Default Domain Controllers
+    Policy." This activity is significant because changes to these default GPOs can
+    indicate an adversary with privileged access attempting to gain further control,
+    establish persistence, or deploy malware across multiple hosts. If confirmed malicious,
+    such modification
+  author: Mauricio Velazco, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - active-directory-privilege-escalation
+  - sneaky-active-directory-persistence-tricks
+  mitre_attack:
+    techniques:
+    - id: T1484.001
+      name: Technique T1484.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1484.001/default_domain_policy_modified/windows-security.log
+    description: ActiveDirectory - ActiveDirectory
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

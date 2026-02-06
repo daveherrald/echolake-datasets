@@ -1,0 +1,36 @@
+metadata:
+  name: disable-windows-app-hotkeys
+  version: 12.0.0
+  description: The following analytic detects a suspicious registry modification aimed
+    at disabling Windows hotkeys for native applications. It leverages data from the
+    Endpoint.Registry data model, focusing on specific registry paths and values indicative
+    of this behavior. This activity is significant as it can impair an analyst's ability
+    to use essential tools like Task Manager and Command Prompt, hindering incident
+    response efforts. If confirmed malicious, this technique can allow an attacker
+    to maintain per
+  author: Teoderick Contreras, Splunk, Steven Dick
+  tags:
+  - ttp
+  - splunk-security-content
+  - xmrig
+  - windows-registry-abuse
+  mitre_attack:
+    techniques:
+    - id: T1112
+      name: Technique T1112
+    - id: T1562.001
+      name: Technique T1562.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.001/hotkey_disabled_hidden_user/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

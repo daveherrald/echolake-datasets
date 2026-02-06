@@ -1,0 +1,35 @@
+metadata:
+  name: windows-certutil-root-certificate-addition
+  version: 2.0.0
+  description: 'The following analytic detects the use of certutil.exe to add a certificate
+    to the Root certificate store using the "-addstore" flag.
+
+    In this case, the certificate is loaded from a temporary file path (e.g., %TEMP%)
+    or other uncommon locations (e.g. C:\\Users\\Public\\), which is highly suspicious
+    and uncommon in legitimate administrative activity.
+
+    This behavior may indicate an adversary is installing a malicious root certificate
+    to intercept HTTPS traffic, impersonate trusted entities, or bypas'
+  author: Teoderick Contreras, Nasreddine Bencherchali, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - secret-blizzard
+  mitre_attack:
+    techniques:
+    - id: T1587.003
+      name: Technique T1587.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1587.003/add_store_cert/addstore_cert.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

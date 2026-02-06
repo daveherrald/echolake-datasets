@@ -1,0 +1,33 @@
+metadata:
+  name: execute-javascript-with-jscript-com-clsid
+  version: 8.0.0
+  description: The following analytic detects the execution of JavaScript using the
+    JScript.Encode CLSID (COM Object) by cscript.exe. It leverages data from Endpoint
+    Detection and Response (EDR) agents, focusing on process names, command-line executions,
+    and parent processes. This activity is significant as it is a known technique
+    used by ransomware, such as Reddot, to execute malicious scripts and potentially
+    disable AMSI (Antimalware Scan Interface). If confirmed malicious, this behavior
+    could allow attacker
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - ransomware
+  mitre_attack:
+    techniques:
+    - id: T1059.005
+      name: Technique T1059.005
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/ransomware_ttp/data2/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

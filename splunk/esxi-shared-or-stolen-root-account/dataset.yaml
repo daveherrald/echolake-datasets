@@ -1,0 +1,31 @@
+metadata:
+  name: esxi-shared-or-stolen-root-account
+  version: 1.0.0
+  description: This detection monitors for signs of a shared or potentially compromised
+    root account on ESXi hosts by tracking the number of unique IP addresses logging
+    in as root within a short time window. Multiple logins from different IPs in a
+    brief period may indicate credential misuse, lateral movement, or account compromise.
+  author: Raven Tait, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - esxi-post-compromise
+  - black-basta-ransomware
+  mitre_attack:
+    techniques:
+    - id: T1078
+      name: Technique T1078
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1078/esxi_stolen_root_account/esxi_stolen_root_account.log
+    description: vmware:esxlog - vmw-syslog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

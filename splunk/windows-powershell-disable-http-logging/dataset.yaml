@@ -1,0 +1,36 @@
+metadata:
+  name: windows-powershell-disable-http-logging
+  version: 8.0.0
+  description: The following analytic detects the use of `get-WebConfigurationProperty`
+    and `Set-ItemProperty` commands in PowerShell to disable HTTP logging on Windows
+    systems. This detection leverages PowerShell Script Block Logging, specifically
+    looking for script blocks that reference HTTP logging properties and attempt to
+    set them to "false" or "dontLog". Disabling HTTP logging is significant as it
+    can be used by adversaries to cover their tracks and delete logs, hindering forensic
+    investigations. If conf
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - iis-components
+  - windows-defense-evasion-tactics
+  mitre_attack:
+    techniques:
+    - id: T1505.004
+      name: Technique T1505.004
+    - id: T1562.002
+      name: Technique T1562.002
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1505.004/4104_disable_http_logging_windows-powershell.log
+    description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

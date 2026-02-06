@@ -1,0 +1,33 @@
+metadata:
+  name: windows-proxy-via-netsh
+  version: 7.0.0
+  description: The following analytic identifies the use of netsh.exe to configure
+    a connection proxy, which can be leveraged for persistence by executing a helper
+    DLL. It detects this activity by analyzing process creation events from Endpoint
+    Detection and Response (EDR) agents, focusing on command-line executions involving
+    "portproxy" and "v4tov4" parameters. This activity is significant because it indicates
+    potential unauthorized network configuration changes, which could be used to maintain
+    persistence or
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - volt-typhoon
+  mitre_attack:
+    techniques:
+    - id: T1090.001
+      name: Technique T1090.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1090.001/netsh_portproxy/volt_sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

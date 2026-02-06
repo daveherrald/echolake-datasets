@@ -1,0 +1,35 @@
+metadata:
+  name: windows-replication-through-removable-media
+  version: 12.0.0
+  description: The following analytic detects the creation or dropping of executable
+    or script files in the root directory of a removable drive. It leverages data
+    from the Endpoint.Filesystem datamodel, focusing on specific file types and their
+    creation paths. This activity is significant as it may indicate an attempt to
+    spread malware, such as ransomware, via removable media. If confirmed malicious,
+    this behavior could lead to unauthorized code execution, lateral movement, or
+    persistence within the network, p
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - plugx
+  - china-nexus-threat-activity
+  - chaos-ransomware
+  mitre_attack:
+    techniques:
+    - id: T1091
+      name: Technique T1091
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/chaos_ransomware/spread_in_root_drives/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,33 @@
+metadata:
+  name: o365-user-consent-denied-for-oauth-application
+  version: 7.0.0
+  description: The following analytic identifies instances where a user has denied
+    consent to an OAuth application seeking permissions within the Office 365 environment.
+    This detection leverages O365 audit logs, focusing on events related to user consent
+    actions. By filtering for denied consent actions associated with OAuth applications,
+    it captures instances where users have actively rejected permission requests.
+    This activity is significant as it may indicate users spotting potentially suspicious
+    or unfamili
+  author: Mauricio Velazco, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - office-365-account-takeover
+  mitre_attack:
+    techniques:
+    - id: T1528
+      name: Technique T1528
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1528/o365_user_consent_declined/o365_user_consent_declined.log
+    description: o365 - o365:graph:api
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

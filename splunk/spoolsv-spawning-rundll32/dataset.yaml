@@ -1,0 +1,35 @@
+metadata:
+  name: spoolsv-spawning-rundll32
+  version: 10.0.0
+  description: The following analytic detects the spawning of `rundll32.exe` without
+    command-line arguments by `spoolsv.exe`, which is unusual and potentially indicative
+    of exploitation attempts like CVE-2021-34527 (PrintNightmare). This detection
+    leverages Endpoint Detection and Response (EDR) telemetry, focusing on process
+    creation events where `spoolsv.exe` is the parent process. This activity is significant
+    as `spoolsv.exe` typically does not spawn other processes, and such behavior could
+    indicate an activ
+  author: Mauricio Velazco, Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - printnightmare-cve-2021-34527
+  - compromised-windows-host
+  - black-basta-ransomware
+  mitre_attack:
+    techniques:
+    - id: T1547.012
+      name: Technique T1547.012
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1547.012/printnightmare/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

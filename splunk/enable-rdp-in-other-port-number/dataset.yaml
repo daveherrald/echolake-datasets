@@ -1,0 +1,35 @@
+metadata:
+  name: enable-rdp-in-other-port-number
+  version: 14.0.0
+  description: 'The following analytic detects modifications to the registry that
+    enable RDP on a machine using a non-default port number. It leverages data from
+    the Endpoint.Registry data model, specifically monitoring changes to the registry
+    path "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp"
+    and the "PortNumber" value. This activity is significant as attackers often modify
+    RDP settings to facilitate lateral movement and maintain remote access to compromised
+    systems. If confirmed '
+  author: Teoderick Contreras, Splunk, Steven Dick
+  tags:
+  - ttp
+  - splunk-security-content
+  - prohibited-traffic-allowed-or-protocol-mismatch
+  - windows-registry-abuse
+  - windows-rdp-artifacts-and-defense-evasion
+  mitre_attack:
+    techniques:
+    - id: T1021
+      name: Technique T1021
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/honeypots/casper/datasets1/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

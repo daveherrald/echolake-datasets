@@ -1,0 +1,35 @@
+metadata:
+  name: windows-rdpclient-connection-sequence-events
+  version: 5.0.0
+  description: This analytic monitors Windows RDP client connection sequence events
+    (EventCode 1024) from the Microsoft-Windows-TerminalServices-RDPClient/Operational
+    log. These events track when RDP ClientActiveX initiates connection attempts to
+    remote servers. The connection sequence is a critical phase of RDP where the client
+    and server exchange settings and establish common parameters for the session.
+    Monitoring these events can help identify unusual RDP connection patterns, potential
+    lateral movement atte
+  author: Michael Haag, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - spearphishing-attachments
+  - windows-rdp-artifacts-and-defense-evasion
+  mitre_attack:
+    techniques:
+    - id: T1133
+      name: Technique T1133
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1133/rdp/terminalservices-rdpclient.log
+    description: WinEventLog:Microsoft-Windows-TerminalServices-RDPClient/Operational
+      - WinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

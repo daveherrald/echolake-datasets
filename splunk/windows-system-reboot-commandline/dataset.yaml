@@ -1,0 +1,35 @@
+metadata:
+  name: windows-system-reboot-commandline
+  version: 9.0.0
+  description: The following analytic identifies the execution of the Windows command
+    line to reboot a host machine using "shutdown.exe" with specific parameters. This
+    detection leverages data from Endpoint Detection and Response (EDR) agents, focusing
+    on process names and command-line arguments. This activity is significant as it
+    is often associated with advanced persistent threats (APTs) and remote access
+    trojans (RATs) like dcrat, which may use system reboots to disrupt operations,
+    aid in system destruction
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - xworm
+  - darkgate-malware
+  - njrat
+  mitre_attack:
+    techniques:
+    - id: T1529
+      name: Technique T1529
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/dcrat/reboot_logoff_commandline/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

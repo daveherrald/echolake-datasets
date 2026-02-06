@@ -1,0 +1,30 @@
+metadata:
+  name: esxi-loghost-config-tampering
+  version: 1.0.0
+  description: This detection identifies changes to the syslog loghost configuration
+    on an ESXi host, which may indicate an attempt to disrupt log forwarding and evade
+    detection.
+  author: Raven Tait, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - esxi-post-compromise
+  - black-basta-ransomware
+  mitre_attack:
+    techniques:
+    - id: T1562
+      name: Technique T1562
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.003/esxi_loghost_config_tampering/esxi_loghost_config_tampering.log
+    description: vmware:esxlog - vmw-syslog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

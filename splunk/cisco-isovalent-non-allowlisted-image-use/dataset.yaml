@@ -1,0 +1,33 @@
+metadata:
+  name: cisco-isovalent-non-allowlisted-image-use
+  version: 1.0.0
+  description: "The following analytic detects use of container images that fall outside\
+    \ an approved\nallowlist, leveraging Cisco Isovalent/Tetragon runtime telemetry\
+    \ (image name and\nworkload identity). Adversaries commonly introduce untrusted\
+    \ or newly published\nimages to deploy tooling, establish persistence, or abuse\
+    \ supply\u2011chain trust. This\nbehavior may indicate image pulls from unauthorized\
+    \ registries, execution of\nunvetted software, or a drift from established deployment\
+    \ baselines. Extra scrutiny\nis warrant"
+  author: Bhavin Patel, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - cisco-isovalent-suspicious-activity
+  mitre_attack:
+    techniques:
+    - id: T1204.003
+      name: Technique T1204.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_isovalent/cisco_isovalent.log
+    description: not_applicable - cisco:isovalent:processExec
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

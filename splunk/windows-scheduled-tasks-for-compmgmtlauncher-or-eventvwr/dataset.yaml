@@ -1,0 +1,34 @@
+metadata:
+  name: windows-scheduled-tasks-for-compmgmtlauncher-or-eventvwr
+  version: 7.0.0
+  description: The following analytic detects the creation or modification of Windows
+    Scheduled Tasks related to CompMgmtLauncher or Eventvwr. These legitimate system
+    utilities, used for launching the Computer Management Console and Event Viewer,
+    can be abused by attackers to execute malicious payloads under the guise of normal
+    system processes. By leveraging these tasks, adversaries can establish persistence
+    or elevate privileges without raising suspicion. This detection helps security
+    analysts identify unusu
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - valleyrat
+  - water-gamayun
+  mitre_attack:
+    techniques:
+    - id: T1053
+      name: Technique T1053
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053/valleyrat_schedtask/valleyrat_schedtask.log
+    description: XmlWinEventLog:Security - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

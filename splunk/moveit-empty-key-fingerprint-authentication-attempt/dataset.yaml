@@ -1,0 +1,34 @@
+metadata:
+  name: moveit-empty-key-fingerprint-authentication-attempt
+  version: 5.0.0
+  description: This detection identifies attempts to authenticate with an empty public
+    key fingerprint in Progress MOVEit Transfer, which is a key indicator of potential
+    exploitation of the CVE-2024-5806 vulnerability. Such attempts are characteristic
+    of the authentication bypass technique used in this vulnerability, where attackers
+    try to impersonate valid users without providing proper credentials. While occasional
+    empty key fingerprint authentication attempts might occur due to misconfigurations,
+    a sudden i
+  author: Michael Haag, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - moveit-transfer-authentication-bypass
+  - hellcat-ransomware
+  mitre_attack:
+    techniques:
+    - id: T1190
+      name: Technique T1190
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/moveit/SftpServer.log
+    description: sftp_server_logs - sftp_server_logs
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

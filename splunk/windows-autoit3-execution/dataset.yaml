@@ -1,0 +1,35 @@
+metadata:
+  name: windows-autoit3-execution
+  version: 9.0.0
+  description: "The following analytic detects the execution of AutoIt3, a scripting\n\
+    language often used for automating Windows GUI tasks and general scripting. \n\
+    It identifies instances where AutoIt3 or its variants are executed by searching\
+    \ for process names\nor original file names matching 'autoit3.exe'. \nThis activity\
+    \ is significant because attackers frequently use AutoIt3 to automate malicious\
+    \ actions, such as executing malware. \nIf confirmed malicious, this activity\
+    \ could lead to unauthorized code execution"
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - crypto-stealer
+  - handala-wiper
+  - darkgate-malware
+  mitre_attack:
+    techniques:
+    - id: T1059
+      name: Technique T1059
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059/autoit/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

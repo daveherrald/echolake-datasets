@@ -1,0 +1,34 @@
+metadata:
+  name: asl-aws-ec2-snapshot-shared-externally
+  version: 3.0.0
+  description: The following analytic detects when an EC2 snapshot is shared publicly
+    by analyzing AWS CloudTrail events. This detection method leverages CloudTrail
+    logs to identify modifications in snapshot permissions, specifically when the
+    snapshot is shared outside the originating AWS account. This activity is significant
+    as it may indicate an attempt to exfiltrate sensitive data stored in the snapshot.
+    If confirmed malicious, an attacker could gain unauthorized access to the snapshot's
+    data, potentially l
+  author: Patrick Bareiss, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - suspicious-cloud-instance-activities
+  - data-exfiltration
+  mitre_attack:
+    techniques:
+    - id: T1537
+      name: Technique T1537
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1537/aws_snapshot_exfil/asl_ocsf_cloudtrail.json
+    description: aws_asl - aws:asl
+    format: jsonl
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

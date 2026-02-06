@@ -1,0 +1,35 @@
+metadata:
+  name: windows-attempt-to-stop-security-service
+  version: 5.0.0
+  description: The following analytic detects attempts to stop security-related services
+    on an endpoint, which may indicate malicious activity. It leverages data from
+    Endpoint Detection and Response (EDR) agents, specifically searching for processes
+    involving the "sc.exe" or "net.exe" command with the "stop" parameter or the PowerShell
+    "Stop-Service" cmdlet. This activity is significant because disabling security
+    services can undermine the organization's security posture, potentially leading
+    to unauthorized ac
+  author: Rico Valdez, Nasreddine Bencherchali, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - whispergate
+  - graceful-wipe-out-attack
+  - disabling-security-tools
+  mitre_attack:
+    techniques:
+    - id: T1562.001
+      name: Technique T1562.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.001/win_defend_service_stop/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

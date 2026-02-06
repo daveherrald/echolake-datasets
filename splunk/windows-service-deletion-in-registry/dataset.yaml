@@ -1,0 +1,35 @@
+metadata:
+  name: windows-service-deletion-in-registry
+  version: 7.0.0
+  description: The following analytic detects the deletion of a service from the Windows
+    Registry under CurrentControlSet\Services. It leverages data from the Endpoint.Registry
+    datamodel, specifically monitoring registry paths and actions related to service
+    deletion. This activity is significant as adversaries may delete services to evade
+    detection and hinder incident response efforts. If confirmed malicious, this action
+    could disrupt legitimate services, impair system functionality, and potentially
+    allow atta
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - plugx
+  - crypto-stealer
+  - brute-ratel-c4
+  mitre_attack:
+    techniques:
+    - id: T1489
+      name: Technique T1489
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/brute_ratel/service_deletion/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,34 @@
+metadata:
+  name: windows-svchostexe-parent-process-anomaly
+  version: 5.0.0
+  description: The following analytic detects an anomaly where an svchost.exe process
+    is spawned by a parent process other than the standard services.exe. In a typical
+    Windows environment, svchost.exe is a system process that hosts Windows service
+    DLLs, and is expected to be a child of services.exe. A process deviation from
+    this hierarchy may indicate suspicious behavior, such as malicious code attempting
+    to masquerade as a legitimate system process or evade detection. It is essential
+    to investigate the parent
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - snappybee
+  - china-nexus-threat-activity
+  mitre_attack:
+    techniques:
+    - id: T1036.009
+      name: Technique T1036.009
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1035.009/suspicious_spawn_svchost/susp_svchost_proc.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

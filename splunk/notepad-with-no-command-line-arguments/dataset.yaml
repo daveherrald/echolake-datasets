@@ -1,0 +1,33 @@
+metadata:
+  name: notepad-with-no-command-line-arguments
+  version: 8.0.0
+  description: The following analytic identifies instances where Notepad.exe is launched
+    without any command line arguments, a behavior commonly associated with the SliverC2
+    framework. This detection leverages process creation events from Endpoint Detection
+    and Response (EDR) agents, focusing on processes initiated by Notepad.exe within
+    a short time frame. This activity is significant as it may indicate an attempt
+    to inject malicious code into Notepad.exe, a known tactic for evading detection.
+    If confirmed mal
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - bishopfox-sliver-adversary-emulation-framework
+  mitre_attack:
+    techniques:
+    - id: T1055
+      name: Technique T1055
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1055/sliver/notepad_windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

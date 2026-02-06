@@ -1,0 +1,35 @@
+metadata:
+  name: o365-sharepoint-suspicious-search-behavior
+  version: 3.0.0
+  description: The following analytic identifies when Office 365 users search for
+    suspicious keywords or have an excessive number of queries to a SharePoint site
+    within a limited timeframe. This behavior may indicate that a malicious actor
+    has gained control of a user account and is conducting discovery or enumeration
+    activities.
+  author: Steven Dick
+  tags:
+  - anomaly
+  - splunk-security-content
+  - office-365-account-takeover
+  - office-365-collection-techniques
+  - compromised-user-account
+  mitre_attack:
+    techniques:
+    - id: T1213.002
+      name: Technique T1213.002
+    - id: T1552
+      name: Technique T1552
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1213.002/o365_sus_sharepoint_search/o365_sus_sharepoint_search.log
+    description: o365 - o365:management:activity
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

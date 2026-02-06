@@ -1,0 +1,35 @@
+metadata:
+  name: deleting-shadow-copies
+  version: 14.0.0
+  description: The following analytic detects the deletion of shadow copies using
+    the vssadmin.exe or wmic.exe utilities. It leverages data from Endpoint Detection
+    and Response (EDR) agents, focusing on process names and command-line arguments.
+    This activity is significant because deleting shadow copies is a common tactic
+    used by attackers to prevent recovery and hide their tracks. If confirmed malicious,
+    this action could hinder incident response efforts and allow attackers to maintain
+    persistence and cover t
+  author: David Dorsey, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - rhysida-ransomware
+  - prestige-ransomware
+  - cisa-aa22-264a
+  mitre_attack:
+    techniques:
+    - id: T1490
+      name: Technique T1490
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1490/atomic_red_team/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

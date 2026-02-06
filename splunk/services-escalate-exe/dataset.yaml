@@ -1,0 +1,35 @@
+metadata:
+  name: services-escalate-exe
+  version: 8.0.0
+  description: The following analytic identifies the execution of a randomly named
+    binary via `services.exe`, indicative of privilege escalation using Cobalt Strike's
+    `svc-exe`. This detection leverages data from Endpoint Detection and Response
+    (EDR) agents, focusing on process lineage and command-line executions. This activity
+    is significant as it often follows initial access, allowing adversaries to escalate
+    privileges and establish persistence. If confirmed malicious, this behavior could
+    enable attackers to
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - graceful-wipe-out-attack
+  - cobalt-strike
+  - cisa-aa23-347a
+  mitre_attack:
+    techniques:
+    - id: T1548
+      name: Technique T1548
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1055/cobalt_strike/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

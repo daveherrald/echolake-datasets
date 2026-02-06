@@ -1,0 +1,34 @@
+metadata:
+  name: connectwise-screenconnect-path-traversal
+  version: 6.0.0
+  description: The following analytic detects attempts to exploit the ConnectWise
+    ScreenConnect CVE-2024-1708 vulnerability, which allows path traversal attacks
+    by manipulating file_path and file_name parameters in the URL. It leverages the
+    Endpoint datamodel Filesystem node to identify suspicious file system events,
+    specifically targeting paths and filenames associated with ScreenConnect. This
+    activity is significant as it can lead to unauthorized access to sensitive files
+    and directories, potentially resulti
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - connectwise-screenconnect-vulnerabilities
+  - seashell-blizzard
+  mitre_attack:
+    techniques:
+    - id: T1190
+      name: Technique T1190
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/screenconnect/sysmon_app_extensions.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

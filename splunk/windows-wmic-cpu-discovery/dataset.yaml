@@ -1,0 +1,33 @@
+metadata:
+  name: windows-wmic-cpu-discovery
+  version: 1.0.0
+  description: "The following analytic detects the use of WMIC (Windows Management\
+    \ Instrumentation Command-line) for CPU discovery, often executed with commands\
+    \ such as \u201Cwmic cpu get name\u201D This behavior is commonly associated with\
+    \ reconnaissance, where adversaries seek to gather details about system hardware,\
+    \ assess processing power, or determine if the environment is virtualized. While\
+    \ WMIC is a legitimate administrative tool, its use for CPU queries outside of\
+    \ normal inventory or management scripts can indica"
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - lamehug
+  mitre_attack:
+    techniques:
+    - id: T1082
+      name: Technique T1082
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/lamehug/T1082/wmic_cmd/wmic_cmd.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

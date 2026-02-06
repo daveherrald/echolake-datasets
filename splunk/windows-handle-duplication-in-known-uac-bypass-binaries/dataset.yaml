@@ -1,0 +1,33 @@
+metadata:
+  name: windows-handle-duplication-in-known-uac-bypass-binaries
+  version: 1.0.0
+  description: 'The following analytic detects suspicious handle duplication activity
+    targeting known Windows utilities such as ComputerDefaults.exe, Eventvwr.exe,
+    and others. This technique is commonly used to escalate privileges or bypass UAC
+    by inheriting or injecting elevated tokens or handles. The detection focuses on
+    non-standard use of DuplicateHandle or token duplication where process, thread,
+    or token handles are copied into the context of trusted, signed utilities. Such
+    behavior may indicate attempts '
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - castle-rat
+  mitre_attack:
+    techniques:
+    - id: T1134.001
+      name: Technique T1134.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1134.001/uac_process_handle_dup/Computerdefaults_access.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

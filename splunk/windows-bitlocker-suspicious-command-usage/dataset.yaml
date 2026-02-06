@@ -1,0 +1,35 @@
+metadata:
+  name: windows-bitlocker-suspicious-command-usage
+  version: 3.0.0
+  description: This analytic is developed to detect the usage of BitLocker commands
+    used to disable or impact boot settings. The malware ShrinkLocker uses various
+    commands change how BitLocker handles encryption, potentially bypassing TPM requirements,
+    enabling BitLocker without TPM, and enforcing specific startup key and PIN configurations.
+    Such modifications can weaken system security, making it easier for unauthorized
+    access and data breaches. Detecting these changes is crucial for maintaining robust
+    encryp
+  author: Steven Dick
+  tags:
+  - ttp
+  - splunk-security-content
+  - shrinklocker
+  mitre_attack:
+    techniques:
+    - id: T1486
+      name: Technique T1486
+    - id: T1490
+      name: Technique T1490
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1486/bitlocker_sus_commands/bitlocker_sus_commands.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,33 @@
+metadata:
+  name: aws-saml-update-identity-provider
+  version: 8.0.0
+  description: The following analytic detects updates to the SAML provider in AWS.
+    It leverages AWS CloudTrail logs to identify the `UpdateSAMLProvider` event, analyzing
+    fields such as `sAMLProviderArn`, `sourceIPAddress`, and `userIdentity` details.
+    Monitoring updates to the SAML provider is crucial as it may indicate a perimeter
+    compromise of federated credentials or unauthorized backdoor access set by an
+    attacker. If confirmed malicious, this activity could allow attackers to manipulate
+    identity federation,
+  author: Rod Soto, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - cloud-federated-credential-abuse
+  mitre_attack:
+    techniques:
+    - id: T1078
+      name: Technique T1078
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1078/update_saml_provider/update_saml_provider.json
+    description: aws_cloudtrail - aws:cloudtrail
+    format: jsonl
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

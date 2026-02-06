@@ -1,0 +1,33 @@
+metadata:
+  name: o365-user-consent-blocked-for-risky-application
+  version: 6.0.0
+  description: The following analytic identifies instances where Office 365 has blocked
+    a user's attempt to grant consent to an application deemed risky or potentially
+    malicious. This detection leverages O365 audit logs, specifically focusing on
+    failed user consent actions due to system-driven blocks. Monitoring these blocked
+    consent attempts is crucial as it highlights potential threats early on, indicating
+    that a user might be targeted or that malicious applications are attempting to
+    infiltrate the organizat
+  author: Mauricio Velazco, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - office-365-account-takeover
+  mitre_attack:
+    techniques:
+    - id: T1528
+      name: Technique T1528
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1528/o365_user_consent_blocked/o365_user_consent_blocked.log
+    description: o365 - o365:management:activity
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

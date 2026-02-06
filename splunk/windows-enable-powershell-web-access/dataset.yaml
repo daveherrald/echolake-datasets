@@ -1,0 +1,33 @@
+metadata:
+  name: windows-enable-powershell-web-access
+  version: 7.0.0
+  description: The following analytic detects the enabling of PowerShell Web Access
+    via PowerShell commands. It leverages PowerShell script block logging (EventCode
+    4104) to identify the execution of the `Install-WindowsFeature` cmdlet with the
+    `WindowsPowerShellWebAccess` parameter. This activity is significant because enabling
+    PowerShell Web Access can facilitate remote execution of PowerShell commands,
+    potentially allowing an attacker to gain unauthorized access to systems and networks.
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - cisa-aa24-241a
+  - malicious-powershell
+  mitre_attack:
+    techniques:
+    - id: T1059.001
+      name: Technique T1059.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/powershell_script_block_logging/pswa_powershell.log
+    description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

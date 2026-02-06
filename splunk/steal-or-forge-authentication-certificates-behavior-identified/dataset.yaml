@@ -1,0 +1,33 @@
+metadata:
+  name: steal-or-forge-authentication-certificates-behavior-identified
+  version: 6.0.0
+  description: The following analytic identifies potential threats related to the
+    theft or forgery of authentication certificates. It detects when five or more
+    analytics from the Windows Certificate Services story trigger within a specified
+    timeframe. This detection leverages aggregated risk scores and event counts from
+    the Risk data model. This activity is significant as it may indicate an ongoing
+    attack aimed at compromising authentication mechanisms. If confirmed malicious,
+    attackers could gain unauthorized
+  author: Michael Haag, Splunk
+  tags:
+  - correlation
+  - splunk-security-content
+  - windows-certificate-services
+  mitre_attack:
+    techniques:
+    - id: T1649
+      name: Technique T1649
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1649/atomic_red_team/risk_certificate_services.log
+    description: certs - stash
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

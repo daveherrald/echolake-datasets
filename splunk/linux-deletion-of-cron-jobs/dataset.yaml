@@ -1,0 +1,37 @@
+metadata:
+  name: linux-deletion-of-cron-jobs
+  version: 8.0.0
+  description: 'The following analytic detects the deletion of cron jobs on a Linux
+    machine. It leverages filesystem event logs to identify when files within the
+    "/etc/cron.*" directory are deleted. This activity is significant because attackers
+    or malware may delete cron jobs to disable scheduled security tasks or evade detection
+    mechanisms. If confirmed malicious, this action could allow an attacker to disrupt
+    system operations, evade security measures, or facilitate further malicious activities
+    such as data '
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - acidrain
+  - data-destruction
+  - acidpour
+  mitre_attack:
+    techniques:
+    - id: T1070.004
+      name: Technique T1070.004
+    - id: T1485
+      name: Technique T1485
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/acidrain/sysmon_linux.log
+    description: Syslog:Linux-Sysmon/Operational - sysmon:linux
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

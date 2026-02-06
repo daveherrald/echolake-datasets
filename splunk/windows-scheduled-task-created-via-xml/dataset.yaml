@@ -1,0 +1,37 @@
+metadata:
+  name: windows-scheduled-task-created-via-xml
+  version: 11.0.0
+  description: 'The following analytic detects the creation of scheduled tasks in
+    Windows using schtasks.exe with the "XML" parameter.
+
+    This detection leverages data from Endpoint Detection and Response (EDR) agents,
+    focusing on command-line executions and process details.
+
+    This activity is significant as it is a common technique for establishing persistence
+    or achieving privilege escalation, often used by malware like Trickbot and Winter-Vivern.
+    While creating a scheduled task via XML may be legitimate, it can a'
+  author: Teoderick Contreras, Nasreddine Bencherchali, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - winter-vivern
+  - malicious-inno-setup-loader
+  - cisa-aa23-347a
+  mitre_attack:
+    techniques:
+    - id: T1053.005
+      name: Technique T1053.005
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/winter-vivern/scheduledtask/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

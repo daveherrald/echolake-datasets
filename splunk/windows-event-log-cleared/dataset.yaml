@@ -1,0 +1,35 @@
+metadata:
+  name: windows-event-log-cleared
+  version: 15.0.0
+  description: 'The following analytic detects the clearing of Windows event logs
+    by identifying Windows Security Event ID 1102 or System log event 104. This detection
+    leverages Windows event logs to monitor for log clearing activities. Such behavior
+    is significant as it may indicate an attempt to cover tracks after malicious activities.
+    If confirmed malicious, this action could hinder forensic investigations and allow
+    attackers to persist undetected, making it crucial to investigate further and
+    correlate with '
+  author: Rico Valdez, Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - shrinklocker
+  - windows-log-manipulation
+  - ransomware
+  mitre_attack:
+    techniques:
+    - id: T1070.001
+      name: Technique T1070.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1070.001/windows_event_log_cleared/windows-xml.log
+    description: XmlWinEventLog:Security - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

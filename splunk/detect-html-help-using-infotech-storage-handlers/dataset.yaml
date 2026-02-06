@@ -1,0 +1,35 @@
+metadata:
+  name: detect-html-help-using-infotech-storage-handlers
+  version: 11.0.0
+  description: The following analytic detects the execution of hh.exe (HTML Help)
+    using InfoTech Storage Handlers to load Windows script code from a Compiled HTML
+    Help (CHM) file. This detection leverages data from Endpoint Detection and Response
+    (EDR) agents, focusing on process names and command-line executions. This activity
+    is significant because it can be used to execute malicious scripts embedded within
+    CHM files, potentially leading to code execution. If confirmed malicious, this
+    technique could allow a
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - suspicious-compiled-html-activity
+  - living-off-the-land
+  - compromised-windows-host
+  mitre_attack:
+    techniques:
+    - id: T1218.001
+      name: Technique T1218.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218.001/atomic_red_team/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

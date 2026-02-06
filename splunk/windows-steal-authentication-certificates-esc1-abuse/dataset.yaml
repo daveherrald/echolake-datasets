@@ -1,0 +1,33 @@
+metadata:
+  name: windows-steal-authentication-certificates-esc1-abuse
+  version: 8.0.0
+  description: The following analytic detects when a new certificate is requested
+    or granted against Active Directory Certificate Services (AD CS) using a Subject
+    Alternative Name (SAN). It leverages Windows Security Event Codes 4886 and 4887
+    to identify these actions. This activity is significant because improperly configured
+    certificate templates can be exploited for privilege escalation and environment
+    compromise. If confirmed malicious, an attacker could gain elevated privileges
+    or persist within the envir
+  author: Steven Dick
+  tags:
+  - ttp
+  - splunk-security-content
+  - windows-certificate-services
+  mitre_attack:
+    techniques:
+    - id: T1649
+      name: Technique T1649
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1649/certify_abuse/certify_esc1_abuse_winsecurity.log
+    description: XmlWinEventLog:Security - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

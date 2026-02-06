@@ -1,0 +1,34 @@
+metadata:
+  name: vmware-server-side-template-injection-hunt
+  version: 5.0.0
+  description: The following analytic identifies potential server-side template injection
+    attempts related to CVE-2022-22954. It detects suspicious URL patterns containing
+    "deviceudid" and keywords like "java.lang.ProcessBuilder" or "freemarker.template.utility.ObjectConstructor"
+    using web or proxy logs within the Web Datamodel. This activity is significant
+    as it may indicate an attempt to exploit a known vulnerability in VMware, potentially
+    leading to remote code execution. If confirmed malicious, attackers c
+  author: Michael Haag, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - vmware-server-side-injection-and-privilege-escalation
+  mitre_attack:
+    techniques:
+    - id: T1190
+      name: Technique T1190
+    - id: T1133
+      name: Technique T1133
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/vmware/vmware_scanning_pan_threat.log
+    description: pan:threat - pan:threat
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

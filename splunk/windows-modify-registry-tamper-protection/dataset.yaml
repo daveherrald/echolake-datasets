@@ -1,0 +1,34 @@
+metadata:
+  name: windows-modify-registry-tamper-protection
+  version: 9.0.0
+  description: The following analytic detects a suspicious modification to the Windows
+    Defender Tamper Protection registry setting. It leverages data from the Endpoint
+    datamodel, specifically targeting changes where the registry path is set to disable
+    Tamper Protection. This activity is significant because disabling Tamper Protection
+    can allow adversaries to make further undetected changes to Windows Defender settings,
+    potentially leading to reduced security on the system. If confirmed malicious,
+    this could en
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - scattered-lapsus$-hunters
+  - redline-stealer
+  mitre_attack:
+    techniques:
+    - id: T1112
+      name: Technique T1112
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/redline/modify_registry/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

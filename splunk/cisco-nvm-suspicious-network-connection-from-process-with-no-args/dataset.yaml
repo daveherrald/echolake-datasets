@@ -1,0 +1,39 @@
+metadata:
+  name: cisco-nvm-suspicious-network-connection-from-process-with-no-args
+  version: 2.0.0
+  description: 'This analytic detects system binaries that are commonly abused in
+    process injection techniques but are observed without any command-line arguments.
+
+    It leverages Cisco Network Visibility Module (NVM) flow data and process arguments
+
+    to identify outbound connections initiated by curl where TLS checks were explicitly
+    disabled.
+
+    Binaries such as `rundll32.exe`, `regsvr32.exe`, `dllhost.exe`, `svchost.exe`,
+    and others are legitimate Windows processes that are often injected into by malware
+    or post-expl'
+  author: Nasreddine Bencherchali, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - cisco-network-visibility-module-analytics
+  mitre_attack:
+    techniques:
+    - id: T1055
+      name: Technique T1055
+    - id: T1218
+      name: Technique T1218
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_network_visibility_module/cisco_nvm_flowdata/nvm_flowdata.log
+    description: not_applicable - cisco:nvm:flowdata
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

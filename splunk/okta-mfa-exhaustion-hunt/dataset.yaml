@@ -1,0 +1,35 @@
+metadata:
+  name: okta-mfa-exhaustion-hunt
+  version: 7.0.0
+  description: The following analytic detects patterns of successful and failed Okta
+    MFA push attempts to identify potential MFA exhaustion attacks. It leverages Okta
+    event logs, specifically focusing on push verification events, and uses statistical
+    evaluations to determine suspicious activity. This activity is significant as
+    it may indicate an attacker attempting to bypass MFA by overwhelming the user
+    with push notifications. If confirmed malicious, this could lead to unauthorized
+    access, compromising the se
+  author: Michael Haag, Marissa Bower, Mauricio Velazco, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - okta-account-takeover
+  - okta-mfa-exhaustion
+  - scattered-lapsus$-hunters
+  mitre_attack:
+    techniques:
+    - id: T1110
+      name: Technique T1110
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1621/okta_multiple_failed_mfa_pushes/okta_multiple_failed_mfa_pushes.log
+    description: Okta - OktaIM2:log
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

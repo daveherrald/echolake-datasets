@@ -1,0 +1,35 @@
+metadata:
+  name: rundll32-shimcache-flush
+  version: 8.0.0
+  description: The following analytic detects the execution of a suspicious rundll32
+    command line used to clear the shim cache. It leverages data from Endpoint Detection
+    and Response (EDR) agents, focusing on process execution logs and command-line
+    arguments. This activity is significant because clearing the shim cache is an
+    anti-forensic technique aimed at evading detection and removing forensic artifacts.
+    If confirmed malicious, this action could hinder incident response efforts, allowing
+    an attacker to cove
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - unusual-processes
+  - living-off-the-land
+  - compromised-windows-host
+  mitre_attack:
+    techniques:
+    - id: T1112
+      name: Technique T1112
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1112/shimcache_flush/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

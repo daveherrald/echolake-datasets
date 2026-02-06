@@ -1,0 +1,35 @@
+metadata:
+  name: azure-ad-new-federated-domain-added
+  version: 11.0.0
+  description: The following analytic detects the addition of a new federated domain
+    within an Azure Active Directory tenant. It leverages Azure AD AuditLogs to identify
+    successful "Set domain authentication" operations. This activity is significant
+    as it may indicate the use of the Azure AD identity federation backdoor technique,
+    allowing an adversary to establish persistence. If confirmed malicious, the attacker
+    could impersonate any user, bypassing password and MFA requirements, potentially
+    leading to unaut
+  author: Mauricio Velazco, Gowthamaraj Rajendran, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - azure-active-directory-persistence
+  - scattered-lapsus$-hunters
+  - hellcat-ransomware
+  mitre_attack:
+    techniques:
+    - id: T1484.002
+      name: Technique T1484.002
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1484.002/new_federated_domain/azure-audit.log
+    description: Azure AD - azure:monitor:aad
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

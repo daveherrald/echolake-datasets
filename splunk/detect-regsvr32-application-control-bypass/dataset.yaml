@@ -1,0 +1,35 @@
+metadata:
+  name: detect-regsvr32-application-control-bypass
+  version: 11.0.0
+  description: The following analytic identifies the abuse of Regsvr32.exe to proxy
+    execution of malicious code, specifically detecting the loading of "scrobj.dll"
+    by Regsvr32.exe. This detection leverages data from Endpoint Detection and Response
+    (EDR) agents, focusing on process creation events and command-line executions.
+    This activity is significant because Regsvr32.exe is a trusted, signed Microsoft
+    binary, often used in "Squiblydoo" attacks to bypass application control mechanisms.
+    If confirmed malicious
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - living-off-the-land
+  - suspicious-regsvr32-activity
+  - graceful-wipe-out-attack
+  mitre_attack:
+    techniques:
+    - id: T1218.010
+      name: Technique T1218.010
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218.010/atomic_red_team/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

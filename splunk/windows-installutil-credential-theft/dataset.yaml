@@ -1,0 +1,33 @@
+metadata:
+  name: windows-installutil-credential-theft
+  version: 10.0.0
+  description: 'The following analytic detects instances where the Windows InstallUtil.exe
+    binary loads `vaultcli.dll` and `Samlib.dll`. This detection leverages Sysmon
+    EventCode 7 to identify these specific DLL loads. This activity is significant
+    because it can indicate an attempt to execute code that bypasses application control
+    and captures credentials using tools like Mimikatz. If confirmed malicious, this
+    behavior could allow an attacker to steal credentials, potentially leading to
+    unauthorized access and '
+  author: Michael Haag, Mauricio Velazo, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - signed-binary-proxy-execution-installutil
+  mitre_attack:
+    techniques:
+    - id: T1218.004
+      name: Technique T1218.004
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218.004/atomic_red_team/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,33 @@
+metadata:
+  name: o365-application-available-to-other-tenants
+  version: 7.0.0
+  description: The following analytic identifies the configuration of Azure Active
+    Directory Applications in a manner that allows authentication from external tenants
+    or personal accounts. This configuration can lead to inappropriate or malicious
+    access of any data or capabilities the application is allowed to access. This
+    detection leverages the O365 Universal Audit Log data source.
+  author: Steven Dick
+  tags:
+  - ttp
+  - splunk-security-content
+  - azure-active-directory-persistence
+  - azure-active-directory-account-takeover
+  - data-exfiltration
+  mitre_attack:
+    techniques:
+    - id: T1098.003
+      name: Technique T1098.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1098/o365_azure_workload_events/o365_azure_workload_events.log
+    description: o365 - o365:management:activity
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

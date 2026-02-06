@@ -1,0 +1,33 @@
+metadata:
+  name: windows-executable-masquerading-as-benign-file-types
+  version: 1.0.0
+  description: 'The following analytic detects the presence of executable files masquerading
+    as benign file types on Windows systems. Adversaries employ this technique to
+    evade defenses and trick users into executing malicious code by renaming executables
+    with extensions commonly associated with documents, images, or other non-executable
+    formats (e.g., .pdf, .jpg, .doc, .png).
+
+    '
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - netsupport-rmm-tool-abuse
+  mitre_attack:
+    techniques:
+    - id: T1036.008
+      name: Technique T1036.008
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1036.008/masquerading_executable_as_non_exec_file_type/non_exec_ext_but_exec_detected.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,36 @@
+metadata:
+  name: linux-medusa-rootkit
+  version: 3.0.0
+  description: This detection identifies file creation events associated with the
+    installation of the Medusa rootkit, a userland LD_PRELOAD-based rootkit known
+    for deploying shared objects, loader binaries, and configuration files into specific
+    system directories. These files typically facilitate process hiding, credential
+    theft, and backdoor access. Monitoring for such file creation patterns enables
+    early detection of rootkit deployment before full compromise.
+  author: Raven Tait, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - china-nexus-threat-activity
+  - medusa-rootkit
+  - hellcat-ransomware
+  mitre_attack:
+    techniques:
+    - id: T1014
+      name: Technique T1014
+    - id: T1589.001
+      name: Technique T1589.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1014/medusa_rootkit/sysmon_linux.log
+    description: Syslog:Linux-Sysmon/Operational - sysmon:linux
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,33 @@
+metadata:
+  name: windows-modify-registry-auto-update-notif
+  version: 8.0.0
+  description: The following analytic detects a suspicious modification to the Windows
+    registry that changes the auto-update notification setting to "Notify before download."
+    This detection leverages data from the Endpoint.Registry data model, focusing
+    on specific registry paths and values. This activity is significant because it
+    is a known technique used by adversaries, including malware like RedLine Stealer,
+    to evade detection and potentially deploy additional payloads. If confirmed malicious,
+    this modificat
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - redline-stealer
+  mitre_attack:
+    techniques:
+    - id: T1112
+      name: Technique T1112
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/redline/modify_registry/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,31 @@
+metadata:
+  name: ollama-possible-api-endpoint-scan-reconnaissance
+  version: 1.0.0
+  description: Detects API reconnaissance and endpoint scanning activity against Ollama
+    servers by identifying sources probing multiple API endpoints within short timeframes,
+    particularly when using HEAD requests or accessing diverse endpoint paths, which
+    indicates systematic enumeration to map the API surface, discover hidden endpoints,
+    or identify vulnerabilities before launching targeted attacks.
+  author: Rod Soto
+  tags:
+  - anomaly
+  - splunk-security-content
+  - suspicious-ollama-activities
+  mitre_attack:
+    techniques:
+    - id: T1595
+      name: Technique T1595
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/ollama/server.log
+    description: server.log - ollama:server
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

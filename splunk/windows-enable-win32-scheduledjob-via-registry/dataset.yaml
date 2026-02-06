@@ -1,0 +1,33 @@
+metadata:
+  name: windows-enable-win32-scheduledjob-via-registry
+  version: 7.0.0
+  description: The following analytic detects the creation of a new DWORD value named
+    "EnableAt" in the registry path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\Configuration".
+    This modification enables the use of the at.exe or wmi Win32_ScheduledJob commands
+    to add scheduled tasks on a Windows endpoint. The detection leverages registry
+    event data from the Endpoint datamodel. This activity is significant because it
+    may indicate that an attacker is enabling the ability to schedule tasks, poten
+  author: Michael Haag, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - active-directory-lateral-movement
+  - scheduled-tasks
+  mitre_attack:
+    techniques:
+    - id: T1053.005
+      name: Technique T1053.005
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/atomic_red_team/enableat_windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

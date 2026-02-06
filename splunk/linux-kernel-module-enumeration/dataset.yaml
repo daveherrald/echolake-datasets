@@ -1,0 +1,36 @@
+metadata:
+  name: linux-kernel-module-enumeration
+  version: 9.0.0
+  description: The following analytic identifies the use of the 'kmod' process to
+    list kernel modules on a Linux system. This detection leverages data from Endpoint
+    Detection and Response (EDR) agents, focusing on process names and command-line
+    executions. While listing kernel modules is not inherently malicious, it can be
+    a precursor to loading unauthorized modules using 'insmod'. If confirmed malicious,
+    this activity could allow an attacker to load kernel modules, potentially leading
+    to privilege escalation,
+  author: Michael Haag, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - xorddos
+  - linux-rootkit
+  mitre_attack:
+    techniques:
+    - id: T1082
+      name: Technique T1082
+    - id: T1014
+      name: Technique T1014
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1082/atomic_red_team/linux-sysmon.log
+    description: Syslog:Linux-Sysmon/Operational - sysmon:linux
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

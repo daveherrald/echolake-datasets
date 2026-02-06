@@ -1,0 +1,36 @@
+metadata:
+  name: local-llm-framework-dns-query
+  version: 1.0.0
+  description: 'Detects DNS queries related to local LLM models on endpoints by monitoring
+    Sysmon DNS query events (Event ID 22) for known LLM model domains and services.
+
+    Local LLM frameworks like Ollama, LM Studio, and GPT4All make DNS calls to repositories
+    such as huggingface.co and ollama.ai for model downloads, updates, and telemetry.
+
+    These queries can reveal unauthorized AI tool usage or data exfiltration risks
+    on corporate networks.
+
+    '
+  author: Rod Soto
+  tags:
+  - hunting
+  - splunk-security-content
+  - suspicious-local-llm-frameworks
+  mitre_attack:
+    techniques:
+    - id: T1590
+      name: Technique T1590
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/suspicious_behaviour/local_llms/sysmon_dns.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

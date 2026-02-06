@@ -1,0 +1,35 @@
+metadata:
+  name: linux-service-started-or-enabled
+  version: 9.0.0
+  description: 'The following analytic detects the creation or enabling of services
+    on Linux platforms using the systemctl or service tools. It leverages Endpoint
+    Detection and Response (EDR) logs, focusing on process names, parent processes,
+    and command-line executions. This activity is significant as adversaries may create
+    or modify services to maintain persistence or execute malicious payloads. If confirmed
+    malicious, this behavior could lead to persistent access, data theft, ransomware
+    deployment, or other '
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - linux-privilege-escalation
+  - linux-persistence-techniques
+  - linux-living-off-the-land
+  mitre_attack:
+    techniques:
+    - id: T1053.006
+      name: Technique T1053.006
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053.006/service_systemd/sysmon_linux.log
+    description: Syslog:Linux-Sysmon/Operational - sysmon:linux
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

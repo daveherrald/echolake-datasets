@@ -1,0 +1,37 @@
+metadata:
+  name: potential-telegram-api-request-via-commandline
+  version: 6.0.0
+  description: 'The following analytic detects the presence of "api.telegram.org"
+    in the CommandLine of a process. It leverages data from Endpoint Detection and
+    Response (EDR) agents, focusing on process execution logs that include command-line
+    details. This activity can be significant as the telegram API has been used as
+    an exfiltration mechanism or even as a C2 channel. If confirmed malicious, this
+    could allow an attacker or malware to exfiltrate data or receive additional C2
+    instruction, potentially leading '
+  author: Nasreddine Bencherchali, Splunk, Zaki Zarkasih Al Mustafa
+  tags:
+  - anomaly
+  - splunk-security-content
+  - xmrig
+  - water-gamayun
+  - 0bj3ctivity-stealer
+  mitre_attack:
+    techniques:
+    - id: T1102.002
+      name: Technique T1102.002
+    - id: T1041
+      name: Technique T1041
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1102.002/telegram_api_cli/telegram_cli.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

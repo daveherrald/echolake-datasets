@@ -1,0 +1,37 @@
+metadata:
+  name: windows-audit-policy-excluded-category-via-auditpol
+  version: 3.0.0
+  description: The following analytic identifies the execution of `auditpol.exe` with
+    the "/set" and "/exclude" command-line arguments which indicates that the user's
+    per-user policy will cause audit to be suppressed regardless of the system audit
+    policy. It leverages data from Endpoint Detection and Response (EDR) agents, focusing
+    on process names and command-line executions. This activity can be significant
+    as it indicates potential defense evasion by adversaries or Red Teams, aiming
+    to exclude specific user
+  author: Nasreddine Bencherchali, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - windows-audit-policy-tampering
+  mitre_attack:
+    techniques:
+    - id: T1562.002
+      name: Technique T1562.002
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.002/auditpol_tampering/auditpol_tampering_sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.002/auditpol_tampering/auditpol_tampering_security.log
+    description: XmlWinEventLog:Security - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

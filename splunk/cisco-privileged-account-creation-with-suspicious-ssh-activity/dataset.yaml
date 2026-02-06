@@ -1,0 +1,40 @@
+metadata:
+  name: cisco-privileged-account-creation-with-suspicious-ssh-activity
+  version: 2.0.0
+  description: 'This analytic detects a correlation between privileged account creation
+    on Cisco IOS devices and subsequent inbound SSH connections to non-standard ports
+    or sshd_operns by correlating risk events
+
+    This correlation identifies when both "Cisco IOS Suspicious Privileged Account
+    Creation" and SSH-related Snort detections ("SSH Connection to sshd_operns" or
+    "SSH Connection to Non-Standard Port") fire for the same network device.
+
+    This behavior is highly indicative of persistence establishment following'
+  author: Nasreddine Bencherchali, Splunk
+  tags:
+  - correlation
+  - splunk-security-content
+  - cisco-secure-firewall-threat-defense-analytics
+  - salt-typhoon
+  mitre_attack:
+    techniques:
+    - id: T1021.004
+      name: Technique T1021.004
+    - id: T1136
+      name: Technique T1136
+    - id: T1078
+      name: Technique T1078
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/emerging_threats/SaltTyphoon/salttyphoon_correlation.log
+    description: not_applicable - stash
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

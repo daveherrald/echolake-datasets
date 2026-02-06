@@ -1,0 +1,35 @@
+metadata:
+  name: windows-suspect-process-with-authentication-traffic
+  version: 8.0.0
+  description: The following analytic detects executables running from public or temporary
+    locations that are communicating over Windows domain authentication ports/protocols
+    such as LDAP (389), LDAPS (636), and Kerberos (88). It leverages network traffic
+    data to identify processes originating from user-controlled directories. This
+    activity is significant because legitimate applications rarely run from these
+    locations and attempt domain authentication, making it a potential indicator of
+    compromise. If confirme
+  author: Steven Dick
+  tags:
+  - anomaly
+  - splunk-security-content
+  - active-directory-discovery
+  mitre_attack:
+    techniques:
+    - id: T1087.002
+      name: Technique T1087.002
+    - id: T1204.002
+      name: Technique T1204.002
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1649/certify_abuse/certify_esc1_abuse_sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

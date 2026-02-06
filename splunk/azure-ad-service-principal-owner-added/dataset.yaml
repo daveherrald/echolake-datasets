@@ -1,0 +1,35 @@
+metadata:
+  name: azure-ad-service-principal-owner-added
+  version: 10.0.0
+  description: The following analytic detects the addition of a new owner to a Service
+    Principal within an Azure AD tenant. It leverages Azure Active Directory events
+    from the AuditLog log category to identify this activity. This behavior is significant
+    because Service Principals do not support multi-factor authentication or conditional
+    access policies, making them a target for adversaries seeking persistence or privilege
+    escalation. If confirmed malicious, this activity could allow attackers to maintain
+    acces
+  author: Mauricio Velazco, Gowthamaraj Rajendran, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - azure-active-directory-persistence
+  - azure-active-directory-privilege-escalation
+  - nobelium-group
+  mitre_attack:
+    techniques:
+    - id: T1098
+      name: Technique T1098
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1098/azure_ad_add_serviceprincipal_owner/azure-audit.log
+    description: Azure AD - azure:monitor:aad
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

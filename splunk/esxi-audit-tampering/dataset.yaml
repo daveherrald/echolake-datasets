@@ -1,0 +1,33 @@
+metadata:
+  name: esxi-audit-tampering
+  version: 1.0.0
+  description: This detection identifies the use of the esxcli system auditrecords
+    commands, which can be used to tamper with logging on an ESXi host. This action
+    may indicate an attempt to evade detection or hinder forensic analysis by preventing
+    the recording of system-level audit events.
+  author: Raven Tait, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - esxi-post-compromise
+  - black-basta-ransomware
+  mitre_attack:
+    techniques:
+    - id: T1562.003
+      name: Technique T1562.003
+    - id: T1070
+      name: Technique T1070
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.003/esxi_audit_tampering/esxi_audit_tampering.log
+    description: vmware:esxlog - vmw-syslog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

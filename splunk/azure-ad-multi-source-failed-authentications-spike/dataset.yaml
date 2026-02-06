@@ -1,0 +1,38 @@
+metadata:
+  name: azure-ad-multi-source-failed-authentications-spike
+  version: 10.0.0
+  description: The following analytic detects potential distributed password spraying
+    attacks in an Azure AD environment. It identifies a spike in failed authentication
+    attempts across various user-and-IP combinations from multiple source IPs and
+    countries, using different user agents. This detection leverages Azure AD SignInLogs,
+    focusing on error code 50126 for failed authentications. This activity is significant
+    as it indicates an adversary's attempt to bypass security controls by distributing
+    login attempt
+  author: Mauricio Velazco, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - azure-active-directory-account-takeover
+  - nobelium-group
+  mitre_attack:
+    techniques:
+    - id: T1110.003
+      name: Technique T1110.003
+    - id: T1110.004
+      name: Technique T1110.004
+    - id: T1586.003
+      name: Technique T1586.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1110.003/azure_ad_distributed_spray/azure_ad_distributed_spray.log
+    description: Azure AD - azure:monitor:aad
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

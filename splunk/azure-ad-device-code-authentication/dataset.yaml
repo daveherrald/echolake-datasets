@@ -1,0 +1,35 @@
+metadata:
+  name: azure-ad-device-code-authentication
+  version: 8.0.0
+  description: The following analytic identifies Azure Device Code Phishing attacks,
+    which can lead to Azure Account Take-Over (ATO). It leverages Azure AD SignInLogs
+    to detect suspicious authentication requests using the device code authentication
+    protocol. This activity is significant as it indicates potential bypassing of
+    Multi-Factor Authentication (MFA) and Conditional Access Policies (CAPs) through
+    phishing emails. If confirmed malicious, attackers could gain unauthorized access
+    to Azure AD, Exchange mai
+  author: Mauricio Velazco, Gowthamaraj Rajendran,  Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - azure-active-directory-account-takeover
+  mitre_attack:
+    techniques:
+    - id: T1528
+      name: Technique T1528
+    - id: T1566.002
+      name: Technique T1566.002
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1528/device_code_authentication/azure-audit.log
+    description: Azure AD - azure:monitor:aad
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,35 @@
+metadata:
+  name: windows-unsigned-dll-side-loading-in-same-process-path
+  version: 15.0.0
+  description: This detection identifies unsigned DLLs loaded through DLL side-loading
+    with same file path with the process loaded the DLL, a technique observed in DarkGate
+    malware. This detection monitors DLL loading, verifies signatures, and flags unsigned
+    DLLs. Suspicious file paths and known executable associations are checked. Detecting
+    such suspicious DLLs is crucial in preventing privilege escalation attacks and
+    other potential security breaches. Regular security assessments, thorough monitoring,
+    and im
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - plugx
+  - darkgate-malware
+  - derusbi
+  mitre_attack:
+    techniques:
+    - id: T1574.001
+      name: Technique T1574.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1574.002/unsigned_dll_loaded_same_process_path/unsigned_dll_process_path.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

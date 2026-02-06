@@ -1,0 +1,33 @@
+metadata:
+  name: azure-runbook-webhook-created
+  version: 11.0.0
+  description: The following analytic detects the creation of a new Automation Runbook
+    Webhook within an Azure tenant. It leverages Azure Audit events, specifically
+    the "Create or Update an Azure Automation webhook" operation, to identify this
+    activity. This behavior is significant because Webhooks can trigger Automation
+    Runbooks via unauthenticated URLs exposed to the Internet, posing a security risk.
+    If confirmed malicious, an attacker could use this to execute code, create users,
+    or maintain persistence wit
+  author: Mauricio Velazco, Brian Serocki, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - azure-active-directory-persistence
+  mitre_attack:
+    techniques:
+    - id: T1078.004
+      name: Technique T1078.004
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1078.004/azure_runbook_webhook/azure-activity.log
+    description: mscs:azure:audit - mscs:azure:audit
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

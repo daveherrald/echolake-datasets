@@ -1,0 +1,33 @@
+metadata:
+  name: java-class-file-download-by-java-user-agent
+  version: 6.0.0
+  description: The following analytic identifies a Java user agent performing a GET
+    request for a .class file from a remote site. It leverages web or proxy logs within
+    the Web Datamodel to detect this activity. This behavior is significant as it
+    may indicate exploitation attempts, such as those related to CVE-2021-44228 (Log4Shell).
+    If confirmed malicious, an attacker could exploit vulnerabilities in the Java
+    application, potentially leading to remote code execution and further compromise
+    of the affected syste
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - log4shell-cve-2021-44228
+  mitre_attack:
+    techniques:
+    - id: T1190
+      name: Technique T1190
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/java/java.log
+    description: stream:http - stream:http
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

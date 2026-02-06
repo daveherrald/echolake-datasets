@@ -1,0 +1,35 @@
+metadata:
+  name: linux-auditd-private-keys-and-certificate-enumeration
+  version: 4.0.0
+  description: The following analytic detects suspicious attempts to find private
+    keys, which may indicate an attacker's effort to access sensitive cryptographic
+    information. Private keys are crucial for securing encrypted communications and
+    data, and unauthorized access to them can lead to severe security breaches, including
+    data decryption and identity theft. By monitoring for unusual or unauthorized
+    searches for private keys, this analytic helps identify potential threats to cryptographic
+    security, enabling
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - linux-living-off-the-land
+  - linux-privilege-escalation
+  - linux-persistence-techniques
+  mitre_attack:
+    techniques:
+    - id: T1552.004
+      name: Technique T1552.004
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1552.004/linux_auditd_find_gpg/auditd_execve_find_gpg.log
+    description: auditd - auditd
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

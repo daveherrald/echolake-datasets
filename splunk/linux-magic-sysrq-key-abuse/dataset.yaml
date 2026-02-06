@@ -1,0 +1,45 @@
+metadata:
+  name: linux-magic-sysrq-key-abuse
+  version: 2.0.0
+  description: 'Detects potential abuse of the Linux Magic SysRq (System Request)
+    key by adversaries with root or sufficient privileges to manipulate or destabilize
+    a system.
+
+    Writing to /proc/sysrq-trigger can crash the system, kill processes, or bypass
+    standard logging.
+
+    Monitoring SysRq abuse helps detect stealthy post-exploitation activity.
+
+    Correlate with related EXECVE or PROCTITLE events to identify the process or user
+    responsible for the access or modification.
+
+    '
+  author: Milad Cheraghi
+  tags:
+  - ttp
+  - splunk-security-content
+  - compromised-linux-host
+  mitre_attack:
+    techniques:
+    - id: T1059.004
+      name: Technique T1059.004
+    - id: T1529
+      name: Technique T1529
+    - id: T1489
+      name: Technique T1489
+    - id: T1499
+      name: Technique T1499
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1529/auditd_path_sysrq/path_sysrq.log
+    description: auditd - auditd
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

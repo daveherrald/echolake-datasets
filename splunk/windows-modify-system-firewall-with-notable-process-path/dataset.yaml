@@ -1,0 +1,35 @@
+metadata:
+  name: windows-modify-system-firewall-with-notable-process-path
+  version: 8.0.0
+  description: The following analytic detects suspicious modifications to system firewall
+    rules, specifically allowing execution of applications from notable and potentially
+    malicious file paths. This detection leverages data from Endpoint Detection and
+    Response (EDR) agents, focusing on command-line executions involving firewall
+    rule changes. This activity is significant as it may indicate an adversary attempting
+    to bypass firewall restrictions to execute malicious files. If confirmed malicious,
+    this could al
+  author: Teoderick Contreras, Will Metcalf, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - medusa-ransomware
+  - njrat
+  - compromised-windows-host
+  mitre_attack:
+    techniques:
+    - id: T1562.004
+      name: Technique T1562.004
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.004/njrat_add_firewall_rule/njrat_firewall_sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

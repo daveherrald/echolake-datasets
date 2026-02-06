@@ -1,0 +1,35 @@
+metadata:
+  name: windows-office-product-spawned-child-process-for-download
+  version: 6.0.0
+  description: 'The following analytic identifies Office applications spawning child
+    processes to download content via HTTP/HTTPS. It leverages data from Endpoint
+    Detection and Response (EDR) agents, focusing on process creation events where
+    Office applications like Word or Excel initiate network connections, excluding
+    common browsers. This activity is significant as it often indicates the use of
+    malicious documents to execute living-off-the-land binaries (LOLBins) for payload
+    delivery. If confirmed malicious, '
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - spearphishing-attachments
+  - cve-2023-36884-office-and-windows-html-rce-vulnerability
+  - plugx
+  mitre_attack:
+    techniques:
+    - id: T1566.001
+      name: Technique T1566.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566.001/datasets2/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

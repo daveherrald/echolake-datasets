@@ -1,0 +1,35 @@
+metadata:
+  name: windows-installutil-uninstall-option
+  version: 11.0.0
+  description: The following analytic detects the use of the Windows InstallUtil.exe
+    binary with the `/u` (uninstall) switch, which can execute code while bypassing
+    application control. This detection leverages data from Endpoint Detection and
+    Response (EDR) agents, focusing on process names, parent processes, and command-line
+    executions. This activity is significant because it can indicate an attempt to
+    execute malicious code without administrative privileges. If confirmed malicious,
+    an attacker could achieve
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - living-off-the-land
+  - compromised-windows-host
+  - signed-binary-proxy-execution-installutil
+  mitre_attack:
+    techniques:
+    - id: T1218.004
+      name: Technique T1218.004
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218.004/atomic_red_team/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

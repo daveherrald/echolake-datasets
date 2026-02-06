@@ -1,0 +1,34 @@
+metadata:
+  name: allow-inbound-traffic-in-firewall-rule
+  version: 9.0.0
+  description: The following analytic detects a suspicious PowerShell command that
+    allows inbound traffic to a specific local port within the public profile. It
+    leverages PowerShell script block logging (EventCode 4104) to identify commands
+    containing keywords like "firewall," "Inbound," "Allow," and "-LocalPort." This
+    activity is significant because it may indicate an attacker attempting to establish
+    remote access by modifying firewall rules. If confirmed malicious, this could
+    allow unauthorized access to the
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - prohibited-traffic-allowed-or-protocol-mismatch
+  - netsupport-rmm-tool-abuse
+  mitre_attack:
+    techniques:
+    - id: T1021.001
+      name: Technique T1021.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1021/allow_inbound_traffic_in_firewall_rule/windows-xml.log
+    description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

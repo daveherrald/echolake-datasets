@@ -1,0 +1,34 @@
+metadata:
+  name: windows-credentials-from-web-browsers-saved-in-temp-folder
+  version: 6.0.0
+  description: The following analytic detects the creation of files containing passwords,
+    cookies, and saved login account information by the Braodo stealer malware in
+    temporary folders. Braodo often collects these credentials from browsers and applications,
+    storing them in temp directories before exfiltration. This detection focuses on
+    monitoring for the creation of files with patterns or formats commonly associated
+    with stolen credentials. By identifying these activities, security teams can take
+    needed actio
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - braodo-stealer
+  - scattered-lapsus$-hunters
+  mitre_attack:
+    techniques:
+    - id: T1555.003
+      name: Technique T1555.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1555.003/browser_credential_info_temp/braodo_browser_info.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

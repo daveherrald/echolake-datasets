@@ -1,0 +1,35 @@
+metadata:
+  name: tomcat-session-deserialization-attempt
+  version: 2.0.0
+  description: This detection identifies potential exploitation of CVE-2025-24813
+    in Apache Tomcat through the second stage of the attack. This phase occurs when
+    an attacker attempts to trigger deserialization of a previously uploaded malicious
+    session file by sending a GET request with a specially crafted JSESSIONID cookie.
+    These requests typically have specific characteristics, including a JSESSIONID
+    cookie with a leading dot that matches a previously uploaded filename, and typically
+    result in a HTTP 500 err
+  author: Michael Haag, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - apache-tomcat-session-deserialization-attacks
+  mitre_attack:
+    techniques:
+    - id: T1190
+      name: Technique T1190
+    - id: T1505.003
+      name: Technique T1505.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/tomcat/tomcat_nginx_access.log
+    description: nginx - nginx:plus:kv
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,33 @@
+metadata:
+  name: wmiprvse-lolbas-execution-process-spawn
+  version: 1.0.0
+  description: The following analytic detects `wmiprvse.exe` spawning a LOLBAS execution
+    process. It leverages data from Endpoint Detection and Response (EDR) agents,
+    focusing on process creation events where `wmiprvse.exe` is the parent process
+    and the child process is a known LOLBAS binary. This activity is significant as
+    it may indicate lateral movement or remote code execution by an adversary abusing
+    Windows Management Instrumentation (WMI). If confirmed malicious, this behavior
+    could allow attackers to ex
+  author: Mauricio Velazco, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - active-directory-lateral-movement
+  mitre_attack:
+    techniques:
+    - id: T1047
+      name: Technique T1047
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1047/lateral_movement_lolbas/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,30 @@
+metadata:
+  name: certutil-exe-certificate-extraction
+  version: 11.0.0
+  description: The following analytic identifies the use of certutil.exe with arguments
+    indicating the manipulation or extraction of certificates. It leverages data from
+    Endpoint Detection and Response (EDR) agents, focusing on process names and command-line
+    arguments. This activity is significant because extracting certificates can allow
+    attackers to sign new authentication tokens, particularly in federated environments
+    like Windows ADFS. If confirmed malicious, this could enable attackers to forge
+    authentica
+  author: Rod Soto, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - windows-persistence-techniques
+  - living-off-the-land
+  - cloud-federated-credential-abuse
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/suspicious_behaviour/certutil_exe_certificate_extraction/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

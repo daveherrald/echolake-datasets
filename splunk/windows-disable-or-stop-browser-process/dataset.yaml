@@ -1,0 +1,35 @@
+metadata:
+  name: windows-disable-or-stop-browser-process
+  version: 7.0.0
+  description: The following analytic detects the use of the taskkill command in a
+    process command line to terminate several known browser processes, a technique
+    commonly employed by the Braodo stealer malware to steal credentials. By forcefully
+    closing browsers like Chrome, Edge, and Firefox, the malware can unlock files
+    that store sensitive information, such as passwords and login data. This detection
+    focuses on identifying taskkill commands targeting these browsers, signaling malicious
+    intent. Early detecti
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - braodo-stealer
+  - scattered-lapsus$-hunters
+  - hellcat-ransomware
+  mitre_attack:
+    techniques:
+    - id: T1562.001
+      name: Technique T1562.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.001/taskkill_browser/braodo_taskkill.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,33 @@
+metadata:
+  name: cisco-duo-policy-allow-tampered-devices
+  version: 1.0.0
+  description: "The following analytic detects when a Duo policy is created or updated\
+    \ to allow tampered or rooted devices, such as jailbroken smartphones, \nto access\
+    \ protected resources. It identifies this behavior by searching Duo administrator\
+    \ activity logs for policy changes where the allow_rooted_devices \nsetting is\
+    \ enabled. This is accomplished by filtering for policy creation or update actions\
+    \ and parsing the policy description for the relevant configuration. \nAllowing\
+    \ tampered devices poses a significan"
+  author: Patrick Bareiss, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - cisco-duo-suspicious-activity
+  mitre_attack:
+    techniques:
+    - id: T1556
+      name: Technique T1556
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1556/cisco_duo_policy_allow_tampered_devices/cisco_duo_administrator.json
+    description: duo - cisco:duo:administrator
+    format: jsonl
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

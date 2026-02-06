@@ -1,0 +1,35 @@
+metadata:
+  name: high-frequency-copy-of-files-in-network-share
+  version: 7.0.0
+  description: The following analytic detects a high frequency of file copying or
+    moving within network shares, which may indicate potential data sabotage or exfiltration
+    attempts. It leverages Windows Security Event Logs (EventCode 5145) to monitor
+    access to specific file types and network shares. This activity is significant
+    as it can reveal insider threats attempting to transfer classified or internal
+    files, potentially leading to data breaches or evidence tampering. If confirmed
+    malicious, this behavior co
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - information-sabotage
+  - insider-threat
+  - hellcat-ransomware
+  mitre_attack:
+    techniques:
+    - id: T1537
+      name: Technique T1537
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1537/high_frequency_copy_of_files_in_network_share/windows-xml.log
+    description: XmlWinEventLog:Security - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

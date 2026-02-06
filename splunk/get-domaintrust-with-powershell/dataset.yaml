@@ -1,0 +1,33 @@
+metadata:
+  name: get-domaintrust-with-powershell
+  version: 6.0.0
+  description: The following analytic identifies the execution of the Get-DomainTrust
+    command from PowerView using PowerShell, which is used to gather domain trust
+    information. This detection leverages data from Endpoint Detection and Response
+    (EDR) agents, focusing on process and command-line telemetry. This activity is
+    significant as it indicates potential reconnaissance efforts by an adversary to
+    understand domain trust relationships, which can inform lateral movement strategies.
+    If confirmed malicious, thi
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - active-directory-discovery
+  mitre_attack:
+    techniques:
+    - id: T1482
+      name: Technique T1482
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1482/discovery/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

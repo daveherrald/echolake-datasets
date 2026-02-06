@@ -1,0 +1,36 @@
+metadata:
+  name: cisco-nvm-installation-of-typosquatted-python-package
+  version: 1.0.0
+  description: 'This analytic detects suspicious python package installations where
+    the package name resembles popular Python libraries but may be typosquatted or
+    slightly altered.
+
+    Typosquatting is a common technique used by attackers to trick users into installing
+    malicious packages that mimic legitimate ones.
+
+    This detection leverages Cisco NVM flow telemetry and checks for pip or poetry
+    package managers with the "install" or "add" flags, making outbound connections
+    to package repository such as `pypi.org` wit'
+  author: Nasreddine Bencherchali, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - cisco-network-visibility-module-analytics
+  mitre_attack:
+    techniques:
+    - id: T1059
+      name: Technique T1059
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_network_visibility_module/cisco_nvm_flowdata/nvm_flowdata.log
+    description: not_applicable - cisco:nvm:flowdata
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,33 @@
+metadata:
+  name: windows-dnsadmins-new-member-added
+  version: 8.0.0
+  description: The following analytic detects the addition of a new member to the
+    DnsAdmins group in Active Directory by leveraging Event ID 4732. This detection
+    uses security event logs to identify changes to this high-privilege group. Monitoring
+    this activity is crucial because members of the DnsAdmins group can manage the
+    DNS service, often running on Domain Controllers, and potentially execute malicious
+    code with SYSTEM privileges. If confirmed malicious, this activity could allow
+    an attacker to escalate p
+  author: Mauricio Velazco, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - active-directory-privilege-escalation
+  mitre_attack:
+    techniques:
+    - id: T1098
+      name: Technique T1098
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1098/dnsadmins_member_added/windows-security.log
+    description: XmlWinEventLog:Security - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

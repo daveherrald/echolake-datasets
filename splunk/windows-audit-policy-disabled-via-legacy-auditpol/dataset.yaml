@@ -1,0 +1,33 @@
+metadata:
+  name: windows-audit-policy-disabled-via-legacy-auditpol
+  version: 3.0.0
+  description: 'The following analytic identifies the execution of the legacy `auditpol.exe`
+    included with the Windows 2000 Resource Kit Tools, with the "/disable" command-line
+    argument or one of the allowed category flags and the "none" option, in order
+    to disable a specific logging category from the audit policy. It leverages data
+    from Endpoint Detection and Response (EDR) agents, focusing on process names and
+    command-line executions. This activity can be significant as it indicates potential
+    defense evasion '
+  author: Nasreddine Bencherchali, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - windows-audit-policy-tampering
+  mitre_attack:
+    techniques:
+    - id: T1562.002
+      name: Technique T1562.002
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.002/auditpol_tampering/auditpol_tampering_sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

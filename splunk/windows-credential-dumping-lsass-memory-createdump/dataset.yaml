@@ -1,0 +1,35 @@
+metadata:
+  name: windows-credential-dumping-lsass-memory-createdump
+  version: 10.0.0
+  description: The following analytic detects the use of CreateDump.exe to perform
+    a process dump. This binary is not native to Windows and is often introduced by
+    third-party applications, including PowerShell 7. The detection leverages data
+    from Endpoint Detection and Response (EDR) agents, focusing on process names,
+    GUIDs, and complete command-line executions. This activity is significant as it
+    may indicate an attempt to dump LSASS memory, which can be used to extract credentials.
+    If confirmed malicious, thi
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - compromised-windows-host
+  - credential-dumping
+  - scattered-lapsus$-hunters
+  mitre_attack:
+    techniques:
+    - id: T1003.001
+      name: Technique T1003.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1003.001/atomic_red_team/createdump_windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

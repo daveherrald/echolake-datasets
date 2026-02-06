@@ -1,0 +1,38 @@
+metadata:
+  name: windows-short-lived-dns-record
+  version: 1.0.0
+  description: The following analytic identifies the creation and quick deletion of
+    a DNS object within 300 seconds in an Active Directory environment, indicative
+    of a potential attack abusing DNS. This detection leverages Windows Security Event
+    Codes 5136 and 5137, analyzing the duration between these events. This activity
+    is significant as temporary DNS entries allows attackers to cause unexpecting
+    network trafficking, leading to potential compromise.
+  author: Raven Tait, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - compromised-windows-host
+  - suspicious-dns-traffic
+  - local-privilege-escalation-with-krbrelayup
+  mitre_attack:
+    techniques:
+    - id: T1071.004
+      name: Technique T1071.004
+    - id: T1557.001
+      name: Technique T1557.001
+    - id: T1187
+      name: Technique T1187
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1071.004/kerberos_coercion/windows-xml.log
+    description: XmlWinEventLog:Security - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,42 @@
+metadata:
+  name: cisco-nvm-curl-execution-with-insecure-flags
+  version: 4.0.0
+  description: 'This analytic detects the use of `curl.exe` with insecure flags such
+    as `-k`, `--insecure`, `--proxy-insecure`, or `--doh-insecure`
+
+    which disable TLS certificate validation.
+
+    It leverages Cisco Network Visibility Module (NVM) flow data and process arguments
+
+    to identify outbound connections initiated by curl where TLS checks were explicitly
+    disabled.
+
+    This behavior may indicate an attempt to bypass certificate validation to connect
+    to potentially untrusted or malicious endpoints,
+
+    a common tactic in'
+  author: Nasreddine Bencherchali, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - cisco-network-visibility-module-analytics
+  - promptlock
+  - microsoft-wsus-cve-2025-59287
+  mitre_attack:
+    techniques:
+    - id: T1197
+      name: Technique T1197
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_network_visibility_module/cisco_nvm_flowdata/nvm_flowdata.log
+    description: not_applicable - cisco:nvm:flowdata
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

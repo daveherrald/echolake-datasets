@@ -1,0 +1,36 @@
+metadata:
+  name: windows-defender-asr-or-threat-configuration-tamper
+  version: 1.0.0
+  description: 'The following analytic detects the use of commands to disable Attack
+    Surface Reduction (ASR) rules or change threat default actions in Windows Defender.
+
+    It leverages data from Endpoint Detection and Response (EDR) agents, focusing
+    on command-line executions involving "Add-MpPreference" or "Set-MpPreference".
+
+    This activity is significant because adversaries often use it to bypass Windows
+    Defender, allowing malicious code to execute undetected.
+
+    If confirmed malicious, this behavior could enable at'
+  author: Nasreddine Bencherchali, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - windows-defense-evasion-tactics
+  mitre_attack:
+    techniques:
+    - id: T1562.001
+      name: Technique T1562.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.001/disable_defender_asr_or_threats/disable_defender_asr_or_threats.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

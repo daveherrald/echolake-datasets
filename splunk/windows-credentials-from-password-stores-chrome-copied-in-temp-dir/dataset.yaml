@@ -1,0 +1,34 @@
+metadata:
+  name: windows-credentials-from-password-stores-chrome-copied-in-temp-dir
+  version: 6.0.0
+  description: The following analytic detects the copying of Chrome's Local State
+    and Login Data files into temporary folders, a tactic often used by the Braodo
+    stealer malware. These files contain encrypted user credentials, including saved
+    passwords and login session details. The detection monitors for suspicious copying
+    activity involving these specific Chrome files, particularly in temp directories
+    where malware typically processes the stolen data. Identifying this behavior enables
+    security teams to act qu
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - braodo-stealer
+  - scattered-lapsus$-hunters
+  mitre_attack:
+    techniques:
+    - id: T1555.003
+      name: Technique T1555.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1555.003/browser_credential_info_temp/braodo_browser_info.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

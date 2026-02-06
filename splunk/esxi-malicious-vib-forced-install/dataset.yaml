@@ -1,0 +1,35 @@
+metadata:
+  name: esxi-malicious-vib-forced-install
+  version: 2.0.0
+  description: Detects potentially malicious installation of VMware Installation Bundles
+    (VIBs) using the --force flag. The --force option bypasses signature and compatibility
+    checks, allowing unsigned, community-supported, or incompatible VIBs to be installed
+    on an ESXi host. This behavior is uncommon in normal administrative operations
+    and is often observed in post-compromise scenarios where adversaries attempt to
+    install backdoored or unauthorized kernel modules, drivers, or monitoring tools
+    to establish pe
+  author: Raven Tait, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - esxi-post-compromise
+  - black-basta-ransomware
+  - china-nexus-threat-activity
+  mitre_attack:
+    techniques:
+    - id: T1505.006
+      name: Technique T1505.006
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1505.006/esxi_malicious_vib/esxi_malicious_vib_forced_install.log
+    description: vmware:esxlog - vmw-syslog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,35 @@
+metadata:
+  name: windows-screen-capture-via-powershell
+  version: 9.0.0
+  description: The following analytic detects the execution of a PowerShell script
+    designed to capture screen images on a host. It leverages PowerShell Script Block
+    Logging to identify specific script block text patterns associated with screen
+    capture activities. This behavior is significant as it may indicate an attempt
+    to exfiltrate sensitive information by capturing desktop screenshots. If confirmed
+    malicious, this activity could allow an attacker to gather visual data from the
+    compromised system, potential
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - apt37-rustonotto-and-fadestealer
+  - winter-vivern
+  - water-gamayun
+  mitre_attack:
+    techniques:
+    - id: T1113
+      name: Technique T1113
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/winter-vivern/pwh_exfiltration/windows-powershell-xml.log
+    description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

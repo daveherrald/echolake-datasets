@@ -1,0 +1,45 @@
+metadata:
+  name: icacls-deny-command
+  version: 9.0.0
+  description: 'The following analytic detects instances where an adversary modifies
+
+    security permissions of a file or directory using commands like "icacls.exe",
+    "cacls.exe",
+
+    or "xcacls.exe" with deny options. It leverages data from Endpoint Detection and
+
+    Response (EDR) agents, focusing on process names and command-line executions.
+    This
+
+    activity is significant as it is commonly used by Advanced Persistent Threats
+    (APTs)
+
+    and coinminer scripts to evade detection and impede access to critical files.
+    If
+
+    confirmed '
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - azorult
+  - sandworm-tools
+  - compromised-windows-host
+  mitre_attack:
+    techniques:
+    - id: T1222
+      name: Technique T1222
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/xmrig_miner/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

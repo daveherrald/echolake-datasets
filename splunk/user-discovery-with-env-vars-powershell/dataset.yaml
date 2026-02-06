@@ -1,0 +1,33 @@
+metadata:
+  name: user-discovery-with-env-vars-powershell
+  version: 6.0.0
+  description: The following analytic detects the execution of `powershell.exe` with
+    command-line arguments that use PowerShell environment variables to identify the
+    current logged user. It leverages data from Endpoint Detection and Response (EDR)
+    agents, focusing on process names and command-line executions. This activity is
+    significant as adversaries may use it for situational awareness and Active Directory
+    discovery on compromised endpoints. If confirmed malicious, this behavior could
+    allow attackers to gat
+  author: Mauricio Velazco, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - active-directory-discovery
+  mitre_attack:
+    techniques:
+    - id: T1033
+      name: Technique T1033
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1033/AD_discovery/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,36 @@
+metadata:
+  name: github-enterprise-repository-deleted
+  version: 3.0.0
+  description: The following analytic detects when a user deletes a repository in
+    GitHub Enterprise. The detection monitors GitHub Enterprise audit logs for repository
+    deletion events, which could indicate unauthorized removal of critical source
+    code and project resources. For a SOC, identifying repository deletions is crucial
+    as it may signal account compromise, insider threats, or malicious attempts to
+    destroy intellectual property and disrupt development operations. The impact could
+    be severe, potentially r
+  author: Patrick Bareiss, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - github-malicious-activity
+  - npm-supply-chain-compromise
+  mitre_attack:
+    techniques:
+    - id: T1485
+      name: Technique T1485
+    - id: T1195
+      name: Technique T1195
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1485/github_delete_repository/github.json
+    description: http:github - httpevent
+    format: jsonl
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

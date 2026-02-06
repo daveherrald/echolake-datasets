@@ -1,0 +1,35 @@
+metadata:
+  name: windows-non-system-account-targeting-lsass
+  version: 11.0.0
+  description: The following analytic identifies non-SYSTEM accounts requesting access
+    to lsass.exe. This detection leverages Sysmon EventCode 10 logs to monitor access
+    attempts to the Local Security Authority Subsystem Service (lsass.exe) by non-SYSTEM
+    users. This activity is significant as it may indicate credential dumping attempts
+    or unauthorized access to sensitive credentials. If confirmed malicious, an attacker
+    could potentially extract credentials from memory, leading to privilege escalation
+    or lateral
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - cisa-aa23-347a
+  - credential-dumping
+  - lokibot
+  mitre_attack:
+    techniques:
+    - id: T1003.001
+      name: Technique T1003.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1003.001/atomic_red_team/windows-sysmon_creddump.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

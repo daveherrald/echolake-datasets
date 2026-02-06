@@ -1,0 +1,34 @@
+metadata:
+  name: windows-mshta-execution-in-registry
+  version: 7.0.0
+  description: 'The following analytic detects the execution of mshta.exe via registry
+    entries to run malicious scripts. It leverages registry activity logs to identify
+    entries containing "mshta," "javascript," "vbscript," or "WScript.Shell." This
+    behavior is significant as it indicates potential fileless malware, such as Kovter,
+    which uses encoded scripts in the registry to persist and execute without files.
+    If confirmed malicious, this activity could allow attackers to maintain persistence,
+    execute arbitrary '
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - suspicious-windows-registry-activities
+  - windows-persistence-techniques
+  mitre_attack:
+    techniques:
+    - id: T1218.005
+      name: Technique T1218.005
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218.005/mshta_in_registry/sysmon3.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

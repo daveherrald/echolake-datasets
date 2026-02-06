@@ -1,0 +1,33 @@
+metadata:
+  name: o365-oauth-app-mailbox-access-via-graph-api
+  version: 7.0.0
+  description: The following analytic detects when emails are accessed in Office 365
+    Exchange via the Microsoft Graph API using the client ID '00000003-0000-0000-c000-000000000000'.
+    It leverages the 'MailItemsAccessed' operation within the Exchange workload, focusing
+    on OAuth-authenticated applications. This activity is significant as unauthorized
+    access to emails can lead to data breaches and information theft. If confirmed
+    malicious, attackers could exfiltrate sensitive information, compromise user accounts,
+  author: Mauricio Velazco, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - office-365-collection-techniques
+  - nobelium-group
+  mitre_attack:
+    techniques:
+    - id: T1114.002
+      name: Technique T1114.002
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1114.002/o365_oauth_app_graph_mailbox_access/o365_oauth_app_graph_mailbox_access.log
+    description: o365 - o365:management:activity
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

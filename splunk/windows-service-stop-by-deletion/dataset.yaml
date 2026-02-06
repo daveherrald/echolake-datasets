@@ -1,0 +1,35 @@
+metadata:
+  name: windows-service-stop-by-deletion
+  version: 6.0.0
+  description: The following analytic detects the use of `sc.exe` to delete a Windows
+    service. It leverages Endpoint Detection and Response (EDR) data, focusing on
+    process execution logs that capture command-line arguments. This activity is significant
+    because adversaries often delete services to disable security mechanisms or critical
+    system functions, aiding in evasion and persistence. If confirmed malicious, this
+    action could lead to the termination of essential security services, allowing
+    attackers to oper
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - azorult
+  - graceful-wipe-out-attack
+  - crypto-stealer
+  mitre_attack:
+    techniques:
+    - id: T1489
+      name: Technique T1489
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/azorult/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

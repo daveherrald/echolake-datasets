@@ -1,0 +1,32 @@
+metadata:
+  name: esxi-system-information-discovery
+  version: 1.0.0
+  description: This detection identifies the use of ESXCLI system-level commands that
+    retrieve configuration details. While used for legitimate administration, this
+    behavior may also indicate adversary reconnaissance aimed at profiling the ESXi
+    host's capabilities, build information, or system role in preparation for further
+    compromise.
+  author: Raven Tait, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - esxi-post-compromise
+  - black-basta-ransomware
+  mitre_attack:
+    techniques:
+    - id: T1082
+      name: Technique T1082
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1082/esxi_system_information/esxi_system_information.log
+    description: vmware:esxlog - vmw-syslog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

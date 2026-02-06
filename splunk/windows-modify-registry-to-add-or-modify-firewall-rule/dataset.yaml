@@ -1,0 +1,34 @@
+metadata:
+  name: windows-modify-registry-to-add-or-modify-firewall-rule
+  version: 9.0.0
+  description: The following analytic detects a potential addition or modification
+    of firewall rules, signaling possible configuration changes or security policy
+    adjustments. It tracks commands such as netsh advfirewall firewall add rule and
+    netsh advfirewall firewall set rule, which may indicate attempts to alter network
+    access controls. Monitoring these actions ensures the integrity of firewall settings
+    and helps prevent unauthorized network access.
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - shrinklocker
+  - cisa-aa24-241a
+  - netsupport-rmm-tool-abuse
+  mitre_attack:
+    techniques:
+    - id: T1112
+      name: Technique T1112
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1112/firewall_modify_delete/firewall_mod_delete.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,35 @@
+metadata:
+  name: azure-ad-privileged-role-assigned-to-service-principal
+  version: 10.0.0
+  description: The following analytic detects the assignment of privileged roles to
+    service principals in Azure Active Directory (AD). It leverages the AuditLogs
+    log category from ingested Azure AD events. This activity is significant because
+    assigning elevated permissions to non-human entities can lead to unauthorized
+    access or malicious activities. If confirmed malicious, attackers could exploit
+    these service principals to gain elevated access to Azure resources, potentially
+    compromising sensitive data and c
+  author: Mauricio Velazco, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - azure-active-directory-privilege-escalation
+  - nobelium-group
+  - scattered-lapsus$-hunters
+  mitre_attack:
+    techniques:
+    - id: T1098.003
+      name: Technique T1098.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1098.003/azure_ad_privileged_role_serviceprincipal/azure-audit.log
+    description: Azure AD - azure:monitor:aad
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,34 @@
+metadata:
+  name: windows-admon-group-policy-object-created
+  version: 8.0.0
+  description: The following analytic detects the creation of a new Group Policy Object
+    (GPO) using Splunk's Admon data. It identifies events where a new GPO is created,
+    excluding default "New Group Policy Object" entries. Monitoring GPO creation is
+    crucial as adversaries can exploit GPOs to escalate privileges or deploy malware
+    across an Active Directory network. If confirmed malicious, this activity could
+    allow attackers to control system configurations, deploy ransomware, or propagate
+    malware, significantly
+  author: Mauricio Velazco, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - active-directory-privilege-escalation
+  - sneaky-active-directory-persistence-tricks
+  mitre_attack:
+    techniques:
+    - id: T1484.001
+      name: Technique T1484.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1484.001/group_policy_created/windows-admon.log
+    description: ActiveDirectory - ActiveDirectory
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,35 @@
+metadata:
+  name: windows-obfuscated-files-or-information-via-rar-sfx
+  version: 5.0.0
+  description: The following analytic detects the creation of RAR Self-Extracting
+    (SFX) files by monitoring the generation of file related to rar sfx .tmp file
+    creation during sfx installation. This method leverages a heuristic to identify
+    RAR SFX archives based on specific markers that indicate a combination of executable
+    code and compressed RAR data. By tracking such activity, the analytic helps pinpoint
+    potentially unauthorized or suspicious file creation events, which are often associated
+    with malware pack
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - crypto-stealer
+  - apt37-rustonotto-and-fadestealer
+  - ghostredirector-iis-module-and-rungan-backdoor
+  mitre_attack:
+    techniques:
+    - id: T1027.013
+      name: Technique T1027.013
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1027.013/rar_sfx_execution/rar_sfx.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

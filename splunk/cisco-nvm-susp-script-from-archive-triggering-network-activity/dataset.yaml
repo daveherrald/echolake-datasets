@@ -1,0 +1,40 @@
+metadata:
+  name: cisco-nvm-susp-script-from-archive-triggering-network-activity
+  version: 2.0.0
+  description: 'This analytic detects script execution (`wscript.exe` or `cscript.exe`)
+    triggered from compressed files opened directly using
+
+    `explorer.exe`, `winrar.exe`, or `7zFM.exe`.
+
+    When a user double clicks on a ".js" file from within one of these compressed
+    files. Its extracted temporally in the temp directory in folder with certain markers.
+
+    It leverages Cisco Network Visibility Module (NVM) flow data, in order to look
+    for a specific parent/child relationship and an initiated network connection.
+
+    This beh'
+  author: Nasreddine Bencherchali, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - cisco-network-visibility-module-analytics
+  mitre_attack:
+    techniques:
+    - id: T1059.005
+      name: Technique T1059.005
+    - id: T1204.002
+      name: Technique T1204.002
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_network_visibility_module/cisco_nvm_flowdata/nvm_flowdata.log
+    description: not_applicable - cisco:nvm:flowdata
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

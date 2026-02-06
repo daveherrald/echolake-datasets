@@ -1,0 +1,33 @@
+metadata:
+  name: linux-indicator-removal-service-file-deletion
+  version: 7.0.0
+  description: The following analytic detects the deletion of Linux service unit configuration
+    files by suspicious processes. It leverages Endpoint Detection and Response (EDR)
+    telemetry, focusing on processes executing the 'rm' command targeting '.service'
+    files. This activity is significant as it may indicate malware attempting to disable
+    critical services or security products, a common defense evasion tactic. If confirmed
+    malicious, this behavior could lead to service disruption, security tool incapacitatio
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - awfulshred
+  - data-destruction
+  mitre_attack:
+    techniques:
+    - id: T1070.004
+      name: Technique T1070.004
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/awfulshred/test1/sysmon_linux.log
+    description: Syslog:Linux-Sysmon/Operational - sysmon:linux
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

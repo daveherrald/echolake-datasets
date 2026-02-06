@@ -1,0 +1,35 @@
+metadata:
+  name: suspicious-mshta-child-process
+  version: 11.0.0
+  description: 'The following analytic identifies child processes spawned from "mshta.exe".
+    It leverages data from Endpoint Detection and Response (EDR) agents, focusing
+    on specific child processes like "powershell.exe" and "cmd.exe". This activity
+    is significant because "mshta.exe" is often exploited by attackers to execute
+    malicious scripts or commands. If confirmed malicious, this behavior could allow
+    an attacker to execute arbitrary code, escalate privileges, or maintain persistence
+    within the environment. '
+  author: Michael Haag, Teoderick Contreras Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - suspicious-mshta-activity
+  - living-off-the-land
+  - lumma-stealer
+  mitre_attack:
+    techniques:
+    - id: T1218.005
+      name: Technique T1218.005
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218.005/atomic_red_team/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

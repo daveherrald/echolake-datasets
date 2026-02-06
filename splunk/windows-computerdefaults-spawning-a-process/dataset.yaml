@@ -1,0 +1,33 @@
+metadata:
+  name: windows-computerdefaults-spawning-a-process
+  version: 1.0.0
+  description: 'The following analytic detects the spawning of ComputerDefaults.exe,
+    a Windows system process used to manage default application associations. While
+    normally legitimate, this process can be exploited by attackers to bypass User
+    Account Control (UAC) and execute unauthorized code with elevated privileges.
+    Detection focuses on abnormal execution patterns, unusual parent-child process
+    relationships, or deviations from standard paths. Such behavior may indicate attempts
+    to modify system defaults or '
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - castle-rat
+  mitre_attack:
+    techniques:
+    - id: T1548.002
+      name: Technique T1548.002
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1548.002/computerdefaults_spawn_proc/computerdefaults_process.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

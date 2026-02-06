@@ -1,0 +1,34 @@
+metadata:
+  name: kerberos-pre-authentication-flag-disabled-in-useraccountcontrol
+  version: 7.0.0
+  description: The following analytic detects when the Kerberos Pre-Authentication
+    flag is disabled in a user account, using Windows Security Event 4738. This event
+    indicates a change in the UserAccountControl property of a domain user object.
+    Disabling this flag allows adversaries to perform offline brute force attacks
+    on the user's password using the AS-REP Roasting technique. This activity is significant
+    as it can be used by attackers with existing privileges to escalate their access
+    or maintain persistence
+  author: Mauricio Velazco, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - active-directory-kerberos-attacks
+  - blacksuit-ransomware
+  mitre_attack:
+    techniques:
+    - id: T1558.004
+      name: Technique T1558.004
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1558.004/powershell/windows-security.log
+    description: WinEventLog:Security - WinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

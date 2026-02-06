@@ -1,0 +1,34 @@
+metadata:
+  name: azure-ad-privileged-authentication-administrator-role-assigned
+  version: 10.0.0
+  description: The following analytic detects the assignment of the Privileged Authentication
+    Administrator role to an Azure AD user. It leverages Azure Active Directory audit
+    logs to identify when this specific role is assigned. This activity is significant
+    because users in this role can set or reset authentication methods for any user,
+    including those in privileged roles like Global Administrators. If confirmed malicious,
+    an attacker could change credentials and assume the identity and permissions of
+    high-pr
+  author: Mauricio Velazco, Gowthamaraj Rajendran, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - azure-active-directory-privilege-escalation
+  - scattered-lapsus$-hunters
+  mitre_attack:
+    techniques:
+    - id: T1003.002
+      name: Technique T1003.002
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1098.003/azure_ad_assign_privileged_role/azure-audit.log
+    description: Azure AD - azure:monitor:aad
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

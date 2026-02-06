@@ -1,0 +1,34 @@
+metadata:
+  name: azure-ad-privileged-graph-api-permission-assigned
+  version: 8.0.0
+  description: 'The following analytic detects the assignment of high-risk Graph API
+    permissions in Azure AD, specifically Application.ReadWrite.All, AppRoleAssignment.ReadWrite.All,
+    and RoleManagement.ReadWrite.Directory. It uses azure_monitor_aad data to scan
+    AuditLogs for ''Update application'' operations, identifying when these permissions
+    are assigned. This activity is significant as it grants broad control over Azure
+    AD, including application and directory settings. If confirmed malicious, it could
+    lead to '
+  author: Mauricio Velazco, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - azure-active-directory-persistence
+  - nobelium-group
+  mitre_attack:
+    techniques:
+    - id: T1003.002
+      name: Technique T1003.002
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1098.003/azure_ad_privileged_graph_perm_assigned/azure_ad_privileged_graph_perm_assigned.log
+    description: Azure AD - azure:monitor:aad
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

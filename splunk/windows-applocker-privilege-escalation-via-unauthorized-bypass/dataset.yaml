@@ -1,0 +1,33 @@
+metadata:
+  name: windows-applocker-privilege-escalation-via-unauthorized-bypass
+  version: 5.0.0
+  description: The following analytic utilizes Windows AppLocker event logs to identify
+    attempts to bypass application restrictions. AppLocker is a feature that allows
+    administrators to specify which applications are permitted to run on a system.
+    This analytic is designed to identify attempts to bypass these restrictions, which
+    could be indicative of an attacker attempting to escalate privileges. The analytic
+    uses EventCodes 8007, 8004, 8022, 8025, 8029, and 8040 to identify these attempts.
+    The analytic will i
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - windows-applocker
+  mitre_attack:
+    techniques:
+    - id: T1218
+      name: Technique T1218
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562/applocker/applocker.log
+    description: XmlWinEventLog:Microsoft-Windows-AppLocker/MSI and Script - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

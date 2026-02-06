@@ -1,0 +1,33 @@
+metadata:
+  name: get-domainpolicy-with-powershell-script-block
+  version: 7.0.0
+  description: The following analytic detects the execution of the `Get-DomainPolicy`
+    cmdlet using PowerShell Script Block Logging (EventCode=4104). It leverages logs
+    capturing script block text to identify attempts to obtain the password policy
+    in a Windows domain. This activity is significant as it indicates potential reconnaissance
+    efforts by adversaries or Red Teams to gather domain policy information, which
+    is crucial for planning further attacks. If confirmed malicious, this behavior
+    could lead to detail
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - active-directory-discovery
+  mitre_attack:
+    techniques:
+    - id: T1201
+      name: Technique T1201
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/powershell_script_block_logging/domainpolicy.log
+    description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

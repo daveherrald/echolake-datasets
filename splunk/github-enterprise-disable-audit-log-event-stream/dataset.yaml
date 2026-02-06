@@ -1,0 +1,36 @@
+metadata:
+  name: github-enterprise-disable-audit-log-event-stream
+  version: 3.0.0
+  description: The following analytic detects when a user disables audit log event
+    streaming in GitHub Enterprise. The detection monitors GitHub Enterprise audit
+    logs for configuration changes that disable the audit log streaming functionality,
+    which is used to send audit events to security monitoring platforms. This behavior
+    could indicate an attacker attempting to prevent their malicious activities from
+    being logged and detected by disabling the audit trail. For a SOC, identifying
+    the disabling of audit logg
+  author: Patrick Bareiss, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - github-malicious-activity
+  - npm-supply-chain-compromise
+  mitre_attack:
+    techniques:
+    - id: T1562.008
+      name: Technique T1562.008
+    - id: T1195
+      name: Technique T1195
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.008/github_audit_log_stream_disabled/github.json
+    description: http:github - httpevent
+    format: jsonl
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

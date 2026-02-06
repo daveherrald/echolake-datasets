@@ -1,0 +1,34 @@
+metadata:
+  name: windows-impair-defenses-disable-av-autostart-via-registry
+  version: 9.0.0
+  description: The following analytic detects modifications to the registry related
+    to the disabling of autostart functionality for certain antivirus products, such
+    as Kingsoft and Tencent. Malware like ValleyRAT may alter specific registry keys
+    to prevent these security tools from launching automatically at startup, thereby
+    weakening system defenses. By monitoring changes in the registry entries associated
+    with antivirus autostart settings, this detection enables security analysts to
+    identify attempts to disa
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - scattered-lapsus$-hunters
+  - valleyrat
+  mitre_attack:
+    techniques:
+    - id: T1112
+      name: Technique T1112
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1112/kingsoft_reg/kingsoft_reg.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

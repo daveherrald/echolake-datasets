@@ -1,0 +1,35 @@
+metadata:
+  name: linux-sudoers-tmp-file-creation
+  version: 9.0.0
+  description: The following analytic detects the creation of the "sudoers.tmp" file,
+    which occurs when editing the /etc/sudoers file using visudo or another editor
+    on a Linux platform. This detection leverages filesystem data to identify the
+    presence of "sudoers.tmp" files. Monitoring this activity is crucial as adversaries
+    may exploit it to gain elevated privileges on a compromised host. If confirmed
+    malicious, this activity could allow attackers to modify sudoers configurations,
+    potentially granting them un
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - linux-persistence-techniques
+  - china-nexus-threat-activity
+  - salt-typhoon
+  mitre_attack:
+    techniques:
+    - id: T1548.003
+      name: Technique T1548.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1548.003/sudoers_temp/sysmon_linux.log
+    description: Syslog:Linux-Sysmon/Operational - sysmon:linux
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,34 @@
+metadata:
+  name: linux-apt-privilege-escalation
+  version: 9.0.0
+  description: The following analytic detects the use of the Advanced Package Tool
+    (APT) with elevated privileges via sudo on Linux systems. It leverages Endpoint
+    Detection and Response (EDR) telemetry to identify processes where APT commands
+    are executed with sudo rights. This activity is significant because it indicates
+    a user can run system commands as root, potentially leading to unauthorized root
+    shell access. If confirmed malicious, this could allow an attacker to escalate
+    privileges, execute arbitrary c
+  author: Gowthamaraj Rajendran, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - linux-privilege-escalation
+  - linux-living-off-the-land
+  mitre_attack:
+    techniques:
+    - id: T1548.003
+      name: Technique T1548.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1548/apt/sysmon_linux.log
+    description: Syslog:Linux-Sysmon/Operational - sysmon:linux
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

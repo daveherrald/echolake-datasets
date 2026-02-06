@@ -1,0 +1,35 @@
+metadata:
+  name: ollama-suspicious-prompt-injection-jailbreak
+  version: 1.0.0
+  description: Detects potential prompt injection or jailbreak attempts against Ollama
+    API endpoints by identifying requests with abnormally long response times. Attackers
+    often craft complex, layered prompts designed to bypass AI safety controls, which
+    typically result in extended processing times as the model attempts to parse and
+    respond to these malicious inputs. This detection monitors /api/generate and /api/chat
+    endpoints for requests exceeding 30 seconds, which may indicate sophisticated
+    jailbreak techn
+  author: Rod Soto
+  tags:
+  - anomaly
+  - splunk-security-content
+  - suspicious-ollama-activities
+  mitre_attack:
+    techniques:
+    - id: T1190
+      name: Technique T1190
+    - id: T1059
+      name: Technique T1059
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/ollama/server.log
+    description: server.log - ollama:server
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

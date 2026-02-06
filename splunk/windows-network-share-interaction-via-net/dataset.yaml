@@ -1,0 +1,37 @@
+metadata:
+  name: windows-network-share-interaction-via-net
+  version: 3.0.0
+  description: The following analytic identifies network share discovery and collection
+    activities performed on Windows systems using the Net command. Attackers often
+    use network share discovery to identify accessible shared resources within a network,
+    which can be a precursor to privilege escalation or data exfiltration. By monitoring
+    Windows Event Logs for the usage of the Net command to list and interact with
+    network shares, this detection helps identify potential reconnaissance and collection
+    activities.
+  author: Dean Luxton
+  tags:
+  - anomaly
+  - splunk-security-content
+  - active-directory-discovery
+  - active-directory-privilege-escalation
+  - network-discovery
+  mitre_attack:
+    techniques:
+    - id: T1135
+      name: Technique T1135
+    - id: T1039
+      name: Technique T1039
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1135/net_share/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

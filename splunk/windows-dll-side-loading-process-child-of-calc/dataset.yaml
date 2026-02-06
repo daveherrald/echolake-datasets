@@ -1,0 +1,34 @@
+metadata:
+  name: windows-dll-side-loading-process-child-of-calc
+  version: 8.0.0
+  description: The following analytic identifies suspicious child processes spawned
+    by calc.exe, indicative of DLL side-loading techniques. This detection leverages
+    data from Endpoint Detection and Response (EDR) agents, focusing on process GUIDs,
+    names, and parent processes. This activity is significant as it is commonly associated
+    with Qakbot malware, which uses calc.exe to load malicious DLLs via regsvr32.exe.
+    If confirmed malicious, this behavior could allow attackers to execute arbitrary
+    code, maintain pe
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - qakbot
+  - earth-alux
+  mitre_attack:
+    techniques:
+    - id: T1574.001
+      name: Technique T1574.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/qakbot/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

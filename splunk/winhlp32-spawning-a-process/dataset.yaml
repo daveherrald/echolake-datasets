@@ -1,0 +1,34 @@
+metadata:
+  name: winhlp32-spawning-a-process
+  version: 9.0.0
+  description: The following analytic detects winhlp32.exe spawning a child process
+    that loads a file from appdata, programdata, or temp directories. This detection
+    leverages data from Endpoint Detection and Response (EDR) agents, focusing on
+    process creation events. This activity is significant because winhlp32.exe has
+    known vulnerabilities and can be exploited to execute malicious code. If confirmed
+    malicious, an attacker could use this technique to execute arbitrary scripts,
+    escalate privileges, or maintain
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - remcos
+  - compromised-windows-host
+  mitre_attack:
+    techniques:
+    - id: T1055
+      name: Technique T1055
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/remcos/remcos/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

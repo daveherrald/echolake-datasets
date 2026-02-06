@@ -1,0 +1,36 @@
+metadata:
+  name: azure-ad-multi-factor-authentication-disabled
+  version: 10.0.0
+  description: The following analytic detects attempts to disable multi-factor authentication
+    (MFA) for an Azure AD user. It leverages Azure Active Directory AuditLogs to identify
+    the "Disable Strong Authentication" operation. This activity is significant because
+    disabling MFA can allow adversaries to maintain persistence using compromised
+    accounts without raising suspicion. If confirmed malicious, this action could
+    enable attackers to bypass an essential security control, potentially leading
+    to unauthorized a
+  author: Mauricio Velazco, Gowthamaraj Rajendran, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - azure-active-directory-account-takeover
+  - scattered-lapsus$-hunters
+  mitre_attack:
+    techniques:
+    - id: T1556.006
+      name: Technique T1556.006
+    - id: T1586.003
+      name: Technique T1586.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1556/azuread/azure-audit.log
+    description: Azure AD - azure:monitor:aad
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

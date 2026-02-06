@@ -1,0 +1,35 @@
+metadata:
+  name: windows-credential-access-from-browser-password-store
+  version: 17.0.0
+  description: The following analytic identifies a possible non-common browser process
+    accessing its browser user data profile. This tactic/technique has been observed
+    in various Trojan Stealers, such as SnakeKeylogger, which attempt to gather sensitive
+    browser information and credentials as part of their exfiltration strategy. Detecting
+    this anomaly can serve as a valuable pivot for identifying processes that access
+    lists of browser user data profiles unexpectedly. This detection uses a lookup
+    file `browser_a
+  author: Teoderick Contreras, Bhavin Patel Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - stealc-stealer
+  - salt-typhoon
+  - earth-alux
+  mitre_attack:
+    techniques:
+    - id: T1012
+      name: Technique T1012
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1552/snakey_keylogger_outlook_reg_access/snakekeylogger_4663.log
+    description: XmlWinEventLog:Security - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

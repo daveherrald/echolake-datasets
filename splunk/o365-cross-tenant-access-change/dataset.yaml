@@ -1,0 +1,31 @@
+metadata:
+  name: o365-cross-tenant-access-change
+  version: 6.0.0
+  description: The following analytic identifies when cross-tenant access/synchronization
+    policies are changed in an Azure tenant. Adversaries have been observed altering
+    victim cross-tenant policies as a method of lateral movement or maintaining persistent
+    access to compromised environments. These policies should be considered sensitive
+    and monitored for changes and/or loose configuration.
+  author: Steven Dick
+  tags:
+  - ttp
+  - splunk-security-content
+  - azure-active-directory-persistence
+  mitre_attack:
+    techniques:
+    - id: T1484.002
+      name: Technique T1484.002
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1098/o365_azure_workload_events/o365_azure_workload_events.log
+    description: o365 - o365:management:activity
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

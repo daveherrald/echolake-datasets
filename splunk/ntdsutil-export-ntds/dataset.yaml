@@ -1,0 +1,35 @@
+metadata:
+  name: ntdsutil-export-ntds
+  version: 8.0.0
+  description: The following analytic detects the use of Ntdsutil to export the Active
+    Directory database (NTDS.dit). It leverages data from Endpoint Detection and Response
+    (EDR) agents, focusing on process names and command-line arguments. This activity
+    is significant because exporting NTDS.dit can be a precursor to offline password
+    cracking, posing a severe security risk. If confirmed malicious, an attacker could
+    gain access to sensitive credentials, potentially leading to unauthorized access
+    and privilege e
+  author: Michael Haag, Patrick Bareiss, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - credential-dumping
+  - hafnium-group
+  - living-off-the-land
+  mitre_attack:
+    techniques:
+    - id: T1003.003
+      name: Technique T1003.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1003.003/atomic_red_team/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,35 @@
+metadata:
+  name: windows-office-product-spawned-msdt
+  version: 5.0.0
+  description: The following analytic detects a Microsoft Office product spawning
+    the Windows msdt.exe process. This detection leverages data from Endpoint Detection
+    and Response (EDR) agents, focusing on process creation events where Office applications
+    are the parent process. This activity is significant as it may indicate an attempt
+    to exploit protocol handlers to bypass security controls, even if macros are disabled.
+    If confirmed malicious, this behavior could allow an attacker to execute arbitrary
+    code, p
+  author: Michael Haag, Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - spearphishing-attachments
+  - compromised-windows-host
+  - microsoft-support-diagnostic-tool-vulnerability-cve-2022-30190
+  mitre_attack:
+    techniques:
+    - id: T1566.001
+      name: Technique T1566.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566.001/macro/msdt.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

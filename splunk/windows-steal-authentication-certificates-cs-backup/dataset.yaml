@@ -1,0 +1,33 @@
+metadata:
+  name: windows-steal-authentication-certificates-cs-backup
+  version: 5.0.0
+  description: The following analytic identifies the backup of the Active Directory
+    Certificate Services (AD CS) store, detected via Event ID 4876. This event is
+    logged when a backup is performed using the CertSrv.msc UI or the CertUtil.exe
+    -BackupDB command. Monitoring this activity is crucial as unauthorized backups
+    can indicate an attempt to steal authentication certificates, which are critical
+    for secure communications. If confirmed malicious, this activity could allow an
+    attacker to impersonate users, esc
+  author: Michael Haag, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - windows-certificate-services
+  mitre_attack:
+    techniques:
+    - id: T1649
+      name: Technique T1649
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1649/atomic_red_team/4876_windows-security.log
+    description: XmlWinEventLog:Security - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

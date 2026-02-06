@@ -1,0 +1,33 @@
+metadata:
+  name: windows-applocker-rare-application-launch-detection
+  version: 5.0.0
+  description: The following analytic detects the launch of rarely used applications
+    within the environment, which may indicate the use of potentially malicious software
+    or tools by attackers. It leverages Windows AppLocker event logs, aggregating
+    application launch counts over time and flagging those that significantly deviate
+    from the norm. This behavior is significant as it helps identify unusual application
+    activity that could signal a security threat. If confirmed malicious, this activity
+    could allow atta
+  author: Michael Haag, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - windows-applocker
+  mitre_attack:
+    techniques:
+    - id: T1218
+      name: Technique T1218
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562/applocker/applocker.log
+    description: XmlWinEventLog:Microsoft-Windows-AppLocker/MSI and Script - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

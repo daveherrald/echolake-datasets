@@ -1,0 +1,33 @@
+metadata:
+  name: okta-idp-lifecycle-modifications
+  version: 5.0.0
+  description: The following analytic identifies modifications to Okta Identity Provider
+    (IDP) lifecycle events, including creation, activation, deactivation, and deletion
+    of IDP configurations. It uses OktaIm2 logs ingested via the Splunk Add-on for
+    Okta Identity Cloud. Monitoring these events is crucial for maintaining the integrity
+    and security of authentication mechanisms. Unauthorized or anomalous changes could
+    indicate potential security breaches or misconfigurations. If confirmed malicious,
+    attackers co
+  author: Bhavin Patel, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - suspicious-okta-activity
+  mitre_attack:
+    techniques:
+    - id: T1087.004
+      name: Technique T1087.004
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1556/okta_idp/okta.log
+    description: Okta - OktaIM2:log
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

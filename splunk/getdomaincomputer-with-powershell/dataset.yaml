@@ -1,0 +1,33 @@
+metadata:
+  name: getdomaincomputer-with-powershell
+  version: 6.0.0
+  description: The following analytic detects the execution of `powershell.exe` with
+    command-line arguments that utilize `Get-DomainComputer` to discover remote systems.
+    This detection leverages data from Endpoint Detection and Response (EDR) agents,
+    focusing on process names and command-line executions. This activity is significant
+    as `Get-DomainComputer` is part of PowerView, a tool often used by adversaries
+    for domain enumeration and situational awareness. If confirmed malicious, this
+    activity could allow a
+  author: Mauricio Velazco, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - active-directory-discovery
+  mitre_attack:
+    techniques:
+    - id: T1018
+      name: Technique T1018
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1018/AD_discovery/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

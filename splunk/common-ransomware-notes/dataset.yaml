@@ -1,0 +1,38 @@
+metadata:
+  name: common-ransomware-notes
+  version: 14.0.0
+  description: 'The following analytic detects the creation of files with names commonly
+    associated with ransomware notes.
+
+    It leverages file-system activity data from the Endpoint Filesystem data model,
+    typically populated by endpoint detection and response (EDR) tools or Sysmon logs.
+
+    This activity is significant because ransomware notes indicate a potential ransomware
+    attack, which can lead to data encryption and extortion.
+
+    If confirmed malicious, this activity could result in significant data loss, operationa'
+  author: David Dorsey, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - chaos-ransomware
+  - rhysida-ransomware
+  - ransomware
+  mitre_attack:
+    techniques:
+    - id: T1485
+      name: Technique T1485
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1485/ransomware_notes/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

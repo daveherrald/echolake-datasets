@@ -1,0 +1,33 @@
+metadata:
+  name: getdomaincontroller-with-powershell-script-block
+  version: 8.0.0
+  description: The following analytic detects the execution of the `Get-DomainController`
+    commandlet using PowerShell Script Block Logging (EventCode=4104). This commandlet
+    is part of PowerView, a tool often used for domain enumeration. The detection
+    leverages script block text to identify this specific activity. Monitoring this
+    behavior is crucial as it may indicate an adversary or Red Team performing reconnaissance
+    to map out domain controllers. If confirmed malicious, this activity could lead
+    to further dom
+  author: Mauricio Velazco, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - active-directory-discovery
+  mitre_attack:
+    techniques:
+    - id: T1018
+      name: Technique T1018
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/powershell_script_block_logging/getdc.log
+    description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

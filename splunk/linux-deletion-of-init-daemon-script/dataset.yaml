@@ -1,0 +1,37 @@
+metadata:
+  name: linux-deletion-of-init-daemon-script
+  version: 8.0.0
+  description: The following analytic detects the deletion of init daemon scripts
+    on a Linux machine. It leverages filesystem event logs to identify when files
+    within the /etc/init.d/ directory are deleted. This activity is significant because
+    init daemon scripts control the start and stop of critical services, and their
+    deletion can indicate an attempt to impair security features or evade defenses.
+    If confirmed malicious, this behavior could allow an attacker to disrupt essential
+    services, execute destructive
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - acidrain
+  - data-destruction
+  - acidpour
+  mitre_attack:
+    techniques:
+    - id: T1070.004
+      name: Technique T1070.004
+    - id: T1485
+      name: Technique T1485
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/acidrain/sysmon_linux.log
+    description: Syslog:Linux-Sysmon/Operational - sysmon:linux
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

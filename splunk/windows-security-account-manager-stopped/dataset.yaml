@@ -1,0 +1,35 @@
+metadata:
+  name: windows-security-account-manager-stopped
+  version: 9.0.0
+  description: The following analytic detects the stopping of the Windows Security
+    Account Manager (SAM) service via command-line, typically using the "net stop
+    samss" command. This detection leverages data from Endpoint Detection and Response
+    (EDR) agents, focusing on process names and command-line executions. This activity
+    is significant because stopping the SAM service can disrupt authentication mechanisms
+    and is often associated with ransomware attacks like Ryuk. If confirmed malicious,
+    this action could l
+  author: Rod Soto, Jose Hernandez, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - compromised-windows-host
+  - ryuk-ransomware
+  - scattered-lapsus$-hunters
+  mitre_attack:
+    techniques:
+    - id: T1489
+      name: Technique T1489
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/ryuk/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

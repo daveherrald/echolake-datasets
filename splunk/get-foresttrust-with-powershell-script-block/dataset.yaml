@@ -1,0 +1,35 @@
+metadata:
+  name: get-foresttrust-with-powershell-script-block
+  version: 8.0.0
+  description: The following analytic detects the execution of the Get-ForestTrust
+    command from PowerSploit using PowerShell Script Block Logging (EventCode=4104).
+    This method captures the full command sent to PowerShell, providing detailed visibility
+    into potentially suspicious activities. Monitoring this behavior is crucial as
+    it can indicate an attempt to gather domain trust information, which is often
+    a precursor to lateral movement or privilege escalation. If confirmed malicious,
+    this activity could allow
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - active-directory-discovery
+  mitre_attack:
+    techniques:
+    - id: T1482
+      name: Technique T1482
+    - id: T1059.001
+      name: Technique T1059.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1482/discovery/windows-powershell-xml.log
+    description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

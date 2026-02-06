@@ -1,0 +1,35 @@
+metadata:
+  name: windows-wmi-process-call-create
+  version: 7.0.0
+  description: The following analytic detects the execution of WMI command lines used
+    to create or execute processes. It leverages data from Endpoint Detection and
+    Response (EDR) agents, focusing on command-line events that include specific keywords
+    like "process," "call," and "create." This activity is significant because adversaries
+    often use WMI to execute malicious payloads on local or remote hosts, potentially
+    bypassing traditional security controls. If confirmed malicious, this behavior
+    could allow attac
+  author: Teoderick Contreras, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - volt-typhoon
+  - qakbot
+  - icedid
+  mitre_attack:
+    techniques:
+    - id: T1047
+      name: Technique T1047
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1047/atomic_red_team/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

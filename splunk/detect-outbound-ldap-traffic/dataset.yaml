@@ -1,0 +1,40 @@
+metadata:
+  name: detect-outbound-ldap-traffic
+  version: 8.0.0
+  description: The following analytic identifies outbound LDAP traffic to external
+    IP addresses. It leverages the Network_Traffic data model to detect connections
+    on ports 389 or 636 that are not directed to private IP ranges (RFC1918). This
+    activity is significant because outbound LDAP traffic can indicate potential data
+    exfiltration or unauthorized access attempts. If confirmed malicious, attackers
+    could exploit this to access sensitive directory information, leading to data
+    breaches or further network compr
+  author: Bhavin Patel, Johan Bjerke, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - log4shell-cve-2021-44228
+  - cisco-secure-firewall-threat-defense-analytics
+  mitre_attack:
+    techniques:
+    - id: T1190
+      name: Technique T1190
+    - id: T1059
+      name: Technique T1059
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059/log4shell_ldap_traffic/pantraffic.log
+    description: pan:traffic - pan:traffic
+    format: text
+    schema: raw
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_secure_firewall_threat_defense/connection_event/connection_events.log
+    description: not_applicable - cisco:sfw:estreamer
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

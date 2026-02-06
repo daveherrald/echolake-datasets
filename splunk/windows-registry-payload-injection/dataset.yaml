@@ -1,0 +1,33 @@
+metadata:
+  name: windows-registry-payload-injection
+  version: 8.0.0
+  description: The following analytic detects suspiciously long data written to the
+    Windows registry, a behavior often linked to fileless malware or persistence techniques.
+    It leverages Endpoint Detection and Response (EDR) telemetry, focusing on registry
+    events with data lengths exceeding 512 characters. This activity is significant
+    as it can indicate an attempt to evade traditional file-based defenses, making
+    it crucial for SOC monitoring. If confirmed malicious, this technique could allow
+    attackers to maint
+  author: Steven Dick
+  tags:
+  - ttp
+  - splunk-security-content
+  - unusual-processes
+  mitre_attack:
+    techniques:
+    - id: T1027.011
+      name: Technique T1027.011
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/gootloader/partial_ttps/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

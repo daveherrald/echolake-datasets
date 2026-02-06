@@ -1,0 +1,35 @@
+metadata:
+  name: windows-impair-defense-disable-win-defender-signature-retirement
+  version: 8.0.0
+  description: The following analytic detects modifications to the Windows registry
+    that disable Windows Defender Signature Retirement. It leverages data from the
+    Endpoint.Registry data model, specifically monitoring changes to the DisableSignatureRetirement
+    registry setting. This activity is significant because disabling signature retirement
+    can prevent Windows Defender from removing outdated antivirus signatures, potentially
+    reducing its effectiveness in detecting threats. If confirmed malicious, this
+    action
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - windows-defense-evasion-tactics
+  - windows-registry-abuse
+  - scattered-lapsus$-hunters
+  mitre_attack:
+    techniques:
+    - id: T1562.001
+      name: Technique T1562.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.001/disable-windows-security-defender-features/windefender-bypas-2-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,35 @@
+metadata:
+  name: mimikatz-passtheticket-commandline-parameters
+  version: 9.0.0
+  description: The following analytic detects the use of Mimikatz command line parameters
+    associated with pass-the-ticket attacks. It leverages data from Endpoint Detection
+    and Response (EDR) agents, focusing on specific command-line patterns related
+    to Kerberos ticket manipulation. This activity is significant because pass-the-ticket
+    attacks allow adversaries to move laterally within an environment using stolen
+    Kerberos tickets, bypassing normal access controls. If confirmed malicious, this
+    could enable attac
+  author: Mauricio Velazco, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - sandworm-tools
+  - cisa-aa23-347a
+  - cisa-aa22-320a
+  mitre_attack:
+    techniques:
+    - id: T1550.003
+      name: Technique T1550.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1550.003/mimikatz/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

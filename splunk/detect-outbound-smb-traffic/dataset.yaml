@@ -1,0 +1,35 @@
+metadata:
+  name: detect-outbound-smb-traffic
+  version: 12.0.0
+  description: The following analytic detects outbound SMB (Server Message Block)
+    connections from internal hosts to external servers. It identifies this activity
+    by monitoring network traffic for SMB requests directed towards the Internet,
+    which are unusual for standard operations. This detection is significant for a
+    SOC as it can indicate an attacker's attempt to retrieve credential hashes through
+    compromised servers, a key step in lateral movement and privilege escalation.
+    If confirmed malicious, this activ
+  author: Bhavin Patel, Stuart Hopkins, Patrick Bareiss
+  tags:
+  - ttp
+  - splunk-security-content
+  - hidden-cobra-malware
+  - dhs-report-ta18-074a
+  - nobelium-group
+  mitre_attack:
+    techniques:
+    - id: T1071.002
+      name: Technique T1071.002
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_secure_firewall_threat_defense/connection_event/connection_events.log
+    description: not_applicable - cisco:sfw:estreamer
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,33 @@
+metadata:
+  name: 3cx-supply-chain-attack-network-indicators
+  version: 8.0.0
+  description: 'The following analytic identifies DNS queries to domains associated
+    with the 3CX supply chain attack. It leverages the Network_Resolution datamodel
+    to detect these suspicious domain indicators. This activity is significant because
+    it can indicate a potential compromise stemming from the 3CX supply chain attack,
+    which is known for distributing malicious software through trusted updates. If
+    confirmed malicious, this activity could allow attackers to establish a foothold
+    in the network, exfiltrate '
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - 3cx-supply-chain-attack
+  mitre_attack:
+    techniques:
+    - id: T1195.002
+      name: Technique T1195.002
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1195.002/3CX/3cx_network-windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

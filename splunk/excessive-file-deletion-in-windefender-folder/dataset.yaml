@@ -1,0 +1,34 @@
+metadata:
+  name: excessive-file-deletion-in-windefender-folder
+  version: 7.0.0
+  description: The following analytic detects excessive file deletion events in the
+    Windows Defender folder. It leverages Sysmon EventCodes 23 and 26 to identify
+    processes deleting multiple files within this directory. This behavior is significant
+    as it may indicate an attempt to corrupt or disable Windows Defender, a key security
+    component. If confirmed malicious, this activity could allow an attacker to disable
+    endpoint protection, facilitating further malicious actions without detection.
+  author: Teoderick Contreras, Splunk, Steven Dick
+  tags:
+  - ttp
+  - splunk-security-content
+  - data-destruction
+  - whispergate
+  - blackbyte-ransomware
+  mitre_attack:
+    techniques:
+    - id: T1485
+      name: Technique T1485
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1485/excessive_file_del_in_windefender_dir/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

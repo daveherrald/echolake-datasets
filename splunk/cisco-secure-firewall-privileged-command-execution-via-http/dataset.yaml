@@ -1,0 +1,38 @@
+metadata:
+  name: cisco-secure-firewall-privileged-command-execution-via-http
+  version: 1.0.0
+  description: 'This analytic detects HTTP requests to privileged execution paths
+    on Cisco routers, specifically targeting the `/level/15/exec/-/*` endpoint using
+    Cisco Secure Firewall Intrusion Events.
+
+    This detection leverages Snort signature 65370 to identify requests to these sensitive
+    endpoints, which when combined with other indicators may signal active exploitation
+    or post-compromise activity.
+
+    '
+  author: Nasreddine Bencherchali, Michael Haag, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - cisco-secure-firewall-threat-defense-analytics
+  - salt-typhoon
+  mitre_attack:
+    techniques:
+    - id: T1059
+      name: Technique T1059
+    - id: T1505.003
+      name: Technique T1505.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_secure_firewall_threat_defense/intrusion_event/intrusion_events.log
+    description: not_applicable - cisco:sfw:estreamer
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

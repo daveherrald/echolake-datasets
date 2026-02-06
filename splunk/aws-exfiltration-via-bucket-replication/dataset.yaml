@@ -1,0 +1,34 @@
+metadata:
+  name: aws-exfiltration-via-bucket-replication
+  version: 6.0.0
+  description: 'The following analytic detects API calls to enable S3 bucket replication
+    services. It leverages AWS CloudTrail logs to identify `PutBucketReplication`
+    events, focusing on fields like `bucketName`, `ReplicationConfiguration.Rule.Destination.Bucket`,
+    and user details. This activity is significant as it can indicate unauthorized
+    data replication, potentially leading to data exfiltration. If confirmed malicious,
+    attackers could replicate sensitive data to external accounts, leading to data
+    breaches '
+  author: Bhavin Patel, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - suspicious-aws-s3-activities
+  - data-exfiltration
+  mitre_attack:
+    techniques:
+    - id: T1537
+      name: Technique T1537
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1119/aws_exfil_datasync/cloudtrail.json
+    description: aws_cloudtrail - aws:cloudtrail
+    format: jsonl
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

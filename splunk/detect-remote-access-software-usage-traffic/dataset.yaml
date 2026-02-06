@@ -1,0 +1,35 @@
+metadata:
+  name: detect-remote-access-software-usage-traffic
+  version: 12.0.0
+  description: The following analytic detects network traffic associated with known
+    remote access software applications, such as AnyDesk, GoToMyPC, LogMeIn, and TeamViewer.
+    It leverages Palo Alto traffic logs mapped to the Network_Traffic data model in
+    Splunk. This activity is significant because adversaries often use remote access
+    tools to maintain unauthorized access to compromised environments. If confirmed
+    malicious, this activity could allow attackers to control systems remotely, exfiltrate
+    data, or deplo
+  author: Steven Dick
+  tags:
+  - anomaly
+  - splunk-security-content
+  - insider-threat
+  - command-and-control
+  - ransomware
+  mitre_attack:
+    techniques:
+    - id: T1219
+      name: Technique T1219
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1219/screenconnect/screenconnect_palo_traffic.log
+    description: screenconnect_palo_traffic - pan:traffic
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

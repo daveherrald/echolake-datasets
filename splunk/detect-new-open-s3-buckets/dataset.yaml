@@ -1,0 +1,33 @@
+metadata:
+  name: detect-new-open-s3-buckets
+  version: 7.0.0
+  description: The following analytic identifies the creation of open/public S3 buckets
+    in AWS. It detects this activity by analyzing AWS CloudTrail events for `PutBucketAcl`
+    actions where the access control list (ACL) grants permissions to all users or
+    authenticated users. This activity is significant because open S3 buckets can
+    expose sensitive data to unauthorized access, leading to data breaches. If confirmed
+    malicious, an attacker could read, write, or fully control the contents of the
+    bucket, potentially
+  author: Bhavin Patel, Patrick Bareiss, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - suspicious-aws-s3-activities
+  mitre_attack:
+    techniques:
+    - id: T1530
+      name: Technique T1530
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1530/aws_s3_public_bucket/aws_cloudtrail_events.json
+    description: aws_cloudtrail - aws:cloudtrail
+    format: jsonl
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,35 @@
+metadata:
+  name: windows-outlook-macro-created-by-suspicious-process
+  version: 1.0.0
+  description: The following analytic detects the creation of an Outlook Macro (VbaProject.OTM)
+    by a suspicious process. This file is normally created when you create a macro
+    from within Outlook. If this file is created by a process other than Outlook.exe
+    it may be maliciously created. This detection leverages data from the Filesystem
+    datamodel, specifically looking for the file creation event for VbaProject.OTM.
+    This activity is significant as it is commonly associated with some malware infections,
+    indicating
+  author: Raven Tait, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - notdoor-malware
+  mitre_attack:
+    techniques:
+    - id: T1137
+      name: Technique T1137
+    - id: T1059.005
+      name: Technique T1059.005
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/notdoor/outlook_macro/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

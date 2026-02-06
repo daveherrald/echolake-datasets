@@ -1,0 +1,39 @@
+metadata:
+  name: lolbas-with-network-traffic
+  version: 14.0.0
+  description: The following analytic identifies the use of Living Off the Land Binaries
+    and Scripts (LOLBAS) with network traffic. It leverages data from the Network
+    Traffic data model to detect when native Windows binaries, often abused by adversaries,
+    initiate network connections. This activity is significant as LOLBAS are frequently
+    used to download malicious payloads, enabling lateral movement, command-and-control,
+    or data exfiltration. If confirmed malicious, this behavior could allow attackers
+    to execut
+  author: Steven Dick
+  tags:
+  - ttp
+  - splunk-security-content
+  - fake-captcha-campaigns
+  - living-off-the-land
+  - malicious-inno-setup-loader
+  mitre_attack:
+    techniques:
+    - id: T1105
+      name: Technique T1105
+    - id: T1567
+      name: Technique T1567
+    - id: T1218
+      name: Technique T1218
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218/lolbas_with_network_traffic/lolbas_with_network_traffic.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

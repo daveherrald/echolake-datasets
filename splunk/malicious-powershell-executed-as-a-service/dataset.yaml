@@ -1,0 +1,35 @@
+metadata:
+  name: malicious-powershell-executed-as-a-service
+  version: 9.0.0
+  description: The following analytic identifies the execution of malicious PowerShell
+    commands or payloads via the Windows SC.exe utility. It detects this activity
+    by analyzing Windows System logs (EventCode 7045) and filtering for specific PowerShell-related
+    patterns in the ImagePath field. This behavior is significant because it indicates
+    potential abuse of the Windows Service Control Manager to run unauthorized or
+    harmful scripts, which could lead to system compromise. If confirmed malicious,
+    this activity
+  author: Ryan Becwar
+  tags:
+  - ttp
+  - splunk-security-content
+  - compromised-windows-host
+  - rhysida-ransomware
+  - malicious-powershell
+  mitre_attack:
+    techniques:
+    - id: T1569.002
+      name: Technique T1569.002
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1569.002/malicious_powershell_executed_as_a_service/windows-xml.log
+    description: XmlWinEventLog:System - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

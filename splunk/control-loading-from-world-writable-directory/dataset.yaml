@@ -1,0 +1,35 @@
+metadata:
+  name: control-loading-from-world-writable-directory
+  version: 10.0.0
+  description: The following analytic identifies instances of control.exe loading
+    a .cpl or .inf file from a writable directory, which is related to CVE-2021-40444.
+    This detection leverages data from Endpoint Detection and Response (EDR) agents,
+    focusing on process names and command-line executions mapped to the `Processes`
+    node of the `Endpoint` data model. This activity is significant as it may indicate
+    an attempt to exploit a known vulnerability, potentially leading to unauthorized
+    code execution. If confir
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - microsoft-mshtml-remote-code-execution-cve-2021-40444
+  - living-off-the-land
+  - compromised-windows-host
+  mitre_attack:
+    techniques:
+    - id: T1218.002
+      name: Technique T1218.002
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218.002/atomic_red_team/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

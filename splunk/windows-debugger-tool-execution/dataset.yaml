@@ -1,0 +1,33 @@
+metadata:
+  name: windows-debugger-tool-execution
+  version: 6.0.0
+  description: This analysis detects the use of debugger tools within a production
+    environment. While these tools are legitimate for file analysis and debugging,
+    they are abused by malware like PlugX and DarkGate for malicious DLL side-loading.
+    The hunting query aids Security Operations Centers (SOCs) in identifying potentially
+    suspicious tool executions, particularly for non-technical users in the production
+    network.
+  author: Teoderick Contreras, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - darkgate-malware
+  - plugx
+  mitre_attack:
+    techniques:
+    - id: T1036
+      name: Technique T1036
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1036/debugger_execution/debugger.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

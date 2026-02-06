@@ -1,0 +1,34 @@
+metadata:
+  name: windows-credentials-access-via-vaultcli-module
+  version: 6.0.0
+  description: The following analytic detects potentially abnormal interactions with
+    VaultCLI.dll, particularly those initiated by processes located in publicly writable
+    Windows folder paths. The VaultCLI.dll module allows processes to extract credentials
+    from the Windows Credential Vault. It was seen being abused by information stealers
+    such as Meduza. The analytic monitors suspicious API calls, unauthorized credential
+    access patterns, and anomalous process behaviors indicative of malicious activity.
+    By lever
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - meduza-stealer
+  - hellcat-ransomware
+  mitre_attack:
+    techniques:
+    - id: T1555.004
+      name: Technique T1555.004
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1555.004/vaultcli_creds/vaultcli.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

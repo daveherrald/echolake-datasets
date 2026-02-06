@@ -1,0 +1,35 @@
+metadata:
+  name: detect-html-help-renamed
+  version: 12.0.0
+  description: The following analytic detects instances where hh.exe (HTML Help) has
+    been renamed and is executing a Compiled HTML Help (CHM) file. This detection
+    leverages data from Endpoint Detection and Response (EDR) agents, focusing on
+    process names and original file names. This activity is significant because attackers
+    can use renamed hh.exe to execute malicious scripts embedded in CHM files, potentially
+    leading to code execution. If confirmed malicious, this technique could allow
+    attackers to run arbitr
+  author: Michael Haag, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - suspicious-compiled-html-activity
+  - living-off-the-land
+  - apt37-rustonotto-and-fadestealer
+  mitre_attack:
+    techniques:
+    - id: T1218.001
+      name: Technique T1218.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218.001/atomic_red_team/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

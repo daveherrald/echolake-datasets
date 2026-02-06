@@ -1,0 +1,37 @@
+metadata:
+  name: etw-registry-disabled
+  version: 13.0.0
+  description: The following analytic detects a registry modification that disables
+    the ETW for the .NET Framework. It leverages data from the Endpoint.Registry data
+    model, specifically monitoring changes to the ETWEnabled registry value under
+    the .NETFramework path. This activity is significant because disabling ETW can
+    allow attackers to evade Endpoint Detection and Response (EDR) tools and hide
+    their execution from audit logs. If confirmed malicious, this action could enable
+    attackers to operate undetected,
+  author: Teoderick Contreras, Splunk, Steven Dick
+  tags:
+  - ttp
+  - splunk-security-content
+  - hermetic-wiper
+  - windows-persistence-techniques
+  - windows-privilege-escalation
+  mitre_attack:
+    techniques:
+    - id: T1127
+      name: Technique T1127
+    - id: T1562.006
+      name: Technique T1562.006
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1127/etw_disable/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,33 @@
+metadata:
+  name: windows-default-rdp-file-unhidden
+  version: 1.0.0
+  description: This detection identifies the use of attrib.exe to remove hidden (-h)
+    or system (-s) attributes from the Default.rdp file, which is automatically created
+    in a user's Documents folder when a Remote Desktop Protocol (RDP) session is initiated
+    using mstsc.exe. The Default.rdp file stores session configuration details such
+    as the remote host address and screen settings. Unhiding this file is uncommon
+    in normal user behavior and may indicate that an attacker or red team operator
+    is attempting to acce
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - windows-rdp-artifacts-and-defense-evasion
+  mitre_attack:
+    techniques:
+    - id: T1021.001
+      name: Technique T1021.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1021.001/unhide_file/unhide_file.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,39 @@
+metadata:
+  name: rubeus-command-line-parameters
+  version: 9.0.0
+  description: The following analytic detects the use of Rubeus command line parameters,
+    a toolset for Kerberos attacks within Active Directory environments. It leverages
+    Endpoint Detection and Response (EDR) data to identify specific command-line arguments
+    associated with actions like ticket manipulation, kerberoasting, and password
+    spraying. This activity is significant as Rubeus is commonly used by adversaries
+    to exploit Kerberos for privilege escalation and lateral movement. If confirmed
+    malicious, this co
+  author: Mauricio Velazco, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - active-directory-privilege-escalation
+  - cisa-aa23-347a
+  - active-directory-kerberos-attacks
+  mitre_attack:
+    techniques:
+    - id: T1550.003
+      name: Technique T1550.003
+    - id: T1558.003
+      name: Technique T1558.003
+    - id: T1558.004
+      name: Technique T1558.004
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1550.003/rubeus/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

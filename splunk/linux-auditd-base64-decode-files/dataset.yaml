@@ -1,0 +1,35 @@
+metadata:
+  name: linux-auditd-base64-decode-files
+  version: 5.0.0
+  description: The following analytic detects suspicious Base64 decode operations
+    that may indicate malicious activity, such as data exfiltration or execution of
+    encoded commands. Base64 is commonly used to encode data for safe transmission,
+    but attackers may abuse it to conceal malicious payloads. This detection focuses
+    on identifying unusual or unexpected Base64 decoding processes, particularly when
+    associated with critical files or directories. By monitoring these activities,
+    the analytic helps uncover pote
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - linux-living-off-the-land
+  - linux-privilege-escalation
+  - linux-persistence-techniques
+  mitre_attack:
+    techniques:
+    - id: T1140
+      name: Technique T1140
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1140/linux_auditd_base64/auditd_execve_base64.log
+    description: auditd - auditd
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

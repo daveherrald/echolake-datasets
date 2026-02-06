@@ -1,0 +1,40 @@
+metadata:
+  name: cisco-nvm-suspicious-network-connection-initiated-via-msxsl
+  version: 2.0.0
+  description: 'This analytic identifies the use of `msxsl.exe` initiating a network
+    connection to a non-private IP address.
+
+    Although `msxsl.exe` is a legitimate Microsoft utility used to apply XSLT transformations,
+    adversaries can abuse it
+
+    to execute arbitrary code or load external resources in an evasive manner.
+
+    This detection leverages Cisco NVM telemetry to identify potentially malicious
+    use of `msxsl.exe` making network connections
+
+    that may indicate command and control (C2) or data exfiltration activity.
+
+    '
+  author: Nasreddine Bencherchali, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - cisco-network-visibility-module-analytics
+  mitre_attack:
+    techniques:
+    - id: T1220
+      name: Technique T1220
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_network_visibility_module/cisco_nvm_flowdata/nvm_flowdata.log
+    description: not_applicable - cisco:nvm:flowdata
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

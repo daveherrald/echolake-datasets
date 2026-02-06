@@ -1,0 +1,37 @@
+metadata:
+  name: windows-powershell-invoke-restmethod-ip-information-collection
+  version: 3.0.0
+  description: The following analytic detects the use of PowerShell's Invoke-RestMethod
+    cmdlet to collect geolocation data from ipinfo.io or IP address information from
+    api.ipify.org. This behavior leverages PowerShell Script Block Logging to identify
+    scripts that gather external IP information and potential geolocation data. This
+    activity is significant as it may indicate reconnaissance efforts, where threat
+    actors are attempting to determine the geographical location or network details
+    of a compromised syste
+  author: Michael Haag, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - water-gamayun
+  mitre_attack:
+    techniques:
+    - id: T1082
+      name: Technique T1082
+    - id: T1016
+      name: Technique T1016
+    - id: T1059.001
+      name: Technique T1059.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/atomic_red_team/irm_powershell.log
+    description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

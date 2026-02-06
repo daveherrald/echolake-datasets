@@ -1,0 +1,33 @@
+metadata:
+  name: ws-ftp-remote-code-execution
+  version: 6.0.0
+  description: 'The following analytic detects potential Remote Code Execution (RCE)
+    attempts exploiting CVE-2023-40044 in WS_FTP software. It identifies HTTP POST
+    requests to the "/AHT/AhtApiService.asmx/AuthUser" URL with a status code of 200.
+    This detection leverages the Web datamodel to monitor specific URL patterns and
+    HTTP status codes. This activity is significant as it may indicate an exploitation
+    attempt, potentially allowing an attacker to execute arbitrary code on the server.
+    If confirmed malicious, '
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - ws-ftp-server-critical-vulnerabilities
+  mitre_attack:
+    techniques:
+    - id: T1190
+      name: Technique T1190
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/ws_ftp/wsftpweb.log
+    description: suricata - suricata
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

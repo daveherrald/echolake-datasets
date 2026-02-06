@@ -1,0 +1,33 @@
+metadata:
+  name: windows-powershell-add-module-to-global-assembly-cache
+  version: 8.0.0
+  description: The following analytic detects the addition of a DLL to the Windows
+    Global Assembly Cache (GAC) using PowerShell. It leverages PowerShell Script Block
+    Logging to identify commands containing "system.enterpriseservices.internal.publish".
+    This activity is significant because adding a DLL to the GAC allows it to be shared
+    across multiple applications, potentially enabling an adversary to execute malicious
+    code system-wide. If confirmed malicious, this could lead to widespread code execution,
+    privil
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - iis-components
+  mitre_attack:
+    techniques:
+    - id: T1505.004
+      name: Technique T1505.004
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1505.004/pwsh_publish_powershell.log
+    description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

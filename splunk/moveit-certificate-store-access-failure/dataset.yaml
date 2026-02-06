@@ -1,0 +1,33 @@
+metadata:
+  name: moveit-certificate-store-access-failure
+  version: 4.0.0
+  description: This detection identifies potential exploitation attempts of the CVE-2024-5806
+    vulnerability in Progress MOVEit Transfer. It looks for log entries indicating
+    failures to access the certificate store, which can occur when an attacker attempts
+    to exploit the authentication bypass vulnerability. This behavior is a key indicator
+    of attempts to impersonate valid users without proper credentials. While certificate
+    store access failures can occur during normal operations, an unusual increase
+    in such ev
+  author: Michael Haag, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - moveit-transfer-authentication-bypass
+  mitre_attack:
+    techniques:
+    - id: T1190
+      name: Technique T1190
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/moveit/SftpServer.log
+    description: sftp_server_logs - sftp_server_logs
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

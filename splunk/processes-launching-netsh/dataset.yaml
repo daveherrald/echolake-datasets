@@ -1,0 +1,35 @@
+metadata:
+  name: processes-launching-netsh
+  version: 11.0.0
+  description: The following analytic identifies processes launching netsh.exe, a
+    command-line utility used to modify network configurations. It detects this activity
+    by analyzing data from Endpoint Detection and Response (EDR) agents, focusing
+    on process GUIDs, names, parent processes, and command-line executions. This behavior
+    is significant because netsh.exe can be exploited to execute malicious helper
+    DLLs, serving as a persistence mechanism. If confirmed malicious, an attacker
+    could gain persistent access
+  author: Michael Haag, Josef Kuepker, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - netsh-abuse
+  - disabling-security-tools
+  - dhs-report-ta18-074a
+  mitre_attack:
+    techniques:
+    - id: T1562.004
+      name: Technique T1562.004
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.004/atomic_red_team/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

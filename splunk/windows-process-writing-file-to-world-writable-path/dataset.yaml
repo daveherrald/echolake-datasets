@@ -1,0 +1,35 @@
+metadata:
+  name: windows-process-writing-file-to-world-writable-path
+  version: 8.0.0
+  description: 'The following analytic identifies a process writing a .txt file to
+    a world writable path. This detection leverages data from Endpoint Detection and
+    Response (EDR) agents, focusing on file creation events within specific directories.
+    This activity is significant as adversaries often use such techniques to deliver
+    payloads to a system, which is uncommon for legitimate processes. If confirmed
+    malicious, this behavior could allow attackers to execute arbitrary code, escalate
+    privileges, or maintain '
+  author: Michael Haag, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - apt29-diplomatic-deceptions-with-wineloader
+  - php-cgi-rce-attack-on-japanese-organizations
+  - pathwiper
+  mitre_attack:
+    techniques:
+    - id: T1218.005
+      name: Technique T1218.005
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218.005/atomic_red_team/mshta_tasks_windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

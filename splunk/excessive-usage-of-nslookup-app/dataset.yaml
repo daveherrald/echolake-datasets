@@ -1,0 +1,35 @@
+metadata:
+  name: excessive-usage-of-nslookup-app
+  version: 7.0.0
+  description: The following analytic detects excessive usage of the nslookup application,
+    which may indicate potential DNS exfiltration attempts. It leverages Sysmon EventCode
+    1 to monitor process executions, specifically focusing on nslookup.exe. The detection
+    identifies outliers by comparing the frequency of nslookup executions against
+    a calculated threshold. This activity is significant as it can reveal attempts
+    by malware or APT groups to exfiltrate data via DNS queries. If confirmed malicious,
+    this behav
+  author: Teoderick Contreras, Stanislav Miskovic, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - suspicious-dns-traffic
+  - dynamic-dns
+  - data-exfiltration
+  mitre_attack:
+    techniques:
+    - id: T1048
+      name: Technique T1048
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1048.003/nslookup_exfil/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

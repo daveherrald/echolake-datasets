@@ -1,0 +1,33 @@
+metadata:
+  name: windows-modify-registry-risk-behavior
+  version: 6.0.0
+  description: The following analytic identifies instances where three or more distinct
+    registry modification events associated with MITRE ATT&CK Technique T1112 are
+    detected. It leverages data from the Risk data model in Splunk, focusing on registry-related
+    sources and MITRE technique annotations. This activity is significant because
+    multiple registry modifications can indicate an attempt to persist, hide malicious
+    configurations, or erase forensic evidence. If confirmed malicious, this behavior
+    could allow a
+  author: Teoderick Contreras, Splunk
+  tags:
+  - correlation
+  - splunk-security-content
+  - windows-registry-abuse
+  mitre_attack:
+    techniques:
+    - id: T1112
+      name: Technique T1112
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1112/windows_mod_reg_risk_behavior/modify_reg_risk.log
+    description: mod_reg - stash
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

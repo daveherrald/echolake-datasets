@@ -1,0 +1,35 @@
+metadata:
+  name: wsmprovhost-lolbas-execution-process-spawn
+  version: 8.0.0
+  description: The following analytic identifies `Wsmprovhost.exe` spawning a LOLBAS
+    execution process. It leverages Endpoint Detection and Response (EDR) data to
+    detect when `Wsmprovhost.exe` spawns child processes that are known LOLBAS (Living
+    Off the Land Binaries and Scripts) executables. This activity is significant because
+    it may indicate an adversary using Windows Remote Management (WinRM) to execute
+    code on remote endpoints, a common technique for lateral movement. If confirmed
+    malicious, this could al
+  author: Mauricio Velazco, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - active-directory-lateral-movement
+  - cisa-aa24-241a
+  - hellcat-ransomware
+  mitre_attack:
+    techniques:
+    - id: T1021.006
+      name: Technique T1021.006
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1021.006/lateral_movement_lolbas/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

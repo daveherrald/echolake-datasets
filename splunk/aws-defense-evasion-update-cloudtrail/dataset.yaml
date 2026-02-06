@@ -1,0 +1,33 @@
+metadata:
+  name: aws-defense-evasion-update-cloudtrail
+  version: 7.0.0
+  description: The following analytic detects `UpdateTrail` events in AWS CloudTrail
+    logs. It identifies attempts to modify CloudTrail settings, potentially to evade
+    logging. The detection leverages CloudTrail logs, focusing on `UpdateTrail` events
+    where the user agent is not the AWS console and the operation is successful. This
+    activity is significant because altering CloudTrail settings can disable or limit
+    logging, hindering visibility into AWS account activities. If confirmed malicious,
+    this could allow at
+  author: Gowthamaraj Rajendran, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - aws-defense-evasion
+  mitre_attack:
+    techniques:
+    - id: T1562.008
+      name: Technique T1562.008
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.008/update_cloudtrail/aws_cloudtrail_events.json
+    description: aws_cloudtrail - aws:cloudtrail
+    format: jsonl
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

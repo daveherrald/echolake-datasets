@@ -1,0 +1,36 @@
+metadata:
+  name: linux-account-manipulation-of-ssh-config-and-keys
+  version: 9.0.0
+  description: The following analytic detects the deletion of SSH keys on a Linux
+    machine. It leverages filesystem event logs to identify when files within "/etc/ssh/*"
+    or "~/.ssh/*" are deleted. This activity is significant because attackers may
+    delete or modify SSH keys to evade security measures or as part of a destructive
+    payload, similar to the AcidRain malware. If confirmed malicious, this behavior
+    could lead to impaired security features, hindered forensic investigations, or
+    further unauthorized access,
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - acidrain
+  - hellcat-ransomware
+  mitre_attack:
+    techniques:
+    - id: T1070.004
+      name: Technique T1070.004
+    - id: T1485
+      name: Technique T1485
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/acidrain/sysmon_linux.log
+    description: Syslog:Linux-Sysmon/Operational - sysmon:linux
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,35 @@
+metadata:
+  name: secretdumps-offline-ntds-dumping-tool
+  version: 9.0.0
+  description: The following analytic detects the potential use of the secretsdump.py
+    tool to dump NTLM hashes from a copy of ntds.dit and the SAM, SYSTEM, and SECURITY
+    registry hives. It leverages data from Endpoint Detection and Response (EDR) agents,
+    focusing on specific command-line patterns and process names associated with secretsdump.py.
+    This activity is significant because it indicates an attempt to extract sensitive
+    credential information offline, which is a common post-exploitation technique.
+    If conf
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - compromised-windows-host
+  - graceful-wipe-out-attack
+  - rhysida-ransomware
+  mitre_attack:
+    techniques:
+    - id: T1003.003
+      name: Technique T1003.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/honeypots/casper/datasets1/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

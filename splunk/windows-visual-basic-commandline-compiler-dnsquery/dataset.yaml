@@ -1,0 +1,33 @@
+metadata:
+  name: windows-visual-basic-commandline-compiler-dnsquery
+  version: 1.0.0
+  description: The following analytic detects instances where vbc.exe, the Visual
+    Basic Command Line Compiler, initiates DNS queries. Normally, vbc.exe operates
+    locally to compile Visual Basic code and does not require internet access or to
+    perform DNS lookups. Therefore, any observed DNS activity originating from vbc.exe
+    is highly suspicious and indicative of potential malicious activity. This behavior
+    often suggests that a malicious payload is masquerading as the legitimate vbc.exe
+    process to establish comma
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - lokibot
+  mitre_attack:
+    techniques:
+    - id: T1071.004
+      name: Technique T1071.004
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1071.004/vbc_dnsquery/vbc_dns_query.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

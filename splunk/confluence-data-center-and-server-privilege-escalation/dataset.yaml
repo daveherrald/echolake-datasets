@@ -1,0 +1,34 @@
+metadata:
+  name: confluence-data-center-and-server-privilege-escalation
+  version: 7.0.0
+  description: The following analytic identifies potential exploitation attempts on
+    a known vulnerability in Atlassian Confluence, specifically targeting the /setup/*.action*
+    URL pattern. It leverages web logs within the Splunk 'Web' Data Model, filtering
+    for successful accesses (HTTP status 200) to these endpoints. This activity is
+    significant as it suggests attackers might be exploiting a privilege escalation
+    flaw in Confluence. If confirmed malicious, it could result in unauthorized access
+    or account creati
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - cve-2023-22515-privilege-escalation-vulnerability-confluence-data-center-and-server
+  - confluence-data-center-and-confluence-server-vulnerabilities
+  mitre_attack:
+    techniques:
+    - id: T1190
+      name: Technique T1190
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/confluence/nginx_plus_kv_confluence.log
+    description: nginx:plus:kv - nginx:plus:kv
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

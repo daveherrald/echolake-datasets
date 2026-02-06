@@ -1,0 +1,34 @@
+metadata:
+  name: windows-steal-authentication-certificates-cryptoapi
+  version: 6.0.0
+  description: The following analytic detects the extraction of authentication certificates
+    using Windows Event Log - CAPI2 (CryptoAPI 2). It leverages EventID 70, which
+    is generated when a certificate's private key is acquired. This detection is significant
+    because it can identify potential misuse of certificates, such as those extracted
+    by tools like Mimikatz or Cobalt Strike. If confirmed malicious, this activity
+    could allow attackers to impersonate users, escalate privileges, or access sensitive
+    informatio
+  author: Michael Haag, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - windows-certificate-services
+  - hellcat-ransomware
+  mitre_attack:
+    techniques:
+    - id: T1649
+      name: Technique T1649
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1649/atomic_red_team/capi2-operational.log
+    description: XmlWinEventLog:Microsoft-Windows-CAPI2/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

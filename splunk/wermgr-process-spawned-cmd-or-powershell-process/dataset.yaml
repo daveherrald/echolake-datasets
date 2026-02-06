@@ -1,0 +1,33 @@
+metadata:
+  name: wermgr-process-spawned-cmd-or-powershell-process
+  version: 7.0.0
+  description: The following analytic detects the spawning of cmd or PowerShell processes
+    by the wermgr.exe process. It leverages data from Endpoint Detection and Response
+    (EDR) agents, focusing on process telemetry, including parent-child process relationships
+    and command-line executions. This behavior is significant as it is commonly associated
+    with code injection techniques used by malware like TrickBot to execute shellcode
+    or malicious DLL modules. If confirmed malicious, this activity could allow attacker
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - trickbot
+  - qakbot
+  mitre_attack:
+    techniques:
+    - id: T1059
+      name: Technique T1059
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/trickbot/infection/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

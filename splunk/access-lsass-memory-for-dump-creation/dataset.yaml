@@ -1,0 +1,35 @@
+metadata:
+  name: access-lsass-memory-for-dump-creation
+  version: 12.0.0
+  description: The following analytic detects attempts to dump the LSASS process memory,
+    a common technique in credential dumping attacks. It leverages Sysmon logs, specifically
+    EventCode 10, to identify suspicious call traces to dbgcore.dll and dbghelp.dll
+    associated with lsass.exe. This activity is significant as it often precedes the
+    theft of sensitive login credentials, posing a high risk of unauthorized access
+    to systems and data. If confirmed malicious, attackers could gain access to critical
+    credentials
+  author: Patrick Bareiss, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - cisa-aa23-347a
+  - credential-dumping
+  - cactus-ransomware
+  mitre_attack:
+    techniques:
+    - id: T1003.001
+      name: Technique T1003.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1003.001/atomic_red_team/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

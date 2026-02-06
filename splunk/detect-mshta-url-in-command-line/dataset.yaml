@@ -1,0 +1,39 @@
+metadata:
+  name: detect-mshta-url-in-command-line
+  version: 16.0.0
+  description: 'The following analytic detects the use of Microsoft HTML Application
+    Host (mshta.exe) to make remote HTTP or HTTPS connections. It leverages data from
+    Endpoint Detection and Response (EDR) agents, focusing on command-line arguments
+    containing URLs. This activity is significant because adversaries often use mshta.exe
+    to download and execute remote .hta files, bypassing security controls. If confirmed
+    malicious, this behavior could allow attackers to execute arbitrary code, potentially
+    leading to '
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - apt37-rustonotto-and-fadestealer
+  - compromised-windows-host
+  - lumma-stealer
+  mitre_attack:
+    techniques:
+    - id: T1218.005
+      name: Technique T1218.005
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218.005/atomic_red_team/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_network_visibility_module/cisco_nvm_flowdata/nvm_flowdata.log
+    description: not_applicable - cisco:nvm:flowdata
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

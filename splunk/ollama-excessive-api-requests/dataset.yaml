@@ -1,0 +1,32 @@
+metadata:
+  name: ollama-excessive-api-requests
+  version: 1.0.0
+  description: Detects potential Distributed Denial of Service (DDoS) attacks or rate
+    limit abuse against Ollama API endpoints by identifying excessive request volumes
+    from individual client IP addresses. This detection monitors GIN-formatted Ollama
+    server logs to identify clients generating abnormally high request rates within
+    short time windows, which may indicate automated attacks, botnet activity, or
+    resource exhaustion attempts targeting local AI model infrastructure.
+  author: Rod Soto
+  tags:
+  - anomaly
+  - splunk-security-content
+  - suspicious-ollama-activities
+  mitre_attack:
+    techniques:
+    - id: T1498
+      name: Technique T1498
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/ollama/server.log
+    description: server.log - ollama:server
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

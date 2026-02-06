@@ -1,0 +1,35 @@
+metadata:
+  name: windows-masquerading-explorer-as-child-process
+  version: 9.0.0
+  description: The following analytic identifies instances where explorer.exe is spawned
+    by unusual parent processes such as cmd.exe, powershell.exe, or regsvr32.exe.
+    This detection leverages data from Endpoint Detection and Response (EDR) agents,
+    focusing on process and parent process relationships. This activity is significant
+    because explorer.exe is typically initiated by userinit.exe, and deviations from
+    this norm can indicate code injection or process masquerading attempts by malware
+    like Qakbot. If confi
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - qakbot
+  - compromised-windows-host
+  - water-gamayun
+  mitre_attack:
+    techniques:
+    - id: T1574.001
+      name: Technique T1574.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/qakbot/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

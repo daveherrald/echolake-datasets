@@ -1,0 +1,33 @@
+metadata:
+  name: windows-process-injection-in-non-service-searchindexer
+  version: 6.0.0
+  description: The following analytic identifies instances of the searchindexer.exe
+    process that are not spawned by services.exe, indicating potential process injection.
+    This detection leverages data from Endpoint Detection and Response (EDR) agents,
+    focusing on process names and parent processes. This activity is significant because
+    QakBot malware often uses a fake searchindexer.exe to evade detection and perform
+    malicious actions such as data exfiltration and keystroke logging. If confirmed
+    malicious, this a
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - qakbot
+  mitre_attack:
+    techniques:
+    - id: T1055
+      name: Technique T1055
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1055/non-service-searchindexer/seaarch-indexer-non-service.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,33 @@
+metadata:
+  name: detect-rtlo-in-process
+  version: 8.0.0
+  description: 'The following analytic identifies the abuse of the right-to-left override
+    (RTLO) character (U+202E) in process names. It leverages data from Endpoint Detection
+    and Response (EDR) agents, focusing on process execution logs and command-line
+    data. This activity is significant because adversaries use the RTLO character
+    to disguise malicious files or commands, making them appear benign. If confirmed
+    malicious, this technique can allow attackers to execute harmful code undetected,
+    potentially leading '
+  author: Steven Dick
+  tags:
+  - ttp
+  - splunk-security-content
+  - spearphishing-attachments
+  mitre_attack:
+    techniques:
+    - id: T1036.002
+      name: Technique T1036.002
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1036.002/outlook_attachment/rtlo_events.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,35 @@
+metadata:
+  name: windows-defender-exclusion-registry-entry
+  version: 13.0.0
+  description: 'The following analytic detects modifications to the Windows Defender
+    exclusion registry entries. It leverages endpoint registry data to identify changes
+    in the registry path "*\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Exclusions\\*".
+    This activity is significant because adversaries often modify these entries to
+    bypass Windows Defender, allowing malicious code to execute without detection.
+    If confirmed malicious, this behavior could enable attackers to evade antivirus
+    defenses, maintain '
+  author: Teoderick Contreras, Splunk, Steven Dick
+  tags:
+  - ttp
+  - splunk-security-content
+  - qakbot
+  - remcos
+  - valleyrat
+  mitre_attack:
+    techniques:
+    - id: T1562.001
+      name: Technique T1562.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.001/defender_exclusion_sysmon/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

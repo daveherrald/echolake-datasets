@@ -1,0 +1,35 @@
+metadata:
+  name: crushftp-max-simultaneous-users-from-ip
+  version: 2.0.0
+  description: The following analytic identifies instances where CrushFTP has blocked
+    access due to exceeding the maximum number of simultaneous connections from a
+    single IP address. This activity may indicate brute force attempts, credential
+    stuffing, or automated attacks against the CrushFTP server. This detection is
+    particularly relevant following the discovery of CVE-2025-31161, an authentication
+    bypass vulnerability in CrushFTP versions 10.0.0 through 10.8.3 and 11.0.0 through
+    11.3.0.
+  author: Michael Haag, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - crushftp-vulnerabilities
+  mitre_attack:
+    techniques:
+    - id: T1110.001
+      name: Technique T1110.001
+    - id: T1110.004
+      name: Technique T1110.004
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/crushftp/crushftp11_session.log
+    description: crushftp - crushftp:sessionlogs
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

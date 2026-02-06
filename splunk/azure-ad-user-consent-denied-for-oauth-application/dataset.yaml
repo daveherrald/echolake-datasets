@@ -1,0 +1,33 @@
+metadata:
+  name: azure-ad-user-consent-denied-for-oauth-application
+  version: 10.0.0
+  description: The following analytic identifies instances where a user has denied
+    consent to an OAuth application seeking permissions within the Azure AD environment.
+    This detection leverages Azure AD's audit logs, specifically focusing on user
+    consent actions with error code 65004. Monitoring denied consent actions is significant
+    as it can indicate users recognizing potentially suspicious or untrusted applications.
+    If confirmed malicious, this activity could suggest attempts by unauthorized applications
+    to g
+  author: Mauricio Velazco, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - azure-active-directory-account-takeover
+  mitre_attack:
+    techniques:
+    - id: T1528
+      name: Technique T1528
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1528/azure_ad_user_consent_declined/azure_ad_user_consent_declined.log
+    description: Azure AD - azure:monitor:aad
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

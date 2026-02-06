@@ -1,0 +1,40 @@
+metadata:
+  name: cisco-secure-firewall-remote-access-software-usage-traffic
+  version: 4.0.0
+  description: 'The following analytic detects network traffic associated with known
+    remote access software applications
+
+    that are covered by Cisco Secure Firewall Application Detectors, such as AnyDesk,
+    GoToMyPC, LogMeIn, and TeamViewer.
+
+    It leverages Cisco Secure Firewall Threat Defense Connection Event.
+
+    This activity is significant because adversaries often use remote access tools
+    to maintain unauthorized access to compromised environments.
+
+    If confirmed malicious, this activity could allow attackers to control'
+  author: Nasreddine Bencherchali, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - insider-threat
+  - command-and-control
+  - ransomware
+  mitre_attack:
+    techniques:
+    - id: T1219
+      name: Technique T1219
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_secure_firewall_threat_defense/connection_event/connection_events.log
+    description: not_applicable - cisco:sfw:estreamer
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

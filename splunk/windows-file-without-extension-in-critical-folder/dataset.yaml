@@ -1,0 +1,33 @@
+metadata:
+  name: windows-file-without-extension-in-critical-folder
+  version: 7.0.0
+  description: This analytic detects the creation of files without extensions in critical
+    Windows system and driver-related directories, including but not limited to System32\Drivers,
+    Windows\WinSxS, and other known Windows driver storage and loading paths. The
+    detection has been expanded to comprehensively cover all commonly abused and legitimate
+    Windows driver folder locations, increasing visibility into attempts to stage
+    or deploy kernel-mode components. The analytic leverages telemetry from the Endpoint.Fi
+  author: Teoderick Contreras, Bhavin Patel, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - data-destruction
+  - hermetic-wiper
+  mitre_attack:
+    techniques:
+    - id: T1485
+      name: Technique T1485
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/hermetic_wiper/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

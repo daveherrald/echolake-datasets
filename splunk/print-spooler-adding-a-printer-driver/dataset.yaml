@@ -1,0 +1,34 @@
+metadata:
+  name: print-spooler-adding-a-printer-driver
+  version: 7.0.0
+  description: The following analytic detects the addition of new printer drivers
+    by monitoring Windows PrintService operational logs, specifically EventCode 316.
+    This detection leverages log data to identify messages indicating the addition
+    or update of printer drivers, such as "kernelbase.dll" and "UNIDRV.DLL." This
+    activity is significant as it may indicate exploitation attempts related to vulnerabilities
+    like CVE-2021-34527 (PrintNightmare). If confirmed malicious, attackers could
+    gain code execution or es
+  author: Mauricio Velazco, Michael Haag, Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - printnightmare-cve-2021-34527
+  - black-basta-ransomware
+  mitre_attack:
+    techniques:
+    - id: T1547.012
+      name: Technique T1547.012
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1547.012/printnightmare/windows-printservice_operational.log
+    description: WinEventLog:Microsoft-Windows-PrintService/Operational - WinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

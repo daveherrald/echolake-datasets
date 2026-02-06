@@ -1,0 +1,35 @@
+metadata:
+  name: windows-excessive-usage-of-net-app
+  version: 4.0.0
+  description: The following analytic detects excessive usage of `net.exe` within
+    a one-minute interval. It leverages data from Endpoint Detection and Response
+    (EDR) agents, focusing on process names, parent processes, and command-line executions.
+    This behavior is significant as it may indicate an adversary attempting to create,
+    delete, or disable multiple user accounts rapidly, a tactic observed in Monero
+    mining incidents. If confirmed malicious, this activity could lead to unauthorized
+    user account manipulat
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - prestige-ransomware
+  - graceful-wipe-out-attack
+  - xmrig
+  mitre_attack:
+    techniques:
+    - id: T1531
+      name: Technique T1531
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/xmrig_miner/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

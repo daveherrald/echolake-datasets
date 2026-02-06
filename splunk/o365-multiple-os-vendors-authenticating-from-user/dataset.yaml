@@ -1,0 +1,32 @@
+metadata:
+  name: o365-multiple-os-vendors-authenticating-from-user
+  version: 3.0.0
+  description: The following analytic identifies when multiple operating systems are
+    used to authenticate to Azure/EntraID/Office 365 by the same user account over
+    a short period of time. This activity could be indicative of attackers enumerating
+    various logon capabilities of Azure/EntraID/Office 365 and attempting to discover
+    weaknesses in the organizational MFA or conditional access configurations. Usage
+    of the tools like "MFASweep" will trigger this detection.
+  author: Steven Dick
+  tags:
+  - ttp
+  - splunk-security-content
+  - office-365-account-takeover
+  mitre_attack:
+    techniques:
+    - id: T1110
+      name: Technique T1110
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1110/azure_mfasweep_events/azure_mfasweep_events.log
+    description: o365 - o365:management:activity
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,33 @@
+metadata:
+  name: domain-controller-discovery-with-wmic
+  version: 6.0.0
+  description: The following analytic identifies the execution of `wmic.exe` with
+    command-line arguments used to discover domain controllers in a Windows domain.
+    It leverages data from Endpoint Detection and Response (EDR) agents, focusing
+    on process names and command-line arguments. This activity is significant because
+    it is commonly used by adversaries and Red Teams for situational awareness and
+    Active Directory discovery. If confirmed malicious, this behavior could allow
+    attackers to map out the network, id
+  author: Mauricio Velazco, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - active-directory-discovery
+  mitre_attack:
+    techniques:
+    - id: T1018
+      name: Technique T1018
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1018/AD_discovery/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

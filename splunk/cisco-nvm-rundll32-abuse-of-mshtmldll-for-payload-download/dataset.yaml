@@ -1,0 +1,41 @@
+metadata:
+  name: cisco-nvm-rundll32-abuse-of-mshtmldll-for-payload-download
+  version: 2.0.0
+  description: 'This analytic detects suspicious use of `rundll32.exe` in combination
+    with `mshtml.dll` and the export `RunHTMLApplication`.
+
+    This behavior is often observed in malware to execute JavaScript or VBScript in
+    memory, enabling payload staging or
+
+    bypassing script execution policies and bypassing the usage of the "mshta.exe"
+    binary.
+
+    The detection leverages Cisco Network Visibility Module telemetry which offers
+    network flow activity
+
+    along with process information such as command-line arguments
+
+    If confir'
+  author: Nasreddine Bencherchali, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - cisco-network-visibility-module-analytics
+  mitre_attack:
+    techniques:
+    - id: T1218.005
+      name: Technique T1218.005
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_network_visibility_module/cisco_nvm_flowdata/nvm_flowdata.log
+    description: not_applicable - cisco:nvm:flowdata
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

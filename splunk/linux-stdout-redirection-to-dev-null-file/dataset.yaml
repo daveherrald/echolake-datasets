@@ -1,0 +1,35 @@
+metadata:
+  name: linux-stdout-redirection-to-dev-null-file
+  version: 8.0.0
+  description: The following analytic detects command-line activities that redirect
+    stdout or stderr to the /dev/null file. It leverages data from Endpoint Detection
+    and Response (EDR) agents, focusing on process execution logs. This behavior is
+    significant as it can indicate attempts to hide command outputs, a technique observed
+    in the CyclopsBlink malware to conceal modifications to iptables firewall settings.
+    If confirmed malicious, this activity could allow an attacker to stealthily alter
+    system configurat
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - cyclops-blink
+  - data-destruction
+  - industroyer2
+  mitre_attack:
+    techniques:
+    - id: T1562.004
+      name: Technique T1562.004
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/cyclopsblink/sysmon_linux.log
+    description: Syslog:Linux-Sysmon/Operational - sysmon:linux
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

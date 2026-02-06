@@ -1,0 +1,35 @@
+metadata:
+  name: fortinet-appliance-auth-bypass
+  version: 5.0.0
+  description: 'The following analytic detects attempts to exploit CVE-2022-40684,
+    a Fortinet appliance authentication bypass vulnerability. It identifies REST API
+    requests to the /api/v2/ endpoint using various HTTP methods (GET, POST, PUT,
+    DELETE) that may indicate unauthorized modifications, such as adding SSH keys
+    or creating new users. This detection leverages the Web datamodel to monitor specific
+    URL patterns and HTTP methods. This activity is significant as it can lead to
+    unauthorized access and control '
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - cve-2022-40684-fortinet-appliance-auth-bypass
+  mitre_attack:
+    techniques:
+    - id: T1190
+      name: Technique T1190
+    - id: T1133
+      name: Technique T1133
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/fortigate/fortinetcve202240684.log
+    description: pan:threat - pan:threat
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

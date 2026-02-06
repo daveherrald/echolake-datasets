@@ -1,0 +1,35 @@
+metadata:
+  name: linux-common-process-for-elevation-control
+  version: 9.0.0
+  description: The following analytic identifies the execution of common Linux processes
+    used for elevation control, such as `chmod`, `chown`, and `setuid`. It leverages
+    data from Endpoint Detection and Response (EDR) agents, focusing on process names
+    and command-line executions. This activity is significant because these processes
+    are often abused by adversaries to gain persistence or escalate privileges on
+    compromised hosts. If confirmed malicious, this behavior could allow attackers
+    to modify file attribute
+  author: Teoderick Contreras, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - linux-persistence-techniques
+  - china-nexus-threat-activity
+  - linux-living-off-the-land
+  mitre_attack:
+    techniques:
+    - id: T1548.001
+      name: Technique T1548.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1548.001/chmod_uid/sysmon_linux.log
+    description: Syslog:Linux-Sysmon/Operational - sysmon:linux
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

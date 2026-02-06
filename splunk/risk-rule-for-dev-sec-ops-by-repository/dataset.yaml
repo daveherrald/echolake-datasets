@@ -1,0 +1,33 @@
+metadata:
+  name: risk-rule-for-dev-sec-ops-by-repository
+  version: 9.0.0
+  description: The following analytic identifies high-risk activities within repositories
+    by correlating repository data with risk scores. It leverages findings and intermediate
+    findings created by detections from the Dev Sec Ops analytic stories, summing
+    risk scores and capturing source and user information. The detection focuses on
+    high-risk scores above 100 and sources with more than three occurrences. This
+    activity is significant as it highlights repositories frequently targeted by threats,
+    providing insig
+  author: Bhavin Patel
+  tags:
+  - correlation
+  - splunk-security-content
+  - dev-sec-ops
+  mitre_attack:
+    techniques:
+    - id: T1204.003
+      name: Technique T1204.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1204.003/risk_dataset/aws_ecr_risk_dataset.log
+    description: aws_ecr_risk_dataset.log - stash
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

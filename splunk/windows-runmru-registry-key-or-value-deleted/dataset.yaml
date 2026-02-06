@@ -1,0 +1,32 @@
+metadata:
+  name: windows-runmru-registry-key-or-value-deleted
+  version: 1.0.0
+  description: The following analytic detects the deletion or modification of Most
+    Recently Used (MRU) command entries stored within the Windows Registry. Adversaries
+    often clear these registry keys, such as HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU,
+    to remove forensic evidence of commands executed via the Windows Run dialog or
+    other system utilities. This activity aims to obscure their actions, hinder incident
+    response efforts, and evade detection. Detection focuses on monitoring for chan
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - netsupport-rmm-tool-abuse
+  mitre_attack:
+    techniques:
+    - id: T1112
+      name: Technique T1112
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1112/delete_runmru_reg/runmru_deletion.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

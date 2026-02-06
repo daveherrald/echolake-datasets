@@ -1,0 +1,35 @@
+metadata:
+  name: windows-wsus-spawning-shell
+  version: 1.0.0
+  description: The following analytic identifies instances where a shell (PowerShell.exe
+    or Cmd.exe) is spawned from wsusservice.exe, the Windows Server Update Services
+    process. This detection leverages data from Endpoint Detection and Response (EDR)
+    agents, focusing on process creation events where the parent process is wsusservice.exe.
+    This activity is significant as it may indicate exploitation of CVE-2025-59287,
+    a critical deserialization vulnerability in WSUS that allows unauthenticated remote
+    code execut
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - microsoft-wsus-cve-2025-59287
+  mitre_attack:
+    techniques:
+    - id: T1190
+      name: Technique T1190
+    - id: T1505.003
+      name: Technique T1505.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1505.003/wsus-windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

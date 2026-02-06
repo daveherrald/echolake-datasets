@@ -1,0 +1,33 @@
+metadata:
+  name: windows-list-env-variables-via-set-command-from-uncommon-parent
+  version: 3.0.0
+  description: 'The following analytic identifies a suspicious process command line
+    fetching environment variables using the cmd.exe "set" command, with a non-shell
+    parent process. It leverages data from Endpoint Detection and Response (EDR) agents,
+    focusing on command-line executions and parent process names. This activity could
+    be significant as it is commonly associated with malware like Qakbot, which uses
+    this technique to gather system information. If confirmed malicious, this behavior
+    could indicate that '
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - qakbot
+  mitre_attack:
+    techniques:
+    - id: T1055
+      name: Technique T1055
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/qakbot/qbot_wermgr/sysmon_wermgr.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

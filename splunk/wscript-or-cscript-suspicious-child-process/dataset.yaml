@@ -1,0 +1,39 @@
+metadata:
+  name: wscript-or-cscript-suspicious-child-process
+  version: 10.0.0
+  description: This analytic identifies a suspicious spawned process by WScript or
+    CScript process. This technique was a common technique used by adversaries and
+    malware to execute different LOLBIN, other scripts like PowerShell or spawn a
+    suspended process to inject its code as a defense evasion. This TTP may detect
+    some normal script that uses several application tools that are in the list of
+    the child process it detects but a good pivot and indicator that a script may
+    execute suspicious code.
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - data-destruction
+  - fin7
+  - njrat
+  mitre_attack:
+    techniques:
+    - id: T1055
+      name: Technique T1055
+    - id: T1134.004
+      name: Technique T1134.004
+    - id: T1543
+      name: Technique T1543
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.005/vbs_wscript/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

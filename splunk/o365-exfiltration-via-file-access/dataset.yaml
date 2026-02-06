@@ -1,0 +1,36 @@
+metadata:
+  name: o365-exfiltration-via-file-access
+  version: 2.0.0
+  description: The following analytic detects when an excessive number of files are
+    access from o365 by the same user over a short period of time. A malicious actor
+    may abuse the "open in app" functionality of SharePoint through scripted or Graph
+    API based access to evade triggering the FileDownloaded Event. This behavior may
+    indicate an attacker staging data for exfiltration or an insider threat removing
+    organizational data. Additional attention should be take with any Azure Guest
+    (#EXT#) accounts.
+  author: Steven Dick
+  tags:
+  - anomaly
+  - splunk-security-content
+  - data-exfiltration
+  - office-365-account-takeover
+  mitre_attack:
+    techniques:
+    - id: T1567
+      name: Technique T1567
+    - id: T1530
+      name: Technique T1530
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1567/o365_sus_file_activity/o365_sus_file_activity.log
+    description: o365 - o365:management:activity
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

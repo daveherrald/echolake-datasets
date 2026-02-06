@@ -1,0 +1,33 @@
+metadata:
+  name: zscaler-virus-download-threat-blocked
+  version: 6.0.0
+  description: The following analytic identifies attempts to download viruses that
+    were blocked by Zscaler within a network. It leverages web proxy logs to detect
+    blocked actions indicative of virus download attempts. Key data points such as
+    device owner, user, URL category, destination URL, and IP are analyzed. This activity
+    is significant as it helps in early detection and remediation of potential virus
+    threats, enhancing network security. If confirmed malicious, this activity could
+    indicate an attempt to co
+  author: Gowthamaraj Rajendran, Rod Soto, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - zscaler-browser-proxy-threats
+  mitre_attack:
+    techniques:
+    - id: T1566
+      name: Technique T1566
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566/zscalar_web_proxy/zscalar_web_proxy.json
+    description: zscaler - zscalernss-web
+    format: jsonl
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

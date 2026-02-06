@@ -1,0 +1,44 @@
+metadata:
+  name: github-workflow-file-creation-or-modification
+  version: 1.0.0
+  description: 'The following analytic hunts for any creations or modifications to
+    GitHub Actions workflow YAML files across the organization''s Linux or Windows
+    endpoints.
+
+    This hunting query tracks all workflow file activity under .github/workflows directories
+    to help defenders establish baselines of legitimate CI/CD workflow creation patterns,
+    identify unusual or unauthorized changes, and detect anomalies that may indicate
+    supply chain compromise.
+
+    GitHub Actions workflows execute with privileged access to secr'
+  author: Michael Haag, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - npm-supply-chain-compromise
+  mitre_attack:
+    techniques:
+    - id: T1574.006
+      name: Technique T1574.006
+    - id: T1554
+      name: Technique T1554
+    - id: T1195
+      name: Technique T1195
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1195.001/npm/workflow_yml_sysmon.log
+    description: Syslog:Linux-Sysmon/Operational - sysmon:linux
+    format: text
+    schema: raw
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1195.001/npm/windows_workflow_sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

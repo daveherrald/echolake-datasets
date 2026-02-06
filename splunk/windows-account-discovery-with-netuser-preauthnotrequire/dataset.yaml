@@ -1,0 +1,33 @@
+metadata:
+  name: windows-account-discovery-with-netuser-preauthnotrequire
+  version: 7.0.0
+  description: The following analytic detects the execution of the PowerView PowerShell
+    cmdlet Get-NetUser with the -PreauthNotRequire parameter, leveraging Event ID
+    4104. This method identifies attempts to query Active Directory user accounts
+    that do not require Kerberos preauthentication. Monitoring this activity is crucial
+    as it can indicate reconnaissance efforts by an attacker to identify potentially
+    vulnerable accounts. If confirmed malicious, this behavior could lead to further
+    exploitation, such as una
+  author: Teoderick Contreras, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - cisa-aa23-347a
+  mitre_attack:
+    techniques:
+    - id: T1087
+      name: Technique T1087
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1087/powerview_get_netuser_preauthnotrequire/get-netuser-not-require-pwh.log
+    description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

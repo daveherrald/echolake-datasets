@@ -1,0 +1,35 @@
+metadata:
+  name: windows-credentials-from-password-stores-chrome-login-data-access
+  version: 17.0.0
+  description: The following analytic identifies non-Chrome processes accessing the
+    Chrome user data file "login data." This file is an SQLite database containing
+    sensitive information, including saved passwords. The detection leverages Windows
+    Security Event logs, specifically event code 4663, to monitor access attempts.
+    This activity is significant as it may indicate attempts by threat actors to extract
+    and decrypt stored passwords, posing a risk to user credentials. If confirmed
+    malicious, attackers could g
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - stealc-stealer
+  - darkgate-malware
+  - malicious-inno-setup-loader
+  mitre_attack:
+    techniques:
+    - id: T1012
+      name: Technique T1012
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/redline/chrome_login_data_simulate_access/redline-login-data-security-xml.log
+    description: XmlWinEventLog:Security - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

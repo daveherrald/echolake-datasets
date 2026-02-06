@@ -1,0 +1,33 @@
+metadata:
+  name: windows-admin-permission-discovery
+  version: 6.0.0
+  description: The following analytic identifies the creation of a suspicious file
+    named 'win.dat' in the root directory (C:\). It leverages data from the Endpoint.Filesystem
+    datamodel to detect this activity. This behavior is significant as it is commonly
+    used by malware like NjRAT to check for administrative privileges on a compromised
+    host. If confirmed malicious, this activity could indicate that the malware has
+    administrative access, allowing it to perform high-privilege actions, potentially
+    leading to fu
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - njrat
+  mitre_attack:
+    techniques:
+    - id: T1069.001
+      name: Technique T1069.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1069.001/njrat_admin_check/win_dat.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

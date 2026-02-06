@@ -1,0 +1,39 @@
+metadata:
+  name: cisco-asa-logging-message-suppression
+  version: 1.0.0
+  description: 'This analytic detects suppression of specific logging messages on
+    Cisco ASA devices using the "no logging message" command.
+
+    Adversaries may suppress specific log message IDs to selectively disable logging
+    of security-critical events such as authentication failures, configuration changes,
+    or suspicious network activity. This targeted approach allows attackers to evade
+    detection while maintaining normal logging operations that might otherwise alert
+    administrators to complete logging disablement.
+
+    T'
+  author: Nasreddine Bencherchali, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - suspicious-cisco-adaptive-security-appliance-activity
+  - arcanedoor
+  mitre_attack:
+    techniques:
+    - id: T1562.002
+      name: Technique T1562.002
+    - id: T1070
+      name: Technique T1070
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_asa/generic/cisco_asa_generic_logs.log
+    description: not_applicable - cisco:asa
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

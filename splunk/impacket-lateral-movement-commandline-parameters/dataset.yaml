@@ -1,0 +1,41 @@
+metadata:
+  name: impacket-lateral-movement-commandline-parameters
+  version: 11.0.0
+  description: The following analytic identifies the use of suspicious command-line
+    parameters associated with Impacket tools, such as `wmiexec.py`, `smbexec.py`,
+    `dcomexec.py`, and `atexec.py`, which are used for lateral movement and remote
+    code execution. It detects these activities by analyzing process execution logs
+    from Endpoint Detection and Response (EDR) agents, focusing on specific command-line
+    patterns. This activity is significant because Impacket tools are commonly used
+    by adversaries and Red Teams
+  author: Mauricio Velazco, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - whispergate
+  - gozi-malware
+  - active-directory-lateral-movement
+  mitre_attack:
+    techniques:
+    - id: T1021.002
+      name: Technique T1021.002
+    - id: T1021.003
+      name: Technique T1021.003
+    - id: T1047
+      name: Technique T1047
+    - id: T1543.003
+      name: Technique T1543.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1021.003/impacket/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

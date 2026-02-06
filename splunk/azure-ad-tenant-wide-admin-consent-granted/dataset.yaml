@@ -1,0 +1,34 @@
+metadata:
+  name: azure-ad-tenant-wide-admin-consent-granted
+  version: 8.0.0
+  description: The following analytic identifies instances where admin consent is
+    granted to an application within an Azure AD tenant. It leverages Azure AD audit
+    logs, specifically events related to the admin consent action within the ApplicationManagement
+    category. This activity is significant because admin consent allows applications
+    to access data across the entire tenant, potentially exposing vast amounts of
+    organizational data. If confirmed malicious, an attacker could gain extensive
+    and persistent acces
+  author: Mauricio Velazco, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - azure-active-directory-persistence
+  - nobelium-group
+  mitre_attack:
+    techniques:
+    - id: T1098.003
+      name: Technique T1098.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1098.003/azure_ad_admin_consent/azure_ad_admin_consent.log
+    description: Azure AD - azure:monitor:aad
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

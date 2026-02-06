@@ -1,0 +1,35 @@
+metadata:
+  name: disable-amsi-through-registry
+  version: 11.0.0
+  description: The following analytic detects modifications to the Windows registry
+    that disable the Antimalware Scan Interface (AMSI) by setting the "AmsiEnable"
+    value to "0x00000000". This detection leverages data from the Endpoint.Registry
+    data model, specifically monitoring changes to the registry path "*\\SOFTWARE\\Microsoft\\Windows
+    Script\\Settings\\AmsiEnable". Disabling AMSI is significant as it is a common
+    technique used by ransomware, Remote Access Trojans (RATs), and Advanced Persistent
+    Threats (AP
+  author: Teoderick Contreras, Splunk, Steven Dick
+  tags:
+  - ttp
+  - splunk-security-content
+  - ransomware
+  - cisa-aa23-347a
+  - windows-registry-abuse
+  mitre_attack:
+    techniques:
+    - id: T1562.001
+      name: Technique T1562.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/ransomware_ttp/data2/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

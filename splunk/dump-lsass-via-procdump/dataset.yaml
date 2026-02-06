@@ -1,0 +1,47 @@
+metadata:
+  name: dump-lsass-via-procdump
+  version: 15.0.0
+  description: 'The following analytic detects the use of procdump.exe to dump the
+    LSASS
+
+    process, specifically looking for the -mm and -ma command-line arguments. It leverages
+
+    data from Endpoint Detection and Response (EDR) agents, focusing on process names,
+
+    command-line executions, and parent processes. This activity is significant because
+
+    dumping LSASS can expose sensitive credentials, posing a severe security risk.
+    If
+
+    confirmed malicious, an attacker could obtain credentials, escalate privileges,
+
+    and move la'
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - cisa-aa22-257a
+  - hafnium-group
+  - compromised-windows-host
+  mitre_attack:
+    techniques:
+    - id: T1003.001
+      name: Technique T1003.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1003.001/atomic_red_team/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1003.001/atomic_red_team/crowdstrike_falcon.log
+    description: crowdstrike - crowdstrike:events:sensor
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

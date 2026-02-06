@@ -1,0 +1,37 @@
+metadata:
+  name: microsoft-intune-manual-device-management
+  version: 2.0.0
+  description: Microsoft Intune device management configuration policies, scripts
+    & apps are a all tools administrators can use to remotely manage intune managed
+    devices. Instead of waiting for the devices to poll for changes to polciies, the
+    policies can be manually pushed to expidite delivery.  This may be useful in a
+    pinch, it may also be a sign of an impatient attacker trying to speed up the delivery
+    of their payload.  This detection identifies when a device management configuration
+    policy sync events, on-
+  author: Dean Luxton
+  tags:
+  - hunting
+  - splunk-security-content
+  - azure-active-directory-account-takeover
+  mitre_attack:
+    techniques:
+    - id: T1021.007
+      name: Technique T1021.007
+    - id: T1072
+      name: Technique T1072
+    - id: T1529
+      name: Technique T1529
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1072/intune/intune.log
+    description: Azure AD - azure:monitor:activity
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

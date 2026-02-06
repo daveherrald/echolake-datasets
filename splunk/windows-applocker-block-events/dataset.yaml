@@ -1,0 +1,33 @@
+metadata:
+  name: windows-applocker-block-events
+  version: 6.0.0
+  description: The following analytic detects attempts to bypass application restrictions
+    by identifying Windows AppLocker policy violations. It leverages Windows AppLocker
+    event logs, specifically EventCodes 8007, 8004, 8022, 8025, 8029, and 8040, to
+    pinpoint blocked actions. This activity is significant for a SOC as it highlights
+    potential unauthorized application executions, which could indicate malicious
+    intent or policy circumvention. If confirmed malicious, this activity could allow
+    an attacker to execut
+  author: Michael Haag, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - windows-applocker
+  mitre_attack:
+    techniques:
+    - id: T1218
+      name: Technique T1218
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562/applocker/applocker.log
+    description: XmlWinEventLog:Microsoft-Windows-AppLocker/MSI and Script - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

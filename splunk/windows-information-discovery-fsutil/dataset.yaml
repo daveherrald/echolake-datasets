@@ -1,0 +1,36 @@
+metadata:
+  name: windows-information-discovery-fsutil
+  version: 7.0.0
+  description: 'The following analytic identifies the execution of the Windows built-in
+    tool FSUTIL with the "FSINFO" or "Volume" parameters, in order to discover file
+    system and disk information.
+
+    This detection leverages data from Endpoint Detection and Response (EDR) agents,
+    focusing on process execution logs that include command-line details.
+
+    Monitoring this activity is significant because FSUTIL can be abused by adversaries
+    to gather detailed information about the file system, aiding in further exploitation'
+  author: Teoderick Contreras, Nasreddine Bencherchali, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - windows-post-exploitation
+  - prestige-ransomware
+  mitre_attack:
+    techniques:
+    - id: T1082
+      name: Technique T1082
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/winpeas/winpeas_fsutil/fsutil-fsinfo-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,42 @@
+metadata:
+  name: cisco-secure-firewall-intrusion-events-by-threat-activity
+  version: 6.0.0
+  description: 'This analytic detects intrusion events from known threat activity
+    using Cisco Secure Firewall Intrusion Events.
+
+    It leverages Cisco Secure Firewall Threat Defense IntrusionEvent logs to identify
+    cases where one or multiple Snort signatures
+
+    associated with a known threat or threat actor activity have been triggered within
+    a one-hour time window. The detection uses a
+
+    lookup table (cisco_snort_ids_to_threat_mapping) to map Snort signature IDs to
+    known threat actors and their techniques.
+
+    When multipl'
+  author: Bhavin Patel, Nasreddine Bencherchali, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - cisco-secure-firewall-threat-defense-analytics
+  - arcanedoor
+  mitre_attack:
+    techniques:
+    - id: T1041
+      name: Technique T1041
+    - id: T1573.002
+      name: Technique T1573.002
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_secure_firewall_threat_defense/lumma_stealer/lumma_stealer_events.log
+    description: not_applicable - cisco:sfw:estreamer
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

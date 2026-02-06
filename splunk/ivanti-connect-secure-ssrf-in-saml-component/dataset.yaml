@@ -1,0 +1,33 @@
+metadata:
+  name: ivanti-connect-secure-ssrf-in-saml-component
+  version: 5.0.0
+  description: The following analytic identifies POST requests targeting endpoints
+    vulnerable to the SSRF issue (CVE-2024-21893) in Ivanti's products. It leverages
+    the Web data model, focusing on endpoints such as /dana-ws/saml20.ws, /dana-ws/saml.ws,
+    /dana-ws/samlecp.ws, and /dana-na/auth/saml-logout.cgi. The detection filters
+    for POST requests that received an HTTP 200 OK response, indicating successful
+    execution. This activity is significant as it may indicate an attempt to exploit
+    SSRF vulnerabilities, pot
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - ivanti-connect-secure-vpn-vulnerabilities
+  mitre_attack:
+    techniques:
+    - id: T1190
+      name: Technique T1190
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/ivanti/suricata_ivanti_saml.log
+    description: suricata - suricata
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

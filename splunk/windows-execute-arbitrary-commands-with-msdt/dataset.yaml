@@ -1,0 +1,34 @@
+metadata:
+  name: windows-execute-arbitrary-commands-with-msdt
+  version: 11.0.0
+  description: 'The following analytic detects arbitrary command execution using Windows
+    msdt.exe, a Diagnostics Troubleshooting Wizard. It leverages Endpoint Detection
+    and Response (EDR) data to identify instances where msdt.exe is invoked via the
+    ms-msdt:/ protocol handler to retrieve a remote payload. This activity is significant
+    as it can indicate an exploitation attempt leveraging msdt.exe to execute arbitrary
+    commands, potentially leading to unauthorized code execution. If confirmed malicious,
+    this could '
+  author: Michael Haag, Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - compromised-windows-host
+  - microsoft-support-diagnostic-tool-vulnerability-cve-2022-30190
+  mitre_attack:
+    techniques:
+    - id: T1218
+      name: Technique T1218
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566.001/macro/msdt.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,33 @@
+metadata:
+  name: cloud-compute-instance-created-in-previously-unused-region
+  version: 6.0.0
+  description: The following analytic detects the creation of a cloud compute instance
+    in a region that has not been previously used within the last hour. It leverages
+    cloud infrastructure logs and compares the regions of newly created instances
+    against a lookup file of historically used regions. This activity is significant
+    because the creation of instances in new regions can indicate unauthorized or
+    suspicious activity, such as an attacker attempting to evade detection or establish
+    a foothold in a less monit
+  author: David Dorsey, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - cloud-cryptomining
+  mitre_attack:
+    techniques:
+    - id: T1535
+      name: Technique T1535
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/suspicious_behaviour/abnormally_high_cloud_instances_launched/cloudtrail_behavioural_detections.json
+    description: aws_cloudtrail - aws:cloudtrail
+    format: jsonl
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

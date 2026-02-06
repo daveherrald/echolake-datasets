@@ -1,0 +1,34 @@
+metadata:
+  name: windows-service-initiation-on-remote-endpoint
+  version: 8.0.0
+  description: The following analytic detects the execution of `sc.exe` with command-line
+    arguments used to start a Windows Service on a remote endpoint. It leverages data
+    from Endpoint Detection and Response (EDR) agents, focusing on process names and
+    command-line executions. This activity is significant because adversaries may
+    exploit the Service Control Manager for lateral movement and remote code execution.
+    If confirmed malicious, this could allow attackers to execute arbitrary code on
+    remote systems, pote
+  author: Mauricio Velazco, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - active-directory-lateral-movement
+  - cisa-aa23-347a
+  mitre_attack:
+    techniques:
+    - id: T1543.003
+      name: Technique T1543.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1543.003/lateral_movement/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,30 @@
+metadata:
+  name: o365-bec-email-hiding-rule-created
+  version: 4.0.0
+  description: This analytic detects mailbox rule creation, a common technique used
+    in Business Email Compromise. It uses a scoring mechanism to identify a combination
+    of attributes often featured in mailbox rules created by attackers. This may indicate
+    that an attacker has gained access to the account.
+  author: 0xC0FFEEEE, Github Community
+  tags:
+  - ttp
+  - splunk-security-content
+  - office-365-account-takeover
+  mitre_attack:
+    techniques:
+    - id: T1564.008
+      name: Technique T1564.008
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1564.008/o365/o365_suspicious_mailbox_rule.log
+    description: o365 - o365:management:activity
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

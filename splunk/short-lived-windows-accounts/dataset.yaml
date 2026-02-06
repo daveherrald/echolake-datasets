@@ -1,0 +1,44 @@
+metadata:
+  name: short-lived-windows-accounts
+  version: 10.0.0
+  description: The following analytic detects the rapid creation and deletion of Windows
+    accounts within a short time frame of 1 hour. It leverages the "Change" data model
+    in Splunk, specifically monitoring events with result IDs 4720 (account creation)
+    and 4726 (account deletion). This behavior is significant as it may indicate an
+    attacker attempting to create and remove accounts quickly to evade detection or
+    gain unauthorized access. If confirmed malicious, this activity could lead to
+    unauthorized access, pr
+  author: David Dorsey, Bhavin Patel, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - active-directory-lateral-movement
+  - ghostredirector-iis-module-and-rungan-backdoor
+  mitre_attack:
+    techniques:
+    - id: T1078.003
+      name: Technique T1078.003
+    - id: T1136.001
+      name: Technique T1136.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1136.001/atomic_red_team/windows-security.log
+    description: WinEventLog:Security - WinEventLog
+    format: text
+    schema: raw
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1136.001/atomic_red_team/windows-system.log
+    description: WinEventLog:System - WinEventLog
+    format: text
+    schema: raw
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1136.001/atomic_red_team/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

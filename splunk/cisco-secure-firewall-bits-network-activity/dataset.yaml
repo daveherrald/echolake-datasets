@@ -1,0 +1,28 @@
+metadata:
+  name: cisco-secure-firewall-bits-network-activity
+  version: 4.0.0
+  description: The following analytic detects the use of the Background Intelligent
+    Transfer Service (BITS) client application in allowed outbound connections. It
+    leverages logs from Cisco Secure Firewall Threat Defense devices and identifies
+    instances where BITS is used to initiate downloads from non-standard or unexpected
+    domains. While BITS is a legitimate Windows service used for downloading updates,
+    it is also commonly abused by adversaries to stealthily retrieve payloads or tools.
+    This analytic filters o
+  author: Nasreddine Bencherchali, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - cisco-secure-firewall-threat-defense-analytics
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_secure_firewall_threat_defense/connection_event/connection_events.log
+    description: not_applicable - cisco:sfw:estreamer
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

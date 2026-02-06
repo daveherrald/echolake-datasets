@@ -1,0 +1,35 @@
+metadata:
+  name: linux-auditd-dd-file-overwrite
+  version: 5.0.0
+  description: The following analytic detects the use of the 'dd' command to overwrite
+    files on a Linux system. It leverages data from Linux Auditd telemetry, focusing
+    on process execution logs that include command-line details. This activity is
+    significant because adversaries often use the 'dd' command to destroy or irreversibly
+    overwrite files, disrupting system availability and services. If confirmed malicious,
+    this behavior could lead to data destruction, making recovery difficult and potentially
+    causing s
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - industroyer2
+  - data-destruction
+  - compromised-linux-host
+  mitre_attack:
+    techniques:
+    - id: T1485
+      name: Technique T1485
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1485/linux_auditd_dd_overwrite/auditd_proctitle_dd_overwrite.log
+    description: auditd - auditd
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

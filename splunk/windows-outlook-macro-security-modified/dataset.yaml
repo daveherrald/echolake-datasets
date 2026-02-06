@@ -1,0 +1,36 @@
+metadata:
+  name: windows-outlook-macro-security-modified
+  version: 1.0.0
+  description: The following analytic detects the modification of the Windows Registry
+    key "Level" under Outlook Security. This allows macros to execute without warning,
+    which could allow malicious scripts to run without notice. This detection leverages
+    data from the Endpoint.Registry datamodel, specifically looking for the registry
+    value name "Level" with a value of "0x00000001". This activity is significant
+    as it is commonly associated with some malware infections, indicating potential
+    malicious intent to ha
+  author: Raven Tait, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - notdoor-malware
+  - windows-registry-abuse
+  mitre_attack:
+    techniques:
+    - id: T1137
+      name: Technique T1137
+    - id: T1008
+      name: Technique T1008
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/notdoor/macro_security_level/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

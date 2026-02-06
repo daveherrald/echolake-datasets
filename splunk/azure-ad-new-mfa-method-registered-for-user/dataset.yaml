@@ -1,0 +1,35 @@
+metadata:
+  name: azure-ad-new-mfa-method-registered-for-user
+  version: 10.0.0
+  description: The following analytic detects the registration of a new Multi-Factor
+    Authentication (MFA) method for an Azure AD account. It leverages Azure AD AuditLogs
+    to identify when a user registers new security information. This activity is significant
+    because adversaries who gain unauthorized access to an account may add their own
+    MFA method to maintain persistence. If confirmed malicious, this could allow attackers
+    to bypass existing security controls, maintain long-term access, and potentially
+    escalat
+  author: Mauricio Velazco, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - compromised-user-account
+  - azure-active-directory-account-takeover
+  - scattered-lapsus$-hunters
+  mitre_attack:
+    techniques:
+    - id: T1556.006
+      name: Technique T1556.006
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1556.006/azure_ad_new_mfa_method_registered_for_user/azuread.log
+    description: Azure AD - azure:monitor:aad
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

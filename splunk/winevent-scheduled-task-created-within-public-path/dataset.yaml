@@ -1,0 +1,35 @@
+metadata:
+  name: winevent-scheduled-task-created-within-public-path
+  version: 21.0.0
+  description: The following analytic detects the creation of scheduled tasks within
+    user-writable paths using Windows Security EventCode 4698. It identifies tasks
+    registered via schtasks.exe or TaskService that execute commands from directories
+    like Public, ProgramData, Temp, and AppData. This behavior is significant as it
+    may indicate an attempt to establish persistence or execute unauthorized commands.
+    If confirmed malicious, an attacker could maintain long-term access, escalate
+    privileges, or execute arbit
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - data-destruction
+  - winter-vivern
+  - industroyer2
+  mitre_attack:
+    techniques:
+    - id: T1053.005
+      name: Technique T1053.005
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053.005/winevent_scheduled_task_created_to_spawn_shell/windows-xml.log
+    description: XmlWinEventLog:Security - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,34 @@
+metadata:
+  name: windows-default-group-policy-object-modified-with-gpme
+  version: 9.0.0
+  description: The following analytic detects modifications to default Group Policy
+    Objects (GPOs) using the Group Policy Management Editor (GPME). It leverages the
+    Endpoint data model to identify processes where `mmc.exe` executes `gpme.msc`
+    with specific GUIDs related to default GPOs. This activity is significant because
+    default GPOs, such as the `Default Domain Controllers Policy` and `Default Domain
+    Policy`, are critical for enforcing security policies across the domain. If malicious,
+    such modifications co
+  author: Mauricio Velazco, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - active-directory-privilege-escalation
+  - sneaky-active-directory-persistence-tricks
+  mitre_attack:
+    techniques:
+    - id: T1484.001
+      name: Technique T1484.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1484.001/default_domain_policy_modified/windows-security.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

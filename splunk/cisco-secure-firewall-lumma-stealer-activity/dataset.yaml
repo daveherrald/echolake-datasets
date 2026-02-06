@@ -1,0 +1,40 @@
+metadata:
+  name: cisco-secure-firewall-lumma-stealer-activity
+  version: 2.0.0
+  description: "This analytic detects Lumma Stealer activity using Cisco Secure Firewall\
+    \ Intrusion Events. \nIt leverages Cisco Secure Firewall Threat Defense IntrusionEvent\
+    \ logs to identify cases where four of the following Snort signature IDs 64793,\
+    \ 64794, 64797, 64798, 64799, 64800, 64801, 62709, 64167, 64168, 64169, 64796,\
+    \ 62710, 62711, 62712, 62713, 62714, 62715, 62716, 62717, 64812, 64810, 64811\
+    \ occurs in the span of 15 minutes from the same host.\nIf confirmed malicious,\
+    \ this behavior is highly indicative "
+  author: Nasreddine Bencherchali, Splunk, Talos NTDR
+  tags:
+  - ttp
+  - splunk-security-content
+  - cisco-secure-firewall-threat-defense-analytics
+  - lumma-stealer
+  mitre_attack:
+    techniques:
+    - id: T1190
+      name: Technique T1190
+    - id: T1210
+      name: Technique T1210
+    - id: T1027
+      name: Technique T1027
+    - id: T1204
+      name: Technique T1204
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_secure_firewall_threat_defense/lumma_stealer/lumma_stealer_events.log
+    description: not_applicable - cisco:sfw:estreamer
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

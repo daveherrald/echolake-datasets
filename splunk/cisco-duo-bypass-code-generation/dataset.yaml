@@ -1,0 +1,33 @@
+metadata:
+  name: cisco-duo-bypass-code-generation
+  version: 1.0.0
+  description: "The following analytic detects when a Duo user generates a bypass\
+    \ code, which allows them to circumvent multi-factor authentication (2FA) protections.\
+    \ \nIt works by monitoring Duo activity logs for the 'bypass_create' action, renaming\
+    \ the affected object as the user, and aggregating events to identify \ninstances\
+    \ where a bypass code is issued. This behavior is significant for a Security Operations\
+    \ Center (SOC) because generating a bypass code can enable \nattackers, malicious\
+    \ insiders, or unauthori"
+  author: Patrick Bareiss, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - cisco-duo-suspicious-activity
+  mitre_attack:
+    techniques:
+    - id: T1556
+      name: Technique T1556
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1556/cisco_duo_bypass_code/cisco_duo_activity.json
+    description: duo - cisco:duo:administrator
+    format: jsonl
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

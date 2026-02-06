@@ -1,0 +1,35 @@
+metadata:
+  name: vbscript-execution-using-wscript-app
+  version: 8.0.0
+  description: The following analytic detects the execution of VBScript using the
+    wscript.exe application. It leverages data from Endpoint Detection and Response
+    (EDR) agents, focusing on process and command-line telemetry. This activity is
+    significant because wscript.exe is typically not used to execute VBScript, which
+    is usually associated with cscript.exe. This deviation can indicate an attempt
+    to evade traditional process monitoring and antivirus defenses. If confirmed malicious,
+    this technique could allow
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - fin7
+  - remcos
+  - asyncrat
+  mitre_attack:
+    techniques:
+    - id: T1059.005
+      name: Technique T1059.005
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.005/vbs_wscript/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

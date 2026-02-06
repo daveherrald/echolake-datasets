@@ -1,0 +1,35 @@
+metadata:
+  name: linux-auditd-data-destruction-command
+  version: 5.0.0
+  description: The following analytic detects the execution of a Unix shell command
+    designed to wipe root directories on a Linux host. It leverages data from Linux
+    Auditd, focusing on the 'rm' command with force recursive deletion and the '--no-preserve-root'
+    option. This activity is significant as it indicates potential data destruction
+    attempts, often associated with malware like Awfulshred. If confirmed malicious,
+    this behavior could lead to severe data loss, system instability, and compromised
+    integrity of
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - data-destruction
+  - awfulshred
+  - compromised-linux-host
+  mitre_attack:
+    techniques:
+    - id: T1485
+      name: Technique T1485
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1485/linux_auditd_no_preserve_root/auditd_proctitle_rm_rf.log
+    description: auditd - auditd
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

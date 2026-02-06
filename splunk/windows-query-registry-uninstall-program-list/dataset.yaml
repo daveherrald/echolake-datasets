@@ -1,0 +1,35 @@
+metadata:
+  name: windows-query-registry-uninstall-program-list
+  version: 7.0.0
+  description: The following analytic detects an access request on the uninstall registry
+    key. It leverages Windows Security Event logs, specifically event code 4663. This
+    activity is significant because adversaries or malware can exploit this key to
+    gather information about installed applications, aiding in further attacks. If
+    confirmed malicious, this behavior could allow attackers to map out installed
+    software, potentially identifying vulnerabilities or software to exploit, leading
+    to further system comprom
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - stealc-stealer
+  - redline-stealer
+  - meduza-stealer
+  mitre_attack:
+    techniques:
+    - id: T1012
+      name: Technique T1012
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/redline/recon_registry/recon-reg-redline-security-xml.log
+    description: XmlWinEventLog:Security - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

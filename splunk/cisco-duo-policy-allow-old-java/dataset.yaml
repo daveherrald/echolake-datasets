@@ -1,0 +1,33 @@
+metadata:
+  name: cisco-duo-policy-allow-old-java
+  version: 1.0.0
+  description: "The following analytic detects when a Duo policy is created or updated\
+    \ to allow the use of outdated Java versions, which can introduce significant\
+    \ \nsecurity risks. It works by searching Duo administrator activity logs for\
+    \ policy creation or update actions where the policy explicitly sets \n'java_remediation'\
+    \ to 'no remediation', indicating that no restrictions are enforced against old\
+    \ Java. The analytic aggregates relevant details \nsuch as the user, admin email,\
+    \ and action context for further inv"
+  author: Patrick Bareiss, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - cisco-duo-suspicious-activity
+  mitre_attack:
+    techniques:
+    - id: T1556
+      name: Technique T1556
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1556/cisco_duo_policy_allow_old_flash_and_java/cisco_duo_administrator.json
+    description: duo - cisco:duo:administrator
+    format: jsonl
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

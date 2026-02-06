@@ -1,0 +1,51 @@
+metadata:
+  name: windows-office-product-spawned-uncommon-process
+  version: 6.0.0
+  description: The following analytic detects a Microsoft Office product spawning
+    uncommon processes. This detection leverages data from Endpoint Detection and
+    Response (EDR) agents, focusing on process creation events where Office applications
+    are the parent process. This activity is significant as it may indicate an attempt
+    of a malicious macro execution or exploitation of an unknown vulnerability in
+    an office product, in order to bypass security controls. If confirmed malicious,
+    this behavior could allow an
+  author: Michael Haag, Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - agenttesla
+  - azorult
+  - compromised-windows-host
+  mitre_attack:
+    techniques:
+    - id: T1566.001
+      name: Technique T1566.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566.001/macro/windows-sysmon_macros.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566.001/datasets/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/icedid/phish_icedid/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566.002/atomic_red_team/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/trickbot/spear_phish/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

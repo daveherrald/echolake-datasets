@@ -1,0 +1,35 @@
+metadata:
+  name: detect-rundll32-inline-hta-execution
+  version: 9.0.0
+  description: The following analytic detects the execution of "rundll32.exe" with
+    inline protocol handlers such as "JavaScript", "VBScript", and "About". This behavior
+    is identified using Endpoint Detection and Response (EDR) telemetry, focusing
+    on command-line arguments. This activity is significant as it is often associated
+    with fileless malware or application whitelisting bypass techniques. If confirmed
+    malicious, this could allow an attacker to execute arbitrary code, bypass security
+    controls, and maintai
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - suspicious-mshta-activity
+  - nobelium-group
+  - living-off-the-land
+  mitre_attack:
+    techniques:
+    - id: T1218.005
+      name: Technique T1218.005
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218.005/atomic_red_team/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

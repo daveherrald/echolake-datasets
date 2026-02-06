@@ -1,0 +1,47 @@
+metadata:
+  name: shai-hulud-2-exfiltration-artifact-files
+  version: 1.0.0
+  description: 'Detects creation of exfiltration artifact files associated with Shai-Hulud
+    2.0 npm supply
+
+    chain malware. The malware creates cloud.json, contents.json, environment.json,
+    truffleSecrets.json,
+
+    and actionsSecrets.json files containing harvested credentials from AWS, Azure,
+    GCP, GitHub secrets,
+
+    and environment variables. These files are staged before being pushed to attacker-controlled
+    repositories.
+
+    '
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - npm-supply-chain-compromise
+  mitre_attack:
+    techniques:
+    - id: T1074.001
+      name: Technique T1074.001
+    - id: T1552.001
+      name: Technique T1552.001
+    - id: T1195.002
+      name: Technique T1195.002
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1195.001/npm/shai_hulud_workflow_sysmon.log
+    description: Syslog:Linux-Sysmon/Operational - sysmon:linux
+    format: text
+    schema: raw
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1195.001/npm/windows_workflow_sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

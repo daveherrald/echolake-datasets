@@ -1,0 +1,33 @@
+metadata:
+  name: windows-browser-process-launched-with-unusual-flags
+  version: 1.0.0
+  description: 'The following analytic detects the use of unusual browser flags, specifically
+    --mute-audio and --do-not-elevate, which deviate from standard browser launch
+    behavior. These flags may indicate automated scripts, testing environments, or
+    attempts to modify browser functionality for silent operation or restricted privilege
+    execution. Detection focuses on non-standard launch parameters, unexpected process
+    behavior, or deviations from baseline configurations. Monitoring such flag usage
+    helps identify '
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - castle-rat
+  mitre_attack:
+    techniques:
+    - id: T1185
+      name: Technique T1185
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1185/browser_unusual_flag/castle_chrome_shell32.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

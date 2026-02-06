@@ -1,0 +1,37 @@
+metadata:
+  name: recon-using-wmi-class
+  version: 11.0.0
+  description: The following analytic detects suspicious PowerShell activity via EventCode
+    4104, where WMI performs event queries to gather information on running processes
+    or services. This detection leverages PowerShell Script Block Logging to identify
+    specific WMI queries targeting system information classes like Win32_Bios and
+    Win32_OperatingSystem. This activity is significant as it often indicates reconnaissance
+    efforts by an adversary to profile the compromised machine. If confirmed malicious,
+    the attac
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - hermetic-wiper
+  - quasar-rat
+  - malicious-powershell
+  mitre_attack:
+    techniques:
+    - id: T1592
+      name: Technique T1592
+    - id: T1059.001
+      name: Technique T1059.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/powershell_script_block_logging/reconusingwmi.log
+    description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

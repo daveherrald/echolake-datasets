@@ -1,0 +1,33 @@
+metadata:
+  name: cisco-duo-set-user-status-to-bypass-2fa
+  version: 1.0.0
+  description: "The following analytic detects instances where a Duo user's status\
+    \ is changed to \"Bypass\" for 2FA, specifically when the \nprevious status was\
+    \ \"Active.\" This behavior is identified by analyzing Duo activity logs for user\
+    \ update actions, extracting \nthe status transitions, and filtering for cases\
+    \ where a user is set to bypass multi-factor authentication. This is a critical\
+    \ \nevent for a Security Operations Center (SOC) to monitor, as bypassing 2FA\
+    \ significantly weakens account security and may \nind"
+  author: Patrick Bareiss, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - cisco-duo-suspicious-activity
+  mitre_attack:
+    techniques:
+    - id: T1556
+      name: Technique T1556
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1556/cisco_duo_bypass_2FA/cisco_duo_activity.json
+    description: duo - cisco:duo:activity
+    format: jsonl
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

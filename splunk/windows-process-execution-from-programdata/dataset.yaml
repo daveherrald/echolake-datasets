@@ -1,0 +1,35 @@
+metadata:
+  name: windows-process-execution-from-programdata
+  version: 6.0.0
+  description: The following analytic identifies processes running from file paths
+    within the ProgramData directory, a common location abused by adversaries for
+    executing malicious code while evading detection. Threat actors often drop and
+    execute payloads from this directory to bypass security controls, as it typically
+    has write permissions for standard users. While this behavior can indicate malware
+    execution or persistence techniques, it is important to note that some legitimate
+    software, installers, and up
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - stealc-stealer
+  - snappybee
+  - xworm
+  mitre_attack:
+    techniques:
+    - id: T1036.005
+      name: Technique T1036.005
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1036.005/process_in_programdata/exec_programdata.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

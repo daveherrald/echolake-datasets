@@ -1,0 +1,35 @@
+metadata:
+  name: scheduled-task-creation-on-remote-endpoint-using-at
+  version: 9.0.0
+  description: The following analytic detects the creation of scheduled tasks on remote
+    Windows endpoints using the at.exe command. This detection leverages Endpoint
+    Detection and Response (EDR) telemetry, focusing on process creation events involving
+    at.exe with remote command-line arguments. Identifying this activity is significant
+    for a SOC as it may indicate lateral movement or remote code execution attempts
+    by an attacker. If confirmed malicious, this activity could lead to unauthorized
+    access, persistenc
+  author: Mauricio Velazco, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - active-directory-lateral-movement
+  - living-off-the-land
+  - scheduled-tasks
+  mitre_attack:
+    techniques:
+    - id: T1053.002
+      name: Technique T1053.002
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053.002/lateral_movement/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

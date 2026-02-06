@@ -1,0 +1,36 @@
+metadata:
+  name: sdelete-application-execution
+  version: 9.0.0
+  description: The following analytic detects the execution of the sdelete.exe application,
+    a Sysinternals tool often used by adversaries to securely delete files and remove
+    forensic evidence from a targeted host. This detection leverages data from Endpoint
+    Detection and Response (EDR) agents, focusing on process execution logs. Monitoring
+    this activity is crucial as sdelete.exe is not commonly used in regular operations
+    and its presence may indicate an attempt to cover malicious activities. If confirmed
+    malic
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - masquerading---rename-system-utilities
+  - scattered-spider
+  mitre_attack:
+    techniques:
+    - id: T1070.004
+      name: Technique T1070.004
+    - id: T1485
+      name: Technique T1485
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1485/sdelete/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

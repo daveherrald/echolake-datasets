@@ -1,0 +1,47 @@
+metadata:
+  name: possible-lateral-movement-powershell-spawn
+  version: 12.0.0
+  description: The following analytic detects the spawning of a PowerShell process
+    as a child or grandchild of commonly abused processes like services.exe, wmiprvse.exe,
+    svchost.exe, wsmprovhost.exe, and mmc.exe. It leverages data from Endpoint Detection
+    and Response (EDR) agents, focusing on process and parent process names, as well
+    as command-line executions. This activity is significant as it often indicates
+    lateral movement or remote code execution attempts by adversaries. If confirmed
+    malicious, this beha
+  author: Mauricio Velazco, Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - active-directory-lateral-movement
+  - malicious-powershell
+  - hermetic-wiper
+  mitre_attack:
+    techniques:
+    - id: T1021.003
+      name: Technique T1021.003
+    - id: T1021.006
+      name: Technique T1021.006
+    - id: T1047
+      name: Technique T1047
+    - id: T1053.005
+      name: Technique T1053.005
+    - id: T1059.001
+      name: Technique T1059.001
+    - id: T1218.014
+      name: Technique T1218.014
+    - id: T1543.003
+      name: Technique T1543.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1543.003/lateral_movement_powershell/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,33 @@
+metadata:
+  name: aws-ecr-container-scanning-findings-high
+  version: 8.0.0
+  description: The following analytic identifies high-severity findings from AWS Elastic
+    Container Registry (ECR) image scans. It detects these activities by analyzing
+    AWS CloudTrail logs for the DescribeImageScanFindings event, specifically filtering
+    for findings with a high severity level. This activity is significant for a SOC
+    because high-severity vulnerabilities in container images can lead to potential
+    exploitation if not addressed. If confirmed malicious, attackers could exploit
+    these vulnerabilities to
+  author: Patrick Bareiss, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - dev-sec-ops
+  mitre_attack:
+    techniques:
+    - id: T1204.003
+      name: Technique T1204.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1204.003/aws_ecr_image_scanning/aws_ecr_scanning_findings_events.json
+    description: aws_cloudtrail - aws:cloudtrail
+    format: jsonl
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

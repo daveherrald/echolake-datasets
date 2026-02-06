@@ -1,0 +1,35 @@
+metadata:
+  name: detect-html-help-spawn-child-process
+  version: 12.0.0
+  description: The following analytic detects the execution of hh.exe (HTML Help)
+    spawning a child process, indicating the use of a Compiled HTML Help (CHM) file
+    to execute Windows script code. This detection leverages data from Endpoint Detection
+    and Response (EDR) agents, focusing on process creation events where hh.exe is
+    the parent process. This activity is significant as it may indicate an attempt
+    to execute malicious scripts via CHM files, a known technique for bypassing security
+    controls. If confirmed m
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - suspicious-compiled-html-activity
+  - agenttesla
+  - living-off-the-land
+  mitre_attack:
+    techniques:
+    - id: T1218.001
+      name: Technique T1218.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218.001/atomic_red_team/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,35 @@
+metadata:
+  name: windows-protocol-tunneling-with-plink
+  version: 9.0.0
+  description: This analytic detects the use of Plink (including renamed versions
+    like pvhost.exe) for protocol tunneling, which may be used for egress or lateral
+    movement within an organization. It identifies specific command-line options (-R,
+    -L, -D, -l, -N, -P, -pw) commonly used for port forwarding and tunneling by analyzing
+    process execution logs from Endpoint Detection and Response (EDR) agents. This
+    activity is significant as it may indicate an attempt to bypass network security
+    controls or establish un
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - cisa-aa22-257a
+  mitre_attack:
+    techniques:
+    - id: T1572
+      name: Technique T1572
+    - id: T1021.004
+      name: Technique T1021.004
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1572/plink/plink-windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

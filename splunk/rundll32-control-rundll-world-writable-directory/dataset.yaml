@@ -1,0 +1,35 @@
+metadata:
+  name: rundll32-control-rundll-world-writable-directory
+  version: 10.0.0
+  description: The following analytic detects the execution of rundll32.exe with the
+    `Control_RunDLL` command, loading files from world-writable directories such as
+    windows\temp, programdata, or appdata. This detection leverages Endpoint Detection
+    and Response (EDR) telemetry, focusing on process command-line data and specific
+    directory paths. This activity is significant as it may indicate an attempt to
+    exploit CVE-2021-40444 or similar vulnerabilities, allowing attackers to execute
+    arbitrary code. If confirm
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - microsoft-mshtml-remote-code-execution-cve-2021-40444
+  - suspicious-rundll32-activity
+  - living-off-the-land
+  mitre_attack:
+    techniques:
+    - id: T1218.011
+      name: Technique T1218.011
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218.002/atomic_red_team/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

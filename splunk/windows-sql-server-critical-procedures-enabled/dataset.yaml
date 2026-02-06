@@ -1,0 +1,33 @@
+metadata:
+  name: windows-sql-server-critical-procedures-enabled
+  version: 3.0.0
+  description: This detection identifies when critical SQL Server configuration options
+    are modified, including "Ad Hoc Distributed Queries", "external scripts enabled",
+    "Ole Automation Procedures", "clr enabled", and "clr strict security". These features
+    can be abused by attackers for various malicious purposes - Ad Hoc Distributed
+    Queries enables Active Directory reconnaissance through ADSI provider, external
+    scripts and Ole Automation allow execution of arbitrary code, and CLR features
+    can be used to run cu
+  author: Michael Haag, Splunk, sidoyle from Splunk Community
+  tags:
+  - ttp
+  - splunk-security-content
+  - sql-server-abuse
+  mitre_attack:
+    techniques:
+    - id: T1505.001
+      name: Technique T1505.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1505.001/simulation/adhocdq_windows_application.log
+    description: XmlWinEventLog:Application - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

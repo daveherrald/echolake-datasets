@@ -1,0 +1,33 @@
+metadata:
+  name: windows-sip-provider-inventory
+  version: 5.0.0
+  description: The following analytic identifies all SIP (Subject Interface Package)
+    providers on a Windows system using PowerShell scripted inputs. It detects SIP
+    providers by capturing DLL paths from relevant events. This activity is significant
+    because malicious SIP providers can be used to bypass trust controls, potentially
+    allowing unauthorized code execution. If confirmed malicious, this activity could
+    enable attackers to subvert system integrity, leading to unauthorized access or
+    persistent threats with
+  author: Michael Haag, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - subvert-trust-controls-sip-and-trust-provider-hijacking
+  mitre_attack:
+    techniques:
+    - id: T1553.003
+      name: Technique T1553.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1553.003/sip/sip_inventory.log
+    description: powershell://SubjectInterfacePackage - PwSh:SubjectInterfacePackage
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

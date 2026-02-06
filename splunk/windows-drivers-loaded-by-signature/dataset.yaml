@@ -1,0 +1,37 @@
+metadata:
+  name: windows-drivers-loaded-by-signature
+  version: 6.0.0
+  description: The following analytic identifies all drivers being loaded on Windows
+    systems using Sysmon EventCode 6 (Driver Load). It leverages fields such as driver
+    path, signature status, and hash to detect potentially suspicious drivers. This
+    activity is significant for a SOC as malicious drivers can be used to gain kernel-level
+    access, bypass security controls, or persist in the environment. If confirmed
+    malicious, this activity could allow an attacker to execute arbitrary code with
+    high privileges, lead
+  author: Michael Haag, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - windows-drivers
+  - cisa-aa22-320a
+  - agenttesla
+  mitre_attack:
+    techniques:
+    - id: T1014
+      name: Technique T1014
+    - id: T1068
+      name: Technique T1068
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1014/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

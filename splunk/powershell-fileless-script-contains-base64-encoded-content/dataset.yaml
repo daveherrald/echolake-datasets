@@ -1,0 +1,37 @@
+metadata:
+  name: powershell-fileless-script-contains-base64-encoded-content
+  version: 15.0.0
+  description: The following analytic detects the execution of PowerShell scripts
+    containing Base64 encoded content, specifically identifying the use of `FromBase64String`.
+    It leverages PowerShell Script Block Logging (EventCode=4104) to capture and analyze
+    the full command sent to PowerShell. This activity is significant as Base64 encoding
+    is often used by attackers to obfuscate malicious payloads, making it harder to
+    detect. If confirmed malicious, this could lead to code execution, allowing attackers
+    to run
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - winter-vivern
+  - malicious-powershell
+  - medusa-ransomware
+  mitre_attack:
+    techniques:
+    - id: T1027
+      name: Technique T1027
+    - id: T1059.001
+      name: Technique T1059.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/powershell_script_block_logging/frombase64string.log
+    description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

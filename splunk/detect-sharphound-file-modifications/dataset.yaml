@@ -1,0 +1,43 @@
+metadata:
+  name: detect-sharphound-file-modifications
+  version: 9.0.0
+  description: The following analytic detects the creation of files typically associated
+    with SharpHound, a reconnaissance tool used for gathering domain and trust data.
+    It leverages file modification events from the Endpoint.Filesystem data model,
+    focusing on default file naming patterns like `*_BloodHound.zip` and various JSON
+    files. This activity is significant as it indicates potential domain enumeration,
+    which is a precursor to more targeted attacks. If confirmed malicious, an attacker
+    could gain detailed
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - windows-discovery-techniques
+  - ransomware
+  - blacksuit-ransomware
+  mitre_attack:
+    techniques:
+    - id: T1069.001
+      name: Technique T1069.001
+    - id: T1069.002
+      name: Technique T1069.002
+    - id: T1087.001
+      name: Technique T1087.001
+    - id: T1087.002
+      name: Technique T1087.002
+    - id: T1482
+      name: Technique T1482
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/sharphound/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

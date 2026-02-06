@@ -1,0 +1,33 @@
+metadata:
+  name: gsuite-email-suspicious-subject-with-attachment
+  version: 6.0.0
+  description: 'The following analytic identifies Gsuite emails with suspicious subjects
+    and attachments commonly used in spear phishing attacks. It leverages Gsuite email
+    logs, focusing on specific keywords in the subject line and known malicious file
+    types in attachments. This activity is significant for a SOC as spear phishing
+    is a prevalent method for initial compromise, often leading to further malicious
+    actions. If confirmed malicious, this activity could result in unauthorized access,
+    data exfiltration, '
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - dev-sec-ops
+  mitre_attack:
+    techniques:
+    - id: T1566.001
+      name: Technique T1566.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566.001/gsuite_susp_subj/gsuite_susp_subj_attach.log
+    description: http:gsuite - gsuite:gmail:bigquery
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

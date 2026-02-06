@@ -1,0 +1,38 @@
+metadata:
+  name: cisco-nvm-suspicious-download-from-file-sharing-website
+  version: 3.0.0
+  description: 'This analytic detects suspicious downloads from common file sharing
+    and content delivery platforms using known living-off-the-land binaries (LOLBins)
+
+    such as ''curl.exe'', ''certutil.exe'', ''msiexec.exe'', ''powershell.exe'', ''wmic.exe'',
+    and others.
+
+    It leverages Cisco Network Visibility Module logs to correlate network flow activity
+    with process context, including command-line arguments, process path,
+
+    and parent process information. These tools are often abused by adversaries and
+    malware to retrieve pa'
+  author: Nasreddine Bencherchali, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - apt37-rustonotto-and-fadestealer
+  - cisco-network-visibility-module-analytics
+  mitre_attack:
+    techniques:
+    - id: T1197
+      name: Technique T1197
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_network_visibility_module/cisco_nvm_flowdata/nvm_flowdata.log
+    description: not_applicable - cisco:nvm:flowdata
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

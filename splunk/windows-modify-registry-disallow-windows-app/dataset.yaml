@@ -1,0 +1,33 @@
+metadata:
+  name: windows-modify-registry-disallow-windows-app
+  version: 8.0.0
+  description: The following analytic detects modifications to the Windows registry
+    aimed at preventing the execution of specific computer programs. It leverages
+    data from the Endpoint.Registry datamodel, focusing on changes to the registry
+    path "*\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\DisallowRun*"
+    with a value of "0x00000001". This activity is significant as it can indicate
+    an attempt to disable security tools, a tactic used by malware like Azorult. If
+    confirmed malicious, this c
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - azorult
+  mitre_attack:
+    techniques:
+    - id: T1112
+      name: Technique T1112
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/azorult/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,33 @@
+metadata:
+  name: windows-process-with-namedpipe-commandline
+  version: 6.0.0
+  description: 'The following analytic detects processes with command lines containing
+    named pipes. It leverages data from Endpoint Detection and Response (EDR) agents,
+    focusing on process command-line executions. This behavior is significant as it
+    is often used by adversaries, such as those behind the Olympic Destroyer malware,
+    for inter-process communication post-injection, aiding in defense evasion and
+    privilege escalation. If confirmed malicious, this activity could allow attackers
+    to maintain persistence, '
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - windows-defense-evasion-tactics
+  mitre_attack:
+    techniques:
+    - id: T1055
+      name: Technique T1055
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/olympic_destroyer/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

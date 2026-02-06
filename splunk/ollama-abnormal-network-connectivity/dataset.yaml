@@ -1,0 +1,31 @@
+metadata:
+  name: ollama-abnormal-network-connectivity
+  version: 1.0.0
+  description: Detects abnormal network activity and connectivity issues in Ollama
+    including non-localhost API access attempts and warning-level network errors such
+    as DNS lookup failures, TCP connection issues, or host resolution problems that
+    may indicate network-based attacks, unauthorized access attempts, or infrastructure
+    reconnaissance activity.
+  author: Rod Soto
+  tags:
+  - anomaly
+  - splunk-security-content
+  - suspicious-ollama-activities
+  mitre_attack:
+    techniques:
+    - id: T1571
+      name: Technique T1571
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/ollama/app.log
+    description: app.log - ollama:server
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

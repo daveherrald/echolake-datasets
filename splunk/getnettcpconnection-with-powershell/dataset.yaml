@@ -1,0 +1,33 @@
+metadata:
+  name: getnettcpconnection-with-powershell
+  version: 6.0.0
+  description: The following analytic identifies the execution of `powershell.exe`
+    with the `Get-NetTcpConnection` command, which lists current TCP connections on
+    a system. This detection leverages data from Endpoint Detection and Response (EDR)
+    agents, focusing on process names and command-line executions. Monitoring this
+    activity is significant as it may indicate an adversary or Red Team performing
+    network reconnaissance or situational awareness. If confirmed malicious, this
+    activity could allow attackers to
+  author: Mauricio Velazco, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - active-directory-discovery
+  mitre_attack:
+    techniques:
+    - id: T1049
+      name: Technique T1049
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1049/AD_discovery/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,33 @@
+metadata:
+  name: cisco-isovalent-curl-execution-with-insecure-flags
+  version: 1.0.0
+  description: The following analytic detects the execution of curl commands with
+    insecure flags within the Cisco Isovalent environment. It identifies this activity
+    by monitoring process execution logs for curl commands that use the -k or --insecure
+    flags. This behavior is significant for a SOC as it could allow an attacker to
+    bypass SSL/TLS verification, potentially exposing the Kubernetes infrastructure
+    to man-in-the-middle attacks. If confirmed malicious, this activity could lead
+    to data interception, servi
+  author: Bhavin Patel, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - cisco-isovalent-suspicious-activity
+  mitre_attack:
+    techniques:
+    - id: T1105
+      name: Technique T1105
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_isovalent/cisco_isovalent.log
+    description: not_applicable - cisco:isovalent:processExec
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

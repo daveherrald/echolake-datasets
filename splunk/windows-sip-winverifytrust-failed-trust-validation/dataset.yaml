@@ -1,0 +1,33 @@
+metadata:
+  name: windows-sip-winverifytrust-failed-trust-validation
+  version: 5.0.0
+  description: 'The following analytic detects failed trust validation attempts using
+    Windows Event Log - CAPI2 (CryptoAPI 2). It specifically triggers on EventID 81,
+    which indicates that "The digital signature of the object did not verify." This
+    detection leverages the CAPI2 Operational log to identify instances where digital
+    signatures fail to validate. Monitoring this activity is crucial as it can indicate
+    attempts to execute untrusted or potentially malicious binaries. If confirmed
+    malicious, this activity '
+  author: Michael Haag, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - subvert-trust-controls-sip-and-trust-provider-hijacking
+  mitre_attack:
+    techniques:
+    - id: T1553.003
+      name: Technique T1553.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1553.003/sip/capi2-operational.log
+    description: XmlWinEventLog:Microsoft-Windows-CAPI2/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

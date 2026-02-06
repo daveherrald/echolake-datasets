@@ -1,0 +1,34 @@
+metadata:
+  name: detect-wmi-event-subscription-persistence
+  version: 8.0.0
+  description: The following analytic identifies the creation of WMI Event Subscriptions,
+    which can be used to establish persistence or perform privilege escalation. It
+    detects EventID 19 (EventFilter creation), EventID 20 (EventConsumer creation),
+    and EventID 21 (FilterToConsumerBinding creation) from Sysmon logs. This activity
+    is significant because WMI Event Subscriptions can execute code with elevated
+    SYSTEM privileges, making it a powerful persistence mechanism. If confirmed malicious,
+    an attacker could m
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - suspicious-wmi-use
+  - hellcat-ransomware
+  mitre_attack:
+    techniques:
+    - id: T1546.003
+      name: Technique T1546.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1546.003/atomic_red_team/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

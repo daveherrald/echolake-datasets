@@ -1,0 +1,35 @@
+metadata:
+  name: windows-firewall-rule-deletion
+  version: 3.0.0
+  description: This detection identifies instances where a Windows Firewall rule has
+    been deleted, potentially exposing the system to security risks. Unauthorized
+    removal of firewall rules can indicate an attacker attempting to bypass security
+    controls or malware disabling protections for persistence and command-and-control
+    communication. The event logs details such as the deleted rule name, protocol,
+    port, and the user responsible for the action. Security teams should monitor for
+    unexpected deletions, correla
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - shrinklocker
+  - medusa-ransomware
+  - netsupport-rmm-tool-abuse
+  mitre_attack:
+    techniques:
+    - id: T1562.004
+      name: Technique T1562.004
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.004/firewall_win_event/delete_rule/MPSSVC_Rule-Level_Policy_Change-4948.log
+    description: XmlWinEventLog:Security - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

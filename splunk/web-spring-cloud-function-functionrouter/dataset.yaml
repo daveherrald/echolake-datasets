@@ -1,0 +1,35 @@
+metadata:
+  name: web-spring-cloud-function-functionrouter
+  version: 5.0.0
+  description: The following analytic identifies HTTP POST requests to the Spring
+    Cloud Function endpoint containing "functionRouter" in the URL. It leverages the
+    Web data model to detect these requests based on specific fields such as http_method,
+    url, and http_user_agent. This activity is significant because it targets CVE-2022-22963,
+    a known vulnerability in Spring Cloud Function, which has multiple proof-of-concept
+    exploits available. If confirmed malicious, this activity could allow attackers
+    to execute a
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - spring4shell-cve-2022-22965
+  mitre_attack:
+    techniques:
+    - id: T1190
+      name: Technique T1190
+    - id: T1133
+      name: Technique T1133
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/spring4shell/all_functionrouter_http_streams.log
+    description: stream:http - stream:http
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

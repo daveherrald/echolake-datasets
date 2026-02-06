@@ -1,0 +1,33 @@
+metadata:
+  name: windows-steal-authentication-certificates-certificate-issued
+  version: 5.0.0
+  description: The following analytic identifies the issuance of a new certificate
+    by Certificate Services - AD CS, detected via Event ID 4887. This event logs the
+    requester user context, DNS hostname of the requesting machine, and the request
+    time. Monitoring this activity is crucial as it can indicate potential misuse
+    of authentication certificates. If confirmed malicious, an attacker could use
+    the issued certificate to impersonate users, escalate privileges, or maintain
+    persistence within the environment. T
+  author: Michael Haag, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - windows-certificate-services
+  mitre_attack:
+    techniques:
+    - id: T1649
+      name: Technique T1649
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1649/atomic_red_team/4887_windows-security.log
+    description: XmlWinEventLog:Security - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

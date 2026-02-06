@@ -1,0 +1,33 @@
+metadata:
+  name: net-profiler-uac-bypass
+  version: 8.0.0
+  description: 'The following analytic detects modifications to the registry aimed
+    at bypassing the User Account Control (UAC) feature in Windows. It identifies
+    changes to the .NET COR_PROFILER_PATH registry key, which can be exploited to
+    load a malicious DLL via mmc.exe. This detection leverages data from the Endpoint.Registry
+    datamodel, focusing on specific registry paths and values. Monitoring this activity
+    is crucial as it can indicate an attempt to escalate privileges or persist within
+    the environment. If '
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - windows-defense-evasion-tactics
+  mitre_attack:
+    techniques:
+    - id: T1548.002
+      name: Technique T1548.002
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1548/uac_bypass/windows-sysmon2.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

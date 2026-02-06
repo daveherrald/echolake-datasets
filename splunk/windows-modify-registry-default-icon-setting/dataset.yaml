@@ -1,0 +1,33 @@
+metadata:
+  name: windows-modify-registry-default-icon-setting
+  version: 8.0.0
+  description: 'The following analytic detects suspicious modifications to the Windows
+    registry''s default icon settings, a technique associated with Lockbit ransomware.
+    It leverages data from the Endpoint Registry data model, focusing on changes to
+    registry paths under "*HKCR\\*\\defaultIcon\\(Default)*". This activity is significant
+    as it is uncommon for normal users to modify these settings, and such changes
+    can indicate ransomware infection or other malware. If confirmed malicious, this
+    could lead to system '
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - lockbit-ransomware
+  mitre_attack:
+    techniques:
+    - id: T1112
+      name: Technique T1112
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/lockbit_ransomware/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

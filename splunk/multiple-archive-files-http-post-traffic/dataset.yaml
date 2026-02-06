@@ -1,0 +1,35 @@
+metadata:
+  name: multiple-archive-files-http-post-traffic
+  version: 9.0.0
+  description: "The following analytic detects the high-frequency exfiltration of\
+    \ archive files via HTTP POST requests. It leverages HTTP stream logs to identify\
+    \ specific archive file headers within the request body. This activity is significant\
+    \ as it often indicates data exfiltration by APTs or trojan spyware after data\
+    \ collection. If confirmed malicious, this behavior could lead to the unauthorized\
+    \ transfer of sensitive data to an attacker\u2019s command and control server,\
+    \ potentially resulting in severe data bre"
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - data-exfiltration
+  - command-and-control
+  - apt37-rustonotto-and-fadestealer
+  mitre_attack:
+    techniques:
+    - id: T1048.003
+      name: Technique T1048.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1048.003/archive_http_post/stream_http_events.log
+    description: stream - stream:http
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

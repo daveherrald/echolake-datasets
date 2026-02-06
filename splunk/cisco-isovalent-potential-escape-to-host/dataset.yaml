@@ -1,0 +1,34 @@
+metadata:
+  name: cisco-isovalent-potential-escape-to-host
+  version: 2.0.0
+  description: This analytic detects potential container escape or reconnaissance
+    attempts by monitoring for the rapid execution of multiple suspicious Linux commands
+    (nsenter, mount, ps aux, and ls) within a short time window. The search aggregates
+    process execution logs into 5-minute buckets and identifies when two or more distinct
+    commands occur in quick succession. This behavior is noteworthy because attackers
+    often chain these commands together to pivot from a container into the host, enumerate
+    processes,
+  author: Bhavin Patel, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - cisco-isovalent-suspicious-activity
+  - voidlink-cloud-native-linux-malware
+  mitre_attack:
+    techniques:
+    - id: T1611
+      name: Technique T1611
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1611/cisco_isovalent_k8_escape/cisco_isovalent.log
+    description: not_applicable - cisco:isovalent:processExec
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

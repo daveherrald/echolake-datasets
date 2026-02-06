@@ -1,0 +1,33 @@
+metadata:
+  name: aws-new-mfa-method-registered-for-user
+  version: 8.0.0
+  description: The following analytic detects the registration of a new Multi-Factor
+    Authentication (MFA) method for an AWS account. It leverages AWS CloudTrail logs
+    to identify the `CreateVirtualMFADevice` event. This activity is significant because
+    adversaries who gain unauthorized access to an AWS account may register a new
+    MFA method to maintain persistence. If confirmed malicious, this could allow attackers
+    to secure their access, making it difficult to detect and remove their presence,
+    potentially leadin
+  author: Bhavin Patel, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - aws-identity-and-access-management-account-takeover
+  mitre_attack:
+    techniques:
+    - id: T1556.006
+      name: Technique T1556.006
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1556.006/aws_new_mfa_method_registered_for_user/cloudtrail.json
+    description: aws_cloudtrail - aws:cloudtrail
+    format: jsonl
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

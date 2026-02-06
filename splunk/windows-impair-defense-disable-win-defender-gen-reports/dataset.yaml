@@ -1,0 +1,34 @@
+metadata:
+  name: windows-impair-defense-disable-win-defender-gen-reports
+  version: 7.0.0
+  description: The following analytic detects modifications in the Windows registry
+    to disable Windows Defender generic reports. It leverages data from the Endpoint.Registry
+    data model, specifically monitoring changes to the "DisableGenericRePorts" registry
+    value. This activity is significant as it can prevent the transmission of error
+    reports to Microsoft's Windows Error Reporting service, potentially hiding malicious
+    activities. If confirmed malicious, this action could allow attackers to bypass
+    Windows Defe
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - windows-defense-evasion-tactics
+  - windows-registry-abuse
+  mitre_attack:
+    techniques:
+    - id: T1562.001
+      name: Technique T1562.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.001/disable-windows-security-defender-features/windefender-bypas-2-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

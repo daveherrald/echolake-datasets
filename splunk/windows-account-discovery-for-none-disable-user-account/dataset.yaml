@@ -1,0 +1,33 @@
+metadata:
+  name: windows-account-discovery-for-none-disable-user-account
+  version: 9.0.0
+  description: The following analytic detects the execution of the PowerView PowerShell
+    cmdlet Get-NetUser with the UACFilter parameter set to NOT_ACCOUNTDISABLE, indicating
+    an attempt to enumerate Active Directory user accounts that are not disabled.
+    This detection leverages PowerShell Script Block Logging (EventCode 4104) to identify
+    the specific script block text. Monitoring this activity is significant as it
+    may indicate reconnaissance efforts by an attacker to identify active user accounts
+    for further exp
+  author: Teoderick Contreras, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - cisa-aa23-347a
+  mitre_attack:
+    techniques:
+    - id: T1087.001
+      name: Technique T1087.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1087/powerview_get_netuser_preauthnotrequire/get-netuser-not-require-pwh.log
+    description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

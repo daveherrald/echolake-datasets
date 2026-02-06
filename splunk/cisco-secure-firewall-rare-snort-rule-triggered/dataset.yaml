@@ -1,0 +1,36 @@
+metadata:
+  name: cisco-secure-firewall-rare-snort-rule-triggered
+  version: 3.0.0
+  description: 'This analytic identifies Snort signatures that have triggered only
+    once in the past 7 days across all Cisco Secure Firewall IntrusionEvent logs.
+    While these rules typically do not trigger in day-to-day network activity, their
+    sudden appearance may indicate early-stage compromise, previously unseen malware,
+    or reconnaissance activity against less commonly exposed services. Investigating
+    these outliers can provide valuable insight into new or low-noise adversary behaviors.
+
+    '
+  author: Nasreddine Bencherchali, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - cisco-secure-firewall-threat-defense-analytics
+  mitre_attack:
+    techniques:
+    - id: T1598
+      name: Technique T1598
+    - id: T1583.006
+      name: Technique T1583.006
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_secure_firewall_threat_defense/intrusion_event/intrusion_events.log
+    description: not_applicable - cisco:sfw:estreamer
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

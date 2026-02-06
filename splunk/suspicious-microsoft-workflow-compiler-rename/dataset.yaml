@@ -1,0 +1,37 @@
+metadata:
+  name: suspicious-microsoft-workflow-compiler-rename
+  version: 11.0.0
+  description: 'The following analytic detects the renaming of microsoft.workflow.compiler.exe,
+    a rarely used executable typically located in C:\Windows\Microsoft.NET\Framework64\v4.0.30319.
+    This detection leverages Endpoint Detection and Response (EDR) data, focusing
+    on process names and original file names. This activity is significant because
+    renaming this executable can indicate an attempt to evade security controls. If
+    confirmed malicious, an attacker could use this renamed executable to execute
+    arbitrary '
+  author: Michael Haag, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - masquerading---rename-system-utilities
+  - living-off-the-land
+  - cobalt-strike
+  mitre_attack:
+    techniques:
+    - id: T1036.003
+      name: Technique T1036.003
+    - id: T1127
+      name: Technique T1127
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1127/atomic_red_team/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

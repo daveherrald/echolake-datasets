@@ -1,0 +1,35 @@
+metadata:
+  name: windows-scheduled-task-service-spawned-shell
+  version: 7.0.0
+  description: The following analytic detects when the Task Scheduler service ("svchost.exe
+    -k netsvcs -p -s Schedule") spawns common command line, scripting, or shell execution
+    binaries such as "powershell.exe" or "cmd.exe". This detection leverages data
+    from Endpoint Detection and Response (EDR) agents, focusing on process and parent
+    process relationships. This activity is significant as attackers often abuse the
+    Task Scheduler for execution and persistence, blending in with legitimate Windows
+    operations. If
+  author: Steven Dick
+  tags:
+  - ttp
+  - splunk-security-content
+  - windows-persistence-techniques
+  mitre_attack:
+    techniques:
+    - id: T1053.005
+      name: Technique T1053.005
+    - id: T1059
+      name: Technique T1059
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/gootloader/partial_ttps/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

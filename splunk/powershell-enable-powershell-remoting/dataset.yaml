@@ -1,0 +1,33 @@
+metadata:
+  name: powershell-enable-powershell-remoting
+  version: 8.0.0
+  description: The following analytic detects the use of the Enable-PSRemoting cmdlet,
+    which allows PowerShell remoting on a local or remote computer. This detection
+    leverages PowerShell Script Block Logging (EventCode 4104) to identify when this
+    cmdlet is executed. Monitoring this activity is crucial as it can indicate an
+    attacker enabling remote command execution capabilities on a compromised system.
+    If confirmed malicious, this activity could allow an attacker to take control
+    of the system remotely, execute
+  author: Michael Haag, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - malicious-powershell
+  mitre_attack:
+    techniques:
+    - id: T1059.001
+      name: Technique T1059.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/atomic_red_team/4104-psremoting-windows-powershell.log
+    description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

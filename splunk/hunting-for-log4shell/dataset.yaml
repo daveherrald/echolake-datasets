@@ -1,0 +1,36 @@
+metadata:
+  name: hunting-for-log4shell
+  version: 6.0.0
+  description: The following analytic detects potential exploitation attempts of the
+    Log4Shell vulnerability (CVE-2021-44228) by analyzing HTTP headers for specific
+    patterns. It leverages the Web Datamodel and evaluates various indicators such
+    as the presence of `{jndi:`, environment variables, and common URI paths. This
+    detection is significant as Log4Shell allows remote code execution, posing a severe
+    threat to systems. If confirmed malicious, attackers could gain unauthorized access,
+    execute arbitrary code,
+  author: Michael Haag, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - log4shell-cve-2021-44228
+  - cisa-aa22-320a
+  mitre_attack:
+    techniques:
+    - id: T1190
+      name: Technique T1190
+    - id: T1133
+      name: Technique T1133
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/java/log4shell-nginx.log
+    description: /var/log/nginx/access.log - nginx:plus:kv
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

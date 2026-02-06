@@ -1,0 +1,35 @@
+metadata:
+  name: sc-exe-manipulating-windows-services
+  version: 12.0.0
+  description: 'The following analytic detects the creation or modification of Windows
+    services using the sc.exe command. It leverages data from Endpoint Detection and
+    Response (EDR) agents, focusing on process names and command-line arguments. This
+    activity is significant because manipulating Windows services can be a method
+    for attackers to establish persistence, escalate privileges, or execute arbitrary
+    code. If confirmed malicious, this behavior could allow an attacker to maintain
+    long-term access, disrupt '
+  author: Rico Valdez, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - azorult
+  - orangeworm-attack-group
+  - windows-drivers
+  mitre_attack:
+    techniques:
+    - id: T1543.003
+      name: Technique T1543.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1543.003/atomic_red_team/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,36 @@
+metadata:
+  name: aws-successful-console-authentication-from-multiple-ips
+  version: 8.0.0
+  description: The following analytic detects an AWS account successfully authenticating
+    from multiple unique IP addresses within a 5-minute window. It leverages AWS CloudTrail
+    logs, specifically monitoring `ConsoleLogin` events and counting distinct source
+    IPs. This behavior is significant as it may indicate compromised credentials,
+    potentially from a phishing attack, being used concurrently by an adversary and
+    a legitimate user. If confirmed malicious, this activity could allow unauthorized
+    access to corpora
+  author: Bhavin Patel, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - suspicious-aws-login-activities
+  - compromised-user-account
+  mitre_attack:
+    techniques:
+    - id: T1586
+      name: Technique T1586
+    - id: T1535
+      name: Technique T1535
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1586.003/aws_console_login_multiple_ips/cloudtrail.json
+    description: aws_cloudtrail - aws:cloudtrail
+    format: jsonl
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

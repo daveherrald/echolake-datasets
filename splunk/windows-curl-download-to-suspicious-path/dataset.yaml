@@ -1,0 +1,48 @@
+metadata:
+  name: windows-curl-download-to-suspicious-path
+  version: 18.0.0
+  description: 'The following analytic detects the use of Windows Curl.exe to download
+
+    a file to a suspicious location, such as AppData, ProgramData, or Public directories.
+
+    It leverages data from Endpoint Detection and Response (EDR) agents, focusing
+    on
+
+    command-line executions that include the -O or --output options. This activity
+    is
+
+    significant because downloading files to these locations can indicate an attempt
+
+    to bypass security controls or establish persistence. If confirmed malicious,
+    this
+
+    behavior could l'
+  author: Michael Haag, Nasreddine Bencherchali, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - apt37-rustonotto-and-fadestealer
+  - black-basta-ransomware
+  - china-nexus-threat-activity
+  mitre_attack:
+    techniques:
+    - id: T1105
+      name: Technique T1105
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1105/atomic_red_team/windows-sysmon_curl.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_network_visibility_module/cisco_nvm_flowdata/nvm_flowdata.log
+    description: not_applicable - cisco:nvm:flowdata
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

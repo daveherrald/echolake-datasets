@@ -1,0 +1,35 @@
+metadata:
+  name: windows-snappybee-create-test-registry
+  version: 4.0.0
+  description: The following analytic detects modifications to the Windows registry
+    under `SOFTWARE\Microsoft\Test`, a location rarely used by legitimate applications
+    in a production environment. Monitoring this key is crucial, as adversaries may
+    create or alter values here for monitoring update of itself file path, updated
+    configuration file, or system mark compromised. The detection leverages **Sysmon
+    Event ID 13** (Registry Value Set) to identify unauthorized changes. Analysts
+    should investigate processes a
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - salt-typhoon
+  - china-nexus-threat-activity
+  - snappybee
+  mitre_attack:
+    techniques:
+    - id: T1112
+      name: Technique T1112
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1112/test_registry/test_reg.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,33 @@
+metadata:
+  name: okta-user-logins-from-multiple-cities
+  version: 5.0.0
+  description: The following analytic identifies instances where the same Okta user
+    logs in from different cities within a 24-hour period. This detection leverages
+    Okta Identity Management logs, analyzing login events and their geographic locations.
+    Such behavior is significant as it may indicate a compromised account, with an
+    attacker attempting unauthorized access from multiple locations. If confirmed
+    malicious, this activity could lead to account takeovers and data breaches, allowing
+    attackers to access sen
+  author: Bhavin Patel, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - okta-account-takeover
+  mitre_attack:
+    techniques:
+    - id: T1586.003
+      name: Technique T1586.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1586.003/okta_multiple_city/okta_multiple_city_im2.log
+    description: Okta - OktaIM2:log
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,34 @@
+metadata:
+  name: windows-suspicious-vmware-tools-child-process
+  version: 1.0.0
+  description: The following analytic identifies child processes spawned by vmtoolsd.exe,
+    the VMWare Tools service in Windows, which typically runs with SYSTEM privileges.
+    This detection leverages data from Endpoint Detection and Response (EDR) agents,
+    focusing on process and parent process relationships. Monitoring this activity
+    is crucial as it can indicate exploitation attempts, such as CVE-2023-20867. If
+    confirmed malicious, attackers could gain SYSTEM-level access, allowing them to
+    execute arbitrary code,
+  author: Raven Tait, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - esxi-post-compromise
+  - china-nexus-threat-activity
+  mitre_attack:
+    techniques:
+    - id: T1059
+      name: Technique T1059
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059/vmtoolsd/vmtoolsd_execution.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

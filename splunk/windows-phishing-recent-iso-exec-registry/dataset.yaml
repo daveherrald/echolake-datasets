@@ -1,0 +1,35 @@
+metadata:
+  name: windows-phishing-recent-iso-exec-registry
+  version: 9.0.0
+  description: The following analytic detects the creation of registry artifacts when
+    an ISO container is opened, clicked, or mounted on a Windows operating system.
+    It leverages data from the Endpoint.Registry data model, specifically monitoring
+    registry keys related to recent ISO or IMG file executions. This activity is significant
+    as adversaries increasingly use container-based phishing campaigns to bypass macro-based
+    document execution controls. If confirmed malicious, this behavior could indicate
+    an initia
+  author: Teoderick Contreras, Bhavin Patel, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - brute-ratel-c4
+  - agenttesla
+  - qakbot
+  mitre_attack:
+    techniques:
+    - id: T1566.001
+      name: Technique T1566.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/brute_ratel/iso_version_dll_campaign/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,35 @@
+metadata:
+  name: windows-eventlog-cleared-via-wevtutil
+  version: 2.0.0
+  description: The following analytic detects the usage of wevtutil.exe with the "clear-log"
+    parameter in order to clear the contents of logs. It leverages data from Endpoint
+    Detection and Response (EDR) agents, focusing on process names and command-line
+    arguments. This activity is significant because clearing event logs can be an
+    attempt to cover tracks after malicious actions, hindering forensic investigations.
+    If confirmed malicious, this behavior could allow an attacker to erase evidence
+    of their activitie
+  author: Nasreddine Bencherchali, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - windows-log-manipulation
+  - ransomware
+  - rhysida-ransomware
+  mitre_attack:
+    techniques:
+    - id: T1070.001
+      name: Technique T1070.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1070.001/windows_pwh_log_cleared/wevtutil_clear_log.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

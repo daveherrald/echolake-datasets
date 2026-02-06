@@ -1,0 +1,34 @@
+metadata:
+  name: powershell-invoke-cimmethod-cimsession
+  version: 8.0.0
+  description: The following analytic detects the creation of a New-CIMSession cmdlet
+    followed by the use of the Invoke-CIMMethod cmdlet within PowerShell. It leverages
+    PowerShell Script Block Logging to identify these specific cmdlets in the ScriptBlockText
+    field. This activity is significant because it mirrors the behavior of the Invoke-WMIMethod
+    cmdlet, often used for remote code execution via NTLMv2 pass-the-hash authentication.
+    If confirmed malicious, this could allow an attacker to execute commands remot
+  author: Michael Haag, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - scattered-lapsus$-hunters
+  - malicious-powershell
+  - active-directory-lateral-movement
+  mitre_attack:
+    techniques:
+    - id: T1047
+      name: Technique T1047
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1047/atomic_red_team/4104-cimmethod-windows-powershell.log
+    description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

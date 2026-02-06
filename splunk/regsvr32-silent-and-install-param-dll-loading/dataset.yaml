@@ -1,0 +1,35 @@
+metadata:
+  name: regsvr32-silent-and-install-param-dll-loading
+  version: 9.0.0
+  description: 'The following analytic detects the loading of a DLL using the regsvr32
+    application with the silent parameter and DLLInstall execution. It leverages data
+    from Endpoint Detection and Response (EDR) agents, focusing on process command-line
+    arguments and parent process details. This activity is significant as it is commonly
+    used by RAT malware like Remcos and njRAT to load malicious DLLs on compromised
+    machines. If confirmed malicious, this technique could allow attackers to execute
+    arbitrary code, '
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - asyncrat
+  - hermetic-wiper
+  - living-off-the-land
+  mitre_attack:
+    techniques:
+    - id: T1218.010
+      name: Technique T1218.010
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.005/vbs_wscript/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

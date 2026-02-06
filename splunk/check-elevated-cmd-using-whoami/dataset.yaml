@@ -1,0 +1,33 @@
+metadata:
+  name: check-elevated-cmd-using-whoami
+  version: 7.0.0
+  description: The following analytic identifies the execution of the "whoami" command
+    with the "/group" flag, where the results are passed to the "find" command in
+    order to look for a the string "12288". This string represents the SID of the
+    group "Mandatory Label\High Mandatory Level" effectively checking if the current
+    process is running as a "High" integrity process or with Administrator privileges.
+    It leverages data from Endpoint Detection and Response (EDR) agents, focusing
+    on process and command-line te
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - fin7
+  mitre_attack:
+    techniques:
+    - id: T1033
+      name: Technique T1033
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/fin7/fin7_js_2/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

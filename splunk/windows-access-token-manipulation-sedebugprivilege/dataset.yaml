@@ -1,0 +1,35 @@
+metadata:
+  name: windows-access-token-manipulation-sedebugprivilege
+  version: 18.0.0
+  description: The following analytic detects a process enabling the "SeDebugPrivilege"
+    privilege token. It leverages Windows Security Event Logs with EventCode 4703,
+    filtering out common legitimate processes. This activity is significant because
+    SeDebugPrivilege allows a process to inspect and modify the memory of other processes,
+    potentially leading to credential dumping or code injection. If confirmed malicious,
+    an attacker could gain extensive control over system processes, enabling them
+    to escalate privil
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - meduza-stealer
+  - plugx
+  - cisa-aa23-347a
+  mitre_attack:
+    techniques:
+    - id: T1134.002
+      name: Technique T1134.002
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/brute_ratel/sedebugprivilege_token/security-xml.log
+    description: XmlWinEventLog:Security - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,35 @@
+metadata:
+  name: hiding-files-and-directories-with-attrib-exe
+  version: 13.0.0
+  description: 'The following analytic detects the use of the Windows binary attrib.exe
+    to hide files or directories by marking them with specific flags. It leverages
+    data from Endpoint Detection and Response (EDR) agents, focusing on command-line
+    arguments that include the "+h" flag. This activity is significant because hiding
+    files can be a tactic used by attackers to conceal malicious files or tools from
+    users and security software. If confirmed malicious, this behavior could allow
+    an attacker to persist in '
+  author: Bhavin Patel, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - windows-persistence-techniques
+  - malicious-inno-setup-loader
+  - azorult
+  mitre_attack:
+    techniques:
+    - id: T1222.001
+      name: Technique T1222.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1222.001/atomic_red_team/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

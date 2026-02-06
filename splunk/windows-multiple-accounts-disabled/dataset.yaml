@@ -1,0 +1,35 @@
+metadata:
+  name: windows-multiple-accounts-disabled
+  version: 7.0.0
+  description: The following analytic identifies instances where more than five unique
+    Windows accounts are disabled within a 10-minute window, as indicated by Event
+    Code 4725 in the Windows Security Event Log. It leverages the wineventlog_security
+    dataset, grouping data into 10-minute segments and tracking the count and distinct
+    count of TargetUserName. This behavior is significant as it may indicate internal
+    policy breaches or an external attacker's attempt to disrupt operations. If confirmed
+    malicious, this
+  author: Mauricio Velazco, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - azure-active-directory-persistence
+  mitre_attack:
+    techniques:
+    - id: T1098
+      name: Technique T1098
+    - id: T1078
+      name: Technique T1078
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1098/windows_multiple_accounts_disabled/windows_multiple_accounts_disabled.log
+    description: XmlWinEventLog:Security - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

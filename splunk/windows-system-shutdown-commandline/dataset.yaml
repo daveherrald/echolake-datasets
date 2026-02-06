@@ -1,0 +1,35 @@
+metadata:
+  name: windows-system-shutdown-commandline
+  version: 10.0.0
+  description: The following analytic identifies the execution of the Windows shutdown
+    command via the command line interface. It leverages data from Endpoint Detection
+    and Response (EDR) agents, focusing on process names and command-line arguments.
+    This activity is significant because attackers may use the shutdown command to
+    erase tracks, cause disruption, or ensure changes take effect after installing
+    backdoors. If confirmed malicious, this activity could lead to system downtime,
+    denial of service, or evasi
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - xworm
+  - darkgate-malware
+  - njrat
+  mitre_attack:
+    techniques:
+    - id: T1529
+      name: Technique T1529
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/dcrat/shutdown_commandline/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

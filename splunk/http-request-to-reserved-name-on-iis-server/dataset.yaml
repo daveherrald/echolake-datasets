@@ -1,0 +1,33 @@
+metadata:
+  name: http-request-to-reserved-name-on-iis-server
+  version: 1.0.0
+  description: Detects attempts to exploit a request smuggling technique against IIS
+    that leverages a Windows quirk where requests for reserved Windows device names
+    such as "/con" trigger an early server response before the request body is received.
+    When combined with a Content-Length desynchronization, this behavior can lead
+    to a parsing confusion between frontend and backend.
+  author: Raven Tait, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - http-request-smuggling
+  mitre_attack:
+    techniques:
+    - id: T1071.001
+      name: Technique T1071.001
+    - id: T1190
+      name: Technique T1190
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/request_smuggling/suricata_reserved_names.log
+    description: suricata - suricata
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

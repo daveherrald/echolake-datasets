@@ -1,0 +1,33 @@
+metadata:
+  name: o365-privileged-graph-api-permission-assigned
+  version: 6.0.0
+  description: The following analytic detects the assignment of critical Graph API
+    permissions in Azure AD using the O365 Unified Audit Log. It focuses on permissions
+    such as Application.ReadWrite.All, AppRoleAssignment.ReadWrite.All, and RoleManagement.ReadWrite.Directory.
+    The detection method leverages Azure Active Directory workload events, specifically
+    'Update application' operations. This activity is significant as these permissions
+    provide extensive control over Azure AD settings, posing a high risk if m
+  author: Mauricio Velazco, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - office-365-persistence-mechanisms
+  - nobelium-group
+  mitre_attack:
+    techniques:
+    - id: T1003.002
+      name: Technique T1003.002
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1098.003/o365_privileged_graph_perm_assigned/o365_privileged_graph_perm_assigned.log
+    description: o365 - o365:management:activity
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,36 @@
+metadata:
+  name: macos-amos-stealer-virtual-machine-check-activity
+  version: 2.0.0
+  description: 'The following analytic detects AMOS Stealer VM check activity on macOS.
+    It leverages osquery to monitor process events and identifies the execution of
+    the "osascript" command along with specific commandline strings. This activity
+    is significant
+
+    as AMOS stealer was seen using this pattern in order to check if the host is a
+    Virtual Machine or not. If confirmed malicious, this behavior indicate that the
+    host is already infected by the AMOS stealer, which could allow attackers to execute
+    arbitrary c'
+  author: Nasreddine Bencherchali, Splunk, Alex Karkins
+  tags:
+  - anomaly
+  - splunk-security-content
+  - amos-stealer
+  - hellcat-ransomware
+  mitre_attack:
+    techniques:
+    - id: T1059.002
+      name: Technique T1059.002
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.002/amos_stealer/amos_stealer.log
+    description: osquery - osquery:results
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,35 @@
+metadata:
+  name: disable-security-logs-using-minint-registry
+  version: 12.0.0
+  description: 'The following analytic detects a suspicious registry modification
+    aimed at disabling security audit logs by adding a specific registry entry. It
+    leverages data from the Endpoint.Registry data model, focusing on changes to the
+    "Control\\MiniNt" registry path. This activity is significant because it can prevent
+    Windows from logging any events to the Security Log, effectively blinding security
+    monitoring efforts. If confirmed malicious, this technique could allow an attacker
+    to operate undetected, '
+  author: Teoderick Contreras, Splunk, Steven Dick
+  tags:
+  - ttp
+  - splunk-security-content
+  - windows-defense-evasion-tactics
+  - cisa-aa23-347a
+  - windows-registry-abuse
+  mitre_attack:
+    techniques:
+    - id: T1112
+      name: Technique T1112
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1112/minint_reg/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

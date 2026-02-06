@@ -1,0 +1,33 @@
+metadata:
+  name: zscaler-behavior-analysis-threat-blocked
+  version: 6.0.0
+  description: The following analytic identifies threats blocked by the Zscaler proxy
+    based on behavior analysis. It leverages web proxy logs to detect entries where
+    actions are blocked and threat names and classes are specified. This detection
+    is significant as it highlights potential malicious activities that were intercepted
+    by Zscaler's behavior analysis, providing early indicators of threats. If confirmed
+    malicious, these blocked threats could indicate attempted breaches or malware
+    infections, helping sec
+  author: Rod Soto, Gowthamaraj Rajendran, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - zscaler-browser-proxy-threats
+  mitre_attack:
+    techniques:
+    - id: T1566
+      name: Technique T1566
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566/zscalar_web_proxy/zscalar_web_proxy.json
+    description: zscaler - zscalernss-web
+    format: jsonl
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

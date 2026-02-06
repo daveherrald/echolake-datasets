@@ -1,0 +1,35 @@
+metadata:
+  name: windows-boot-or-logon-autostart-execution-in-startup-folder
+  version: 12.0.0
+  description: The following analytic detects the creation of files in the Windows
+    %startup% folder, a common persistence technique. It leverages the Endpoint.Filesystem
+    data model to identify file creation events in this specific directory. This activity
+    is significant because adversaries often use the startup folder to ensure their
+    malicious code executes automatically upon system boot or user logon. If confirmed
+    malicious, this could allow attackers to maintain persistence on the host, potentially
+    leading t
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - xworm
+  - chaos-ransomware
+  - njrat
+  mitre_attack:
+    techniques:
+    - id: T1547.001
+      name: Technique T1547.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/chaos_ransomware/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

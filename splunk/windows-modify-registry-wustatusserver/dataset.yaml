@@ -1,0 +1,33 @@
+metadata:
+  name: windows-modify-registry-wustatusserver
+  version: 8.0.0
+  description: The following analytic identifies suspicious modifications to the Windows
+    Update configuration registry, specifically targeting the WUStatusServer key.
+    It leverages data from the Endpoint datamodel to detect changes in the registry
+    path associated with Windows Update settings. This activity is significant as
+    it is commonly used by adversaries, including malware like RedLine Stealer, to
+    bypass detection and deploy additional payloads. If confirmed malicious, this
+    modification could allow attacker
+  author: Teoderick Contreras, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - redline-stealer
+  mitre_attack:
+    techniques:
+    - id: T1112
+      name: Technique T1112
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/redline/modify_registry/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,39 @@
+metadata:
+  name: windows-cabinet-file-extraction-via-expand
+  version: 2.0.0
+  description: 'Detects usage of expand.exe to extract Microsoft Cabinet (CAB) archives,
+    with
+
+    emphasis on extractions into `C:\\ProgramData` or similar staging locations. In
+
+    recent APT37 activity, a CAB payload (e.g., wonder.cab) was expanded into
+
+    ProgramData prior to persistence and execution. This behavior is a strong signal
+
+    for ingress tool transfer and staging of payloads.
+
+    '
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - apt37-rustonotto-and-fadestealer
+  - netsupport-rmm-tool-abuse
+  mitre_attack:
+    techniques:
+    - id: T1105
+      name: Technique T1105
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1140/atomic_red_team/expand_windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

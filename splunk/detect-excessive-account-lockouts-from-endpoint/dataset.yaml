@@ -1,0 +1,41 @@
+metadata:
+  name: detect-excessive-account-lockouts-from-endpoint
+  version: 13.0.0
+  description: The following analytic detects endpoints causing a high number of account
+    lockouts within a short period. It leverages the Windows security event logs ingested
+    into the `Change` datamodel, specifically under the `Account_Management` node,
+    to identify and count lockout events. This activity is significant as it may indicate
+    a brute-force attack or misconfigured system causing repeated authentication failures.
+    If confirmed malicious, this behavior could lead to account lockouts, disrupting
+    user ac
+  author: David Dorsey, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - active-directory-password-spraying
+  mitre_attack:
+    techniques:
+    - id: T1078.002
+      name: Technique T1078.002
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1078.002/account_lockout/windows-security.log
+    description: WinEventLog:Security - WinEventLog
+    format: text
+    schema: raw
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1078.002/account_lockout/windows-system.log
+    description: WinEventLog:System - WinEventLog
+    format: text
+    schema: raw
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1078.002/account_lockout/windows-xml.log
+    description: XmlWinEventLog:Security - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

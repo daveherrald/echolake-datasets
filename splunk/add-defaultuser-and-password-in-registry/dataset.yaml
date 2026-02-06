@@ -1,0 +1,33 @@
+metadata:
+  name: add-defaultuser-and-password-in-registry
+  version: 11.0.0
+  description: The following analytic detects suspicious registry modifications that
+    implement auto admin logon by adding DefaultUserName and DefaultPassword values.
+    It leverages data from the Endpoint.Registry data model, specifically monitoring
+    changes to the "SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" registry
+    path. This activity is significant because it is associated with BlackMatter ransomware,
+    which uses this technique to automatically log on to compromised hosts and continue
+    encryption afte
+  author: Teoderick Contreras, Splunk, Steven Dick
+  tags:
+  - anomaly
+  - splunk-security-content
+  - blackmatter-ransomware
+  mitre_attack:
+    techniques:
+    - id: T1552.002
+      name: Technique T1552.002
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1552.002/autoadminlogon/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,35 @@
+metadata:
+  name: disable-defender-blockatfirstseen-feature
+  version: 11.0.0
+  description: The following analytic detects the modification of the Windows registry
+    to disable the Windows Defender BlockAtFirstSeen feature. It leverages data from
+    the Endpoint.Registry data model, specifically monitoring changes to the registry
+    path associated with Windows Defender SpyNet and the DisableBlockAtFirstSeen value.
+    This activity is significant because disabling this feature can allow malicious
+    files to bypass initial detection by Windows Defender, increasing the risk of
+    malware infection. If c
+  author: Teoderick Contreras, Splunk, Steven Dick
+  tags:
+  - ttp
+  - splunk-security-content
+  - azorult
+  - cisa-aa23-347a
+  - icedid
+  mitre_attack:
+    techniques:
+    - id: T1562.001
+      name: Technique T1562.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/icedid/disable_av/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

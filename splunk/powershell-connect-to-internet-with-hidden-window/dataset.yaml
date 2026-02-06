@@ -1,0 +1,35 @@
+metadata:
+  name: powershell-connect-to-internet-with-hidden-window
+  version: 14.0.0
+  description: The following analytic detects PowerShell commands using the WindowStyle
+    parameter to hide the window while connecting to the Internet. This behavior is
+    identified through Endpoint Detection and Response (EDR) telemetry, focusing on
+    command-line executions that include variations of the WindowStyle parameter.
+    This activity is significant because it attempts to bypass default PowerShell
+    execution policies and conceal its actions, which is often indicative of malicious
+    intent. If confirmed malicio
+  author: David Dorsey, Michael Haag Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - agenttesla
+  - hafnium-group
+  - hermetic-wiper
+  mitre_attack:
+    techniques:
+    - id: T1059.001
+      name: Technique T1059.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/hidden_powershell/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

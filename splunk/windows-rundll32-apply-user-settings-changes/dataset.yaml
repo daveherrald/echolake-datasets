@@ -1,0 +1,33 @@
+metadata:
+  name: windows-rundll32-apply-user-settings-changes
+  version: 8.0.0
+  description: "The following analytic detects the execution of rundll32 with a call\
+    \ to the user32 DLL, specifically the UpdatePerUserSystemParameters function.\n\
+    This function is responsible for updating system parameters, such as desktop backgrounds,\
+    \ display settings, and visual themes. \nIt leverages data from Endpoint Detection\
+    \ and Response (EDR) agents, focusing on command-line executions.\nThis activity\
+    \ can be significant as it is an uncommon way to apply settings. It was also observed\
+    \ as part of Rhysida Rans"
+  author: Teoderick Contreras, Nasreddine Bencherchali, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - rhysida-ransomware
+  mitre_attack:
+    techniques:
+    - id: T1218.011
+      name: Technique T1218.011
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218.011/update_per_user_system/rundll32_updateperusersystem.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,54 @@
+metadata:
+  name: cisco-secure-firewall-high-priority-intrusion-classification
+  version: 2.0.0
+  description: 'This analytic identifies high-severity intrusion events based on the
+    classification assigned to Snort rules within Cisco Secure Firewall logs.
+
+    It leverages Cisco Secure Firewall Threat Defense logs and focuses on events classified
+    as:
+
+
+    - A Network Trojan was Detected
+
+    - Successful Administrator Privilege Gain
+
+    - Successful User Privilege Gain
+
+    - Attempt to Login By a Default Username and Password
+
+    - Known malware command and control traffic
+
+    - Known malicious file or file based exploit
+
+    - Known client'
+  author: Nasreddine Bencherchali, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - cisco-secure-firewall-threat-defense-analytics
+  mitre_attack:
+    techniques:
+    - id: T1203
+      name: Technique T1203
+    - id: T1003
+      name: Technique T1003
+    - id: T1071
+      name: Technique T1071
+    - id: T1190
+      name: Technique T1190
+    - id: T1078
+      name: Technique T1078
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_secure_firewall_threat_defense/intrusion_event/intrusion_events.log
+    description: not_applicable - cisco:sfw:estreamer
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

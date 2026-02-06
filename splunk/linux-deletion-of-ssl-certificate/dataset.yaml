@@ -1,0 +1,36 @@
+metadata:
+  name: linux-deletion-of-ssl-certificate
+  version: 8.0.0
+  description: The following analytic detects the deletion of SSL certificates on
+    a Linux machine. It leverages filesystem event logs to identify when files with
+    extensions .pem or .crt are deleted from the /etc/ssl/certs/ directory. This activity
+    is significant because attackers may delete or modify SSL certificates to disable
+    security features or evade defenses on a compromised system. If confirmed malicious,
+    this behavior could indicate an attempt to disrupt secure communications, evade
+    detection, or execut
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - acidrain
+  - acidpour
+  mitre_attack:
+    techniques:
+    - id: T1070.004
+      name: Technique T1070.004
+    - id: T1485
+      name: Technique T1485
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/acidrain/sysmon_linux.log
+    description: Syslog:Linux-Sysmon/Operational - sysmon:linux
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

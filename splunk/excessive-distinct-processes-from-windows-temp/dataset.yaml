@@ -1,0 +1,33 @@
+metadata:
+  name: excessive-distinct-processes-from-windows-temp
+  version: 8.0.0
+  description: The following analytic identifies an excessive number of distinct processes
+    executing from the Windows\Temp directory. It leverages data from Endpoint Detection
+    and Response (EDR) agents, focusing on process paths and counts within a 20-minute
+    window. This behavior is significant as it often indicates the presence of post-exploit
+    frameworks like Koadic and Meterpreter, which use this technique to execute malicious
+    actions. If confirmed malicious, this activity could allow attackers to execute
+    ar
+  author: Michael Hart, Mauricio Velazco, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - meterpreter
+  mitre_attack:
+    techniques:
+    - id: T1059
+      name: Technique T1059
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059/excessive_distinct_processes_from_windows_temp/windows-xml.log
+    description: XmlWinEventLog:Security - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

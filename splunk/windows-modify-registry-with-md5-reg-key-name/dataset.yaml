@@ -1,0 +1,33 @@
+metadata:
+  name: windows-modify-registry-with-md5-reg-key-name
+  version: 8.0.0
+  description: The following analytic detects potentially malicious registry modifications
+    characterized by MD5-like registry key names. It leverages the Endpoint data model
+    to identify registry entries under the SOFTWARE path with 32-character hexadecimal
+    names, a technique often used by NjRAT malware for fileless storage of keylogs
+    and .DLL plugins. This activity is significant as it can indicate the presence
+    of NjRAT or similar malware, which can lead to unauthorized data access and persistent
+    threats withi
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - njrat
+  mitre_attack:
+    techniques:
+    - id: T1112
+      name: Technique T1112
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1112/njrat_md5_registry_entry/njrat_reg_binary.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

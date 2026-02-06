@@ -1,0 +1,33 @@
+metadata:
+  name: windows-excel-activemicrosoftapp-child-process
+  version: 1.0.0
+  description: The following analytic identifies the execution of the ActiveMicrosoftApp
+    process as a child of Microsoft Excel. Under normal conditions, Excel primarily
+    spawns internal Office-related processes, and the creation of ActiveMicrosoftApp
+    is uncommon in day-to-day business workflows. Adversaries may abuse this behavior
+    to blend malicious activity within trusted applications, execute unauthorized
+    code, or bypass application control mechanisms. This technique aligns with common
+    tradecraft where Office
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - pathwiper
+  mitre_attack:
+    techniques:
+    - id: T1021.003
+      name: Technique T1021.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1021.003/excel_activemicrosoftapp/sysmon_winprojexe.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

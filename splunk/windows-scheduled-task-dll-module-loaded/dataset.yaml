@@ -1,0 +1,33 @@
+metadata:
+  name: windows-scheduled-task-dll-module-loaded
+  version: 6.0.0
+  description: The following analytic detects instances where the taskschd.dll is
+    loaded by processes running in suspicious or writable directories. This activity
+    is unusual, as legitimate processes that load taskschd.dll typically reside in
+    protected system locations. Malware or threat actors may attempt to load this
+    DLL from writable or non-standard directories to manipulate the Task Scheduler
+    and execute malicious tasks. By identifying processes that load taskschd.dll in
+    these unsafe locations, this detecti
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - valleyrat
+  mitre_attack:
+    techniques:
+    - id: T1053
+      name: Technique T1053
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053/taskschd_dll/taskschd_dll.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

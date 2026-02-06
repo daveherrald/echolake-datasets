@@ -1,0 +1,40 @@
+metadata:
+  name: windows-dotnet-binary-in-non-standard-path
+  version: 11.0.0
+  description: 'The following analytic detects the execution of native .NET binaries
+    from non-standard directories within the Windows operating system.
+
+    It leverages Endpoint Detection and Response (EDR) telemetry, comparing process
+    names and original file names against a predefined lookup "is_net_windows_file".
+
+    This activity is significant because adversaries may move .NET binaries to unconventional
+    paths to evade detection and execute malicious code.
+
+    If confirmed malicious, this behavior could allow attackers '
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - masquerading---rename-system-utilities
+  - ransomware
+  - unusual-processes
+  mitre_attack:
+    techniques:
+    - id: T1036.003
+      name: Technique T1036.003
+    - id: T1218.004
+      name: Technique T1218.004
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218.004/atomic_red_team/windows-sysmon_installutil_path.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,35 @@
+metadata:
+  name: windows-remote-desktop-network-bruteforce-attempt
+  version: 5.0.0
+  description: The following analytic identifies potential Remote Desktop Protocol
+    (RDP) brute force attacks by monitoring network traffic for RDP application activity.
+    This query detects potential RDP brute force attacks by identifying source IPs
+    that have made more than 10 connection attempts to the same RDP port on a host
+    within a one-hour window. The results are presented in a table that includes the
+    source and destination IPs, destination port, number of attempts, and the times
+    of the first and last conne
+  author: Jose Hernandez, Bhavin Patel, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - samsam-ransomware
+  - ryuk-ransomware
+  - compromised-user-account
+  mitre_attack:
+    techniques:
+    - id: T1110.001
+      name: Technique T1110.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1110.001/rdp_brute_sysmon/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

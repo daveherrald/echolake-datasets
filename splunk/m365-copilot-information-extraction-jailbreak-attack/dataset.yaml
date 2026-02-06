@@ -1,0 +1,33 @@
+metadata:
+  name: m365-copilot-information-extraction-jailbreak-attack
+  version: 1.0.0
+  description: Detects M365 Copilot information extraction jailbreak attacks that
+    attempt to obtain sensitive, classified, or comprehensive data through various
+    social engineering techniques including fictional entity impersonation, bulk data
+    requests, and privacy bypass attempts. The detection searches exported eDiscovery
+    prompt logs for extraction keywords like "transcendent," "tell me everything,"
+    "confidential," "dump," "extract," "reveal," and "bypass" in the Subject_Title
+    field, categorizing each attempt
+  author: Rod Soto
+  tags:
+  - ttp
+  - splunk-security-content
+  - suspicious-microsoft-365-copilot-activities
+  mitre_attack:
+    techniques:
+    - id: T1562
+      name: Technique T1562
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://raw.githubusercontent.com/splunk/attack_data/master/datasets/m365_copilot/copilot_prompt_logs.csv
+    description: csv - csv
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

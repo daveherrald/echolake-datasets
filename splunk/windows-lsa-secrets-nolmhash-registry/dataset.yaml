@@ -1,0 +1,34 @@
+metadata:
+  name: windows-lsa-secrets-nolmhash-registry
+  version: 9.0.0
+  description: The following analytic detects modifications to the Windows registry
+    related to the Local Security Authority (LSA) NoLMHash setting. It identifies
+    when the registry value is set to 0, indicating that the system will store passwords
+    in the weaker Lan Manager (LM) hash format. This detection leverages registry
+    activity logs from endpoint data sources like Sysmon or EDR tools. Monitoring
+    this activity is crucial as it can indicate attempts to weaken password storage
+    security. If confirmed malicious
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - cisa-aa23-347a
+  - scattered-lapsus$-hunters
+  mitre_attack:
+    techniques:
+    - id: T1003.004
+      name: Technique T1003.004
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1003.004/NoLMHash/lsa-reg-settings-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

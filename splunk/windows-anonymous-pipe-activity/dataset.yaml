@@ -1,0 +1,35 @@
+metadata:
+  name: windows-anonymous-pipe-activity
+  version: 5.0.0
+  description: The following analytic detects the creation or connection of anonymous
+    pipes for inter-process communication (IPC) within a Windows environment. Anonymous
+    pipes are commonly used by legitimate system processes, services, and applications
+    to transfer data between related processes. However, adversaries frequently abuse
+    anonymous pipes to facilitate stealthy process injection, command-and-control
+    (C2) communication, credential theft, or privilege escalation. This detection
+    monitors for unusual ano
+  author: Teoderick Contreras, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - salt-typhoon
+  - china-nexus-threat-activity
+  - snappybee
+  mitre_attack:
+    techniques:
+    - id: T1559
+      name: Technique T1559
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1559/anonymous_pipe/anonymouspipe.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

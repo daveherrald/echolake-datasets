@@ -1,0 +1,37 @@
+metadata:
+  name: okta-risk-threshold-exceeded
+  version: 7.0.0
+  description: The following correlation identifies when a user exceeds a risk threshold
+    based on multiple suspicious Okta activities. It leverages the Risk Framework
+    from Enterprise Security, aggregating risk events from "Suspicious Okta Activity,"
+    "Okta Account Takeover," and "Okta MFA Exhaustion" analytic stories. This detection
+    is significant as it highlights potentially compromised user accounts exhibiting
+    multiple tactics, techniques, and procedures (TTPs) within a 24-hour period. If
+    confirmed malicious,
+  author: Michael Haag, Bhavin Patel, Splunk
+  tags:
+  - correlation
+  - splunk-security-content
+  - okta-account-takeover
+  - okta-mfa-exhaustion
+  - suspicious-okta-activity
+  mitre_attack:
+    techniques:
+    - id: T1078
+      name: Technique T1078
+    - id: T1110
+      name: Technique T1110
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/suspicious_behaviour/okta_account_takeover_risk_events/okta_risk.log
+    description: risk_data - stash
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

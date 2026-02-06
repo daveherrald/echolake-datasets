@@ -1,0 +1,33 @@
+metadata:
+  name: getwmiobject-ds-user-with-powershell-script-block
+  version: 9.0.0
+  description: The following analytic detects the execution of the `Get-WmiObject`
+    cmdlet with the `DS_User` class parameter via PowerShell Script Block Logging
+    (EventCode=4104). It leverages logs to identify attempts to query all domain users
+    using WMI. This activity is significant as it may indicate an adversary or Red
+    Team operation attempting to enumerate domain users for situational awareness
+    and Active Directory discovery. If confirmed malicious, this behavior could lead
+    to further reconnaissance, enabli
+  author: Teoderick Contreras, Mauricio Velazco, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - active-directory-discovery
+  mitre_attack:
+    techniques:
+    - id: T1087.002
+      name: Technique T1087.002
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/powershell_script_block_logging/sbl_xml.log
+    description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

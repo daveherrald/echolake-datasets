@@ -1,0 +1,35 @@
+metadata:
+  name: windows-unusual-count-of-users-fail-to-auth-wth-explicitcredentials
+  version: 8.0.0
+  description: The following analytic identifies a source user failing to authenticate
+    with multiple users using explicit credentials on a host. It leverages Windows
+    Event Code 4648 and calculates the standard deviation for each host, using the
+    3-sigma rule to detect anomalies. This behavior is significant as it may indicate
+    a Password Spraying attack, where an adversary attempts to gain initial access
+    or elevate privileges. If confirmed malicious, this activity could lead to unauthorized
+    access, privilege esc
+  author: Mauricio Velazco, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - active-directory-password-spraying
+  - insider-threat
+  - volt-typhoon
+  mitre_attack:
+    techniques:
+    - id: T1110.003
+      name: Technique T1110.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1110.003/purplesharp_explicit_credential_spray_xml/windows-security.log
+    description: XmlWinEventLog:Security - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

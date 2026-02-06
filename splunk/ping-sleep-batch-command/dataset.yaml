@@ -1,0 +1,45 @@
+metadata:
+  name: ping-sleep-batch-command
+  version: 11.0.0
+  description: 'The following analytic identifies the execution of ping sleep batch
+    commands.
+
+    It leverages data from Endpoint Detection and Response (EDR) agents, focusing
+    on
+
+    process and parent process command-line details. This activity is significant
+    as
+
+    it indicates an attempt to delay malicious code execution, potentially evading
+    detection
+
+    or sandbox analysis. If confirmed malicious, this technique allows attackers to
+
+    bypass security measures, making it harder to detect and analyze their activities,
+
+    thereby '
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - warzone-rat
+  - quasar-rat
+  - data-destruction
+  mitre_attack:
+    techniques:
+    - id: T1497.003
+      name: Technique T1497.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1497.003/ping_sleep/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

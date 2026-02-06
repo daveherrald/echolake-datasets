@@ -1,0 +1,33 @@
+metadata:
+  name: windows-modify-registry-valleyrat-c2-config
+  version: 8.0.0
+  description: The following analytic detects modifications to theregistry related
+    to ValleyRAT C2 configuration. Specifically,  it monitors changes in registry
+    keys where ValleyRAT saves the IP address and port information of its command-and-control
+    (C2) server. This activity is a key indicator of ValleyRAT attempting to establish
+    persistent communication with its C2 infrastructure. By identifying these unauthorized
+    registry modifications, security analysts can quickly detect malicious configurations
+    and inve
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - valleyrat
+  mitre_attack:
+    techniques:
+    - id: T1112
+      name: Technique T1112
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1112/valleyrat_c2_reg2/valleyrat_c2_reg2.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,35 @@
+metadata:
+  name: asl-aws-iam-successful-group-deletion
+  version: 8.0.0
+  description: The following analytic detects the successful deletion of a group within
+    AWS IAM, leveraging CloudTrail IAM events. This action, while not inherently malicious,
+    can serve as a precursor to more sinister activities, such as unauthorized access
+    or privilege escalation attempts. By monitoring for such deletions, the analytic
+    aids in identifying potential preparatory steps towards an attack, allowing for
+    early detection and mitigation. The identification of this behavior is crucial
+    for a SOC to prev
+  author: Patrick Bareiss, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - aws-iam-privilege-escalation
+  mitre_attack:
+    techniques:
+    - id: T1069.003
+      name: Technique T1069.003
+    - id: T1098
+      name: Technique T1098
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1098/aws_iam_successful_group_deletion/asl_ocsf_cloudtrail.json
+    description: aws_asl - aws:asl
+    format: jsonl
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

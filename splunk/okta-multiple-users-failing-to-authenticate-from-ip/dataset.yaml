@@ -1,0 +1,33 @@
+metadata:
+  name: okta-multiple-users-failing-to-authenticate-from-ip
+  version: 7.0.0
+  description: The following analytic identifies instances where more than 10 unique
+    user accounts have failed to authenticate from a single IP address within a 5-minute
+    window in an Okta tenant. This detection uses OktaIm2 logs ingested via the Splunk
+    Add-on for Okta Identity Cloud. Such activity is significant as it may indicate
+    brute-force attacks or password spraying attempts. If confirmed malicious, this
+    behavior suggests an external entity is attempting to compromise multiple user
+    accounts, potentially l
+  author: Michael Haag, Mauricio Velazco, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - okta-account-takeover
+  mitre_attack:
+    techniques:
+    - id: T1110.003
+      name: Technique T1110.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1110.003/okta_multiple_users_from_ip/okta_multiple_users_from_ip.log
+    description: Okta - OktaIM2:log
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

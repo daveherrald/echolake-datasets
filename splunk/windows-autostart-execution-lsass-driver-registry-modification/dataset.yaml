@@ -1,0 +1,32 @@
+metadata:
+  name: windows-autostart-execution-lsass-driver-registry-modification
+  version: 7.0.0
+  description: The following analytic detects modifications to undocumented registry
+    keys that allow a DLL to load into lsass.exe, potentially capturing credentials.
+    It leverages the Endpoint.Registry data model to identify changes to \CurrentControlSet\Services\NTDS\DirectoryServiceExtPt
+    or \CurrentControlSet\Services\NTDS\LsaDbExtPt. This activity is significant as
+    it indicates a possible attempt to inject malicious code into the Local Security
+    Authority Subsystem Service (LSASS), which can lead to credentia
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - windows-registry-abuse
+  mitre_attack:
+    techniques:
+    - id: T1547.008
+      name: Technique T1547.008
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1547.008/atomic_red_team/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

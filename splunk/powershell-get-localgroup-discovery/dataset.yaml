@@ -1,0 +1,33 @@
+metadata:
+  name: powershell-get-localgroup-discovery
+  version: 7.0.0
+  description: 'The following analytic identifies the use of the `get-localgroup`
+    command executed via PowerShell or cmd.exe to enumerate local groups on an endpoint.
+    This detection leverages data from Endpoint Detection and Response (EDR) agents,
+    focusing on process names and command-line arguments. Monitoring this activity
+    is significant as it may indicate an attacker attempting to gather information
+    about local group memberships, which can be a precursor to privilege escalation.
+    If confirmed malicious, this '
+  author: Michael Haag, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - active-directory-discovery
+  mitre_attack:
+    techniques:
+    - id: T1069.001
+      name: Technique T1069.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1069.001/atomic_red_team/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

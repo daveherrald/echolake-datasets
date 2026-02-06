@@ -1,0 +1,35 @@
+metadata:
+  name: windows-sensitive-group-discovery-with-net
+  version: 5.0.0
+  description: The following analytic detects the execution of `net.exe` with command-line
+    arguments used to query elevated domain or sensitive groups. It leverages data
+    from Endpoint Detection and Response (EDR) agents, focusing on process names and
+    command-line executions. This activity is significant as it indicates potential
+    reconnaissance efforts by adversaries to identify high-privileged users within
+    Active Directory. If confirmed malicious, this behavior could lead to further
+    attacks aimed at compromisi
+  author: Mauricio Velazco, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - active-directory-discovery
+  - volt-typhoon
+  - rhysida-ransomware
+  mitre_attack:
+    techniques:
+    - id: T1069.002
+      name: Technique T1069.002
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1069.002/AD_discovery/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

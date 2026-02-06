@@ -1,0 +1,35 @@
+metadata:
+  name: windows-disable-windows-group-policy-features-through-registry
+  version: 12.0.0
+  description: The following analytic detects suspicious registry modifications aimed
+    at disabling Windows Group Policy features. It leverages data from the Endpoint.Registry
+    data model, focusing on specific registry paths and values associated with disabling
+    key Windows functionalities. This activity is significant because it is commonly
+    used by ransomware to hinder mitigation and forensic response efforts. If confirmed
+    malicious, this behavior could severely impair the ability of security teams to
+    analyze an
+  author: Steven Dick, Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - ransomware
+  - cisa-aa23-347a
+  - windows-defense-evasion-tactics
+  mitre_attack:
+    techniques:
+    - id: T1112
+      name: Technique T1112
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1112/ransomware_disable_reg/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

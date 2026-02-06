@@ -1,0 +1,35 @@
+metadata:
+  name: windows-disableantispyware-registry
+  version: 8.0.0
+  description: The following analytic detects the modification of the Windows Registry
+    key "DisableAntiSpyware" being set to disable. This detection leverages data from
+    the Endpoint.Registry datamodel, specifically looking for the registry value name
+    "DisableAntiSpyware" with a value of "0x00000001". This activity is significant
+    as it is commonly associated with Ryuk ransomware infections, indicating potential
+    malicious intent to disable Windows Defender. If confirmed malicious, this action
+    could allow attacke
+  author: Rod Soto, Jose Hernandez, Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - azorult
+  - ryuk-ransomware
+  - windows-registry-abuse
+  mitre_attack:
+    techniques:
+    - id: T1562.001
+      name: Technique T1562.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.001/atomic_red_team/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

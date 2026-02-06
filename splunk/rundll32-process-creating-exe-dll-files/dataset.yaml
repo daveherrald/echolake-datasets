@@ -1,0 +1,34 @@
+metadata:
+  name: rundll32-process-creating-exe-dll-files
+  version: 8.0.0
+  description: 'The following analytic detects a rundll32 process creating executable
+    (.exe) or dynamic link library (.dll) files. It leverages Sysmon EventCode 11
+    to identify instances where rundll32.exe generates these file types. This activity
+    is significant because rundll32 is often exploited by malware, such as IcedID,
+    to drop malicious payloads in directories like Temp, AppData, or ProgramData.
+    If confirmed malicious, this behavior could allow an attacker to execute arbitrary
+    code, establish persistence, '
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - icedid
+  - living-off-the-land
+  mitre_attack:
+    techniques:
+    - id: T1218.011
+      name: Technique T1218.011
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/icedid/inf_icedid/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

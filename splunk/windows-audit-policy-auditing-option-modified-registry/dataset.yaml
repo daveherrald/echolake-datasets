@@ -1,0 +1,33 @@
+metadata:
+  name: windows-audit-policy-auditing-option-modified-registry
+  version: 4.0.0
+  description: The following analytic detects potentially suspicious modifications
+    to the Audit Policy auditing options registry values. It leverages data from the
+    Endpoint.Registry data model, focusing on changes to one of the following auditing
+    option values "CrashOnAuditFail", "FullPrivilegeAuditing", "AuditBaseObjects"
+    and "AuditBaseDirectories" within the "HKLM\\System\\CurrentControlSet\\Control\\Lsa\\"
+    registry key. This activity is significant as it could be a sign of a threat actor
+    trying to tamper wi
+  author: Nasreddine Bencherchali, Bhavin Patel, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - windows-audit-policy-tampering
+  mitre_attack:
+    techniques:
+    - id: T1547.014
+      name: Technique T1547.014
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.002/auditpol_tampering/auditpol_tampering_sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

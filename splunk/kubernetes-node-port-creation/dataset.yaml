@@ -1,0 +1,33 @@
+metadata:
+  name: kubernetes-node-port-creation
+  version: 5.0.0
+  description: The following analytic detects the creation of a Kubernetes NodePort
+    service, which exposes a service to the external network. It identifies this activity
+    by monitoring Kubernetes Audit logs for the creation of NodePort services. This
+    behavior is significant for a SOC as it could allow an attacker to access internal
+    services, posing a threat to the Kubernetes infrastructure's integrity and security.
+    If confirmed malicious, this activity could lead to data breaches, service disruptions,
+    or unauth
+  author: Patrick Bareiss, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - kubernetes-security
+  mitre_attack:
+    techniques:
+    - id: T1204
+      name: Technique T1204
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1204/kube_audit_create_node_port_service/kube_audit_create_node_port_service.json
+    description: kubernetes - _json
+    format: jsonl
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,29 @@
+metadata:
+  name: detect-spike-in-aws-security-hub-alerts-for-ec2-instance
+  version: 7.0.0
+  description: The following analytic identifies a spike in the number of AWS Security
+    Hub alerts for an EC2 instance within a 4-hour interval. It leverages AWS Security
+    Hub findings data, calculating the average and standard deviation of alerts to
+    detect anomalies. This activity is significant for a SOC as a sudden increase
+    in alerts may indicate potential security incidents or misconfigurations requiring
+    immediate attention. If confirmed malicious, this could signify an ongoing attack,
+    leading to unauthorize
+  author: Bhavin Patel, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - aws-security-hub-alerts
+  - critical-alerts
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/suspicious_behaviour/security_hub_ec2_spike/security_hub_ec2_spike.json
+    description: aws_securityhub_finding - aws:securityhub:finding
+    format: jsonl
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

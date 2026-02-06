@@ -1,0 +1,40 @@
+metadata:
+  name: cisco-secure-firewall-citrix-netscaler-memory-overread-attempt
+  version: 2.0.0
+  description: 'This analytic detects exploitation activity of CVE-2025-5777 using
+    Cisco Secure Firewall Intrusion Events.
+
+    It leverages Cisco Secure Firewall Threat Defense IntrusionEvent logs to identify
+    cases where Snort signature 65118 (Citrix NetScaler memory overread attempt) is
+    triggered
+
+    If confirmed malicious, this behavior is highly indicative of a potential exploitation
+    of CVE-2025-5777.
+
+    '
+  author: Michael Haag, Nasreddine Bencherchali, Splunk, Talos NTDR
+  tags:
+  - ttp
+  - splunk-security-content
+  - cisco-secure-firewall-threat-defense-analytics
+  - citrix-netscaler-adc-and-netscaler-gateway-cve-2025-5777
+  mitre_attack:
+    techniques:
+    - id: T1203
+      name: Technique T1203
+    - id: T1059
+      name: Technique T1059
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_secure_firewall_threat_defense/intrusion_event/intrusion_events.log
+    description: not_applicable - cisco:sfw:estreamer
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

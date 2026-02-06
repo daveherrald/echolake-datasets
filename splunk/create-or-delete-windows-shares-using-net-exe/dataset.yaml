@@ -1,0 +1,35 @@
+metadata:
+  name: create-or-delete-windows-shares-using-net-exe
+  version: 14.0.0
+  description: The following analytic detects the creation or deletion of Windows
+    shares using the net.exe command. It leverages Endpoint Detection and Response
+    (EDR) data to identify processes involving net.exe with actions related to share
+    management. This activity is significant because it may indicate an attacker attempting
+    to manipulate network shares for malicious purposes, such as data exfiltration,
+    malware distribution, or establishing persistence. If confirmed malicious, this
+    activity could lead to un
+  author: Bhavin Patel, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - hidden-cobra-malware
+  - cisa-aa22-277a
+  - windows-post-exploitation
+  mitre_attack:
+    techniques:
+    - id: T1070.005
+      name: Technique T1070.005
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1070.005/atomic_red_team/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

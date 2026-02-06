@@ -1,0 +1,35 @@
+metadata:
+  name: o365-applicationimpersonation-role-assigned
+  version: 7.0.0
+  description: The following analytic detects the assignment of the ApplicationImpersonation
+    role in Office 365 to a user or application. It uses the Office 365 Management
+    Activity API to monitor Azure Active Directory audit logs for role assignment
+    events. This activity is significant because the ApplicationImpersonation role
+    allows impersonation of any user, enabling access to and modification of their
+    mailbox. If confirmed malicious, an attacker could gain unauthorized access to
+    sensitive information, manip
+  author: Mauricio Velazco, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - office-365-persistence-mechanisms
+  - office-365-collection-techniques
+  - nobelium-group
+  mitre_attack:
+    techniques:
+    - id: T1098.002
+      name: Technique T1098.002
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1098.002/application_impersonation_role_assigned/application_impersonation_role_assigned.log
+    description: O365 - o365:management:activity
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

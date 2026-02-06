@@ -1,0 +1,35 @@
+metadata:
+  name: network-connection-discovery-with-netstat
+  version: 6.0.0
+  description: The following analytic detects the execution of `netstat.exe` with
+    command-line arguments to list network connections on a system. It leverages data
+    from Endpoint Detection and Response (EDR) agents, focusing on process names,
+    command-line executions, and parent processes. This activity is significant as
+    both Red Teams and adversaries use `netstat.exe` for situational awareness and
+    Active Directory discovery. If confirmed malicious, this behavior could allow
+    attackers to map network connections,
+  author: Mauricio Velazco, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - cisa-aa22-277a
+  - windows-post-exploitation
+  - active-directory-discovery
+  mitre_attack:
+    techniques:
+    - id: T1049
+      name: Technique T1049
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1049/AD_discovery/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

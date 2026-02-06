@@ -1,0 +1,35 @@
+metadata:
+  name: windows-process-injection-remote-thread
+  version: 8.0.0
+  description: The following analytic detects suspicious remote thread execution in
+    processes such as Taskmgr.exe, calc.exe, and notepad.exe, which may indicate process
+    injection by malware like Qakbot. This detection leverages Sysmon EventCode 8
+    to identify remote thread creation in specific target processes. This activity
+    is significant as it often signifies an attempt by malware to inject malicious
+    code into legitimate processes, potentially leading to unauthorized code execution.
+    If confirmed malicious, th
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - qakbot
+  - graceful-wipe-out-attack
+  - warzone-rat
+  mitre_attack:
+    techniques:
+    - id: T1055.002
+      name: Technique T1055.002
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/qakbot/qbot_wermgr2/sysmon_wermgr2.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

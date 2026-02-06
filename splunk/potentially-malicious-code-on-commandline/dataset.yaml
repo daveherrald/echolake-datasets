@@ -1,0 +1,33 @@
+metadata:
+  name: potentially-malicious-code-on-commandline
+  version: 6.0.0
+  description: The following analytic detects potentially malicious command lines
+    using a pretrained machine learning text classifier. It identifies unusual keyword
+    combinations in command lines, such as "streamreader," "webclient," "mutex," "function,"
+    and "computehash," which are often associated with adversarial PowerShell code
+    execution for C2 communication. This detection leverages data from Endpoint Detection
+    and Response (EDR) agents, focusing on command lines longer than 200 characters.
+    This activity i
+  author: Michael Hart, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - suspicious-command-line-executions
+  mitre_attack:
+    techniques:
+    - id: T1059.003
+      name: Technique T1059.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/malicious_cmd_line_samples/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

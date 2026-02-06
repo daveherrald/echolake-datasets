@@ -1,0 +1,33 @@
+metadata:
+  name: windows-findstr-gpp-discovery
+  version: 8.0.0
+  description: The following analytic detects the use of the findstr command to search
+    for unsecured credentials in Group Policy Preferences (GPP). It leverages data
+    from Endpoint Detection and Response (EDR) agents, focusing on command-line executions
+    involving findstr.exe with references to SYSVOL and cpassword. This activity is
+    significant because it indicates an attempt to locate and potentially decrypt
+    embedded credentials in GPP, which could lead to unauthorized access. If confirmed
+    malicious, this could
+  author: Mauricio Velazco, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - active-directory-privilege-escalation
+  mitre_attack:
+    techniques:
+    - id: T1552.006
+      name: Technique T1552.006
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1552.006/findstr_gpp_discovery/windows-security.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

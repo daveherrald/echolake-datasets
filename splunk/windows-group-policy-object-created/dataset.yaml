@@ -1,0 +1,36 @@
+metadata:
+  name: windows-group-policy-object-created
+  version: 8.0.0
+  description: The following analytic detects the creation of a new Group Policy Object
+    (GPO) by leveraging Event IDs 5136 and 5137. This detection uses directory service
+    change events to identify when a new GPO is created. Monitoring GPO creation is
+    crucial as adversaries can exploit GPOs to escalate privileges or deploy malware
+    across an Active Directory network. If confirmed malicious, this activity could
+    allow attackers to control system configurations, deploy ransomware, or propagate
+    malware, leading to w
+  author: Mauricio Velazco
+  tags:
+  - ttp
+  - splunk-security-content
+  - active-directory-privilege-escalation
+  - sneaky-active-directory-persistence-tricks
+  mitre_attack:
+    techniques:
+    - id: T1078.002
+      name: Technique T1078.002
+    - id: T1484.001
+      name: Technique T1484.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1484.001/group_policy_created/windows-security.log
+    description: XmlWinEventLog:Security - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

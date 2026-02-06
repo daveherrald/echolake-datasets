@@ -1,0 +1,36 @@
+metadata:
+  name: windows-usbstor-registry-key-modification
+  version: 4.0.0
+  description: This analytic is used to identify when a USB removable media device
+    is attached to a Windows host. In this scenario we are querying the Endpoint Registry
+    data model to look for modifications to the HKLM\System\CurrentControlSet\Enum\USBSTOR\
+    key. Adversaries and Insider Threats may use removable media devices for several
+    malicious activities, including initial access, execution, and exfiltration.
+  author: Steven Dick
+  tags:
+  - anomaly
+  - splunk-security-content
+  - data-protection
+  - apt37-rustonotto-and-fadestealer
+  mitre_attack:
+    techniques:
+    - id: T1200
+      name: Technique T1200
+    - id: T1025
+      name: Technique T1025
+    - id: T1091
+      name: Technique T1091
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1200/sysmon_usb_use_execution/sysmon_usb_use_execution.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

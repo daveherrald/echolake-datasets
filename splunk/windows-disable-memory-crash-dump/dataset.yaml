@@ -1,0 +1,35 @@
+metadata:
+  name: windows-disable-memory-crash-dump
+  version: 8.0.0
+  description: The following analytic detects attempts to disable the memory crash
+    dump feature on Windows systems by setting the registry value to 0. It leverages
+    data from the Endpoint.Registry datamodel, specifically monitoring changes to
+    the CrashDumpEnabled registry key. This activity is significant because disabling
+    crash dumps can hinder forensic analysis and incident response efforts. If confirmed
+    malicious, this action could be part of a broader attack strategy, such as data
+    destruction or system dest
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - ransomware
+  - data-destruction
+  - windows-registry-abuse
+  mitre_attack:
+    techniques:
+    - id: T1485
+      name: Technique T1485
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/hermetic_wiper/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

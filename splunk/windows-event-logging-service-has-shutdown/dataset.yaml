@@ -1,0 +1,35 @@
+metadata:
+  name: windows-event-logging-service-has-shutdown
+  version: 4.0.0
+  description: The following analytic detects the shutdown of the Windows Event Log
+    service by leveraging Windows Event ID 1100. This event is logged every time the
+    service stops, including during normal system shutdowns. Monitoring this activity
+    is crucial as it can indicate attempts to cover tracks or disable logging. If
+    confirmed malicious, an attacker could hide their activities, making it difficult
+    to trace their actions and investigate further incidents. Analysts should verify
+    if the shutdown was planned
+  author: Mauricio Velazco, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - windows-log-manipulation
+  - ransomware
+  - clop-ransomware
+  mitre_attack:
+    techniques:
+    - id: T1070.001
+      name: Technique T1070.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1070.001/suspicious_event_log_service_behavior/windows-xml.log
+    description: XmlWinEventLog:Security - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

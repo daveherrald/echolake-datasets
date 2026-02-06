@@ -1,0 +1,35 @@
+metadata:
+  name: windows-mshta-writing-to-world-writable-path
+  version: 7.0.0
+  description: The following analytic identifies instances of `mshta.exe` writing
+    files to world-writable directories. It leverages Sysmon EventCode 11 logs to
+    detect file write operations by `mshta.exe` to directories like `C:\Windows\Tasks`
+    and `C:\Windows\Temp`. This activity is significant as it often indicates an attempt
+    to establish persistence or execute malicious code, deviating from the utility's
+    legitimate use. If confirmed malicious, this behavior could lead to the execution
+    of multi-stage payloads,
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - apt29-diplomatic-deceptions-with-wineloader
+  - suspicious-mshta-activity
+  - xworm
+  mitre_attack:
+    techniques:
+    - id: T1218.005
+      name: Technique T1218.005
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218.005/atomic_red_team/mshta_tasks_windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

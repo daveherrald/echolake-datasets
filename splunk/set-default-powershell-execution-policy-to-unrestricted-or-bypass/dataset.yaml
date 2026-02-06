@@ -1,0 +1,35 @@
+metadata:
+  name: set-default-powershell-execution-policy-to-unrestricted-or-bypass
+  version: 17.0.0
+  description: The following analytic detects changes to the PowerShell ExecutionPolicy
+    in the registry to "Unrestricted" or "Bypass." It leverages data from Endpoint
+    Detection and Response (EDR) agents, focusing on registry modifications under
+    the path *Software\Microsoft\Powershell\1\ShellIds\Microsoft.PowerShell*. This
+    activity is significant because setting the ExecutionPolicy to these values can
+    allow the execution of potentially malicious scripts without restriction. If confirmed
+    malicious, this could en
+  author: Steven Dick, Patrick Bareiss, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - hafnium-group
+  - hermetic-wiper
+  - credential-dumping
+  mitre_attack:
+    techniques:
+    - id: T1059.001
+      name: Technique T1059.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/powershell_execution_policy/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

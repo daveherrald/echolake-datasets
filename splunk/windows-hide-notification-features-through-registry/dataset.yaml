@@ -1,0 +1,35 @@
+metadata:
+  name: windows-hide-notification-features-through-registry
+  version: 11.0.0
+  description: The following analytic detects suspicious registry modifications aimed
+    at hiding common Windows notification features on a compromised host. It leverages
+    data from the Endpoint.Registry data model, focusing on specific registry paths
+    and values. This activity is significant as it is often used by ransomware to
+    obscure visual indicators, increasing the impact of the attack. If confirmed malicious,
+    this could prevent users from noticing critical system alerts, thereby aiding
+    the attacker in mainta
+  author: Teoderick Contreras, Splunk, Steven Dick
+  tags:
+  - anomaly
+  - splunk-security-content
+  - ransomware
+  - windows-defense-evasion-tactics
+  - windows-registry-abuse
+  mitre_attack:
+    techniques:
+    - id: T1112
+      name: Technique T1112
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1112/ransomware_disable_reg/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

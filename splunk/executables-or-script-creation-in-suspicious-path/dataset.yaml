@@ -1,0 +1,35 @@
+metadata:
+  name: executables-or-script-creation-in-suspicious-path
+  version: 21.0.0
+  description: 'The following analytic identifies the creation of executables or scripts
+    in suspicious file paths on Windows systems. It leverages the Endpoint.Filesystem
+    data model to detect files with specific extensions (e.g., .exe, .dll, .ps1) created
+    in uncommon directories (e.g., \windows\fonts\, \users\public\). This activity
+    is significant as adversaries often use these paths to evade detection and maintain
+    persistence. If confirmed malicious, this behavior could allow attackers to execute
+    unauthorized '
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - plugx
+  - warzone-rat
+  - swift-slicer
+  mitre_attack:
+    techniques:
+    - id: T1036
+      name: Technique T1036
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1036/executables_suspicious_file_path/exec_susp_path2.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

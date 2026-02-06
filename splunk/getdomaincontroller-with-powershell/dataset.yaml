@@ -1,0 +1,33 @@
+metadata:
+  name: getdomaincontroller-with-powershell
+  version: 6.0.0
+  description: The following analytic detects the execution of `powershell.exe` with
+    the `Get-DomainController` command, which is used to discover remote systems within
+    a Windows domain. This detection leverages data from Endpoint Detection and Response
+    (EDR) agents, focusing on process names and command-line arguments. Monitoring
+    this activity is crucial as it may indicate an attempt to enumerate domain controllers,
+    a common tactic in Active Directory discovery. If confirmed malicious, this activity
+    could all
+  author: Mauricio Velazco, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - active-directory-discovery
+  mitre_attack:
+    techniques:
+    - id: T1018
+      name: Technique T1018
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1018/AD_discovery/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

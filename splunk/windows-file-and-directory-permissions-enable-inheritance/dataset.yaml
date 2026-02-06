@@ -1,0 +1,34 @@
+metadata:
+  name: windows-file-and-directory-permissions-enable-inheritance
+  version: 4.0.0
+  description: The following analytic detects the enabling of permission inheritance
+    using ICACLS. This analytic identifies instances where ICACLS commands are used
+    to enable permission inheritance on files or directories. The /inheritance:e flag,
+    which restores inherited permissions from a parent directory, is monitored to
+    detect changes that might reapply broader access control settings. Enabling inheritance
+    can indicate legitimate administrative actions but may also signal attempts to
+    override restrictive c
+  author: Teoderick Contreras, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - crypto-stealer
+  - netsupport-rmm-tool-abuse
+  mitre_attack:
+    techniques:
+    - id: T1222.001
+      name: Technique T1222.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1222.001/icacls_inheritance/icacls_process_1.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

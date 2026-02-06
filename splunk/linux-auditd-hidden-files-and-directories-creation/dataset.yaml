@@ -1,0 +1,35 @@
+metadata:
+  name: linux-auditd-hidden-files-and-directories-creation
+  version: 7.0.0
+  description: 'The following analytic detects suspicious creation of hidden files
+    and directories, which may indicate an attacker''s attempt to conceal malicious
+    activities or unauthorized data. Hidden files and directories are often used to
+    evade detection by security tools and administrators, providing a stealthy means
+    for storing malware, logs, or sensitive information. By monitoring for unusual
+    or unauthorized creation of hidden files and directories, this analytic helps
+    identify potential attempts to hide '
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - linux-living-off-the-land
+  - linux-privilege-escalation
+  - linux-persistence-techniques
+  mitre_attack:
+    techniques:
+    - id: T1083
+      name: Technique T1083
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1083/linux_auditd_hidden_file/auditd_execve_hidden_file.log
+    description: auditd - auditd
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

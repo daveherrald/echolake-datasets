@@ -1,0 +1,35 @@
+metadata:
+  name: windows-uac-bypass-suspicious-child-process
+  version: 9.0.0
+  description: The following analytic detects when an executable known for User Account
+    Control (UAC) bypass exploitation spawns a child process in a user-controlled
+    location or a command shell executable (e.g., cmd.exe, powershell.exe). This detection
+    leverages Sysmon EventID 1 data, focusing on high or system integrity level processes
+    with specific parent-child process relationships. This activity is significant
+    as it may indicate an attacker has successfully used a UAC bypass exploit to escalate
+    privileges.
+  author: Steven Dick
+  tags:
+  - ttp
+  - splunk-security-content
+  - windows-defense-evasion-tactics
+  - living-off-the-land
+  - castle-rat
+  mitre_attack:
+    techniques:
+    - id: T1548.002
+      name: Technique T1548.002
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1548.002/uac_behavior/uac_behavior_sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,34 @@
+metadata:
+  name: windows-new-inprocserver32-added
+  version: 8.0.0
+  description: 'The following analytic detects the addition of new InProcServer32
+    registry keys on Windows endpoints. It leverages data from the Endpoint.Registry
+    datamodel to identify changes in registry paths associated with InProcServer32.
+    This activity is significant because malware often uses this mechanism to achieve
+    persistence or execute malicious code by registering a new InProcServer32 key
+    pointing to a harmful DLL. If confirmed malicious, this could allow an attacker
+    to persist in the environment or '
+  author: Michael Haag, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - hellcat-ransomware
+  - outlook-rce-cve-2024-21378
+  mitre_attack:
+    techniques:
+    - id: T1112
+      name: Technique T1112
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566/cve-2024-21378/inprocserver32_windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

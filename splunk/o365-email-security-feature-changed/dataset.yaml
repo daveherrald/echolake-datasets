@@ -1,0 +1,35 @@
+metadata:
+  name: o365-email-security-feature-changed
+  version: 7.0.0
+  description: The following analytic identifies when specific O365 advanced security
+    settings are altered within the Office 365 tenant. If an attacker successfully
+    disables O365 security settings, they can operate within the tenant with reduced
+    risk of detection. This can lead to unauthorized data access, data exfiltration,
+    account compromise, or other malicious activities without leaving a detailed audit
+    trail.
+  author: Steven Dick
+  tags:
+  - ttp
+  - splunk-security-content
+  - office-365-persistence-mechanisms
+  - office-365-account-takeover
+  mitre_attack:
+    techniques:
+    - id: T1562.001
+      name: Technique T1562.001
+    - id: T1562.008
+      name: Technique T1562.008
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566/o365_various_alerts/o365_various_alerts.log
+    description: o365 - o365:management:activity
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,35 @@
+metadata:
+  name: enumerate-users-local-group-using-telegram
+  version: 9.0.0
+  description: The following analytic detects a Telegram process enumerating all network
+    users in a local group. It leverages EventCode 4798, which is generated when a
+    process enumerates a user's security-enabled local groups on a computer or device.
+    This activity is significant as it may indicate an attempt to gather information
+    on user accounts, a common precursor to further malicious actions. If confirmed
+    malicious, this behavior could allow an attacker to map out user accounts, potentially
+    leading to privi
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - xmrig
+  - compromised-windows-host
+  - water-gamayun
+  mitre_attack:
+    techniques:
+    - id: T1087
+      name: Technique T1087
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1087/enumerate_users_local_group_using_telegram/windows-xml.log
+    description: XmlWinEventLog:Security - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

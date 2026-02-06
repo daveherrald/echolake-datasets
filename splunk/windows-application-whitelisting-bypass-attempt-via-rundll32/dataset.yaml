@@ -1,0 +1,35 @@
+metadata:
+  name: windows-application-whitelisting-bypass-attempt-via-rundll32
+  version: 1.0.0
+  description: "The following analytic detects the execution of rundll32.exe calling\
+    \ one of the following DLLs:\n\n- Advpack.dll\n- Ieadvpack.dll\n- Syssetup.dll\n\
+    - Setupapi.dll\n\nwith one of the following functions: \"LaunchINFSection\", \"\
+    InstallHinfSection\", \"SetupInfObjectInstallAction\".\nThis method is identified\
+    \ through Endpoint Detection and Response (EDR) telemetry, \nfocusing on command-line\
+    \ executions and process details. \nThis activity is significant as it indicates\
+    \ a potential application\ncontrol or whitelisti"
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - suspicious-rundll32-activity
+  - living-off-the-land
+  - compromised-windows-host
+  mitre_attack:
+    techniques:
+    - id: T1218.011
+      name: Technique T1218.011
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218.011/atomic_red_team/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,36 @@
+metadata:
+  name: github-enterprise-repository-archived
+  version: 3.0.0
+  description: The following analytic detects when a repository is archived in GitHub
+    Enterprise. The detection monitors GitHub Enterprise audit logs for repository
+    archival events by tracking actor details, repository information, and associated
+    metadata. For a SOC, identifying repository archival is important as it could
+    indicate attempts to make critical code inaccessible or preparation for repository
+    deletion. While archiving is a legitimate feature, unauthorized archival of active
+    repositories could signa
+  author: Patrick Bareiss, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - github-malicious-activity
+  - npm-supply-chain-compromise
+  mitre_attack:
+    techniques:
+    - id: T1485
+      name: Technique T1485
+    - id: T1195
+      name: Technique T1195
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1485/github_archived_repository/github.json
+    description: http:github - httpevent
+    format: jsonl
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

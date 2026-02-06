@@ -1,0 +1,39 @@
+metadata:
+  name: powershell-webrequest-using-memory-stream
+  version: 6.0.0
+  description: The following analytic detects the use of .NET classes in PowerShell
+    to download a URL payload directly into memory, a common fileless malware staging
+    technique. It leverages PowerShell Script Block Logging (EventCode=4104) to identify
+    suspicious PowerShell commands involving `system.net.webclient`, `system.net.webrequest`,
+    and `IO.MemoryStream`. This activity is significant as it indicates potential
+    fileless malware execution, which is harder to detect and can bypass traditional
+    file-based defe
+  author: Steven Dick
+  tags:
+  - ttp
+  - splunk-security-content
+  - moonpeak
+  - medusa-ransomware
+  - malicious-powershell
+  mitre_attack:
+    techniques:
+    - id: T1059.001
+      name: Technique T1059.001
+    - id: T1105
+      name: Technique T1105
+    - id: T1027.011
+      name: Technique T1027.011
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/gootloader/partial_ttps/windows-powershell-xml.log
+    description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

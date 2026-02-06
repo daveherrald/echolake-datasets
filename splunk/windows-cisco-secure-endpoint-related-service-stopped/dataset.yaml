@@ -1,0 +1,35 @@
+metadata:
+  name: windows-cisco-secure-endpoint-related-service-stopped
+  version: 3.0.0
+  description: The following analytic detects the suspicious termination of known
+    services commonly targeted by ransomware before file encryption. It leverages
+    Windows System Event Logs (EventCode 7036) to identify when critical services
+    such as Volume Shadow Copy, backup, and antivirus services are stopped. This activity
+    is significant because ransomware often disables these services to avoid errors
+    and ensure successful file encryption. If confirmed malicious, this behavior could
+    lead to widespread data encr
+  author: Nasreddine Bencherchali, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - security-solution-tampering
+  - scattered-lapsus$-hunters
+  - hellcat-ransomware
+  mitre_attack:
+    techniques:
+    - id: T1490
+      name: Technique T1490
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.001/cisco_secure_endpoint_tampering/service_stop.log
+    description: XmlWinEventLog:System - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

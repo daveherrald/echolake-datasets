@@ -1,0 +1,35 @@
+metadata:
+  name: linux-ssh-authorized-keys-modification
+  version: 10.0.0
+  description: 'The following analytic detects the modification of SSH Authorized
+    Keys on Linux systems. It leverages process execution data from Endpoint Detection
+    and Response (EDR) agents, specifically monitoring commands like "bash" and "cat"
+    interacting with "authorized_keys" files. This activity is significant as adversaries
+    often modify SSH Authorized Keys to establish persistent access to compromised
+    endpoints. If confirmed malicious, this behavior could allow attackers to maintain
+    unauthorized access, '
+  author: Michael Haag, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - linux-living-off-the-land
+  - hellcat-ransomware
+  - voidlink-cloud-native-linux-malware
+  mitre_attack:
+    techniques:
+    - id: T1098.004
+      name: Technique T1098.004
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1098.004/ssh_authorized_keys/authkey_linux-sysmon.log
+    description: Syslog:Linux-Sysmon/Operational - sysmon:linux
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

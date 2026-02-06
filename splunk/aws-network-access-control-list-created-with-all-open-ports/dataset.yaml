@@ -1,0 +1,33 @@
+metadata:
+  name: aws-network-access-control-list-created-with-all-open-ports
+  version: 8.0.0
+  description: The following analytic detects the creation of AWS Network Access Control
+    Lists (ACLs) with all ports open to a specified CIDR. It leverages AWS CloudTrail
+    events, specifically monitoring for `CreateNetworkAclEntry` or `ReplaceNetworkAclEntry`
+    actions with rules allowing all traffic. This activity is significant because
+    it can expose the network to unauthorized access, increasing the risk of data
+    breaches and other malicious activities. If confirmed malicious, an attacker could
+    exploit this misc
+  author: Bhavin Patel, Patrick Bareiss, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - aws-network-acl-activity
+  mitre_attack:
+    techniques:
+    - id: T1562.007
+      name: Technique T1562.007
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.007/aws_create_acl/aws_cloudtrail_events.json
+    description: aws_cloudtrail - aws:cloudtrail
+    format: jsonl
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

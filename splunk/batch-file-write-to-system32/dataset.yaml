@@ -1,0 +1,34 @@
+metadata:
+  name: batch-file-write-to-system32
+  version: 11.0.0
+  description: The following analytic detects the creation of a batch file (.bat)
+    within the Windows system directory tree, specifically in the System32 or SysWOW64
+    folders. It leverages data from the Endpoint datamodel, focusing on process and
+    filesystem events to identify this behavior. This activity is significant because
+    writing batch files to system directories can be indicative of malicious intent,
+    such as persistence mechanisms or system manipulation. If confirmed malicious,
+    this could allow an attacker
+  author: Steven Dick, Michael Haag, Rico Valdez, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - samsam-ransomware
+  - compromised-windows-host
+  mitre_attack:
+    techniques:
+    - id: T1204.002
+      name: Technique T1204.002
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1204.002/batch_file_in_system32/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

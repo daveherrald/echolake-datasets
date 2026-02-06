@@ -1,0 +1,35 @@
+metadata:
+  name: short-lived-scheduled-task
+  version: 7.0.0
+  description: 'The following analytic detects the creation and deletion of scheduled
+    tasks within a short time frame (less than 30 seconds) using Windows Security
+    EventCodes 4698 and 4699. This behavior is identified by analyzing Windows Security
+    Event Logs and leveraging the Windows TA for parsing. Such activity is significant
+    as it may indicate lateral movement or remote code execution attempts by adversaries.
+    If confirmed malicious, this could lead to unauthorized access, data exfiltration,
+    or execution of '
+  author: Mauricio Velazco, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - active-directory-lateral-movement
+  - cisa-aa22-257a
+  - cisa-aa23-347a
+  mitre_attack:
+    techniques:
+    - id: T1053.005
+      name: Technique T1053.005
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053.005/lateral_movement/windows-security.log
+    description: WinEventLog:Security - WinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

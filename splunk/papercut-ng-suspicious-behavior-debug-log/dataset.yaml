@@ -1,0 +1,35 @@
+metadata:
+  name: papercut-ng-suspicious-behavior-debug-log
+  version: 6.0.0
+  description: The following analytic identifies potential exploitation attempts on
+    a PaperCut NG server by analyzing its debug log data. It detects unauthorized
+    or suspicious access attempts from public IP addresses and searches for specific
+    URIs associated with known exploits. The detection leverages regex to parse unstructured
+    log data, focusing on admin login activities. This activity is significant as
+    it can indicate an active exploitation attempt on the server. If confirmed malicious,
+    attackers could gai
+  author: Michael Haag, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - papercut-mf-ng-vulnerability
+  mitre_attack:
+    techniques:
+    - id: T1190
+      name: Technique T1190
+    - id: T1133
+      name: Technique T1133
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/papercut/server.log
+    description: papercutng - papercutng
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

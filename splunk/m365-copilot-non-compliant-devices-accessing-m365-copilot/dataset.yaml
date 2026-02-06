@@ -1,0 +1,33 @@
+metadata:
+  name: m365-copilot-non-compliant-devices-accessing-m365-copilot
+  version: 1.0.0
+  description: Detects M365 Copilot access from non-compliant or unmanaged devices
+    that violate corporate security policies, indicating potential shadow IT usage,
+    BYOD policy violations, or compromised endpoint access. The detection filters
+    M365 Copilot Graph API events where deviceDetail.isCompliant=false or deviceDetail.isManaged=false,
+    then aggregates by user, operating system, and browser to calculate metrics including
+    event counts, unique IPs and locations, and compliance/management status over
+    time. User
+  author: Rod Soto
+  tags:
+  - anomaly
+  - splunk-security-content
+  - suspicious-microsoft-365-copilot-activities
+  mitre_attack:
+    techniques:
+    - id: T1562
+      name: Technique T1562
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/m365_copilot/m365_copilot_access.log
+    description: AuditLogs.SignIns - o365:graph:api
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

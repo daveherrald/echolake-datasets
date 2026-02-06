@@ -1,0 +1,37 @@
+metadata:
+  name: windows-change-file-association-command-to-notepad
+  version: 1.0.0
+  description: 'The following analytic detects attempts to change the command value
+    of a file association of an extension to open with Notepad.exe.
+
+    It leverages data from Endpoint Detection and Response (EDR) agents, focusing
+    on specific command-line patterns and registry modifications.
+
+    This activity is significant as it can indicate an attempt to manipulate file
+    handling behavior, a technique observed in APT and ransomware attacks like Prestige.
+
+    After changing the extension of all encrypted files to a new one,'
+  author: Teoderick Contreras, Nasreddine Bencherchali, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - prestige-ransomware
+  - compromised-windows-host
+  mitre_attack:
+    techniques:
+    - id: T1546.001
+      name: Technique T1546.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/prestige_ransomware/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

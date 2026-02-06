@@ -1,0 +1,35 @@
+metadata:
+  name: windows-impair-defense-disable-win-defender-network-protection
+  version: 8.0.0
+  description: The following analytic detects modifications to the Windows registry
+    that disable Windows Defender Network Protection. It leverages data from the Endpoint.Registry
+    data model, specifically monitoring changes to the EnableNetworkProtection registry
+    entry. This activity is significant because disabling Network Protection can leave
+    the system vulnerable to network-based threats by preventing Windows Defender
+    from analyzing and blocking malicious network activity. If confirmed malicious,
+    this action
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - windows-defense-evasion-tactics
+  - windows-registry-abuse
+  - scattered-lapsus$-hunters
+  mitre_attack:
+    techniques:
+    - id: T1562.001
+      name: Technique T1562.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.001/disable-windows-security-defender-features/windefender-bypas-2-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,33 @@
+metadata:
+  name: get-wmiobject-group-discovery-with-script-block-logging
+  version: 9.0.0
+  description: 'The following analytic detects the execution of the `Get-WMIObject
+    Win32_Group` command using PowerShell Script Block Logging (EventCode=4104). This
+    method captures the full command sent to PowerShell, allowing for detailed analysis.
+    Identifying group information on an endpoint is not inherently malicious but can
+    be suspicious based on context such as time, endpoint, and user. This activity
+    is significant as it may indicate reconnaissance efforts by an attacker. If confirmed
+    malicious, it could '
+  author: Michael Haag, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - active-directory-discovery
+  mitre_attack:
+    techniques:
+    - id: T1069.001
+      name: Technique T1069.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1069.001/atomic_red_team/windows-powershell-xml.log
+    description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

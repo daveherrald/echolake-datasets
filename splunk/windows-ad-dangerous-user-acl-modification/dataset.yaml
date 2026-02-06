@@ -1,0 +1,34 @@
+metadata:
+  name: windows-ad-dangerous-user-acl-modification
+  version: 6.0.0
+  description: 'This detection monitors the addition of the following ACLs to an Active
+    Directory user object: "Full control","All extended rights","All validated writes",
+    "Create all child objects","Delete all child objects","Delete subtree","Delete","Modify
+    permissions","Modify owner","Write all properties".  Such modifications can indicate
+    potential privilege escalation or malicious activity. Immediate investigation
+    is recommended upon alert.'
+  author: Dean Luxton
+  tags:
+  - ttp
+  - splunk-security-content
+  - sneaky-active-directory-persistence-tricks
+  mitre_attack:
+    techniques:
+    - id: T1222.001
+      name: Technique T1222.001
+    - id: T1484
+      name: Technique T1484
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1222.001/dacl_abuse/user_dacl_mod_windows-security-xml.log
+    description: XmlWinEventLog:Security - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

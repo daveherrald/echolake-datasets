@@ -1,0 +1,33 @@
+metadata:
+  name: windows-iis-server-pswa-console-access
+  version: 4.0.0
+  description: This analytic detects access attempts to the PowerShell Web Access
+    (PSWA) console on Windows IIS servers. It monitors web traffic for requests to
+    PSWA-related URIs, which could indicate legitimate administrative activity or
+    potential unauthorized access attempts. By tracking source IP, HTTP status, URI
+    path, and HTTP method, it helps identify suspicious patterns or brute-force attacks
+    targeting PSWA. This detection is crucial for maintaining the security of remote
+    PowerShell management interface
+  author: Michael Haag, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - cisa-aa24-241a
+  mitre_attack:
+    techniques:
+    - id: T1190
+      name: Technique T1190
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/pswa/iis_pswaaccess.log
+    description: ms:iis:splunk - ms:iis:splunk
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

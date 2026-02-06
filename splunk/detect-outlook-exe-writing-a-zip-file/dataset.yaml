@@ -1,0 +1,39 @@
+metadata:
+  name: detect-outlook-exe-writing-a-zip-file
+  version: 15.0.0
+  description: 'The following analytic identifies the execution of `outlook.exe` writing
+    a `.zip` file to the disk.
+
+    It leverages data from the Endpoint data model, specifically monitoring process
+    and filesystem activities.
+
+    This behavior can be significant as it may indicate the use of Outlook to deliver
+    malicious payloads or exfiltrate data via compressed files.
+
+    If confirmed malicious, this activity could lead to unauthorized data access,
+    data exfiltration, or the delivery of malware, potentially compromising t'
+  author: Bhavin Patel, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - amadey
+  - apt37-rustonotto-and-fadestealer
+  - meduza-stealer
+  mitre_attack:
+    techniques:
+    - id: T1566.001
+      name: Technique T1566.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566.001/outlook_writing_zip/outlook_writing_zip.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,35 @@
+metadata:
+  name: windows-modify-registry-disable-restricted-admin
+  version: 10.0.0
+  description: 'The following analytic detects modifications to the Windows registry
+    entry "DisableRestrictedAdmin," which controls the Restricted Admin mode behavior.
+    This detection leverages registry activity logs from endpoint data sources like
+    Sysmon or Carbon Black. Monitoring this activity is crucial as changes to this
+    setting can disable a security feature that limits credential exposure during
+    remote connections. If confirmed malicious, an attacker could weaken security
+    controls, increasing the risk of '
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - ghostredirector-iis-module-and-rungan-backdoor
+  - medusa-ransomware
+  - cisa-aa23-347a
+  mitre_attack:
+    techniques:
+    - id: T1112
+      name: Technique T1112
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1003.004/NoLMHash/lsa-reg-settings-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

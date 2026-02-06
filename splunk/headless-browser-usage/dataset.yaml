@@ -1,0 +1,33 @@
+metadata:
+  name: headless-browser-usage
+  version: 6.0.0
+  description: The following analytic detects the usage of headless browsers within
+    an organization. It identifies processes containing the "--headless" and "--disable-gpu"
+    command line arguments, which are indicative of headless browsing. This detection
+    leverages data from the Endpoint.Processes datamodel to identify such processes.
+    Monitoring headless browser usage is significant as these tools can be exploited
+    by adversaries for malicious activities like web scraping, automated testing,
+    and undetected web i
+  author: Michael Haag, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - forest-blizzard
+  mitre_attack:
+    techniques:
+    - id: T1564.003
+      name: Technique T1564.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1185/headlessbrowser/headless_mockbin.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

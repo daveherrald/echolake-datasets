@@ -1,0 +1,36 @@
+metadata:
+  name: disable-registry-tool
+  version: 13.0.0
+  description: 'The following analytic detects modifications to the Windows registry
+    aimed at disabling the Registry Editor (regedit). It leverages data from the Endpoint.Registry
+    data model, specifically monitoring changes to the registry path "*\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\DisableRegistryTools"
+    with a value of "0x00000001". This activity is significant because malware, such
+    as RATs or trojans, often disable registry tools to prevent the removal of their
+    entries, aiding in '
+  author: Teoderick Contreras, Splunk, Steven Dick
+  tags:
+  - ttp
+  - splunk-security-content
+  - windows-defense-evasion-tactics
+  - windows-registry-abuse
+  - njrat
+  mitre_attack:
+    techniques:
+    - id: T1112
+      name: Technique T1112
+    - id: T1562.001
+      name: Technique T1562.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.001/win_app_defender_disabling/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

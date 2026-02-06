@@ -1,0 +1,33 @@
+metadata:
+  name: windows-app-layer-protocol-qakbot-namedpipe
+  version: 6.0.0
+  description: The following analytic detects a suspicious process creating or connecting
+    to a potential Qakbot named pipe. It leverages Sysmon EventCodes 17 and 18, focusing
+    on specific processes known to be abused by Qakbot and identifying randomly generated
+    named pipes in GUID form. This activity is significant as Qakbot malware uses
+    named pipes for inter-process communication after code injection, facilitating
+    data theft. If confirmed malicious, this behavior could indicate a Qakbot infection,
+    leading to u
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - qakbot
+  mitre_attack:
+    techniques:
+    - id: T1071
+      name: Technique T1071
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/qakbot/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

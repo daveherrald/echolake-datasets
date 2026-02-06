@@ -1,0 +1,42 @@
+metadata:
+  name: windows-command-and-scripting-interpreter-hunting-path-traversal
+  version: 7.0.0
+  description: 'The following analytic identifies path traversal command-line executions,
+
+    leveraging data from Endpoint Detection and Response (EDR) agents. It detects
+    patterns
+
+    in command-line arguments indicative of path traversal techniques, such as multiple
+
+    instances of "/..", "\..", or "\\..". This activity is significant as it often
+    indicates
+
+    attempts to evade defenses by executing malicious code, such as through msdt.exe.
+
+    If confirmed malicious, this behavior could allow attackers to execute arbitrary
+
+    cod'
+  author: Teoderick Contreras, Michael Haag, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - windows-defense-evasion-tactics
+  - microsoft-support-diagnostic-tool-vulnerability-cve-2022-30190
+  mitre_attack:
+    techniques:
+    - id: T1059
+      name: Technique T1059
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059/path_traversal/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

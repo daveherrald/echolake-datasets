@@ -1,0 +1,33 @@
+metadata:
+  name: aws-defense-evasion-impair-security-services
+  version: 9.0.0
+  description: The following analytic detects attempts to impair or disable AWS security
+    services by monitoring specific deletion operations across GuardDuty, AWS WAF
+    (classic and v2), CloudWatch, Route 53, and CloudWatch Logs. These actions include
+    deleting detectors, rule groups, IP sets, web ACLs, logging configurations, alarms,
+    and log streams. Adversaries may perform such operations to evade detection or
+    remove visibility from defenders. By explicitly pairing eventName values with
+    their corresponding even
+  author: Bhavin Patel, Gowthamaraj Rajendran, Splunk, PashFW, Github Community
+  tags:
+  - ttp
+  - splunk-security-content
+  - aws-defense-evasion
+  mitre_attack:
+    techniques:
+    - id: T1562.008
+      name: Technique T1562.008
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.008/aws_delete_security_services/aws_cloudtrail_events.json
+    description: aws_cloudtrail - aws:cloudtrail
+    format: jsonl
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

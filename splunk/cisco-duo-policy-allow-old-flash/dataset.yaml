@@ -1,0 +1,33 @@
+metadata:
+  name: cisco-duo-policy-allow-old-flash
+  version: 1.0.0
+  description: The following analytic identifies instances where a Duo administrator
+    creates or updates a policy to allow the use of outdated Flash components, specifically
+    by detecting policy changes with the flash_remediation=no remediation attribute.
+    It leverages Duo activity logs ingested via the Cisco Security Cloud App, searching
+    for policy_update or policy_create actions and parsing the policy description
+    for indicators of weakened security controls. This behavior is significant for
+    a SOC because permit
+  author: Patrick Bareiss, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - cisco-duo-suspicious-activity
+  mitre_attack:
+    techniques:
+    - id: T1556
+      name: Technique T1556
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1556/cisco_duo_policy_allow_old_flash_and_java/cisco_duo_administrator.json
+    description: duo - cisco:duo:administrator
+    format: jsonl
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,33 @@
+metadata:
+  name: get-domainpolicy-with-powershell
+  version: 7.0.0
+  description: The following analytic detects the execution of `powershell.exe` running
+    the `Get-DomainPolicy` cmdlet, which is used to retrieve password policies in
+    a Windows domain. It leverages data from Endpoint Detection and Response (EDR)
+    agents, focusing on process names and command-line executions. This activity is
+    significant as it indicates potential reconnaissance efforts by adversaries to
+    gather domain policy information, which is crucial for planning further attacks.
+    If confirmed malicious, this c
+  author: Teoderick Contreras, Mauricio Velazco, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - active-directory-discovery
+  mitre_attack:
+    techniques:
+    - id: T1201
+      name: Technique T1201
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1201/pwd_policy_discovery/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,33 @@
+metadata:
+  name: wermgr-process-connecting-to-ip-check-web-services
+  version: 9.0.0
+  description: 'The following analytic detects the wermgr.exe process attempting to
+    connect to known IP check web services. It leverages Sysmon EventCode 22 to identify
+    DNS queries made by wermgr.exe to specific IP check services. This activity is
+    significant because wermgr.exe is typically used for Windows error reporting,
+    and its connection to these services may indicate malicious code injection, often
+    associated with malware like Trickbot. If confirmed malicious, this behavior could
+    allow attackers to recon '
+  author: Teoderick Contreras, Mauricio Velazco, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - trickbot
+  mitre_attack:
+    techniques:
+    - id: T1590.005
+      name: Technique T1590.005
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/trickbot/infection/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

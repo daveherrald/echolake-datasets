@@ -1,0 +1,35 @@
+metadata:
+  name: ryuk-wake-on-lan-command
+  version: 9.0.0
+  description: The following analytic detects the use of Wake-on-LAN commands associated
+    with Ryuk ransomware. It leverages data from Endpoint Detection and Response (EDR)
+    agents, focusing on specific process and command-line activities. This behavior
+    is significant as Ryuk ransomware uses Wake-on-LAN to power on devices in a compromised
+    network, increasing its encryption success rate. If confirmed malicious, this
+    activity could lead to widespread ransomware encryption across multiple endpoints,
+    causing signif
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - compromised-windows-host
+  - ryuk-ransomware
+  - hellcat-ransomware
+  mitre_attack:
+    techniques:
+    - id: T1059.003
+      name: Technique T1059.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.003/ryuk/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

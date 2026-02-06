@@ -1,0 +1,33 @@
+metadata:
+  name: windows-powershell-wmi-win32-scheduledjob
+  version: 8.0.0
+  description: The following analytic detects the use of the Win32_ScheduledJob WMI
+    class via PowerShell script block logging. This class, which manages scheduled
+    tasks, is disabled by default due to security concerns and must be explicitly
+    enabled through registry modifications. The detection leverages PowerShell event
+    code 4104 and script block text analysis. Monitoring this activity is crucial
+    as it may indicate malicious intent, especially if the class was enabled by an
+    attacker. If confirmed malicious, th
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - active-directory-lateral-movement
+  mitre_attack:
+    techniques:
+    - id: T1059.001
+      name: Technique T1059.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/atomic_red_team/win32_scheduledjob_windows-powershell.log
+    description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

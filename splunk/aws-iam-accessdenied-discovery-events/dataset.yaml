@@ -1,0 +1,33 @@
+metadata:
+  name: aws-iam-accessdenied-discovery-events
+  version: 7.0.0
+  description: The following analytic identifies excessive AccessDenied events within
+    an hour timeframe for IAM users in AWS. It leverages AWS CloudTrail logs to detect
+    multiple failed access attempts from the same source IP and user identity. This
+    activity is significant as it may indicate that an access key has been compromised
+    and is being misused for unauthorized discovery actions. If confirmed malicious,
+    this could allow attackers to gather information about the AWS environment, potentially
+    leading to fur
+  author: Michael Haag, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - suspicious-cloud-user-activities
+  mitre_attack:
+    techniques:
+    - id: T1580
+      name: Technique T1580
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1580/aws_iam_accessdenied_discovery_events/aws_iam_accessdenied_discovery_events.json
+    description: aws_cloudtrail - aws:cloudtrail
+    format: jsonl
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

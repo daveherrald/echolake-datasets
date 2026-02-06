@@ -1,0 +1,35 @@
+metadata:
+  name: windows-multiple-account-passwords-changed
+  version: 7.0.0
+  description: The following analytic detects instances where more than five unique
+    Windows account passwords are changed within a 10-minute interval. It leverages
+    Event Code 4724 from the Windows Security Event Log, using the wineventlog_security
+    dataset to monitor and count distinct TargetUserName values. This behavior is
+    significant as rapid password changes across multiple accounts are unusual and
+    may indicate unauthorized access or internal compromise. If confirmed malicious,
+    this activity could lead to w
+  author: Mauricio Velazco, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - azure-active-directory-persistence
+  mitre_attack:
+    techniques:
+    - id: T1098
+      name: Technique T1098
+    - id: T1078
+      name: Technique T1078
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1098/windows_multiple_passwords_changed/windows_multiple_passwords_changed.log
+    description: XmlWinEventLog:Security - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

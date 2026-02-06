@@ -1,0 +1,35 @@
+metadata:
+  name: linux-ingress-tool-transfer-hunting
+  version: 9.0.0
+  description: The following analytic detects the use of 'curl' and 'wget' commands
+    within a Linux environment. It leverages data from Endpoint Detection and Response
+    (EDR) agents, focusing on process names, user information, and command-line executions.
+    This activity is significant as 'curl' and 'wget' are commonly used for downloading
+    files, which can indicate potential ingress of malicious tools. If confirmed malicious,
+    this activity could lead to unauthorized code execution, data exfiltration, or
+    further c
+  author: Michael Haag, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - ingress-tool-transfer
+  - linux-living-off-the-land
+  - xorddos
+  mitre_attack:
+    techniques:
+    - id: T1105
+      name: Technique T1105
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1105/atomic_red_team/curl-linux-sysmon.log
+    description: Syslog:Linux-Sysmon/Operational - sysmon:linux
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,43 @@
+metadata:
+  name: cisco-nvm-suspicious-network-connection-to-ip-lookup-service-api
+  version: 4.0.0
+  description: 'This analytic identifies non-browser processes reaching out to public
+    IP lookup or geolocation services,
+
+    such as `ipinfo.io`, `icanhazip.com`, `ip-api.com`, and others.
+
+    These domains are commonly used by legitimate tools, but their usage outside of
+    browsers may indicate
+
+    network reconnaissance, virtual machine detection, or staging by malware.
+
+    This activity is observed in post-exploitation frameworks, stealer malware, and
+    advanced threat actor campaigns.
+
+    The detection relies on Cisco Network Visi'
+  author: Nasreddine Bencherchali, Splunk, Janantha Marasinghe
+  tags:
+  - anomaly
+  - splunk-security-content
+  - cisco-network-visibility-module-analytics
+  - castle-rat
+  mitre_attack:
+    techniques:
+    - id: T1590.005
+      name: Technique T1590.005
+    - id: T1016
+      name: Technique T1016
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_network_visibility_module/cisco_nvm_flowdata/nvm_flowdata.log
+    description: not_applicable - cisco:nvm:flowdata
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

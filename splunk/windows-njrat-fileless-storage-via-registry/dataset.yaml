@@ -1,0 +1,33 @@
+metadata:
+  name: windows-njrat-fileless-storage-via-registry
+  version: 7.0.0
+  description: The following analytic detects suspicious registry modifications indicative
+    of NjRat's fileless storage technique. It leverages the Endpoint.Registry data
+    model to identify specific registry paths and values commonly used by NjRat for
+    keylogging and executing DLL plugins. This activity is significant as it helps
+    evade traditional file-based detection systems, making it crucial for SOC analysts
+    to monitor. If confirmed malicious, this behavior could allow attackers to persist
+    on the host, execute
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - njrat
+  mitre_attack:
+    techniques:
+    - id: T1027.011
+      name: Technique T1027.011
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1027.011/njrat_fileless_registry_entry/njrat_registry.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

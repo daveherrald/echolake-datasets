@@ -1,0 +1,33 @@
+metadata:
+  name: detect-remote-access-software-usage-registry
+  version: 10.0.0
+  description: The following analytic detects when a known remote access software
+    is added to common persistence locations on a device within the environment. Adversaries
+    use these utilities to retain remote access capabilities to the environment. Utilities
+    in the lookup include AnyDesk, GoToMyPC, LogMeIn, TeamViewer and much more. Review
+    the lookup for the entire list and add any others.
+  author: Steven Dick
+  tags:
+  - anomaly
+  - splunk-security-content
+  - insider-threat
+  - command-and-control
+  - ransomware
+  mitre_attack:
+    techniques:
+    - id: T1219
+      name: Technique T1219
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1219/screenconnect/screenconnect_sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

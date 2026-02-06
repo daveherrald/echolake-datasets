@@ -1,0 +1,35 @@
+metadata:
+  name: hide-user-account-from-sign-in-screen
+  version: 11.0.0
+  description: The following analytic detects a suspicious registry modification that
+    hides a user account from the Windows Login screen. It leverages data from the
+    Endpoint.Registry data model, specifically monitoring changes to the registry
+    path "*\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\Userlist*" with
+    a value of "0x00000000". This activity is significant as it may indicate an adversary
+    attempting to create a hidden admin account to avoid detection and maintain persistence
+    on the compromised
+  author: Teoderick Contreras, Splunk, Steven Dick
+  tags:
+  - ttp
+  - splunk-security-content
+  - xmrig
+  - windows-registry-abuse
+  - azorult
+  mitre_attack:
+    techniques:
+    - id: T1562.001
+      name: Technique T1562.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.001/hotkey_disabled_hidden_user/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

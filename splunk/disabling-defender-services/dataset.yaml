@@ -1,0 +1,35 @@
+metadata:
+  name: disabling-defender-services
+  version: 11.0.0
+  description: The following analytic detects the disabling of Windows Defender services
+    by monitoring registry modifications. It leverages registry event data to identify
+    changes to specific registry paths associated with Defender services, where the
+    'Start' value is set to '0x00000004'. This activity is significant because disabling
+    Defender services can indicate an attempt by an adversary to evade detection and
+    maintain persistence on the endpoint. If confirmed malicious, this action could
+    allow attackers t
+  author: Teoderick Contreras, Splunk, Steven Dick
+  tags:
+  - ttp
+  - splunk-security-content
+  - icedid
+  - windows-registry-abuse
+  - redline-stealer
+  mitre_attack:
+    techniques:
+    - id: T1562.001
+      name: Technique T1562.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/icedid/disable_av/sysmon2.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

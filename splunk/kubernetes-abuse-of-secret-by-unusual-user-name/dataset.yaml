@@ -1,0 +1,33 @@
+metadata:
+  name: kubernetes-abuse-of-secret-by-unusual-user-name
+  version: 5.0.0
+  description: The following analytic detects unauthorized access or misuse of Kubernetes
+    Secrets by unusual user names. It leverages Kubernetes Audit logs to identify
+    anomalies in access patterns by analyzing the source of requests based on user
+    names. This activity is significant for a SOC as Kubernetes Secrets store sensitive
+    information like passwords, OAuth tokens, and SSH keys, making them critical assets.
+    If confirmed malicious, this activity could lead to unauthorized access to sensitive
+    systems or dat
+  author: Patrick Bareiss, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - kubernetes-security
+  mitre_attack:
+    techniques:
+    - id: T1552.007
+      name: Technique T1552.007
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1552.007/kube_audit_get_secret/kube_audit_get_secret.json
+    description: kubernetes - _json
+    format: jsonl
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

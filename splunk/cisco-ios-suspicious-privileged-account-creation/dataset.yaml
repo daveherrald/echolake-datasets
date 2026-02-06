@@ -1,0 +1,35 @@
+metadata:
+  name: cisco-ios-suspicious-privileged-account-creation
+  version: 1.0.0
+  description: This analytic detects the creation of privileged user accounts on Cisco
+    IOS devices, which could indicate an attacker establishing backdoor access. The
+    detection focuses on identifying when user accounts are created with privilege
+    level 15 (the highest administrative privilege level in Cisco IOS) or when existing
+    accounts have their privileges elevated. This type of activity is particularly
+    concerning when performed by unauthorized users or during unusual hours, as it
+    may represent a key step in
+  author: Bhavin Patel, Michael Haag, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - cisco-smart-install-remote-code-execution-cve-2018-0171
+  mitre_attack:
+    techniques:
+    - id: T1136
+      name: Technique T1136
+    - id: T1078
+      name: Technique T1078
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/cisco/cisco_smart_install/cisco_ios.log
+    description: cisco:ios - cisco:ios
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

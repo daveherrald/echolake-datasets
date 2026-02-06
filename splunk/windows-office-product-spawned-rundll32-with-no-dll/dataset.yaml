@@ -1,0 +1,35 @@
+metadata:
+  name: windows-office-product-spawned-rundll32-with-no-dll
+  version: 4.0.0
+  description: The following analytic detects any Windows Office Product spawning
+    `rundll32.exe` without a `.dll` file extension. This behavior is identified using
+    Endpoint Detection and Response (EDR) telemetry, focusing on process and parent
+    process relationships. This activity is significant as it is a known tactic of
+    the IcedID malware family, which can lead to unauthorized code execution. If confirmed
+    malicious, this could allow attackers to execute arbitrary code, potentially leading
+    to data exfiltration
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - spearphishing-attachments
+  - cve-2023-36884-office-and-windows-html-rce-vulnerability
+  - compromised-windows-host
+  mitre_attack:
+    techniques:
+    - id: T1566.001
+      name: Technique T1566.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566.001/macro/windows-sysmon_icedid.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,44 @@
+metadata:
+  name: windows-powershell-fakecaptcha-clipboard-execution
+  version: 5.0.0
+  description: 'This detection identifies potential FakeCAPTCHA/ClickFix clipboard
+    hijacking campaigns by looking for PowerShell execution with hidden window parameters
+    and distinctive strings related to fake CAPTCHA verification. These campaigns
+    use social engineering to trick users into pasting malicious PowerShell commands
+    from their clipboard, typically delivering information stealers or remote access
+    trojans.
+
+    '
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - scattered-lapsus$-hunters
+  - fake-captcha-campaigns
+  - cisco-network-visibility-module-analytics
+  mitre_attack:
+    techniques:
+    - id: T1059.001
+      name: Technique T1059.001
+    - id: T1204.001
+      name: Technique T1204.001
+    - id: T1059.003
+      name: Technique T1059.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/atomic_red_team/captcha_windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_network_visibility_module/cisco_nvm_flowdata/nvm_flowdata.log
+    description: not_applicable - cisco:nvm:flowdata
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

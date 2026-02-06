@@ -1,0 +1,33 @@
+metadata:
+  name: kubernetes-scanning-by-unauthenticated-ip-address
+  version: 5.0.0
+  description: 'The following analytic identifies potential scanning activities within
+    a Kubernetes environment by unauthenticated IP addresses. It leverages Kubernetes
+    audit logs to detect multiple unauthorized access attempts (HTTP 403 responses)
+    from the same source IP. This activity is significant as it may indicate an attacker
+    probing for vulnerabilities or attempting to exploit known issues. If confirmed
+    malicious, such scanning could lead to unauthorized access, data breaches, or
+    further exploitation of '
+  author: Patrick Bareiss, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - kubernetes-security
+  mitre_attack:
+    techniques:
+    - id: T1046
+      name: Technique T1046
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1046/kubernetes_scanning/kubernetes_scanning.json
+    description: kubernetes - _json
+    format: jsonl
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

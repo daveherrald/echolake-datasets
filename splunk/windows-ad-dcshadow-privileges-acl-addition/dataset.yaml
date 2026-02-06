@@ -1,0 +1,33 @@
+metadata:
+  name: windows-ad-dcshadow-privileges-acl-addition
+  version: 6.0.0
+  description: This detection identifies an Active Directory access-control list (ACL)
+    modification event, which applies the minimum required extended rights to perform
+    the DCShadow attack.
+  author: Dean Luxton
+  tags:
+  - ttp
+  - splunk-security-content
+  - sneaky-active-directory-persistence-tricks
+  mitre_attack:
+    techniques:
+    - id: T1484
+      name: Technique T1484
+    - id: T1207
+      name: Technique T1207
+    - id: T1222.001
+      name: Technique T1222.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1484/DCShadowPermissions/windows-security-xml.log
+    description: XmlWinEventLog:Security - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,33 @@
+metadata:
+  name: o365-security-and-compliance-alert-triggered
+  version: 8.0.0
+  description: The following analytic identifies alerts triggered by the Office 365
+    Security and Compliance Center, indicating potential threats or policy violations.
+    It leverages data from the `o365_management_activity` dataset, focusing on events
+    where the workload is SecurityComplianceCenter and the operation is AlertTriggered.
+    This activity is significant as it highlights security and compliance issues within
+    the O365 environment, which are crucial for maintaining organizational security.
+    If confirmed mali
+  author: Mauricio Velazco, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - office-365-account-takeover
+  mitre_attack:
+    techniques:
+    - id: T1078.004
+      name: Technique T1078.004
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1078.004/o365_security_and_compliance_alert_triggered/o365_security_and_compliance_alert_triggered.log
+    description: o365 - o365:management:activity
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

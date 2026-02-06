@@ -1,0 +1,35 @@
+metadata:
+  name: windows-system-network-connections-discovery-netsh
+  version: 6.0.0
+  description: 'The following analytic detects the execution of the Windows built-in
+    tool netsh.exe to display the state, configuration, and profile of the host firewall.
+    This detection leverages data from Endpoint Detection and Response (EDR) agents,
+    focusing on command-line executions and process metadata. Monitoring this activity
+    is crucial as netsh.exe can be used by adversaries to bypass firewall rules or
+    discover firewall settings. If confirmed malicious, this activity could allow
+    attackers to manipulate '
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - windows-post-exploitation
+  - prestige-ransomware
+  - snake-keylogger
+  mitre_attack:
+    techniques:
+    - id: T1049
+      name: Technique T1049
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/winpeas/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

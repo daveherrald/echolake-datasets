@@ -1,0 +1,32 @@
+metadata:
+  name: windows-modify-registry-enablelinkedconnections
+  version: 9.0.0
+  description: The following analytic detects a suspicious modification to the Windows
+    registry setting for EnableLinkedConnections. It leverages data from the Endpoint.Registry
+    datamodel to identify changes where the registry path is "*\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\EnableLinkedConnections"
+    and the value is set to "0x00000001". This activity is significant because enabling
+    linked connections can allow network shares to be accessed with both standard
+    and administrator-level privileges,
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - blackbyte-ransomware
+  mitre_attack:
+    techniques:
+    - id: T1112
+      name: Technique T1112
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1112/blackbyte/enablelinkedconnections/blackbyte_sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

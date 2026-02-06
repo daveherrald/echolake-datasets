@@ -1,0 +1,35 @@
+metadata:
+  name: ransomware-notes-bulk-creation
+  version: 11.0.0
+  description: The following analytic identifies the bulk creation of ransomware notes
+    (e.g., .txt, .html, .hta files) on an infected machine. It leverages Sysmon EventCode
+    11 to detect multiple instances of these file types being created within a short
+    time frame. This activity is significant as it often indicates an active ransomware
+    attack, where the attacker is notifying the victim of the encryption. If confirmed
+    malicious, this behavior could lead to widespread data encryption, rendering critical
+    files in
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - blackmatter-ransomware
+  - darkside-ransomware
+  - chaos-ransomware
+  mitre_attack:
+    techniques:
+    - id: T1486
+      name: Technique T1486
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/clop/clop_a/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

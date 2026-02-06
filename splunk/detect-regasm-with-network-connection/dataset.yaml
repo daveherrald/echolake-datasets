@@ -1,0 +1,35 @@
+metadata:
+  name: detect-regasm-with-network-connection
+  version: 11.0.0
+  description: The following analytic detects the execution of regasm.exe establishing
+    a network connection to a public IP address, excluding private IP ranges. This
+    detection leverages Sysmon EventID 3 logs to identify such behavior. This activity
+    is significant as regasm.exe is a legitimate Microsoft-signed binary that can
+    be exploited to bypass application control mechanisms. If confirmed malicious,
+    this behavior could indicate an adversary's attempt to establish a remote Command
+    and Control (C2) channel, p
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - suspicious-regsvcs-regasm-activity
+  - living-off-the-land
+  - handala-wiper
+  mitre_attack:
+    techniques:
+    - id: T1218.009
+      name: Technique T1218.009
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218.009/atomic_red_team/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

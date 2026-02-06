@@ -1,0 +1,28 @@
+metadata:
+  name: crowdstrike-falcon-stream-alerts
+  version: 1.0.0
+  description: The following analytic is to leverage alerts from CrowdStrike Falcon
+    Event Stream. This query aggregates and summarizes DetectionSummaryEvent and IdpDetectionSummaryEvent
+    alerts from CrowdStrike Falcon Event Stream, providing details such as destination,
+    user, severity, MITRE information, and Crowdstrike id and links. The evals in
+    the search do multiple things to include align the severity, ensure the user,
+    dest, title, description, MITRE fields are set properly, and the drilldowns are
+    defined b
+  author: Bryan Pluta, Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - critical-alerts
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/suspicious_behaviour/crowdstrike_stream/event_stream_events/stream_events.log
+    description: CrowdStrike:Event:Streams - CrowdStrike:Event:Streams:JSON
+    format: jsonl
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

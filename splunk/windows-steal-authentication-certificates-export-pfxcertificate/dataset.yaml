@@ -1,0 +1,33 @@
+metadata:
+  name: windows-steal-authentication-certificates-export-pfxcertificate
+  version: 8.0.0
+  description: The following analytic detects the use of the PowerShell cmdlet `export-pfxcertificate`
+    on the command line, indicating an attempt to export a certificate from the local
+    Windows Certificate Store. This detection leverages data from Endpoint Detection
+    and Response (EDR) agents, focusing on process execution logs and command-line
+    arguments. This activity is significant as it may indicate an attempt to exfiltrate
+    authentication certificates, which can be used to impersonate users or decrypt
+    sensiti
+  author: Michael Haag, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - windows-certificate-services
+  mitre_attack:
+    techniques:
+    - id: T1649
+      name: Technique T1649
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1649/atomic_red_team/export_pfxcertificate_windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,39 @@
+metadata:
+  name: cisco-nvm-non-network-binary-making-network-connection
+  version: 2.0.0
+  description: 'This analytic detects network connections initiated by binaries that
+    are not typically associated with network communication,
+
+    such as ''notepad.exe'', ''calc.exe'' or ''write.exe''.
+
+    It leverages Cisco Network Visibility Module logs to correlate network flow activity
+    with process context, including command-line arguments, process path, and parent
+    process information.
+
+    These applications are normally used for locally and do not require outbound network
+    access. When they do initiate such connections, it m'
+  author: Nasreddine Bencherchali, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - cisco-network-visibility-module-analytics
+  mitre_attack:
+    techniques:
+    - id: T1055
+      name: Technique T1055
+    - id: T1036
+      name: Technique T1036
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_network_visibility_module/cisco_nvm_flowdata/nvm_flowdata.log
+    description: not_applicable - cisco:nvm:flowdata
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

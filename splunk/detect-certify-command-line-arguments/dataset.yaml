@@ -1,0 +1,37 @@
+metadata:
+  name: detect-certify-command-line-arguments
+  version: 7.0.0
+  description: The following analytic detects the use of Certify or Certipy tools
+    to enumerate Active Directory Certificate Services (AD CS) environments. It leverages
+    Endpoint Detection and Response (EDR) data, focusing on specific command-line
+    arguments associated with these tools. This activity is significant because it
+    indicates potential reconnaissance or exploitation attempts targeting AD CS, which
+    could lead to unauthorized access or privilege escalation. If confirmed malicious,
+    attackers could gain ins
+  author: Steven Dick
+  tags:
+  - ttp
+  - splunk-security-content
+  - compromised-windows-host
+  - windows-certificate-services
+  - ingress-tool-transfer
+  mitre_attack:
+    techniques:
+    - id: T1649
+      name: Technique T1649
+    - id: T1105
+      name: Technique T1105
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1649/certify_abuse/certify_esc1_abuse_sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

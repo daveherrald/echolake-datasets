@@ -1,0 +1,32 @@
+metadata:
+  name: windows-driver-inventory
+  version: 6.0.0
+  description: The following analytic identifies drivers being loaded across the fleet.
+    It leverages a PowerShell script input deployed to critical systems to capture
+    driver data. This detection is significant as it helps monitor for unauthorized
+    or malicious drivers that could compromise system integrity. If confirmed malicious,
+    such drivers could allow attackers to execute arbitrary code, escalate privileges,
+    or maintain persistence within the environment.
+  author: Michael Haag, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - windows-drivers
+  mitre_attack:
+    techniques:
+    - id: T1068
+      name: Technique T1068
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1068/drivers/driver_inventory.log
+    description: PwSh:DriverInventory - PwSh:DriverInventory
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

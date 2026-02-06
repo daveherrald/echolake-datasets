@@ -1,0 +1,32 @@
+metadata:
+  name: windows-modify-registry-disable-toast-notifications
+  version: 8.0.0
+  description: The following analytic detects modifications to the Windows registry
+    that disable toast notifications. It leverages data from the Endpoint.Registry
+    datamodel, specifically monitoring changes to the registry path "*\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\PushNotifications\\ToastEnabled*"
+    with a value set to "0x00000000". This activity is significant because disabling
+    toast notifications can prevent users from receiving critical system and application
+    updates, which adversaries like Azorul
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - azorult
+  mitre_attack:
+    techniques:
+    - id: T1112
+      name: Technique T1112
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/azorult/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

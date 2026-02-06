@@ -1,0 +1,33 @@
+metadata:
+  name: potential-system-network-configuration-discovery-activity
+  version: 5.0.0
+  description: The following analytic identifies the rapid execution of processes
+    used for system network configuration discovery on an endpoint. It leverages data
+    from Endpoint Detection and Response (EDR) agents, focusing on process GUIDs,
+    names, parent processes, and command-line executions. This activity can be significant
+    as it may indicate an attacker attempting to map the network, which is a common
+    precursor to lateral movement or further exploitation. If confirmed malicious,
+    this behavior could allow a
+  author: Bhavin Patel, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - unusual-processes
+  mitre_attack:
+    techniques:
+    - id: T1016
+      name: Technique T1016
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1016/discovery_commands/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

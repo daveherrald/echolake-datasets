@@ -1,0 +1,34 @@
+metadata:
+  name: windows-sharepoint-spinstall0-webshell-file-creation
+  version: 1.0.0
+  description: This detection identifies the creation or modification of the "spinstall0.aspx"
+    webshell file in Microsoft SharePoint directories. This file is a known indicator
+    of compromise associated with the exploitation of CVE-2025-53770 (ToolShell vulnerability).
+    Attackers exploit the vulnerability to drop webshells that provide persistent
+    access to compromised SharePoint servers, allowing them to execute arbitrary commands,
+    access sensitive data, and move laterally within the network.
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - microsoft-sharepoint-vulnerabilities
+  mitre_attack:
+    techniques:
+    - id: T1190
+      name: Technique T1190
+    - id: T1505.003
+      name: Technique T1505.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1505.003/sharepoint_webshell/sysmon_spinstall0.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

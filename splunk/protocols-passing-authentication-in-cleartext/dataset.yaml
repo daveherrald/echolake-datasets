@@ -1,0 +1,30 @@
+metadata:
+  name: protocols-passing-authentication-in-cleartext
+  version: 9.0.0
+  description: The following analytic identifies the use of cleartext protocols that
+    risk leaking sensitive information. It detects network traffic on legacy protocols
+    such as Telnet (port 23), POP3 (port 110), IMAP (port 143), and non-anonymous
+    FTP (port 21). The detection leverages the Network_Traffic data model to identify
+    TCP traffic on these ports. Monitoring this activity is crucial as it can expose
+    credentials and other sensitive data to interception. If confirmed malicious,
+    attackers could capture auth
+  author: Rico Valdez, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - use-of-cleartext-protocols
+  - cisco-secure-firewall-threat-defense-analytics
+  - scattered-lapsus$-hunters
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_secure_firewall_threat_defense/connection_event/connection_events.log
+    description: not_applicable - cisco:sfw:estreamer
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

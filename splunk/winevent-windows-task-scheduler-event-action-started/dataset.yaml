@@ -1,0 +1,35 @@
+metadata:
+  name: winevent-windows-task-scheduler-event-action-started
+  version: 11.0.0
+  description: The following analytic detects the execution of tasks registered in
+    Windows Task Scheduler by monitoring EventID 200 (action run) and 201 (action
+    completed) from the Task Scheduler logs. This detection leverages Task Scheduler
+    logs to identify potentially suspicious or unauthorized task executions. Monitoring
+    these events is significant for a SOC as it helps uncover evasive techniques used
+    for persistence, unauthorized code execution, or other malicious activities. If
+    confirmed malicious, this a
+  author: Michael Haag, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - icedid
+  - blacksuit-ransomware
+  - windows-persistence-techniques
+  mitre_attack:
+    techniques:
+    - id: T1053.005
+      name: Technique T1053.005
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053.005/winevent_windows_task_scheduler_event_action_started/windows-xml.log
+    description: XmlWinEventLog:Microsoft-Windows-TaskScheduler/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

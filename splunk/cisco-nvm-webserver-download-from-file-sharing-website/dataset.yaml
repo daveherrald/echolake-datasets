@@ -1,0 +1,39 @@
+metadata:
+  name: cisco-nvm-webserver-download-from-file-sharing-website
+  version: 3.0.0
+  description: 'This analytic detects unexpected outbound network connections initiated
+    by known webserver processes such as `httpd.exe`, `nginx.exe`, or `tomcat.exe`
+    to common file sharing or public content hosting services like GitHub, Discord
+    CDN, Transfer.sh, or Pastebin.
+
+    Webservers are rarely expected to perform outbound downloads, especially to dynamic
+    or anonymous file hosting domains. This behavior is often associated with server
+    compromise,
+
+    where an attacker uses a reverse shell, webshell, or injected '
+  author: Nasreddine Bencherchali, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - ghostredirector-iis-module-and-rungan-backdoor
+  - cisco-network-visibility-module-analytics
+  mitre_attack:
+    techniques:
+    - id: T1105
+      name: Technique T1105
+    - id: T1190
+      name: Technique T1190
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_network_visibility_module/cisco_nvm_flowdata/nvm_flowdata.log
+    description: not_applicable - cisco:nvm:flowdata
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

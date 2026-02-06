@@ -1,0 +1,33 @@
+metadata:
+  name: windows-set-network-profile-category-to-private-via-registry
+  version: 1.0.0
+  description: The following analytic detects attempts to modify the Windows Registry
+    to change a network profile's category to "Private", which may indicate an adversary
+    is preparing the environment for lateral movement or reducing firewall restrictions.
+    Specifically, this activity involves changes to the Category value within the
+    HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList\Profiles\{GUID}
+    registry path. A value of 1 corresponds to a private network profile, which typically
+    enables less rest
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - secret-blizzard
+  mitre_attack:
+    techniques:
+    - id: T1112
+      name: Technique T1112
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1112/reg_profiles_private2/reg_profiles_private2.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

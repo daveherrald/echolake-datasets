@@ -1,0 +1,39 @@
+metadata:
+  name: ngrok-reverse-proxy-on-network
+  version: 6.0.0
+  description: The following analytic detects DNS queries to common Ngrok domains,
+    indicating potential use of the Ngrok reverse proxy tool. It leverages the Network
+    Resolution datamodel to identify queries to domains such as "*.ngrok.com" and
+    "*.ngrok.io". While Ngrok usage is not inherently malicious, it has been increasingly
+    adopted by adversaries for covert communication and data exfiltration. If confirmed
+    malicious, this activity could allow attackers to bypass network defenses, establish
+    persistent conne
+  author: Michael Haag, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - reverse-network-proxy
+  - cisa-aa22-320a
+  - cisa-aa24-241a
+  mitre_attack:
+    techniques:
+    - id: T1572
+      name: Technique T1572
+    - id: T1090
+      name: Technique T1090
+    - id: T1102
+      name: Technique T1102
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1572/ngrok/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

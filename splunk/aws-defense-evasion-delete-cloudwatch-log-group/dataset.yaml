@@ -1,0 +1,33 @@
+metadata:
+  name: aws-defense-evasion-delete-cloudwatch-log-group
+  version: 7.0.0
+  description: The following analytic detects the deletion of CloudWatch log groups
+    in AWS, identified through `DeleteLogGroup` events in CloudTrail logs. This detection
+    leverages CloudTrail data to monitor for successful log group deletions, excluding
+    console-based actions. This activity is significant as it indicates potential
+    attempts to evade logging and monitoring, which is crucial for maintaining visibility
+    into AWS activities. If confirmed malicious, this could allow attackers to hide
+    their tracks, maki
+  author: Gowthamaraj Rajendran, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - aws-defense-evasion
+  mitre_attack:
+    techniques:
+    - id: T1562.008
+      name: Technique T1562.008
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.008/delete_cloudwatch_log_group/aws_cloudtrail_events.json
+    description: aws_cloudtrail - aws:cloudtrail
+    format: jsonl
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

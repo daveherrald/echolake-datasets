@@ -1,0 +1,34 @@
+metadata:
+  name: linux-possible-append-command-to-profile-config-file
+  version: 7.0.0
+  description: The following analytic detects suspicious command-lines that modify
+    user profile files to automatically execute scripts or executables upon system
+    reboot. It leverages data from Endpoint Detection and Response (EDR) agents, focusing
+    on command-line executions involving profile files like ~/.bashrc and /etc/profile.
+    This activity is significant as it indicates potential persistence mechanisms
+    used by adversaries to maintain access to compromised hosts. If confirmed malicious,
+    this could allow att
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - linux-privilege-escalation
+  - linux-persistence-techniques
+  mitre_attack:
+    techniques:
+    - id: T1546.004
+      name: Technique T1546.004
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1546.004/linux_init_profile/sysmon_linux.log
+    description: Syslog:Linux-Sysmon/Operational - sysmon:linux
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

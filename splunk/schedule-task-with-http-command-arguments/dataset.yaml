@@ -1,0 +1,35 @@
+metadata:
+  name: schedule-task-with-http-command-arguments
+  version: 7.0.0
+  description: The following analytic detects the creation of scheduled tasks on Windows
+    systems that include HTTP command arguments, using Windows Security EventCode
+    4698. It identifies tasks registered via schtasks.exe or TaskService with HTTP
+    in their command arguments. This behavior is significant as it often indicates
+    malware activity or the use of Living off the Land binaries (lolbins) to download
+    additional payloads. If confirmed malicious, this activity could lead to data
+    exfiltration, malware propagat
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - windows-persistence-techniques
+  - living-off-the-land
+  - compromised-windows-host
+  mitre_attack:
+    techniques:
+    - id: T1053
+      name: Technique T1053
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053.005/tasksched/windows-security.log
+    description: WinEventLog:Security - WinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

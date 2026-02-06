@@ -1,0 +1,31 @@
+metadata:
+  name: ollama-abnormal-service-crash-availability-attack
+  version: 1.0.0
+  description: Detects critical service crashes, fatal errors, and abnormal process
+    terminations in Ollama that may indicate exploitation attempts, resource exhaustion
+    attacks, malicious input triggering unhandled exceptions, or deliberate denial
+    of service attacks designed to disrupt AI model availability and degrade system
+    stability.
+  author: Rod Soto
+  tags:
+  - anomaly
+  - splunk-security-content
+  - suspicious-ollama-activities
+  mitre_attack:
+    techniques:
+    - id: T1489
+      name: Technique T1489
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/ollama/app.log
+    description: app.log - ollama:server
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

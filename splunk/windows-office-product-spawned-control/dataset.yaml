@@ -1,0 +1,35 @@
+metadata:
+  name: windows-office-product-spawned-control
+  version: 5.0.0
+  description: The following analytic identifies instances where `control.exe` is
+    spawned by a Microsoft Office product. It leverages data from Endpoint Detection
+    and Response (EDR) agents, focusing on process and parent process relationships.
+    This activity is significant because it can indicate exploitation attempts related
+    to CVE-2021-40444, where `control.exe` is used to execute malicious .cpl or .inf
+    files. If confirmed malicious, this behavior could allow an attacker to execute
+    arbitrary code, potentially
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - spearphishing-attachments
+  - microsoft-mshtml-remote-code-execution-cve-2021-40444
+  - compromised-windows-host
+  mitre_attack:
+    techniques:
+    - id: T1566.001
+      name: Technique T1566.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566.001/macro/windows-sysmon_control.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

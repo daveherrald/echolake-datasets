@@ -1,0 +1,39 @@
+metadata:
+  name: windows-http-network-communication-from-msiexec
+  version: 7.0.0
+  description: The following analytic detects MSIExec making network connections over
+    ports 443 or 80. This behavior is identified by correlating process creation events
+    from Endpoint Detection and Response (EDR) agents with network traffic logs. Typically,
+    MSIExec does not perform network communication to the internet, making this activity
+    unusual and potentially indicative of malicious behavior. If confirmed malicious,
+    an attacker could be using MSIExec to download or communicate with external servers,
+    poten
+  author: Michael Haag, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - apt37-rustonotto-and-fadestealer
+  - ghostredirector-iis-module-and-rungan-backdoor
+  - windows-system-binary-proxy-execution-msiexec
+  mitre_attack:
+    techniques:
+    - id: T1218.007
+      name: Technique T1218.007
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218.007/atomic_red_team/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_network_visibility_module/cisco_nvm_flowdata/nvm_flowdata.log
+    description: not_applicable - cisco:nvm:flowdata
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

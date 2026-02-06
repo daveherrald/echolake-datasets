@@ -1,0 +1,35 @@
+metadata:
+  name: windows-scheduled-task-with-suspicious-command
+  version: 5.0.0
+  description: 'The following analytic detects the creation of scheduled tasks designed
+    to execute commands using native Windows shells like PowerShell, Cmd, Wscript,
+    or Cscript or from public folders such as Users, Temp, or ProgramData. It leverages
+    Windows Security EventCode 4698, 4700, and 4702 to identify when such tasks are
+    registered, enabled, or modified. This activity is significant as it may indicate
+    an attempt to establish persistence or execute malicious commands on a system.
+    If confirmed malicious, '
+  author: Steven Dick
+  tags:
+  - ttp
+  - splunk-security-content
+  - scheduled-tasks
+  - ransomware
+  - quasar-rat
+  mitre_attack:
+    techniques:
+    - id: T1053.005
+      name: Technique T1053.005
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053.005/winevent_scheduled_task_created_to_spawn_shell/windows-xml.log
+    description: XmlWinEventLog:Security - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

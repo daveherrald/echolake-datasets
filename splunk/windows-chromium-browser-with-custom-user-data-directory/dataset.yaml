@@ -1,0 +1,36 @@
+metadata:
+  name: windows-chromium-browser-with-custom-user-data-directory
+  version: 3.0.0
+  description: 'The following analytic detects instances where the Chromium-based
+    browser (e.g., Google Chrome, Microsoft Edge) is launched with the --user-data-dir
+    command-line argument. While this flag is legitimate and used for multi-profile
+    support or automation, it is frequently leveraged by malware and adversaries to
+    run Chrome in an isolated environment for stealth operations, credential harvesting,
+    phishing delivery, or evasion of user session artifacts.
+
+    '
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - stealc-stealer
+  - malicious-inno-setup-loader
+  - lokibot
+  mitre_attack:
+    techniques:
+    - id: T1497
+      name: Technique T1497
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1497/chrom_no_sandbox/chrome-no_sandbox.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,33 @@
+metadata:
+  name: windows-indirect-command-execution-via-pcalua
+  version: 7.0.0
+  description: The following analytic detects programs initiated by pcalua.exe, the
+    Microsoft Windows Program Compatibility Assistant. This detection leverages data
+    from Endpoint Detection and Response (EDR) agents, focusing on process and parent
+    process information. While pcalua.exe can start legitimate programs, it is significant
+    because attackers may use it to bypass command line execution protections. If
+    confirmed malicious, this activity could allow attackers to execute arbitrary
+    commands, potentially lea
+  author: Eric McGinnis, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - living-off-the-land
+  mitre_attack:
+    techniques:
+    - id: T1202
+      name: Technique T1202
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1202/atomic_red_team/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

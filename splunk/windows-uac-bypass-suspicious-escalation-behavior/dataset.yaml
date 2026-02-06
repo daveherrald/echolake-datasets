@@ -1,0 +1,35 @@
+metadata:
+  name: windows-uac-bypass-suspicious-escalation-behavior
+  version: 9.0.0
+  description: The following analytic detects when a process spawns an executable
+    known for User Account Control (UAC) bypass exploitation and subsequently monitors
+    for any child processes with a higher integrity level than the original process.
+    This detection leverages Sysmon EventID 1 data, focusing on process integrity
+    levels and known UAC bypass executables. This activity is significant as it may
+    indicate an attacker has successfully used a UAC bypass exploit to escalate privileges.
+    If confirmed malicious,
+  author: Steven Dick
+  tags:
+  - ttp
+  - splunk-security-content
+  - living-off-the-land
+  - compromised-windows-host
+  - windows-defense-evasion-tactics
+  mitre_attack:
+    techniques:
+    - id: T1548.002
+      name: Technique T1548.002
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1548.002/uac_behavior/uac_behavior_sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

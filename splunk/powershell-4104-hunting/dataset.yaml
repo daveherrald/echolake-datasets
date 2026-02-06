@@ -1,0 +1,35 @@
+metadata:
+  name: powershell-4104-hunting
+  version: 21.0.0
+  description: The following analytic identifies suspicious PowerShell execution using
+    Script Block Logging (EventCode 4104). It leverages specific patterns and keywords
+    within the ScriptBlockText field to detect potentially malicious activities. This
+    detection is significant for SOC analysts as PowerShell is commonly used by attackers
+    for various malicious purposes, including code execution, privilege escalation,
+    and persistence. If confirmed malicious, this activity could allow attackers to
+    execute arbitrary
+  author: Michael Haag, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - braodo-stealer
+  - cactus-ransomware
+  - china-nexus-threat-activity
+  mitre_attack:
+    techniques:
+    - id: T1059.001
+      name: Technique T1059.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/powershell_script_block_logging/sbl_xml.log
+    description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

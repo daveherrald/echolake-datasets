@@ -1,0 +1,33 @@
+metadata:
+  name: ivanti-sentry-authentication-bypass
+  version: 5.0.0
+  description: The following analytic identifies unauthenticated access attempts to
+    the System Manager Portal in Ivanti Sentry, exploiting CVE-2023-38035. It detects
+    this activity by monitoring HTTP requests to specific endpoints ("/mics/services/configservice/*",
+    "/mics/services/*", "/mics/services/MICSLogService*") with a status code of 200.
+    This behavior is significant for a SOC as it indicates potential unauthorized
+    access, which could lead to OS command execution as root. If confirmed malicious,
+    this acti
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - ivanti-sentry-authentication-bypass-cve-2023-38035
+  mitre_attack:
+    techniques:
+    - id: T1190
+      name: Technique T1190
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/ivanti/ivanti_sentry_CVE_2023_38035.log
+    description: suricata - suricata
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,33 @@
+metadata:
+  name: windows-modify-registry-valleyrat-pwn-reg-entry
+  version: 9.0.0
+  description: The following analytic detects modifications to the Windows Registry
+    specifically targeting `.pwn` file associations related to the ValleyRAT malware.
+    ValleyRAT may create or alter registry entries to associate `.pwn` files with
+    malicious processes, allowing it to execute harmful scripts or commands when these
+    files are opened. By monitoring for unusual changes in registry keys linked to
+    `.pwn` extensions, this detection enables security analysts to identify potential
+    ValleyRAT infection attempt
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - valleyrat
+  mitre_attack:
+    techniques:
+    - id: T1112
+      name: Technique T1112
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1112/pwn_reg/pwn_reg.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

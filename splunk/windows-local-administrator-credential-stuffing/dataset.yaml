@@ -1,0 +1,35 @@
+metadata:
+  name: windows-local-administrator-credential-stuffing
+  version: 9.0.0
+  description: The following analytic detects attempts to authenticate using the built-in
+    local Administrator account across more than 30 endpoints within a 5-minute window.
+    It leverages Windows Event Logs, specifically events 4625 and 4624, to identify
+    this behavior. This activity is significant as it may indicate an adversary attempting
+    to validate stolen local credentials across multiple hosts, potentially leading
+    to privilege escalation. If confirmed malicious, this could allow the attacker
+    to gain widespr
+  author: Mauricio Velazco, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - active-directory-privilege-escalation
+  - active-directory-lateral-movement
+  - scattered-lapsus$-hunters
+  mitre_attack:
+    techniques:
+    - id: T1110.004
+      name: Technique T1110.004
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1110.004/local_administrator_cred_stuffing/windows-security.log
+    description: XmlWinEventLog:Security - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

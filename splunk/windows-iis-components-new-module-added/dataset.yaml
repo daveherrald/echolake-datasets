@@ -1,0 +1,33 @@
+metadata:
+  name: windows-iis-components-new-module-added
+  version: 7.0.0
+  description: The following analytic detects the addition of new IIS modules on a
+    Windows IIS server. It leverages the Windows Event log - Microsoft-IIS-Configuration/Operational,
+    specifically EventCode 29, to identify this activity. This behavior is significant
+    because IIS modules are rarely added to production servers, and unauthorized modules
+    could indicate malicious activity. If confirmed malicious, an attacker could use
+    these modules to execute arbitrary code, escalate privileges, or maintain persistence
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - iis-components
+  - ghostredirector-iis-module-and-rungan-backdoor
+  mitre_attack:
+    techniques:
+    - id: T1505.004
+      name: Technique T1505.004
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1505.004/IIS-Configuration-Operational.log
+    description: IIS:Configuration:Operational - IIS:Configuration:Operational
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

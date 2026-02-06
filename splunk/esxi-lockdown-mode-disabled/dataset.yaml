@@ -1,0 +1,32 @@
+metadata:
+  name: esxi-lockdown-mode-disabled
+  version: 1.0.0
+  description: This detection identifies when Lockdown Mode is disabled on an ESXi
+    host, which can indicate that a threat actor is attempting to weaken host security
+    controls. Disabling Lockdown Mode allows broader remote access via SSH or the
+    host client and may precede further malicious actions such as data exfiltration,
+    lateral movement, or VM tampering.
+  author: Raven Tait, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - esxi-post-compromise
+  - black-basta-ransomware
+  mitre_attack:
+    techniques:
+    - id: T1562
+      name: Technique T1562
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562/esxi_lockdown_disabled/esxi_lockdown_disabled.log
+    description: vmware:esxlog - vmw-syslog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

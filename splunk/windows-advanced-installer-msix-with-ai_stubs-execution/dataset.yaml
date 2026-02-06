@@ -1,0 +1,37 @@
+metadata:
+  name: windows-advanced-installer-msix-with-ai_stubs-execution
+  version: 1.0.0
+  description: The following analytic identifies the execution of Advanced Installer
+    MSIX Package Support Framework (PSF) components, specifically the AI_STUBS executables
+    with the original filename 'popupwrapper.exe'. This detection leverages data from
+    Endpoint Detection and Response (EDR) agents, focusing on process paths and original
+    filenames. This activity is significant as adversaries have been observed packaging
+    malicious content within MSIX files built with Advanced Installer to bypass security
+    control
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - msix-package-abuse
+  mitre_attack:
+    techniques:
+    - id: T1218
+      name: Technique T1218
+    - id: T1553.005
+      name: Technique T1553.005
+    - id: T1204.002
+      name: Technique T1204.002
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218/msix_ai_stubs/windows_sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

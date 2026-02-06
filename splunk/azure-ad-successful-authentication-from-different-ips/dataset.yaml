@@ -1,0 +1,36 @@
+metadata:
+  name: azure-ad-successful-authentication-from-different-ips
+  version: 10.0.0
+  description: 'The following analytic detects an Azure AD account successfully authenticating
+    from multiple unique IP addresses within a 30-minute window. It leverages Azure
+    AD SignInLogs to identify instances where the same user logs in from different
+    IPs in a short time frame. This behavior is significant as it may indicate compromised
+    credentials being used by an adversary, potentially following a phishing attack.
+    If confirmed malicious, this activity could allow unauthorized access to corporate
+    resources, '
+  author: Mauricio Velazco, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - compromised-user-account
+  - azure-active-directory-account-takeover
+  mitre_attack:
+    techniques:
+    - id: T1110.001
+      name: Technique T1110.001
+    - id: T1110.003
+      name: Technique T1110.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1110.001/azure_ad_successful_authentication_from_different_ips/azuread.log
+    description: Azure AD - azure:monitor:aad
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

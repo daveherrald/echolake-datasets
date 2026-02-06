@@ -1,0 +1,33 @@
+metadata:
+  name: windows-registry-sip-provider-modification
+  version: 7.0.0
+  description: The following analytic detects modifications to the Windows Registry
+    SIP Provider. It leverages Sysmon EventID 7 to monitor registry changes in paths
+    and values related to Cryptography Providers and OID Encoding Types. This activity
+    is significant as it may indicate an attempt to subvert trust controls, a common
+    tactic for bypassing security measures and maintaining persistence. If confirmed
+    malicious, an attacker could manipulate the system's cryptographic functions,
+    potentially leading to unau
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - subvert-trust-controls-sip-and-trust-provider-hijacking
+  mitre_attack:
+    techniques:
+    - id: T1553.003
+      name: Technique T1553.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1553.003/sip/sip_windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,33 @@
+metadata:
+  name: windows-eventlog-recon-activity-using-log-query-utilities
+  version: 3.0.0
+  description: This analytic detects EventLog reconnaissance activity using utilities
+    such as `wevtutil.exe`, `wmic.exe`, PowerShell cmdlets like `Get-WinEvent`, or
+    WMI queries targeting `Win32_NTLogEvent`. It leverages data from Endpoint Detection
+    and Response (EDR) agents, focusing on process names and command-line arguments.
+    These tools are often used by adversaries to extract usernames, IP addresses,
+    session data, and event information for credential access or situational awareness
+    during lateral movement.
+  author: Nasreddine Bencherchali, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - windows-discovery-techniques
+  mitre_attack:
+    techniques:
+    - id: T1654
+      name: Technique T1654
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1654/eventlog_enumeration/eventlog_enumeration.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

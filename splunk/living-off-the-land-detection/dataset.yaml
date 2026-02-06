@@ -1,0 +1,40 @@
+metadata:
+  name: living-off-the-land-detection
+  version: 9.0.0
+  description: The following correlation identifies multiple risk events associated
+    with the "Living Off The Land" analytic story, indicating potentially suspicious
+    behavior. It leverages the Risk data model to aggregate and correlate events tagged
+    under this story, focusing on systems with a high count of distinct sources. This
+    activity is significant as it often involves the use of legitimate tools for malicious
+    purposes, making detection challenging. If confirmed malicious, this behavior
+    could allow attacke
+  author: Michael Haag, Splunk
+  tags:
+  - correlation
+  - splunk-security-content
+  - living-off-the-land
+  - hellcat-ransomware
+  mitre_attack:
+    techniques:
+    - id: T1105
+      name: Technique T1105
+    - id: T1190
+      name: Technique T1190
+    - id: T1059
+      name: Technique T1059
+    - id: T1133
+      name: Technique T1133
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218/living_off_the_land/lolbinrisk.log
+    description: lotl - stash
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

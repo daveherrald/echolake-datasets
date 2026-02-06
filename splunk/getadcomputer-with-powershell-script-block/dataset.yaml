@@ -1,0 +1,35 @@
+metadata:
+  name: getadcomputer-with-powershell-script-block
+  version: 9.0.0
+  description: The following analytic detects the execution of the `Get-AdComputer`
+    PowerShell commandlet using PowerShell Script Block Logging (EventCode=4104).
+    This detection leverages script block text to identify when this commandlet is
+    run. The `Get-AdComputer` commandlet is significant as it can be used by adversaries
+    to enumerate all domain computers, aiding in situational awareness and Active
+    Directory discovery. If confirmed malicious, this activity could allow attackers
+    to map the network, identify t
+  author: Mauricio Velazco, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - active-directory-discovery
+  - cisa-aa22-320a
+  - medusa-ransomware
+  mitre_attack:
+    techniques:
+    - id: T1018
+      name: Technique T1018
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/powershell_script_block_logging/sbl_xml.log
+    description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

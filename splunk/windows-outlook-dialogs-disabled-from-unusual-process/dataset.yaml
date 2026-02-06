@@ -1,0 +1,36 @@
+metadata:
+  name: windows-outlook-dialogs-disabled-from-unusual-process
+  version: 1.0.0
+  description: The following analytic detects the modification of the Windows Registry
+    key "PONT_STRING" under Outlook Options. This disables certain dialog popups,
+    which could allow malicious scripts to run without notice. This detection leverages
+    data from the Endpoint.Registry datamodel to search for this key changing from
+    an unusual process. This activity is significant as it is commonly associated
+    with some malware infections, indicating potential malicious intent to harvest
+    email information.
+  author: Raven Tait, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - notdoor-malware
+  - windows-registry-abuse
+  mitre_attack:
+    techniques:
+    - id: T1112
+      name: Technique T1112
+    - id: T1562
+      name: Technique T1562
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/notdoor/disable_dialogs/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

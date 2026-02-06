@@ -1,0 +1,35 @@
+metadata:
+  name: xmrig-driver-loaded
+  version: 7.0.0
+  description: The following analytic detects the installation of the XMRIG coinminer
+    driver on a system. It identifies the loading of the `WinRing0x64.sys` driver,
+    commonly associated with XMRIG, by analyzing Sysmon EventCode 6 logs for specific
+    signatures and image loads. This activity is significant because XMRIG is an open-source
+    CPU miner frequently exploited by adversaries to mine cryptocurrency illicitly.
+    If confirmed malicious, this activity could lead to unauthorized resource consumption,
+    degraded sys
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - cisa-aa22-320a
+  - crypto-stealer
+  - xmrig
+  mitre_attack:
+    techniques:
+    - id: T1543.003
+      name: Technique T1543.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/xmrig_miner/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

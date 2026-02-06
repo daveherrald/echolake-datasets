@@ -1,0 +1,39 @@
+metadata:
+  name: windows-privilege-escalation-user-process-spawn-system-process
+  version: 8.0.0
+  description: The following analytic detects when a process with low, medium, or
+    high integrity spawns a system integrity process from a user-controlled location.
+    This behavior is indicative of privilege escalation attempts where attackers elevate
+    their privileges to SYSTEM level from a user-controlled process or service. The
+    detection leverages Sysmon data, specifically Event ID 15, to identify such transitions.
+    Monitoring this activity is crucial as it can signify an attacker gaining SYSTEM-level
+    access, po
+  author: Steven Dick
+  tags:
+  - ttp
+  - splunk-security-content
+  - windows-privilege-escalation
+  - compromised-windows-host
+  - blacksuit-ransomware
+  mitre_attack:
+    techniques:
+    - id: T1068
+      name: Technique T1068
+    - id: T1548
+      name: Technique T1548
+    - id: T1134
+      name: Technique T1134
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1068/windows_escalation_behavior/windows_escalation_behavior_sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

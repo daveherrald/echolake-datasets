@@ -1,0 +1,32 @@
+metadata:
+  name: windows-sql-server-xp_cmdshell-config-change
+  version: 6.0.0
+  description: This detection identifies when the xp_cmdshell configuration is modified
+    in SQL Server. The xp_cmdshell extended stored procedure allows execution of operating
+    system commands and programs from SQL Server, making it a high-risk feature commonly
+    abused by attackers for privilege escalation and lateral movement.
+  author: Michael Haag, Splunk, sidoyle from Splunk Community
+  tags:
+  - ttp
+  - splunk-security-content
+  - sql-server-abuse
+  - seashell-blizzard
+  - ghostredirector-iis-module-and-rungan-backdoor
+  mitre_attack:
+    techniques:
+    - id: T1505.001
+      name: Technique T1505.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1505.001/simulation/windows-application.log
+    description: XmlWinEventLog:Application - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

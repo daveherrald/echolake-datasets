@@ -1,0 +1,33 @@
+metadata:
+  name: windows-rdp-automaticdestinations-deletion
+  version: 1.0.0
+  description: "This detection identifies the deletion of files within the AutomaticDestinations\
+    \ folder, located under a user\u2019s AppData\\Roaming\\Microsoft\\Windows\\Recent\
+    \ directory. These files are part of the Windows Jump List feature, which records\
+    \ recently accessed files and folders tied to specific applications. Each .automaticDestinations-ms\
+    \ file corresponds to a program (e.g., Explorer, Word, Notepad) and can be valuable\
+    \ for forensic analysis of user activity. Adversaries may target this folder to\
+    \ erase evi"
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - windows-rdp-artifacts-and-defense-evasion
+  mitre_attack:
+    techniques:
+    - id: T1070.004
+      name: Technique T1070.004
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1070.004/automatic_file_deleted/automatic_file_deleted.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

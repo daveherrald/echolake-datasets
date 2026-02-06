@@ -1,0 +1,33 @@
+metadata:
+  name: windows-system-discovery-using-qwinsta
+  version: 6.0.0
+  description: The following analytic detects the execution of "qwinsta.exe" on a
+    Windows operating system. This detection leverages data from Endpoint Detection
+    and Response (EDR) agents, focusing on process execution logs. The "qwinsta.exe"
+    tool is significant because it can display detailed session information on a remote
+    desktop session host server. This behavior is noteworthy as it is commonly abused
+    by Qakbot malware to gather system information and send it back to its Command
+    and Control (C2) server. If
+  author: Teoderick Contreras, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - qakbot
+  mitre_attack:
+    techniques:
+    - id: T1033
+      name: Technique T1033
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1033/qakbot_discovery_cmdline/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

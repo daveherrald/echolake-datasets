@@ -1,0 +1,32 @@
+metadata:
+  name: windows-esx-admins-group-creation-security-event
+  version: 5.0.0
+  description: This analytic detects creation, deletion, or modification of the "ESX
+    Admins" group in Active Directory. These events may indicate attempts to exploit
+    the VMware ESXi Active Directory Integration Authentication Bypass vulnerability
+    (CVE-2024-37085).
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - vmware-esxi-ad-integration-authentication-bypass-cve-2024-37085
+  mitre_attack:
+    techniques:
+    - id: T1136.001
+      name: Technique T1136.001
+    - id: T1136.002
+      name: Technique T1136.002
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1136.001/atomic_red_team/windows-security-esxadmins.log
+    description: Security - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

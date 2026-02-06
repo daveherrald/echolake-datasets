@@ -1,0 +1,34 @@
+metadata:
+  name: windows-sql-server-extended-procedure-dll-loading-hunt
+  version: 2.0.0
+  description: This analytic detects when SQL Server loads DLLs to execute extended
+    stored procedures. This is particularly important for security monitoring as it
+    indicates the first-time use or version changes of potentially dangerous procedures
+    like xp_cmdshell, sp_OACreate, and others. While this is a legitimate operation,
+    adversaries may abuse these procedures for execution, discovery, or privilege
+    escalation.
+  author: Michael Haag, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - sql-server-abuse
+  mitre_attack:
+    techniques:
+    - id: T1505.001
+      name: Technique T1505.001
+    - id: T1059.009
+      name: Technique T1059.009
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1505.001/simulation/dllprocedureload_windows-application.log
+    description: XmlWinEventLog:Application - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

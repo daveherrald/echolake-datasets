@@ -1,0 +1,35 @@
+metadata:
+  name: windows-unsecured-outlook-credentials-access-in-registry
+  version: 9.0.0
+  description: The following analytic detects unauthorized access to Outlook credentials
+    stored in the Windows registry. It leverages Windows Security Event logs, specifically
+    EventCode 4663, to identify access attempts to registry paths associated with
+    Outlook profiles. This activity is significant as it may indicate attempts to
+    steal sensitive email credentials, which could lead to unauthorized access to
+    email accounts. If confirmed malicious, this could allow attackers to exfiltrate
+    sensitive information, i
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - stealc-stealer
+  - snake-keylogger
+  - meduza-stealer
+  mitre_attack:
+    techniques:
+    - id: T1552
+      name: Technique T1552
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1552/snakey_keylogger_outlook_reg_access/snakekeylogger_4663.log
+    description: XmlWinEventLog:Security - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

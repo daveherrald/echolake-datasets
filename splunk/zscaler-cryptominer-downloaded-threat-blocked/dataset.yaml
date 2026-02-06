@@ -1,0 +1,33 @@
+metadata:
+  name: zscaler-cryptominer-downloaded-threat-blocked
+  version: 5.0.0
+  description: The following analytic identifies attempts to download cryptomining
+    software that are blocked by Zscaler. It leverages web proxy logs to detect blocked
+    actions associated with cryptominer threats, analyzing key data points such as
+    device owner, user, URL category, destination URL, and IP. This activity is significant
+    for a SOC as it helps in early identification and mitigation of cryptomining activities,
+    which can compromise network integrity and resource availability. If confirmed
+    malicious, th
+  author: Gowthamaraj Rajendran, Rod Soto, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - zscaler-browser-proxy-threats
+  mitre_attack:
+    techniques:
+    - id: T1566
+      name: Technique T1566
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566/zscalar_web_proxy/zscalar_web_proxy.json
+    description: zscaler - zscalernss-web
+    format: jsonl
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,35 @@
+metadata:
+  name: scheduled-task-deleted-or-created-via-cmd
+  version: 23.0.0
+  description: The following analytic identifies the creation or deletion of scheduled
+    tasks using the schtasks.exe utility with the -create or -delete flags. It leverages
+    data from Endpoint Detection and Response (EDR) agents, focusing on process names
+    and command-line executions. This activity is significant as it can indicate unauthorized
+    system manipulation or malicious intent, often associated with threat actors like
+    Dragonfly and incidents such as the SUNBURST attack. If confirmed malicious, this
+    activit
+  author: Bhavin Patel, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - shrinklocker
+  - agenttesla
+  - cisa-aa24-241a
+  mitre_attack:
+    techniques:
+    - id: T1053.005
+      name: Technique T1053.005
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053.005/atomic_red_team/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

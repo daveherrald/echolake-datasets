@@ -1,0 +1,34 @@
+metadata:
+  name: remote-process-instantiation-via-wmi-and-powershell
+  version: 16.0.0
+  description: The following analytic detects the execution of `powershell.exe` using
+    the `Invoke-WmiMethod` cmdlet to start a process on a remote endpoint via WMI.
+    It leverages data from Endpoint Detection and Response (EDR) agents, focusing
+    on command-line executions and process telemetry. This activity is significant
+    as it indicates potential lateral movement or remote code execution attempts by
+    adversaries. If confirmed malicious, this could allow attackers to execute arbitrary
+    code on remote systems, lead
+  author: Mauricio Velazco, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - active-directory-lateral-movement
+  - compromised-windows-host
+  mitre_attack:
+    techniques:
+    - id: T1047
+      name: Technique T1047
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1047/lateral_movement/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

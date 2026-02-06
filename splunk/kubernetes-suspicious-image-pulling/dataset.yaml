@@ -1,0 +1,33 @@
+metadata:
+  name: kubernetes-suspicious-image-pulling
+  version: 5.0.0
+  description: The following analytic detects suspicious image pulling in Kubernetes
+    environments. It identifies this activity by monitoring Kubernetes audit logs
+    for image pull requests that do not match a predefined list of allowed images.
+    This behavior is significant for a SOC as it may indicate an attacker attempting
+    to deploy malicious software or infiltrate the system. If confirmed malicious,
+    the impact could be severe, potentially leading to unauthorized access to sensitive
+    systems or data, and enabling
+  author: Patrick Bareiss, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - kubernetes-security
+  mitre_attack:
+    techniques:
+    - id: T1526
+      name: Technique T1526
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1526/kubernetes_audit_pull_image/kubernetes_audit_pull_image.json
+    description: kubernetes - _json
+    format: jsonl
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

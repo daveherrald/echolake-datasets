@@ -1,0 +1,37 @@
+metadata:
+  name: okta-successful-single-factor-authentication
+  version: 7.0.0
+  description: The following analytic identifies successful single-factor authentication
+    events against the Okta Dashboard for accounts without Multi-Factor Authentication
+    (MFA) enabled. It detects this activity by analyzing Okta logs for successful
+    authentication events where "Okta Verify" is not used. This behavior is significant
+    as it may indicate a misconfiguration, policy violation, or potential account
+    takeover. If confirmed malicious, an attacker could gain unauthorized access to
+    the account, potentiall
+  author: Bhavin Patel, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - okta-account-takeover
+  mitre_attack:
+    techniques:
+    - id: T1078.004
+      name: Technique T1078.004
+    - id: T1586.003
+      name: Technique T1586.003
+    - id: T1621
+      name: Technique T1621
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1078.004/okta_single_factor_auth/okta_single_factor_auth.log
+    description: okta_log - OktaIM2:log
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

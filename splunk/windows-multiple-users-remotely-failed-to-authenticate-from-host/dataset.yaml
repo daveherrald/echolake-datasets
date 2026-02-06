@@ -1,0 +1,34 @@
+metadata:
+  name: windows-multiple-users-remotely-failed-to-authenticate-from-host
+  version: 9.0.0
+  description: The following analytic identifies a source host failing to authenticate
+    against a remote host with 30 unique users. It leverages Windows Event 4625 with
+    Logon Type 3, indicating remote authentication attempts. This behavior is significant
+    as it may indicate a Password Spraying attack, where an adversary attempts to
+    gain initial access or elevate privileges in an Active Directory environment.
+    If confirmed malicious, this activity could lead to unauthorized access, privilege
+    escalation, and potent
+  author: Mauricio Velazco, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - active-directory-password-spraying
+  - volt-typhoon
+  mitre_attack:
+    techniques:
+    - id: T1110.003
+      name: Technique T1110.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1110.003/purplesharp_remote_spray_xml/windows-security.log
+    description: XmlWinEventLog:Security - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

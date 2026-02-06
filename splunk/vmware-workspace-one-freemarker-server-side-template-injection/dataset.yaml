@@ -1,0 +1,35 @@
+metadata:
+  name: vmware-workspace-one-freemarker-server-side-template-injection
+  version: 5.0.0
+  description: The following analytic detects server-side template injection attempts
+    related to CVE-2022-22954 in VMware Workspace ONE. It leverages web or proxy logs
+    to identify HTTP GET requests to the endpoint catalog-portal/ui/oauth/verify with
+    the freemarker.template.utility.Execute command. This activity is significant
+    as it indicates potential exploitation attempts that could lead to remote code
+    execution. If confirmed malicious, an attacker could execute arbitrary commands
+    on the server, leading to fu
+  author: Michael Haag, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - vmware-server-side-injection-and-privilege-escalation
+  mitre_attack:
+    techniques:
+    - id: T1190
+      name: Technique T1190
+    - id: T1133
+      name: Technique T1133
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/vmware/vmware_scanning_pan_threat.log
+    description: pan:threat - pan:threat
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

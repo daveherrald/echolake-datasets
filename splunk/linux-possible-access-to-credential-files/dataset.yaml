@@ -1,0 +1,35 @@
+metadata:
+  name: linux-possible-access-to-credential-files
+  version: 10.0.0
+  description: The following analytic detects attempts to access or dump the contents
+    of /etc/passwd and /etc/shadow files on Linux systems. It leverages data from
+    Endpoint Detection and Response (EDR) agents, focusing on processes like 'cat',
+    'nano', 'vim', and 'vi' accessing these files. This activity is significant as
+    it may indicate credential dumping, a technique used by adversaries to gain persistence
+    or escalate privileges. If confirmed malicious, attackers could obtain hashed
+    passwords for offline crac
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - linux-persistence-techniques
+  - china-nexus-threat-activity
+  - xorddos
+  mitre_attack:
+    techniques:
+    - id: T1003.008
+      name: Technique T1003.008
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1003.008/copy_file_stdoutpipe/sysmon_linux.log
+    description: Syslog:Linux-Sysmon/Operational - sysmon:linux
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

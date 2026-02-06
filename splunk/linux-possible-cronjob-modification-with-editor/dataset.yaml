@@ -1,0 +1,35 @@
+metadata:
+  name: linux-possible-cronjob-modification-with-editor
+  version: 8.0.0
+  description: 'The following analytic detects potential unauthorized modifications
+    to Linux cronjobs using text editors like "nano," "vi," or "vim." It identifies
+    this activity by monitoring command-line executions that interact with cronjob
+    configuration paths. This behavior is significant for a SOC as it may indicate
+    attempts at privilege escalation or establishing persistent access. If confirmed
+    malicious, the impact could be severe, allowing attackers to execute damaging
+    actions such as data theft, system '
+  author: Teoderick Contreras, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - xorddos
+  - linux-living-off-the-land
+  - linux-privilege-escalation
+  mitre_attack:
+    techniques:
+    - id: T1053.003
+      name: Technique T1053.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053.003/cronjobs_entry/sysmon_linux.log
+    description: Syslog:Linux-Sysmon/Operational - sysmon:linux
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

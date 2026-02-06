@@ -1,0 +1,36 @@
+metadata:
+  name: windows-lolbas-executed-as-renamed-file
+  version: 7.0.0
+  description: The following analytic identifies a LOLBAS process being executed where
+    it's process name does not match it's original file name attribute. Processes
+    that have been renamed and executed may be an indicator that an adversary is attempting
+    to evade defenses or execute malicious code. The LOLBAS project documents Windows
+    native binaries that can be abused by threat actors to perform tasks like executing
+    malicious code.
+  author: Steven Dick
+  tags:
+  - ttp
+  - splunk-security-content
+  - living-off-the-land
+  - masquerading---rename-system-utilities
+  - windows-defense-evasion-tactics
+  mitre_attack:
+    techniques:
+    - id: T1036.003
+      name: Technique T1036.003
+    - id: T1218.011
+      name: Technique T1218.011
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1036/cmd_lolbas_usage/cmd_lolbas_usage.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

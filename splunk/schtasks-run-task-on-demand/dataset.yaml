@@ -1,0 +1,35 @@
+metadata:
+  name: schtasks-run-task-on-demand
+  version: 6.0.0
+  description: The following analytic detects the execution of a Windows Scheduled
+    Task on demand via the shell or command line. It leverages process-related data,
+    including process name, parent process, and command-line executions, sourced from
+    endpoint logs. The detection focuses on 'schtasks.exe' with an associated 'run'
+    command. This activity is significant as adversaries often use it to force the
+    execution of their created Scheduled Tasks for persistent access or lateral movement
+    within a compromised mach
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - industroyer2
+  - cisa-aa22-257a
+  - data-destruction
+  mitre_attack:
+    techniques:
+    - id: T1053
+      name: Technique T1053
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/xmrig_miner/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,33 @@
+metadata:
+  name: attempt-to-add-certificate-to-untrusted-store
+  version: 16.0.0
+  description: "The following analytic detects attempts to add a certificate to the\
+    \ untrusted\ncertificate store using the 'certutil -addstore' command. \nIt leverages\
+    \ process activity and command-line arguments from Endpoint Detection and Response\
+    \ (EDR) logs mapped to the Splunk `Processes` data model. \nThis activity is significant\
+    \ as it may indicate an attacker trying to disable security tools to gain unauthorized\
+    \ access.\nIf confirmed malicious, this could lead to the compromise of system\
+    \ security, allowing att"
+  author: Patrick Bareiss, Rico Valdez, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - disabling-security-tools
+  mitre_attack:
+    techniques:
+    - id: T1553.004
+      name: Technique T1553.004
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1553.004/atomic_red_team/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

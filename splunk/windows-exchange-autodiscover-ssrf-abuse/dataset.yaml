@@ -1,0 +1,37 @@
+metadata:
+  name: windows-exchange-autodiscover-ssrf-abuse
+  version: 6.0.0
+  description: 'This analytic identifies potential exploitation attempts of ProxyShell
+    (CVE-2021-34473, CVE-2021-34523, CVE-2021-31207) and ProxyNotShell (CVE-2022-41040,
+    CVE-2022-41082) vulnerabilities in Microsoft Exchange Server. The detection focuses
+    on identifying the SSRF attack patterns used in these exploit chains. The analytic
+    monitors for suspicious POST requests to /autodiscover/autodiscover.json endpoints
+    that may indicate attempts to enumerate LegacyDN attributes as part of initial
+    reconnaissance. '
+  author: Michael Haag, Nathaniel Stearns, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - proxyshell
+  - blackbyte-ransomware
+  - proxynotshell
+  mitre_attack:
+    techniques:
+    - id: T1190
+      name: Technique T1190
+    - id: T1133
+      name: Technique T1133
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/proxyshell/proxyshell.log
+    description: ms:iis:splunk - ms:iis:splunk
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

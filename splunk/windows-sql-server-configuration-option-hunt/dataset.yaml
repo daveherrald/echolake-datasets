@@ -1,0 +1,31 @@
+metadata:
+  name: windows-sql-server-configuration-option-hunt
+  version: 3.0.0
+  description: This detection helps hunt for changes to SQL Server configuration options
+    that could indicate malicious activity. It monitors for modifications to any SQL
+    Server configuration settings, allowing analysts to identify potentially suspicious
+    changes that may be part of an attack, such as enabling dangerous features or
+    modifying security-relevant settings.
+  author: Michael Haag, Splunk, sidoyle from Splunk Community
+  tags:
+  - hunting
+  - splunk-security-content
+  - sql-server-abuse
+  mitre_attack:
+    techniques:
+    - id: T1505.001
+      name: Technique T1505.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1505.001/simulation/windows-application.log
+    description: XmlWinEventLog:Application - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

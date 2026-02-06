@@ -1,0 +1,34 @@
+metadata:
+  name: linux-file-creation-in-profile-directory
+  version: 7.0.0
+  description: The following analytic detects the creation of files in the /etc/profile.d
+    directory on Linux systems. It leverages filesystem data to identify new files
+    in this directory, which is often used by adversaries for persistence by executing
+    scripts upon system boot. This activity is significant as it may indicate an attempt
+    to maintain long-term access to the compromised host. If confirmed malicious,
+    this could allow attackers to execute arbitrary code with elevated privileges
+    each time the system b
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - linux-privilege-escalation
+  - linux-persistence-techniques
+  mitre_attack:
+    techniques:
+    - id: T1546.004
+      name: Technique T1546.004
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1546.004/linux_init_profile/sysmon_linux.log
+    description: Syslog:Linux-Sysmon/Operational - sysmon:linux
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

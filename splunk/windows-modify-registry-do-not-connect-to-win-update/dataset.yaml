@@ -1,0 +1,32 @@
+metadata:
+  name: windows-modify-registry-do-not-connect-to-win-update
+  version: 8.0.0
+  description: The following analytic detects a suspicious modification to the Windows
+    registry that disables automatic updates. It leverages data from the Endpoint
+    datamodel, specifically monitoring changes to the registry path "*\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\DoNotConnectToWindowsUpdateInternetLocations"
+    with a value of "0x00000001". This activity is significant as it can be used by
+    adversaries, including malware like RedLine Stealer, to evade detection and prevent
+    the system from r
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - redline-stealer
+  mitre_attack:
+    techniques:
+    - id: T1112
+      name: Technique T1112
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/redline/modify_registry/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

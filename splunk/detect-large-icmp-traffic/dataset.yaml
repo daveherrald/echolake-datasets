@@ -1,0 +1,35 @@
+metadata:
+  name: detect-large-icmp-traffic
+  version: 2.0.0
+  description: The following analytic identifies ICMP traffic to external IP addresses
+    with total bytes (sum of bytes in and bytes out) greater than 1,000 bytes. It
+    leverages the Network_Traffic data model to detect large ICMP packet that aren't
+    blocked and are directed toward external networks. We use  All_Traffic.bytes in
+    the detection to capture variations in inbound versus outbound traffic sizes,
+    as significant discrepancies or unusually large ICMP exchanges can indicate information
+    smuggling, covert commu
+  author: Rico Valdez, Dean Luxton, Bhavin Patel, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - command-and-control
+  - china-nexus-threat-activity
+  - backdoor-pingpong
+  mitre_attack:
+    techniques:
+    - id: T1095
+      name: Technique T1095
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1095/palologs/large_icmp.log
+    description: pan:traffic - pan:traffic
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

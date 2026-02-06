@@ -1,0 +1,34 @@
+metadata:
+  name: windows-linked-policies-in-adsi-discovery
+  version: 7.0.0
+  description: The following analytic detects the use of the `[Adsisearcher]` type
+    accelerator in PowerShell Script Block Logging (EventCode=4104) to query Active
+    Directory for domain organizational units. This detection leverages PowerShell
+    operational logs to identify script blocks containing `[adsisearcher]`, `objectcategory=organizationalunit`,
+    and `findAll()`. This activity is significant as it indicates potential reconnaissance
+    efforts by adversaries to gain situational awareness of the domain structure.
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - data-destruction
+  - active-directory-discovery
+  - industroyer2
+  mitre_attack:
+    techniques:
+    - id: T1087.002
+      name: Technique T1087.002
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1087.002/adsi_discovery/windows-powershell-xml2.log
+    description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

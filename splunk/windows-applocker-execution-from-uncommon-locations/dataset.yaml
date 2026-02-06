@@ -1,0 +1,33 @@
+metadata:
+  name: windows-applocker-execution-from-uncommon-locations
+  version: 5.0.0
+  description: The following analytic identifies the execution of applications or
+    scripts from uncommon or suspicious file paths, potentially indicating malware
+    or unauthorized activity. It leverages Windows AppLocker event logs and uses statistical
+    analysis to detect anomalies. By calculating the average and standard deviation
+    of execution counts per file path, it flags paths with execution counts significantly
+    higher than expected. This behavior is significant as it can uncover malicious
+    activities or policy
+  author: Michael Haag, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - windows-applocker
+  mitre_attack:
+    techniques:
+    - id: T1218
+      name: Technique T1218
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562/applocker/applocker.log
+    description: XmlWinEventLog:Microsoft-Windows-AppLocker/MSI and Script - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

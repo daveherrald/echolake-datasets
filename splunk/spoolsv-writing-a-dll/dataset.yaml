@@ -1,0 +1,35 @@
+metadata:
+  name: spoolsv-writing-a-dll
+  version: 11.0.0
+  description: The following analytic detects `spoolsv.exe` writing a `.dll` file,
+    which is unusual behavior and may indicate exploitation of vulnerabilities like
+    CVE-2021-34527 (PrintNightmare). This detection leverages the Endpoint datamodel,
+    specifically monitoring process and filesystem events to identify `.dll` file
+    creation within the `\spool\drivers\x64\` path. This activity is significant as
+    it may signify an attacker attempting to execute malicious code via the Print
+    Spooler service. If confirmed mali
+  author: Mauricio Velazco, Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - printnightmare-cve-2021-34527
+  - compromised-windows-host
+  - black-basta-ransomware
+  mitre_attack:
+    techniques:
+    - id: T1547.012
+      name: Technique T1547.012
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1547.012/printnightmare/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

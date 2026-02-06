@@ -1,0 +1,33 @@
+metadata:
+  name: windows-rdp-client-launched-with-admin-session
+  version: 2.0.0
+  description: "This detection identifies the execution of the Windows Remote Desktop\
+    \ Client (mstsc.exe) with the \"/v\" and /admin command-line arguments. The \"\
+    /v\" flag specifies the remote host to connect to, while the /admin flag initiates\
+    \ a connection to the target system\u2019s console session, often used for administrative\
+    \ purposes. This combination may indicate that a user or attacker is performing\
+    \ privileged remote access, potentially to manage a system without disrupting\
+    \ existing user sessions. While such usa"
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - windows-rdp-artifacts-and-defense-evasion
+  mitre_attack:
+    techniques:
+    - id: T1021.001
+      name: Technique T1021.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1021.001/mstsc_admini/mstsc_admin.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

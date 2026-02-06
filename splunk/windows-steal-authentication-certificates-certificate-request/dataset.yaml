@@ -1,0 +1,33 @@
+metadata:
+  name: windows-steal-authentication-certificates-certificate-request
+  version: 5.0.0
+  description: The following analytic detects when a new certificate is requested
+    from Certificate Services - AD CS. It leverages Event ID 4886, which indicates
+    that a certificate request has been received. This activity is significant because
+    unauthorized certificate requests can be part of credential theft or lateral movement
+    tactics. If confirmed malicious, an attacker could use the certificate to impersonate
+    users, gain unauthorized access to resources, or establish persistent access within
+    the environment
+  author: Michael Haag, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - windows-certificate-services
+  mitre_attack:
+    techniques:
+    - id: T1649
+      name: Technique T1649
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1649/atomic_red_team/4886_windows-security.log
+    description: XmlWinEventLog:Security - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

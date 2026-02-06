@@ -1,0 +1,35 @@
+metadata:
+  name: nginx-connectwise-screenconnect-authentication-bypass
+  version: 7.0.0
+  description: The following analytic detects attempts to exploit the ConnectWise
+    ScreenConnect CVE-2024-1709 vulnerability, which allows attackers to bypass authentication
+    via alternate paths or channels. It leverages Nginx access logs to identify web
+    requests to the SetupWizard.aspx page, indicating potential exploitation. This
+    activity is significant as it can lead to unauthorized administrative access and
+    remote code execution. If confirmed malicious, attackers could create administrative
+    users and gain fu
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - connectwise-screenconnect-vulnerabilities
+  - seashell-blizzard
+  - scattered-lapsus$-hunters
+  mitre_attack:
+    techniques:
+    - id: T1190
+      name: Technique T1190
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/screenconnect/nginx_screenconnect.log
+    description: nginx:plus:kv - nginx:plus:kv
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

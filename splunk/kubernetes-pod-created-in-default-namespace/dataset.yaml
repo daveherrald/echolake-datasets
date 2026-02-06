@@ -1,0 +1,33 @@
+metadata:
+  name: kubernetes-pod-created-in-default-namespace
+  version: 5.0.0
+  description: The following analytic detects the creation of Kubernetes pods in the
+    default, kube-system, or kube-public namespaces. It leverages Kubernetes audit
+    logs to identify pod creation events within these specific namespaces. This activity
+    is significant for a SOC as it may indicate an attacker attempting to hide their
+    presence or evade defenses. Unauthorized pod creation in these namespaces can
+    suggest a successful cluster breach, potentially leading to privilege escalation,
+    persistent access, or fur
+  author: Patrick Bareiss, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - kubernetes-security
+  mitre_attack:
+    techniques:
+    - id: T1204
+      name: Technique T1204
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1204/kubernetes_privileged_pod/kubernetes_privileged_pod.json
+    description: kubernetes - _json
+    format: jsonl
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

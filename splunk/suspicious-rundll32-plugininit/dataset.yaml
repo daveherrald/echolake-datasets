@@ -1,0 +1,33 @@
+metadata:
+  name: suspicious-rundll32-plugininit
+  version: 8.0.0
+  description: The following analytic identifies the execution of the rundll32.exe
+    process with the "plugininit" parameter. This detection leverages data from Endpoint
+    Detection and Response (EDR) agents, focusing on process creation events and command-line
+    arguments. This activity is significant because the "plugininit" parameter is
+    commonly associated with IcedID malware, which uses it to execute an initial DLL
+    stager to download additional payloads. If confirmed malicious, this behavior
+    could lead to furthe
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - icedid
+  mitre_attack:
+    techniques:
+    - id: T1218.011
+      name: Technique T1218.011
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/icedid/inf_icedid/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

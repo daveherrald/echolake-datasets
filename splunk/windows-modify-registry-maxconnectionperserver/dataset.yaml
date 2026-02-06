@@ -1,0 +1,33 @@
+metadata:
+  name: windows-modify-registry-maxconnectionperserver
+  version: 8.0.0
+  description: The following analytic identifies a suspicious modification of the
+    Windows registry setting for max connections per server. It detects changes to
+    specific registry paths using data from the Endpoint.Registry datamodel. This
+    activity is significant because altering this setting can be exploited by attackers
+    to increase the number of concurrent connections to a remote server, potentially
+    facilitating DDoS attacks or enabling more effective lateral movement within a
+    compromised network. If confirme
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - warzone-rat
+  mitre_attack:
+    techniques:
+    - id: T1112
+      name: Technique T1112
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/warzone_rat/maxconnectionperserver/registry_event.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

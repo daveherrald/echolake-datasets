@@ -1,0 +1,33 @@
+metadata:
+  name: kerberos-user-enumeration
+  version: 9.0.0
+  description: 'The following analytic detects an unusual number of Kerberos Ticket
+    Granting Ticket (TGT) requests for non-existing users from a single source endpoint.
+    It leverages Event ID 4768 and identifies anomalies using the 3-sigma statistical
+    rule. This behavior is significant as it may indicate an adversary performing
+    a user enumeration attack against Active Directory. If confirmed malicious, the
+    attacker could validate a list of usernames, potentially leading to further attacks
+    such as brute force or '
+  author: Mauricio Velazco, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - active-directory-kerberos-attacks
+  mitre_attack:
+    techniques:
+    - id: T1589.002
+      name: Technique T1589.002
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1589.002/kerberos_user_enumeration/windows-xml.log
+    description: XmlWinEventLog:Security - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

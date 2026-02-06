@@ -1,0 +1,35 @@
+metadata:
+  name: windows-hunting-system-account-targeting-lsass
+  version: 10.0.0
+  description: The following analytic identifies processes attempting to access Lsass.exe,
+    which may indicate credential dumping or applications needing credential access.
+    It leverages Sysmon EventCode 10 to detect such activities by analyzing fields
+    like TargetImage, GrantedAccess, and SourceImage. This behavior is significant
+    as unauthorized access to Lsass.exe can lead to credential theft, posing a severe
+    security risk. If confirmed malicious, attackers could gain access to sensitive
+    credentials, potentiall
+  author: Michael Haag, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - cisa-aa23-347a
+  - credential-dumping
+  - lokibot
+  mitre_attack:
+    techniques:
+    - id: T1003.001
+      name: Technique T1003.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1003.001/atomic_red_team/windows-sysmon_creddump.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,34 @@
+metadata:
+  name: linux-c99-privilege-escalation
+  version: 9.0.0
+  description: The following analytic detects the execution of the c99 utility with
+    sudo privileges, which can lead to privilege escalation on Linux systems. It leverages
+    data from Endpoint Detection and Response (EDR) agents, focusing on process execution
+    logs that include command-line details. This activity is significant because it
+    indicates a potential misuse of the c99 utility to gain root access, which is
+    critical for maintaining system security. If confirmed malicious, this could allow
+    an attacker to ex
+  author: Gowthamaraj Rajendran, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - linux-privilege-escalation
+  - linux-living-off-the-land
+  mitre_attack:
+    techniques:
+    - id: T1548.003
+      name: Technique T1548.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1548/c99/sysmon_linux.log
+    description: Syslog:Linux-Sysmon/Operational - sysmon:linux
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

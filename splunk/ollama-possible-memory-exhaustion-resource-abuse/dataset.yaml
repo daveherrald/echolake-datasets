@@ -1,0 +1,33 @@
+metadata:
+  name: ollama-possible-memory-exhaustion-resource-abuse
+  version: 1.0.0
+  description: 'Detects abnormal memory allocation patterns and excessive runner operations
+    in Ollama that may indicate resource exhaustion attacks, memory abuse through
+    malicious model loading, or attempts to degrade system performance by overwhelming
+    GPU/CPU resources. Adversaries may deliberately load multiple large models, trigger
+    repeated model initialization cycles, or exploit memory allocation mechanisms
+    to exhaust available system resources, causing denial of service conditions or
+    degrading performance '
+  author: Rod Soto
+  tags:
+  - anomaly
+  - splunk-security-content
+  - suspicious-ollama-activities
+  mitre_attack:
+    techniques:
+    - id: T1499
+      name: Technique T1499
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/ollama/server.log
+    description: server.log - ollama:server
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,36 @@
+metadata:
+  name: github-organizations-repository-deleted
+  version: 4.0.0
+  description: The following analytic identifies when a repository is deleted within
+    a GitHub organization. The detection monitors GitHub Organizations audit logs
+    for repository deletion events by tracking actor details, repository information,
+    and associated metadata. This behavior is concerning for SOC teams as malicious
+    actors may attempt to delete repositories to destroy source code, intellectual
+    property, or evidence of compromise. Repository deletion can result in permanent
+    loss of code, documentation, a
+  author: Patrick Bareiss, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - github-malicious-activity
+  - npm-supply-chain-compromise
+  mitre_attack:
+    techniques:
+    - id: T1485
+      name: Technique T1485
+    - id: T1195
+      name: Technique T1195
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1485/github_delete_repository/github.json
+    description: github - github:cloud:audit
+    format: jsonl
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

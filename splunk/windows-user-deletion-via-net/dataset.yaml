@@ -1,0 +1,35 @@
+metadata:
+  name: windows-user-deletion-via-net
+  version: 4.0.0
+  description: The following analytic detects the use of net.exe or net1.exe command-line
+    to delete a user account on a system. It leverages data from Endpoint Detection
+    and Response (EDR) agents, focusing on process and command-line execution logs.
+    This activity is significant as it may indicate an attempt to impair user accounts
+    or cover tracks during lateral movement. If confirmed malicious, this could lead
+    to unauthorized access removal, disruption of legitimate user activities, or concealment
+    of adversari
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - xmrig
+  - graceful-wipe-out-attack
+  - darkgate-malware
+  mitre_attack:
+    techniques:
+    - id: T1531
+      name: Technique T1531
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/xmrig_miner/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,34 @@
+metadata:
+  name: credential-dumping-via-symlink-to-shadow-copy
+  version: 9.0.0
+  description: The following analytic detects the creation of a symlink to a shadow
+    copy, which may indicate credential dumping attempts. It leverages the Endpoint.Processes
+    data model in Splunk to identify processes executing commands containing "mklink"
+    and "HarddiskVolumeShadowCopy". This activity is significant because attackers
+    often use this technique to manipulate or delete shadow copies, hindering system
+    backup and recovery efforts. If confirmed malicious, this could prevent data restoration,
+    complicat
+  author: Patrick Bareiss, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - compromised-windows-host
+  - credential-dumping
+  mitre_attack:
+    techniques:
+    - id: T1003.003
+      name: Technique T1003.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1003.003/atomic_red_team/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

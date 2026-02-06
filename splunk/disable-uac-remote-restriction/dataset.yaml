@@ -1,0 +1,35 @@
+metadata:
+  name: disable-uac-remote-restriction
+  version: 11.0.0
+  description: The following analytic detects the modification of the registry to
+    disable UAC remote restriction by setting the "LocalAccountTokenFilterPolicy"
+    value to "0x00000001". It leverages data from the Endpoint.Registry data model,
+    specifically monitoring changes to the registry path "*\\CurrentVersion\\Policies\\System*".
+    This activity is significant because disabling UAC remote restriction can allow
+    an attacker to bypass User Account Control (UAC) protections, potentially leading
+    to privilege escalat
+  author: Teoderick Contreras, Splunk, Steven Dick
+  tags:
+  - ttp
+  - splunk-security-content
+  - suspicious-windows-registry-activities
+  - windows-defense-evasion-tactics
+  - cisa-aa23-347a
+  mitre_attack:
+    techniques:
+    - id: T1548.002
+      name: Technique T1548.002
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1548.002/LocalAccountTokenFilterPolicy/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

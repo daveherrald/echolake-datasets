@@ -1,0 +1,33 @@
+metadata:
+  name: nishang-powershelltcponeline
+  version: 9.0.0
+  description: The following analytic detects the use of the Nishang Invoke-PowerShellTCPOneLine
+    utility, which initiates a callback to a remote Command and Control (C2) server.
+    It leverages Endpoint Detection and Response (EDR) data, focusing on PowerShell
+    processes that include specific .NET classes like Net.Sockets.TCPClient and System.Text.ASCIIEncoding.
+    This activity is significant as it indicates potential remote control or data
+    exfiltration attempts by an attacker. If confirmed malicious, this could lea
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - hafnium-group
+  - cleo-file-transfer-software
+  mitre_attack:
+    techniques:
+    - id: T1059.001
+      name: Technique T1059.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/atomic_red_team/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,35 @@
+metadata:
+  name: cisco-secure-firewall-binary-file-type-download
+  version: 3.0.0
+  description: "The following analytic detects file downloads involving executable,\
+    \ archive, or scripting-related file types that are commonly used in malware delivery.\
+    \ \nThese file types include formats like PE executables, shell scripts, autorun\
+    \ files, installers, and known testing samples such as EICAR.\nThis detection\
+    \ leverages Cisco Secure Firewall Threat Defense logs and enriches the results\
+    \ using a filetype lookup to provide context.\nIf confirmed malicious, these downloads\
+    \ could indicate the initial infect"
+  author: Nasreddine Bencherchali, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - cisco-secure-firewall-threat-defense-analytics
+  mitre_attack:
+    techniques:
+    - id: T1203
+      name: Technique T1203
+    - id: T1059
+      name: Technique T1059
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_secure_firewall_threat_defense/file_event/file_events.log
+    description: not_applicable - cisco:sfw:estreamer
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,34 @@
+metadata:
+  name: windows-alternate-datastream-base64-content
+  version: 9.0.0
+  description: 'The following analytic detects the creation of Alternate Data Streams
+    (ADS) with Base64 content on Windows systems. It leverages Sysmon EventID 15,
+    which captures file creation events, including the content of named streams. ADS
+    can conceal malicious payloads, making them significant for SOC monitoring. This
+    detection identifies hidden streams that may contain executables, scripts, or
+    configuration data, often used by malware to evade detection. If confirmed malicious,
+    this activity could allow '
+  author: Steven Dick, Teoderick Contreras, Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - windows-defense-evasion-tactics
+  - apt37-rustonotto-and-fadestealer
+  mitre_attack:
+    techniques:
+    - id: T1564.004
+      name: Technique T1564.004
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1564.004/ads_abuse/ads_abuse_sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

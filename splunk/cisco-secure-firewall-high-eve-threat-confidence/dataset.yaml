@@ -1,0 +1,39 @@
+metadata:
+  name: cisco-secure-firewall-high-eve-threat-confidence
+  version: 3.0.0
+  description: The following analytic detects connections with a high Encrypted Visibility
+    Engine (EVE) threat confidence score, indicating potentially malicious behavior
+    within encrypted traffic. It leverages Cisco Secure Firewall Threat Defense logs
+    and evaluates the EVE_ThreatConfidencePct field, which reflects the system's confidence
+    in classifying encrypted sessions as threats based on machine learning models
+    and behavioral analysis. A score equal to or greater than 80 suggests the connection
+    is highly li
+  author: Nasreddine Bencherchali, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - cisco-secure-firewall-threat-defense-analytics
+  mitre_attack:
+    techniques:
+    - id: T1041
+      name: Technique T1041
+    - id: T1071.001
+      name: Technique T1071.001
+    - id: T1105
+      name: Technique T1105
+    - id: T1573.002
+      name: Technique T1573.002
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_secure_firewall_threat_defense/connection_event/connection_events.log
+    description: not_applicable - cisco:sfw:estreamer
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,34 @@
+metadata:
+  name: o365-excessive-sso-logon-errors
+  version: 8.0.0
+  description: The following analytic detects accounts experiencing a high number
+    of Single Sign-On (SSO) logon errors. It leverages data from the `o365_management_activity`
+    dataset, focusing on failed user login attempts with SSO errors. This activity
+    is significant as it may indicate brute-force attempts or the hijacking/reuse
+    of SSO tokens. If confirmed malicious, attackers could potentially gain unauthorized
+    access to user accounts, leading to data breaches, privilege escalation, or further
+    lateral movemen
+  author: Rod Soto, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - office-365-account-takeover
+  - cloud-federated-credential-abuse
+  mitre_attack:
+    techniques:
+    - id: T1556
+      name: Technique T1556
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1556/o365_sso_logon_errors/o365_sso_logon_errors2.json
+    description: o365 - o365:management:activity
+    format: jsonl
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

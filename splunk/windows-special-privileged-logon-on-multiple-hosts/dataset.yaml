@@ -1,0 +1,39 @@
+metadata:
+  name: windows-special-privileged-logon-on-multiple-hosts
+  version: 8.0.0
+  description: The following analytic detects a user authenticating with special privileges
+    on 30 or more remote endpoints within a 5-minute window. It leverages Event ID
+    4672 from Windows Security logs to identify this behavior. This activity is significant
+    as it may indicate lateral movement or remote code execution by an adversary.
+    If confirmed malicious, the attacker could gain extensive control over the network,
+    potentially leading to privilege escalation, data exfiltration, or further compromise
+    of the e
+  author: Mauricio Velazco, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - active-directory-privilege-escalation
+  - active-directory-lateral-movement
+  - compromised-windows-host
+  mitre_attack:
+    techniques:
+    - id: T1087
+      name: Technique T1087
+    - id: T1021.002
+      name: Technique T1021.002
+    - id: T1135
+      name: Technique T1135
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1078/special_logon_on_mulitple_hosts/windows-security.log
+    description: XmlWinEventLog:Security - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

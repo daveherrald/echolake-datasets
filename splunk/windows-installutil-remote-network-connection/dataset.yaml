@@ -1,0 +1,39 @@
+metadata:
+  name: windows-installutil-remote-network-connection
+  version: 16.0.0
+  description: The following analytic detects the Windows InstallUtil.exe binary making
+    a remote network connection. It leverages data from Endpoint Detection and Response
+    (EDR) agents, focusing on process and network telemetry. This activity is significant
+    because InstallUtil.exe can be exploited to download and execute malicious code,
+    bypassing application control mechanisms. If confirmed malicious, an attacker
+    could achieve code execution, potentially leading to further system compromise,
+    data exfiltration,
+  author: Michael Haag, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - living-off-the-land
+  - compromised-windows-host
+  - signed-binary-proxy-execution-installutil
+  mitre_attack:
+    techniques:
+    - id: T1218.004
+      name: Technique T1218.004
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218.004/atomic_red_team/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_network_visibility_module/cisco_nvm_flowdata/nvm_flowdata.log
+    description: not_applicable - cisco:nvm:flowdata
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

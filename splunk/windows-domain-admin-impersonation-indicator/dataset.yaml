@@ -1,0 +1,35 @@
+metadata:
+  name: windows-domain-admin-impersonation-indicator
+  version: 8.0.0
+  description: The following analytic identifies potential Kerberos ticket forging
+    attacks, specifically the Diamond Ticket attack. This is detected when a user
+    logs into a host and the GroupMembership field in event 4627 indicates a privileged
+    group (e.g., Domain Admins), but the user does not actually belong to that group
+    in the directory service. The detection leverages Windows Security Event Log 4627,
+    which logs account logon events. The analytic cross-references the GroupMembership
+    field from the event ag
+  author: Mauricio Velazco, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - active-directory-kerberos-attacks
+  - gozi-malware
+  - compromised-windows-host
+  mitre_attack:
+    techniques:
+    - id: T1558
+      name: Technique T1558
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1558/diamond_ticket/security.log
+    description: XmlWinEventLog:Security - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

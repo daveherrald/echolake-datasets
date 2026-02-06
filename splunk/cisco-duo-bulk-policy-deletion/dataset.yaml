@@ -1,0 +1,33 @@
+metadata:
+  name: cisco-duo-bulk-policy-deletion
+  version: 1.0.0
+  description: 'The following analytic detects instances where a Duo administrator
+    performs a bulk deletion of more than three policies in a single action. It identifies
+    this behavior by searching Duo activity logs for the policy_bulk_delete action,
+    extracting the names of deleted policies, and counting them. If the count exceeds
+    three, the event is flagged. This behavior is significant for a Security Operations
+    Center (SOC) because mass deletion of security policies can indicate malicious
+    activity, such as an '
+  author: Patrick Bareiss, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - cisco-duo-suspicious-activity
+  mitre_attack:
+    techniques:
+    - id: T1556
+      name: Technique T1556
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1556/cisco_duo_bulk_policy_deletion/cisco_duo_administrator.json
+    description: duo - cisco:duo:administrator
+    format: jsonl
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

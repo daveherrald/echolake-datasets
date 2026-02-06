@@ -1,0 +1,32 @@
+metadata:
+  name: crowdstrike-admin-with-duplicate-password
+  version: 4.0.0
+  description: The following analytic detects CrowdStrike alerts for admin accounts
+    with duplicate password risk, identifying instances where administrative users
+    share the same password. This practice significantly increases the risk of unauthorized
+    access and potential breaches. Addressing these alerts promptly is crucial for
+    maintaining strong security protocols, ensuring each admin account uses a unique,
+    secure password to protect critical systems and data.
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - compromised-windows-host
+  mitre_attack:
+    techniques:
+    - id: T1110
+      name: Technique T1110
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/suspicious_behaviour/crowdstrike_stream/admin_duplicate_password/crowdstrike_admin_dup_pwd_cleaned.log
+    description: crowdstrike:identities - crowdstrike:identities
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

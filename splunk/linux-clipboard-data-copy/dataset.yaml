@@ -1,0 +1,33 @@
+metadata:
+  name: linux-clipboard-data-copy
+  version: 7.0.0
+  description: The following analytic detects the use of the Linux 'xclip' command
+    to copy data from the clipboard. It leverages Endpoint Detection and Response
+    (EDR) telemetry, focusing on process names and command-line arguments related
+    to clipboard operations. This activity is significant because adversaries can
+    exploit clipboard data to capture sensitive information such as passwords or IP
+    addresses. If confirmed malicious, this technique could lead to unauthorized data
+    exfiltration, compromising sensitive
+  author: Michael Haag, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - linux-living-off-the-land
+  mitre_attack:
+    techniques:
+    - id: T1115
+      name: Technique T1115
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1115/atomic_red_team/linux-sysmon.log
+    description: Syslog:Linux-Sysmon/Operational - sysmon:linux
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,32 @@
+metadata:
+  name: o365-sharepoint-allowed-domains-policy-changed
+  version: 8.0.0
+  description: The following analytic identifies when the allowed domain settings
+    for O365 SharePoint have been changed. With Azure AD B2B collaboration, users
+    and administrators can invite external users to collaborate with internal users.
+    External guest account invitations may also need access to OneDrive/SharePoint
+    resources. These changed should be monitored by security teams as they could potentially
+    lead to unauthorized access.
+  author: Steven Dick
+  tags:
+  - ttp
+  - splunk-security-content
+  - azure-active-directory-persistence
+  mitre_attack:
+    techniques:
+    - id: T1136.003
+      name: Technique T1136.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566/o365_various_alerts/o365_various_alerts.log
+    description: o365 - o365:management:activity
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

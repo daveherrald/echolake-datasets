@@ -1,0 +1,35 @@
+metadata:
+  name: detect-prohibited-applications-spawning-cmd-exe
+  version: 14.0.0
+  description: The following analytic detects executions of cmd.exe spawned by processes
+    that are commonly abused by attackers and do not typically launch cmd.exe. It
+    leverages data from Endpoint Detection and Response (EDR) agents, focusing on
+    process GUID, process name, parent process, and command-line executions. This
+    activity is significant because it may indicate an attempt to execute unauthorized
+    commands or scripts, often a precursor to further malicious actions. If confirmed
+    malicious, this behavior co
+  author: Bhavin Patel, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - suspicious-command-line-executions
+  - suspicious-mshta-activity
+  - suspicious-zoom-child-processes
+  mitre_attack:
+    techniques:
+    - id: T1059.003
+      name: Technique T1059.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.003/powershell_spawn_cmd/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

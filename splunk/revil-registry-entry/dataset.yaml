@@ -1,0 +1,34 @@
+metadata:
+  name: revil-registry-entry
+  version: 9.0.0
+  description: The following analytic identifies suspicious modifications in the registry
+    entry, specifically targeting paths used by malware like REVIL. It detects changes
+    in registry paths such as `SOFTWARE\\WOW6432Node\\Facebook_Assistant` and `SOFTWARE\\WOW6432Node\\BlackLivesMatter`.
+    This detection leverages data from Endpoint Detection and Response (EDR) agents,
+    focusing on registry modifications linked to process GUIDs. This activity is significant
+    as it indicates potential malware persistence mechanism
+  author: Steven Dick, Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - ransomware
+  - revil-ransomware
+  - windows-registry-abuse
+  mitre_attack:
+    techniques:
+    - id: T1112
+      name: Technique T1112
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/revil/inf1/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,33 @@
+metadata:
+  name: domain-group-discovery-with-wmic
+  version: 8.0.0
+  description: The following analytic identifies the execution of `wmic.exe` with
+    command-line arguments used to query for domain groups. It leverages data from
+    Endpoint Detection and Response (EDR) agents, focusing on process names and command-line
+    executions. This activity is significant as it indicates potential reconnaissance
+    efforts by adversaries to gain situational awareness and map out Active Directory
+    structures. If confirmed malicious, this behavior could allow attackers to identify
+    and target specif
+  author: Mauricio Velazco, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - active-directory-discovery
+  mitre_attack:
+    techniques:
+    - id: T1069.002
+      name: Technique T1069.002
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1069.002/AD_discovery/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,33 @@
+metadata:
+  name: windows-defender-asr-rule-disabled
+  version: 7.0.0
+  description: The following analytic identifies when a Windows Defender ASR rule
+    disabled events. ASR is a feature of Windows Defender Exploit Guard that prevents
+    actions and apps that are typically used by exploit-seeking malware to infect
+    machines. ASR rules are applied to processes and applications. When a process
+    or application attempts to perform an action that is blocked by an ASR rule, an
+    event is generated. This detection searches for ASR rule disabled events that
+    are generated when an ASR rule is dis
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - windows-attack-surface-reduction
+  mitre_attack:
+    techniques:
+    - id: T1112
+      name: Technique T1112
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059/defender/asr_disabled_registry.log
+    description: WinEventLog:Microsoft-Windows-Windows Defender/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

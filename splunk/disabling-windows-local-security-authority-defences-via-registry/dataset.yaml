@@ -1,0 +1,34 @@
+metadata:
+  name: disabling-windows-local-security-authority-defences-via-registry
+  version: 8.0.0
+  description: The following analytic identifies the deletion of registry keys that
+    disable Local Security Authority (LSA) protection and Microsoft Defender Device
+    Guard. It leverages data from Endpoint Detection and Response (EDR) agents, focusing
+    on registry actions and paths associated with LSA and Device Guard settings. This
+    activity is significant because disabling these defenses can leave a system vulnerable
+    to various attacks, including credential theft and unauthorized code execution.
+    If confirmed mali
+  author: Dean Luxton,Teoderick Contreras Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - windows-defense-evasion-tactics
+  - windows-registry-abuse
+  mitre_attack:
+    techniques:
+    - id: T1556
+      name: Technique T1556
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1556/disable_lsa_protection_new/lsa_reg_deletion_modification.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

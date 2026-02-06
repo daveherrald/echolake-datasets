@@ -1,0 +1,35 @@
+metadata:
+  name: aws-credential-access-getpassworddata
+  version: 7.0.0
+  description: The following analytic identifies more than 10 GetPasswordData API
+    calls within a 5-minute window in your AWS account. It leverages AWS CloudTrail
+    logs to detect this activity by counting the distinct instance IDs accessed. This
+    behavior is significant as it may indicate an attempt to retrieve encrypted administrator
+    passwords for running Windows instances, which is a critical security concern.
+    If confirmed malicious, attackers could gain unauthorized access to administrative
+    credentials, potent
+  author: Bhavin Patel, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - aws-identity-and-access-management-account-takeover
+  mitre_attack:
+    techniques:
+    - id: T1110.001
+      name: Technique T1110.001
+    - id: T1586.003
+      name: Technique T1586.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1552/aws_getpassworddata/aws_cloudtrail_events.json
+    description: aws_cloudtrail - aws:cloudtrail
+    format: jsonl
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,35 @@
+metadata:
+  name: linux-iptables-firewall-modification
+  version: 11.0.0
+  description: The following analytic detects suspicious command-line activity that
+    modifies the iptables firewall settings on a Linux machine. It leverages data
+    from Endpoint Detection and Response (EDR) agents, focusing on specific command
+    patterns that alter firewall rules to accept traffic on certain TCP ports. This
+    activity is significant as it can indicate malware, such as CyclopsBlink, modifying
+    firewall settings to allow communication with a Command and Control (C2) server.
+    If confirmed malicious, this
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - china-nexus-threat-activity
+  - backdoor-pingpong
+  - cyclops-blink
+  mitre_attack:
+    techniques:
+    - id: T1562.004
+      name: Technique T1562.004
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/cyclopsblink/sysmon_linux.log
+    description: Syslog:Linux-Sysmon/Operational - sysmon:linux
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,33 @@
+metadata:
+  name: get-wmiobject-group-discovery
+  version: 7.0.0
+  description: The following analytic detects the use of the `Get-WMIObject Win32_Group`
+    command executed via PowerShell to enumerate local groups on an endpoint. This
+    detection leverages data from Endpoint Detection and Response (EDR) agents, focusing
+    on process names and command-line executions. Identifying local groups can be
+    a precursor to privilege escalation or lateral movement. If confirmed malicious,
+    this activity could allow an attacker to map out group memberships, aiding in
+    further exploitation or u
+  author: Michael Haag, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - active-directory-discovery
+  mitre_attack:
+    techniques:
+    - id: T1069.001
+      name: Technique T1069.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1069.001/atomic_red_team/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,33 @@
+metadata:
+  name: getwmiobject-ds-group-with-powershell-script-block
+  version: 9.0.0
+  description: 'The following analytic detects the execution of the `Get-WmiObject`
+    commandlet with the `DS_Group` parameter via PowerShell Script Block Logging (EventCode=4104).
+    This method leverages WMI to query all domain groups. Monitoring this activity
+    is crucial as adversaries and Red Teams may use it for domain group enumeration,
+    aiding in situational awareness and Active Directory discovery. If confirmed malicious,
+    this activity could allow attackers to map out the domain structure, potentially
+    leading '
+  author: Mauricio Velazco, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - active-directory-discovery
+  mitre_attack:
+    techniques:
+    - id: T1069.002
+      name: Technique T1069.002
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/powershell_script_block_logging/sbl_xml.log
+    description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

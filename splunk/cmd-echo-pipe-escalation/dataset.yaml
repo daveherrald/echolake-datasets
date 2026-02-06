@@ -1,0 +1,37 @@
+metadata:
+  name: cmd-echo-pipe-escalation
+  version: 11.0.0
+  description: The following analytic identifies the use of named-pipe impersonation
+    for privilege escalation, commonly associated with Cobalt Strike and similar frameworks.
+    It detects command-line executions where `cmd.exe` uses `echo` to write to a named
+    pipe, such as `cmd.exe /c echo 4sgryt3436 > \\.\Pipe\5erg53`. This detection leverages
+    data from Endpoint Detection and Response (EDR) agents, focusing on process and
+    command-line telemetry. This activity is significant as it indicates potential
+    privilege es
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - graceful-wipe-out-attack
+  - cobalt-strike
+  - compromised-windows-host
+  mitre_attack:
+    techniques:
+    - id: T1059.003
+      name: Technique T1059.003
+    - id: T1543.003
+      name: Technique T1543.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1055/cobalt_strike/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

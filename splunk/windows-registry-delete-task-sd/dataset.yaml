@@ -1,0 +1,37 @@
+metadata:
+  name: windows-registry-delete-task-sd
+  version: 8.0.0
+  description: The following analytic detects a process attempting to delete a scheduled
+    task's Security Descriptor (SD) from the registry path of that task. It leverages
+    the Endpoint.Registry data model to identify registry actions performed by the
+    SYSTEM user, specifically targeting deletions or modifications of the SD value.
+    This activity is significant as it may indicate an attempt to remove evidence
+    of a scheduled task for defense evasion. If confirmed malicious, it suggests an
+    attacker with privileged ac
+  author: Michael Haag, Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - windows-registry-abuse
+  - windows-persistence-techniques
+  - scheduled-tasks
+  mitre_attack:
+    techniques:
+    - id: T1053.005
+      name: Technique T1053.005
+    - id: T1562
+      name: Technique T1562
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053.005/taskschedule/sd_delete_windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

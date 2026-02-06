@@ -1,0 +1,32 @@
+metadata:
+  name: crowdstrike-privilege-escalation-for-non-admin-user
+  version: 4.0.0
+  description: The following analytic detects CrowdStrike alerts for privilege escalation
+    attempts by non-admin users. These alerts indicate unauthorized efforts by regular
+    users to gain elevated permissions, posing a significant security risk. Detecting
+    and addressing these attempts promptly helps prevent potential breaches and ensures
+    that user privileges remain properly managed, maintaining the integrity of the
+    organization's security protocols.
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - compromised-windows-host
+  mitre_attack:
+    techniques:
+    - id: T1110
+      name: Technique T1110
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/suspicious_behaviour/crowdstrike_stream/privilege_escalation/crowdstrike_priv_esc_cleaned.log
+    description: CrowdStrike:Event:Streams - CrowdStrike:Event:Streams:JSON
+    format: jsonl
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,35 @@
+metadata:
+  name: powershell-domain-enumeration
+  version: 11.0.0
+  description: The following analytic detects the execution of PowerShell commands
+    used for domain enumeration, such as `get-netdomaintrust` and `get-adgroupmember`.
+    It leverages PowerShell Script Block Logging (EventCode=4104) to capture and analyze
+    the full command sent to PowerShell. This activity is significant as it often
+    indicates reconnaissance efforts by an attacker to map out the domain structure
+    and identify key users and groups. If confirmed malicious, this behavior could
+    lead to further targeted at
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - hermetic-wiper
+  - malicious-powershell
+  - cisa-aa23-347a
+  mitre_attack:
+    techniques:
+    - id: T1059.001
+      name: Technique T1059.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/powershell_script_block_logging/enumeration.log
+    description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

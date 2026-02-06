@@ -1,0 +1,35 @@
+metadata:
+  name: cisco-isovalent-cron-job-creation
+  version: 1.0.0
+  description: The following analytic detects the creation of a cron job within the
+    Cisco Isovalent environment. It identifies this activity by monitoring process
+    execution logs for cron job creation events. This behavior is significant for
+    a SOC as it could allow an attacker to execute malicious tasks repeatedly and
+    automatically, posing a threat to the Kubernetes infrastructure. If confirmed
+    malicious, this activity could lead to persistent attacks, service disruptions,
+    or unauthorized access to sensitive in
+  author: Bhavin Patel, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - cisco-isovalent-suspicious-activity
+  mitre_attack:
+    techniques:
+    - id: T1053.003
+      name: Technique T1053.003
+    - id: T1053.007
+      name: Technique T1053.007
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_isovalent/cisco_isovalent.log
+    description: not_applicable - cisco:isovalent:processExec
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

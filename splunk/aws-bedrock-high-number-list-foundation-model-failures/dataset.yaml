@@ -1,0 +1,32 @@
+metadata:
+  name: aws-bedrock-high-number-list-foundation-model-failures
+  version: 2.0.0
+  description: The following analytic identifies an high number of AccessDenied attempts
+    to list AWS Bedrock foundation models. It leverages AWS CloudTrail logs to detect
+    when a user or service experiences multiple failures when calling the ListFoundationModels
+    API. This activity is significant as it may indicate an adversary performing reconnaissance
+    of available AI models after compromising credentials with limited permissions.
+    Repeated failures could suggest brute force attempts to enumerate accessible reso
+  author: Bhavin Patel, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - aws-bedrock-security
+  mitre_attack:
+    techniques:
+    - id: T1580
+      name: Technique T1580
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1580/aws_bedrock_list_foundation_model_failures/cloudtrail.json
+    description: aws_cloudtrail - aws:cloudtrail
+    format: jsonl
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

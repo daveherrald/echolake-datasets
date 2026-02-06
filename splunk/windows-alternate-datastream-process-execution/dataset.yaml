@@ -1,0 +1,34 @@
+metadata:
+  name: windows-alternate-datastream-process-execution
+  version: 8.0.0
+  description: The following analytic detects when a process attempts to execute a
+    file from within an NTFS file system alternate data stream. This detection leverages
+    process execution data from sources like Windows process monitoring or Sysmon
+    Event ID 1, focusing on specific processes known for such behavior. This activity
+    is significant because alternate data streams can be used by threat actors to
+    hide malicious code, making it difficult to detect. If confirmed malicious, this
+    could allow an attacker to e
+  author: Steven Dick
+  tags:
+  - ttp
+  - splunk-security-content
+  - compromised-windows-host
+  - windows-defense-evasion-tactics
+  mitre_attack:
+    techniques:
+    - id: T1564.004
+      name: Technique T1564.004
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1564.004/ads_abuse/ads_abuse_sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

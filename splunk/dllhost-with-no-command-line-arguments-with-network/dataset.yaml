@@ -1,0 +1,41 @@
+metadata:
+  name: dllhost-with-no-command-line-arguments-with-network
+  version: 14.0.0
+  description: 'The following analytic detects instances of DLLHost.exe running without
+
+    command line arguments while establishing a network connection.
+
+    This behavior is identified using Endpoint Detection and Response (EDR) telemetry,
+
+    focusing on process execution and network activity data.
+
+    It is significant because DLLHost.exe typically runs with specific arguments,
+
+    and its absence can indicate malicious activity, such as Cobalt Strike usage.
+
+    If confirmed malicious, this activity could allow attackers to execu'
+  author: Steven Dick, Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - blackbyte-ransomware
+  - cobalt-strike
+  - graceful-wipe-out-attack
+  mitre_attack:
+    techniques:
+    - id: T1055
+      name: Technique T1055
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1055/cobalt_strike/windows-sysmon_dllhost.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

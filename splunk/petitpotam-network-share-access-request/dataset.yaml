@@ -1,0 +1,33 @@
+metadata:
+  name: petitpotam-network-share-access-request
+  version: 6.0.0
+  description: The following analytic detects network share access requests indicative
+    of the PetitPotam attack (CVE-2021-36942). It leverages Windows Event Code 5145,
+    which logs attempts to access network share objects. This detection is significant
+    as PetitPotam can coerce authentication from domain controllers, potentially leading
+    to unauthorized access. If confirmed malicious, this activity could allow attackers
+    to escalate privileges or move laterally within the network, posing a severe security
+    risk. Ens
+  author: Michael Haag, Mauricio Velazco, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - petitpotam-ntlm-relay-on-active-directory-certificate-services
+  mitre_attack:
+    techniques:
+    - id: T1187
+      name: Technique T1187
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1187/petitpotam/windows-xml.log
+    description: XmlWinEventLog:Security - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

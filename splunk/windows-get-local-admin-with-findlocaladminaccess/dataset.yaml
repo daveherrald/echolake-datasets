@@ -1,0 +1,33 @@
+metadata:
+  name: windows-get-local-admin-with-findlocaladminaccess
+  version: 7.0.0
+  description: 'The following analytic detects the execution of the `Find-LocalAdminAccess`
+    cmdlet using PowerShell Script Block Logging (EventCode=4104). This cmdlet is
+    part of PowerView, a toolkit for Windows domain enumeration. Identifying the use
+    of `Find-LocalAdminAccess` is crucial as adversaries may use it to find machines
+    where the current user has local administrator access, facilitating lateral movement
+    or privilege escalation. If confirmed malicious, this activity could allow attackers
+    to target and '
+  author: Gowthamaraj Rajendran, Mauricio Velazco, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - active-directory-discovery
+  mitre_attack:
+    techniques:
+    - id: T1087.002
+      name: Technique T1087.002
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1087.002/AD_discovery/windows-powershell-LocalAdminAccess-xml.log
+    description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

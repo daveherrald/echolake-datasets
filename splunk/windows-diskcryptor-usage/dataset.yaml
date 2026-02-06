@@ -1,0 +1,33 @@
+metadata:
+  name: windows-diskcryptor-usage
+  version: 7.0.0
+  description: The following analytic detects the execution of DiskCryptor, identified
+    by the process names "dcrypt.exe" or "dcinst.exe". This detection leverages data
+    from Endpoint Detection and Response (EDR) agents, focusing on process names and
+    original file names. DiskCryptor is significant because adversaries use it to
+    manually encrypt disks during an operation, potentially leading to data inaccessibility.
+    If confirmed malicious, this activity could result in complete disk encryption,
+    causing data loss a
+  author: Michael Haag, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - ransomware
+  mitre_attack:
+    techniques:
+    - id: T1486
+      name: Technique T1486
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1486/dcrypt/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

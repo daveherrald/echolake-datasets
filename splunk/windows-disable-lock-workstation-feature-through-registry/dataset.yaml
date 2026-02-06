@@ -1,0 +1,34 @@
+metadata:
+  name: windows-disable-lock-workstation-feature-through-registry
+  version: 11.0.0
+  description: The following analytic detects a suspicious registry modification that
+    disables the Lock Computer feature in Windows. It leverages data from the Endpoint.Registry
+    data model, specifically monitoring changes to the registry path "*\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\DisableLockWorkstation"
+    with a value of "0x00000001". This activity is significant because it prevents
+    users from locking their screens, a tactic often used by malware, including ransomware,
+    to maintain c
+  author: Teoderick Contreras, Splunk, Steven Dick
+  tags:
+  - anomaly
+  - splunk-security-content
+  - ransomware
+  - windows-defense-evasion-tactics
+  - windows-registry-abuse
+  mitre_attack:
+    techniques:
+    - id: T1112
+      name: Technique T1112
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1112/ransomware_disable_reg/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

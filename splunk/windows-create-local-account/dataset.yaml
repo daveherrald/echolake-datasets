@@ -1,0 +1,35 @@
+metadata:
+  name: windows-create-local-account
+  version: 9.0.0
+  description: The following analytic detects the creation of a new local user account
+    on a Windows system. It leverages Windows Security Audit logs, specifically event
+    ID 4720, to identify this activity. Monitoring the creation of local accounts
+    is crucial for a SOC as it can indicate unauthorized access or lateral movement
+    within the network. If confirmed malicious, this activity could allow an attacker
+    to establish persistence, escalate privileges, or gain unauthorized access to
+    sensitive systems and data.
+  author: Michael Haag, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - active-directory-password-spraying
+  - cisa-aa24-241a
+  - ghostredirector-iis-module-and-rungan-backdoor
+  mitre_attack:
+    techniques:
+    - id: T1136.001
+      name: Technique T1136.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1136.001/atomic_red_team/4720.log
+    description: XmlWinEventLog:Security - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

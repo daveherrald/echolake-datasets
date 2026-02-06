@@ -1,0 +1,38 @@
+metadata:
+  name: unknown-process-using-the-kerberos-protocol
+  version: 8.0.0
+  description: The following analytic identifies a non-lsass.exe process making an
+    outbound connection on port 88, which is typically used by the Kerberos authentication
+    protocol. This detection leverages data from Endpoint Detection and Response (EDR)
+    agents, focusing on process and network traffic logs. This activity is significant
+    because, under normal circumstances, only the lsass.exe process should interact
+    with the Kerberos Distribution Center. If confirmed malicious, this behavior could
+    indicate an adve
+  author: Mauricio Velazco, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - active-directory-kerberos-attacks
+  - blacksuit-ransomware
+  mitre_attack:
+    techniques:
+    - id: T1550
+      name: Technique T1550
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1550/rubeus/windows-security.log
+    description: WinEventLog:Security - WinEventLog
+    format: text
+    schema: raw
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1550/rubeus/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

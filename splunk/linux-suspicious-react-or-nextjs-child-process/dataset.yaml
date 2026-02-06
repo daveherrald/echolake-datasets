@@ -1,0 +1,37 @@
+metadata:
+  name: linux-suspicious-react-or-nextjs-child-process
+  version: 1.0.0
+  description: 'This analytic detects Linux processes such as sh, bash, and common
+    Linux LOLBINs being spawned by React or Next.js application servers.
+
+    In the context of CVE-2025-55182 / React2Shell / CVE-2025-66478 for Next.js, successful
+    exploitation can lead to arbitrary JavaScript execution on the server, which in
+    turn is commonly used to invoke Node''s child_process APIs (for example child_process.execSync)
+    to run OS-level commands.
+
+    Public proof-of-concept payloads and observed in-the-wild exploit traffic s'
+  author: Nasreddine Bencherchali, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - react2shell
+  mitre_attack:
+    techniques:
+    - id: T1190
+      name: Technique T1190
+    - id: T1059.004
+      name: Technique T1059.004
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/emerging_threats/react2shell/react2shell_linux.log
+    description: Syslog:Linux-Sysmon/Operational - sysmon:linux
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,35 @@
+metadata:
+  name: windows-powershell-export-certificate
+  version: 8.0.0
+  description: The following analytic detects the use of the PowerShell Cmdlet `export-certificate`
+    by leveraging Script Block Logging. This activity is significant as it may indicate
+    an adversary attempting to exfiltrate certificates from the local Certificate
+    Store on a Windows endpoint. Monitoring this behavior is crucial because stolen
+    certificates can be used to impersonate users, decrypt sensitive data, or facilitate
+    further attacks. If confirmed malicious, this activity could lead to unauthorized
+    access
+  author: Michael Haag, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - windows-certificate-services
+  mitre_attack:
+    techniques:
+    - id: T1552.004
+      name: Technique T1552.004
+    - id: T1649
+      name: Technique T1649
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1649/atomic_red_team/4104_export_certificate.log
+    description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

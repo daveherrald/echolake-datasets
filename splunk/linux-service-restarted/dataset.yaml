@@ -1,0 +1,35 @@
+metadata:
+  name: linux-service-restarted
+  version: 7.0.0
+  description: The following analytic detects the restarting or re-enabling of services
+    on Linux systems using the `systemctl` or `service` commands. It leverages data
+    from Endpoint Detection and Response (EDR) agents, focusing on process and command-line
+    execution logs. This activity is significant as adversaries may use it to maintain
+    persistence or execute unauthorized actions. If confirmed malicious, this behavior
+    could lead to repeated execution of malicious payloads, unauthorized access, or
+    data destruct
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - awfulshred
+  - linux-privilege-escalation
+  - linux-living-off-the-land
+  mitre_attack:
+    techniques:
+    - id: T1053.006
+      name: Technique T1053.006
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053.006/service_systemd/sysmon_linux.log
+    description: Syslog:Linux-Sysmon/Operational - sysmon:linux
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

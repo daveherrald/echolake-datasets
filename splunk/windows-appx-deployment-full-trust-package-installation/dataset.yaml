@@ -1,0 +1,36 @@
+metadata:
+  name: windows-appx-deployment-full-trust-package-installation
+  version: 1.0.0
+  description: 'The following analytic detects the installation of MSIX/AppX packages
+    with full trust privileges. This detection leverages Windows event logs from the
+    AppXDeployment-Server, specifically focusing on EventCode 400 which indicates
+    a package deployment operation. Full trust packages are significant as they run
+    with elevated privileges outside the normal AppX container restrictions, allowing
+    them to access system resources that regular AppX packages cannot. Adversaries
+    have been observed leveraging '
+  author: Michael Haag, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - msix-package-abuse
+  mitre_attack:
+    techniques:
+    - id: T1553.005
+      name: Technique T1553.005
+    - id: T1204.002
+      name: Technique T1204.002
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1204.002/appx/windows_appxdeploymentserver.log
+    description: XmlWinEventLog:Microsoft-Windows-AppXDeploymentServer/Operational
+      - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

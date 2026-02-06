@@ -1,0 +1,34 @@
+metadata:
+  name: getadcomputer-with-powershell
+  version: 6.0.0
+  description: 'The following analytic detects the execution of `powershell.exe` with
+    the `Get-AdComputer` commandlet, which is used to discover remote systems within
+    a domain. This detection leverages data from Endpoint Detection and Response (EDR)
+    agents, focusing on process names and command-line arguments. This activity is
+    significant because it indicates potential reconnaissance efforts by adversaries
+    to map out domain computers, which is a common step in the attack lifecycle. If
+    confirmed malicious, this '
+  author: Mauricio Velazco, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - active-directory-discovery
+  - medusa-ransomware
+  mitre_attack:
+    techniques:
+    - id: T1018
+      name: Technique T1018
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1018/AD_discovery/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

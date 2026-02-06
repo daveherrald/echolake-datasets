@@ -1,0 +1,43 @@
+metadata:
+  name: file-download-or-read-to-pipe-execution
+  version: 2.0.0
+  description: 'The following analytic detects the use of download or file reading
+    utilities from Windows, Linux or MacOS to download or read the contents of a file
+    from a remote or local source and pipe it directly to a shell for execution.
+
+    This detection leverages data from Endpoint Detection and Response (EDR) agents,
+    focusing on command-line executions.
+
+    This activity is significant as it is commonly associated with malicious actions
+    like coinminers and exploits such as CVE-2021-44228 in Log4j.
+
+    If confirmed '
+  author: Michael Haag, Nasreddine Bencherchali, Splunk, DipsyTipsy
+  tags:
+  - ttp
+  - splunk-security-content
+  - compromised-windows-host
+  - ingress-tool-transfer
+  - linux-living-off-the-land
+  mitre_attack:
+    techniques:
+    - id: T1105
+      name: Technique T1105
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1105/download_to_pipe_exec/download_to_pipe_exec.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1105/download_to_pipe_exec/download_to_pipe_exec_linux.log
+    description: Syslog:Linux-Sysmon/Operational - sysmon:linux
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

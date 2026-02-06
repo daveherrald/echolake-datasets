@@ -1,0 +1,34 @@
+metadata:
+  name: modification-of-wallpaper
+  version: 7.0.0
+  description: The following analytic detects the modification of registry keys related
+    to the desktop wallpaper settings. It leverages Sysmon EventCode 13 to identify
+    changes to the "Control Panel\\Desktop\\Wallpaper" and "Control Panel\\Desktop\\WallpaperStyle"
+    registry keys, especially when the modifying process is not explorer.exe or involves
+    suspicious file paths like temp or public directories. This activity is significant
+    as it can indicate ransomware behavior, such as the REVIL ransomware, which change
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - revil-ransomware
+  - rhysida-ransomware
+  - lockbit-ransomware
+  mitre_attack:
+    techniques:
+    - id: T1491
+      name: Technique T1491
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/revil/inf1/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

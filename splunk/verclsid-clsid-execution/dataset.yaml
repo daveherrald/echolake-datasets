@@ -1,0 +1,33 @@
+metadata:
+  name: verclsid-clsid-execution
+  version: 8.0.0
+  description: The following analytic detects the potential abuse of the verclsid.exe
+    utility to execute malicious files via generated CLSIDs. It leverages data from
+    Endpoint Detection and Response (EDR) agents, focusing on specific command-line
+    patterns associated with verclsid.exe. This activity is significant because verclsid.exe
+    is a legitimate Windows application used to verify CLSID COM objects, and its
+    misuse can indicate an attempt to bypass security controls. If confirmed malicious,
+    this technique cou
+  author: Teoderick Contreras, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - unusual-processes
+  mitre_attack:
+    techniques:
+    - id: T1218.012
+      name: Technique T1218.012
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218.012/verclsid_exec/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

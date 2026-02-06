@@ -1,0 +1,34 @@
+metadata:
+  name: single-letter-process-on-endpoint
+  version: 11.0.0
+  description: The following analytic detects processes with names consisting of a
+    single letter, which is often indicative of malware or an attacker attempting
+    to evade detection. This detection leverages data from Endpoint Detection and
+    Response (EDR) agents, focusing on process names and command-line executions.
+    This activity is significant because attackers use such techniques to obscure
+    their presence and carry out malicious activities like data theft or ransomware
+    attacks. If confirmed malicious, this be
+  author: David Dorsey, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - dhs-report-ta18-074a
+  - compromised-windows-host
+  mitre_attack:
+    techniques:
+    - id: T1204.002
+      name: Technique T1204.002
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1204.002/single_letter_exe/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

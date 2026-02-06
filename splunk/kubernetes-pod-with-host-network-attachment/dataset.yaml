@@ -1,0 +1,33 @@
+metadata:
+  name: kubernetes-pod-with-host-network-attachment
+  version: 5.0.0
+  description: The following analytic detects the creation or update of a Kubernetes
+    pod with host network attachment. It leverages Kubernetes Audit logs to identify
+    pods configured with host network settings. This activity is significant for a
+    SOC as it could allow an attacker to monitor all network traffic on the node,
+    potentially capturing sensitive information and escalating privileges. If confirmed
+    malicious, this could lead to unauthorized access, data breaches, and service
+    disruptions, severely impactin
+  author: Patrick Bareiss, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - kubernetes-security
+  mitre_attack:
+    techniques:
+    - id: T1204
+      name: Technique T1204
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1204/kubernetes_privileged_pod/kubernetes_privileged_pod.json
+    description: kubernetes - _json
+    format: jsonl
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,33 @@
+metadata:
+  name: cisco-duo-admin-login-unusual-os
+  version: 1.0.0
+  description: 'The following analytic identifies Duo admin login attempts from operating
+    systems that are unusual for your environment, excluding commonly used OS such
+    as Mac OS X. Please adjust to your environment. It works by analyzing Duo activity
+    logs for admin login actions and filtering out logins from expected operating
+    systems. The analytic then aggregates events by browser, version, source IP, location,
+    and OS details to highlight anomalies. Detecting admin logins from unexpected
+    operating systems is '
+  author: Patrick Bareiss, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - cisco-duo-suspicious-activity
+  mitre_attack:
+    techniques:
+    - id: T1556
+      name: Technique T1556
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1556/cisco_duo_unusual_admin_login/cisco_duo_activity.json
+    description: duo - cisco:duo:activity
+    format: jsonl
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

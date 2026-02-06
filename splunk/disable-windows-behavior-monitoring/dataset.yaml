@@ -1,0 +1,35 @@
+metadata:
+  name: disable-windows-behavior-monitoring
+  version: 18.0.0
+  description: 'The following analytic identifies modifications in the registry to
+    disable Windows Defender''s real-time behavior monitoring. It leverages data from
+    the Endpoint.Registry data model, specifically monitoring changes to registry
+    paths associated with Windows Defender settings. This activity is significant
+    because disabling real-time protection is a common tactic used by malware such
+    as RATs, bots, or Trojans to evade detection. If confirmed malicious, this action
+    could allow an attacker to execute '
+  author: Teoderick Contreras, Splunk, Steven Dick
+  tags:
+  - ttp
+  - splunk-security-content
+  - windows-defense-evasion-tactics
+  - cisa-aa23-347a
+  - revil-ransomware
+  mitre_attack:
+    techniques:
+    - id: T1562.001
+      name: Technique T1562.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.001/win_app_defender_disabling/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

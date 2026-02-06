@@ -1,0 +1,32 @@
+metadata:
+  name: windows-rdp-server-registry-deletion
+  version: 1.0.0
+  description: This detection identifies the deletion of registry keys under HKEY_CURRENT_USER\Software\Microsoft\Terminal
+    Server Client\Servers\, which store records of previously connected remote systems
+    via Remote Desktop Protocol (RDP). These keys are created automatically when a
+    user connects to a remote host using the native Windows RDP client (mstsc.exe)
+    and can be valuable forensic artifacts for tracking remote access activity. Malicious
+    actors aware of this behavior may delete these keys after using R
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - windows-rdp-artifacts-and-defense-evasion
+  mitre_attack:
+    techniques:
+    - id: T1070.004
+      name: Technique T1070.004
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1070.004/terminal_server_reg_deleted/terminal_server_client_reg_deleted.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

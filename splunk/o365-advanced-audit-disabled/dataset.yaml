@@ -1,0 +1,33 @@
+metadata:
+  name: o365-advanced-audit-disabled
+  version: 7.0.0
+  description: The following analytic detects instances where the O365 advanced audit
+    is disabled for a specific user within the Office 365 tenant. It uses O365 audit
+    logs, focusing on events related to audit license changes in AzureActiveDirectory
+    workloads. This activity is significant because the O365 advanced audit provides
+    critical logging and insights into user and administrator activities. Disabling
+    it can blind security teams to potential malicious actions. If confirmed malicious,
+    attackers could opera
+  author: Mauricio Velazco, Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - office-365-persistence-mechanisms
+  mitre_attack:
+    techniques:
+    - id: T1562.008
+      name: Technique T1562.008
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.008/o365_advanced_audit_disabled/o365_advanced_audit_disabled.log
+    description: o365 - o365:management:activity
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

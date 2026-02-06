@@ -1,0 +1,33 @@
+metadata:
+  name: 7zip-commandline-to-smb-share-path
+  version: 8.0.0
+  description: The following analytic detects the execution of 7z or 7za processes
+    with command lines pointing to SMB network shares. It leverages data from Endpoint
+    Detection and Response (EDR) agents, focusing on process names and command-line
+    arguments. This activity is significant as it may indicate an attempt to archive
+    and exfiltrate sensitive files to a network share, a technique observed in CONTI
+    LEAK tools. If confirmed malicious, this behavior could lead to data exfiltration,
+    compromising sensitive i
+  author: Teoderick Contreras, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - ransomware
+  mitre_attack:
+    techniques:
+    - id: T1560.001
+      name: Technique T1560.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/conti/conti_leak/windows-sysmon_7z.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

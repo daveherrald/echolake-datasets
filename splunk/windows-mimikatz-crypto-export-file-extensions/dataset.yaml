@@ -1,0 +1,35 @@
+metadata:
+  name: windows-mimikatz-crypto-export-file-extensions
+  version: 6.0.0
+  description: The following analytic detects the creation of files with extensions
+    commonly associated with the Mimikatz Crypto module. It leverages the Endpoint.Filesystem
+    data model to identify specific file names indicative of certificate export activities.
+    This behavior is significant as it may indicate the use of Mimikatz to export
+    cryptographic keys, which is a common tactic for credential theft. If confirmed
+    malicious, this activity could allow an attacker to exfiltrate sensitive cryptographic
+    material
+  author: Michael Haag, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - sandworm-tools
+  - cisa-aa23-347a
+  - windows-certificate-services
+  mitre_attack:
+    techniques:
+    - id: T1649
+      name: Technique T1649
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1649/atomic_red_team/certwrite_windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

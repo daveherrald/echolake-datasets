@@ -1,0 +1,33 @@
+metadata:
+  name: windows-winlogon-with-public-network-connection
+  version: 9.0.0
+  description: The following analytic detects instances of Winlogon.exe, a critical
+    Windows process, connecting to public IP addresses. This behavior is identified
+    using Endpoint Detection and Response (EDR) telemetry, focusing on network connections
+    made by Winlogon.exe. Under normal circumstances, Winlogon.exe should not connect
+    to public IPs, and such activity may indicate a compromise, such as the BlackLotus
+    bootkit attack. This detection is significant as it highlights potential system
+    integrity breaches.
+  author: Michael Haag, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - blacklotus-campaign
+  mitre_attack:
+    techniques:
+    - id: T1542.003
+      name: Technique T1542.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1542.003/bootkits/network-winlogon-windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

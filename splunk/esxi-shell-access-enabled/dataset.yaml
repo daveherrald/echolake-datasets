@@ -1,0 +1,31 @@
+metadata:
+  name: esxi-shell-access-enabled
+  version: 1.0.0
+  description: This detection identifies when the ESXi Shell is enabled on a host,
+    which may indicate that a malicious actor is preparing to execute commands locally
+    or establish persistent access. Enabling the shell outside of approved maintenance
+    windows can be a sign of compromise or unauthorized administrative activity.
+  author: Raven Tait, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - esxi-post-compromise
+  - black-basta-ransomware
+  mitre_attack:
+    techniques:
+    - id: T1021
+      name: Technique T1021
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1021/esxi_shell_enabled/esxi_shell_enabled.log
+    description: vmware:esxlog - vmw-syslog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,34 @@
+metadata:
+  name: windows-remote-services-allow-rdp-in-firewall
+  version: 8.0.0
+  description: The following analytic detects modifications to the Windows firewall
+    to enable Remote Desktop Protocol (RDP) on a targeted machine. It leverages data
+    from Endpoint Detection and Response (EDR) agents, focusing on command-line executions
+    involving "netsh.exe" to allow TCP port 3389. This activity is significant as
+    it may indicate an adversary attempting to gain remote access to a compromised
+    host, a common tactic for lateral movement. If confirmed malicious, this could
+    allow attackers to remotely
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - azorult
+  - windows-rdp-artifacts-and-defense-evasion
+  mitre_attack:
+    techniques:
+    - id: T1021.001
+      name: Technique T1021.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/azorult/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

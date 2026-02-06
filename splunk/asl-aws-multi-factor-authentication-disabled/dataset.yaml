@@ -1,0 +1,37 @@
+metadata:
+  name: asl-aws-multi-factor-authentication-disabled
+  version: 8.0.0
+  description: The following analytic detects attempts to disable multi-factor authentication
+    (MFA) for an AWS IAM user. It leverages Amazon Security Lake logs, specifically
+    monitoring for `DeleteVirtualMFADevice` or `DeactivateMFADevice` API operations.
+    This activity is significant as disabling MFA can indicate an adversary attempting
+    to weaken account security to maintain persistence using a compromised account.
+    If confirmed malicious, this action could allow attackers to retain access to
+    the AWS environment
+  author: Patrick Bareiss, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - aws-identity-and-access-management-account-takeover
+  mitre_attack:
+    techniques:
+    - id: T1556.006
+      name: Technique T1556.006
+    - id: T1586.003
+      name: Technique T1586.003
+    - id: T1621
+      name: Technique T1621
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1621/aws_mfa_disabled/asl_ocsf_cloudtrail.json
+    description: aws_asl - aws:asl
+    format: jsonl
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

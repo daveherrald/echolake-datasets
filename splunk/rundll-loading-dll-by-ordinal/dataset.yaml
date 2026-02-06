@@ -1,0 +1,35 @@
+metadata:
+  name: rundll-loading-dll-by-ordinal
+  version: 12.0.0
+  description: The following analytic detects rundll32.exe loading a DLL export function
+    by ordinal value. It leverages data from Endpoint Detection and Response (EDR)
+    agents, focusing on process command-line executions. This behavior is significant
+    because adversaries may use rundll32.exe to execute malicious code while evading
+    security tools that do not monitor this process. If confirmed malicious, this
+    activity could allow attackers to execute arbitrary code, potentially leading
+    to system compromise, privil
+  author: Michael Haag, David Dorsey, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - unusual-processes
+  - suspicious-rundll32-activity
+  - living-off-the-land
+  mitre_attack:
+    techniques:
+    - id: T1218.011
+      name: Technique T1218.011
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218.011/atomic_red_team/ordinal_windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

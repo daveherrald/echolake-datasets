@@ -1,0 +1,33 @@
+metadata:
+  name: ollama-possible-rce-via-model-loading
+  version: 1.0.0
+  description: Detects Ollama server errors and failures during model loading operations
+    that may indicate malicious model injection, path traversal attempts, or exploitation
+    of model loading mechanisms to achieve remote code execution. Adversaries may
+    attempt to load specially crafted malicious models or exploit vulnerabilities
+    in the model loading process to execute arbitrary code on the server. This detection
+    monitors error messages and failure patterns that could signal attempts to abuse
+    model loading func
+  author: Rod Soto
+  tags:
+  - anomaly
+  - splunk-security-content
+  - suspicious-ollama-activities
+  mitre_attack:
+    techniques:
+    - id: T1190
+      name: Technique T1190
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/ollama/app.log
+    description: app.log - ollama:server
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,35 @@
+metadata:
+  name: windows-service-stop-attempt
+  version: 4.0.0
+  description: The following analytic identifies attempts to stop services on a system
+    using `net.exe`, `sc.exe` or the "Stop-Service" cmdlet. It leverages Endpoint
+    Detection and Response (EDR) telemetry. This activity can be significant as adversaries
+    often terminate security or critical services to evade detection and further their
+    objectives. If confirmed malicious, this behavior could allow attackers to disable
+    security defenses, facilitate ransomware encryption, or disrupt essential services,
+    leading to p
+  author: Teoderick Contreras, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - prestige-ransomware
+  - graceful-wipe-out-attack
+  - scattered-lapsus$-hunters
+  mitre_attack:
+    techniques:
+    - id: T1489
+      name: Technique T1489
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/prestige_ransomware/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

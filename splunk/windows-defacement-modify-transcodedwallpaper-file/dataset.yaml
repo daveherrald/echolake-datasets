@@ -1,0 +1,33 @@
+metadata:
+  name: windows-defacement-modify-transcodedwallpaper-file
+  version: 7.0.0
+  description: The following analytic identifies modifications to the TranscodedWallpaper
+    file in the wallpaper theme directory, excluding changes made by explorer.exe.
+    This detection leverages the Endpoint.Processes and Endpoint.Filesystem data models
+    to correlate process activity with file modifications. This activity is significant
+    as it may indicate an adversary attempting to deface or change the desktop wallpaper
+    of a targeted host, a tactic often used to signal compromise or deliver a message.
+    If confirm
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - brute-ratel-c4
+  mitre_attack:
+    techniques:
+    - id: T1491
+      name: Technique T1491
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/brute_ratel/wallpaper_via_transcodedwallpaper/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

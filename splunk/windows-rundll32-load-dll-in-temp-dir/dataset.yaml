@@ -1,0 +1,33 @@
+metadata:
+  name: windows-rundll32-load-dll-in-temp-dir
+  version: 2.0.0
+  description: This detection identifies instances where rundll32.exe is used to load
+    a DLL from a temporary directory, such as C:\Users\<User>\AppData\Local\Temp\
+    or C:\Windows\Temp\. While rundll32.exe is a legitimate Windows utility used to
+    execute functions exported from DLLs, its use to load libraries from temporary
+    locations is highly suspicious. These directories are commonly used by malware
+    and red team tools to stage payloads or execute code in-memory without writing
+    it to more persistent locations. T
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - interlock-rat
+  mitre_attack:
+    techniques:
+    - id: T1218.011
+      name: Technique T1218.011
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218.011/rundll32_dll_in_temp/rundll32_tmp.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

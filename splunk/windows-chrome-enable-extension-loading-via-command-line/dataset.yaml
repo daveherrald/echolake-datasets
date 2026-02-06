@@ -1,0 +1,35 @@
+metadata:
+  name: windows-chrome-enable-extension-loading-via-command-line
+  version: 1.0.0
+  description: 'The following analytic detects instances where Google Chrome is started
+    with the --disable-features=DisableLoadExtensionCommandLineSwitch flag, effectively
+    enabling the loading of extensions via the command line.
+
+    This may indicate attempts to bypass enterprise extension policies, load unauthorized
+    or malicious extensions, or manipulate browser behavior.
+
+    Monitoring this activity helps identify potential security policy violations,
+    malware persistence techniques, or other suspicious Chrome modific'
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - browser-hijacking
+  mitre_attack:
+    techniques:
+    - id: T1185
+      name: Technique T1185
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1185/chrome_load_extensions/chrome_load_extension.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

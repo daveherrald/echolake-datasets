@@ -1,0 +1,33 @@
+metadata:
+  name: windows-server-software-component-gacutil-install-to-gac
+  version: 9.0.0
+  description: 'The following analytic detects the use of GACUtil.exe to add a DLL
+    into the Global Assembly Cache (GAC). It leverages data from Endpoint Detection
+    and Response (EDR) agents, focusing on process names and command-line executions.
+    This activity is significant because adding a DLL to the GAC allows it to be called
+    by any application, potentially enabling widespread code execution. If confirmed
+    malicious, this could allow an attacker to execute arbitrary code across the operating
+    system, leading to '
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - iis-components
+  mitre_attack:
+    techniques:
+    - id: T1505.004
+      name: Technique T1505.004
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1505.004/gacutil_windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

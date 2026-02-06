@@ -1,0 +1,35 @@
+metadata:
+  name: windows-credentials-from-password-stores-deletion
+  version: 8.0.0
+  description: The following analytic detects the execution of the Windows OS tool
+    cmdkey.exe with the /delete parameter. This detection leverages data from Endpoint
+    Detection and Response (EDR) agents, focusing on process execution logs and command-line
+    arguments. The activity is significant because cmdkey.exe can be used by attackers
+    to delete stored credentials, potentially leading to privilege escalation and
+    persistence. If confirmed malicious, this behavior could allow attackers to remove
+    stored user cred
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - compromised-windows-host
+  - darkgate-malware
+  - netsupport-rmm-tool-abuse
+  mitre_attack:
+    techniques:
+    - id: T1555
+      name: Technique T1555
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1555/cmdkey_delete_credentials_store/cmdkey_del_sys.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,34 @@
+metadata:
+  name: windows-modify-show-compress-color-and-info-tip-registry
+  version: 11.0.0
+  description: The following analytic detects suspicious modifications to the Windows
+    registry keys related to file compression color and information tips. It leverages
+    data from the Endpoint.Registry data model, specifically monitoring changes to
+    the "ShowCompColor" and "ShowInfoTip" values under the "Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced"
+    path. This activity is significant as it was observed in the Hermetic Wiper malware,
+    indicating potential malicious intent to alter file attributes and use
+  author: Teoderick Contreras, Splunk, Steven Dick
+  tags:
+  - ttp
+  - splunk-security-content
+  - data-destruction
+  - windows-defense-evasion-tactics
+  - windows-registry-abuse
+  mitre_attack:
+    techniques:
+    - id: T1112
+      name: Technique T1112
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/hermetic_wiper/globalfolderoptions_reg/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

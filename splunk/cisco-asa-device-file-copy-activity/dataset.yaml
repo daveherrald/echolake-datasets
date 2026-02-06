@@ -1,0 +1,39 @@
+metadata:
+  name: cisco-asa-device-file-copy-activity
+  version: 1.0.0
+  description: 'This analytic detects file copy activity on Cisco ASA devices via
+    CLI or ASDM.
+
+    Adversaries may copy device files including configurations, logs, packet captures,
+    or system files for reconnaissance, credential extraction, or data exfiltration.
+    While legitimate file operations occur during backups and maintenance, unauthorized
+    copies may indicate malicious activity.
+
+    The detection monitors for command execution events (message ID 111008 or 111010)
+    containing copy commands targeting running-config, '
+  author: Nasreddine Bencherchali, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - suspicious-cisco-adaptive-security-appliance-activity
+  - arcanedoor
+  mitre_attack:
+    techniques:
+    - id: T1005
+      name: Technique T1005
+    - id: T1530
+      name: Technique T1530
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_asa/generic/cisco_asa_generic_logs.log
+    description: not_applicable - cisco:asa
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,35 @@
+metadata:
+  name: linux-impair-defenses-process-kill
+  version: 8.0.0
+  description: The following analytic identifies the execution of the 'pkill' command,
+    which is used to terminate processes on a Linux system. It leverages data from
+    Endpoint Detection and Response (EDR) agents, focusing on process names and command-line
+    executions. This activity is significant because threat actors often use 'pkill'
+    to disable security defenses or terminate critical processes, facilitating further
+    malicious actions. If confirmed malicious, this behavior could lead to the disruption
+    of securit
+  author: Teoderick Contreras, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - awfulshred
+  - data-destruction
+  - scattered-lapsus$-hunters
+  mitre_attack:
+    techniques:
+    - id: T1562.001
+      name: Technique T1562.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/awfulshred/test1/sysmon_linux.log
+    description: Syslog:Linux-Sysmon/Operational - sysmon:linux
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,37 @@
+metadata:
+  name: cisco-secure-firewall-ssh-connection-to-non-standard-port
+  version: 1.0.0
+  description: 'This analytic detects inbound SSH connections to non-standard ports
+    on network devices using Cisco Secure Firewall Intrusion Events. APT actors have
+    been observed enabling SSH servers on high, non-default TCP ports to maintain
+    encrypted remote access to compromised network infrastructure.
+
+    This detection leverages Snort signature 65369 to identify SSH protocol traffic
+    on unusual ports, which may indicate persistence mechanisms or backdoor access
+    established by threat actors.
+
+    '
+  author: Nasreddine Bencherchali, Michael Haag, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - cisco-secure-firewall-threat-defense-analytics
+  - salt-typhoon
+  mitre_attack:
+    techniques:
+    - id: T1021.004
+      name: Technique T1021.004
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_secure_firewall_threat_defense/intrusion_event/intrusion_events.log
+    description: not_applicable - cisco:sfw:estreamer
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

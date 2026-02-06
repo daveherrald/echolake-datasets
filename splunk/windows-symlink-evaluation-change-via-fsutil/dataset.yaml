@@ -1,0 +1,31 @@
+metadata:
+  name: windows-symlink-evaluation-change-via-fsutil
+  version: 1.0.0
+  description: "This analytic detects the execution of the Windows built-in tool Fsutil.exe\
+    \ with\nthe \"behavior\", \"set\" and \"SymlinkEvaluation\" parameters.\nAttackers\
+    \ can abuse this to alter symlink evaluation behavior on Windows, potentially\
+    \ enabling remote traversal over SMB shares or evading defenses. \nSuch changes\
+    \ should be uncommon or even rare in enterprise environments and should be investigated.\n"
+  author: Nasreddine Bencherchali, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - windows-post-exploitation
+  mitre_attack:
+    techniques:
+    - id: T1222.001
+      name: Technique T1222.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1222.001/fsutil_symlink_eval/fsutil_symlink_eval.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

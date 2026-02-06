@@ -1,0 +1,37 @@
+metadata:
+  name: windows-powerview-ad-access-control-list-enumeration
+  version: 8.0.0
+  description: 'The following analytic detects the execution of PowerView PowerShell
+    cmdlets `Get-ObjectAcl` or `Get-DomainObjectAcl`, which are used to enumerate
+    Access Control List (ACL) permissions for Active Directory objects. It leverages
+    Event ID 4104 from PowerShell Script Block Logging to identify this activity.
+    This behavior is significant as it may indicate an attempt to discover weak permissions
+    in Active Directory, potentially leading to privilege escalation. If confirmed
+    malicious, attackers could '
+  author: Mauricio Velazco, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - active-directory-discovery
+  - active-directory-privilege-escalation
+  - rhysida-ransomware
+  mitre_attack:
+    techniques:
+    - id: T1078.002
+      name: Technique T1078.002
+    - id: T1069
+      name: Technique T1069
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1078.002/powerview_acl_enumeration/windows-powershell.log
+    description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

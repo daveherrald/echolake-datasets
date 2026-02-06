@@ -1,0 +1,34 @@
+metadata:
+  name: detect-copy-of-shadowcopy-with-script-block-logging
+  version: 9.0.0
+  description: The following analytic detects the use of PowerShell commands to copy
+    the SAM, SYSTEM, or SECURITY hives, which are critical for credential theft. It
+    leverages PowerShell Script Block Logging (EventCode=4104) to capture and analyze
+    the full command executed. This activity is significant as it indicates an attempt
+    to exfiltrate sensitive registry hives for offline password cracking. If confirmed
+    malicious, this could lead to unauthorized access to credentials, enabling further
+    compromise of the s
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - credential-dumping
+  - vanhelsing-ransomware
+  mitre_attack:
+    techniques:
+    - id: T1003.002
+      name: Technique T1003.002
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1003.002/detect_copy_of_shadowcopy_with_script_block_logging/windows-xml.log
+    description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

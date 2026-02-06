@@ -1,0 +1,34 @@
+metadata:
+  name: windows-registry-entries-restored-via-reg
+  version: 3.0.0
+  description: The following analytic detects the execution of reg.exe with the "restore"
+    parameter, indicating an attempt to restore registry backup data on a host. This
+    detection leverages data from Endpoint Detection and Response (EDR) agents, focusing
+    on process execution logs and command-line arguments. This activity is significant
+    as it may indicate post-exploitation actions, such as those performed by tools
+    like winpeas, which use "reg save" and "reg restore" to manipulate registry settings.
+    If confirme
+  author: Teoderick Contreras, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - windows-post-exploitation
+  - prestige-ransomware
+  mitre_attack:
+    techniques:
+    - id: T1012
+      name: Technique T1012
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/winpeas/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

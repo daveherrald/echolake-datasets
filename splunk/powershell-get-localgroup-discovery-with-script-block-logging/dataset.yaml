@@ -1,0 +1,33 @@
+metadata:
+  name: powershell-get-localgroup-discovery-with-script-block-logging
+  version: 9.0.0
+  description: The following analytic detects the execution of the PowerShell cmdlet
+    `get-localgroup` using PowerShell Script Block Logging (EventCode=4104). This
+    method captures the full command sent to PowerShell, providing detailed visibility
+    into script execution. Monitoring this activity is significant as it can indicate
+    an attempt to enumerate local groups, which may be a precursor to privilege escalation
+    or lateral movement. If confirmed malicious, an attacker could gain insights into
+    group memberships,
+  author: Michael Haag, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - active-directory-discovery
+  mitre_attack:
+    techniques:
+    - id: T1069.001
+      name: Technique T1069.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/powershell_script_block_logging/getlocalgroup.log
+    description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

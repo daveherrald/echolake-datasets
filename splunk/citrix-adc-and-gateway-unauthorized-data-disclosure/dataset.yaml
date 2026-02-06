@@ -1,0 +1,33 @@
+metadata:
+  name: citrix-adc-and-gateway-unauthorized-data-disclosure
+  version: 6.0.0
+  description: The following analytic detects attempts to exploit the Citrix Bleed
+    vulnerability (CVE-2023-4966), which can lead to the leaking of session tokens.
+    It identifies HTTP requests with a 200 status code targeting the /oauth/idp/.well-known/openid-configuration
+    URL endpoint. By parsing web traffic and filtering based on user agent details,
+    HTTP method, source and destination IPs, and sourcetype, it aims to identify potentially
+    malicious requests. This activity is significant for a SOC because success
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - citrix-netscaler-adc-and-netscaler-gateway-cve-2023-4966
+  - scattered-lapsus$-hunters
+  mitre_attack:
+    techniques:
+    - id: T1190
+      name: Technique T1190
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/citrix/cve-2023-4966-citrix.log
+    description: suricata - suricata
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

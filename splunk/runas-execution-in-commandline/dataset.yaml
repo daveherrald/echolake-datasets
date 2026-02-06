@@ -1,0 +1,35 @@
+metadata:
+  name: runas-execution-in-commandline
+  version: 9.0.0
+  description: The following analytic detects the execution of the runas.exe process
+    with administrator user options. It leverages data from Endpoint Detection and
+    Response (EDR) agents, focusing on command-line executions and process details.
+    This activity is significant as it may indicate an attempt to gain elevated privileges,
+    a common tactic in privilege escalation and lateral movement. If confirmed malicious,
+    this could allow an attacker to execute commands with higher privileges, potentially
+    leading to u
+  author: Teoderick Contreras, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - quasar-rat
+  - data-destruction
+  - windows-privilege-escalation
+  mitre_attack:
+    techniques:
+    - id: T1134.001
+      name: Technique T1134.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/vilsel/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

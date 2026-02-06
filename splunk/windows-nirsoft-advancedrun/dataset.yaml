@@ -1,0 +1,35 @@
+metadata:
+  name: windows-nirsoft-advancedrun
+  version: 8.0.0
+  description: 'The following analytic detects the execution of AdvancedRun.exe, a
+    tool with capabilities similar to remote administration programs like PsExec.
+    It identifies the process by its name or original file name and flags common command-line
+    arguments. This detection leverages data from Endpoint Detection and Response
+    (EDR) agents, focusing on process and command-line telemetry. Monitoring this
+    activity is crucial as AdvancedRun can be used for remote code execution and configuration-based
+    automation. '
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - ransomware
+  - unusual-processes
+  - data-destruction
+  mitre_attack:
+    techniques:
+    - id: T1588.002
+      name: Technique T1588.002
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1588.002/atomic_red_team/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

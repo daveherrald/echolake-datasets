@@ -1,0 +1,42 @@
+metadata:
+  name: windows-pstools-recon-usage
+  version: 3.0.0
+  description: 'The following analytic identifies execution of Sysinternals PsTools
+    and Sysinternals Suit binaries that are commonly used for reconnaissance and information
+    gathering on
+
+    Windows endpoints.
+
+    PsTools (PsExec, PsFile, PsGetSid, PsInfo, PsPing, etc.) or Sysinternals Suit
+    tools, are frequently used by administrators for legitimate maintenance but are
+    also leveraged by threat actors to collect system, account, network and service
+    information during discovery and lateral movement.
+
+    This detection focuses'
+  author: Nasreddine Bencherchali
+  tags:
+  - anomaly
+  - splunk-security-content
+  - compromised-windows-host
+  mitre_attack:
+    techniques:
+    - id: T1082
+      name: Technique T1082
+    - id: T1046
+      name: Technique T1046
+    - id: T1018
+      name: Technique T1018
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://github.com/Splunk/attack_data/raw/master/datasets/attack_techniques/T1082/sysinternals_pstools/sysinternals_pstools.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

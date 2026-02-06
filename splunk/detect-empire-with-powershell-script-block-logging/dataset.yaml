@@ -1,0 +1,34 @@
+metadata:
+  name: detect-empire-with-powershell-script-block-logging
+  version: 10.0.0
+  description: The following analytic detects suspicious PowerShell execution indicative
+    of PowerShell-Empire activity. It leverages PowerShell Script Block Logging (EventCode=4104)
+    to capture and analyze commands sent to PowerShell, specifically looking for patterns
+    involving `system.net.webclient` and base64 encoding. This behavior is significant
+    as it often represents initial stagers used by PowerShell-Empire, a known post-exploitation
+    framework. If confirmed malicious, this activity could allow attackers t
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - hellcat-ransomware
+  - malicious-powershell
+  - hermetic-wiper
+  mitre_attack:
+    techniques:
+    - id: T1059.001
+      name: Technique T1059.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/powershell_script_block_logging/empire.log
+    description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

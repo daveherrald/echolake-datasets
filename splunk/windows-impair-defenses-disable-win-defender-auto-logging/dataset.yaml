@@ -1,0 +1,35 @@
+metadata:
+  name: windows-impair-defenses-disable-win-defender-auto-logging
+  version: 8.0.0
+  description: The following analytic detects the disabling of Windows Defender logging
+    by identifying changes to the Registry keys DefenderApiLogger or DefenderAuditLogger
+    set to disable. It leverages data from the Endpoint.Registry datamodel to monitor
+    specific registry paths and values. This activity is significant as it is commonly
+    associated with Remote Access Trojan (RAT) malware attempting to evade detection.
+    If confirmed malicious, this action could allow an attacker to conceal their activities,
+    making
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - windows-defense-evasion-tactics
+  - cisa-aa23-347a
+  - windows-registry-abuse
+  mitre_attack:
+    techniques:
+    - id: T1562.001
+      name: Technique T1562.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.001/disable_defender_logging/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

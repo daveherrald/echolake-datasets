@@ -1,0 +1,35 @@
+metadata:
+  name: remote-wmi-command-attempt
+  version: 9.0.0
+  description: The following analytic detects the execution of `wmic.exe` with the
+    `node` switch, indicating an attempt to spawn a local or remote process. This
+    detection leverages data from Endpoint Detection and Response (EDR) agents, focusing
+    on process creation events and command-line arguments. This activity is significant
+    as it may indicate lateral movement or remote code execution attempts by an attacker.
+    If confirmed malicious, the attacker could gain remote control over the targeted
+    system, execute ar
+  author: Rico Valdez, Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - graceful-wipe-out-attack
+  - volt-typhoon
+  - living-off-the-land
+  mitre_attack:
+    techniques:
+    - id: T1047
+      name: Technique T1047
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1047/atomic_red_team/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

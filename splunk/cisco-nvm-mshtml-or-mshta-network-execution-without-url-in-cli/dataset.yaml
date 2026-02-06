@@ -1,0 +1,44 @@
+metadata:
+  name: cisco-nvm-mshtml-or-mshta-network-execution-without-url-in-cli
+  version: 2.0.0
+  description: 'This analytic detects suspicious use of ''mshta.exe'' or ''rundll32.exe''
+    invoking ''mshtml.dll''
+
+    or the ''RunHTMLApplication'' export without including a direct HTTP/HTTPS URL
+    in the command line.
+
+    This pattern could be associated with obfuscated script execution used by threat
+    actors during
+
+    initial access or payload staging. The absence of a visible URL may indicate attempts
+    to evade static
+
+    detections by embedding the URL via string concatenation, encoding (e.g., hex),
+    or indirect script loaders
+
+    like '''
+  author: Nasreddine Bencherchali, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - cisco-network-visibility-module-analytics
+  mitre_attack:
+    techniques:
+    - id: T1218.005
+      name: Technique T1218.005
+    - id: T1059.005
+      name: Technique T1059.005
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_network_visibility_module/cisco_nvm_flowdata/nvm_flowdata.log
+    description: not_applicable - cisco:nvm:flowdata
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

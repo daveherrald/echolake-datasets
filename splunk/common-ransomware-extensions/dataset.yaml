@@ -1,0 +1,35 @@
+metadata:
+  name: common-ransomware-extensions
+  version: 17.0.0
+  description: The following analytic detects modifications to files with extensions
+    commonly associated with ransomware. It leverages the Endpoint.Filesystem data
+    model to identify changes in file extensions that match known ransomware patterns.
+    This activity is significant because it suggests an attacker is attempting to
+    encrypt or alter files, potentially leading to severe data loss and operational
+    disruption. If confirmed malicious, this activity could result in the encryption
+    of critical data, rendering i
+  author: David Dorsey, Michael Haag, Splunk, Steven Dick
+  tags:
+  - ttp
+  - splunk-security-content
+  - rhysida-ransomware
+  - prestige-ransomware
+  - ransomware
+  mitre_attack:
+    techniques:
+    - id: T1485
+      name: Technique T1485
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1485/ransomware_notes/ransom-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

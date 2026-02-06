@@ -1,0 +1,33 @@
+metadata:
+  name: windows-outlook-webview-registry-modification
+  version: 6.0.0
+  description: The following analytic identifies modifications to specific Outlook
+    registry values related to WebView and Today features. It detects when a URL is
+    set in these registry locations, which could indicate attempts to manipulate Outlook's
+    web-based components. The analytic focuses on changes to the "URL" value within
+    Outlook's WebView and Today registry paths. This activity is significant as it
+    may represent an attacker's effort to redirect Outlook's web content or inject
+    malicious URLs. If successf
+  author: Michael Haag, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - suspicious-windows-registry-activities
+  mitre_attack:
+    techniques:
+    - id: T1112
+      name: Technique T1112
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1112/atomic_red_team/windows-sysmon-webview.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

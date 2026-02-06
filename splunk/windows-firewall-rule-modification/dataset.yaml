@@ -1,0 +1,35 @@
+metadata:
+  name: windows-firewall-rule-modification
+  version: 3.0.0
+  description: This detection identifies instances where a Windows Firewall rule has
+    been modified, which may indicate an attempt to alter security policies. Unauthorized
+    modifications can weaken firewall protections, allowing malicious traffic or preventing
+    legitimate communications. The event logs details such as the modified rule name,
+    protocol, ports, application path, and the user responsible for the change. Security
+    teams should monitor unexpected modifications, correlate them with related events,
+    and in
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - shrinklocker
+  - medusa-ransomware
+  - netsupport-rmm-tool-abuse
+  mitre_attack:
+    techniques:
+    - id: T1562.004
+      name: Technique T1562.004
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.004/firewall_win_event/modify_rule/MPSSVC_Rule-Level_Policy_Change-4947.log
+    description: XmlWinEventLog:Security - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

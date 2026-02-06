@@ -1,0 +1,33 @@
+metadata:
+  name: excessive-number-of-service-control-start-as-disabled
+  version: 8.0.0
+  description: The following analytic detects an excessive number of `sc.exe` processes
+    launched with the command line argument `start= disabled` within a short period.
+    It leverages data from Endpoint Detection and Response (EDR) agents, focusing
+    on process names, command-line executions, and process GUIDs. This activity is
+    significant as it may indicate an attempt to disable critical services, potentially
+    impairing system defenses. If confirmed malicious, this behavior could allow an
+    attacker to disrupt secur
+  author: Michael Hart, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - windows-defense-evasion-tactics
+  mitre_attack:
+    techniques:
+    - id: T1562.001
+      name: Technique T1562.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.001/sc_service_start_disabled/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

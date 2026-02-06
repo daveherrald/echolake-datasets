@@ -1,0 +1,35 @@
+metadata:
+  name: windows-office-product-dropped-uncommon-file
+  version: 5.0.0
+  description: The following analytic detects Microsoft Office applications dropping
+    or creating executables or scripts on a Windows OS. It leverages process creation
+    and file system events from the Endpoint data model to identify Office applications
+    like Word or Excel generating files with extensions such as ".exe", ".dll", or
+    ".ps1". This behavior is significant as it is often associated with spear-phishing
+    attacks where malicious files are dropped to compromise the host. If confirmed
+    malicious, this activit
+  author: Teoderick Contreras, Michael Haag, Splunk, TheLawsOfChaos, Github
+  tags:
+  - anomaly
+  - splunk-security-content
+  - cve-2023-21716-word-rtf-heap-corruption
+  - warzone-rat
+  - fin7
+  mitre_attack:
+    techniques:
+    - id: T1566.001
+      name: Technique T1566.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/fin7/fin7_macro_js_1/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

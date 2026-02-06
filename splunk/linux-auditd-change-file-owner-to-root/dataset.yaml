@@ -1,0 +1,35 @@
+metadata:
+  name: linux-auditd-change-file-owner-to-root
+  version: 7.0.0
+  description: The following analytic detects the use of the 'chown' command to change
+    a file owner to 'root' on a Linux system. It leverages Linux Auditd telemetry,
+    specifically monitoring command-line executions and process details. This activity
+    is significant as it may indicate an attempt to escalate privileges by adversaries,
+    malware, or red teamers. If confirmed malicious, this action could allow an attacker
+    to gain root-level access, leading to full control over the compromised host and
+    potential persis
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - linux-living-off-the-land
+  - linux-privilege-escalation
+  - linux-persistence-techniques
+  mitre_attack:
+    techniques:
+    - id: T1222.002
+      name: Technique T1222.002
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053.002/linux_auditd_chown_root/auditd_proctitle_chown_root.log
+    description: auditd - auditd
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

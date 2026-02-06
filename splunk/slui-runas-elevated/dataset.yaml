@@ -1,0 +1,35 @@
+metadata:
+  name: slui-runas-elevated
+  version: 8.0.0
+  description: 'The following analytic detects the execution of the Microsoft Software
+    Licensing User Interface Tool (`slui.exe`) with elevated privileges using the
+    `-verb runas` function. This activity is identified through logs from Endpoint
+    Detection and Response (EDR) agents, focusing on specific registry keys and command-line
+    parameters. This behavior is significant as it indicates a potential privilege
+    escalation attempt, which could allow an attacker to gain elevated access and
+    execute malicious actions '
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - darkside-ransomware
+  - compromised-windows-host
+  - windows-defense-evasion-tactics
+  mitre_attack:
+    techniques:
+    - id: T1548.002
+      name: Technique T1548.002
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1548.002/slui/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

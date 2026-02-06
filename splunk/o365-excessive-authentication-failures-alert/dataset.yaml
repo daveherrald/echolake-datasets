@@ -1,0 +1,33 @@
+metadata:
+  name: o365-excessive-authentication-failures-alert
+  version: 7.0.0
+  description: 'The following analytic identifies an excessive number of authentication
+    failures, including failed attempts against MFA prompt codes. It uses data from
+    the `o365_management_activity` dataset, focusing on events where the authentication
+    status is marked as failure. This behavior is significant as it may indicate a
+    brute force attack or an attempt to compromise user accounts. If confirmed malicious,
+    this activity could lead to unauthorized access, data breaches, or further exploitation
+    within the '
+  author: Rod Soto, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - office-365-account-takeover
+  mitre_attack:
+    techniques:
+    - id: T1110
+      name: Technique T1110
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1110/o365_brute_force_login/o365_brute_force_login.json
+    description: o365 - o365:management:activity
+    format: jsonl
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

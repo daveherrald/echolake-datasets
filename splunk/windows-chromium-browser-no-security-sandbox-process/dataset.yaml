@@ -1,0 +1,33 @@
+metadata:
+  name: windows-chromium-browser-no-security-sandbox-process
+  version: 1.0.0
+  description: The following analytic detects instances where a Chrome or Chromium-based
+    browser is launched with the --no-sandbox flag, a known indicator of potentially
+    malicious or suspicious behavior. While this flag is occasionally used during
+    software development or testing, it is rarely seen in normal user activity. Threat
+    actors often abuse this setting to disable Chrome's built-in security sandbox,
+    making it easier to execute malicious code or escape browser isolation. This behavior
+    is commonly observe
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - malicious-inno-setup-loader
+  mitre_attack:
+    techniques:
+    - id: T1497
+      name: Technique T1497
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1497/chrom_no_sandbox/chrome-no_sandbox.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

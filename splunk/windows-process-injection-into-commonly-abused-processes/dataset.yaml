@@ -1,0 +1,35 @@
+metadata:
+  name: windows-process-injection-into-commonly-abused-processes
+  version: 4.0.0
+  description: The following analytic detects process injection into executables that
+    are commonly abused using Sysmon EventCode 10. It identifies suspicious GrantedAccess
+    requests (0x40 and 0x1fffff) to processes such as notepad.exe, wordpad.exe and
+    calc.exe, excluding common system paths like System32, Syswow64, and Program Files.
+    This behavior is often associated with the SliverC2 framework by BishopFox. Monitoring
+    this activity is crucial as it may indicate an initial payload attempting to execute
+    maliciou
+  author: 0xC0FFEEEE, Github Community
+  tags:
+  - anomaly
+  - splunk-security-content
+  - bishopfox-sliver-adversary-emulation-framework
+  - earth-alux
+  - sap-netweaver-exploitation
+  mitre_attack:
+    techniques:
+    - id: T1055.002
+      name: Technique T1055.002
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1055/sliver/T1055_windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

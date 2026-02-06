@@ -1,0 +1,43 @@
+metadata:
+  name: attacker-tools-on-endpoint
+  version: 13.0.0
+  description: 'The following analytic detects the execution of tools commonly exploited
+    by cybercriminals, such as those used for unauthorized access, network scanning,
+    or data exfiltration. It leverages process activity data from Endpoint Detection
+    and Response (EDR) agents, focusing on known attacker tool names. This activity
+    is significant because it serves as an early warning system for potential security
+    incidents, enabling prompt response. If confirmed malicious, this activity could
+    lead to unauthorized '
+  author: Bhavin Patel, Splunk, sventec, Github Community
+  tags:
+  - ttp
+  - splunk-security-content
+  - xmrig
+  - unusual-processes
+  - samsam-ransomware
+  mitre_attack:
+    techniques:
+    - id: T1003
+      name: Technique T1003
+    - id: T1036.005
+      name: Technique T1036.005
+    - id: T1595
+      name: Technique T1595
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1595/attacker_scan_tools/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_network_visibility_module/cisco_nvm_flowdata/nvm_flowdata.log
+    description: not_applicable - cisco:nvm:flowdata
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

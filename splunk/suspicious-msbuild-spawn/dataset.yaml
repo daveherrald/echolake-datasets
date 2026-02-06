@@ -1,0 +1,35 @@
+metadata:
+  name: suspicious-msbuild-spawn
+  version: 9.0.0
+  description: The following analytic identifies instances where wmiprvse.exe spawns
+    msbuild.exe, which is unusual and indicative of potential misuse of a COM object.
+    This detection leverages data from Endpoint Detection and Response (EDR) agents,
+    focusing on process relationships and command-line executions. This activity is
+    significant because msbuild.exe is typically spawned by devenv.exe during legitimate
+    Visual Studio use, not by wmiprvse.exe. If confirmed malicious, this behavior
+    could indicate an attack
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - trusted-developer-utilities-proxy-execution-msbuild
+  - living-off-the-land
+  - storm-2460-clfs-zero-day-exploitation
+  mitre_attack:
+    techniques:
+    - id: T1127.001
+      name: Technique T1127.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1127.001/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

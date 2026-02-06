@@ -1,0 +1,33 @@
+metadata:
+  name: windows-subinacl-execution
+  version: 4.0.0
+  description: The following analytic detects the execution of the SubInAcl utility.
+    SubInAcl is a legacy Windows Resource Kit tool from the Windows 2003 era, used
+    to manipulate security descriptors of securable objects. It leverages data from
+    Endpoint Detection and Response (EDR) agents, specifically searching for any process
+    execution involving "SubInAcl.exe" binary. This activity can be significant because
+    the utility should be rarely found on modern Windows machines, which mean any
+    execution could potentia
+  author: Nasreddine Bencherchali, Michael Haag, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - defense-evasion-or-unauthorized-access-via-sddl-tampering
+  mitre_attack:
+    techniques:
+    - id: T1222.001
+      name: Technique T1222.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1222.001/subinacl/subinacl_sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

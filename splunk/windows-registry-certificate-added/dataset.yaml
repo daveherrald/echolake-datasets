@@ -1,0 +1,34 @@
+metadata:
+  name: windows-registry-certificate-added
+  version: 9.0.0
+  description: The following analytic detects the installation of a root CA certificate
+    by monitoring specific registry paths for SetValue events. It leverages data from
+    the Endpoint datamodel, focusing on registry paths containing "certificates" and
+    registry values named "Blob." This activity is significant because unauthorized
+    root CA certificates can compromise the integrity of encrypted communications
+    and facilitate man-in-the-middle attacks. If confirmed malicious, this could allow
+    an attacker to intercep
+  author: Michael Haag, Teodeerick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - windows-drivers
+  - windows-registry-abuse
+  mitre_attack:
+    techniques:
+    - id: T1553.004
+      name: Technique T1553.004
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1587.002/atomic_red_team/certblob_windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

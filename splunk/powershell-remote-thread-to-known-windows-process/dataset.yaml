@@ -1,0 +1,33 @@
+metadata:
+  name: powershell-remote-thread-to-known-windows-process
+  version: 7.0.0
+  description: The following analytic detects suspicious PowerShell processes attempting
+    to inject code into critical Windows processes using CreateRemoteThread. It leverages
+    Sysmon EventCode 8 to identify instances where PowerShell spawns threads in processes
+    like svchost.exe, csrss.exe, and others. This activity is significant as it is
+    commonly used by malware such as TrickBot and offensive tools like Cobalt Strike
+    to execute malicious payloads, establish reverse shells, or download additional
+    malware. If co
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - trickbot
+  mitre_attack:
+    techniques:
+    - id: T1055
+      name: Technique T1055
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/trickbot/infection/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

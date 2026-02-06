@@ -1,0 +1,37 @@
+metadata:
+  name: powershell-fileless-process-injection-via-getprocaddress
+  version: 10.0.0
+  description: The following analytic detects the use of `GetProcAddress` in PowerShell
+    script blocks, leveraging PowerShell Script Block Logging (EventCode=4104). This
+    method captures the full command sent to PowerShell, which is then logged in Windows
+    event logs. The presence of `GetProcAddress` is unusual for typical PowerShell
+    scripts and often indicates malicious activity, as many attack toolkits use it
+    to achieve code execution. If confirmed malicious, this activity could allow an
+    attacker to execute arb
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - hellcat-ransomware
+  - malicious-powershell
+  - hermetic-wiper
+  mitre_attack:
+    techniques:
+    - id: T1055
+      name: Technique T1055
+    - id: T1059.001
+      name: Technique T1059.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/powershell_script_block_logging/sbl_xml.log
+    description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

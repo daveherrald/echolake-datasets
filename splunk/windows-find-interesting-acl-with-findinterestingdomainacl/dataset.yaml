@@ -1,0 +1,32 @@
+metadata:
+  name: windows-find-interesting-acl-with-findinterestingdomainacl
+  version: 7.0.0
+  description: The following analytic detects the execution of the `Find-InterestingDomainAcl`
+    cmdlet, part of the PowerView toolkit, using PowerShell Script Block Logging (EventCode=4104).
+    This detection leverages logs to identify when this command is run, which is significant
+    as adversaries may use it to find misconfigured or unusual Access Control Lists
+    (ACLs) within a domain. If confirmed malicious, this activity could allow attackers
+    to identify privilege escalation opportunities or weak security configur
+  author: Gowthamaraj Rajendran, Mauricio Velazco, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - active-directory-discovery
+  mitre_attack:
+    techniques:
+    - id: T1087.002
+      name: Technique T1087.002
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1087.002/AD_discovery/windows-powershell-interestingACL-xml.log
+    description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,35 @@
+metadata:
+  name: windows-system-user-discovery-via-quser
+  version: 6.0.0
+  description: The following analytic detects the execution of the Windows OS tool
+    quser.exe, commonly used to gather information about user sessions on a Remote
+    Desktop Session Host server. This detection leverages data from Endpoint Detection
+    and Response (EDR) agents, focusing on process execution logs. Monitoring this
+    activity is crucial as quser.exe is often abused by post-exploitation tools like
+    winpeas, used in ransomware attacks to enumerate user sessions. If confirmed malicious,
+    attackers could levera
+  author: Teoderick Contreras, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - prestige-ransomware
+  - crypto-stealer
+  - windows-post-exploitation
+  mitre_attack:
+    techniques:
+    - id: T1033
+      name: Technique T1033
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/winpeas/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

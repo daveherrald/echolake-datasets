@@ -1,0 +1,35 @@
+metadata:
+  name: github-organizations-disable-2fa-requirement
+  version: 3.0.0
+  description: 'The following analytic detects when two-factor authentication (2FA)
+    requirements are disabled in GitHub Organizations. The detection monitors GitHub
+    Organizations audit logs for 2FA requirement changes by tracking actor details,
+    organization information, and associated metadata. For a SOC, identifying disabled
+    2FA requirements is critical as it could indicate attempts to weaken account security
+    controls. Two-factor authentication is a fundamental security control that helps
+    prevent unauthorized '
+  author: Patrick Bareiss, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - github-malicious-activity
+  mitre_attack:
+    techniques:
+    - id: T1562.001
+      name: Technique T1562.001
+    - id: T1195
+      name: Technique T1195
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.001/github_disable_two_factor_requirement/github.json
+    description: github - github:cloud:audit
+    format: jsonl
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

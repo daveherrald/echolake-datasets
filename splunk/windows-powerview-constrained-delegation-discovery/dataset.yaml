@@ -1,0 +1,35 @@
+metadata:
+  name: windows-powerview-constrained-delegation-discovery
+  version: 7.0.0
+  description: The following analytic detects the use of PowerView commandlets to
+    discover Windows endpoints with Kerberos Constrained Delegation. It leverages
+    PowerShell Script Block Logging (EventCode=4104) to identify specific commandlets
+    like `Get-DomainComputer` or `Get-NetComputer` with the `-TrustedToAuth` parameter.
+    This activity is significant as it indicates potential reconnaissance efforts
+    by adversaries or Red Teams to map out privileged delegation settings in Active
+    Directory. If confirmed malicio
+  author: Mauricio Velazco, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - cisa-aa23-347a
+  - rhysida-ransomware
+  - active-directory-kerberos-attacks
+  mitre_attack:
+    techniques:
+    - id: T1018
+      name: Technique T1018
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1018/windows_powerview_constrained_delegation_discovery/windows-xml.log
+    description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

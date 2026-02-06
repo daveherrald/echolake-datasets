@@ -1,0 +1,33 @@
+metadata:
+  name: cloud-api-calls-from-previously-unseen-user-roles
+  version: 6.0.0
+  description: The following analytic detects cloud API calls executed by user roles
+    that have not previously run these commands. It leverages the Change data model
+    in Splunk to identify commands executed by users with the user_type of AssumedRole
+    and a status of success. This activity is significant because new commands from
+    different user roles can indicate potential malicious activity or unauthorized
+    actions. If confirmed malicious, this behavior could lead to unauthorized access,
+    data breaches, or other da
+  author: David Dorsey, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - suspicious-cloud-user-activities
+  mitre_attack:
+    techniques:
+    - id: T1078
+      name: Technique T1078
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/suspicious_behaviour/abnormally_high_cloud_instances_launched/cloudtrail_behavioural_detections.json
+    description: aws_cloudtrail - aws:cloudtrail
+    format: jsonl
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

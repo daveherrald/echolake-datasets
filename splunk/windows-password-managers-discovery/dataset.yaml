@@ -1,0 +1,35 @@
+metadata:
+  name: windows-password-managers-discovery
+  version: 8.0.0
+  description: The following analytic identifies command-line activity that searches
+    for files related to password manager software, such as "*.kdbx*" and "*credential*".
+    It leverages data from Endpoint Detection and Response (EDR) agents, focusing
+    on process execution logs. This activity is significant because attackers often
+    target password manager databases to extract stored credentials, which can be
+    used for further exploitation. If confirmed malicious, this behavior could lead
+    to unauthorized access to se
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - windows-post-exploitation
+  - prestige-ransomware
+  - scattered-spider
+  mitre_attack:
+    techniques:
+    - id: T1555.005
+      name: Technique T1555.005
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/winpeas/winpeas_search_pwd_db/dir-db-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

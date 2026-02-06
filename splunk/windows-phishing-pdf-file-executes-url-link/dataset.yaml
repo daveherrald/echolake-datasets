@@ -1,0 +1,34 @@
+metadata:
+  name: windows-phishing-pdf-file-executes-url-link
+  version: 7.0.0
+  description: The following analytic detects suspicious PDF viewer processes spawning
+    browser application child processes. It leverages data from Endpoint Detection
+    and Response (EDR) agents, focusing on process and parent process names. This
+    activity is significant as it may indicate a PDF spear-phishing attempt where
+    a malicious URL link is executed, leading to potential payload download. If confirmed
+    malicious, this could allow attackers to execute code, escalate privileges, or
+    persist in the environment b
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - spearphishing-attachments
+  - snake-keylogger
+  mitre_attack:
+    techniques:
+    - id: T1566.001
+      name: Technique T1566.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566.001/phishing_pdf_uri/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

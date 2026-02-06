@@ -1,0 +1,38 @@
+metadata:
+  name: advanced-ip-or-port-scanner-execution
+  version: 1.0.0
+  description: 'The following analytic detects the execution of network scanning utilities
+    such as Advanced IP Scanner or Advanced Port Scanner.
+
+    These legitimate administrative tools are often leveraged by threat actors and
+    ransomware operators during the discovery phase to enumerate active hosts and
+    open ports within a target environment.
+
+    Detection is based on process creation telemetry referencing known executable
+    names, original file names, or specific command-line parameters such as "/portable"
+    and "/lng" t'
+  author: Nasreddine Bencherchali, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - windows-defense-evasion-tactics
+  mitre_attack:
+    techniques:
+    - id: T1046
+      name: Technique T1046
+    - id: T1135
+      name: Technique T1135
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1046/advanced_ip_port_scanner/advanced_ip_port_scanner.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

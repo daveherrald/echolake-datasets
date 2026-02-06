@@ -1,0 +1,35 @@
+metadata:
+  name: linux-auditd-find-credentials-from-password-managers
+  version: 7.0.0
+  description: The following analytic detects suspicious attempts to find credentials
+    stored in password managers, which may indicate an attacker's effort to retrieve
+    sensitive login information. Password managers are often targeted by adversaries
+    seeking to access stored passwords for further compromise or lateral movement
+    within a network. By monitoring for unusual or unauthorized access to password
+    manager files or processes, this analytic helps identify potential credential
+    theft attempts, enabling securit
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - linux-living-off-the-land
+  - linux-privilege-escalation
+  - linux-persistence-techniques
+  mitre_attack:
+    techniques:
+    - id: T1555.005
+      name: Technique T1555.005
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1555.005/linux_auditd_find_password_db/auditd_execve_pwd_mgr.log
+    description: auditd - auditd
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,36 @@
+metadata:
+  name: windows-local-llm-framework-execution
+  version: 1.0.0
+  description: 'The following analytic detects execution of unauthorized local LLM
+    frameworks (Ollama, LM Studio, GPT4All, Jan, llama.cpp, KoboldCPP, Oobabooga,
+    NutStudio) and Python-based AI/ML libraries (HuggingFace Transformers, LangChain)
+    on Windows endpoints by leveraging process creation events.
+
+    It identifies cases where known LLM framework executables are launched or command-line
+    arguments reference AI/ML libraries.
+
+    This activity is significant as it may indicate shadow AI deployments, unauthorized
+    model'
+  author: Rod Soto, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - suspicious-local-llm-frameworks
+  mitre_attack:
+    techniques:
+    - id: T1543
+      name: Technique T1543
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/suspicious_behaviour/local_llms/sysmon_local_llms.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

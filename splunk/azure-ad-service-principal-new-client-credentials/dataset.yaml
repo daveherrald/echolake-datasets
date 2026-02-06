@@ -1,0 +1,35 @@
+metadata:
+  name: azure-ad-service-principal-new-client-credentials
+  version: 10.0.0
+  description: The following analytic detects the addition of new credentials to Service
+    Principals and Applications in Azure AD. It leverages Azure AD AuditLogs, specifically
+    monitoring the "Update application*Certificates and secrets management" operation.
+    This activity is significant as it may indicate an adversary attempting to maintain
+    persistent access or escalate privileges within the Azure environment. If confirmed
+    malicious, attackers could use these new credentials to log in as the service
+    principal,
+  author: Mauricio Velazco, Gowthamaraj Rajendran, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - azure-active-directory-persistence
+  - azure-active-directory-privilege-escalation
+  - nobelium-group
+  mitre_attack:
+    techniques:
+    - id: T1098.001
+      name: Technique T1098.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1098.001/azure_ad_service_principal_credentials/azure-audit.log
+    description: Azure AD - azure:monitor:aad
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,35 @@
+metadata:
+  name: windows-system-network-config-discovery-display-dns
+  version: 7.0.0
+  description: The following analytic identifies the execution of the "ipconfig /displaydns"
+    command, which retrieves DNS reply information using the built-in Windows tool
+    IPConfig. This detection leverages data from Endpoint Detection and Response (EDR)
+    agents, focusing on process command-line executions. Monitoring this activity
+    is significant as threat actors and post-exploitation tools like WINPEAS often
+    abuse this command to gather network information. If confirmed malicious, this
+    activity could allow att
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - medusa-ransomware
+  - windows-post-exploitation
+  - prestige-ransomware
+  mitre_attack:
+    techniques:
+    - id: T1016
+      name: Technique T1016
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/winpeas/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

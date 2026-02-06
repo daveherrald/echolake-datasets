@@ -1,0 +1,37 @@
+metadata:
+  name: suspicious-process-executed-from-container-file
+  version: 8.0.0
+  description: The following analytic identifies a suspicious process executed from
+    within common container/archive file types such as ZIP, ISO, IMG, and others.
+    It leverages data from Endpoint Detection and Response (EDR) agents, focusing
+    on process names and command-line executions. This activity is significant as
+    it is a common technique used by adversaries to execute scripts or evade defenses.
+    If confirmed malicious, this behavior could allow attackers to execute arbitrary
+    code, escalate privileges, or per
+  author: Steven Dick
+  tags:
+  - ttp
+  - splunk-security-content
+  - apt37-rustonotto-and-fadestealer
+  - ghostredirector-iis-module-and-rungan-backdoor
+  - unusual-processes
+  mitre_attack:
+    techniques:
+    - id: T1204.002
+      name: Technique T1204.002
+    - id: T1036.008
+      name: Technique T1036.008
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/gootloader/partial_ttps/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

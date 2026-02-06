@@ -1,0 +1,38 @@
+metadata:
+  name: cisco-asa-user-privilege-level-change
+  version: 1.0.0
+  description: 'This analytic detects privilege level changes for user accounts on
+    Cisco ASA devices via CLI or ASDM.
+
+    Adversaries may escalate account privileges to gain elevated access to network
+    infrastructure, enable additional command execution capabilities, or establish
+    higher-level persistent access. Privilege levels on Cisco ASA range from 0 (lowest)
+    to 15 (full administrative access), with level 15 providing complete device control.
+
+    The detection monitors for ASA message ID 502103, which is generated wh'
+  author: Nasreddine Bencherchali, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - suspicious-cisco-adaptive-security-appliance-activity
+  - arcanedoor
+  mitre_attack:
+    techniques:
+    - id: T1078.003
+      name: Technique T1078.003
+    - id: T1098
+      name: Technique T1098
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_asa/generic/cisco_asa_generic_logs.log
+    description: not_applicable - cisco:asa
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

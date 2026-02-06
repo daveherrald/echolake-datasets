@@ -1,0 +1,32 @@
+metadata:
+  name: powershell-load-module-in-meterpreter
+  version: 8.0.0
+  description: The following analytic detects the execution of suspicious PowerShell
+    commands associated with Meterpreter modules, such as "MSF.Powershell" and "MSF.Powershell.Meterpreter".
+    It leverages PowerShell Script Block Logging (EventCode=4104) to capture and analyze
+    the full command sent to PowerShell. This activity is significant as it indicates
+    potential post-exploitation actions, including credential dumping and persistence
+    mechanisms. If confirmed malicious, an attacker could gain extensive control
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - metasploit
+  mitre_attack:
+    techniques:
+    - id: T1059.001
+      name: Technique T1059.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059/metasploit/msf.powershell.powershell.log
+    description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

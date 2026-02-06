@@ -1,0 +1,35 @@
+metadata:
+  name: okta-mismatch-between-source-and-response-for-verify-push-request
+  version: 7.0.0
+  description: 'The following analytic identifies discrepancies between the source
+    and response events for Okta Verify Push requests, indicating potential suspicious
+    behavior. It leverages Okta System Log events, specifically `system.push.send_factor_verify_push`
+    and `user.authentication.auth_via_mfa` with the factor "OKTA_VERIFY_PUSH." The
+    detection groups events by SessionID, calculates the ratio of successful sign-ins
+    to push requests, and checks for session roaming and new device/IP usage. This
+    activity is '
+  author: John Murphy and Jordan Ruocco, Okta, Michael Haag, Bhavin Patel, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - okta-account-takeover
+  - okta-mfa-exhaustion
+  - scattered-lapsus$-hunters
+  mitre_attack:
+    techniques:
+    - id: T1621
+      name: Technique T1621
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1621/okta_mismatch/okta_mismatch.log
+    description: Okta - OktaIM2:log
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

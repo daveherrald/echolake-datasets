@@ -1,0 +1,34 @@
+metadata:
+  name: windows-modify-registry-disable-windows-security-center-notif
+  version: 8.0.0
+  description: The following analytic detects modifications to the Windows registry
+    aimed at disabling Windows Security Center notifications. It leverages data from
+    the Endpoint.Registry datamodel, specifically monitoring changes to the registry
+    path "*\\Windows\\CurrentVersion\\ImmersiveShell\\UseActionCenterExperience*"
+    with a value of "0x00000000". This activity is significant as it can indicate
+    an attempt by adversaries or malware, such as Azorult, to evade defenses by suppressing
+    critical update notificat
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - azorult
+  - cisa-aa23-347a
+  mitre_attack:
+    techniques:
+    - id: T1112
+      name: Technique T1112
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/azorult/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

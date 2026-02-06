@@ -1,0 +1,33 @@
+metadata:
+  name: windows-msix-package-interaction
+  version: 1.0.0
+  description: 'This hunting query detects user interactions with MSIX packages by
+    monitoring EventCode 171 in the Microsoft-Windows-AppXPackaging/Operational logs.
+    These events are generated when a user clicks on or attempts to interact with
+    an MSIX package, even if the package is not fully installed. This information
+    can be valuable for security teams to identify what MSIX packages users are attempting
+    to open in their environment, which may help detect malicious MSIX packages before
+    they''re fully installed. '
+  author: Michael Haag, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - msix-package-abuse
+  mitre_attack:
+    techniques:
+    - id: T1204.002
+      name: Technique T1204.002
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1204.002/appx/windows-appxpackaging.log
+    description: XmlWinEventLog:Microsoft-Windows-AppxPackaging/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

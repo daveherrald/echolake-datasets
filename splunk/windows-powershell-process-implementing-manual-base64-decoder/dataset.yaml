@@ -1,0 +1,41 @@
+metadata:
+  name: windows-powershell-process-implementing-manual-base64-decoder
+  version: 2.0.0
+  description: 'The following analytic identifies Windows PowerShell processes that
+    implement a manual Base64 decoder.
+
+    Threat actors often use Base64 encoding to obfuscate malicious payloads or commands
+    within PowerShell scripts.
+
+    By manually decoding Base64 strings, attackers can evade detection mechanisms
+    that look for standard decoding functions like using the "-enc" flag or the "FromBase64String"
+    function.
+
+    This detection focuses on PowerShell processes that exhibit characteristics of
+    manual Base64 decoding, '
+  author: Nasreddine Bencherchali
+  tags:
+  - anomaly
+  - splunk-security-content
+  - compromised-windows-host
+  - deobfuscate-decode-files-or-information
+  mitre_attack:
+    techniques:
+    - id: T1027.010
+      name: Technique T1027.010
+    - id: T1059.001
+      name: Technique T1059.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://github.com/Splunk/attack_data/raw/master/datasets/attack_techniques/T1027.010/manual_b64_decode_pwsh/manual_b64_decode_pwsh.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

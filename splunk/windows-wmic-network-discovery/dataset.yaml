@@ -1,0 +1,33 @@
+metadata:
+  name: windows-wmic-network-discovery
+  version: 1.0.0
+  description: "The following analytic detects the execution of Windows Management\
+    \ Instrumentation Command-line (WMIC) commands used for network interface discovery\
+    \ on a Windows system. Specifically, it identifies commands such as \u201Cwmic\
+    \ nic\u201D that retrieve detailed information about the network adapters installed\
+    \ on the device. While these commands are commonly used by IT administrators for\
+    \ legitimate network inventory and diagnostics, they can also be leveraged by\
+    \ malicious actors for reconnaissance, enabling t"
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - lamehug
+  mitre_attack:
+    techniques:
+    - id: T1082
+      name: Technique T1082
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/lamehug/T1082/wmic_cmd/wmic_cmd.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,36 @@
+metadata:
+  name: windows-rdp-connection-successful
+  version: 9.0.0
+  description: The following analytic detects successful Remote Desktop Protocol (RDP)
+    connections by monitoring EventCode 1149 from the Windows TerminalServices RemoteConnectionManager
+    Operational log. This detection is significant as successful RDP connections can
+    indicate remote access to a system, which may be leveraged by attackers to control
+    or exfiltrate data. If confirmed malicious, this activity could lead to unauthorized
+    access, data theft, or further lateral movement within the network. Monitoring
+    s
+  author: Michael Haag, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - active-directory-lateral-movement
+  - blackbyte-ransomware
+  - windows-rdp-artifacts-and-defense-evasion
+  mitre_attack:
+    techniques:
+    - id: T1563.002
+      name: Technique T1563.002
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1563.002/windows_rdp_connection_successful/windows-xml.log
+    description: WinEventLog:Microsoft-Windows-TerminalServices-RemoteConnectionManager/Operational
+      - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

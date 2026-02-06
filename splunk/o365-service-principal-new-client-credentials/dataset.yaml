@@ -1,0 +1,34 @@
+metadata:
+  name: o365-service-principal-new-client-credentials
+  version: 9.0.0
+  description: 'The following analytic detects the addition of new credentials for
+    Service Principals within an Office 365 tenant. It uses O365 audit logs, focusing
+    on events related to credential modifications or additions in the AzureActiveDirectory
+    workload. This activity is significant because Service Principals represent application
+    identities, and their credentials allow applications to authenticate and access
+    resources. If an attacker successfully adds or modifies these credentials, they
+    can impersonate '
+  author: Mauricio Velazco, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - office-365-persistence-mechanisms
+  - nobelium-group
+  mitre_attack:
+    techniques:
+    - id: T1098.001
+      name: Technique T1098.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1098.001/o365_service_principal_credentials/o365_service_principal_credentials.log
+    description: o365 - o365:management:activity
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

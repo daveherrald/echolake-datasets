@@ -1,0 +1,38 @@
+metadata:
+  name: windows-process-with-netexec-command-line-parameters
+  version: 7.0.0
+  description: 'The following analytic detects the use of NetExec (formally CrackmapExec)
+    a toolset used for post-exploitation enumeration and attack within Active Directory
+    environments through command line parameters. It leverages Endpoint Detection
+    and Response (EDR) data to identify specific command-line arguments associated
+    with actions like ticket manipulation, kerberoasting, and password spraying. This
+    activity is significant as NetExec is used by adversaries to exploit Kerberos
+    for privilege escalation '
+  author: Steven Dick, Github Community
+  tags:
+  - ttp
+  - splunk-security-content
+  - active-directory-kerberos-attacks
+  - active-directory-privilege-escalation
+  mitre_attack:
+    techniques:
+    - id: T1550.003
+      name: Technique T1550.003
+    - id: T1558.003
+      name: Technique T1558.003
+    - id: T1558.004
+      name: Technique T1558.004
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1550/netexec_toolkit_usage/netexec_toolkit_usage.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

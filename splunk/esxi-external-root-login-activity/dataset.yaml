@@ -1,0 +1,32 @@
+metadata:
+  name: esxi-external-root-login-activity
+  version: 1.0.0
+  description: This detection identifies instances where the ESXi UI is accessed using
+    the root account instead of a delegated administrative user. Direct root access
+    to the UI bypasses role-based access controls and auditing practices, and may
+    indicate risky behavior, misconfiguration, or unauthorized activity by a malicious
+    actor using compromised credentials.
+  author: Raven Tait, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - esxi-post-compromise
+  - black-basta-ransomware
+  mitre_attack:
+    techniques:
+    - id: T1078
+      name: Technique T1078
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1078/esxi_external_root_login/esxi_external_root_login.log
+    description: vmware:esxlog - vmw-syslog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

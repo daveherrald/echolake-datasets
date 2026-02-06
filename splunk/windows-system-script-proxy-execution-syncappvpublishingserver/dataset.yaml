@@ -1,0 +1,35 @@
+metadata:
+  name: windows-system-script-proxy-execution-syncappvpublishingserver
+  version: 8.0.0
+  description: The following analytic detects the execution of Syncappvpublishingserver.vbs
+    via wscript.exe or cscript.exe, which may indicate an attempt to download remote
+    files or perform privilege escalation. This detection leverages data from Endpoint
+    Detection and Response (EDR) agents, focusing on process names and command-line
+    executions. Monitoring this activity is crucial as it can signify malicious use
+    of a native Windows script for unauthorized actions. If confirmed malicious, this
+    behavior could le
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - living-off-the-land
+  mitre_attack:
+    techniques:
+    - id: T1216
+      name: Technique T1216
+    - id: T1218
+      name: Technique T1218
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1216/atomic_red_team/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

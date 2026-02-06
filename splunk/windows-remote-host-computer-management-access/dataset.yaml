@@ -1,0 +1,33 @@
+metadata:
+  name: windows-remote-host-computer-management-access
+  version: 2.0.0
+  description: The following analytic detects the use of mmc.exe to launch Computer
+    Management (compmgmt.msc) and connect to a remote machine. This technique allows
+    administrators to access system management tools, including Event Viewer, Services,
+    Shared Folders, and Local Users & Groups, without initiating a full remote desktop
+    session. While commonly used for legitimate administrative purposes, adversaries
+    may leverage this method for remote reconnaissance, privilege escalation, or persistence.
+    Monitoring t
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - medusa-ransomware
+  mitre_attack:
+    techniques:
+    - id: T1021.006
+      name: Technique T1021.006
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1021.006/compmgtm_access/compmgmt_load.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

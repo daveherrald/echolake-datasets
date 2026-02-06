@@ -1,0 +1,35 @@
+metadata:
+  name: windows-speechruntime-com-hijacking-dll-load
+  version: 2.0.0
+  description: SpeechRuntime is vulnerable to an attack that allows a user to run
+    code on another user's session remotely and stealthily by exploiting a Windows
+    COM class. When this class is invoked, it launches SpeechRuntime.exe in the context
+    of the currently logged-on user. Because this COM class is susceptible to COM
+    Hijacking, the attacker can alter the registry remotely to point to a malicious
+    DLL. By dropping that DLL on the target system (e.g., via SMB) and triggering
+    the COM object, the attacker cause
+  author: Raven Tait, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - active-directory-lateral-movement
+  - compromised-windows-host
+  - scattered-lapsus$-hunters
+  mitre_attack:
+    techniques:
+    - id: T1021.003
+      name: Technique T1021.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1021.003/lateral_movement_speechruntime/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

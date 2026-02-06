@@ -1,0 +1,33 @@
+metadata:
+  name: cloud-compute-instance-created-by-previously-unseen-user
+  version: 8.0.0
+  description: The following analytic identifies the creation of cloud compute instances
+    by users who have not previously created them. It leverages data from the Change
+    data model, focusing on 'create' actions by users, and cross-references with a
+    baseline of known user activities. This activity is significant as it may indicate
+    unauthorized access or misuse of cloud resources by new or compromised accounts.
+    If confirmed malicious, attackers could deploy unauthorized compute instances,
+    leading to potential da
+  author: Rico Valdez, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - cloud-cryptomining
+  mitre_attack:
+    techniques:
+    - id: T1078.004
+      name: Technique T1078.004
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/suspicious_behaviour/abnormally_high_cloud_instances_launched/cloudtrail_behavioural_detections.json
+    description: aws_cloudtrail - aws:cloudtrail
+    format: jsonl
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

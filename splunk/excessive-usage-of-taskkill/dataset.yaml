@@ -1,0 +1,35 @@
+metadata:
+  name: excessive-usage-of-taskkill
+  version: 8.0.0
+  description: The following analytic identifies excessive usage of `taskkill.exe`,
+    a command-line utility used to terminate processes. The detection leverages data
+    from Endpoint Detection and Response (EDR) agents, focusing on instances where
+    `taskkill.exe` is executed ten or more times within a one-minute span. This behavior
+    is significant as adversaries often use `taskkill.exe` to disable security tools
+    or other critical processes to evade detection. If confirmed malicious, this activity
+    could allow attacke
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - azorult
+  - agenttesla
+  - cisa-aa22-277a
+  mitre_attack:
+    techniques:
+    - id: T1562.001
+      name: Technique T1562.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/xmrig_miner/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,34 @@
+metadata:
+  name: o365-multiple-service-principals-created-by-user
+  version: 6.0.0
+  description: 'The following analytic identifies instances where a single user creates
+    more than three unique OAuth applications within a 10-minute window in the Office
+    365 environment. It leverages O365 logs from the Unified Audit Log, focusing on
+    the ''Add service principal'' operation in Azure Active Directory. This activity
+    is significant as it may indicate a compromised user account or unauthorized actions,
+    potentially leading to broader network infiltration or privilege escalation. If
+    confirmed malicious, '
+  author: Mauricio Velazco, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - office-365-persistence-mechanisms
+  - nobelium-group
+  mitre_attack:
+    techniques:
+    - id: T1136.003
+      name: Technique T1136.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1136.003/o365_multiple_service_principals_created/o365_multiple_service_principals_created.log
+    description: o365 - o365:management:activity
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

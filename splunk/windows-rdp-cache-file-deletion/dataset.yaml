@@ -1,0 +1,33 @@
+metadata:
+  name: windows-rdp-cache-file-deletion
+  version: 1.0.0
+  description: "This detection identifies the deletion of RDP bitmap cache files\u2014\
+    specifically .bmc and .bin files\u2014typically stored in the user profile under\
+    \ the Terminal Server Client\\Cache directory. These files are created by the\
+    \ native Windows Remote Desktop Client (mstsc.exe) and store graphical elements\
+    \ from remote sessions to improve performance. Deleting these files may indicate\
+    \ an attempt to remove forensic evidence of RDP usage. While rare in legitimate\
+    \ user behavior, this action is commonly associated"
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - windows-rdp-artifacts-and-defense-evasion
+  mitre_attack:
+    techniques:
+    - id: T1070.004
+      name: Technique T1070.004
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1070.004/bmc_file_deleted/bmc_file_deleted.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,33 @@
+metadata:
+  name: windows-odbcconf-hunting
+  version: 7.0.0
+  description: 'The following analytic identifies the execution of Odbcconf.exe within
+    the environment. It leverages data from Endpoint Detection and Response (EDR)
+    agents, focusing on process creation events where the process name is Odbcconf.exe.
+    This activity is significant because Odbcconf.exe can be used by attackers to
+    execute arbitrary commands or load malicious DLLs, potentially leading to code
+    execution or persistence. If confirmed malicious, this behavior could allow an
+    attacker to maintain access to '
+  author: Michael Haag, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - living-off-the-land
+  mitre_attack:
+    techniques:
+    - id: T1218.008
+      name: Technique T1218.008
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218.008/atomic_red_team/windows-sysmon-odbc-regsvr.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

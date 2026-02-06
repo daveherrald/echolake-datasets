@@ -1,0 +1,35 @@
+metadata:
+  name: linux-setuid-using-chmod-utility
+  version: 7.0.0
+  description: The following analytic detects the execution of the chmod utility to
+    set the SUID or SGID bit on files, which can allow users to temporarily gain root
+    or group-level access. This detection leverages data from Endpoint Detection and
+    Response (EDR) agents, focusing on process names and command-line arguments related
+    to chmod. This activity is significant as it can indicate an attempt to escalate
+    privileges or maintain persistence on a system. If confirmed malicious, an attacker
+    could gain elevated
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - linux-privilege-escalation
+  - linux-persistence-techniques
+  - linux-living-off-the-land
+  mitre_attack:
+    techniques:
+    - id: T1548.001
+      name: Technique T1548.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1548.001/chmod_uid/sysmon_linux.log
+    description: Syslog:Linux-Sysmon/Operational - sysmon:linux
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

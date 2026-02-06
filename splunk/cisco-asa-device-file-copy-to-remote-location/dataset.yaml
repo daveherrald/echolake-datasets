@@ -1,0 +1,41 @@
+metadata:
+  name: cisco-asa-device-file-copy-to-remote-location
+  version: 1.0.0
+  description: 'This analytic detects file copy operations to remote locations on
+    Cisco ASA devices via CLI or ASDM.
+
+    Adversaries may exfiltrate device files including configurations, logs, packet
+    captures, or system data to remote servers using protocols like TFTP, FTP, HTTP,
+    HTTPS, SMB, or SCP. While legitimate backups to centralized servers are common,
+    copies to unexpected destinations may indicate data exfiltration to attacker-controlled
+    infrastructure.
+
+    The detection monitors for command execution events (me'
+  author: Nasreddine Bencherchali, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - suspicious-cisco-adaptive-security-appliance-activity
+  - arcanedoor
+  mitre_attack:
+    techniques:
+    - id: T1005
+      name: Technique T1005
+    - id: T1041
+      name: Technique T1041
+    - id: T1048.003
+      name: Technique T1048.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_asa/generic/cisco_asa_generic_logs.log
+    description: not_applicable - cisco:asa
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

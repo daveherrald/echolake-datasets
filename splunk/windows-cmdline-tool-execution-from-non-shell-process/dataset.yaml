@@ -1,0 +1,35 @@
+metadata:
+  name: windows-cmdline-tool-execution-from-non-shell-process
+  version: 8.0.0
+  description: 'The following analytic identifies instances where `ipconfig.exe`,
+    `systeminfo.exe`, or similar tools are executed by a non-standard shell parent
+    process, excluding CMD, PowerShell, or Explorer. This detection leverages Endpoint
+    Detection and Response (EDR) telemetry to monitor process creation events. Such
+    behavior is significant as it may indicate adversaries using injected processes
+    to perform system discovery, a tactic observed in FIN7''s JSSLoader. If confirmed
+    malicious, this activity could '
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - cisa-aa22-277a
+  - gozi-malware
+  - cisa-aa23-347a
+  mitre_attack:
+    techniques:
+    - id: T1059.007
+      name: Technique T1059.007
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/fin7/jssloader/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

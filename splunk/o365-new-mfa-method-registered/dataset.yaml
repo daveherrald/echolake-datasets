@@ -1,0 +1,33 @@
+metadata:
+  name: o365-new-mfa-method-registered
+  version: 8.0.0
+  description: The following analytic detects the registration of a new Multi-Factor
+    Authentication (MFA) method for a user account within Office 365. It leverages
+    O365 audit logs to identify changes in MFA configurations. This activity is significant
+    as it may indicate an attacker's attempt to maintain persistence on a compromised
+    account. If confirmed malicious, the attacker could bypass existing security measures,
+    solidify their access, and potentially escalate privileges or access sensitive
+    data. Immediate
+  author: Mauricio Velazco, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - office-365-persistence-mechanisms
+  mitre_attack:
+    techniques:
+    - id: T1098.005
+      name: Technique T1098.005
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1098.005/o365_register_new_mfa_method/o365_register_new_mfa_method.log
+    description: o365 - o365:management:activity
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

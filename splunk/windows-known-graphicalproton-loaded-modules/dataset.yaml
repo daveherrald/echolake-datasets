@@ -1,0 +1,35 @@
+metadata:
+  name: windows-known-graphicalproton-loaded-modules
+  version: 9.0.0
+  description: The following analytic detects the loading of DLL modules associated
+    with the GraphicalProton backdoor implant, commonly used by SVR in targeted attacks.
+    It leverages Sysmon EventCode 7 to identify specific DLLs loaded by processes.
+    This activity is significant as it may indicate the presence of a sophisticated
+    backdoor, warranting immediate investigation. If confirmed malicious, the attacker
+    could gain persistent access to the compromised host, potentially leading to further
+    exploitation and da
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - hellcat-ransomware
+  - cisa-aa23-347a
+  - water-gamayun
+  mitre_attack:
+    techniques:
+    - id: T1574.001
+      name: Technique T1574.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1574.002/svr_loaded_modules/loaded_module_svr.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

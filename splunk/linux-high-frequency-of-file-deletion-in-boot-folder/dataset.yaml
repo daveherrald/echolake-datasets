@@ -1,0 +1,37 @@
+metadata:
+  name: linux-high-frequency-of-file-deletion-in-boot-folder
+  version: 8.0.0
+  description: The following analytic detects a high frequency of file deletions in
+    the /boot/ folder on Linux systems. It leverages filesystem event logs to identify
+    when 200 or more files are deleted within an hour by the same process. This behavior
+    is significant as it may indicate the presence of wiper malware, such as Industroyer2,
+    which targets critical system directories. If confirmed malicious, this activity
+    could lead to system instability or failure, hindering the boot process and potentially
+    causing
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - data-destruction
+  - industroyer2
+  - acidpour
+  mitre_attack:
+    techniques:
+    - id: T1070.004
+      name: Technique T1070.004
+    - id: T1485
+      name: Technique T1485
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1485/rm_boot_dir/sysmon_linux.log
+    description: Syslog:Linux-Sysmon/Operational - sysmon:linux
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

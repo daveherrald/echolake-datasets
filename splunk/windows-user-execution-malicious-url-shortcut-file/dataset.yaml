@@ -1,0 +1,35 @@
+metadata:
+  name: windows-user-execution-malicious-url-shortcut-file
+  version: 10.0.0
+  description: The following analytic detects the creation URL shortcut files, often
+    used by malware like CHAOS ransomware. It leverages the Endpoint.Filesystem datamodel
+    to identify ".url" files created outside common directories, such as "Program
+    Files". This activity can be significant as ".URL" files can be used as mean to
+    trick the user into visiting certain websites unknowingly, or when placed in certain
+    locations such as "\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\",
+    it may a
+  author: Teoderick Contreras, Nasreddine Bencherchali, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - xworm
+  - chaos-ransomware
+  - njrat
+  mitre_attack:
+    techniques:
+    - id: T1204.002
+      name: Technique T1204.002
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/chaos_ransomware/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,38 @@
+metadata:
+  name: web-jsp-request-via-url
+  version: 7.0.0
+  description: 'The following analytic identifies URL requests associated with CVE-2022-22965
+    (Spring4Shell) exploitation attempts, specifically targeting webshell access on
+    a remote webserver. It detects HTTP GET requests with URLs containing ".jsp?cmd="
+    or "j&cmd=" patterns. This activity is significant as it indicates potential webshell
+    deployment, which can lead to unauthorized remote command execution. If confirmed
+    malicious, attackers could gain control over the webserver, execute arbitrary
+    commands, and '
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - spring4shell-cve-2022-22965
+  - earth-alux
+  mitre_attack:
+    techniques:
+    - id: T1133
+      name: Technique T1133
+    - id: T1190
+      name: Technique T1190
+    - id: T1505.003
+      name: Technique T1505.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/spring4shell/spring4shell_nginx.log
+    description: /var/log/nginx/access.log - nginx:plus:kv
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

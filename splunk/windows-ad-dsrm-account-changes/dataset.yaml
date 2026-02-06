@@ -1,0 +1,35 @@
+metadata:
+  name: windows-ad-dsrm-account-changes
+  version: 9.0.0
+  description: The following analytic identifies changes to the Directory Services
+    Restore Mode (DSRM) account behavior via registry modifications. It detects alterations
+    in the registry path "*\\System\\CurrentControlSet\\Control\\Lsa\\DSRMAdminLogonBehavior"
+    with specific values indicating potential misuse. This activity is significant
+    because the DSRM account, if misconfigured, can be exploited to persist within
+    a domain, similar to a local administrator account. If confirmed malicious, an
+    attacker could ga
+  author: Dean Luxton
+  tags:
+  - ttp
+  - splunk-security-content
+  - sneaky-active-directory-persistence-tricks
+  - windows-registry-abuse
+  - windows-persistence-techniques
+  mitre_attack:
+    techniques:
+    - id: T1098
+      name: Technique T1098
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1098/dsrm_account/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

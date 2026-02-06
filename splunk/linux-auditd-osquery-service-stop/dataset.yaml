@@ -1,0 +1,35 @@
+metadata:
+  name: linux-auditd-osquery-service-stop
+  version: 6.0.0
+  description: The following analytic detects suspicious stopping of the `osquery`
+    service, which may indicate an attempt to disable monitoring and evade detection.
+    `Osquery` is a powerful tool used for querying system information and detecting
+    anomalies, and stopping its service can be a sign that an attacker is trying to
+    disrupt security monitoring or hide malicious activities. By monitoring for unusual
+    or unauthorized stops of the `osquery` service, this analytic helps identify potential
+    efforts to bypass s
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - linux-living-off-the-land
+  - linux-privilege-escalation
+  - linux-persistence-techniques
+  mitre_attack:
+    techniques:
+    - id: T1489
+      name: Technique T1489
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1489/linux_auditd_osquerd_service_stop/linux_auditd_osquerd_service_stop.log
+    description: auditd - auditd
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

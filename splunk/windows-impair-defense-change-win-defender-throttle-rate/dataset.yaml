@@ -1,0 +1,33 @@
+metadata:
+  name: windows-impair-defense-change-win-defender-throttle-rate
+  version: 7.0.0
+  description: The following analytic detects modifications to the ThrottleDetectionEventsRate
+    registry setting in Windows Defender. It leverages data from the Endpoint.Registry
+    datamodel to identify changes in the registry path related to Windows Defender's
+    event logging rate. This activity is significant because altering the ThrottleDetectionEventsRate
+    can reduce the frequency of logged detection events, potentially masking malicious
+    activities. If confirmed malicious, this could allow an attacker to evade d
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - windows-defense-evasion-tactics
+  - windows-registry-abuse
+  mitre_attack:
+    techniques:
+    - id: T1562.001
+      name: Technique T1562.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.001/disable-windows-security-defender-features/windefender-bypas-2-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,34 @@
+metadata:
+  name: windows-executable-in-loaded-modules
+  version: 7.0.0
+  description: The following analytic identifies instances where executable files
+    (.exe) are loaded as modules, detected through 'ImageLoaded' events in Sysmon
+    logs. This method leverages Sysmon EventCode 7 to track unusual module loading
+    behavior, which is significant as it deviates from the norm of loading .dll files.
+    This activity is crucial for SOC monitoring because it can indicate the presence
+    of malware like NjRAT, which uses this technique to load malicious modules. If
+    confirmed malicious, this behavio
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - njrat
+  - lokibot
+  mitre_attack:
+    techniques:
+    - id: T1129
+      name: Technique T1129
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1129/executable_shared_modules/image_loaded_exe.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

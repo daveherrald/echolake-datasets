@@ -1,0 +1,35 @@
+metadata:
+  name: aws-credential-access-failed-login
+  version: 7.0.0
+  description: The following analytic identifies unsuccessful login attempts to the
+    AWS Management Console using a specific user identity. It leverages AWS CloudTrail
+    logs to detect failed authentication events associated with the AWS ConsoleLogin
+    action. This activity is significant for a SOC because repeated failed login attempts
+    may indicate a brute force attack or unauthorized access attempts. If confirmed
+    malicious, an attacker could potentially gain access to AWS account services and
+    resources, leading t
+  author: Gowthamaraj Rajendran, Bhavin Patel, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - aws-identity-and-access-management-account-takeover
+  mitre_attack:
+    techniques:
+    - id: T1110.001
+      name: Technique T1110.001
+    - id: T1586.003
+      name: Technique T1586.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1110.001/aws_login_failure/aws_cloudtrail_events.json
+    description: aws_cloudtrail - aws:cloudtrail
+    format: jsonl
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

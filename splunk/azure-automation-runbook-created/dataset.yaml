@@ -1,0 +1,33 @@
+metadata:
+  name: azure-automation-runbook-created
+  version: 10.0.0
+  description: The following analytic detects the creation of a new Azure Automation
+    Runbook within an Azure tenant. It leverages Azure Audit events, specifically
+    the Azure Activity log category, to identify when a new Runbook is created or
+    updated. This activity is significant because adversaries with privileged access
+    can use Runbooks to maintain persistence, escalate privileges, or execute malicious
+    code. If confirmed malicious, this could lead to unauthorized actions such as
+    creating Global Administrators,
+  author: Mauricio Velazco, Brian Serocki, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - azure-active-directory-persistence
+  mitre_attack:
+    techniques:
+    - id: T1136.003
+      name: Technique T1136.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1078.004/azure_automation_runbook/azure-activity.log
+    description: mscs:azure:audit - mscs:azure:audit
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

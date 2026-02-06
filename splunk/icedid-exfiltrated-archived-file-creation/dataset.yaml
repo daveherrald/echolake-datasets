@@ -1,0 +1,34 @@
+metadata:
+  name: icedid-exfiltrated-archived-file-creation
+  version: 8.0.0
+  description: The following analytic detects the creation of suspicious files named
+    passff.tar and cookie.tar, which are indicative of archived stolen browser information
+    such as history and cookies on a machine compromised with IcedID. It leverages
+    Sysmon EventCode 11 to identify these specific filenames. This activity is significant
+    because it suggests that sensitive browser data has been exfiltrated, which could
+    lead to further exploitation or data breaches. If confirmed malicious, this could
+    allow attacke
+  author: Teoderick Contreras, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - icedid
+  - apt37-rustonotto-and-fadestealer
+  mitre_attack:
+    techniques:
+    - id: T1560.001
+      name: Technique T1560.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/icedid/simulated_icedid/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

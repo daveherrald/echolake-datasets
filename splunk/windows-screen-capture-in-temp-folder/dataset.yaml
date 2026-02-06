@@ -1,0 +1,35 @@
+metadata:
+  name: windows-screen-capture-in-temp-folder
+  version: 8.0.0
+  description: The following analytic detects the creation of screen capture files
+    by the Braodo stealer malware. This stealer is known to capture screenshots of
+    the victim's desktop as part of its data theft activities. The detection focuses
+    on identifying unusual screen capture activity, especially when images are saved
+    in directories often used by malware, such as temporary or hidden folders. Monitoring
+    for these files helps to quickly identify malicious screen capture attempts, allowing
+    security teams to r
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - stealc-stealer
+  - crypto-stealer
+  - braodo-stealer
+  mitre_attack:
+    techniques:
+    - id: T1113
+      name: Technique T1113
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1113/braodo_screenshot/braodo_screenshot.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

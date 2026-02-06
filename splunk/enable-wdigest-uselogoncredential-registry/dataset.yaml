@@ -1,0 +1,37 @@
+metadata:
+  name: enable-wdigest-uselogoncredential-registry
+  version: 12.0.0
+  description: The following analytic detects a suspicious registry modification that
+    enables the plain text credential feature in Windows by setting the "UseLogonCredential"
+    value to 1 in the WDigest registry path. This detection leverages data from the
+    Endpoint.Registry data model, focusing on specific registry paths and values.
+    This activity is significant because it is commonly used by malware and tools
+    like Mimikatz to dump plain text credentials, indicating a potential credential
+    dumping attempt. If conf
+  author: Teoderick Contreras, Splunk, Steven Dick
+  tags:
+  - ttp
+  - splunk-security-content
+  - credential-dumping
+  - windows-registry-abuse
+  - cisa-aa22-320a
+  mitre_attack:
+    techniques:
+    - id: T1112
+      name: Technique T1112
+    - id: T1003
+      name: Technique T1003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1112/atomic_red_team/wdigest_windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

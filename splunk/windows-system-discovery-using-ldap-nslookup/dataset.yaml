@@ -1,0 +1,33 @@
+metadata:
+  name: windows-system-discovery-using-ldap-nslookup
+  version: 6.0.0
+  description: The following analytic detects the execution of nslookup.exe to query
+    domain information using LDAP. It leverages data from Endpoint Detection and Response
+    (EDR) agents, focusing on process names and command-line arguments. This activity
+    is significant as nslookup.exe can be abused by malware like Qakbot to gather
+    critical domain details, such as SRV records and server names. If confirmed malicious,
+    this behavior could allow attackers to map the network, identify key servers,
+    and plan further at
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - qakbot
+  mitre_attack:
+    techniques:
+    - id: T1033
+      name: Technique T1033
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1033/qakbot_discovery_cmdline/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

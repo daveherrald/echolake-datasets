@@ -1,0 +1,33 @@
+metadata:
+  name: kubernetes-cron-job-creation
+  version: 5.0.0
+  description: The following analytic detects the creation of a Kubernetes cron job,
+    which is a task scheduled to run automatically at specified intervals. It identifies
+    this activity by monitoring Kubernetes Audit logs for the creation events of cron
+    jobs. This behavior is significant for a SOC as it could allow an attacker to
+    execute malicious tasks repeatedly and automatically, posing a threat to the Kubernetes
+    infrastructure. If confirmed malicious, this activity could lead to persistent
+    attacks, service d
+  author: Patrick Bareiss, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - kubernetes-security
+  mitre_attack:
+    techniques:
+    - id: T1053.007
+      name: Technique T1053.007
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053.007/kubernetes_audit_cron_job_creation/kubernetes_audit_cron_job_creation.json
+    description: kubernetes - _json
+    format: jsonl
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

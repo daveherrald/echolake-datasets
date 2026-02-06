@@ -1,0 +1,33 @@
+metadata:
+  name: windows-process-commandline-discovery
+  version: 7.0.0
+  description: The following analytic detects the use of Windows Management Instrumentation
+    Command-line (WMIC) to retrieve information about running processes, specifically
+    targeting the command lines used to launch those processes. This detection leverages
+    data from Endpoint Detection and Response (EDR) agents, focusing on logs containing
+    process details and command-line executions. This activity is significant as it
+    may indicate suspicious behavior, such as a user or process gathering detailed
+    process infor
+  author: Teoderick Contreras, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - cisa-aa23-347a
+  mitre_attack:
+    techniques:
+    - id: T1057
+      name: Technique T1057
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1057/process_commandline_discovery/wmic-cmdline-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,36 @@
+metadata:
+  name: llm-model-file-creation
+  version: 1.0.0
+  description: 'Detects the creation of Large Language Model (LLM) files on Windows
+    endpoints by monitoring file creation events for specific model file formats and
+    extensions commonly used by local AI frameworks.
+
+    This detection identifies potential shadow AI deployments, unauthorized model
+    downloads, and rogue LLM infrastructure by detecting file creation patterns associated
+    with quantized models (.gguf, .ggml), safetensors model format files, and Ollama
+    Modelfiles.
+
+    These file types are characteristic of local'
+  author: Rod Soto
+  tags:
+  - hunting
+  - splunk-security-content
+  - suspicious-local-llm-frameworks
+  mitre_attack:
+    techniques:
+    - id: T1543
+      name: Technique T1543
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/suspicious_behaviour/local_llms/sysmon_local_llms.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

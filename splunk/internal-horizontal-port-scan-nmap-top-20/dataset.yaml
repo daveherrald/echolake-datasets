@@ -1,0 +1,38 @@
+metadata:
+  name: internal-horizontal-port-scan-nmap-top-20
+  version: 8.0.0
+  description: This analytic identifies instances where an internal host has attempted
+    to communicate with 250 or more destination IP addresses using on of the NMAP
+    top 20 ports. Horizontal port scans from internal hosts can indicate reconnaissance
+    or scanning activities, potentially signaling malicious intent or misconfiguration.
+    By monitoring network traffic logs, this detection helps detect and respond to
+    such behavior promptly, enhancing network security and preventing potential threats.
+  author: Dean Luxton
+  tags:
+  - ttp
+  - splunk-security-content
+  - network-discovery
+  - cisco-secure-firewall-threat-defense-analytics
+  - china-nexus-threat-activity
+  mitre_attack:
+    techniques:
+    - id: T1046
+      name: Technique T1046
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1046/nmap/horizontal.log
+    description: aws:cloudwatchlogs:vpcflow - aws:cloudwatchlogs:vpcflow
+    format: text
+    schema: raw
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_secure_firewall_threat_defense/connection_event/connection_events.log
+    description: not_applicable - cisco:sfw:estreamer
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

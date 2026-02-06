@@ -1,0 +1,33 @@
+metadata:
+  name: cisco-duo-policy-skip-2fa-for-other-countries
+  version: 1.0.0
+  description: "The following analytic detects when a Duo policy is created or updated\
+    \ to allow access without two-factor authentication (2FA) \nfor users in countries\
+    \ other than the default. It identifies this behavior by searching Duo administrator\
+    \ activity logs for policy \ncreation or update actions where the policy description\
+    \ indicates that access is permitted without 2FA for certain user locations. \n\
+    This is achieved by parsing the relevant fields in the logs and filtering for\
+    \ the specific condition of 'All"
+  author: Patrick Bareiss, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - cisco-duo-suspicious-activity
+  mitre_attack:
+    techniques:
+    - id: T1556
+      name: Technique T1556
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1556/cisco_duo_policy_bypass_2FA_other_countries/cisco_duo_administrator.json
+    description: duo - cisco:duo:administrator
+    format: jsonl
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

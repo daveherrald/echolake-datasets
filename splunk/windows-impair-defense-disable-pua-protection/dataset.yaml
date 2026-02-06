@@ -1,0 +1,35 @@
+metadata:
+  name: windows-impair-defense-disable-pua-protection
+  version: 8.0.0
+  description: The following analytic detects a modification in the Windows registry
+    to disable Windows Defender PUA protection by setting PUAProtection to 0. This
+    detection leverages data from the Endpoint.Registry datamodel, focusing on registry
+    path changes related to Windows Defender. Disabling PUA protection is significant
+    as it reduces defenses against Potentially Unwanted Applications (PUAs), which,
+    while not always malicious, can negatively impact user experience and security.
+    If confirmed malicious, t
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - windows-defense-evasion-tactics
+  - windows-registry-abuse
+  - scattered-lapsus$-hunters
+  mitre_attack:
+    techniques:
+    - id: T1562.001
+      name: Technique T1562.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.001/disable-windows-security-defender-features/windefender-bypas-2-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

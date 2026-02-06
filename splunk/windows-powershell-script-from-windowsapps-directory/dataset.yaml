@@ -1,0 +1,36 @@
+metadata:
+  name: windows-powershell-script-from-windowsapps-directory
+  version: 1.0.0
+  description: 'The following analytic identifies the execution of PowerShell scripts
+    from the WindowsApps directory, which is a common technique used in malicious
+    MSIX package execution. This detection leverages data from Endpoint Detection
+    and Response (EDR) agents, focusing on process command lines and parent process
+    paths. This activity is significant as adversaries have been observed using MSIX
+    packages with embedded PowerShell scripts (particularly StartingScriptWrapper.ps1)
+    to execute malicious code. If '
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - msix-package-abuse
+  - malicious-powershell
+  mitre_attack:
+    techniques:
+    - id: T1059.001
+      name: Technique T1059.001
+    - id: T1204.002
+      name: Technique T1204.002
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/msix_powershell/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,35 @@
+metadata:
+  name: windows-credentials-from-password-stores-query
+  version: 7.0.0
+  description: The following analytic detects the execution of the Windows OS tool
+    cmdkey.exe, which is often abused by post-exploitation tools like winpeas, commonly
+    used in ransomware attacks to list stored usernames, passwords, or credentials.
+    This detection leverages data from Endpoint Detection and Response (EDR) agents,
+    focusing on process execution logs. This activity is significant as it indicates
+    potential credential harvesting, which can lead to privilege escalation and persistence.
+    If confirmed mali
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - windows-post-exploitation
+  - prestige-ransomware
+  - darkgate-malware
+  mitre_attack:
+    techniques:
+    - id: T1555
+      name: Technique T1555
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/winpeas/winpeas_cmdkeylist/cmdkey-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

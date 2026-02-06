@@ -1,0 +1,35 @@
+metadata:
+  name: windows-computer-account-with-spn
+  version: 7.0.0
+  description: The following analytic detects the addition of Service Principal Names
+    (SPNs) HOST and RestrictedKrbHost to a computer account, indicative of KrbRelayUp
+    behavior. This detection leverages Windows Security Event Logs, specifically EventCode
+    4741, to identify changes in SPNs. This activity is significant as it is commonly
+    associated with Kerberos-based attacks, which can be used to escalate privileges
+    or perform lateral movement within a network. If confirmed malicious, this behavior
+    could allow a
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - local-privilege-escalation-with-krbrelayup
+  - active-directory-kerberos-attacks
+  - compromised-windows-host
+  mitre_attack:
+    techniques:
+    - id: T1558
+      name: Technique T1558
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1558/windows_computer_account_with_spn/windows-xml.log
+    description: XmlWinEventLog:Security - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

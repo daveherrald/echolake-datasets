@@ -1,0 +1,33 @@
+metadata:
+  name: windows-modify-registry-qakbot-binary-data-registry
+  version: 9.0.0
+  description: 'The following analytic detects the creation of a suspicious registry
+    entry by Qakbot malware, characterized by 8 random registry value names with encrypted
+    binary data. This detection leverages data from Endpoint Detection and Response
+    (EDR) agents, focusing on registry modifications under the "SOFTWARE\\Microsoft\\"
+    path by processes like explorer.exe. This activity is significant as it indicates
+    potential Qakbot infection, which uses the registry to store malicious code or
+    configuration data. '
+  author: Teoderick Contreras, Bhavin Patel, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - qakbot
+  mitre_attack:
+    techniques:
+    - id: T1112
+      name: Technique T1112
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/qakbot/qbot2/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

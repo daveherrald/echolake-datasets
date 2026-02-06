@@ -1,0 +1,37 @@
+metadata:
+  name: gcp-unusual-number-of-failed-authentications-from-ip
+  version: 7.0.0
+  description: The following analytic identifies a single source IP failing to authenticate
+    into Google Workspace with multiple valid users, potentially indicating a Password
+    Spraying attack. It uses Google Workspace login failure events and calculates
+    the standard deviation for source IPs, applying the 3-sigma rule to detect unusual
+    failed authentication attempts. This activity is significant as it may signal
+    an adversary attempting to gain initial access or elevate privileges. If confirmed
+    malicious, this co
+  author: Bhavin Patel, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - gcp-account-takeover
+  mitre_attack:
+    techniques:
+    - id: T1110.003
+      name: Technique T1110.003
+    - id: T1110.004
+      name: Technique T1110.004
+    - id: T1586.003
+      name: Technique T1586.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1110.003/gcp_gws_multiple_login_failure/gws_login.json
+    description: gws_login - gws:reports:login
+    format: jsonl
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

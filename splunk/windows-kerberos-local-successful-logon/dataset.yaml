@@ -1,0 +1,35 @@
+metadata:
+  name: windows-kerberos-local-successful-logon
+  version: 10.0.0
+  description: The following analytic identifies a local successful authentication
+    event on a Windows endpoint using the Kerberos package. It detects EventCode 4624
+    with LogonType 3 and source address 127.0.0.1, indicating a login to the built-in
+    local Administrator account. This activity is significant as it may suggest a
+    Kerberos relay attack, a method attackers use to escalate privileges. If confirmed
+    malicious, this could allow an attacker to gain unauthorized access to sensitive
+    systems, execute arbitrary
+  author: Michael Haag, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - local-privilege-escalation-with-krbrelayup
+  - active-directory-kerberos-attacks
+  - compromised-windows-host
+  mitre_attack:
+    techniques:
+    - id: T1558
+      name: Technique T1558
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1558/windows_kerberos_local_successful_logon/windows-xml.log
+    description: XmlWinEventLog:Security - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

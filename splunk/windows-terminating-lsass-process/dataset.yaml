@@ -1,0 +1,35 @@
+metadata:
+  name: windows-terminating-lsass-process
+  version: 9.0.0
+  description: 'The following analytic detects a suspicious process attempting to
+    terminate the Lsass.exe process. It leverages Sysmon EventCode 10 logs to identify
+    processes granted PROCESS_TERMINATE access to Lsass.exe. This activity is significant
+    because Lsass.exe is a critical process responsible for enforcing security policies
+    and handling user credentials. If confirmed malicious, this behavior could indicate
+    an attempt to perform credential dumping, privilege escalation, or evasion of
+    security policies, '
+  author: Teoderick Contreras, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - data-destruction
+  - double-zero-destructor
+  - scattered-lapsus$-hunters
+  mitre_attack:
+    techniques:
+    - id: T1562.001
+      name: Technique T1562.001
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/doublezero_wiper/sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,33 @@
+metadata:
+  name: asl-aws-ecr-container-upload-outside-business-hours
+  version: 8.0.0
+  description: The following analytic detects the upload of new containers to AWS
+    Elastic Container Service (ECR) outside of standard business hours through AWS
+    CloudTrail events. It identifies this behavior by monitoring for `PutImage` events
+    occurring before 8 AM or after 8 PM, as well as any uploads on weekends. This
+    activity is significant for a SOC to investigate as it may indicate unauthorized
+    access or malicious deployments, potentially leading to compromised services or
+    data breaches. Identifying and a
+  author: Patrick Bareiss, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - dev-sec-ops
+  mitre_attack:
+    techniques:
+    - id: T1204.003
+      name: Technique T1204.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1204.003/aws_ecr_container_upload/asl_ocsf_cloudtrail.json
+    description: aws_asl - aws:asl
+    format: jsonl
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

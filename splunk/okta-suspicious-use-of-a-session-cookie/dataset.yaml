@@ -1,0 +1,35 @@
+metadata:
+  name: okta-suspicious-use-of-a-session-cookie
+  version: 8.0.0
+  description: The following analytic identifies suspicious use of a session cookie
+    by detecting multiple client values (IP, User Agent, etc.) changing for the same
+    Device Token associated with a specific user. It leverages policy evaluation events
+    from successful authentication logs in Okta. This activity is significant as it
+    may indicate an adversary attempting to reuse a stolen web session cookie, potentially
+    bypassing authentication mechanisms. If confirmed malicious, this could allow
+    unauthorized access t
+  author: Scott Dermott, Felicity Robson, Okta, Michael Haag, Bhavin Patel, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - suspicious-okta-activity
+  - okta-account-takeover
+  - scattered-lapsus$-hunters
+  mitre_attack:
+    techniques:
+    - id: T1539
+      name: Technique T1539
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1539/okta_web_session_multiple_ip/okta_web_session_multiple_ip.log
+    description: Okta - OktaIM2:log
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

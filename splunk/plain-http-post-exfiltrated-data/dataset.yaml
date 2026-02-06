@@ -1,0 +1,35 @@
+metadata:
+  name: plain-http-post-exfiltrated-data
+  version: 8.0.0
+  description: The following analytic detects potential data exfiltration using plain
+    HTTP POST requests. It leverages network traffic logs, specifically monitoring
+    the `stream_http` data source for POST methods containing suspicious form data
+    such as "wermgr.exe" or "svchost.exe". This activity is significant because it
+    is commonly associated with malware like Trickbot, trojans, keyloggers, or APT
+    adversaries, which use plain text HTTP POST requests to communicate with remote
+    C2 servers. If confirmed maliciou
+  author: Teoderick Contreras, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - data-exfiltration
+  - command-and-control
+  - apt37-rustonotto-and-fadestealer
+  mitre_attack:
+    techniques:
+    - id: T1048.003
+      name: Technique T1048.003
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1048.003/plain_exfil_data/stream_http_events.log
+    description: stream - stream:http
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

@@ -1,0 +1,33 @@
+metadata:
+  name: getadgroup-with-powershell
+  version: 7.0.0
+  description: The following analytic detects the execution of `powershell.exe` with
+    the `Get-AdGroup` commandlet, which is used to query domain groups in a Windows
+    Domain. This detection leverages data from Endpoint Detection and Response (EDR)
+    agents, focusing on process names and command-line arguments. Monitoring this
+    activity is crucial as it may indicate an adversary or Red Team enumerating domain
+    groups for situational awareness and Active Directory discovery. If confirmed
+    malicious, this activity could
+  author: Mauricio Velazco, Splunk
+  tags:
+  - hunting
+  - splunk-security-content
+  - active-directory-discovery
+  mitre_attack:
+    techniques:
+    - id: T1069.002
+      name: Technique T1069.002
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1069.002/AD_discovery/windows-sysmon.log
+    description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

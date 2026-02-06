@@ -1,0 +1,38 @@
+metadata:
+  name: cisco-isovalent-late-process-execution
+  version: 1.0.0
+  description: 'Detects process executions that occur well after a container has initialized,
+    which can indicate
+
+    suspicious activity (e.g., interactive shells, injected binaries, or post-compromise
+    tooling).
+
+    The analytic compares the process start time to the container start time and flags
+    processes
+
+    launched more than 5 minutes (300 seconds) after initialization.
+
+    '
+  author: Bhavin Patel, Splunk
+  tags:
+  - anomaly
+  - splunk-security-content
+  - cisco-isovalent-suspicious-activity
+  mitre_attack:
+    techniques:
+    - id: T1543
+      name: Technique T1543
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_isovalent/cisco_isovalent_process_exec_delayed_shell.log
+    description: not_applicable - cisco:isovalent:processExec
+    format: text
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw

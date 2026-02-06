@@ -1,0 +1,33 @@
+metadata:
+  name: aws-defense-evasion-delete-cloudtrail
+  version: 7.0.0
+  description: 'The following analytic detects the deletion of AWS CloudTrail logs
+    by identifying `DeleteTrail` events within CloudTrail logs. This detection leverages
+    CloudTrail data to monitor for successful `DeleteTrail` actions, excluding those
+    initiated from the AWS console. This activity is significant because adversaries
+    may delete CloudTrail logs to evade detection and operate stealthily within the
+    compromised environment. If confirmed malicious, this action could allow attackers
+    to cover their tracks, '
+  author: Bhavin Patel, Splunk
+  tags:
+  - ttp
+  - splunk-security-content
+  - aws-defense-evasion
+  mitre_attack:
+    techniques:
+    - id: T1562.008
+      name: Technique T1562.008
+    tactics: []
+files:
+  bundled: []
+  references:
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.008/stop_delete_cloudtrail/aws_cloudtrail_events.json
+    description: aws_cloudtrail - aws:cloudtrail
+    format: jsonl
+    schema: raw
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: raw
