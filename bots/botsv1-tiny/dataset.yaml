@@ -1,0 +1,37 @@
+defaults:
+  input:
+    format: csv
+    timestamp_patterns:
+    - field: _time
+      format: auto
+      is_base: true
+  replay:
+    base_time: earliest
+    delta_factor: 1.0
+    target_time: now-1h
+files:
+  bundled:
+  - description: Nessus Vulnerability Scan
+    format: csv
+    path: data/botsv1.nessus-scan.csv.gz
+    sourcetype: nessus:scan
+  - description: Windows Application Event Log
+    format: csv
+    path: data/botsv1.WinEventLog-Application.csv.gz
+    sourcetype: WinEventLog:Application
+  - description: IIS Web Server Logs
+    format: csv
+    path: data/botsv1.iis.csv.gz
+    sourcetype: iis
+  references: []
+metadata:
+  author: Splunk
+  description: BOTS v1 Dataset - Tiny Subset (3 small files)
+  license: Splunk General Terms
+  name: botsv1-tiny
+  tags:
+  - bots
+  - splunk
+  - security
+  - test
+  version: 1.0.0

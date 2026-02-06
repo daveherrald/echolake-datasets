@@ -1,0 +1,124 @@
+metadata:
+  name: "botsv2"
+  version: "1.0.0"
+  description: "Boss of the SOC v2 - Sample security dataset and CTF platform with 100+ sourcetypes covering network, endpoint, cloud, and application data"
+  author: "Ryan Kovar, David Herrald, James Brodsky, John Stoner, Jim Apger, David Veuve (Splunk)"
+  created: "2017"
+  license: "CC0-1.0"
+
+  tags:
+    - bots
+    - ctf
+    - competition
+    - multi-source
+    - windows
+    - linux
+    - network
+    - aws
+    - application
+
+  # Dataset characteristics
+  size:
+    full_dataset: "16.4 GB"
+    attack_only: "3.2 GB"
+
+  checksums:
+    full_md5: "fd2673726c96e97a39fc03119d6686c6"
+    attack_only_md5: "6ea8f15cc4ccf6186db7a31415c09c58"
+
+  # Data sources (100+ sourcetypes)
+  data_sources:
+    - name: "Network Traffic"
+      sourcetypes:
+        - "stream:dns"
+        - "stream:http"
+        - "stream:ftp"
+        - "stream:smtp"
+        - "stream:mysql"
+        - "stream:smb"
+        - "stream:arp"
+        - "stream:dhcp"
+
+    - name: "Windows Logs"
+      sourcetypes:
+        - "WinEventLog:Security"
+        - "WinEventLog:Application"
+        - "WinEventLog:System"
+        - "XmlWinEventLog:Microsoft-Windows-Sysmon/Operational"
+
+    - name: "Unix/Linux Logs"
+      sourcetypes:
+        - "linux_secure"
+        - "auditd"
+        - "syslog"
+
+    - name: "Application Logs"
+      sourcetypes:
+        - "apache:access"
+        - "mysql:server"
+        - "weblogic"
+
+    - name: "Performance Metrics"
+      sourcetypes:
+        - "perfmon:cpu"
+        - "perfmon:memory"
+        - "collectd"
+
+    - name: "Endpoint Protection"
+      sourcetypes:
+        - "symantec:ep:security:file"
+        - "symantec:ep:packet:file"
+        - "suricata"
+
+files:
+  bundled: []
+
+  references:
+    - uri: "https://botsdataset.s3.amazonaws.com/botsv2/botsv2_data_set.tgz"
+      description: "BOTS v2 Full Dataset - Splunk indexed format (16.4 GB)"
+      format: "tar.gz"
+      size: "16.4 GB"
+      checksum: "md5:fd2673726c96e97a39fc03119d6686c6"
+      schema: "splunk_indexed"
+
+    - uri: "https://botsdataset.s3.amazonaws.com/botsv2/botsv2-attack-only.tgz"
+      description: "BOTS v2 Attack-Only Dataset - Splunk indexed format (3.2 GB)"
+      format: "tar.gz"
+      size: "3.2 GB"
+      checksum: "md5:6ea8f15cc4ccf6186db7a31415c09c58"
+      schema: "splunk_indexed"
+
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: "earliest"
+    target_time: "now-1h"
+
+  schema: "raw"
+
+# Usage notes
+notes: |
+  ⚠️ BOTSv2 is ONLY available in Splunk pre-indexed format.
+
+  To use with EchoLake, you MUST:
+  1. Download from S3 (16.4 GB full OR 3.2 GB attack-only)
+  2. Install into Splunk Enterprise 7.2.1+
+  3. Export data from Splunk to CSV/JSON
+  4. Use exported files with EchoLake
+
+  IMPORTANT: Choose either full dataset OR attack-only. Cannot install both.
+
+  Required Splunk Environment:
+  - Splunk Enterprise 7.2.1+
+  - 19 specific apps/add-ons with pinned versions including:
+    - SA-Investigator 1.3.1
+    - Splunk CIM 4.12.0
+    - Microsoft Sysmon Add-on 6.0.4
+    - Palo Alto Networks Add-on 3.8.2
+    - Splunk Stream Add-on 7.1.1
+
+  Query in Splunk: index=botsv2 earliest=0
+  Export from Splunk: Use SPL with outputcsv or export search results
+
+  Warning: Dataset contains evidence from actual security incidents and may
+  include profanity or offensive terminology.

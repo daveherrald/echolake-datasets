@@ -1,0 +1,116 @@
+metadata:
+  name: "botsv3"
+  version: "1.0.0"
+  description: "Boss of the SOC v3 - Sample security dataset and CTF platform with 100+ sourcetypes covering cloud (AWS, Azure, O365), network, and endpoint data"
+  author: "Splunk"
+  created: "2019"
+  license: "CC0-1.0"
+
+  tags:
+    - bots
+    - ctf
+    - competition
+    - multi-source
+    - aws
+    - azure
+    - o365
+    - cloud
+    - network
+    - endpoint
+
+  # Dataset characteristics
+  size:
+    compressed: "320.1 MB"
+
+  checksums:
+    md5: "d7ccca99a01cff070dff3c139cdc10eb"
+
+  # Data sources (100+ sourcetypes)
+  data_sources:
+    - name: "Network Traffic"
+      sourcetypes:
+        - "stream:dns"
+        - "stream:http"
+        - "stream:smtp"
+        - "stream:mysql"
+        - "stream:smb"
+        - "stream:arp"
+        - "stream:dhcp"
+
+    - name: "AWS Cloud Services"
+      sourcetypes:
+        - "aws:cloudtrail"
+        - "aws:cloudwatch"
+        - "aws:cloudwatch:guardduty"
+        - "aws:s3:accesslogs"
+        - "aws:elb:accesslogs"
+        - "aws:cloudwatchlogs:vpcflow"
+
+    - name: "Microsoft Cloud"
+      sourcetypes:
+        - "ms:aad:audit"
+        - "ms:aad:signin"
+        - "ms:o365:management"
+        - "ms:o365:reporting:messagetrace"
+
+    - name: "Windows Endpoint"
+      sourcetypes:
+        - "WinEventLog:Security"
+        - "WinEventLog:Application"
+        - "WinEventLog:System"
+        - "XmlWinEventLog:Microsoft-Windows-Sysmon/Operational"
+
+    - name: "Linux/Unix Endpoint"
+      sourcetypes:
+        - "linux_secure"
+        - "auditd"
+        - "syslog"
+        - "bash_history"
+        - "osquery:results"
+
+    - name: "Security Tools"
+      sourcetypes:
+        - "symantec:ep:security:file"
+        - "code42:security"
+        - "cisco:asa"
+        - "suricata"
+
+files:
+  bundled: []
+
+  references:
+    - uri: "https://botsdataset.s3.amazonaws.com/botsv3/botsv3_data_set.tgz"
+      description: "BOTS v3 Dataset - Splunk indexed format"
+      format: "tar.gz"
+      size: "320.1 MB"
+      checksum: "md5:d7ccca99a01cff070dff3c139cdc10eb"
+      schema: "splunk_indexed"
+
+defaults:
+  replay:
+    delta_factor: 1.0
+    base_time: "earliest"
+    target_time: "now-1h"
+
+  schema: "raw"
+
+# Usage notes
+notes: |
+  ⚠️ BOTSv3 is ONLY available in Splunk pre-indexed format.
+
+  To use with EchoLake, you MUST:
+  1. Download: https://botsdataset.s3.amazonaws.com/botsv3/botsv3_data_set.tgz (320.1 MB)
+  2. Install into Splunk Enterprise 7.1.7+
+  3. Export data from Splunk to CSV/JSON
+  4. Use exported files with EchoLake
+
+  Required Splunk Environment:
+  - Splunk Enterprise 7.1.7+
+  - 25+ specific apps/add-ons for full functionality
+
+  Query in Splunk: index=botsv3 earliest=0
+  Export from Splunk: Use SPL with outputcsv or export search results
+
+  This dataset uses no volume-based licensing in Splunk.
+
+  Warning: Dataset contains evidence from actual security incidents.
