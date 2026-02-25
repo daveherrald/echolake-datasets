@@ -9,69 +9,45 @@ pip install echolake
 
 # Replay a Splunk detection dataset
 echolake replay \
-  --dataset github:daveherrald/echolake-datasets/splunk/access-lsass-memory-for-dump-creation \
+  --dataset github:daveherrald/echolake-datasets/datasets/splunk-detections/access-lsass-memory-for-dump-creation \
   --output ./replayed-logs
 
-# Replay a curated attack collection
+# Replay BOTSv1
 echolake replay \
-  --dataset github:daveherrald/echolake-datasets/meta/ransomware-suite \
-  --output ./replayed-logs
-
-# Replay BOTSv1 (tiny subset, ~357KB)
-echolake replay \
-  --dataset github:daveherrald/echolake-datasets/bots/botsv1-tiny \
+  --dataset github:daveherrald/echolake-datasets/datasets/botsv1 \
   --output ./replayed-logs
 ```
 
-## Collections
+## Datasets
 
-| Collection | Datasets | Description |
-|-----------|----------|-------------|
-| [splunk/](splunk/) | 1,866 | Datasets from [Splunk Security Content](https://github.com/splunk/security_content) detections |
-| [bots/](bots/) | 5 | [Boss of the SOC](https://github.com/splunk/securitydatasets) competition datasets |
-| [meta/](meta/) | 7 | Curated collections of related datasets |
+| Path | Count | Description |
+|------|-------|-------------|
+| [datasets/botsv1/](datasets/botsv1/) | 1 | Boss of the SOC v1 (22 sourcetypes, ~33M events) |
+| [datasets/botsv2/](datasets/botsv2/) | 1 | Boss of the SOC v2 (93+ sourcetypes, ~24M events) |
+| [datasets/botsv3/](datasets/botsv3/) | 1 | Boss of the SOC v3 (99+ sourcetypes, ~2M events) |
+| [datasets/splunk-detections/](datasets/splunk-detections/) | 1,866 | Splunk Security Content detection datasets |
 
-**Total: 1,878 datasets**
-
-## Splunk Security Content
+## Splunk Detections
 
 1,866 datasets covering 327+ MITRE ATT&CK techniques across endpoint, cloud, network, and web detections. Each dataset references sample attack data from Splunk's attack_data repository.
 
 ```bash
 # Search by technique
-grep -r "T1003" splunk/*/dataset.yaml
+grep -r "T1003" datasets/splunk-detections/*/dataset.yaml
 
 # Replay a specific detection
 echolake replay \
-  --dataset github:daveherrald/echolake-datasets/splunk/windows-event-log-cleared \
+  --dataset github:daveherrald/echolake-datasets/datasets/splunk-detections/windows-event-log-cleared \
   --output ./replayed
 ```
 
 ## Boss of the SOC (BOTS)
 
-| Dataset | Size | Events | Format |
-|---------|------|--------|--------|
-| [botsv1](bots/botsv1/) | ~1.8 GB | ~33M | CSV (22 sourcetypes) |
-| [botsv1-small](bots/botsv1-small/) | ~530 MB | ~8M | CSV (3 sourcetypes) |
-| [botsv1-tiny](bots/botsv1-tiny/) | ~357 KB | ~1K | CSV (3 sourcetypes) |
-| [botsv2](bots/botsv2/) | 16.4 GB | - | Splunk indexed (manifest only) |
-| [botsv3](bots/botsv3/) | 320 MB | - | Splunk indexed (manifest only) |
-
-BOTSv1 data files are available as [GitHub Release assets](https://github.com/daveherrald/echolake-datasets/releases/tag/v1.0.0).
-
-## Meta-Datasets
-
-Curated attack scenario collections that bundle related detections:
-
-| Meta-Dataset | Datasets | MITRE Techniques |
-|-------------|----------|------------------|
-| [ransomware-suite](meta/ransomware-suite/) | 7 | T1486, T1490, T1489 |
-| [credential-dumping-t1003](meta/credential-dumping-t1003/) | 7 | T1003.001-.003 |
-| [aws-cloud-attacks](meta/aws-cloud-attacks/) | 8 | T1078.004, T1098, T1485 |
-| [lateral-movement-suite](meta/lateral-movement-suite/) | 7 | T1021, T1047 |
-| [web-exploitation-cves](meta/web-exploitation-cves/) | 8 | T1190, T1210 |
-| [top-10-mitre-attacks](meta/top-10-mitre-attacks/) | 10 | Top 10 techniques |
-| [sample-logs](meta/sample-logs/) | - | Sample data for testing |
+| Dataset | Compressed | Events | Sourcetypes |
+|---------|-----------|--------|-------------|
+| [botsv1](datasets/botsv1/) | ~1.8 GB | ~33M | 22 |
+| [botsv2](datasets/botsv2/) | ~6 GB | ~24M | 93+ |
+| [botsv3](datasets/botsv3/) | ~320 MB | ~2M | 99+ |
 
 ## Dataset Format
 
@@ -105,22 +81,21 @@ defaults:
 ### From GitHub (recommended)
 
 ```bash
-echolake replay --dataset github:daveherrald/echolake-datasets/splunk/DATASET_NAME --output ./out
+echolake replay --dataset github:daveherrald/echolake-datasets/datasets/splunk-detections/DATASET_NAME --output ./out
 ```
 
 ### From a local clone
 
 ```bash
 git clone https://github.com/daveherrald/echolake-datasets.git
-echolake replay --dataset local:./echolake-datasets/splunk/DATASET_NAME --output ./out
+echolake replay --dataset local:./echolake-datasets/datasets/splunk-detections/DATASET_NAME --output ./out
 ```
 
 ## License
 
-MIT License. See [LICENSE](LICENSE).
+This repository is released under the [MIT License](LICENSE).
 
-BOTS datasets are released under CC0-1.0 by Splunk. Splunk Security Content detections are licensed under the Splunk Security Content License.
+The datasets within this repository reference and include data from third-party sources under their own licenses:
 
-## Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on adding datasets.
+- **BOTS datasets**: Released under [CC0-1.0 (Creative Commons Zero)](https://creativecommons.org/publicdomain/zero/1.0/) by Splunk, Inc. See [splunk/botsv1](https://github.com/splunk/botsv1), [splunk/botsv2](https://github.com/splunk/botsv2), [splunk/botsv3](https://github.com/splunk/botsv3).
+- **Splunk detection datasets**: Detection logic from [splunk/security_content](https://github.com/splunk/security_content) and sample attack data from [splunk/attack_data](https://github.com/splunk/attack_data), both licensed under the [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0) by Splunk, Inc.

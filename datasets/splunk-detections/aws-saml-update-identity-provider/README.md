@@ -1,0 +1,37 @@
+# AWS SAML Update identity provider
+
+**Type:** TTP
+
+**Author:** Rod Soto, Splunk
+
+## Description
+
+This dataset contains sample data for detecting updates to the SAML provider in AWS. It leverages AWS CloudTrail logs to identify the `UpdateSAMLProvider` event, analyzing fields such as `sAMLProviderArn`, `sourceIPAddress`, and `userIdentity` details. Monitoring updates to the SAML provider is crucial as it may indicate a perimeter compromise of federated credentials or unauthorized backdoor access set by an attacker. If confirmed malicious, this activity could allow attackers to manipulate identity federation, potentially leading to unauthorized access to cloud resources and sensitive data.
+
+## MITRE ATT&CK
+
+- T1078
+
+## Analytic Stories
+
+- Cloud Federated Credential Abuse
+
+## Data Sources
+
+- AWS CloudTrail UpdateSAMLProvider
+
+## Sample Data
+
+- **Source:** aws_cloudtrail
+  **Sourcetype:** aws:cloudtrail
+  **URL:** https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1078/update_saml_provider/update_saml_provider.json
+
+
+---
+
+*Source: [Splunk Security Content](detections/cloud/aws_saml_update_identity_provider.yml)*
+
+
+## License
+
+Detection logic: [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0) ([splunk/security_content](https://github.com/splunk/security_content)). Sample attack data: [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0) ([splunk/attack_data](https://github.com/splunk/attack_data)). Both by Splunk, Inc.

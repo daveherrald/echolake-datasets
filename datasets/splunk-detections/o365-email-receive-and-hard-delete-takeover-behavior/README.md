@@ -1,0 +1,47 @@
+# O365 Email Receive and Hard Delete Takeover Behavior
+
+**Type:** Anomaly
+
+**Author:** Steven Dick
+
+## Description
+
+This dataset contains sample data for identifying when an O365 email recipient receives and then deletes emails related to password or banking/payroll changes within a short period. This behavior may indicate a compromised account where the threat actor is attempting to redirect the victims payroll to an attacker controlled bank account.
+
+## MITRE ATT&CK
+
+- T1070.008
+- T1485
+- T1114.001
+
+## Analytic Stories
+
+- Office 365 Account Takeover
+- Office 365 Collection Techniques
+- Suspicious Emails
+- Data Destruction
+
+## Data Sources
+
+- Office 365 Universal Audit Log
+- Office 365 Reporting Message Trace
+
+## Sample Data
+
+- **Source:** o365
+  **Sourcetype:** o365:management:activity
+  **URL:** https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1114/o365_suspect_email_actions/o365_exchange_suspect_events.log
+
+- **Source:** o365_messagetrace
+  **Sourcetype:** o365:reporting:messagetrace
+  **URL:** https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1114/o365_suspect_email_actions/o365_messagetrace_suspect_events.log
+
+
+---
+
+*Source: [Splunk Security Content](detections/cloud/o365_email_receive_and_hard_delete_takeover_behavior.yml)*
+
+
+## License
+
+Detection logic: [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0) ([splunk/security_content](https://github.com/splunk/security_content)). Sample attack data: [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0) ([splunk/attack_data](https://github.com/splunk/attack_data)). Both by Splunk, Inc.
