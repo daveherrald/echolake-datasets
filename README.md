@@ -8,12 +8,12 @@ Curated security datasets for [EchoLake](https://github.com/daveherrald/echolake
 pip install echolake
 
 # Replay a Splunk detection dataset
-echolake replay \
+echolake echo \
   --dataset github:daveherrald/echolake-datasets/datasets/splunk-detections/access-lsass-memory-for-dump-creation \
   --output ./replayed-logs
 
 # Replay BOTSv1
-echolake replay \
+echolake echo \
   --dataset github:daveherrald/echolake-datasets/datasets/botsv1 \
   --output ./replayed-logs
 ```
@@ -31,12 +31,14 @@ echolake replay \
 
 1,866 datasets covering 327+ MITRE ATT&CK techniques across endpoint, cloud, network, and web detections. Each dataset references sample attack data from Splunk's attack_data repository.
 
+See [SPLUNK_INDEX.md](datasets/SPLUNK_INDEX.md) for full lookup tables by sourcetype and vendor/product.
+
 ```bash
 # Search by technique
 grep -r "T1003" datasets/splunk-detections/*/dataset.yaml
 
 # Replay a specific detection
-echolake replay \
+echolake echo \
   --dataset github:daveherrald/echolake-datasets/datasets/splunk-detections/windows-event-log-cleared \
   --output ./replayed
 ```
@@ -81,14 +83,14 @@ defaults:
 ### From GitHub (recommended)
 
 ```bash
-echolake replay --dataset github:daveherrald/echolake-datasets/datasets/splunk-detections/DATASET_NAME --output ./out
+echolake echo --dataset github:daveherrald/echolake-datasets/datasets/splunk-detections/DATASET_NAME --output ./out
 ```
 
 ### From a local clone
 
 ```bash
 git clone https://github.com/daveherrald/echolake-datasets.git
-echolake replay --dataset local:./echolake-datasets/datasets/splunk-detections/DATASET_NAME --output ./out
+echolake echo --dataset local:./echolake-datasets/datasets/splunk-detections/DATASET_NAME --output ./out
 ```
 
 ## License
