@@ -7,10 +7,10 @@ Curated security datasets for [EchoLake](https://github.com/daveherrald/echolake
 ```bash
 pip install echolake
 
-echolake replay \
+echolake echo \
   --output ./replayed-logs
 
-echolake replay \
+echolake echo \
   --output ./replayed-logs
 ```
 
@@ -22,7 +22,7 @@ echolake replay \
 # Search by technique
 
 # Replay a specific detection
-echolake replay \
+echolake echo \
   --output ./replayed
 ```
 
