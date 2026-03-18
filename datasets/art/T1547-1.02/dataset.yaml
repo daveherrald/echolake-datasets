@@ -1,0 +1,151 @@
+metadata:
+  name: art-T1547-1.02
+  version: 3.0.0
+  description: 'Atomic Red Team T1547-1: Boot or Logon Autostart Execution (Add a driver) on Windows 11 Enterprise domain
+    workstation.'
+  author: EchoLake Project
+  created: '2026-03-17'
+  license: CC0-1.0
+  tags:
+  - art
+  - atomic-red-team
+  - T1547
+  - windows
+  - sysmon
+  - echolake
+  - persistence
+  - privilege-escalation
+  mitre_attack:
+    techniques:
+    - id: T1547
+      name: Boot or Logon Autostart Execution
+      tactics: &id001
+      - persistence
+      - privilege-escalation
+    tactics: *id001
+  timestamp_range:
+    earliest: '2026-03-17T17:08:06Z'
+    latest: '2026-03-17T17:08:09Z'
+    field: _time
+files:
+  bundled:
+  - path: data/powershell.jsonl.gz
+    description: Microsoft-Windows-PowerShell/Operational events
+    format: jsonl
+    schema: lakehouse_bronze
+    event_count: 94
+    log_source:
+      vendor: Microsoft
+      product: Windows
+      category: Powershell
+      event_ids:
+      - 4103
+      - 4104
+  - path: data/security.jsonl.gz
+    description: Security events
+    format: jsonl
+    schema: lakehouse_bronze
+    event_count: 5
+    log_source:
+      vendor: Microsoft
+      product: Windows
+      category: Security
+      event_ids:
+      - 4688
+  - path: data/sysmon.jsonl.gz
+    description: Microsoft-Windows-Sysmon/Operational events
+    format: jsonl
+    schema: lakehouse_bronze
+    event_count: 18
+    log_source:
+      vendor: Microsoft
+      product: Windows
+      category: Sysmon
+      event_ids:
+      - 1
+      - 7
+      - 10
+      - 17
+environment:
+  host:
+    hostname: ACME-WS06
+    os: Windows 11 Enterprise Evaluation
+    os_version: 10.0.22631
+    architecture: x86_64
+    domain: acme.local
+    platform: Proxmox/QEMU
+  execution:
+    user: NT AUTHORITY\SYSTEM
+    method: QEMU guest agent
+    tool: Atomic Red Team
+    tool_version: v4.0 (328 techniques)
+    isolation: per-test cleanup
+  collection:
+    collector: Cribl Edge
+    channels:
+    - Microsoft-Windows-PowerShell/Operational
+    - Security
+    - Microsoft-Windows-Sysmon/Operational
+  windows:
+    sysmon:
+      installed: true
+      version: '15.15'
+      config_source: sysmon-modular (Olaf Hartong)
+      config_hash: SHA256=4516404FA30EE87CEA558567820CDC78863CC4AB07889519E49EAC3CCA92E0D2
+      hashing_algorithms:
+      - SHA1
+      - MD5
+      - SHA256
+      - IMPHASH
+      network_connect: true
+      image_load: true
+      dns_query: true
+      process_create_mode: include
+      notes: Filtered config — ProcessCreate uses include rules matching known-suspicious patterns (LOLBins, accessibility
+        bypass, fltmc, attrib, sc, etc). Not all process creations are captured in Sysmon. Security 4688 with command-line
+        auditing provides complementary full coverage.
+    audit_policy:
+      process_creation: success
+      process_termination: success
+      command_line_logging: true
+      logon: success_and_failure
+      special_logon: success_and_failure
+      object_access: none
+      account_management: none
+      policy_change: none
+      privilege_use: none
+      token_right_adjusted: success
+      kerberos: success_and_failure
+      credential_validation: success_and_failure
+    powershell:
+      script_block_logging: true
+      script_block_invocation: true
+      module_logging: true
+      module_logging_scope: '*'
+      transcription: true
+    endpoint_protection:
+      product: Windows Defender
+      real_time_protection: false
+      behavior_monitoring: false
+      amsi_enabled: false
+      antivirus_enabled: false
+      disabled_via: Group Policy (Disable-Defender-ART GPO on UndefendedTests OU)
+      notes: All Defender protections disabled via GPO for ART testing. This dataset captures technique execution without
+        endpoint protection interference.
+provenance:
+  build:
+    host: {}
+    timestamps:
+      start_epoch: 1773767286
+      end_epoch: 1773767289
+  verification:
+    source_counts:
+      sysmon: 18
+      security: 5
+      powershell: 94
+defaults:
+  echo:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: lakehouse_bronze

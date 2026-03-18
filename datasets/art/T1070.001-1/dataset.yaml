@@ -1,0 +1,172 @@
+metadata:
+  name: art-T1070.001-1
+  version: 3.0.0
+  description: 'Atomic Red Team T1070.001-1: Clear Windows Event Logs (Clear Logs) on Windows 11 Enterprise domain workstation.'
+  author: EchoLake Project
+  created: '2026-03-13'
+  license: CC0-1.0
+  tags:
+  - art
+  - atomic-red-team
+  - T1070
+  - T1070.001
+  - defense-evasion
+  - clear-logs
+  - windows
+  - sysmon
+  - echolake
+  mitre_attack:
+    techniques:
+    - id: T1070.001
+      name: Clear Windows Event Logs
+      tactics: &id001
+      - defense-evasion
+    tactics: *id001
+  timestamp_range:
+    earliest: '2026-03-13T18:42:21Z'
+    latest: '2026-03-13T18:42:27Z'
+    field: _time
+files:
+  bundled:
+  - path: data/sysmon.jsonl.gz
+    description: Microsoft-Windows-Sysmon/Operational events
+    format: jsonl
+    schema: lakehouse_bronze
+    event_count: 37
+    log_source:
+      vendor: Microsoft
+      product: Windows
+      category: Sysmon
+      event_ids:
+      - 1
+      - 7
+      - 10
+      - 11
+      - 17
+  - path: data/security.jsonl.gz
+    description: Security events
+    format: jsonl
+    schema: lakehouse_bronze
+    event_count: 16
+    log_source:
+      vendor: Microsoft
+      product: Windows
+      category: Security
+      event_ids:
+      - 4688
+      - 4689
+      - 4703
+  - path: data/powershell.jsonl.gz
+    description: Microsoft-Windows-PowerShell/Operational events
+    format: jsonl
+    schema: lakehouse_bronze
+    event_count: 42
+    log_source:
+      vendor: Microsoft
+      product: Windows
+      category: Powershell
+      event_ids:
+      - 4103
+      - 4104
+  - path: data/system.jsonl.gz
+    description: System events
+    format: jsonl
+    schema: lakehouse_bronze
+    event_count: 1
+    log_source:
+      vendor: Microsoft
+      product: Windows
+      category: System
+      event_ids:
+      - 104
+environment:
+  host:
+    hostname: ACME-WS02
+    os: Windows 11 Enterprise Evaluation
+    os_version: 10.0.22631
+    architecture: x86_64
+    domain: acme.local
+    platform: Proxmox/QEMU
+  execution:
+    user: NT AUTHORITY\SYSTEM
+    method: QEMU guest agent
+    tool: Atomic Red Team
+    tool_version: v4.0 (329 techniques)
+    isolation: per-test cleanup
+  collection:
+    collector: Cribl Edge
+    channels:
+    - Microsoft-Windows-Sysmon/Operational
+    - Security
+    - Microsoft-Windows-PowerShell/Operational
+  windows:
+    sysmon:
+      installed: true
+      version: '15.15'
+      config_source: sysmon-modular (Olaf Hartong)
+      config_hash: SHA256=4516404FA30EE87CEA558567820CDC78863CC4AB07889519E49EAC3CCA92E0D2
+      hashing_algorithms:
+      - SHA1
+      - MD5
+      - SHA256
+      - IMPHASH
+      network_connect: true
+      image_load: true
+      dns_query: true
+      process_create_mode: include
+      notes: Filtered config — ProcessCreate uses include rules matching known-suspicious patterns (LOLBins, accessibility
+        bypass, fltmc, attrib, sc, etc). Not all process creations are captured in Sysmon. Security 4688 with command-line
+        auditing provides complementary full coverage.
+    audit_policy:
+      process_creation: success
+      process_termination: success
+      command_line_logging: true
+      logon: success_and_failure
+      special_logon: success_and_failure
+      object_access: none
+      account_management: none
+      policy_change: none
+      privilege_use: none
+      token_right_adjusted: success
+      kerberos: success_and_failure
+      credential_validation: success_and_failure
+    powershell:
+      script_block_logging: true
+      script_block_invocation: true
+      module_logging: true
+      module_logging_scope: '*'
+      transcription: true
+    endpoint_protection:
+      product: Windows Defender
+      version: 4.18.26010.5
+      real_time_protection: true
+      behavior_monitoring: true
+      amsi_enabled: true
+      signature_version: 1.445.536.0
+      notes: Fully active during all test executions. Many techniques are blocked before completion, producing attempt telemetry
+        (process creation, command lines) but not success telemetry (LSASS access, file dumps, network connections).
+provenance:
+  build:
+    host: {}
+    timestamps:
+      start_epoch: 1773427341
+      end_epoch: 1773427348
+  verification:
+    source_counts:
+      sysmon: 51
+      security: 36
+      powershell: 1068
+      system: 1
+      application: 12
+    dest_counts:
+      sysmon: 51
+      security: 36
+      powershell: 1068
+      system: 1
+      application: 12
+defaults:
+  echo:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now-1h
+  schema: lakehouse_bronze

