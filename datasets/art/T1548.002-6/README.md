@@ -1,0 +1,14 @@
+# T1548.002-6: Bypass User Account Control
+
+**MITRE ATT&CK:** [T1548.002](https://attack.mitre.org/techniques/T1548/002)
+**Technique:** Bypass User Account Control
+**Tactic(s):** defense-evasion, privilege-escalation
+**ART Test:** `Invoke-AtomicTest T1548.002 -TestNumbers 6` — Bypass UAC by Mocking Trusted Directories
+
+## Telemetry (58 events)
+- **Sysmon**: 18 events
+- **Security**: 10 events
+- **Powershell**: 30 events
+
+## Pipeline Verification
+VM event counts verified against source. Infrastructure noise filtered. Only events from ACME-WS02.

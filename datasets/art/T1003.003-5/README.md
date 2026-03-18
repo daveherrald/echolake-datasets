@@ -1,0 +1,14 @@
+# T1003.003-5: NTDS
+
+**MITRE ATT&CK:** [T1003.003](https://attack.mitre.org/techniques/T1003/003)
+**Technique:** NTDS
+**Tactic(s):** credential-access
+**ART Test:** `Invoke-AtomicTest T1003.003 -TestNumbers 5` — Create Volume Shadow Copy remotely with WMI
+
+## Telemetry (126 events)
+- **Sysmon**: 74 events
+- **Security**: 17 events
+- **Powershell**: 35 events
+
+## Pipeline Verification
+VM event counts verified against source. Infrastructure noise filtered. Only events from ACME-WS02.
