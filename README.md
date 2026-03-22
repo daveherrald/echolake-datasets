@@ -22,6 +22,3 @@ Full multi-stage attack simulation on a Windows Active Directory environment wit
 ## License
 
 All original content in this repository is released under [CC0 1.0 Universal (Public Domain Dedication)](LICENSE).
-
-Third-party datasets retain their original licenses:
-
