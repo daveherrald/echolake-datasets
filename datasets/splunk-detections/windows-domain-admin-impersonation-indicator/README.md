@@ -1,0 +1,40 @@
+# Windows Domain Admin Impersonation Indicator
+
+**Type:** TTP
+
+**Author:** Mauricio Velazco, Splunk
+
+## Description
+
+This dataset contains sample data for identifying potential Kerberos ticket forging attacks, specifically the Diamond Ticket attack. This is detected when a user logs into a host and the GroupMembership field in event 4627 indicates a privileged group (e.g., Domain Admins), but the user does not actually belong to that group in the directory service. The detection leverages Windows Security Event Log 4627, which logs account logon events. The analytic cross-references the GroupMembership field from the event against a pre-populated lookup of actual group memberships. Its crucial to note that the accuracy and effectiveness of this detection heavily rely on the users diligence in populating and regularly updating this lookup table. Any discrepancies between the events GroupMembership and the lookup indicate potential ticket forging. Kerberos ticket forging, especially the Diamond Ticket attack, allows attackers to impersonate any user and potentially gain unauthorized access to resources. By forging a ticket that indicates membership in a privileged group, an attacker can bypass security controls and gain elevated privileges. Detecting such discrepancies in group memberships during logon events can be a strong indicator of this attack in progress, making it crucial for security teams to monitor and investigate. If validated as a true positive, this indicates that an attacker has successfully forged a Kerberos ticket and may have gained unauthorized access to critical resources, potentially with elevated privileges.
+
+## MITRE ATT&CK
+
+- T1558
+
+## Analytic Stories
+
+- Active Directory Kerberos Attacks
+- Gozi Malware
+- Compromised Windows Host
+- Active Directory Privilege Escalation
+
+## Data Sources
+
+- Windows Event Log Security 4627
+
+## Sample Data
+
+- **Source:** XmlWinEventLog:Security
+  **Sourcetype:** XmlWinEventLog
+  **URL:** https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1558/diamond_ticket/security.log
+
+
+---
+
+*Source: [Splunk Security Content](detections/endpoint/windows_domain_admin_impersonation_indicator.yml)*
+
+
+## License
+
+Detection logic: [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0) ([splunk/security_content](https://github.com/splunk/security_content)). Sample attack data: [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0) ([splunk/attack_data](https://github.com/splunk/attack_data)). Both by Splunk, Inc.

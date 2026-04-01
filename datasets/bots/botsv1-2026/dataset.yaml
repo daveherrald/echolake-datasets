@@ -1,0 +1,124 @@
+defaults:
+  input:
+    format: jsonl
+    timestamp_patterns:
+    - field: _time
+      format: auto
+      is_base: true
+  replay:
+    base_time: earliest
+    delta_factor: 1.0
+    target_time: now-1h
+files:
+  bundled: []
+  references:
+  - uri: s3://echolake-datasets/botsv1-2026/data/WinEventLog-Application.jsonl.gz
+    format: jsonl
+    sourcetype: WinEventLog:Application
+    description: Windows Application Event Log
+  - uri: s3://echolake-datasets/botsv1-2026/data/WinEventLog-Security.jsonl.gz
+    format: jsonl
+    sourcetype: WinEventLog:Security
+    description: Windows Security Event Log
+  - uri: s3://echolake-datasets/botsv1-2026/data/WinEventLog-System.jsonl.gz
+    format: jsonl
+    sourcetype: WinEventLog:System
+    description: Windows System Event Log
+  - uri: s3://echolake-datasets/botsv1-2026/data/XmlWinEventLog-Microsoft-Windows-Sysmon-Operational.jsonl.gz
+    format: jsonl
+    sourcetype: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
+    description: Windows Sysmon Operational Log
+  - uri: s3://echolake-datasets/botsv1-2026/data/fortigate_event.jsonl.gz
+    format: jsonl
+    sourcetype: fortigate_event
+    description: Fortinet Fortigate Events
+  - uri: s3://echolake-datasets/botsv1-2026/data/fortigate_traffic.jsonl.gz
+    format: jsonl
+    sourcetype: fortigate_traffic
+    description: Fortinet Fortigate Traffic
+  - uri: s3://echolake-datasets/botsv1-2026/data/fortigate_utm.jsonl.gz
+    format: jsonl
+    sourcetype: fortigate_utm
+    description: Fortinet Fortigate UTM
+  - uri: s3://echolake-datasets/botsv1-2026/data/iis.jsonl.gz
+    format: jsonl
+    sourcetype: iis
+    description: IIS Web Server Logs
+  - uri: s3://echolake-datasets/botsv1-2026/data/nessus-scan.jsonl.gz
+    format: jsonl
+    sourcetype: nessus:scan
+    description: Nessus Vulnerability Scan Results
+  - uri: s3://echolake-datasets/botsv1-2026/data/stream-dhcp.jsonl.gz
+    format: jsonl
+    sourcetype: stream:dhcp
+    description: Splunk Stream - DHCP
+  - uri: s3://echolake-datasets/botsv1-2026/data/stream-dns.jsonl.gz
+    format: jsonl
+    sourcetype: stream:dns
+    description: Splunk Stream - DNS
+  - uri: s3://echolake-datasets/botsv1-2026/data/stream-http.jsonl.gz
+    format: jsonl
+    sourcetype: stream:http
+    description: Splunk Stream - HTTP
+  - uri: s3://echolake-datasets/botsv1-2026/data/stream-icmp.jsonl.gz
+    format: jsonl
+    sourcetype: stream:icmp
+    description: Splunk Stream - ICMP
+  - uri: s3://echolake-datasets/botsv1-2026/data/stream-ip.jsonl.gz
+    format: jsonl
+    sourcetype: stream:ip
+    description: Splunk Stream - IP
+  - uri: s3://echolake-datasets/botsv1-2026/data/stream-ldap.jsonl.gz
+    format: jsonl
+    sourcetype: stream:ldap
+    description: Splunk Stream - LDAP
+  - uri: s3://echolake-datasets/botsv1-2026/data/stream-mapi.jsonl.gz
+    format: jsonl
+    sourcetype: stream:mapi
+    description: Splunk Stream - MAPI
+  - uri: s3://echolake-datasets/botsv1-2026/data/stream-sip.jsonl.gz
+    format: jsonl
+    sourcetype: stream:sip
+    description: Splunk Stream - SIP
+  - uri: s3://echolake-datasets/botsv1-2026/data/stream-smb.jsonl.gz
+    format: jsonl
+    sourcetype: stream:smb
+    description: Splunk Stream - SMB
+  - uri: s3://echolake-datasets/botsv1-2026/data/stream-snmp.jsonl.gz
+    format: jsonl
+    sourcetype: stream:snmp
+    description: Splunk Stream - SNMP
+  - uri: s3://echolake-datasets/botsv1-2026/data/stream-tcp.jsonl.gz
+    format: jsonl
+    sourcetype: stream:tcp
+    description: Splunk Stream - TCP
+  - uri: s3://echolake-datasets/botsv1-2026/data/suricata.jsonl.gz
+    format: jsonl
+    sourcetype: suricata
+    description: Suricata IDS Alerts
+  - uri: s3://echolake-datasets/botsv1-2026/data/WinRegistry.jsonl.gz
+    format: jsonl
+    sourcetype: WinRegistry
+    description: Windows Registry
+metadata:
+  author: Ryan Kovar, David Herrald, James Brodsky (Splunk)
+  created: '2026'
+  description: Boss of the SOC v1 - Sample security dataset and CTF platform with
+    realistic attack scenarios captured in 2016. Two attacks by a fictitious hacktivist
+    group called po1s0n1vy targeting Wayne Corp, with timestamps rebased to 2026 (2026-02-01
+    through 2026-02-28)
+  license: CC0-1.0
+  name: botsv1-2026
+  tags:
+  - bots
+  - ctf
+  - competition
+  - multi-source
+  - windows
+  - network
+  - ids
+  timestamp_range:
+    earliest: '2026-02-01T18:00:00+00:00'
+    field: _time
+    latest: '2026-02-28T23:59:59+00:00'
+  version: 2026.1.0
