@@ -8,6 +8,8 @@ Curated security datasets for detection engineering, threat hunting, and securit
 |------|-------|-------------|
 | [datasets/art/](datasets/art/) | 1,654 | Atomic Red Team telemetry — Windows security events from 250 MITRE ATT&CK techniques |
 | [datasets/paws-operation-yarn-ball/](datasets/paws-operation-yarn-ball/) | 1 | Multi-stage attack simulation with Sliver C2 on Active Directory (~820K events) |
+| [datasets/bots/](datasets/bots/) | 7 | Splunk Boss of the SOC competition datasets (v1, v2, v3 + 2026 time-shifted variants) |
+| [datasets/splunk-detections/](datasets/splunk-detections/) | 1,866 | Splunk Security Content detection datasets with sample attack data |
 
 ## Atomic Red Team Telemetry
 
@@ -19,6 +21,20 @@ See [datasets/art/README.md](datasets/art/README.md) for full details on instrum
 
 Full multi-stage attack simulation on a Windows Active Directory environment with 7 VMs. Includes agentic persona simulation (6 employees generating realistic background activity) plus a 10-stage Sliver C2 attack chain covering recon, beacon deployment, credential harvesting, lateral movement, data exfiltration, ransomware, and log clearing. ~820K events across Windows (Sysmon, Security, PowerShell), Squid proxy, and Zeek network logs.
 
+## Boss of the SOC (BOTS)
+
+Security datasets from Splunk's Boss of the SOC competition series. Each version contains realistic attack scenarios with multi-source telemetry (Windows event logs, network traffic, IDS alerts, web server logs). Includes BOTSv1 (2016), BOTSv2 (2017), BOTSv3 (2018), a BOTSv2 attack-only subset, and 2026 time-shifted variants with timestamps moved forward to 2026 for use in environments that expect current-year data.
+
+See [datasets/bots/README.md](datasets/bots/README.md) for full details.
+
+## Splunk Detection Datasets
+
+1,866 datasets of sample attack data paired with detection logic from Splunk's [Security Content](https://github.com/splunk/security_content) project. Each dataset provides the telemetry needed to validate a specific detection rule, with references to source data in Splunk's [attack_data](https://github.com/splunk/attack_data) repository.
+
+See [datasets/splunk-detections/README.md](datasets/splunk-detections/README.md) for full details.
+
 ## License
 
-All original content in this repository is released under [CC0 1.0 Universal (Public Domain Dedication)](LICENSE).
+- **ART and PAWS datasets:** [CC0 1.0 Universal (Public Domain Dedication)](LICENSE)
+- **BOTS datasets:** [CC0-1.0](https://creativecommons.org/publicdomain/zero/1.0/) by Splunk, Inc.
+- **Splunk detection datasets:** [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0) by Splunk, Inc.

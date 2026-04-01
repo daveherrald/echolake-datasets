@@ -1,0 +1,40 @@
+# Windows SpeechRuntime Suspicious Child Process
+
+**Type:** TTP
+
+**Author:** Raven Tait, Splunk
+
+## Description
+
+SpeechRuntime is vulnerable to an attack that allows a user to run code on another user's session remotely and stealthily by exploiting a Windows COM class. When this class is invoked, it launches SpeechRuntime.exe in the context of the currently logged-on user. Because this COM class is susceptible to COM Hijacking, the attacker can alter the registry remotely to point to a malicious DLL. By dropping that DLL on the target system (e.g., via SMB) and triggering the COM object, the attacker causes the malicious DLL to load into SpeechRuntime.exe and executing under the user's context. This detection identifies suspicious child processes of SpeechRuntime.exe that could indicate abuse of this vulnerability.
+
+## MITRE ATT&CK
+
+- T1021.003
+
+## Analytic Stories
+
+- Active Directory Lateral Movement
+- Compromised Windows Host
+
+## Data Sources
+
+- Sysmon EventID 1
+- Windows Event Log Security 4688
+- CrowdStrike ProcessRollup2
+
+## Sample Data
+
+- **Source:** XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
+  **Sourcetype:** XmlWinEventLog
+  **URL:** https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1021.003/lateral_movement_speechruntime/windows-sysmon.log
+
+
+---
+
+*Source: [Splunk Security Content](detections/endpoint/windows_speechruntime_suspicious_child_process.yml)*
+
+
+## License
+
+Detection logic: [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0) ([splunk/security_content](https://github.com/splunk/security_content)). Sample attack data: [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0) ([splunk/attack_data](https://github.com/splunk/attack_data)). Both by Splunk, Inc.

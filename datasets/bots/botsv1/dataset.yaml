@@ -1,0 +1,124 @@
+defaults:
+  input:
+    format: csv
+    timestamp_patterns:
+    - field: _time
+      format: auto
+      is_base: true
+  replay:
+    base_time: earliest
+    delta_factor: 1.0
+    target_time: now-1h
+files:
+  bundled: []
+  references:
+  - uri: s3://echolake-datasets/botsv1/data/botsv1.WinEventLog-Application.csv.gz
+    format: csv
+    sourcetype: WinEventLog:Application
+    description: Windows Application Event Log
+  - uri: s3://echolake-datasets/botsv1/data/botsv1.WinEventLog-Security.csv.gz
+    format: csv
+    sourcetype: WinEventLog:Security
+    description: Windows Security Event Log
+  - uri: s3://echolake-datasets/botsv1/data/botsv1.WinEventLog-System.csv.gz
+    format: csv
+    sourcetype: WinEventLog:System
+    description: Windows System Event Log
+  - uri: s3://echolake-datasets/botsv1/data/botsv1.XmlWinEventLog-Microsoft-Windows-Sysmon-Operational.csv.gz
+    format: csv
+    sourcetype: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
+    description: Windows Sysmon Operational Log
+  - uri: s3://echolake-datasets/botsv1/data/botsv1.fgt_event.csv.gz
+    format: csv
+    sourcetype: fortigate_event
+    description: Fortinet Fortigate Events
+  - uri: s3://echolake-datasets/botsv1/data/botsv1.fgt_traffic.csv.gz
+    format: csv
+    sourcetype: fortigate_traffic
+    description: Fortinet Fortigate Traffic
+  - uri: s3://echolake-datasets/botsv1/data/botsv1.fgt_utm.csv.gz
+    format: csv
+    sourcetype: fortigate_utm
+    description: Fortinet Fortigate UTM
+  - uri: s3://echolake-datasets/botsv1/data/botsv1.iis.csv.gz
+    format: csv
+    sourcetype: iis
+    description: IIS Web Server Logs
+  - uri: s3://echolake-datasets/botsv1/data/botsv1.nessus-scan.csv.gz
+    format: csv
+    sourcetype: nessus:scan
+    description: Nessus Vulnerability Scan Results
+  - uri: s3://echolake-datasets/botsv1/data/botsv1.stream-dhcp.csv.gz
+    format: csv
+    sourcetype: stream:dhcp
+    description: Splunk Stream - DHCP
+  - uri: s3://echolake-datasets/botsv1/data/botsv1.stream-dns.csv.gz
+    format: csv
+    sourcetype: stream:dns
+    description: Splunk Stream - DNS
+  - uri: s3://echolake-datasets/botsv1/data/botsv1.stream-http.csv.gz
+    format: csv
+    sourcetype: stream:http
+    description: Splunk Stream - HTTP
+  - uri: s3://echolake-datasets/botsv1/data/botsv1.stream-icmp.csv.gz
+    format: csv
+    sourcetype: stream:icmp
+    description: Splunk Stream - ICMP
+  - uri: s3://echolake-datasets/botsv1/data/botsv1.stream-ip.csv.gz
+    format: csv
+    sourcetype: stream:ip
+    description: Splunk Stream - IP
+  - uri: s3://echolake-datasets/botsv1/data/botsv1.stream-ldap.csv.gz
+    format: csv
+    sourcetype: stream:ldap
+    description: Splunk Stream - LDAP
+  - uri: s3://echolake-datasets/botsv1/data/botsv1.stream-mapi.csv.gz
+    format: csv
+    sourcetype: stream:mapi
+    description: Splunk Stream - MAPI
+  - uri: s3://echolake-datasets/botsv1/data/botsv1.stream-sip.csv.gz
+    format: csv
+    sourcetype: stream:sip
+    description: Splunk Stream - SIP
+  - uri: s3://echolake-datasets/botsv1/data/botsv1.stream-smb.csv.gz
+    format: csv
+    sourcetype: stream:smb
+    description: Splunk Stream - SMB
+  - uri: s3://echolake-datasets/botsv1/data/botsv1.stream-snmp.csv.gz
+    format: csv
+    sourcetype: stream:snmp
+    description: Splunk Stream - SNMP
+  - uri: s3://echolake-datasets/botsv1/data/botsv1.stream-tcp.csv.gz
+    format: csv
+    sourcetype: stream:tcp
+    description: Splunk Stream - TCP
+  - uri: s3://echolake-datasets/botsv1/data/botsv1.suricata.csv.gz
+    format: csv
+    sourcetype: suricata
+    description: Suricata IDS Alerts
+  - uri: s3://echolake-datasets/botsv1/data/botsv1.winregistry.csv.gz
+    format: csv
+    sourcetype: WinRegistry
+    description: Windows Registry
+metadata:
+  author: Ryan Kovar, David Herrald, James Brodsky (Splunk)
+  created: '2016'
+  description: Boss of the SOC v1 - Sample security dataset and CTF platform with
+    realistic attack scenarios captured in 2016. Two attacks by a fictitious hacktivist
+    group called po1s0n1vy targeting Wayne Corp.
+  license: CC0-1.0
+  name: botsv1
+  source_url: https://s3.amazonaws.com/botsdataset/botsv1/csv-by-sourcetype/
+  tags:
+  - bots
+  - ctf
+  - competition
+  - multi-source
+  - windows
+  - network
+  - ids
+  timestamp_range:
+    earliest: '2016-07-31T18:00:00+00:00'
+    field: _time
+    latest: '2016-08-28T23:59:59+00:00'
+  version: 1.0.0
