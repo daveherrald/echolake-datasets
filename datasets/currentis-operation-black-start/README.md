@@ -20,14 +20,14 @@ A state-aligned actor uses a prompt injection against an AI coding assistant run
 
 | # | Stage | Host / persona | ATT&CK (Enterprise) | ATT&CK (ICS) |
 |---|-------|----------------|---------------------|--------------|
-| 0 | Prompt-injection initial access. A poisoned "NERC CIP-010 baseline diff" document reaches Rachel's mailbox; her AI coding assistant reads it to summarize and runs a base64 PowerShell stager. | Rachel Chen (`rchen`), CURRENTIS-WS-RACHEL | T1566, T1204, T1059.001 | n/a |
-| 1 | Recon (LOTL). `whoami`, `gpresult`, `net group`, `nltest`, AD queries, hidden in normal troubleshooting habit. | WS-RACHEL to DC01 | T1087.002, T1482 | n/a |
-| 2 | Beacon. A masqueraded binary beacons to the C2 every ~60 seconds. | WS-RACHEL | T1071.001, T1036 | n/a |
+| 0 | Prompt-injection initial access. A poisoned "NERC CIP-010 baseline diff" document reaches Rachel's mailbox; her AI coding assistant reads it to summarize and runs a base64 PowerShell stager. | Rachel Chen (`rchen`), CURRENTIS-WS-RACHEL | T1566, T1204, T1059.001, T1027, T1140 | n/a |
+| 1 | Recon (LOTL). `whoami`, `net group /domain`, `net user /domain`, `nltest /dclist`, `ipconfig`, `netstat -ano`, `Get-Process`, AD queries, hidden in normal troubleshooting habit. | WS-RACHEL to DC01 | T1087.002, T1482, T1069.002, T1018, T1016, T1049, T1033, T1057 | n/a |
+| 2 | Beacon. A masqueraded binary (`kb5041234-v3.exe`) beacons to the C2 every ~60 seconds, with a registry Run-key for persistence. | WS-RACHEL | T1071.001, T1036, T1036.005, T1547.001 | n/a |
 | 3 | Credential access. An LSASS read harvests the cached turbine-vendor credential and a dormant service account. | WS-RACHEL | T1003.001, T1078 | n/a |
 | 4 | IT-to-OT pivot. RDP from Rachel's box to the SCADA jump host using the stolen `helixgrid-svc` account. The account, not the host, is the anomaly. | WS-RACHEL to SCADA-JH-02 | T1021.001, T1078, T1133 | T0859, T0822 |
 | 5 | OT recon / control-loop mapping. Enumerate engineering software, pull Unit 3 turbine config and alarm/setpoint data. No change yet. | SCADA-JH-02 | T1083, T1005 | T0888 |
 | 6 | Exfil (low and slow). Turbine config and alarm data trickle out the C2 channel, staged small. | SCADA-JH-02 | T1041, T1567 | T0882 |
-| 7 | The surprise. Stage a Unit 3 setpoint-modification capability and a modified control profile, but do not fire it. Clear the Security log and go dormant. | SCADA-JH-02 | T1053.005, T1070.001 | T0831 (staged) |
+| 7 | The surprise. Stage a Unit 3 setpoint-modification capability and a modified control profile, but do not fire it. Clear the Security log, delete staging artifacts, and go dormant. | SCADA-JH-02 | T1053.005, T1070.001, T1070.004 | T0831 (staged) |
 
 ## Data Sources
 
@@ -49,14 +49,14 @@ All files are gzipped JSON Lines in a lakehouse bronze shape, with `_event_time`
 |--------|------------|
 | Initial Access | T1566, T1078, T1133 |
 | Execution | T1204, T1059.001 |
-| Discovery | T1087.002, T1482, T1083 |
+| Discovery | T1087.002, T1482, T1069.002, T1018, T1016, T1049, T1033, T1057, T1083 |
 | Command and Control | T1071.001 |
-| Defense Evasion | T1036, T1070.001 |
+| Defense Evasion | T1027, T1140, T1036, T1036.005, T1070.001, T1070.004 |
 | Credential Access | T1003.001 |
 | Lateral Movement | T1021.001 |
 | Collection | T1005 |
 | Exfiltration | T1041, T1567 |
-| Persistence | T1053.005 |
+| Persistence | T1053.005, T1547.001 |
 
 **ATT&CK for ICS:** T0859 (Valid Accounts), T0822 (External Remote Services), T0888 (Remote System Information Discovery), T0882 (Theft of Operational Information), T0831 (Manipulation of Control, staged but not fired).
 
