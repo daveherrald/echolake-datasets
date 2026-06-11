@@ -8,6 +8,7 @@ Curated security datasets for detection engineering, threat hunting, and securit
 |------|-------|-------------|
 | [datasets/art/](datasets/art/) | 1,654 | Atomic Red Team telemetry — Windows security events from 250 MITRE ATT&CK techniques |
 | [datasets/paws-operation-yarn-ball/](datasets/paws-operation-yarn-ball/) | 1 | Multi-stage attack simulation with Sliver C2 on Active Directory (~820K events) |
+| [datasets/currentis-operation-black-start/](datasets/currentis-operation-black-start/) | 1 | Agentic-AI-to-OT intrusion at a fictional utility, with an IT-to-OT pivot and quiet SCADA pre-positioning (~172K events) |
 | [datasets/bots/](datasets/bots/) | 7 | Splunk Boss of the SOC competition datasets (v1, v2, v3 + 2026 time-shifted variants) |
 | [datasets/splunk-detections/](datasets/splunk-detections/) | 1,866 | Splunk Security Content detection datasets with sample attack data |
 
@@ -20,6 +21,12 @@ See [datasets/art/README.md](datasets/art/README.md) for full details on instrum
 ## PAWS Operation Yarn Ball
 
 Full multi-stage attack simulation on a Windows Active Directory environment with 7 VMs. Includes agentic persona simulation (6 employees generating realistic background activity) plus a 10-stage Sliver C2 attack chain covering recon, beacon deployment, credential harvesting, lateral movement, data exfiltration, ransomware, and log clearing. ~820K events across Windows (Sysmon, Security, PowerShell), Squid proxy, and Zeek network logs.
+
+## Currentis Operation Black Start
+
+A fictional ICS/OT intrusion at the fictional utility Currentis Energy, fusing a 2026-era agentic AI initial-access vector with a classic vendor-account IT-to-OT pivot. The 8-stage kill chain runs from a prompt injection against an AI coding assistant, through living-off-the-land recon, a Sliver HTTP C2 beacon, LSASS credential theft, an IT-to-OT pivot on a stolen turbine-vendor account, OT reconnaissance, and low-and-slow exfiltration, ending in quiet pre-positioning on a SCADA jump host rather than detonation. ~172K events across Windows (Sysmon, Security, PowerShell), Zeek, Exchange, Slack, and Linux syslog, with seven personas of office baseline as the haystack. The C2 address is a publicly documented Cobalt Strike indicator so a threat-intel detection fires on replay. GLACIER DRIFT is a fictional actor, modeled on but not attributed to public reporting.
+
+See [datasets/currentis-operation-black-start/README.md](datasets/currentis-operation-black-start/README.md) for full details.
 
 ## Boss of the SOC (BOTS)
 
@@ -35,6 +42,6 @@ See [datasets/splunk-detections/README.md](datasets/splunk-detections/README.md)
 
 ## License
 
-- **ART and PAWS datasets:** [CC0 1.0 Universal (Public Domain Dedication)](LICENSE)
+- **ART, PAWS, and Currentis datasets:** [CC0 1.0 Universal (Public Domain Dedication)](LICENSE)
 - **BOTS datasets:** [CC0-1.0](https://creativecommons.org/publicdomain/zero/1.0/) by Splunk, Inc.
 - **Splunk detection datasets:** [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0) by Splunk, Inc.
