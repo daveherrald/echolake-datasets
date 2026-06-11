@@ -1,0 +1,122 @@
+metadata:
+  name: currentis-operation-black-start
+  version: 1.0.0
+  description: >-
+    Operation Black Start - a fictional ICS/OT intrusion at the fictional utility "Currentis Energy"
+    (domain currentis.local), built as replayable synthetic security telemetry for detection
+    engineering, threat hunting, and SOC-investigation training. Eight-stage kill chain: agentic
+    prompt-injection initial access (a poisoned NERC CIP-010 document read by a local AI coding
+    assistant), living-off-the-land recon, a Sliver HTTP C2 beacon, LSASS credential theft, an
+    IT-to-OT pivot using a stolen turbine-vendor remote-access account (helixgrid-svc) RDP'ing into
+    the SCADA jump host, Unit 3 turbine-config reads, low-and-slow exfiltration over the C2 channel,
+    and a Security event-log clear. The climax is quiet OT pre-positioning, not detonation - a
+    setpoint-modification capability is staged on the wind-farm controller and never fired. Includes
+    roughly 3.5 hours of multi-host baseline office activity from 7 personas as the haystack. The C2
+    address has been rewritten to a publicly documented Cobalt Strike indicator (121.43.243.13) so a
+    low-confidence "outbound to a possible C2 indicator" threat-intel detection fires on replay.
+    Fictional actor GLACIER DRIFT - modeled on, not attributed to, public reporting.
+  author: EchoLake Project
+  created: '2026-06-09'
+  license: CC0-1.0
+  tags:
+  - currentis
+  - operation-black-start
+  - ics
+  - ot
+  - scada
+  - prompt-injection
+  - agentic-ai
+  - sliver-c2
+  - cobalt-strike
+  - lateral-movement
+  - it-to-ot
+  - credential-access
+  - exfiltration
+  - threat-intel
+  - windows
+  - sysmon
+  - zeek
+  - multi-host
+  - echolake
+  mitre_attack:
+    techniques:
+    - {id: T1566, name: Phishing, tactics: [initial-access]}
+    - {id: T1204, name: User Execution, tactics: [execution]}
+    - {id: T1059.001, name: 'Command and Scripting Interpreter: PowerShell', tactics: [execution]}
+    - {id: T1087.002, name: 'Account Discovery: Domain Account', tactics: [discovery]}
+    - {id: T1482, name: Domain Trust Discovery, tactics: [discovery]}
+    - {id: T1036, name: Masquerading, tactics: [defense-evasion]}
+    - {id: T1071.001, name: 'Application Layer Protocol: Web Protocols', tactics: [command-and-control]}
+    - {id: T1003.001, name: 'OS Credential Dumping: LSASS Memory', tactics: [credential-access]}
+    - {id: T1078, name: Valid Accounts, tactics: [defense-evasion, persistence, privilege-escalation, initial-access]}
+    - {id: T1021.001, name: 'Remote Services: Remote Desktop Protocol', tactics: [lateral-movement]}
+    - {id: T1133, name: External Remote Services, tactics: [initial-access, persistence]}
+    - {id: T1083, name: File and Directory Discovery, tactics: [discovery]}
+    - {id: T1005, name: Data from Local System, tactics: [collection]}
+    - {id: T1041, name: Exfiltration Over C2 Channel, tactics: [exfiltration]}
+    - {id: T1567, name: Exfiltration Over Web Service, tactics: [exfiltration]}
+    - {id: T1053.005, name: 'Scheduled Task/Job: Scheduled Task', tactics: [execution, persistence]}
+    - {id: T1070.001, name: 'Indicator Removal: Clear Windows Event Logs', tactics: [defense-evasion]}
+    - {id: T0859, name: 'ICS: Valid Accounts', tactics: [ics-lateral-movement]}
+    - {id: T0822, name: 'ICS: External Remote Services', tactics: [ics-initial-access]}
+    - {id: T0888, name: 'ICS: Remote System Information Discovery', tactics: [ics-discovery]}
+    - {id: T0882, name: 'ICS: Theft of Operational Information', tactics: [ics-collection]}
+    - {id: T0831, name: 'ICS: Manipulation of Control (staged, not fired)', tactics: [ics-impair-process-control]}
+    tactics: [initial-access, execution, discovery, command-and-control, credential-access, lateral-movement, collection, exfiltration, defense-evasion, persistence]
+  timestamp_range:
+    earliest: '2026-06-09T01:20:00Z'
+    latest: '2026-06-09T02:50:00Z'
+    field: _event_time
+files:
+  bundled:
+  - {path: data/microsoft_winevtlog.jsonl.gz, description: 'Windows Sysmon + Security + PowerShell across all Currentis hosts (attack + baseline)', format: jsonl, schema: lakehouse_bronze, event_count: 93152, log_source: {vendor: Microsoft, product: Windows, category: winevtlog}}
+  - {path: data/zeek_dns.jsonl.gz, description: 'Zeek DNS logs (name-resolution baseline)', format: jsonl, schema: lakehouse_bronze, event_count: 45235, log_source: {vendor: Zeek, product: Zeek, category: dns}}
+  - {path: data/zeek_conn.jsonl.gz, description: 'Zeek connection logs (incl. the C2 beacon and exfil to the documented indicator)', format: jsonl, schema: lakehouse_bronze, event_count: 30918, log_source: {vendor: Zeek, product: Zeek, category: conn}}
+  - {path: data/linux_syslog.jsonl.gz, description: 'Linux syslog (proxy, Zeek sensors, baseline hosts)', format: jsonl, schema: lakehouse_bronze, event_count: 1247, log_source: {vendor: Linux, product: syslog, category: syslog}}
+  - {path: data/zeek_http.jsonl.gz, description: 'Zeek HTTP logs (incl. the HTTP C2 beacon requests)', format: jsonl, schema: lakehouse_bronze, event_count: 794, log_source: {vendor: Zeek, product: Zeek, category: http}}
+  - {path: data/slack_messages.jsonl.gz, description: 'Slack persona chatter (human baseline / needle-in-haystack)', format: jsonl, schema: lakehouse_bronze, event_count: 398, log_source: {vendor: Slack, product: Slack, category: messages}}
+  - {path: data/exchange_message_tracking.jsonl.gz, description: 'Exchange message tracking (incl. the poisoned NERC CIP-010 document to rchen + 2 others)', format: jsonl, schema: lakehouse_bronze, event_count: 14, log_source: {vendor: Microsoft, product: Exchange, category: message_tracking}}
+environment:
+  host:
+    domain: currentis.local
+    platform: Proxmox/QEMU
+    network: VLAN4 192.168.4.0/24
+  execution:
+    actor: GLACIER DRIFT (fictional; modeled on Volt Typhoon / VOLTZITE + SYLVANITE + ELECTRUM, not attributed)
+    patient_zero: Rachel Chen (rchen) on CURRENTIS-WS-RACHEL 192.168.4.233 (EDR-free ML workstation)
+    pivot_account: helixgrid-svc (stolen turbine-vendor remote-access account)
+    ot_target: CURRENTIS-SCADA-JH-02 192.168.4.244 (OT jump host, Helix Grid Systems OptiCore / Unit 3)
+    c2: Sliver HTTP (C2 address rewritten to documented indicator 121.43.243.13 for this dataset)
+  collection:
+    collector: Cribl Edge
+    sysmon: SwiftOnSecurity config
+    audit_policy: 'Security 4624/4663/4768/4769/1102; SACL on C:\OT and C:\Program Files\Helix Grid Systems'
+provenance:
+  build:
+    window_utc: {start: '2026-06-09T01:20:00Z', end: '2026-06-09T02:50:00Z'}
+    campaign_utc: {t0: '2026-06-09T01:38:27Z', t_end: '2026-06-09T02:45:13Z'}
+    tool: 'Sliver C2 with scripted attack stages, executed in an isolated lab; telemetry exported to JSONL'
+    translation:
+      from: internal Sliver C2 address
+      to: 121.43.243.13
+      reason: >-
+        The internal Sliver C2 IP was rewritten to a publicly documented Cobalt Strike indicator
+        (framework=cobaltstrike, BeaconType=HTTP, C2Server=121.43.243.13,/push, ASN=Aliyun, first seen
+        2026-05-22, labeled "Possible Cobaltstrike C2 IP" in open C2 intel feeds). 202 lines were
+        rewritten across winevtlog (Sysmon EID3), zeek_conn, zeek_http, and zeek_dns so that a
+        low-confidence threat-intel detection fires on replay.
+    seed_detection: '"Outbound Connection to Possible C2 Indicator" (severity Informational) fires on replay'
+    notes: >-
+      Known limitations of this synthetic dataset: EDR alert telemetry is not included (the lab EDR
+      covered only the domain controller and Exchange host); the scripted implant and recon stages run
+      under a machine account, while the stage-0 agent-to-PowerShell chain is attributed to rchen; the
+      final exfil (02:45) lands slightly after the log clear (02:30).
+  verification:
+    source_counts: {microsoft_winevtlog: 93152, zeek_conn: 30918, zeek_dns: 45235, zeek_http: 794, exchange_message_tracking: 14, slack_messages: 398, linux_syslog: 1247}
+    dest_counts: {microsoft_winevtlog: 93152, zeek_conn: 30918, zeek_dns: 45235, zeek_http: 794, exchange_message_tracking: 14, slack_messages: 398, linux_syslog: 1247}
+defaults:
+  echo:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now
+  schema: lakehouse_bronze
