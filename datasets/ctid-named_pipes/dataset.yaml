@@ -1,0 +1,192 @@
+metadata:
+  name: ctid-named_pipes
+  version: 1.0.0
+  description: 'CTID micro emulation plan ''Named Pipes'' executed on a clean, instrumented Windows 11
+    workstation (EMU-WS01) and captured as replayable synthetic security telemetry. The CTID named_pipes
+    emulator (executor/server/client) creates a Cobalt-Strike-pattern named pipe (\\.\pipe\MSSE-a09-server),
+    the client connects, data is exchanged, then it closes. Distinctive pipe name mimics CS Artifact Kit.
+    Tool launched via a transient Task Scheduler action so process ancestry is svchost.exe (no orchestration
+    scaffolding in the capture). Source: github.com/center-for-threat-informed-defense/adversary_emulation_library.'
+  author: EchoLake Project
+  created: '2026-06-28'
+  license: CC0-1.0
+  tags:
+  - ctid
+  - micro-emulation
+  - named_pipes
+  - T1559
+  - execution
+  - windows
+  - sysmon
+  - echolake
+  mitre_attack:
+    techniques:
+    - id: T1559
+      name: Inter-Process Communication
+      tactics:
+      - execution
+    tactics:
+    - execution
+  timestamp_range:
+    earliest: '2026-06-28T16:40:13Z'
+    latest: '2026-06-28T16:41:13Z'
+    field: _event_time
+files:
+  bundled:
+  - path: data/sysmon.jsonl.gz
+    description: Microsoft-Windows-Sysmon/Operational events
+    format: jsonl
+    schema: lakehouse_bronze
+    event_count: 79
+    log_source:
+      vendor: Microsoft
+      product: Windows
+      category: sysmon
+      event_ids:
+      - 1
+      - 5
+      - 7
+      - 10
+      - 11
+      - 12
+      - 13
+      - 15
+      - 17
+      - 18
+      - 25
+  - path: data/security.jsonl.gz
+    description: Security events
+    format: jsonl
+    schema: lakehouse_bronze
+    event_count: 19
+    log_source:
+      vendor: Microsoft
+      product: Windows
+      category: security
+      event_ids:
+      - 4688
+      - 4699
+  - path: data/powershell.jsonl.gz
+    description: Microsoft-Windows-PowerShell/Operational events
+    format: jsonl
+    schema: lakehouse_bronze
+    event_count: 76
+    log_source:
+      vendor: Microsoft
+      product: Windows
+      category: powershell
+      event_ids:
+      - 4103
+      - 4104
+      - 4105
+      - 4106
+      - 40961
+      - 40962
+      - 53504
+  - path: data/wmi.jsonl.gz
+    description: Microsoft-Windows-WMI-Activity/Operational events
+    format: jsonl
+    schema: lakehouse_bronze
+    event_count: 5
+    log_source:
+      vendor: Microsoft
+      product: Windows
+      category: wmi
+      event_ids:
+      - 5857
+      - 5858
+environment:
+  host:
+    hostname: EMU-WS01
+    os: Windows 11 Enterprise Eval
+    workgroup: WORKGROUP
+    platform: Proxmox/QEMU
+    network: VLAN4 (zeek-monitored)
+  execution:
+    binary: namedpipes_executor.exe
+    args:
+    - --pipe
+    - '1'
+    - --server
+    - C:\Windows\Temp\tools\named_pipes\build\namedpipes_server.exe
+    - --client
+    - C:\Windows\Temp\tools\named_pipes\build\namedpipes_client.exe
+    launch: transient scheduled task (SYSTEM, parent=svchost.exe)
+  collection:
+    sensor: Sysmon64
+    shipper: Cribl Edge -> S3 zeeklogs-1337
+    ingest: Lakewatch DLT -> lakewatch.bronze.microsoft_winevtlog
+    defender: real-time on; tools path excluded (Tamper Protection enabled)
+provenance:
+  build:
+    tool: badactors / ctid-emulation-harness
+    surface: windows_endpoint
+    host: EMU-WS01
+    timestamps:
+      start_epoch: 1782664813
+      end_epoch: 1782664873
+    ingest_time_collapsed_to_event_time: true
+    filtered_orchestration_events: 28
+  verification:
+    window_epoch:
+    - 1782664813
+    - 1782664873
+    signatures:
+      Microsoft-Windows-Sysmon/Operational:EID17[MSSE]: 1
+      Microsoft-Windows-Sysmon/Operational:EID18[MSSE]: 1
+    scaffolding_leaks: 0
+    lineage_clean: true
+    technique_parent:
+    - '-'
+badactors_quality:
+  Q: 0.7921
+  disqualified: false
+  gates:
+    scaffolding_hard_leaks_zero: true
+    no_future_events: true
+    lineage_clean: true
+    required_signatures_present: true
+    ingest_integrity: true
+  components:
+    coverage: 1.0
+    signal_completeness: 1.0
+    attribution: 0.0279
+    purity: 0.8647
+    integrity: 1.0
+  weights:
+    coverage: 0.4
+    signal_completeness: 0.2
+    attribution: 0.2
+    purity: 0.1
+    integrity: 0.1
+  visibility:
+    coverage: 1.0
+    observable_primitives: 3
+    observed_primitives: 3
+    blind_primitives:
+    - data_transfer
+    missed_observable: []
+  attribution:
+    attributed: 5
+    technique_events: 179
+    ambient_filtered: 28
+    per_step:
+      spawn_components: 3
+      create_pipe: 1
+      connect_pipe: 1
+      data_transfer: 0
+  selection: best-of-N by Q among non-disqualified runs
+  spec: badactors quality v1
+  best_of_n:
+    runs: 2
+    selected: np2
+    all_Q:
+      np1: 0.7865
+      np2: 0.7921
+    selection: highest Q among non-disqualified
+defaults:
+  echo:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now
+  schema: lakehouse_bronze
