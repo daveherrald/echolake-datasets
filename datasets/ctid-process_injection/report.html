@@ -1,0 +1,56 @@
+<!doctype html><meta charset=utf-8>
+<title>badactors run report: process_injection</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:'dark'});</script>
+<style>
+body{font:14px system-ui;margin:2rem;max-width:1000px;color:#222}
+h1{margin-bottom:0} .sub{color:#666}
+table{border-collapse:collapse;margin:1rem 0;width:100%}
+td,th{border:1px solid #ccc;padding:6px 9px;text-align:left;vertical-align:top}
+th{background:#f4f4f4} .Q{font-size:2.4rem;font-weight:800;color:#0a0}
+.card{border:1px solid #ddd;border-radius:8px;padding:1rem;margin:1rem 0}
+.pre{background:#f7f7f7;border:1px solid #ddd}
+</style>
+<h1>badactors run report — Process Injection</h1>
+<div class=sub>process_injection · T1055 Process Injection, T1055.002 Portable Executable Injection</div>
+
+<div class=card>
+<div>Run quality</div>
+<div class=Q>Q = 0.824</div>
+<div>qualified</div>
+<table><tr><th>hard gate</th><th>result</th></tr><tr><td>scaffolding_hard_leaks_zero</td><td><span style="color:#0a0;font-weight:700">PASS</span></td></tr><tr><td>no_future_events</td><td><span style="color:#0a0;font-weight:700">PASS</span></td></tr><tr><td>lineage_clean</td><td><span style="color:#0a0;font-weight:700">PASS</span></td></tr><tr><td>required_signatures_present</td><td><span style="color:#0a0;font-weight:700">PASS</span></td></tr><tr><td>ingest_integrity</td><td><span style="color:#0a0;font-weight:700">PASS</span></td></tr></table>
+<table><tr><th>component</th><th>value (0-1)</th><th>weight</th></tr><tr><td>coverage</td><td>1.0</td><td>0.4</td></tr><tr><td>signal_completeness</td><td>1.0</td><td>0.2</td></tr><tr><td>attribution</td><td>0.1923</td><td>0.2</td></tr><tr><td>purity</td><td>0.8553</td><td>0.1</td></tr><tr><td>integrity</td><td>1.0</td><td>0.1</td></tr></table>
+</div>
+
+<div class=card>
+<div>Visibility / fitness — coverage 1.0 (3/3 observable primitives seen)</div>
+<div class=sub>blind (documented gaps): alloc_memory, write_memory, injected_discovery</div>
+<table><tr><th>step</th><th>behavior</th><th>ATT&CK data component</th><th>observability</th><th>expected signal</th><th>result</th></tr>
+<tr><td>spawn_suspended</td><td>create suspended svchost.exe as injection host</td><td>Process: Process Creation</td><td>partial</td><td>Operational EID1</td><td><span style="color:#0a0">observed (4)</span></td></tr><tr><td>open_process</td><td>OpenProcess on target with VM_WRITE/CREATE_THREAD rights</td><td>Process: Process Access</td><td>observable</td><td>Operational EID10</td><td><span style="color:#0a0">observed (19)</span></td></tr><tr><td>alloc_memory</td><td>VirtualAllocEx RWX region in target</td><td>Process: OS API Execution</td><td>blind</td><td>—</td><td><span style="color:#999">blind (documented gap)</span></td></tr><tr><td>write_memory</td><td>WriteProcessMemory shellcode into target</td><td>Process: OS API Execution</td><td>blind</td><td>—</td><td><span style="color:#999">blind (documented gap)</span></td></tr><tr><td>remote_thread</td><td>CreateRemoteThread executes the shellcode</td><td>Process: Process Modification (remote thread)</td><td>observable</td><td>Operational EID8</td><td><span style="color:#0a0">observed (2)</span></td></tr><tr><td>injected_discovery</td><td>injected shellcode runs whoami/netstat/qwinsta/tasklist in-memory</td><td>Command: Command Execution (in-process)</td><td>blind</td><td>—</td><td><span style="color:#999">blind (documented gap)</span></td></tr></table>
+</div>
+
+<div class=card>
+<div>Process tree (Sysmon lineage, technique events; ambient/infra filtered)</div>
+<pre class="mermaid">graph TD
+  00000}[&quot;ext&quot;] --&gt; 01100}[&quot;uhssvc.exe&quot;]
+  00000}[&quot;ext&quot;] --&gt; 01100}[&quot;svchost.exe&quot;]
+  00000}[&quot;ext&quot;] --&gt; 01100}[&quot;svchost.exe&quot;]
+  00000}[&quot;ext&quot;] --&gt; 01100}[&quot;process_injection.exe&quot;]
+  01100}[&quot;ext&quot;] --&gt; 01100}[&quot;cmd.exe&quot;]
+  01100}[&quot;cmd.exe&quot;] --&gt; 01100}[&quot;whoami.exe&quot;]
+  01100}[&quot;ext&quot;] --&gt; 01100}[&quot;cmd.exe&quot;]
+  01100}[&quot;cmd.exe&quot;] --&gt; 01100}[&quot;NETSTAT.EXE&quot;]
+  00000}[&quot;ext&quot;] --&gt; 01100}[&quot;cmd.exe&quot;]
+  00000}[&quot;ext&quot;] --&gt; 01100}[&quot;cmd.exe&quot;]
+</pre>
+</div>
+
+<div class=card>
+<div>Capture summary</div>
+<table>
+<tr><td>technique events (post-filter)</td><td>130</td></tr>
+<tr><td>attributed to a step</td><td>25</td></tr>
+<tr><td>ambient/infra filtered</td><td>22</td></tr>
+<tr><td>raw window events</td><td>152</td></tr>
+</table>
+</div>
