@@ -1,0 +1,219 @@
+metadata:
+  name: ctid-reflective_loading
+  version: 1.0.0
+  description: 'CTID micro emulation plan ''Reflective Code Loading'' executed on a clean, instrumented
+    Windows 11 workstation (EMU-WS01) and captured as replayable synthetic security telemetry. The CTID
+    reflective_loading emulator reflectively executes shellcode in the current process. The shellcode
+    launches PowerShell discovery commands including whoami, qwinsta, tasklist, Win32_product WMI inventory,
+    and netstat. In the current Windows 11 lab build, the reliable captured signals are the reflective_loading
+    process start, image load, and termination; the payload discovery commands did not produce a clean
+    non-harness signal. Tool launched via a transient Task Scheduler action so process ancestry is svchost.exe
+    (no orchestration scaffolding in the capture). Source: github.com/center-for-threat-informed-defense/adversary_emulation_library.'
+  author: EchoLake Project
+  created: '2026-06-29'
+  license: CC0-1.0
+  tags:
+  - ctid
+  - micro-emulation
+  - reflective_loading
+  - T1620
+  - T1082
+  - T1049
+  - defense-evasion
+  - discovery
+  - windows
+  - sysmon
+  - echolake
+  mitre_attack:
+    techniques:
+    - id: T1620
+      name: Reflective Code Loading
+      tactics:
+      - defense-evasion
+    - id: T1082
+      name: System Information Discovery
+      tactics:
+      - discovery
+    - id: T1049
+      name: System Network Connections Discovery
+      tactics:
+      - discovery
+    tactics:
+    - defense-evasion
+    - discovery
+  timestamp_range:
+    earliest: '2026-06-29T15:53:19Z'
+    latest: '2026-06-29T15:54:46Z'
+    field: _event_time
+files:
+  bundled:
+  - path: data/sysmon.jsonl.gz
+    description: Microsoft-Windows-Sysmon/Operational events
+    format: jsonl
+    schema: lakehouse_bronze
+    event_count: 148
+    log_source:
+      vendor: Microsoft
+      product: Windows
+      category: sysmon
+      event_ids:
+      - 1
+      - 3
+      - 5
+      - 7
+      - 10
+      - 11
+      - 12
+      - 13
+      - 17
+      - 22
+  - path: data/security.jsonl.gz
+    description: Security events
+    format: jsonl
+    schema: lakehouse_bronze
+    event_count: 18
+    log_source:
+      vendor: Microsoft
+      product: Windows
+      category: security
+      event_ids:
+      - 4624
+      - 4672
+      - 4688
+      - 4698
+      - 4699
+      - 4798
+  - path: data/powershell.jsonl.gz
+    description: Microsoft-Windows-PowerShell/Operational events
+    format: jsonl
+    schema: lakehouse_bronze
+    event_count: 253
+    log_source:
+      vendor: Microsoft
+      product: Windows
+      category: powershell
+      event_ids:
+      - 4100
+      - 4103
+      - 4104
+      - 4105
+      - 4106
+      - 40961
+      - 40962
+      - 53504
+  - path: data/application.jsonl.gz
+    description: Application events
+    format: jsonl
+    schema: lakehouse_bronze
+    event_count: 1
+    log_source:
+      vendor: Microsoft
+      product: Windows
+      category: application
+      event_ids:
+      - 1023
+  - path: data/wmi.jsonl.gz
+    description: Microsoft-Windows-WMI-Activity/Operational events
+    format: jsonl
+    schema: lakehouse_bronze
+    event_count: 8
+    log_source:
+      vendor: Microsoft
+      product: Windows
+      category: wmi
+      event_ids:
+      - 5857
+environment:
+  host:
+    hostname: EMU-WS01
+    os: Windows 11 Enterprise Eval
+    workgroup: WORKGROUP
+    platform: Proxmox/QEMU
+    network: VLAN4 (zeek-monitored)
+  execution:
+    binary: reflective_loading.exe
+    args:
+    - --dinvoke
+    launch: transient scheduled task (SYSTEM, parent=svchost.exe)
+  collection:
+    sensor: Sysmon64
+    shipper: Cribl Edge -> S3 zeeklogs-1337
+    ingest: Lakewatch DLT -> lakewatch.bronze.microsoft_winevtlog
+    defender: real-time on; tools path excluded (Tamper Protection enabled)
+provenance:
+  build:
+    tool: badactors / ctid-emulation-harness
+    surface: windows_endpoint
+    host: EMU-WS01
+    timestamps:
+      start_epoch: 1782748399
+      end_epoch: 1782748486
+    ingest_time_collapsed_to_event_time: true
+    filtered_orchestration_events: 64
+  verification:
+    window_epoch:
+    - 1782748399
+    - 1782748486
+    signatures:
+      Microsoft-Windows-Sysmon/Operational:EID1[reflective_loading.exe]: 5
+      Microsoft-Windows-Sysmon/Operational:EID7[reflective_loading.exe]: 1
+      Microsoft-Windows-Sysmon/Operational:EID5[reflective_loading.exe]: 1
+    scaffolding_leaks: 0
+    lineage_clean: true
+    technique_parent:
+    - '-'
+badactors_quality:
+  Q: 0.7884
+  disqualified: false
+  gates:
+    scaffolding_hard_leaks_zero: true
+    no_future_events: true
+    lineage_clean: true
+    required_signatures_present: true
+    ingest_integrity: true
+  components:
+    coverage: 1.0
+    signal_completeness: 1.0
+    attribution: 0.007
+    purity: 0.8699
+    integrity: 1.0
+  weights:
+    coverage: 0.4
+    signal_completeness: 0.2
+    attribution: 0.2
+    purity: 0.1
+    integrity: 0.1
+  visibility:
+    coverage: 1.0
+    observable_primitives: 3
+    observed_primitives: 3
+    blind_primitives:
+    - allocate_execute
+    - launch_powershell
+    - discovery_script
+    missed_observable: []
+  attribution:
+    attributed: 3
+    technique_events: 428
+    ambient_filtered: 64
+    per_step:
+      spawn: 1
+      allocate_execute: 0
+      image_load: 1
+      process_terminate: 1
+      launch_powershell: 0
+      discovery_script: 0
+  selection: best-of-N by Q among non-disqualified runs
+  spec: badactors quality v1
+  best_of_n:
+    runs: 1
+    selected: rl2
+    all_Q:
+      rl2: 0.7884
+    selection: highest Q among non-disqualified
+defaults:
+  echo:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now
+  schema: lakehouse_bronze
