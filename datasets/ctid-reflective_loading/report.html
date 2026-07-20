@@ -1,0 +1,54 @@
+<!doctype html><meta charset=utf-8>
+<title>badactors run report: reflective_loading</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:'dark'});</script>
+<style>
+body{font:14px system-ui;margin:2rem;max-width:1000px;color:#222}
+h1{margin-bottom:0} .sub{color:#666}
+table{border-collapse:collapse;margin:1rem 0;width:100%}
+td,th{border:1px solid #ccc;padding:6px 9px;text-align:left;vertical-align:top}
+th{background:#f4f4f4} .Q{font-size:2.4rem;font-weight:800;color:#d80}
+.card{border:1px solid #ddd;border-radius:8px;padding:1rem;margin:1rem 0}
+.pre{background:#f7f7f7;border:1px solid #ddd}
+</style>
+<h1>badactors run report — Reflective Code Loading</h1>
+<div class=sub>reflective_loading · T1620 Reflective Code Loading, T1082 System Information Discovery, T1049 System Network Connections Discovery</div>
+
+<div class=card>
+<div>Run quality</div>
+<div class=Q>Q = 0.7884</div>
+<div>qualified</div>
+<table><tr><th>hard gate</th><th>result</th></tr><tr><td>scaffolding_hard_leaks_zero</td><td><span style="color:#0a0;font-weight:700">PASS</span></td></tr><tr><td>no_future_events</td><td><span style="color:#0a0;font-weight:700">PASS</span></td></tr><tr><td>lineage_clean</td><td><span style="color:#0a0;font-weight:700">PASS</span></td></tr><tr><td>required_signatures_present</td><td><span style="color:#0a0;font-weight:700">PASS</span></td></tr><tr><td>ingest_integrity</td><td><span style="color:#0a0;font-weight:700">PASS</span></td></tr></table>
+<table><tr><th>component</th><th>value (0-1)</th><th>weight</th></tr><tr><td>coverage</td><td>1.0</td><td>0.4</td></tr><tr><td>signal_completeness</td><td>1.0</td><td>0.2</td></tr><tr><td>attribution</td><td>0.007</td><td>0.2</td></tr><tr><td>purity</td><td>0.8699</td><td>0.1</td></tr><tr><td>integrity</td><td>1.0</td><td>0.1</td></tr></table>
+</div>
+
+<div class=card>
+<div>Visibility / fitness — coverage 1.0 (3/3 observable primitives seen)</div>
+<div class=sub>blind (documented gaps): allocate_execute, launch_powershell, discovery_script</div>
+<table><tr><th>step</th><th>behavior</th><th>ATT&CK data component</th><th>observability</th><th>expected signal</th><th>result</th></tr>
+<tr><td>spawn</td><td>reflective_loading.exe starts</td><td>Process: Process Creation</td><td>partial</td><td>Operational EID1</td><td><span style="color:#0a0">observed (1)</span></td></tr><tr><td>allocate_execute</td><td>allocate memory and execute shellcode in the host process</td><td>Process: OS API Execution</td><td>blind</td><td>—</td><td><span style="color:#999">blind (documented gap)</span></td></tr><tr><td>image_load</td><td>load the reflective_loading image into its own process</td><td>Module: Module Load</td><td>observable</td><td>Operational EID7</td><td><span style="color:#0a0">observed (1)</span></td></tr><tr><td>process_terminate</td><td>reflective_loading.exe exits after the attempted reflective execution path</td><td>Process: Process Termination</td><td>observable</td><td>Operational EID5</td><td><span style="color:#0a0">observed (1)</span></td></tr><tr><td>launch_powershell</td><td>shellcode launches PowerShell discovery</td><td>Process: Process Creation</td><td>blind</td><td>—</td><td><span style="color:#999">blind (documented gap)</span></td></tr><tr><td>discovery_script</td><td>PowerShell runs local discovery commands</td><td>Command: Command Execution</td><td>blind</td><td>—</td><td><span style="color:#999">blind (documented gap)</span></td></tr></table>
+</div>
+
+<div class=card>
+<div>Process tree (Sysmon lineage, technique events; ambient/infra filtered)</div>
+<pre class="mermaid">graph TD
+  00000}[&quot;ext&quot;] --&gt; 01900}[&quot;gspawn-win64-helper.exe&quot;]
+  01900}[&quot;gspawn-win64-helper.exe&quot;] --&gt; 01900}[&quot;powershell.exe&quot;]
+  00000}[&quot;ext&quot;] --&gt; 01900}[&quot;reflective_loading.exe&quot;]
+  00000}[&quot;ext&quot;] --&gt; 01900}[&quot;WmiPrvSE.exe&quot;]
+  00000}[&quot;ext&quot;] --&gt; 01900}[&quot;gspawn-win64-helper.exe&quot;]
+  01900}[&quot;gspawn-win64-helper.exe&quot;] --&gt; 01900}[&quot;powershell.exe&quot;]
+  00000}[&quot;ext&quot;] --&gt; 01900}[&quot;gspawn-win64-helper.exe&quot;]
+  01900}[&quot;gspawn-win64-helper.exe&quot;] --&gt; 01900}[&quot;powershell.exe&quot;]
+</pre>
+</div>
+
+<div class=card>
+<div>Capture summary</div>
+<table>
+<tr><td>technique events (post-filter)</td><td>428</td></tr>
+<tr><td>attributed to a step</td><td>3</td></tr>
+<tr><td>ambient/infra filtered</td><td>64</td></tr>
+<tr><td>raw window events</td><td>492</td></tr>
+</table>
+</div>
