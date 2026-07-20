@@ -6,7 +6,7 @@ Everything here is synthetic, generated in an isolated lab with RFC1918 addressi
 
 ## Overview
 
-- **~172K events** across 7 data sources
+- **~172K events** across 7 data sources (winevtlog re-rooted so the attack descends from the OpenClaw agent, not the lab orchestrator)
 - **Multi-host** Windows Active Directory plus a SCADA jump host on an OT segment
 - **Background activity**: 7 employee personas generating roughly 3.5 hours of realistic office baseline (email, Slack, browsing, file access) as the haystack
 - **Attack**: an 8-stage kill chain from agentic prompt-injection through credential theft, an IT-to-OT pivot, OT reconnaissance, low-and-slow exfiltration, and a log clear
@@ -14,13 +14,13 @@ Everything here is synthetic, generated in an isolated lab with RFC1918 addressi
 
 ## Scenario
 
-A state-aligned actor uses a prompt injection against an AI coding assistant running on an engineer's workstation to seed a living-off-the-land intrusion. The actor harvests a cached turbine-vendor remote-access credential, rides that account from IT into OT, and quietly pre-positions on the wind-farm SCADA jump host ahead of a turbine control-loop manipulation it never fires. The detection story is two deliberate blind spots with the domain controller catching the hop between them: patient zero is an EDR-free machine-learning workstation, the OT jump host is unmonitored by design, but the lateral movement authenticates through an instrumented domain controller.
+A state-aligned actor uses a prompt injection against an AI coding assistant running on an engineer's workstation to seed a living-off-the-land intrusion. The engineer (rchen) had wired OpenClaw to auto-process inbound email from a trusted compliance sender (nerc-cip-portal.org) and had local admin with EDR pulled for her ML tooling, all visible in Slack before the poisoned message arrives. The actor harvests a cached turbine-vendor remote-access credential, rides that account from IT into OT, and quietly pre-positions on the wind-farm SCADA jump host ahead of a turbine control-loop manipulation it never fires. The detection story is two deliberate blind spots with the domain controller catching the hop between them: patient zero is an EDR-free machine-learning workstation, the OT jump host is unmonitored by design, but the lateral movement authenticates through an instrumented domain controller.
 
 ## Kill Chain
 
 | # | Stage | Host / persona | ATT&CK (Enterprise) | ATT&CK (ICS) |
 |---|-------|----------------|---------------------|--------------|
-| 0 | Prompt-injection initial access. A poisoned "NERC CIP-010 baseline diff" document reaches Rachel's mailbox; her AI coding assistant reads it to summarize and runs a base64 PowerShell stager. | Rachel Chen (`rchen`), CURRENTIS-WS-RACHEL | T1566, T1204, T1059.001, T1027, T1140 | n/a |
+| 0 | Prompt-injection initial access. Rachel had configured her local OpenClaw AI assistant to auto-read and act on email from the trusted compliance sender (nerc-cip-portal.org). A poisoned "NERC CIP-010 baseline diff" from that sender carries an embedded instruction; OpenClaw (running as `rchen`) executes a base64 PowerShell stager, and the rest of the on-host attack descends from the agent. | Rachel Chen (`rchen`), CURRENTIS-WS-RACHEL | T1566, T1204, T1059.001, T1027, T1140 | n/a |
 | 1 | Recon (LOTL). `whoami`, `net group /domain`, `net user /domain`, `nltest /dclist`, `ipconfig`, `netstat -ano`, `Get-Process`, AD queries, hidden in normal troubleshooting habit. | WS-RACHEL to DC01 | T1087.002, T1482, T1069.002, T1018, T1016, T1049, T1033, T1057 | n/a |
 | 2 | Beacon. A masqueraded binary (`kb5041234-v3.exe`) beacons to the C2 every ~60 seconds, with a registry Run-key for persistence. | WS-RACHEL | T1071.001, T1036, T1036.005, T1547.001 | n/a |
 | 3 | Credential access. An LSASS read harvests the cached turbine-vendor credential and a dormant service account. | WS-RACHEL | T1003.001, T1078 | n/a |
@@ -33,12 +33,12 @@ A state-aligned actor uses a prompt injection against an AI coding assistant run
 
 | File | Events | Description |
 |------|--------|-------------|
-| microsoft_winevtlog.jsonl.gz | 93,152 | Windows Sysmon, Security, and PowerShell events across all hosts (attack + baseline) |
+| microsoft_winevtlog.jsonl.gz | 93,104 | Windows Sysmon, Security, and PowerShell events across all hosts (attack + baseline) |
 | zeek_dns.jsonl.gz | 45,235 | Zeek DNS logs (name-resolution baseline) |
-| zeek_conn.jsonl.gz | 30,918 | Zeek connection logs (includes the C2 beacon and exfil) |
+| zeek_conn.jsonl.gz | 30,897 | Zeek connection logs (includes the C2 beacon and exfil) |
 | linux_syslog.jsonl.gz | 1,247 | Linux syslog (proxy, Zeek sensors, baseline hosts) |
-| zeek_http.jsonl.gz | 794 | Zeek HTTP logs (includes the HTTP C2 beacon requests) |
-| slack_messages.jsonl.gz | 398 | Slack persona chatter (human baseline, needle-in-haystack) |
+| zeek_http.jsonl.gz | 768 | Zeek HTTP logs (includes the HTTP C2 beacon requests) |
+| slack_messages.jsonl.gz | 404 | Slack persona chatter (human baseline, needle-in-haystack) |
 | exchange_message_tracking.jsonl.gz | 14 | Exchange message tracking (includes the poisoned NERC CIP-010 document) |
 
 All files are gzipped JSON Lines in a lakehouse bronze shape, with `_event_time` and `_ingest_time` timestamp fields and a `data` payload.
