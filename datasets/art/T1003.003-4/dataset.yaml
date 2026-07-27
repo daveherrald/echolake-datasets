@@ -32,7 +32,7 @@ files:
     description: Microsoft-Windows-Sysmon/Operational events
     format: jsonl
     schema: lakehouse_bronze
-    event_count: 69
+    event_count: 85
     log_source:
       vendor: Microsoft
       product: Windows
@@ -48,7 +48,7 @@ files:
     description: Security events
     format: jsonl
     schema: lakehouse_bronze
-    event_count: 13
+    event_count: 74
     log_source:
       vendor: Microsoft
       product: Windows
@@ -61,7 +61,7 @@ files:
     description: Microsoft-Windows-PowerShell/Operational events
     format: jsonl
     schema: lakehouse_bronze
-    event_count: 42
+    event_count: 2167
     log_source:
       vendor: Microsoft
       product: Windows
@@ -69,6 +69,14 @@ files:
       event_ids:
       - 4103
       - 4104
+  - path: data/application.jsonl.gz
+    event_count: 12
+    format: jsonl
+    schema: lakehouse_bronze
+  - path: data/wmi.jsonl.gz
+    event_count: 1
+    format: jsonl
+    schema: lakehouse_bronze
 environment:
   host:
     hostname: ACME-WS02
@@ -104,9 +112,7 @@ environment:
       image_load: true
       dns_query: true
       process_create_mode: include
-      notes: Filtered config — ProcessCreate uses include rules matching known-suspicious patterns (LOLBins, accessibility
-        bypass, fltmc, attrib, sc, etc). Not all process creations are captured in Sysmon. Security 4688 with command-line
-        auditing provides complementary full coverage.
+      notes: "Filtered config \u2014 ProcessCreate uses include rules matching known-suspicious patterns (LOLBins, accessibility bypass, fltmc, attrib, sc, etc). Not all process creations are captured in Sysmon. Security 4688 with command-line auditing provides complementary full coverage."
     audit_policy:
       process_creation: success
       process_termination: success
@@ -133,8 +139,7 @@ environment:
       behavior_monitoring: true
       amsi_enabled: true
       signature_version: 1.445.536.0
-      notes: Fully active during all test executions. Many techniques are blocked before completion, producing attempt telemetry
-        (process creation, command lines) but not success telemetry (LSASS access, file dumps, network connections).
+      notes: Fully active during all test executions. Many techniques are blocked before completion, producing attempt telemetry (process creation, command lines) but not success telemetry (LSASS access, file dumps, network connections).
 provenance:
   build:
     host: {}
@@ -154,6 +159,10 @@ provenance:
       powershell: 2167
       application: 12
       wmi: 1
+  regenerated:
+    from: lakewatch.bronze.microsoft_winevtlog (+ zeek_*/proxy for paws)
+    reason: original .jsonl.gz were UTF-8-corrupted in git; rebuilt from bronze
+    total_events: 2339
 defaults:
   echo:
     delta_factor: 1.0

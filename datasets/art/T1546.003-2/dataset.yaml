@@ -1,8 +1,7 @@
 metadata:
   name: art-T1546.003-2
   version: 3.0.0
-  description: 'Atomic Red Team T1546.003-2: Windows Management Instrumentation Event Subscription (Persistence via WMI Event
-    Subscription - ActiveScriptEventConsumer) on Windows 11 Enterprise domain workstation.'
+  description: 'Atomic Red Team T1546.003-2: Windows Management Instrumentation Event Subscription (Persistence via WMI Event Subscription - ActiveScriptEventConsumer) on Windows 11 Enterprise domain workstation.'
   author: EchoLake Project
   created: '2026-03-14'
   license: CC0-1.0
@@ -35,7 +34,7 @@ files:
     description: Microsoft-Windows-Sysmon/Operational events
     format: jsonl
     schema: lakehouse_bronze
-    event_count: 40
+    event_count: 51
     log_source:
       vendor: Microsoft
       product: Windows
@@ -53,7 +52,7 @@ files:
     description: Security events
     format: jsonl
     schema: lakehouse_bronze
-    event_count: 10
+    event_count: 95
     log_source:
       vendor: Microsoft
       product: Windows
@@ -66,7 +65,7 @@ files:
     description: Microsoft-Windows-PowerShell/Operational events
     format: jsonl
     schema: lakehouse_bronze
-    event_count: 37
+    event_count: 1094
     log_source:
       vendor: Microsoft
       product: Windows
@@ -85,6 +84,10 @@ files:
       category: Wmi
       event_ids:
       - 5861
+  - path: data/application.jsonl.gz
+    event_count: 4
+    format: jsonl
+    schema: lakehouse_bronze
 environment:
   host:
     hostname: ACME-WS02
@@ -120,9 +123,7 @@ environment:
       image_load: true
       dns_query: true
       process_create_mode: include
-      notes: Filtered config — ProcessCreate uses include rules matching known-suspicious patterns (LOLBins, accessibility
-        bypass, fltmc, attrib, sc, etc). Not all process creations are captured in Sysmon. Security 4688 with command-line
-        auditing provides complementary full coverage.
+      notes: "Filtered config \u2014 ProcessCreate uses include rules matching known-suspicious patterns (LOLBins, accessibility bypass, fltmc, attrib, sc, etc). Not all process creations are captured in Sysmon. Security 4688 with command-line auditing provides complementary full coverage."
     audit_policy:
       process_creation: success
       process_termination: success
@@ -149,8 +150,7 @@ environment:
       behavior_monitoring: true
       amsi_enabled: true
       signature_version: 1.445.536.0
-      notes: Fully active during all test executions. Many techniques are blocked before completion, producing attempt telemetry
-        (process creation, command lines) but not success telemetry (LSASS access, file dumps, network connections).
+      notes: Fully active during all test executions. Many techniques are blocked before completion, producing attempt telemetry (process creation, command lines) but not success telemetry (LSASS access, file dumps, network connections).
 provenance:
   build:
     host: {}
@@ -170,6 +170,10 @@ provenance:
       powershell: 1094
       application: 4
       wmi: 1
+  regenerated:
+    from: lakewatch.bronze.microsoft_winevtlog (+ zeek_*/proxy for paws)
+    reason: original .jsonl.gz were UTF-8-corrupted in git; rebuilt from bronze
+    total_events: 1245
 defaults:
   echo:
     delta_factor: 1.0

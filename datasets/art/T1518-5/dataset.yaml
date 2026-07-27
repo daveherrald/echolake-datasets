@@ -26,7 +26,23 @@ metadata:
     latest: '2026-03-13T22:48:46Z'
     field: _time
 files:
-  bundled: []
+  bundled:
+  - path: data/security.jsonl.gz
+    event_count: 69
+    format: jsonl
+    schema: lakehouse_bronze
+  - path: data/application.jsonl.gz
+    event_count: 14
+    format: jsonl
+    schema: lakehouse_bronze
+  - path: data/powershell.jsonl.gz
+    event_count: 1248
+    format: jsonl
+    schema: lakehouse_bronze
+  - path: data/sysmon.jsonl.gz
+    event_count: 60
+    format: jsonl
+    schema: lakehouse_bronze
 environment:
   host:
     hostname: ACME-WS02
@@ -62,9 +78,7 @@ environment:
       image_load: true
       dns_query: true
       process_create_mode: include
-      notes: Filtered config — ProcessCreate uses include rules matching known-suspicious patterns (LOLBins, accessibility
-        bypass, fltmc, attrib, sc, etc). Not all process creations are captured in Sysmon. Security 4688 with command-line
-        auditing provides complementary full coverage.
+      notes: "Filtered config \u2014 ProcessCreate uses include rules matching known-suspicious patterns (LOLBins, accessibility bypass, fltmc, attrib, sc, etc). Not all process creations are captured in Sysmon. Security 4688 with command-line auditing provides complementary full coverage."
     audit_policy:
       process_creation: success
       process_termination: success
@@ -91,8 +105,7 @@ environment:
       behavior_monitoring: true
       amsi_enabled: true
       signature_version: 1.445.536.0
-      notes: Fully active during all test executions. Many techniques are blocked before completion, producing attempt telemetry
-        (process creation, command lines) but not success telemetry (LSASS access, file dumps, network connections).
+      notes: Fully active during all test executions. Many techniques are blocked before completion, producing attempt telemetry (process creation, command lines) but not success telemetry (LSASS access, file dumps, network connections).
 provenance:
   build:
     host: {}
@@ -102,6 +115,10 @@ provenance:
   verification:
     source_counts: {}
     dest_counts: {}
+  regenerated:
+    from: lakewatch.bronze.microsoft_winevtlog (+ zeek_*/proxy for paws)
+    reason: original .jsonl.gz were UTF-8-corrupted in git; rebuilt from bronze
+    total_events: 1391
 defaults:
   echo:
     delta_factor: 1.0

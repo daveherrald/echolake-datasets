@@ -1,8 +1,7 @@
 metadata:
   name: art-T1555.003-6.02
   version: 3.0.0
-  description: 'Atomic Red Team T1555.003-6: Credentials from Web Browsers (Simulating access to Windows Firefox Login Data)
-    on Windows 11 Enterprise domain workstation.'
+  description: 'Atomic Red Team T1555.003-6: Credentials from Web Browsers (Simulating access to Windows Firefox Login Data) on Windows 11 Enterprise domain workstation.'
   author: EchoLake Project
   created: '2026-03-17'
   license: CC0-1.0
@@ -32,7 +31,7 @@ files:
     description: Microsoft-Windows-PowerShell/Operational events
     format: jsonl
     schema: lakehouse_bronze
-    event_count: 104
+    event_count: 0
     log_source:
       vendor: Microsoft
       product: Windows
@@ -44,7 +43,7 @@ files:
     description: Security events
     format: jsonl
     schema: lakehouse_bronze
-    event_count: 4
+    event_count: 1
     log_source:
       vendor: Microsoft
       product: Windows
@@ -55,7 +54,7 @@ files:
     description: Microsoft-Windows-Sysmon/Operational events
     format: jsonl
     schema: lakehouse_bronze
-    event_count: 31
+    event_count: 0
     log_source:
       vendor: Microsoft
       product: Windows
@@ -101,9 +100,7 @@ environment:
       image_load: true
       dns_query: true
       process_create_mode: include
-      notes: Filtered config — ProcessCreate uses include rules matching known-suspicious patterns (LOLBins, accessibility
-        bypass, fltmc, attrib, sc, etc). Not all process creations are captured in Sysmon. Security 4688 with command-line
-        auditing provides complementary full coverage.
+      notes: "Filtered config \u2014 ProcessCreate uses include rules matching known-suspicious patterns (LOLBins, accessibility bypass, fltmc, attrib, sc, etc). Not all process creations are captured in Sysmon. Security 4688 with command-line auditing provides complementary full coverage."
     audit_policy:
       process_creation: success
       process_termination: success
@@ -130,8 +127,7 @@ environment:
       amsi_enabled: false
       antivirus_enabled: false
       disabled_via: Group Policy (Disable-Defender-ART GPO on UndefendedTests OU)
-      notes: All Defender protections disabled via GPO for ART testing. This dataset captures technique execution without
-        endpoint protection interference.
+      notes: All Defender protections disabled via GPO for ART testing. This dataset captures technique execution without endpoint protection interference.
 provenance:
   build:
     host: {}
@@ -143,6 +139,10 @@ provenance:
       sysmon: 31
       security: 4
       powershell: 104
+  regenerated:
+    from: lakewatch.bronze.microsoft_winevtlog (+ zeek_*/proxy for paws)
+    reason: original .jsonl.gz were UTF-8-corrupted in git; rebuilt from bronze
+    total_events: 1
 defaults:
   echo:
     delta_factor: 1.0
