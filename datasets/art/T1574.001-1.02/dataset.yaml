@@ -35,7 +35,7 @@ files:
     description: Microsoft-Windows-PowerShell/Operational events
     format: jsonl
     schema: lakehouse_bronze
-    event_count: 108
+    event_count: 1284
     log_source:
       vendor: Microsoft
       product: Windows
@@ -47,7 +47,7 @@ files:
     description: Security events
     format: jsonl
     schema: lakehouse_bronze
-    event_count: 16
+    event_count: 14
     log_source:
       vendor: Microsoft
       product: Windows
@@ -56,6 +56,10 @@ files:
       - 4688
       - 4689
       - 4703
+  - path: data/application.jsonl.gz
+    event_count: 2
+    format: jsonl
+    schema: lakehouse_bronze
 environment:
   host:
     hostname: ACME-WS06
@@ -90,9 +94,7 @@ environment:
       image_load: true
       dns_query: true
       process_create_mode: include
-      notes: Filtered config — ProcessCreate uses include rules matching known-suspicious patterns (LOLBins, accessibility
-        bypass, fltmc, attrib, sc, etc). Not all process creations are captured in Sysmon. Security 4688 with command-line
-        auditing provides complementary full coverage.
+      notes: "Filtered config \u2014 ProcessCreate uses include rules matching known-suspicious patterns (LOLBins, accessibility bypass, fltmc, attrib, sc, etc). Not all process creations are captured in Sysmon. Security 4688 with command-line auditing provides complementary full coverage."
     audit_policy:
       process_creation: success
       process_termination: success
@@ -119,8 +121,7 @@ environment:
       amsi_enabled: false
       antivirus_enabled: false
       disabled_via: Group Policy (Disable-Defender-ART GPO on UndefendedTests OU)
-      notes: All Defender protections disabled via GPO for ART testing. This dataset captures technique execution without
-        endpoint protection interference.
+      notes: All Defender protections disabled via GPO for ART testing. This dataset captures technique execution without endpoint protection interference.
 provenance:
   build:
     host: {}
@@ -131,6 +132,10 @@ provenance:
     source_counts:
       security: 16
       powershell: 108
+  regenerated:
+    from: lakewatch.bronze.microsoft_winevtlog (+ zeek_*/proxy for paws)
+    reason: original .jsonl.gz were UTF-8-corrupted in git; rebuilt from bronze
+    total_events: 1300
 defaults:
   echo:
     delta_factor: 1.0

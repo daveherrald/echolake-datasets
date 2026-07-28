@@ -1,8 +1,7 @@
 metadata:
   name: art-T1012-3.02
   version: 3.0.0
-  description: 'Atomic Red Team T1012-3: Query Registry (Enumerate COM Objects in Registry with Powershell) on Windows 11
-    Enterprise domain workstation.'
+  description: 'Atomic Red Team T1012-3: Query Registry (Enumerate COM Objects in Registry with Powershell) on Windows 11 Enterprise domain workstation.'
   author: EchoLake Project
   created: '2026-03-14'
   license: CC0-1.0
@@ -31,7 +30,7 @@ files:
     description: Application events
     format: jsonl
     schema: lakehouse_bronze
-    event_count: 1
+    event_count: 8
     log_source:
       vendor: Microsoft
       product: Windows
@@ -42,7 +41,7 @@ files:
     description: Microsoft-Windows-PowerShell/Operational events
     format: jsonl
     schema: lakehouse_bronze
-    event_count: 1489
+    event_count: 0
     log_source:
       vendor: Microsoft
       product: Windows
@@ -54,7 +53,7 @@ files:
     description: Security events
     format: jsonl
     schema: lakehouse_bronze
-    event_count: 38320
+    event_count: 488
     log_source:
       vendor: Microsoft
       product: Windows
@@ -77,7 +76,7 @@ files:
     description: Microsoft-Windows-Sysmon/Operational events
     format: jsonl
     schema: lakehouse_bronze
-    event_count: 1127
+    event_count: 1
     log_source:
       vendor: Microsoft
       product: Windows
@@ -95,7 +94,7 @@ files:
     description: Microsoft-Windows-TaskScheduler/Operational events
     format: jsonl
     schema: lakehouse_bronze
-    event_count: 1
+    event_count: 0
     log_source:
       vendor: Microsoft
       product: Windows
@@ -106,7 +105,7 @@ files:
     description: Microsoft-Windows-WMI-Activity/Operational events
     format: jsonl
     schema: lakehouse_bronze
-    event_count: 1
+    event_count: 22
     log_source:
       vendor: Microsoft
       product: Windows
@@ -151,9 +150,7 @@ environment:
       image_load: true
       dns_query: true
       process_create_mode: include
-      notes: Filtered config — ProcessCreate uses include rules matching known-suspicious patterns (LOLBins, accessibility
-        bypass, fltmc, attrib, sc, etc). Not all process creations are captured in Sysmon. Security 4688 with command-line
-        auditing provides complementary full coverage.
+      notes: "Filtered config \u2014 ProcessCreate uses include rules matching known-suspicious patterns (LOLBins, accessibility bypass, fltmc, attrib, sc, etc). Not all process creations are captured in Sysmon. Security 4688 with command-line auditing provides complementary full coverage."
     audit_policy:
       process_creation: success
       process_termination: success
@@ -180,8 +177,7 @@ environment:
       amsi_enabled: false
       antivirus_enabled: false
       disabled_via: Group Policy (Disable-Defender-ART GPO on UndefendedTests OU)
-      notes: All Defender protections disabled via GPO for ART testing. This dataset captures technique execution without
-        endpoint protection interference.
+      notes: All Defender protections disabled via GPO for ART testing. This dataset captures technique execution without endpoint protection interference.
 provenance:
   build:
     host: {}
@@ -196,6 +192,10 @@ provenance:
       application: 1
       wmi: 1
       taskscheduler: 1
+  regenerated:
+    from: lakewatch.bronze.microsoft_winevtlog (+ zeek_*/proxy for paws)
+    reason: original .jsonl.gz were UTF-8-corrupted in git; rebuilt from bronze
+    total_events: 519
 defaults:
   echo:
     delta_factor: 1.0

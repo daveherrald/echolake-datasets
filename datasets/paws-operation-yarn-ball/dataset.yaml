@@ -1,14 +1,7 @@
 metadata:
   name: paws-operation-yarn-ball
   version: 1.0.0
-  description: >-
-    PAWS (Pawsitive Vibes) Operation Yarn Ball - Full multi-stage attack simulation
-    on a Windows Active Directory environment with 7 VMs. Includes agentic persona
-    simulation (6 employees generating realistic background activity) plus a 10-stage
-    Sliver C2 attack chain covering recon, beacon deployment, credential harvesting,
-    lateral movement via WinRM/PsExec, data exfiltration, ransomware, and log clearing.
-    ~820K events across Windows (Sysmon, Security, PowerShell), Squid proxy, and Zeek
-    network logs.
+  description: PAWS (Pawsitive Vibes) Operation Yarn Ball - Full multi-stage attack simulation on a Windows Active Directory environment with 7 VMs. Includes agentic persona simulation (6 employees generating realistic background activity) plus a 10-stage Sliver C2 attack chain covering recon, beacon deployment, credential harvesting, lateral movement via WinRM/PsExec, data exfiltration, ransomware, and log clearing. ~820K events across Windows (Sysmon, Security, PowerShell), Squid proxy, and Zeek network logs.
   author: EchoLake Project
   created: '2026-03-18'
   license: CC0-1.0
@@ -34,55 +27,75 @@ metadata:
     techniques:
     - id: T1082
       name: System Information Discovery
-      tactics: [discovery]
+      tactics:
+      - discovery
     - id: T1016
       name: System Network Configuration Discovery
-      tactics: [discovery]
+      tactics:
+      - discovery
     - id: T1033
       name: System Owner/User Discovery
-      tactics: [discovery]
+      tactics:
+      - discovery
     - id: T1069
       name: Permission Groups Discovery
-      tactics: [discovery]
+      tactics:
+      - discovery
     - id: T1018
       name: Remote System Discovery
-      tactics: [discovery]
+      tactics:
+      - discovery
     - id: T1071
       name: Application Layer Protocol
-      tactics: [command-and-control]
+      tactics:
+      - command-and-control
     - id: T1071.004
       name: 'Application Layer Protocol: DNS'
-      tactics: [command-and-control]
+      tactics:
+      - command-and-control
     - id: T1218
       name: System Binary Proxy Execution
-      tactics: [defense-evasion]
+      tactics:
+      - defense-evasion
     - id: T1053
       name: Scheduled Task/Job
-      tactics: [execution, persistence, privilege-escalation]
+      tactics:
+      - execution
+      - persistence
+      - privilege-escalation
     - id: T1547.001
       name: 'Boot or Logon Autostart Execution: Registry Run Keys'
-      tactics: [persistence, privilege-escalation]
+      tactics:
+      - persistence
+      - privilege-escalation
     - id: T1552
       name: Unsecured Credentials
-      tactics: [credential-access]
+      tactics:
+      - credential-access
     - id: T1021.006
       name: 'Remote Services: Windows Remote Management'
-      tactics: [lateral-movement]
+      tactics:
+      - lateral-movement
     - id: T1021.002
       name: 'Remote Services: SMB/Windows Admin Shares'
-      tactics: [lateral-movement]
+      tactics:
+      - lateral-movement
     - id: T1569.002
       name: 'System Services: Service Execution'
-      tactics: [execution]
+      tactics:
+      - execution
     - id: T1041
       name: Exfiltration Over C2 Channel
-      tactics: [exfiltration]
+      tactics:
+      - exfiltration
     - id: T1486
       name: Data Encrypted for Impact
-      tactics: [impact]
+      tactics:
+      - impact
     - id: T1070.001
       name: 'Indicator Removal: Clear Windows Event Logs'
-      tactics: [defense-evasion]
+      tactics:
+      - defense-evasion
     tactics:
     - discovery
     - command-and-control
@@ -104,22 +117,51 @@ files:
     description: Microsoft-Windows-Sysmon/Operational events from all 7 PAWS hosts
     format: jsonl
     schema: lakehouse_bronze
-    event_count: 566793
+    event_count: 685735
     log_source:
       vendor: Microsoft
       product: Windows
       category: Sysmon
-      event_ids: [1, 2, 3, 5, 7, 8, 10, 11, 12, 13, 15, 17, 18, 22, 23, 25, 26]
+      event_ids:
+      - 1
+      - 2
+      - 3
+      - 5
+      - 7
+      - 8
+      - 10
+      - 11
+      - 12
+      - 13
+      - 15
+      - 17
+      - 18
+      - 22
+      - 23
+      - 25
+      - 26
   - path: data/security.jsonl.gz
     description: Windows Security events (logon, process creation, audit) from all PAWS hosts
     format: jsonl
     schema: lakehouse_bronze
-    event_count: 32414
+    event_count: 66986
     log_source:
       vendor: Microsoft
       product: Windows
       category: Security
-      event_ids: [4624, 4625, 4634, 4648, 4672, 4688, 4689, 4698, 4703, 4776, 5140, 5145]
+      event_ids:
+      - 4624
+      - 4625
+      - 4634
+      - 4648
+      - 4672
+      - 4688
+      - 4689
+      - 4698
+      - 4703
+      - 4776
+      - 5140
+      - 5145
   - path: data/powershell.jsonl.gz
     description: Microsoft-Windows-PowerShell/Operational events (script block logging)
     format: jsonl
@@ -129,12 +171,14 @@ files:
       vendor: Microsoft
       product: Windows
       category: Powershell
-      event_ids: [4103, 4104]
+      event_ids:
+      - 4103
+      - 4104
   - path: data/wmi.jsonl.gz
     description: Microsoft-Windows-WMI-Activity/Operational events
     format: jsonl
     schema: lakehouse_bronze
-    event_count: 20421
+    event_count: 20351
     log_source:
       vendor: Microsoft
       product: Windows
@@ -143,7 +187,7 @@ files:
     description: Microsoft-Windows-TaskScheduler/Operational events
     format: jsonl
     schema: lakehouse_bronze
-    event_count: 4872
+    event_count: 4904
     log_source:
       vendor: Microsoft
       product: Windows
@@ -152,7 +196,7 @@ files:
     description: Windows System event log
     format: jsonl
     schema: lakehouse_bronze
-    event_count: 2224
+    event_count: 2208
     log_source:
       vendor: Microsoft
       product: Windows
@@ -161,7 +205,7 @@ files:
     description: Windows Application event log
     format: jsonl
     schema: lakehouse_bronze
-    event_count: 2162
+    event_count: 2148
     log_source:
       vendor: Microsoft
       product: Windows
@@ -170,7 +214,7 @@ files:
     description: Other Windows event sources (Directory Service, DNS Server Audit)
     format: jsonl
     schema: lakehouse_bronze
-    event_count: 7
+    event_count: 6
     log_source:
       vendor: Microsoft
       product: Windows
@@ -179,7 +223,7 @@ files:
     description: Squid proxy access logs from PAWS-DC01 (includes C2 beacon traffic)
     format: jsonl
     schema: lakehouse_bronze
-    event_count: 17848
+    event_count: 63320
     log_source:
       vendor: Squid
       product: Squid Proxy
@@ -188,7 +232,7 @@ files:
     description: Zeek connection logs for PAWS network segment
     format: jsonl
     schema: lakehouse_bronze
-    event_count: 129341
+    event_count: 326812
     log_source:
       vendor: Zeek
       product: Zeek
@@ -197,7 +241,7 @@ files:
     description: Zeek DNS logs for PAWS network segment (includes C2 domain lookups)
     format: jsonl
     schema: lakehouse_bronze
-    event_count: 1845
+    event_count: 80972
     log_source:
       vendor: Zeek
       product: Zeek
@@ -206,7 +250,7 @@ files:
     description: Zeek HTTP logs for PAWS network segment (includes C2 beacon HTTP and proxy CONNECT)
     format: jsonl
     schema: lakehouse_bronze
-    event_count: 39399
+    event_count: 39859
     log_source:
       vendor: Zeek
       product: Zeek
@@ -223,7 +267,7 @@ environment:
     user: badactors
     method: QEMU guest agent + Sliver C2
     tool: badactors persona engine + paws-attack.py
-    tool_version: 'March 2026'
+    tool_version: March 2026
     isolation: dedicated VLAN (192.168.4.20-26)
   collection:
     collector: Cribl Edge
@@ -242,7 +286,11 @@ environment:
       installed: true
       version: '15.15'
       config_source: sysmon-modular (Olaf Hartong)
-      hashing_algorithms: [SHA1, MD5, SHA256, IMPHASH]
+      hashing_algorithms:
+      - SHA1
+      - MD5
+      - SHA256
+      - IMPHASH
       network_connect: true
       image_load: true
       dns_query: true
@@ -258,7 +306,10 @@ environment:
   network:
     zeek:
       installed: true
-      logs: [conn, dns, http]
+      logs:
+      - conn
+      - dns
+      - http
       capture_point: PAWS VLAN span port
     proxy:
       type: Squid
@@ -270,11 +321,7 @@ provenance:
       start_epoch: 1773792000
       end_epoch: 1773845337
     tool: badactors + paws-attack.py
-    notes: >-
-      Background activity generated by agentic persona engine (6 personas with
-      LLM-driven day plans). Attack executed by paws-attack.py driving Sliver C2
-      framework through 10 stages (1, 2, 2b, 2c, 2d, 3, 3b, 4, 4b, 5, 6, 7).
-      C2 infra at 192.168.4.200. Beacon traffic routed through Squid proxy on DC01.
+    notes: Background activity generated by agentic persona engine (6 personas with LLM-driven day plans). Attack executed by paws-attack.py driving Sliver C2 framework through 10 stages (1, 2, 2b, 2c, 2d, 3, 3b, 4, 4b, 5, 6, 7). C2 infra at 192.168.4.200. Beacon traffic routed through Squid proxy on DC01.
   verification:
     source_counts:
       sysmon: 566793
@@ -302,6 +349,10 @@ provenance:
       zeek_conn: 129341
       zeek_dns: 1845
       zeek_http: 39399
+  regenerated:
+    from: lakewatch.bronze.microsoft_winevtlog (+ zeek_*/proxy for paws)
+    reason: original .jsonl.gz were UTF-8-corrupted in git; rebuilt from bronze
+    total_events: 1295883
 defaults:
   echo:
     delta_factor: 1.0
