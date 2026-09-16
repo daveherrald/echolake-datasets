@@ -1,0 +1,145 @@
+{
+  "type": "bundle",
+  "id": "bundle--7439ed5c-14ef-5382-b49d-9a6ad8705da5",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--229a2f50-23be-5580-819b-679f3669a899",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--229a2f50-23be-5580-819b-679f3669a899",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--4f8e01f6-6e28-59c7-8e5a-8c4554bd2275",
+      "created_by_ref": "identity--229a2f50-23be-5580-819b-679f3669a899",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "CTID micro-emulation: Reflective Code Loading",
+      "description": "A CTID micro-emulation of reflective code loading followed by light discovery.",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--60be8289-c29a-5f1a-9e5d-71d0701b6bba"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--2707b89a-f6b4-5ab5-9f9c-af5a5b01d27a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1620",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1620"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--b6c2f2fb-f6d8-571f-b692-b2fe14f43ac3",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1082",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1082"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--56a2e631-ce80-5e34-8dba-368dc4e2b8ed",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1049",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1049"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--60be8289-c29a-5f1a-9e5d-71d0701b6bba",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Reflective code loading",
+      "technique_id": "T1620",
+      "technique_ref": "attack-pattern--2707b89a-f6b4-5ab5-9f9c-af5a5b01d27a",
+      "description": "Code is loaded reflectively into memory, avoiding the on-disk image (defense evasion).",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      },
+      "effect_refs": [
+        "attack-action--ff616879-f21f-5e8a-b125-b2f4bc18fa2a"
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--ff616879-f21f-5e8a-b125-b2f4bc18fa2a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "System information discovery",
+      "technique_id": "T1082",
+      "technique_ref": "attack-pattern--b6c2f2fb-f6d8-571f-b692-b2fe14f43ac3",
+      "description": "Host information is enumerated after load.",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      },
+      "effect_refs": [
+        "attack-action--c3128a00-3e10-5452-ad57-329548f45029"
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--c3128a00-3e10-5452-ad57-329548f45029",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "System network connections discovery",
+      "technique_id": "T1049",
+      "technique_ref": "attack-pattern--56a2e631-ce80-5e34-8dba-368dc4e2b8ed",
+      "description": "Active network connections are enumerated.",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}
