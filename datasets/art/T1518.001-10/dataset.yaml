@@ -28,10 +28,10 @@ metadata:
     field: _time
 files:
   bundled:
-  - path: data/sysmon.jsonl.gz
+  - path: data/sysmon.xml.gz
     description: Microsoft-Windows-Sysmon/Operational events
-    format: jsonl
-    schema: lakehouse_bronze
+    format: xml
+    schema: windows_events_xml
     event_count: 63
     log_source:
       vendor: Microsoft
@@ -43,10 +43,10 @@ files:
       - 10
       - 11
       - 17
-  - path: data/security.jsonl.gz
+  - path: data/security.xml.gz
     description: Security events
-    format: jsonl
-    schema: lakehouse_bronze
+    format: xml
+    schema: windows_events_xml
     event_count: 78
     log_source:
       vendor: Microsoft
@@ -56,10 +56,10 @@ files:
       - 4688
       - 4689
       - 4703
-  - path: data/powershell.jsonl.gz
+  - path: data/powershell.xml.gz
     description: Microsoft-Windows-PowerShell/Operational events
-    format: jsonl
-    schema: lakehouse_bronze
+    format: xml
+    schema: windows_events_xml
     event_count: 7316
     log_source:
       vendor: Microsoft
@@ -68,10 +68,10 @@ files:
       event_ids:
       - 4103
       - 4104
-  - path: data/system.jsonl.gz
+  - path: data/system.xml.gz
     description: System events
-    format: jsonl
-    schema: lakehouse_bronze
+    format: xml
+    schema: windows_events_xml
     event_count: 1
     log_source:
       vendor: Microsoft
@@ -79,10 +79,10 @@ files:
       category: System
       event_ids:
       - 7040
-  - path: data/wmi.jsonl.gz
+  - path: data/wmi.xml.gz
     description: Microsoft-Windows-WMI-Activity/Operational events
-    format: jsonl
-    schema: lakehouse_bronze
+    format: xml
+    schema: windows_events_xml
     event_count: 2
     log_source:
       vendor: Microsoft
@@ -90,10 +90,10 @@ files:
       category: Wmi
       event_ids:
       - 5858
-  - path: data/application.jsonl.gz
+  - path: data/application.xml.gz
     event_count: 14
-    format: jsonl
-    schema: lakehouse_bronze
+    format: xml
+    schema: windows_events_xml
 environment:
   host:
     hostname: ACME-WS02
@@ -180,11 +180,11 @@ provenance:
       wmi: 2
   regenerated:
     from: lakewatch.bronze.microsoft_winevtlog (+ zeek_*/proxy for paws)
-    reason: original .jsonl.gz were UTF-8-corrupted in git; rebuilt from bronze
+    reason: original .xml.gz were UTF-8-corrupted in git; rebuilt from bronze
     total_events: 7474
 defaults:
   echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h
-  schema: lakehouse_bronze
+  schema: windows_events_xml

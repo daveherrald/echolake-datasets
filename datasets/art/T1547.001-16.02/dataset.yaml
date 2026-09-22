@@ -29,10 +29,10 @@ metadata:
     field: _time
 files:
   bundled:
-  - path: data/application.jsonl.gz
+  - path: data/application.xml.gz
     description: Application events
-    format: jsonl
-    schema: lakehouse_bronze
+    format: xml
+    schema: windows_events_xml
     event_count: 0
     log_source:
       vendor: Microsoft
@@ -40,10 +40,10 @@ files:
       category: Application
       event_ids:
       - 1704
-  - path: data/powershell.jsonl.gz
+  - path: data/powershell.xml.gz
     description: Microsoft-Windows-PowerShell/Operational events
-    format: jsonl
-    schema: lakehouse_bronze
+    format: xml
+    schema: windows_events_xml
     event_count: 0
     log_source:
       vendor: Microsoft
@@ -52,10 +52,10 @@ files:
       event_ids:
       - 4103
       - 4104
-  - path: data/security.jsonl.gz
+  - path: data/security.xml.gz
     description: Security events
-    format: jsonl
-    schema: lakehouse_bronze
+    format: xml
+    schema: windows_events_xml
     event_count: 37
     log_source:
       vendor: Microsoft
@@ -67,10 +67,10 @@ files:
       - 4672
       - 4688
       - 4702
-  - path: data/sysmon.jsonl.gz
+  - path: data/sysmon.xml.gz
     description: Microsoft-Windows-Sysmon/Operational events
-    format: jsonl
-    schema: lakehouse_bronze
+    format: xml
+    schema: windows_events_xml
     event_count: 3
     log_source:
       vendor: Microsoft
@@ -84,10 +84,10 @@ files:
       - 13
       - 17
       - 22
-  - path: data/system.jsonl.gz
+  - path: data/system.xml.gz
     description: System events
-    format: jsonl
-    schema: lakehouse_bronze
+    format: xml
+    schema: windows_events_xml
     event_count: 0
     log_source:
       vendor: Microsoft
@@ -95,10 +95,10 @@ files:
       category: System
       event_ids:
       - 1500
-  - path: data/taskscheduler.jsonl.gz
+  - path: data/taskscheduler.xml.gz
     description: Microsoft-Windows-TaskScheduler/Operational events
-    format: jsonl
-    schema: lakehouse_bronze
+    format: xml
+    schema: windows_events_xml
     event_count: 0
     log_source:
       vendor: Microsoft
@@ -106,10 +106,10 @@ files:
       category: TaskScheduler
       event_ids:
       - 140
-  - path: data/wmi.jsonl.gz
+  - path: data/wmi.xml.gz
     event_count: 1
-    format: jsonl
-    schema: lakehouse_bronze
+    format: xml
+    schema: windows_events_xml
 environment:
   host:
     hostname: ACME-WS06
@@ -192,11 +192,11 @@ provenance:
       taskscheduler: 1
   regenerated:
     from: lakewatch.bronze.microsoft_winevtlog (+ zeek_*/proxy for paws)
-    reason: original .jsonl.gz were UTF-8-corrupted in git; rebuilt from bronze
+    reason: original .xml.gz were UTF-8-corrupted in git; rebuilt from bronze
     total_events: 41
 defaults:
   echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h
-  schema: lakehouse_bronze
+  schema: windows_events_xml

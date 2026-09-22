@@ -28,10 +28,10 @@ metadata:
     field: _time
 files:
   bundled:
-  - path: data/powershell.jsonl.gz
+  - path: data/powershell.xml.gz
     description: Microsoft-Windows-PowerShell/Operational events
-    format: jsonl
-    schema: lakehouse_bronze
+    format: xml
+    schema: windows_events_xml
     event_count: 0
     log_source:
       vendor: Microsoft
@@ -39,10 +39,10 @@ files:
       category: Powershell
       event_ids:
       - 4104
-  - path: data/security.jsonl.gz
+  - path: data/security.xml.gz
     description: Security events
-    format: jsonl
-    schema: lakehouse_bronze
+    format: xml
+    schema: windows_events_xml
     event_count: 37
     log_source:
       vendor: Microsoft
@@ -50,10 +50,10 @@ files:
       category: Security
       event_ids:
       - 4688
-  - path: data/sysmon.jsonl.gz
+  - path: data/sysmon.xml.gz
     description: Microsoft-Windows-Sysmon/Operational events
-    format: jsonl
-    schema: lakehouse_bronze
+    format: xml
+    schema: windows_events_xml
     event_count: 0
     log_source:
       vendor: Microsoft
@@ -65,10 +65,10 @@ files:
       - 10
       - 11
       - 17
-  - path: data/wmi.jsonl.gz
+  - path: data/wmi.xml.gz
     event_count: 1
-    format: jsonl
-    schema: lakehouse_bronze
+    format: xml
+    schema: windows_events_xml
 environment:
   host:
     hostname: ACME-WS06
@@ -145,11 +145,11 @@ provenance:
       powershell: 98
   regenerated:
     from: lakewatch.bronze.microsoft_winevtlog (+ zeek_*/proxy for paws)
-    reason: original .jsonl.gz were UTF-8-corrupted in git; rebuilt from bronze
+    reason: original .xml.gz were UTF-8-corrupted in git; rebuilt from bronze
     total_events: 38
 defaults:
   echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h
-  schema: lakehouse_bronze
+  schema: windows_events_xml
