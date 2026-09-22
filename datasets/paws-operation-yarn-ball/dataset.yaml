@@ -113,10 +113,10 @@ metadata:
     field: _time
 files:
   bundled:
-  - path: data/sysmon.jsonl.gz
+  - path: data/sysmon.xml.gz
     description: Microsoft-Windows-Sysmon/Operational events from all 7 PAWS hosts
-    format: jsonl
-    schema: lakehouse_bronze
+    format: xml
+    schema: windows_events_xml
     event_count: 685735
     log_source:
       vendor: Microsoft
@@ -140,10 +140,10 @@ files:
       - 23
       - 25
       - 26
-  - path: data/security.jsonl.gz
+  - path: data/security.xml.gz
     description: Windows Security events (logon, process creation, audit) from all PAWS hosts
-    format: jsonl
-    schema: lakehouse_bronze
+    format: xml
+    schema: windows_events_xml
     event_count: 66986
     log_source:
       vendor: Microsoft
@@ -162,10 +162,10 @@ files:
       - 4776
       - 5140
       - 5145
-  - path: data/powershell.jsonl.gz
+  - path: data/powershell.xml.gz
     description: Microsoft-Windows-PowerShell/Operational events (script block logging)
-    format: jsonl
-    schema: lakehouse_bronze
+    format: xml
+    schema: windows_events_xml
     event_count: 2582
     log_source:
       vendor: Microsoft
@@ -174,55 +174,55 @@ files:
       event_ids:
       - 4103
       - 4104
-  - path: data/wmi.jsonl.gz
+  - path: data/wmi.xml.gz
     description: Microsoft-Windows-WMI-Activity/Operational events
-    format: jsonl
-    schema: lakehouse_bronze
+    format: xml
+    schema: windows_events_xml
     event_count: 20351
     log_source:
       vendor: Microsoft
       product: Windows
       category: WMI
-  - path: data/taskscheduler.jsonl.gz
+  - path: data/taskscheduler.xml.gz
     description: Microsoft-Windows-TaskScheduler/Operational events
-    format: jsonl
-    schema: lakehouse_bronze
+    format: xml
+    schema: windows_events_xml
     event_count: 4904
     log_source:
       vendor: Microsoft
       product: Windows
       category: TaskScheduler
-  - path: data/system.jsonl.gz
+  - path: data/system.xml.gz
     description: Windows System event log
-    format: jsonl
-    schema: lakehouse_bronze
+    format: xml
+    schema: windows_events_xml
     event_count: 2208
     log_source:
       vendor: Microsoft
       product: Windows
       category: System
-  - path: data/application.jsonl.gz
+  - path: data/application.xml.gz
     description: Windows Application event log
-    format: jsonl
-    schema: lakehouse_bronze
+    format: xml
+    schema: windows_events_xml
     event_count: 2148
     log_source:
       vendor: Microsoft
       product: Windows
       category: Application
-  - path: data/wineventlog_other.jsonl.gz
+  - path: data/wineventlog_other.xml.gz
     description: Other Windows event sources (Directory Service, DNS Server Audit)
-    format: jsonl
-    schema: lakehouse_bronze
+    format: xml
+    schema: windows_events_xml
     event_count: 6
     log_source:
       vendor: Microsoft
       product: Windows
       category: Other
-  - path: data/proxylog.jsonl.gz
+  - path: data/proxylog.log.gz
     description: Squid proxy access logs from PAWS-DC01 (includes C2 beacon traffic)
-    format: jsonl
-    schema: lakehouse_bronze
+    format: text
+    schema: native
     event_count: 63320
     log_source:
       vendor: Squid
@@ -231,7 +231,7 @@ files:
   - path: data/zeek_conn.jsonl.gz
     description: Zeek connection logs for PAWS network segment
     format: jsonl
-    schema: lakehouse_bronze
+    schema: native
     event_count: 326812
     log_source:
       vendor: Zeek
@@ -240,7 +240,7 @@ files:
   - path: data/zeek_dns.jsonl.gz
     description: Zeek DNS logs for PAWS network segment (includes C2 domain lookups)
     format: jsonl
-    schema: lakehouse_bronze
+    schema: native
     event_count: 80972
     log_source:
       vendor: Zeek
@@ -249,7 +249,7 @@ files:
   - path: data/zeek_http.jsonl.gz
     description: Zeek HTTP logs for PAWS network segment (includes C2 beacon HTTP and proxy CONNECT)
     format: jsonl
-    schema: lakehouse_bronze
+    schema: native
     event_count: 39859
     log_source:
       vendor: Zeek

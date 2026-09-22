@@ -82,13 +82,13 @@ metadata:
     field: _event_time
 files:
   bundled:
-  - {path: data/microsoft_winevtlog.jsonl.gz, description: 'Windows Sysmon + Security + PowerShell across all Currentis hosts (attack + baseline)', format: jsonl, schema: lakehouse_bronze, event_count: 93104, log_source: {vendor: Microsoft, product: Windows, category: winevtlog}}
-  - {path: data/zeek_dns.jsonl.gz, description: 'Zeek DNS logs (name-resolution baseline)', format: jsonl, schema: lakehouse_bronze, event_count: 45235, log_source: {vendor: Zeek, product: Zeek, category: dns}}
-  - {path: data/zeek_conn.jsonl.gz, description: 'Zeek connection logs (incl. the C2 beacon and exfil to the documented indicator)', format: jsonl, schema: lakehouse_bronze, event_count: 30897, log_source: {vendor: Zeek, product: Zeek, category: conn}}
-  - {path: data/linux_syslog.jsonl.gz, description: 'Linux syslog (proxy, Zeek sensors, baseline hosts)', format: jsonl, schema: lakehouse_bronze, event_count: 1247, log_source: {vendor: Linux, product: syslog, category: syslog}}
-  - {path: data/zeek_http.jsonl.gz, description: 'Zeek HTTP logs (incl. the HTTP C2 beacon requests)', format: jsonl, schema: lakehouse_bronze, event_count: 768, log_source: {vendor: Zeek, product: Zeek, category: http}}
-  - {path: data/slack_messages.jsonl.gz, description: 'Slack persona chatter (human baseline / needle-in-haystack)', format: jsonl, schema: lakehouse_bronze, event_count: 404, log_source: {vendor: Slack, product: Slack, category: messages}}
-  - {path: data/exchange_message_tracking.jsonl.gz, description: 'Exchange message tracking (incl. the poisoned NERC CIP-010 document to rchen + 2 others)', format: jsonl, schema: lakehouse_bronze, event_count: 14, log_source: {vendor: Microsoft, product: Exchange, category: message_tracking}}
+  - {path: data/microsoft_winevtlog.xml.gz, description: 'Windows Sysmon + Security + PowerShell across all Currentis hosts (attack + baseline)', format: xml, schema: windows_events_xml, event_count: 93104, log_source: {vendor: Microsoft, product: Windows, category: winevtlog}}
+  - {path: data/zeek_dns.jsonl.gz, description: 'Zeek DNS logs (name-resolution baseline)', format: jsonl, schema: native, event_count: 45235, log_source: {vendor: Zeek, product: Zeek, category: dns}}
+  - {path: data/zeek_conn.jsonl.gz, description: 'Zeek connection logs (incl. the C2 beacon and exfil to the documented indicator)', format: jsonl, schema: native, event_count: 30897, log_source: {vendor: Zeek, product: Zeek, category: conn}}
+  - {path: data/linux_syslog.log.gz, description: 'Linux syslog (proxy, Zeek sensors, baseline hosts)', format: text, schema: native, event_count: 1247, log_source: {vendor: Linux, product: syslog, category: syslog}}
+  - {path: data/zeek_http.jsonl.gz, description: 'Zeek HTTP logs (incl. the HTTP C2 beacon requests)', format: jsonl, schema: native, event_count: 768, log_source: {vendor: Zeek, product: Zeek, category: http}}
+  - {path: data/slack_messages.jsonl.gz, description: 'Slack persona chatter (human baseline / needle-in-haystack)', format: jsonl, schema: native, event_count: 404, log_source: {vendor: Slack, product: Slack, category: messages}}
+  - {path: data/exchange_message_tracking.log.gz, description: 'Exchange message tracking (incl. the poisoned NERC CIP-010 document to rchen + 2 others)', format: text, schema: native, event_count: 14, log_source: {vendor: Microsoft, product: Exchange, category: message_tracking}}
 environment:
   host:
     domain: currentis.local
