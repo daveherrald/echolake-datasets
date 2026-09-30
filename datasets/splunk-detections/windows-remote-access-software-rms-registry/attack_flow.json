@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--0bc3ca7d-4494-5214-89de-8864fd75e04b",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--699b44a3-a2b9-520b-93fd-243ca050f560",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--699b44a3-a2b9-520b-93fd-243ca050f560",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--7ec867be-8ae8-5c45-9273-fc7d303f63d0",
+      "created_by_ref": "identity--699b44a3-a2b9-520b-93fd-243ca050f560",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-remote-access-software-rms-registry",
+      "description": "The following analytic detects the creation or modification of Windows registry entries related to the Remote Manipulator System (RMS) Remote Admin tool. It leverages data from the Endpoint.Registry datamodel, focusing on registry paths containing \"SYSTEM\\\\Remote Manipulator System.\" This activity is significant because RMS, while legitimate, is often abused by adversaries, such as in the Azorult malware campaigns, to gain unauthorized remote access. If confirmed malicious, this could allow atta",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--261d72ea-2e43-5f0b-8d42-197d457caf75"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--8ec8764e-1516-5968-bbce-855590dfa7ae",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1219",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1219"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--261d72ea-2e43-5f0b-8d42-197d457caf75",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1219",
+      "technique_id": "T1219",
+      "technique_ref": "attack-pattern--8ec8764e-1516-5968-bbce-855590dfa7ae",
+      "description": "The following analytic detects the creation or modification of Windows registry entries related to the Remote Manipulator System (RMS) Remote Admin tool. It leverages data from the Endpoint.Registry datamodel, focusing on registry paths containing \"SYSTEM\\\\Remote Manipulator System.\" This activity is significant because RMS, while legitimate, is often abused by adversaries, such as in the Azorult malware campaigns, to gain unauthorized remote access. If confirmed malicious, this could allow atta",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

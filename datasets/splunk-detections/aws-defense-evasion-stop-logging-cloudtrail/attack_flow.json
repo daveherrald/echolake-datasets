@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--7fa85674-d076-59f8-9e83-3a0c39fe8f31",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--5dc87a10-fc3c-54ae-a7d5-6f070fb7b039",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--5dc87a10-fc3c-54ae-a7d5-6f070fb7b039",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--95d91144-103b-57d8-9771-d1111b90d961",
+      "created_by_ref": "identity--5dc87a10-fc3c-54ae-a7d5-6f070fb7b039",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: aws-defense-evasion-stop-logging-cloudtrail",
+      "description": "The following analytic detects `StopLogging` events in AWS CloudTrail logs. It leverages CloudTrail event data to identify when logging is intentionally stopped, excluding console-based actions and focusing on successful attempts. This activity is significant because adversaries may stop logging to evade detection and operate stealthily within the compromised environment. If confirmed malicious, this action could allow attackers to perform further activities without being logged, hindering incid",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--cf3d39f8-4a25-5975-ab32-af8ed5487d67"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--12410ac8-fb4a-5b5c-a9ac-dd371a84c956",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.008",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1562.008"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--cf3d39f8-4a25-5975-ab32-af8ed5487d67",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.008",
+      "technique_id": "T1562.008",
+      "technique_ref": "attack-pattern--12410ac8-fb4a-5b5c-a9ac-dd371a84c956",
+      "description": "The following analytic detects `StopLogging` events in AWS CloudTrail logs. It leverages CloudTrail event data to identify when logging is intentionally stopped, excluding console-based actions and focusing on successful attempts. This activity is significant because adversaries may stop logging to evade detection and operate stealthily within the compromised environment. If confirmed malicious, this action could allow attackers to perform further activities without being logged, hindering incid",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

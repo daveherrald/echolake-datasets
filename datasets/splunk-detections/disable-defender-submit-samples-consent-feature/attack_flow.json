@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--491e1d26-2026-526f-aa9e-7b0dfea1857f",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--f4943c41-5465-5edc-a25b-ef584b6e8e65",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--f4943c41-5465-5edc-a25b-ef584b6e8e65",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--db9c5c99-c010-55f4-b81e-4bdc413651c9",
+      "created_by_ref": "identity--f4943c41-5465-5edc-a25b-ef584b6e8e65",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: disable-defender-submit-samples-consent-feature",
+      "description": "The following analytic detects the modification of the Windows registry to disable the Windows Defender Submit Samples Consent feature. It leverages data from the Endpoint.Registry data model, specifically monitoring changes to the registry path associated with Windows Defender SpyNet and the SubmitSamplesConsent value set to 0x00000000. This activity is significant as it indicates an attempt to bypass or evade detection by preventing Windows Defender from submitting samples for further analysis",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--d803ec92-637e-5437-aeea-b87d1342bf0c"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--fb605c8b-04bd-5106-80f9-91d28b2afaf9",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1562.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--d803ec92-637e-5437-aeea-b87d1342bf0c",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.001",
+      "technique_id": "T1562.001",
+      "technique_ref": "attack-pattern--fb605c8b-04bd-5106-80f9-91d28b2afaf9",
+      "description": "The following analytic detects the modification of the Windows registry to disable the Windows Defender Submit Samples Consent feature. It leverages data from the Endpoint.Registry data model, specifically monitoring changes to the registry path associated with Windows Defender SpyNet and the SubmitSamplesConsent value set to 0x00000000. This activity is significant as it indicates an attempt to bypass or evade detection by preventing Windows Defender from submitting samples for further analysis",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

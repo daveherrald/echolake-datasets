@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--7342c708-97b6-5f5b-8886-c766b3bb1eca",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--3168541e-f3e4-56ed-ada2-be84b0e2a3af",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--3168541e-f3e4-56ed-ada2-be84b0e2a3af",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--f3983895-237a-58a2-a896-8144a8390e01",
+      "created_by_ref": "identity--3168541e-f3e4-56ed-ada2-be84b0e2a3af",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-new-deny-permission-set-on-service-sd-via-scexe",
+      "description": "The following analytic detects changes in a service security descriptor where a new deny ace has been added. It leverages data from Endpoint Detection and Response (EDR) agents, specifically searching for any process execution involving the \"sc.exe\" binary with the \"sdset\" flag targeting any service and adding a dedicated deny ace. If confirmed malicious, this could allow an attacker to escalate their privileges, blind defenses and more.",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--5647c25b-bd94-5718-b476-e55c09b8d276"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--e1706654-f8a0-596a-a131-164b2fc950c9",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1564",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1564"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--5647c25b-bd94-5718-b476-e55c09b8d276",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1564",
+      "technique_id": "T1564",
+      "technique_ref": "attack-pattern--e1706654-f8a0-596a-a131-164b2fc950c9",
+      "description": "The following analytic detects changes in a service security descriptor where a new deny ace has been added. It leverages data from Endpoint Detection and Response (EDR) agents, specifically searching for any process execution involving the \"sc.exe\" binary with the \"sdset\" flag targeting any service and adding a dedicated deny ace. If confirmed malicious, this could allow an attacker to escalate their privileges, blind defenses and more.",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

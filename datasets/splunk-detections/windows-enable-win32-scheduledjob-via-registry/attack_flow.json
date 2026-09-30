@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--87e4eeec-5fa6-58ce-98f0-a176c056bff8",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--eb6834ad-8526-5f1b-9759-d51c3dff7e85",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--eb6834ad-8526-5f1b-9759-d51c3dff7e85",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--18ac5c6a-410e-5b61-ae14-26abba24ffb1",
+      "created_by_ref": "identity--eb6834ad-8526-5f1b-9759-d51c3dff7e85",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-enable-win32-scheduledjob-via-registry",
+      "description": "The following analytic detects the creation of a new DWORD value named \"EnableAt\" in the registry path \"HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Schedule\\Configuration\". This modification enables the use of the at.exe or wmi Win32_ScheduledJob commands to add scheduled tasks on a Windows endpoint. The detection leverages registry event data from the Endpoint datamodel. This activity is significant because it may indicate that an attacker is enabling the ability to schedule tasks, poten",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--75e79f2f-63db-5cee-8f5f-7694e7f95d02"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--1427935e-5725-51e3-a44b-b488c20cf64e",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1053.005",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1053.005"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--75e79f2f-63db-5cee-8f5f-7694e7f95d02",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1053.005",
+      "technique_id": "T1053.005",
+      "technique_ref": "attack-pattern--1427935e-5725-51e3-a44b-b488c20cf64e",
+      "description": "The following analytic detects the creation of a new DWORD value named \"EnableAt\" in the registry path \"HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Schedule\\Configuration\". This modification enables the use of the at.exe or wmi Win32_ScheduledJob commands to add scheduled tasks on a Windows endpoint. The detection leverages registry event data from the Endpoint datamodel. This activity is significant because it may indicate that an attacker is enabling the ability to schedule tasks, poten",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

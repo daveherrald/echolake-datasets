@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--d875c130-fef6-506d-b011-fd2e43e64205",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--14aa5f0f-353f-512e-aa6a-f46d3c8a8294",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--14aa5f0f-353f-512e-aa6a-f46d3c8a8294",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--fa5b1a53-959b-515a-8cd5-cb3d79912d72",
+      "created_by_ref": "identity--14aa5f0f-353f-512e-aa6a-f46d3c8a8294",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-new-inprocserver32-added",
+      "description": "The following analytic detects the addition of new InProcServer32 registry keys on Windows endpoints. It leverages data from the Endpoint.Registry datamodel to identify changes in registry paths associated with InProcServer32. This activity is significant because malware often uses this mechanism to achieve persistence or execute malicious code by registering a new InProcServer32 key pointing to a harmful DLL. If confirmed malicious, this could allow an attacker to persist in the environment or",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--dfec827b-aa13-58ac-bcaa-540b23958098"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--bc56bebb-f781-5696-b723-950914f285d3",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1112",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1112"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--dfec827b-aa13-58ac-bcaa-540b23958098",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1112",
+      "technique_id": "T1112",
+      "technique_ref": "attack-pattern--bc56bebb-f781-5696-b723-950914f285d3",
+      "description": "The following analytic detects the addition of new InProcServer32 registry keys on Windows endpoints. It leverages data from the Endpoint.Registry datamodel to identify changes in registry paths associated with InProcServer32. This activity is significant because malware often uses this mechanism to achieve persistence or execute malicious code by registering a new InProcServer32 key pointing to a harmful DLL. If confirmed malicious, this could allow an attacker to persist in the environment or",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

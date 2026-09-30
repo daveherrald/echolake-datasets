@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--af736a6b-9531-567c-9485-6177ff9135aa",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--3f362e85-d169-5fe0-8fbc-1c678ff5fa43",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--3f362e85-d169-5fe0-8fbc-1c678ff5fa43",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--9bd8b17a-2e6f-50a7-bc9b-428d2d1ba404",
+      "created_by_ref": "identity--3f362e85-d169-5fe0-8fbc-1c678ff5fa43",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: okta-suspicious-activity-reported",
+      "description": "The following analytic identifies when an associate reports a login attempt as suspicious via an email from Okta. It leverages Okta Identity Management logs, specifically the `user.account.report_suspicious_activity_by_enduser` event type. This activity is significant as it indicates potential unauthorized access attempts, warranting immediate investigation to prevent possible security breaches. If confirmed malicious, the attacker could gain unauthorized access to sensitive systems and data, le",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--1635e975-abe1-5ec1-a741-05dbbfad48da"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--5a4a5721-4a2b-5ae6-a52f-26913f4a391c",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1078.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1078.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--1635e975-abe1-5ec1-a741-05dbbfad48da",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1078.001",
+      "technique_id": "T1078.001",
+      "technique_ref": "attack-pattern--5a4a5721-4a2b-5ae6-a52f-26913f4a391c",
+      "description": "The following analytic identifies when an associate reports a login attempt as suspicious via an email from Okta. It leverages Okta Identity Management logs, specifically the `user.account.report_suspicious_activity_by_enduser` event type. This activity is significant as it indicates potential unauthorized access attempts, warranting immediate investigation to prevent possible security breaches. If confirmed malicious, the attacker could gain unauthorized access to sensitive systems and data, le",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--cbbebc92-2859-53d5-96bc-841a491bd50d",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--80bb688a-02ff-55d2-9e2b-99e9c304e4ec",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--80bb688a-02ff-55d2-9e2b-99e9c304e4ec",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--8b4fc12c-e532-5800-80ce-ae5b9a33cd9a",
+      "created_by_ref": "identity--80bb688a-02ff-55d2-9e2b-99e9c304e4ec",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-remote-management-execute-shell",
+      "description": "The following analytic detects the execution of winrshost.exe initiating CMD or PowerShell processes as part of a potential payload execution. winrshost.exe is associated with Windows Remote Management (WinRM) and is typically used for remote execution. By monitoring for this behavior, the detection identifies instances where winrshost.exe is leveraged to run potentially malicious commands or payloads via CMD or PowerShell. This behavior may indicate exploitation of remote management tools for u",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--316e671e-e03e-54eb-8bfa-51b12e697452"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--b9bf4276-0394-56b7-8e2f-bd51bd6f7eb3",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1021.006",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1021.006"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--316e671e-e03e-54eb-8bfa-51b12e697452",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1021.006",
+      "technique_id": "T1021.006",
+      "technique_ref": "attack-pattern--b9bf4276-0394-56b7-8e2f-bd51bd6f7eb3",
+      "description": "The following analytic detects the execution of winrshost.exe initiating CMD or PowerShell processes as part of a potential payload execution. winrshost.exe is associated with Windows Remote Management (WinRM) and is typically used for remote execution. By monitoring for this behavior, the detection identifies instances where winrshost.exe is leveraged to run potentially malicious commands or payloads via CMD or PowerShell. This behavior may indicate exploitation of remote management tools for u",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

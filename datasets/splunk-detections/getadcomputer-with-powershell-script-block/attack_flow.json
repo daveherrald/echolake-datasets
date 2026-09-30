@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--02557bb7-7149-5ebe-a6d5-3f7fcc026707",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--dc62a956-7f48-5403-89a8-ce692f45daba",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--dc62a956-7f48-5403-89a8-ce692f45daba",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--2073d2e6-02c8-5cdc-b0df-cf7b92c04bad",
+      "created_by_ref": "identity--dc62a956-7f48-5403-89a8-ce692f45daba",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: getadcomputer-with-powershell-script-block",
+      "description": "The following analytic detects the execution of the `Get-AdComputer` PowerShell commandlet using PowerShell Script Block Logging (EventCode=4104). This detection leverages script block text to identify when this commandlet is run. The `Get-AdComputer` commandlet is significant as it can be used by adversaries to enumerate all domain computers, aiding in situational awareness and Active Directory discovery. If confirmed malicious, this activity could allow attackers to map the network, identify t",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--675ea389-4f2e-5c9d-97cd-5f926e598840"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--f57f5625-988e-5c3b-b326-90b9d5f34e7b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1018",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1018"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--675ea389-4f2e-5c9d-97cd-5f926e598840",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1018",
+      "technique_id": "T1018",
+      "technique_ref": "attack-pattern--f57f5625-988e-5c3b-b326-90b9d5f34e7b",
+      "description": "The following analytic detects the execution of the `Get-AdComputer` PowerShell commandlet using PowerShell Script Block Logging (EventCode=4104). This detection leverages script block text to identify when this commandlet is run. The `Get-AdComputer` commandlet is significant as it can be used by adversaries to enumerate all domain computers, aiding in situational awareness and Active Directory discovery. If confirmed malicious, this activity could allow attackers to map the network, identify t",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--4791eb44-a06b-5c99-b71e-307fd3a798db",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--a079f819-d9d7-52cb-b1dd-5e53dfa1fa55",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--a079f819-d9d7-52cb-b1dd-5e53dfa1fa55",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--48c18eeb-d3ea-5eaf-aa0c-d461ec60bef2",
+      "created_by_ref": "identity--a079f819-d9d7-52cb-b1dd-5e53dfa1fa55",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-disable-lock-workstation-feature-through-registry",
+      "description": "The following analytic detects a suspicious registry modification that disables the Lock Computer feature in Windows. It leverages data from the Endpoint.Registry data model, specifically monitoring changes to the registry path \"*\\\\SOFTWARE\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Policies\\\\System\\\\DisableLockWorkstation\" with a value of \"0x00000001\". This activity is significant because it prevents users from locking their screens, a tactic often used by malware, including ransomware, to maintain c",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--8800493a-1229-51c6-bd7c-10c99983d279"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--e73b8d70-9ae7-59e2-bd82-37f6a30347fe",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1112",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1112"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--8800493a-1229-51c6-bd7c-10c99983d279",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1112",
+      "technique_id": "T1112",
+      "technique_ref": "attack-pattern--e73b8d70-9ae7-59e2-bd82-37f6a30347fe",
+      "description": "The following analytic detects a suspicious registry modification that disables the Lock Computer feature in Windows. It leverages data from the Endpoint.Registry data model, specifically monitoring changes to the registry path \"*\\\\SOFTWARE\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Policies\\\\System\\\\DisableLockWorkstation\" with a value of \"0x00000001\". This activity is significant because it prevents users from locking their screens, a tactic often used by malware, including ransomware, to maintain c",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

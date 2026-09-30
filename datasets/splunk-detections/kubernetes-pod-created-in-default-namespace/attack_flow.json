@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--44740966-c147-5938-ab13-c46f5575097c",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--9afee79b-4884-51c9-aa21-6a252e524bff",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--9afee79b-4884-51c9-aa21-6a252e524bff",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--d6b4f7e3-b8ec-58ed-90ad-c69d447d3b8b",
+      "created_by_ref": "identity--9afee79b-4884-51c9-aa21-6a252e524bff",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: kubernetes-pod-created-in-default-namespace",
+      "description": "The following analytic detects the creation of Kubernetes pods in the default, kube-system, or kube-public namespaces. It leverages Kubernetes audit logs to identify pod creation events within these specific namespaces. This activity is significant for a SOC as it may indicate an attacker attempting to hide their presence or evade defenses. Unauthorized pod creation in these namespaces can suggest a successful cluster breach, potentially leading to privilege escalation, persistent access, or fur",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--f6c78609-1da7-576b-bdab-fec5df90bfbf"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--dc8f1fb4-a305-50d8-91b0-483ff5b9ff21",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1204",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1204"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--f6c78609-1da7-576b-bdab-fec5df90bfbf",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1204",
+      "technique_id": "T1204",
+      "technique_ref": "attack-pattern--dc8f1fb4-a305-50d8-91b0-483ff5b9ff21",
+      "description": "The following analytic detects the creation of Kubernetes pods in the default, kube-system, or kube-public namespaces. It leverages Kubernetes audit logs to identify pod creation events within these specific namespaces. This activity is significant for a SOC as it may indicate an attacker attempting to hide their presence or evade defenses. Unauthorized pod creation in these namespaces can suggest a successful cluster breach, potentially leading to privilege escalation, persistent access, or fur",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

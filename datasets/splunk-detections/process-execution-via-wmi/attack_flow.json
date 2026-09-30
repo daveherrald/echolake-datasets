@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--7ba74dba-ee74-504b-bdfe-dba4b2efe73b",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--fe9fe643-90ec-5bab-8af9-dbe246cc29ec",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--fe9fe643-90ec-5bab-8af9-dbe246cc29ec",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--27ad7366-5c1a-5baf-b563-7488219303f3",
+      "created_by_ref": "identity--fe9fe643-90ec-5bab-8af9-dbe246cc29ec",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: process-execution-via-wmi",
+      "description": "The following analytic detects the execution of a process by `WmiPrvSE.exe`, indicating potential use of WMI (Windows Management Instrumentation) for process creation. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process and parent process relationships. This activity is significant as WMI can be used for lateral movement, remote code execution, or persistence by attackers. If confirmed malicious, this could allow an attacker to execute arbitrary c",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--054b2aed-a4ed-5f01-8df3-315bccd78770"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--fcc87381-94bf-50f2-b67d-df8b41ce5561",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1047",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1047"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--054b2aed-a4ed-5f01-8df3-315bccd78770",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1047",
+      "technique_id": "T1047",
+      "technique_ref": "attack-pattern--fcc87381-94bf-50f2-b67d-df8b41ce5561",
+      "description": "The following analytic detects the execution of a process by `WmiPrvSE.exe`, indicating potential use of WMI (Windows Management Instrumentation) for process creation. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process and parent process relationships. This activity is significant as WMI can be used for lateral movement, remote code execution, or persistence by attackers. If confirmed malicious, this could allow an attacker to execute arbitrary c",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

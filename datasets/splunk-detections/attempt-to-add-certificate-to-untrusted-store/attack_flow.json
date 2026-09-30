@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--c8c0c116-e57f-5de7-ba0d-6ee7cba6e49f",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--88c2d2b2-36b1-5b11-9d7c-517ec4c1fc5a",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--88c2d2b2-36b1-5b11-9d7c-517ec4c1fc5a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--89b4f3d4-1133-5789-bcac-cff888d63d56",
+      "created_by_ref": "identity--88c2d2b2-36b1-5b11-9d7c-517ec4c1fc5a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: attempt-to-add-certificate-to-untrusted-store",
+      "description": "The following analytic detects attempts to add a certificate to the untrusted\ncertificate store using the 'certutil -addstore' command. \nIt leverages process activity and command-line arguments from Endpoint Detection and Response (EDR) logs mapped to the Splunk `Processes` data model. \nThis activity is significant as it may indicate an attacker trying to disable security tools to gain unauthorized access.\nIf confirmed malicious, this could lead to the compromise of system security, allowing att",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--e1644c58-14d9-5005-8715-e42bc3d2e30a"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--f0e11815-e97b-5488-9162-42d30791be6f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1553.004",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1553.004"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--e1644c58-14d9-5005-8715-e42bc3d2e30a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1553.004",
+      "technique_id": "T1553.004",
+      "technique_ref": "attack-pattern--f0e11815-e97b-5488-9162-42d30791be6f",
+      "description": "The following analytic detects attempts to add a certificate to the untrusted\ncertificate store using the 'certutil -addstore' command. \nIt leverages process activity and command-line arguments from Endpoint Detection and Response (EDR) logs mapped to the Splunk `Processes` data model. \nThis activity is significant as it may indicate an attacker trying to disable security tools to gain unauthorized access.\nIf confirmed malicious, this could lead to the compromise of system security, allowing att",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

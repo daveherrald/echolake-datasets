@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--70540253-2f46-51b6-a4e2-955bce077e5f",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--87f36865-d4f3-5004-aa1f-d5dd6de04632",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--87f36865-d4f3-5004-aa1f-d5dd6de04632",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--5537f263-cffa-5701-8448-d45f61945423",
+      "created_by_ref": "identity--87f36865-d4f3-5004-aa1f-d5dd6de04632",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: disable-defender-spynet-reporting",
+      "description": "The following analytic detects the modification of the registry to disable Windows Defender SpyNet reporting. It leverages data from the Endpoint.Registry data model, specifically monitoring changes to the registry path associated with Windows Defender SpyNet settings. This activity is significant because disabling SpyNet reporting can prevent Windows Defender from sending telemetry data, potentially allowing malicious activities to go undetected. If confirmed malicious, this action could enable",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--b7b151a9-1513-5a57-bb42-79128ec6d3a4"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--7beb7777-27d0-5bd2-a9aa-54f7a1c50e34",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1562.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--b7b151a9-1513-5a57-bb42-79128ec6d3a4",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.001",
+      "technique_id": "T1562.001",
+      "technique_ref": "attack-pattern--7beb7777-27d0-5bd2-a9aa-54f7a1c50e34",
+      "description": "The following analytic detects the modification of the registry to disable Windows Defender SpyNet reporting. It leverages data from the Endpoint.Registry data model, specifically monitoring changes to the registry path associated with Windows Defender SpyNet settings. This activity is significant because disabling SpyNet reporting can prevent Windows Defender from sending telemetry data, potentially allowing malicious activities to go undetected. If confirmed malicious, this action could enable",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

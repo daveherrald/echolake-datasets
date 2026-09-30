@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--11cbd358-b9c5-5ac5-8990-85e54ab97fa7",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--52cb2a2c-a5f9-52ef-b9f4-8d771adbe4ed",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--52cb2a2c-a5f9-52ef-b9f4-8d771adbe4ed",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--b7016766-2435-52cc-bb07-aa18c76f61d1",
+      "created_by_ref": "identity--52cb2a2c-a5f9-52ef-b9f4-8d771adbe4ed",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-new-custom-security-descriptor-set-on-eventlog-channel",
+      "description": "The following analytic detects suspicious modifications to the EventLog security descriptor registry value for defense evasion. It leverages data from the Endpoint.Registry data model, focusing on changes to the \"CustomSD\" value within the \"HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Services\\Eventlog\\<Channel>\\CustomSD\" path. This activity is significant as changes to the access permissions of the event log could blind security products and help attackers evade defenses. If confirmed malicious,",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--b90503bf-9337-562e-9e55-a9fa0431ed34"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--f7483b9c-05d6-55fb-8fd3-6fdc3e584505",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.002",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1562.002"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--b90503bf-9337-562e-9e55-a9fa0431ed34",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.002",
+      "technique_id": "T1562.002",
+      "technique_ref": "attack-pattern--f7483b9c-05d6-55fb-8fd3-6fdc3e584505",
+      "description": "The following analytic detects suspicious modifications to the EventLog security descriptor registry value for defense evasion. It leverages data from the Endpoint.Registry data model, focusing on changes to the \"CustomSD\" value within the \"HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Services\\Eventlog\\<Channel>\\CustomSD\" path. This activity is significant as changes to the access permissions of the event log could blind security products and help attackers evade defenses. If confirmed malicious,",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

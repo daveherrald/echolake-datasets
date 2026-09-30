@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--1959b6e8-81ac-50ce-865a-bf9c8f1cbdbf",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--4fe56970-d331-5b5f-a478-4bf58c260f78",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--4fe56970-d331-5b5f-a478-4bf58c260f78",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--b4602e45-4249-5338-868f-e7b1683cf6e8",
+      "created_by_ref": "identity--4fe56970-d331-5b5f-a478-4bf58c260f78",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-ad-privileged-account-sid-history-addition",
+      "description": "The following analytic identifies when the SID of a privileged user is added to the SID History attribute of another user. It leverages Windows Security Event Codes 4742 and 4738, combined with identity lookups, to detect this activity. This behavior is significant as it may indicate an attempt to abuse SID history for unauthorized access across multiple domains. If confirmed malicious, this activity could allow an attacker to escalate privileges or maintain persistent access within the environm",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--acffe04a-9125-580e-bf8b-684d001bafea"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--a6b988e8-6209-5289-a0f5-c992777307d0",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1134.005",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1134.005"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--acffe04a-9125-580e-bf8b-684d001bafea",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1134.005",
+      "technique_id": "T1134.005",
+      "technique_ref": "attack-pattern--a6b988e8-6209-5289-a0f5-c992777307d0",
+      "description": "The following analytic identifies when the SID of a privileged user is added to the SID History attribute of another user. It leverages Windows Security Event Codes 4742 and 4738, combined with identity lookups, to detect this activity. This behavior is significant as it may indicate an attempt to abuse SID history for unauthorized access across multiple domains. If confirmed malicious, this activity could allow an attacker to escalate privileges or maintain persistent access within the environm",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

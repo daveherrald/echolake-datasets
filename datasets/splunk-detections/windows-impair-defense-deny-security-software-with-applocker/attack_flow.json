@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--84e24247-fe90-5c6a-aa3c-d6b901868ba3",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--aa8b66ce-b9c9-5123-88b7-d0c7a81b27c4",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--aa8b66ce-b9c9-5123-88b7-d0c7a81b27c4",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--49ad6481-971c-52c7-bab9-8f6249a878ab",
+      "created_by_ref": "identity--aa8b66ce-b9c9-5123-88b7-d0c7a81b27c4",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-impair-defense-deny-security-software-with-applocker",
+      "description": "The following analytic detects modifications in the Windows registry by the Applocker utility that deny the execution of various security products. This detection leverages data from the Endpoint.Registry datamodel, focusing on specific registry paths and values indicating a \"Deny\" action against known antivirus and security software. This activity is significant as it may indicate an attempt to disable security defenses, a tactic observed in malware like Azorult. If confirmed malicious, this co",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--fa546af0-aaa4-5fad-b17c-779d2435e602"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--79125e8e-4cf1-598c-bb4b-54ceb525cd66",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1562.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--fa546af0-aaa4-5fad-b17c-779d2435e602",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.001",
+      "technique_id": "T1562.001",
+      "technique_ref": "attack-pattern--79125e8e-4cf1-598c-bb4b-54ceb525cd66",
+      "description": "The following analytic detects modifications in the Windows registry by the Applocker utility that deny the execution of various security products. This detection leverages data from the Endpoint.Registry datamodel, focusing on specific registry paths and values indicating a \"Deny\" action against known antivirus and security software. This activity is significant as it may indicate an attempt to disable security defenses, a tactic observed in malware like Azorult. If confirmed malicious, this co",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--7938c4b4-1c39-5a2a-abab-0742a7a8c6d7",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--b552a80e-708d-5439-a18e-be78164ed24f",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--b552a80e-708d-5439-a18e-be78164ed24f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--b0c9f8e8-5651-5252-b650-2f517137b429",
+      "created_by_ref": "identity--b552a80e-708d-5439-a18e-be78164ed24f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-cabinet-file-extraction-via-expand",
+      "description": "Detects usage of expand.exe to extract Microsoft Cabinet (CAB) archives, with\nemphasis on extractions into `C:\\\\ProgramData` or similar staging locations. In\nrecent APT37 activity, a CAB payload (e.g., wonder.cab) was expanded into\nProgramData prior to persistence and execution. This behavior is a strong signal\nfor ingress tool transfer and staging of payloads.",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--41f2588f-5d47-51d0-90f3-75ca050fd982"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--6e0743b7-9eed-524c-8e2c-690e2f76309d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1105",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1105"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--41f2588f-5d47-51d0-90f3-75ca050fd982",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1105",
+      "technique_id": "T1105",
+      "technique_ref": "attack-pattern--6e0743b7-9eed-524c-8e2c-690e2f76309d",
+      "description": "Detects usage of expand.exe to extract Microsoft Cabinet (CAB) archives, with\nemphasis on extractions into `C:\\\\ProgramData` or similar staging locations. In\nrecent APT37 activity, a CAB payload (e.g., wonder.cab) was expanded into\nProgramData prior to persistence and execution. This behavior is a strong signal\nfor ingress tool transfer and staging of payloads.",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--d8d54c9f-4a2f-58d0-b753-b7a206a4dff7",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--c6ce8fd0-f947-5277-b8fa-f56dbedcdfc4",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--c6ce8fd0-f947-5277-b8fa-f56dbedcdfc4",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--177be89d-62ff-57e2-b7d3-9db6bc8c9032",
+      "created_by_ref": "identity--c6ce8fd0-f947-5277-b8fa-f56dbedcdfc4",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: azure-automation-account-created",
+      "description": "The following analytic detects the creation of a new Azure Automation account within an Azure tenant. It leverages Azure Audit events, specifically the Azure Activity log category, to identify when an account is created or updated. This activity is significant because Azure Automation accounts can be used to automate tasks and orchestrate actions across Azure and on-premise environments. If an attacker creates an Automation account with elevated privileges, they could maintain persistence, execu",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--d60b6c83-be7a-566d-9bd8-1be33f4f275f"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--00335b12-2f9c-5cef-8c5b-b94794e0aac1",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1136.003",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1136.003"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--d60b6c83-be7a-566d-9bd8-1be33f4f275f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1136.003",
+      "technique_id": "T1136.003",
+      "technique_ref": "attack-pattern--00335b12-2f9c-5cef-8c5b-b94794e0aac1",
+      "description": "The following analytic detects the creation of a new Azure Automation account within an Azure tenant. It leverages Azure Audit events, specifically the Azure Activity log category, to identify when an account is created or updated. This activity is significant because Azure Automation accounts can be used to automate tasks and orchestrate actions across Azure and on-premise environments. If an attacker creates an Automation account with elevated privileges, they could maintain persistence, execu",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

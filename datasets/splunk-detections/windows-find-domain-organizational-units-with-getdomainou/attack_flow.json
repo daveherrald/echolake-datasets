@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--660bec48-87c4-505f-b8bc-efafb55cf1a6",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--df92c409-5b26-55fc-8ce9-ce9adebeeefc",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--df92c409-5b26-55fc-8ce9-ce9adebeeefc",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--44825679-7d78-56ad-ae4e-561c68e2cb16",
+      "created_by_ref": "identity--df92c409-5b26-55fc-8ce9-ce9adebeeefc",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-find-domain-organizational-units-with-getdomainou",
+      "description": "The following analytic detects the execution of the `Get-DomainOU` cmdlet, a part of the PowerView toolkit used for Windows domain enumeration. It leverages PowerShell Script Block Logging (EventCode=4104) to identify this activity. Detecting `Get-DomainOU` usage is significant as adversaries may use it to gather information about organizational units within Active Directory, which can facilitate lateral movement or privilege escalation. If confirmed malicious, this activity could allow attacker",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--7156a2cb-3b21-5531-93f8-2403ea23173b"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--d6487a4b-e936-567f-a8da-9de2782ceb25",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1087.002",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1087.002"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--7156a2cb-3b21-5531-93f8-2403ea23173b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1087.002",
+      "technique_id": "T1087.002",
+      "technique_ref": "attack-pattern--d6487a4b-e936-567f-a8da-9de2782ceb25",
+      "description": "The following analytic detects the execution of the `Get-DomainOU` cmdlet, a part of the PowerView toolkit used for Windows domain enumeration. It leverages PowerShell Script Block Logging (EventCode=4104) to identify this activity. Detecting `Get-DomainOU` usage is significant as adversaries may use it to gather information about organizational units within Active Directory, which can facilitate lateral movement or privilege escalation. If confirmed malicious, this activity could allow attacker",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

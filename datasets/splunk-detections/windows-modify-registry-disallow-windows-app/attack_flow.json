@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--ebd07b6e-ea59-553f-b685-0f5d4dc3aafd",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--87c3407c-d895-5844-b477-c4a7fff308ee",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--87c3407c-d895-5844-b477-c4a7fff308ee",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--3bacaeb3-813a-5c9b-a100-f3c1dac57d2c",
+      "created_by_ref": "identity--87c3407c-d895-5844-b477-c4a7fff308ee",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-modify-registry-disallow-windows-app",
+      "description": "The following analytic detects modifications to the Windows registry aimed at preventing the execution of specific computer programs. It leverages data from the Endpoint.Registry datamodel, focusing on changes to the registry path \"*\\\\SOFTWARE\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Policies\\\\Explorer\\\\DisallowRun*\" with a value of \"0x00000001\". This activity is significant as it can indicate an attempt to disable security tools, a tactic used by malware like Azorult. If confirmed malicious, this c",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--f7388257-f087-5ef2-b4f2-e775294d3104"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--85865ec0-1da4-5270-8d34-3a19eccdc738",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1112",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1112"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--f7388257-f087-5ef2-b4f2-e775294d3104",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1112",
+      "technique_id": "T1112",
+      "technique_ref": "attack-pattern--85865ec0-1da4-5270-8d34-3a19eccdc738",
+      "description": "The following analytic detects modifications to the Windows registry aimed at preventing the execution of specific computer programs. It leverages data from the Endpoint.Registry datamodel, focusing on changes to the registry path \"*\\\\SOFTWARE\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Policies\\\\Explorer\\\\DisallowRun*\" with a value of \"0x00000001\". This activity is significant as it can indicate an attempt to disable security tools, a tactic used by malware like Azorult. If confirmed malicious, this c",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--87ac7a26-1b72-5a23-95f4-6e9bab280f51",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--5795b1e5-f4e3-5672-acea-5ace8df2c810",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--5795b1e5-f4e3-5672-acea-5ace8df2c810",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--0a997152-fad3-51e3-ade4-252e8b02bc2b",
+      "created_by_ref": "identity--5795b1e5-f4e3-5672-acea-5ace8df2c810",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: okta-mismatch-between-source-and-response-for-verify-push-request",
+      "description": "The following analytic identifies discrepancies between the source and response events for Okta Verify Push requests, indicating potential suspicious behavior. It leverages Okta System Log events, specifically `system.push.send_factor_verify_push` and `user.authentication.auth_via_mfa` with the factor \"OKTA_VERIFY_PUSH.\" The detection groups events by SessionID, calculates the ratio of successful sign-ins to push requests, and checks for session roaming and new device/IP usage. This activity is",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--9b3fe17e-37fc-511b-8fa5-a20e70b8a59b"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--72fc5152-1434-548b-bf9c-00ff9da626b3",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1621",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1621"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--9b3fe17e-37fc-511b-8fa5-a20e70b8a59b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1621",
+      "technique_id": "T1621",
+      "technique_ref": "attack-pattern--72fc5152-1434-548b-bf9c-00ff9da626b3",
+      "description": "The following analytic identifies discrepancies between the source and response events for Okta Verify Push requests, indicating potential suspicious behavior. It leverages Okta System Log events, specifically `system.push.send_factor_verify_push` and `user.authentication.auth_via_mfa` with the factor \"OKTA_VERIFY_PUSH.\" The detection groups events by SessionID, calculates the ratio of successful sign-ins to push requests, and checks for session roaming and new device/IP usage. This activity is",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

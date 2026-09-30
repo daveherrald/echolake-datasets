@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--892c643d-df33-5705-ba81-8a20730ee312",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--6ad9a1c5-6a70-5128-b925-b297ef14036d",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--6ad9a1c5-6a70-5128-b925-b297ef14036d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--b3e013aa-1efc-57cd-9b64-789c844e5be4",
+      "created_by_ref": "identity--6ad9a1c5-6a70-5128-b925-b297ef14036d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: asl-aws-ecr-container-upload-outside-business-hours",
+      "description": "The following analytic detects the upload of new containers to AWS Elastic Container Service (ECR) outside of standard business hours through AWS CloudTrail events. It identifies this behavior by monitoring for `PutImage` events occurring before 8 AM or after 8 PM, as well as any uploads on weekends. This activity is significant for a SOC to investigate as it may indicate unauthorized access or malicious deployments, potentially leading to compromised services or data breaches. Identifying and a",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--d7f3f44e-3775-57ac-8b89-d0f8c859dfe4"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--6c0ce6e9-bd72-516c-a0d6-9c3f880cf853",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1204.003",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1204.003"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--d7f3f44e-3775-57ac-8b89-d0f8c859dfe4",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1204.003",
+      "technique_id": "T1204.003",
+      "technique_ref": "attack-pattern--6c0ce6e9-bd72-516c-a0d6-9c3f880cf853",
+      "description": "The following analytic detects the upload of new containers to AWS Elastic Container Service (ECR) outside of standard business hours through AWS CloudTrail events. It identifies this behavior by monitoring for `PutImage` events occurring before 8 AM or after 8 PM, as well as any uploads on weekends. This activity is significant for a SOC to investigate as it may indicate unauthorized access or malicious deployments, potentially leading to compromised services or data breaches. Identifying and a",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--008ffaa0-9515-5d1b-b6a8-547fb438be25",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--71d57ce4-5f2e-5dfc-9f14-aa4131a479ce",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--71d57ce4-5f2e-5dfc-9f14-aa4131a479ce",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--7f67d869-bbe4-551d-8abf-51e3f5fb20f6",
+      "created_by_ref": "identity--71d57ce4-5f2e-5dfc-9f14-aa4131a479ce",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: prohibited-network-traffic-allowed",
+      "description": "The following analytic detects instances where network traffic, identified by port and transport layer protocol as prohibited in the \"lookup_interesting_ports\" table, is allowed. It uses the Network_Traffic data model to cross-reference traffic data against predefined security policies. This activity is significant for a SOC as it highlights potential misconfigurations or policy violations that could lead to unauthorized access or data exfiltration. If confirmed malicious, this could allow attac",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--33fb0ff3-6304-5ee9-89aa-02979cd87220"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--e12b567b-2f1d-5377-94c0-4c2ac2a1c334",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1048",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1048"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--33fb0ff3-6304-5ee9-89aa-02979cd87220",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1048",
+      "technique_id": "T1048",
+      "technique_ref": "attack-pattern--e12b567b-2f1d-5377-94c0-4c2ac2a1c334",
+      "description": "The following analytic detects instances where network traffic, identified by port and transport layer protocol as prohibited in the \"lookup_interesting_ports\" table, is allowed. It uses the Network_Traffic data model to cross-reference traffic data against predefined security policies. This activity is significant for a SOC as it highlights potential misconfigurations or policy violations that could lead to unauthorized access or data exfiltration. If confirmed malicious, this could allow attac",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

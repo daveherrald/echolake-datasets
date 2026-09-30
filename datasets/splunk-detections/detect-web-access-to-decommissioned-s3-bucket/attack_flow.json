@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--b3b499a8-8a40-595c-87ee-5e9706f42f4e",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--efd32f20-087c-5f30-b6a9-e78b5f18dd30",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--efd32f20-087c-5f30-b6a9-e78b5f18dd30",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--e50c5099-0eb8-56a4-8b84-c132d1abf9d4",
+      "created_by_ref": "identity--efd32f20-087c-5f30-b6a9-e78b5f18dd30",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: detect-web-access-to-decommissioned-s3-bucket",
+      "description": "This detection identifies web requests to domains that match previously decommissioned S3 buckets through web proxy logs. This activity is significant because attackers may attempt to access or recreate deleted S3 buckets that were previously public to hijack them for malicious purposes. If successful, this could allow attackers to host malicious content or exfiltrate data through compromised bucket names that may still be referenced by legitimate applications.",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--4cf48c6c-c2bd-5b4c-a1d9-0d9b28b50869"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--cfed333c-ecff-55a9-bba8-651d54d439a6",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1485",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1485"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--4cf48c6c-c2bd-5b4c-a1d9-0d9b28b50869",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1485",
+      "technique_id": "T1485",
+      "technique_ref": "attack-pattern--cfed333c-ecff-55a9-bba8-651d54d439a6",
+      "description": "This detection identifies web requests to domains that match previously decommissioned S3 buckets through web proxy logs. This activity is significant because attackers may attempt to access or recreate deleted S3 buckets that were previously public to hijack them for malicious purposes. If successful, this could allow attackers to host malicious content or exfiltrate data through compromised bucket names that may still be referenced by legitimate applications.",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

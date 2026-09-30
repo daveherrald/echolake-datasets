@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--31e2ef3c-cdd7-5798-be37-38bf73299124",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--43720b85-c837-5cf0-8ffe-ead2c306f6b3",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--43720b85-c837-5cf0-8ffe-ead2c306f6b3",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--c8ab5651-ea2a-5226-9486-044507ff31a0",
+      "created_by_ref": "identity--43720b85-c837-5cf0-8ffe-ead2c306f6b3",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-steal-authentication-certificates-export-pfxcertificate",
+      "description": "The following analytic detects the use of the PowerShell cmdlet `export-pfxcertificate` on the command line, indicating an attempt to export a certificate from the local Windows Certificate Store. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process execution logs and command-line arguments. This activity is significant as it may indicate an attempt to exfiltrate authentication certificates, which can be used to impersonate users or decrypt sensiti",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--12f5cf77-399e-5792-a485-5d20c09714cc"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--04e8243d-6baa-57a8-8f26-1e707801f5ca",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1649",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1649"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--12f5cf77-399e-5792-a485-5d20c09714cc",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1649",
+      "technique_id": "T1649",
+      "technique_ref": "attack-pattern--04e8243d-6baa-57a8-8f26-1e707801f5ca",
+      "description": "The following analytic detects the use of the PowerShell cmdlet `export-pfxcertificate` on the command line, indicating an attempt to export a certificate from the local Windows Certificate Store. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process execution logs and command-line arguments. This activity is significant as it may indicate an attempt to exfiltrate authentication certificates, which can be used to impersonate users or decrypt sensiti",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

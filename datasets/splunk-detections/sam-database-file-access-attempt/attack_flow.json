@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--64e2d89d-b685-5358-9305-02243f3c6833",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--0c0fd5a6-533a-5011-82ba-355ad6cccc3f",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--0c0fd5a6-533a-5011-82ba-355ad6cccc3f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--36f8084b-9ade-5986-ab3b-ee1e000a863c",
+      "created_by_ref": "identity--0c0fd5a6-533a-5011-82ba-355ad6cccc3f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: sam-database-file-access-attempt",
+      "description": "The following analytic detects attempts to access the SAM, SYSTEM, or SECURITY database files within the `windows\\system32\\config` directory using Windows Security EventCode 4663. This detection leverages Windows Security Event logs to identify unauthorized access attempts. Monitoring this activity is crucial as it indicates potential credential access attempts, possibly exploiting vulnerabilities like CVE-2021-36934. If confirmed malicious, an attacker could extract user passwords, leading to u",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--d2382dda-f01c-5c2e-9571-811ae4aaddef"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--fb7153b8-5a70-5ff2-838b-1fed5b7abb2c",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1003.002",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1003.002"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--d2382dda-f01c-5c2e-9571-811ae4aaddef",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1003.002",
+      "technique_id": "T1003.002",
+      "technique_ref": "attack-pattern--fb7153b8-5a70-5ff2-838b-1fed5b7abb2c",
+      "description": "The following analytic detects attempts to access the SAM, SYSTEM, or SECURITY database files within the `windows\\system32\\config` directory using Windows Security EventCode 4663. This detection leverages Windows Security Event logs to identify unauthorized access attempts. Monitoring this activity is crucial as it indicates potential credential access attempts, possibly exploiting vulnerabilities like CVE-2021-36934. If confirmed malicious, an attacker could extract user passwords, leading to u",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

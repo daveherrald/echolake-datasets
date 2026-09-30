@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--724e5500-a513-50f9-986a-37e39fdd12ce",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--545432b3-e7d5-5c0f-a265-24b3dc1fd0ce",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--545432b3-e7d5-5c0f-a265-24b3dc1fd0ce",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--7af52ae8-612d-512a-b464-d0f0c84b489f",
+      "created_by_ref": "identity--545432b3-e7d5-5c0f-a265-24b3dc1fd0ce",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-steal-authentication-certificates-certificate-issued",
+      "description": "The following analytic identifies the issuance of a new certificate by Certificate Services - AD CS, detected via Event ID 4887. This event logs the requester user context, DNS hostname of the requesting machine, and the request time. Monitoring this activity is crucial as it can indicate potential misuse of authentication certificates. If confirmed malicious, an attacker could use the issued certificate to impersonate users, escalate privileges, or maintain persistence within the environment. T",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--6566c7d6-ba38-5a9a-9a65-7f4012bf6b54"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--976c0f34-ab42-5178-8b65-24a384a325b1",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1649",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1649"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--6566c7d6-ba38-5a9a-9a65-7f4012bf6b54",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1649",
+      "technique_id": "T1649",
+      "technique_ref": "attack-pattern--976c0f34-ab42-5178-8b65-24a384a325b1",
+      "description": "The following analytic identifies the issuance of a new certificate by Certificate Services - AD CS, detected via Event ID 4887. This event logs the requester user context, DNS hostname of the requesting machine, and the request time. Monitoring this activity is crucial as it can indicate potential misuse of authentication certificates. If confirmed malicious, an attacker could use the issued certificate to impersonate users, escalate privileges, or maintain persistence within the environment. T",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

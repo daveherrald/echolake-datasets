@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--d9e298b3-aee3-5302-852a-07ded0a863ce",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--b2132b1c-e1b1-5654-a44d-34f41c7c4e82",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--b2132b1c-e1b1-5654-a44d-34f41c7c4e82",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--d1565f26-7561-5e7a-aee4-ee0ac39ab8c2",
+      "created_by_ref": "identity--b2132b1c-e1b1-5654-a44d-34f41c7c4e82",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: disable-windows-smartscreen-protection",
+      "description": "The following analytic detects modifications to the Windows registry that disable SmartScreen protection. It leverages data from the Endpoint.Registry data model, specifically monitoring changes to registry paths associated with SmartScreen settings. This activity is significant because SmartScreen provides an early warning system against phishing and malware. Disabling it can indicate malicious intent, often seen in Remote Access Trojans (RATs) to evade detection while downloading additional pa",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--ef4fb1ee-d719-513f-b437-990a96826506"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--c2c57535-ced6-5fef-bfd5-e0a85e7186e4",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1562.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--ef4fb1ee-d719-513f-b437-990a96826506",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.001",
+      "technique_id": "T1562.001",
+      "technique_ref": "attack-pattern--c2c57535-ced6-5fef-bfd5-e0a85e7186e4",
+      "description": "The following analytic detects modifications to the Windows registry that disable SmartScreen protection. It leverages data from the Endpoint.Registry data model, specifically monitoring changes to registry paths associated with SmartScreen settings. This activity is significant because SmartScreen provides an early warning system against phishing and malware. Disabling it can indicate malicious intent, often seen in Remote Access Trojans (RATs) to evade detection while downloading additional pa",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

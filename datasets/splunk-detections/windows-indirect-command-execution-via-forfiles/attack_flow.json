@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--1a555df9-622e-53eb-b5cd-11e88cd450d2",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--008067bf-00ff-5299-adcd-9a21d326afbd",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--008067bf-00ff-5299-adcd-9a21d326afbd",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--030b48e4-e099-5d00-9eb9-b24fad43989d",
+      "created_by_ref": "identity--008067bf-00ff-5299-adcd-9a21d326afbd",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-indirect-command-execution-via-forfiles",
+      "description": "The following analytic detects the execution of programs initiated by forfiles.exe. This command is typically used to run commands on multiple files, often within batch scripts. The detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process creation events where forfiles.exe is the parent process. This activity is significant because forfiles.exe can be exploited to bypass command line execution protections, making it a potential vector for malicious activity",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--1da3f4cd-26da-542e-ae20-46ec4b08b810"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--1b616dcc-d260-5798-be3c-984b045e2039",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1202",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1202"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--1da3f4cd-26da-542e-ae20-46ec4b08b810",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1202",
+      "technique_id": "T1202",
+      "technique_ref": "attack-pattern--1b616dcc-d260-5798-be3c-984b045e2039",
+      "description": "The following analytic detects the execution of programs initiated by forfiles.exe. This command is typically used to run commands on multiple files, often within batch scripts. The detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process creation events where forfiles.exe is the parent process. This activity is significant because forfiles.exe can be exploited to bypass command line execution protections, making it a potential vector for malicious activity",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

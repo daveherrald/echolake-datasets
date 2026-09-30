@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--682f656d-2fe1-5afc-8df1-0e60cf9de396",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--de048581-f832-5d44-b666-b9241b02a875",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--de048581-f832-5d44-b666-b9241b02a875",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--f326c329-71e0-514e-8c16-ca9fa0790963",
+      "created_by_ref": "identity--de048581-f832-5d44-b666-b9241b02a875",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-clipboard-data-via-get-clipboard",
+      "description": "The following analytic detects the execution of the PowerShell command 'Get-Clipboard' to retrieve clipboard data. It leverages PowerShell Script Block Logging (EventCode 4104) to identify instances where this command is used. This activity is significant because it can indicate an attempt to steal sensitive information such as usernames, passwords, or other confidential data copied to the clipboard. If confirmed malicious, this behavior could lead to unauthorized access to sensitive information",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--13319c13-6e28-503a-b3a9-d12976b50f57"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--3cc9d749-42c5-5547-8fd9-01b6ae22dee4",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1115",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1115"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--13319c13-6e28-503a-b3a9-d12976b50f57",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1115",
+      "technique_id": "T1115",
+      "technique_ref": "attack-pattern--3cc9d749-42c5-5547-8fd9-01b6ae22dee4",
+      "description": "The following analytic detects the execution of the PowerShell command 'Get-Clipboard' to retrieve clipboard data. It leverages PowerShell Script Block Logging (EventCode 4104) to identify instances where this command is used. This activity is significant because it can indicate an attempt to steal sensitive information such as usernames, passwords, or other confidential data copied to the clipboard. If confirmed malicious, this behavior could lead to unauthorized access to sensitive information",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--e6265c80-7e20-5401-9ddd-a36296a1e64c",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--3d638235-7bca-5fe1-ab87-8051f8f11105",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--3d638235-7bca-5fe1-ab87-8051f8f11105",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--2262cef0-7a31-534e-bcbf-163ae48227d4",
+      "created_by_ref": "identity--3d638235-7bca-5fe1-ab87-8051f8f11105",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: rundll32-control-rundll-hunt",
+      "description": "The following analytic identifies instances of rundll32.exe executing with `Control_RunDLL` in the command line, which is indicative of loading a .cpl or other file types. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process execution logs and command-line arguments. This activity is significant as rundll32.exe can be exploited to execute malicious Control Panel Item files, potentially linked to CVE-2021-40444. If confirmed malicious, this could al",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--54521afc-7417-54e0-961b-08e425932fad"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--de39b7db-5f7a-5278-9bc5-04bc6a42b291",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1218.011",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1218.011"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--54521afc-7417-54e0-961b-08e425932fad",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1218.011",
+      "technique_id": "T1218.011",
+      "technique_ref": "attack-pattern--de39b7db-5f7a-5278-9bc5-04bc6a42b291",
+      "description": "The following analytic identifies instances of rundll32.exe executing with `Control_RunDLL` in the command line, which is indicative of loading a .cpl or other file types. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process execution logs and command-line arguments. This activity is significant as rundll32.exe can be exploited to execute malicious Control Panel Item files, potentially linked to CVE-2021-40444. If confirmed malicious, this could al",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

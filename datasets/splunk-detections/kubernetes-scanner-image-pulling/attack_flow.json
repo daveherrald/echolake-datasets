@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--8cab8639-2a0d-55d9-ac7f-85b53d1998cd",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--032b8db3-0c4e-5a85-8a9d-d0f9e1732b05",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--032b8db3-0c4e-5a85-8a9d-d0f9e1732b05",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--1792138b-3717-50d6-a0a7-bce8fae9ba2a",
+      "created_by_ref": "identity--032b8db3-0c4e-5a85-8a9d-d0f9e1732b05",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: kubernetes-scanner-image-pulling",
+      "description": "The following analytic detects the pulling of known Kubernetes security scanner images such as kube-hunter, kube-bench, and kube-recon. It leverages Kubernetes logs ingested through Splunk Connect for Kubernetes, specifically monitoring for messages indicating the pulling of these images. This activity is significant because the use of security scanners can indicate an attempt to identify vulnerabilities within the Kubernetes environment. If confirmed malicious, this could lead to the discovery",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--bcd9c00b-6261-5ac6-98e8-1a3e8f0418a7"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--bdd3d85f-5a5a-5e4c-8ca5-49c1d99319e1",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1526",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1526"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--bcd9c00b-6261-5ac6-98e8-1a3e8f0418a7",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1526",
+      "technique_id": "T1526",
+      "technique_ref": "attack-pattern--bdd3d85f-5a5a-5e4c-8ca5-49c1d99319e1",
+      "description": "The following analytic detects the pulling of known Kubernetes security scanner images such as kube-hunter, kube-bench, and kube-recon. It leverages Kubernetes logs ingested through Splunk Connect for Kubernetes, specifically monitoring for messages indicating the pulling of these images. This activity is significant because the use of security scanners can indicate an attempt to identify vulnerabilities within the Kubernetes environment. If confirmed malicious, this could lead to the discovery",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

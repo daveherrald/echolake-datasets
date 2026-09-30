@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--94469668-42c7-5686-bb72-ed7fd538a1bb",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--4946a43a-28b8-5a43-8509-c31a85e21557",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--4946a43a-28b8-5a43-8509-c31a85e21557",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--cb46ddde-3c0a-5715-a490-4ab9bb8bad81",
+      "created_by_ref": "identity--4946a43a-28b8-5a43-8509-c31a85e21557",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-lsa-secrets-nolmhash-registry",
+      "description": "The following analytic detects modifications to the Windows registry related to the Local Security Authority (LSA) NoLMHash setting. It identifies when the registry value is set to 0, indicating that the system will store passwords in the weaker Lan Manager (LM) hash format. This detection leverages registry activity logs from endpoint data sources like Sysmon or EDR tools. Monitoring this activity is crucial as it can indicate attempts to weaken password storage security. If confirmed malicious",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--96d7ce27-92ad-5e8b-817f-72688aa295d8"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--c06ba521-9f6f-5859-ae0e-b1110bda4a21",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1003.004",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1003.004"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--96d7ce27-92ad-5e8b-817f-72688aa295d8",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1003.004",
+      "technique_id": "T1003.004",
+      "technique_ref": "attack-pattern--c06ba521-9f6f-5859-ae0e-b1110bda4a21",
+      "description": "The following analytic detects modifications to the Windows registry related to the Local Security Authority (LSA) NoLMHash setting. It identifies when the registry value is set to 0, indicating that the system will store passwords in the weaker Lan Manager (LM) hash format. This detection leverages registry activity logs from endpoint data sources like Sysmon or EDR tools. Monitoring this activity is crucial as it can indicate attempts to weaken password storage security. If confirmed malicious",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

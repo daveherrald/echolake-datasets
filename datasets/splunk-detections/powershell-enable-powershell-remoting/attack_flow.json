@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--150f0d78-4926-518a-ad41-8587e4784ffd",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--4ec41b25-7c37-56f2-9509-94a55ba44e5f",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--4ec41b25-7c37-56f2-9509-94a55ba44e5f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--d14bcab5-d2c6-51df-8a3d-653e9a8c3275",
+      "created_by_ref": "identity--4ec41b25-7c37-56f2-9509-94a55ba44e5f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: powershell-enable-powershell-remoting",
+      "description": "The following analytic detects the use of the Enable-PSRemoting cmdlet, which allows PowerShell remoting on a local or remote computer. This detection leverages PowerShell Script Block Logging (EventCode 4104) to identify when this cmdlet is executed. Monitoring this activity is crucial as it can indicate an attacker enabling remote command execution capabilities on a compromised system. If confirmed malicious, this activity could allow an attacker to take control of the system remotely, execute",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--e2ae9344-09e5-598a-a043-4307ccb53a0c"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--57693ff3-d522-5b82-9fef-962b384e90f2",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1059.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1059.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--e2ae9344-09e5-598a-a043-4307ccb53a0c",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1059.001",
+      "technique_id": "T1059.001",
+      "technique_ref": "attack-pattern--57693ff3-d522-5b82-9fef-962b384e90f2",
+      "description": "The following analytic detects the use of the Enable-PSRemoting cmdlet, which allows PowerShell remoting on a local or remote computer. This detection leverages PowerShell Script Block Logging (EventCode 4104) to identify when this cmdlet is executed. Monitoring this activity is crucial as it can indicate an attacker enabling remote command execution capabilities on a compromised system. If confirmed malicious, this activity could allow an attacker to take control of the system remotely, execute",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

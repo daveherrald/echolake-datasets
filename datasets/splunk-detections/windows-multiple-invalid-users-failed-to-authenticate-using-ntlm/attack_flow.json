@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--32d21b06-9498-5d01-b831-cc3a3cd07a1d",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--43279555-fd44-567a-95ed-47b4926faf73",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--43279555-fd44-567a-95ed-47b4926faf73",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--175f7bfd-f868-5e2a-8373-eb7c51b3780e",
+      "created_by_ref": "identity--43279555-fd44-567a-95ed-47b4926faf73",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-multiple-invalid-users-failed-to-authenticate-using-ntlm",
+      "description": "The following analytic detects a single source endpoint failing to authenticate with 30 unique invalid users using the NTLM protocol. It leverages EventCode 4776 from Domain Controller logs, focusing on error code 0xC0000064, which indicates non-existent usernames. This behavior is significant as it may indicate a Password Spraying attack, where an adversary attempts to gain initial access or elevate privileges. If confirmed malicious, this activity could lead to unauthorized access, privilege e",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--6cf53713-b60b-5892-8fe5-7017a71dc826"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--9b375978-4873-54b7-b7e7-e19f956d42ab",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1110.003",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1110.003"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--6cf53713-b60b-5892-8fe5-7017a71dc826",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1110.003",
+      "technique_id": "T1110.003",
+      "technique_ref": "attack-pattern--9b375978-4873-54b7-b7e7-e19f956d42ab",
+      "description": "The following analytic detects a single source endpoint failing to authenticate with 30 unique invalid users using the NTLM protocol. It leverages EventCode 4776 from Domain Controller logs, focusing on error code 0xC0000064, which indicates non-existent usernames. This behavior is significant as it may indicate a Password Spraying attack, where an adversary attempts to gain initial access or elevate privileges. If confirmed malicious, this activity could lead to unauthorized access, privilege e",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

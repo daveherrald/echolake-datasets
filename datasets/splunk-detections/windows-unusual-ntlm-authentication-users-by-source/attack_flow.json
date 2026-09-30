@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--6405287b-018c-568d-b198-531cd316e2ae",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--295daa57-1877-561e-bad6-07f5d2d09d83",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--295daa57-1877-561e-bad6-07f5d2d09d83",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--7ac4c3fc-9ecf-5857-a239-3cd2b6ae3280",
+      "created_by_ref": "identity--295daa57-1877-561e-bad6-07f5d2d09d83",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-unusual-ntlm-authentication-users-by-source",
+      "description": "The following analytic detects when an unusual number of NTLM authentications is attempted by the same source. This activity generally results when an attacker attempts to brute force, password spray, or otherwise authenticate to a domain joined Windows device using an NTLM based process/attack. This same activity may also generate a large number of EventID 4776 events in as well.",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--5c05132b-d3c2-58b5-af62-1a30d874edba"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--689ab4a3-84fb-5b2b-b373-aa0c321042f2",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1110.003",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1110.003"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--5c05132b-d3c2-58b5-af62-1a30d874edba",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1110.003",
+      "technique_id": "T1110.003",
+      "technique_ref": "attack-pattern--689ab4a3-84fb-5b2b-b373-aa0c321042f2",
+      "description": "The following analytic detects when an unusual number of NTLM authentications is attempted by the same source. This activity generally results when an attacker attempts to brute force, password spray, or otherwise authenticate to a domain joined Windows device using an NTLM based process/attack. This same activity may also generate a large number of EventID 4776 events in as well.",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

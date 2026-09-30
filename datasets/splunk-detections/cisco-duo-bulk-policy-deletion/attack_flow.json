@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--63dd5570-7ab7-51c8-bf68-7fb553d8f330",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--be89e951-f545-593b-b326-d97f9d050b04",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--be89e951-f545-593b-b326-d97f9d050b04",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--421a86fd-06c7-5c85-bee5-2d54308c9539",
+      "created_by_ref": "identity--be89e951-f545-593b-b326-d97f9d050b04",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: cisco-duo-bulk-policy-deletion",
+      "description": "The following analytic detects instances where a Duo administrator performs a bulk deletion of more than three policies in a single action. It identifies this behavior by searching Duo activity logs for the policy_bulk_delete action, extracting the names of deleted policies, and counting them. If the count exceeds three, the event is flagged. This behavior is significant for a Security Operations Center (SOC) because mass deletion of security policies can indicate malicious activity, such as an",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--75960e13-c524-549d-bfc6-6dd068e27442"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--8b085f4b-21a3-5682-9690-1e8edcd9f6bb",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1556",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1556"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--75960e13-c524-549d-bfc6-6dd068e27442",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1556",
+      "technique_id": "T1556",
+      "technique_ref": "attack-pattern--8b085f4b-21a3-5682-9690-1e8edcd9f6bb",
+      "description": "The following analytic detects instances where a Duo administrator performs a bulk deletion of more than three policies in a single action. It identifies this behavior by searching Duo activity logs for the policy_bulk_delete action, extracting the names of deleted policies, and counting them. If the count exceeds three, the event is flagged. This behavior is significant for a Security Operations Center (SOC) because mass deletion of security policies can indicate malicious activity, such as an",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

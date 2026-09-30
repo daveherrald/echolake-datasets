@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--a52a06b0-7f1a-53e0-a0ad-d5bc15bf792b",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--9121862a-9b2c-5a9b-8516-3f9b306c967d",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--9121862a-9b2c-5a9b-8516-3f9b306c967d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--0450c4fa-5cd7-5b6e-83ed-1e791f7bd2e9",
+      "created_by_ref": "identity--9121862a-9b2c-5a9b-8516-3f9b306c967d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: dump-lsass-via-comsvcs-dll",
+      "description": "The following analytic detects the behavior of dumping credentials from memory by exploiting the Local Security Authority Subsystem Service (LSASS) using the comsvcs.dll and MiniDump via rundll32. This detection leverages process information from Endpoint Detection and Response (EDR) logs, focusing on specific command-line executions. This activity is significant because it indicates potential credential theft, which can lead to broader system compromise, persistence, lateral movement, and privi",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--2f1fe414-462f-5832-8c8b-6e6399a7cba2"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--0ac44424-6c87-5f9d-928b-f22418bbd2ef",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1003.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1003.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--2f1fe414-462f-5832-8c8b-6e6399a7cba2",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1003.001",
+      "technique_id": "T1003.001",
+      "technique_ref": "attack-pattern--0ac44424-6c87-5f9d-928b-f22418bbd2ef",
+      "description": "The following analytic detects the behavior of dumping credentials from memory by exploiting the Local Security Authority Subsystem Service (LSASS) using the comsvcs.dll and MiniDump via rundll32. This detection leverages process information from Endpoint Detection and Response (EDR) logs, focusing on specific command-line executions. This activity is significant because it indicates potential credential theft, which can lead to broader system compromise, persistence, lateral movement, and privi",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

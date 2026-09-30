@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--c508bcb0-1ece-539d-bcdd-57f62a9f43d9",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--d50b09c2-9bee-533d-af8b-cbd5e33eccbd",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--d50b09c2-9bee-533d-af8b-cbd5e33eccbd",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--7d4f4886-6bd0-5ae2-8548-7498d1a90898",
+      "created_by_ref": "identity--d50b09c2-9bee-533d-af8b-cbd5e33eccbd",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-account-discovery-for-none-disable-user-account",
+      "description": "The following analytic detects the execution of the PowerView PowerShell cmdlet Get-NetUser with the UACFilter parameter set to NOT_ACCOUNTDISABLE, indicating an attempt to enumerate Active Directory user accounts that are not disabled. This detection leverages PowerShell Script Block Logging (EventCode 4104) to identify the specific script block text. Monitoring this activity is significant as it may indicate reconnaissance efforts by an attacker to identify active user accounts for further exp",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--dcf119d4-6fb7-53fc-98a9-8d8d61de6127"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--c11ee15a-10f7-5f60-8984-33c3d7630c39",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1087.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1087.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--dcf119d4-6fb7-53fc-98a9-8d8d61de6127",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1087.001",
+      "technique_id": "T1087.001",
+      "technique_ref": "attack-pattern--c11ee15a-10f7-5f60-8984-33c3d7630c39",
+      "description": "The following analytic detects the execution of the PowerView PowerShell cmdlet Get-NetUser with the UACFilter parameter set to NOT_ACCOUNTDISABLE, indicating an attempt to enumerate Active Directory user accounts that are not disabled. This detection leverages PowerShell Script Block Logging (EventCode 4104) to identify the specific script block text. Monitoring this activity is significant as it may indicate reconnaissance efforts by an attacker to identify active user accounts for further exp",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

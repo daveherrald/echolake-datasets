@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--66d88b54-20e5-5d28-8b8e-8f2586e37d84",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--5f788176-aa5e-5efe-954f-82b280a3cf2a",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--5f788176-aa5e-5efe-954f-82b280a3cf2a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--116969cc-8c9f-51ce-a9ec-9877b874f1fe",
+      "created_by_ref": "identity--5f788176-aa5e-5efe-954f-82b280a3cf2a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-high-file-deletion-frequency",
+      "description": "The following analytic identifies a high frequency of file deletions by monitoring Sysmon EventCodes 23 and 26 for specific file extensions. This detection leverages Sysmon logs to track deleted target filenames, process names, and process IDs. Such activity is significant as it often indicates ransomware behavior, where files are encrypted and the originals are deleted. If confirmed malicious, this activity could lead to extensive data loss and operational disruption, as ransomware can render c",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--914b8d13-2d1d-5d65-8e30-fb88ddaa6b30"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--b4c7ea3c-d9d1-5917-bb09-dca11b8da12f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1485",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1485"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--914b8d13-2d1d-5d65-8e30-fb88ddaa6b30",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1485",
+      "technique_id": "T1485",
+      "technique_ref": "attack-pattern--b4c7ea3c-d9d1-5917-bb09-dca11b8da12f",
+      "description": "The following analytic identifies a high frequency of file deletions by monitoring Sysmon EventCodes 23 and 26 for specific file extensions. This detection leverages Sysmon logs to track deleted target filenames, process names, and process IDs. Such activity is significant as it often indicates ransomware behavior, where files are encrypted and the originals are deleted. If confirmed malicious, this activity could lead to extensive data loss and operational disruption, as ransomware can render c",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--e1297abd-ab8a-5050-a1e9-c45e86121584",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--8ef14ec5-fe10-57c0-abaf-611b0c3c00c5",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--8ef14ec5-fe10-57c0-abaf-611b0c3c00c5",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--2ad25768-29a0-5128-8367-9d8e2a5a52fb",
+      "created_by_ref": "identity--8ef14ec5-fe10-57c0-abaf-611b0c3c00c5",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: remote-system-discovery-with-dsquery",
+      "description": "The following analytic detects the execution of `dsquery.exe` with the `computer` argument, which is used to discover remote systems within a domain. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line arguments. Remote system discovery is significant as it indicates potential reconnaissance activities by adversaries or Red Teams to map out network resources and Active Directory structures. If confirmed malicious, this activ",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--3bf4bdd6-ac9b-519c-bd85-4398e86da3d4"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--001d4ad8-b772-5094-ba77-b40b52085b54",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1018",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1018"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--3bf4bdd6-ac9b-519c-bd85-4398e86da3d4",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1018",
+      "technique_id": "T1018",
+      "technique_ref": "attack-pattern--001d4ad8-b772-5094-ba77-b40b52085b54",
+      "description": "The following analytic detects the execution of `dsquery.exe` with the `computer` argument, which is used to discover remote systems within a domain. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line arguments. Remote system discovery is significant as it indicates potential reconnaissance activities by adversaries or Red Teams to map out network resources and Active Directory structures. If confirmed malicious, this activ",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

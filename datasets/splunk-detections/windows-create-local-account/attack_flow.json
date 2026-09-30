@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--e28b90d3-c2e4-57ff-8c22-3428d6b673fb",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--3472cab4-e744-552a-96ff-7ded455d6c4e",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--3472cab4-e744-552a-96ff-7ded455d6c4e",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--1abfd6e9-3720-5fa7-917e-9190a79bda3c",
+      "created_by_ref": "identity--3472cab4-e744-552a-96ff-7ded455d6c4e",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-create-local-account",
+      "description": "The following analytic detects the creation of a new local user account on a Windows system. It leverages Windows Security Audit logs, specifically event ID 4720, to identify this activity. Monitoring the creation of local accounts is crucial for a SOC as it can indicate unauthorized access or lateral movement within the network. If confirmed malicious, this activity could allow an attacker to establish persistence, escalate privileges, or gain unauthorized access to sensitive systems and data.",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--a7d7fc20-0466-518b-aa77-0f82c3950abb"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--21be730e-8d1d-5ee1-938b-cda3a73fc34a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1136.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1136.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--a7d7fc20-0466-518b-aa77-0f82c3950abb",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1136.001",
+      "technique_id": "T1136.001",
+      "technique_ref": "attack-pattern--21be730e-8d1d-5ee1-938b-cda3a73fc34a",
+      "description": "The following analytic detects the creation of a new local user account on a Windows system. It leverages Windows Security Audit logs, specifically event ID 4720, to identify this activity. Monitoring the creation of local accounts is crucial for a SOC as it can indicate unauthorized access or lateral movement within the network. If confirmed malicious, this activity could allow an attacker to establish persistence, escalate privileges, or gain unauthorized access to sensitive systems and data.",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

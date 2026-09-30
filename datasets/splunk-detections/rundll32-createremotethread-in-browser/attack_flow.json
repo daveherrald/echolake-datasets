@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--d83e4672-6a7f-56e4-8967-785503c97b31",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--bca00aa1-5975-5213-ad5d-8f5657422d25",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--bca00aa1-5975-5213-ad5d-8f5657422d25",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--06363f64-81df-507c-b7fa-435ddceb6c71",
+      "created_by_ref": "identity--bca00aa1-5975-5213-ad5d-8f5657422d25",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: rundll32-createremotethread-in-browser",
+      "description": "The following analytic detects the suspicious creation of a remote thread by rundll32.exe targeting browser processes such as firefox.exe, chrome.exe, iexplore.exe, and microsoftedgecp.exe. This detection leverages Sysmon EventCode 8, focusing on SourceImage and TargetImage fields to identify the behavior. This activity is significant as it is commonly associated with malware like IcedID, which hooks browsers to steal sensitive information such as banking details. If confirmed malicious, this co",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--ac0d5206-d3df-5179-a791-d2c48d17f7b1"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--bc309940-410d-5a21-a0f7-87446ec44bbf",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1055",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1055"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--ac0d5206-d3df-5179-a791-d2c48d17f7b1",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1055",
+      "technique_id": "T1055",
+      "technique_ref": "attack-pattern--bc309940-410d-5a21-a0f7-87446ec44bbf",
+      "description": "The following analytic detects the suspicious creation of a remote thread by rundll32.exe targeting browser processes such as firefox.exe, chrome.exe, iexplore.exe, and microsoftedgecp.exe. This detection leverages Sysmon EventCode 8, focusing on SourceImage and TargetImage fields to identify the behavior. This activity is significant as it is commonly associated with malware like IcedID, which hooks browsers to steal sensitive information such as banking details. If confirmed malicious, this co",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

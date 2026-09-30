@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--30753438-921e-5932-8b83-4be6cbcaa840",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--f2304756-f1b6-5a1e-abb6-4ef4110d443f",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--f2304756-f1b6-5a1e-abb6-4ef4110d443f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--513de6b2-c5cc-5b29-89c8-75a5c76c687a",
+      "created_by_ref": "identity--f2304756-f1b6-5a1e-abb6-4ef4110d443f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: detect-regsvcs-spawning-a-process",
+      "description": "The following analytic identifies regsvcs.exe spawning a child process. This behavior is detected using Endpoint Detection and Response (EDR) telemetry, focusing on process creation events where the parent process is regsvcs.exe. This activity is significant because regsvcs.exe rarely spawns child processes, and such behavior can indicate an attempt to bypass application control mechanisms. If confirmed malicious, this could allow an attacker to execute arbitrary code, potentially leading to pri",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--044456d4-4314-53c8-9733-27c9baf3f4b1"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--b500ba38-6f4e-545a-ac4b-8e4db18f8293",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1218.009",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1218.009"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--044456d4-4314-53c8-9733-27c9baf3f4b1",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1218.009",
+      "technique_id": "T1218.009",
+      "technique_ref": "attack-pattern--b500ba38-6f4e-545a-ac4b-8e4db18f8293",
+      "description": "The following analytic identifies regsvcs.exe spawning a child process. This behavior is detected using Endpoint Detection and Response (EDR) telemetry, focusing on process creation events where the parent process is regsvcs.exe. This activity is significant because regsvcs.exe rarely spawns child processes, and such behavior can indicate an attempt to bypass application control mechanisms. If confirmed malicious, this could allow an attacker to execute arbitrary code, potentially leading to pri",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

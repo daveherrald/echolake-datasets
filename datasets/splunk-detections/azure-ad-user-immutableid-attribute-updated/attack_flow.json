@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--9ddb38f9-c42d-5fee-80f3-27b0528b2223",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--d007a88b-3e36-5e0f-97e9-895f7f903fae",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--d007a88b-3e36-5e0f-97e9-895f7f903fae",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--7dbf2387-940a-59f7-99c2-0cb375cf0ae8",
+      "created_by_ref": "identity--d007a88b-3e36-5e0f-97e9-895f7f903fae",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: azure-ad-user-immutableid-attribute-updated",
+      "description": "The following analytic identifies the modification of the SourceAnchor (ImmutableId) attribute for an Azure Active Directory user. This detection leverages Azure AD audit logs, specifically monitoring the \"Update user\" operation and changes to the SourceAnchor attribute. This activity is significant as it is a step in setting up an Azure AD identity federation backdoor, allowing an adversary to establish persistence. If confirmed malicious, the attacker could impersonate any user, bypassing pass",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--6fd83349-d1b9-5a9c-bb7c-d8065c6aabc0"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--870b30c5-a242-5c45-9219-beec7ebe0411",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1098",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1098"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--6fd83349-d1b9-5a9c-bb7c-d8065c6aabc0",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1098",
+      "technique_id": "T1098",
+      "technique_ref": "attack-pattern--870b30c5-a242-5c45-9219-beec7ebe0411",
+      "description": "The following analytic identifies the modification of the SourceAnchor (ImmutableId) attribute for an Azure Active Directory user. This detection leverages Azure AD audit logs, specifically monitoring the \"Update user\" operation and changes to the SourceAnchor attribute. This activity is significant as it is a step in setting up an Azure AD identity federation backdoor, allowing an adversary to establish persistence. If confirmed malicious, the attacker could impersonate any user, bypassing pass",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

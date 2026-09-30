@@ -1,0 +1,110 @@
+{
+  "type": "bundle",
+  "id": "bundle--d2c94f97-da10-5d76-9db5-1bf655d4330c",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--69d4f0fe-4129-5f04-941a-de67a3b0d7fe",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--69d4f0fe-4129-5f04-941a-de67a3b0d7fe",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--ef83c8b9-4e73-58c4-b157-adfcac3e049f",
+      "created_by_ref": "identity--69d4f0fe-4129-5f04-941a-de67a3b0d7fe",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: linux-suspicious-react-or-nextjs-child-process",
+      "description": "This analytic detects Linux processes such as sh, bash, and common Linux LOLBINs being spawned by React or Next.js application servers.\nIn the context of CVE-2025-55182 / React2Shell / CVE-2025-66478 for Next.js, successful exploitation can lead to arbitrary JavaScript execution on the server, which in turn is commonly used to invoke Node's child_process APIs (for example child_process.execSync) to run OS-level commands.\nPublic proof-of-concept payloads and observed in-the-wild exploit traffic s",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--21e9124a-3ae8-5906-94b4-232225493938",
+        "attack-action--4d7783d7-1d81-5f4b-a03e-09857213a777"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--db3f6b9f-7a37-5cd3-8c66-bae5abb5cee1",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1190",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1190"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--1abc5850-1108-5f4a-993b-a02efad32269",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1059.004",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1059.004"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--21e9124a-3ae8-5906-94b4-232225493938",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1190",
+      "technique_id": "T1190",
+      "technique_ref": "attack-pattern--db3f6b9f-7a37-5cd3-8c66-bae5abb5cee1",
+      "description": "This analytic detects Linux processes such as sh, bash, and common Linux LOLBINs being spawned by React or Next.js application servers.\nIn the context of CVE-2025-55182 / React2Shell / CVE-2025-66478 for Next.js, successful exploitation can lead to arbitrary JavaScript execution on the server, which in turn is commonly used to invoke Node's child_process APIs (for example child_process.execSync) to run OS-level commands.\nPublic proof-of-concept payloads and observed in-the-wild exploit traffic s",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--4d7783d7-1d81-5f4b-a03e-09857213a777",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1059.004",
+      "technique_id": "T1059.004",
+      "technique_ref": "attack-pattern--1abc5850-1108-5f4a-993b-a02efad32269",
+      "description": "This analytic detects Linux processes such as sh, bash, and common Linux LOLBINs being spawned by React or Next.js application servers.\nIn the context of CVE-2025-55182 / React2Shell / CVE-2025-66478 for Next.js, successful exploitation can lead to arbitrary JavaScript execution on the server, which in turn is commonly used to invoke Node's child_process APIs (for example child_process.execSync) to run OS-level commands.\nPublic proof-of-concept payloads and observed in-the-wild exploit traffic s",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

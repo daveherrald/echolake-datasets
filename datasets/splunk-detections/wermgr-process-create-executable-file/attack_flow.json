@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--7801f31f-9319-5814-b96f-362115f771bd",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--4b5a5f36-fff9-5292-aa44-d3b7134ea743",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--4b5a5f36-fff9-5292-aa44-d3b7134ea743",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--d52fe592-37a5-5cb5-93bf-448074f70c60",
+      "created_by_ref": "identity--4b5a5f36-fff9-5292-aa44-d3b7134ea743",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: wermgr-process-create-executable-file",
+      "description": "The following analytic detects the wermgr.exe process creating an executable file. It leverages Sysmon EventCode 11 to identify instances where wermgr.exe generates a .exe file. This behavior is unusual because wermgr.exe is typically associated with error reporting, not file creation. Such activity is significant as it may indicate TrickBot malware, which injects code into wermgr.exe to execute malicious actions like downloading additional payloads. If confirmed malicious, this could lead to fu",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--203bd5b7-c5b6-596c-b96a-8843393fbca5"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--81c56cac-b5f2-5b13-922b-cf9c050e2a6b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1027",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1027"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--203bd5b7-c5b6-596c-b96a-8843393fbca5",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1027",
+      "technique_id": "T1027",
+      "technique_ref": "attack-pattern--81c56cac-b5f2-5b13-922b-cf9c050e2a6b",
+      "description": "The following analytic detects the wermgr.exe process creating an executable file. It leverages Sysmon EventCode 11 to identify instances where wermgr.exe generates a .exe file. This behavior is unusual because wermgr.exe is typically associated with error reporting, not file creation. Such activity is significant as it may indicate TrickBot malware, which injects code into wermgr.exe to execute malicious actions like downloading additional payloads. If confirmed malicious, this could lead to fu",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

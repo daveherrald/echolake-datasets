@@ -1,0 +1,110 @@
+{
+  "type": "bundle",
+  "id": "bundle--03918b8e-7dfb-5b4b-b4be-6d2404dcfb86",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--d9b74157-4aec-5dc7-8fdf-f0fbc7e9eefa",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--d9b74157-4aec-5dc7-8fdf-f0fbc7e9eefa",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--ae9dd9ca-f541-55f1-93bb-dcaaae919dc0",
+      "created_by_ref": "identity--d9b74157-4aec-5dc7-8fdf-f0fbc7e9eefa",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: cisco-nvm-susp-script-from-archive-triggering-network-activity",
+      "description": "This analytic detects script execution (`wscript.exe` or `cscript.exe`) triggered from compressed files opened directly using\n`explorer.exe`, `winrar.exe`, or `7zFM.exe`.\nWhen a user double clicks on a \".js\" file from within one of these compressed files. Its extracted temporally in the temp directory in folder with certain markers.\nIt leverages Cisco Network Visibility Module (NVM) flow data, in order to look for a specific parent/child relationship and an initiated network connection.\nThis beh",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--5a31dfa2-dfdb-5dee-97b1-404c33743781",
+        "attack-action--495087dd-80d8-5ce4-a0bd-74b271e09b10"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--37e5d6dc-3228-53b3-9c71-3d784a1efc1e",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1059.005",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1059.005"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--f7475ac3-2c27-54fb-afbb-58af124a717f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1204.002",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1204.002"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--5a31dfa2-dfdb-5dee-97b1-404c33743781",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1059.005",
+      "technique_id": "T1059.005",
+      "technique_ref": "attack-pattern--37e5d6dc-3228-53b3-9c71-3d784a1efc1e",
+      "description": "This analytic detects script execution (`wscript.exe` or `cscript.exe`) triggered from compressed files opened directly using\n`explorer.exe`, `winrar.exe`, or `7zFM.exe`.\nWhen a user double clicks on a \".js\" file from within one of these compressed files. Its extracted temporally in the temp directory in folder with certain markers.\nIt leverages Cisco Network Visibility Module (NVM) flow data, in order to look for a specific parent/child relationship and an initiated network connection.\nThis beh",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--495087dd-80d8-5ce4-a0bd-74b271e09b10",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1204.002",
+      "technique_id": "T1204.002",
+      "technique_ref": "attack-pattern--f7475ac3-2c27-54fb-afbb-58af124a717f",
+      "description": "This analytic detects script execution (`wscript.exe` or `cscript.exe`) triggered from compressed files opened directly using\n`explorer.exe`, `winrar.exe`, or `7zFM.exe`.\nWhen a user double clicks on a \".js\" file from within one of these compressed files. Its extracted temporally in the temp directory in folder with certain markers.\nIt leverages Cisco Network Visibility Module (NVM) flow data, in order to look for a specific parent/child relationship and an initiated network connection.\nThis beh",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

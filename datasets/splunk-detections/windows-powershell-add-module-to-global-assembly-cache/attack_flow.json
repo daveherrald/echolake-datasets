@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--08f65667-df0b-5005-ab3b-e8d9857e4cd4",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--261cbe55-54ce-5e1a-833e-bc6d39749d93",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--261cbe55-54ce-5e1a-833e-bc6d39749d93",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--dedc5830-a2ac-5a82-b2e8-73a5cbac5996",
+      "created_by_ref": "identity--261cbe55-54ce-5e1a-833e-bc6d39749d93",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-powershell-add-module-to-global-assembly-cache",
+      "description": "The following analytic detects the addition of a DLL to the Windows Global Assembly Cache (GAC) using PowerShell. It leverages PowerShell Script Block Logging to identify commands containing \"system.enterpriseservices.internal.publish\". This activity is significant because adding a DLL to the GAC allows it to be shared across multiple applications, potentially enabling an adversary to execute malicious code system-wide. If confirmed malicious, this could lead to widespread code execution, privil",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--039407a4-2a82-5ee2-9755-c978bc407438"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--b52a8df4-abf2-508e-b010-ff4708ef8829",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1505.004",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1505.004"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--039407a4-2a82-5ee2-9755-c978bc407438",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1505.004",
+      "technique_id": "T1505.004",
+      "technique_ref": "attack-pattern--b52a8df4-abf2-508e-b010-ff4708ef8829",
+      "description": "The following analytic detects the addition of a DLL to the Windows Global Assembly Cache (GAC) using PowerShell. It leverages PowerShell Script Block Logging to identify commands containing \"system.enterpriseservices.internal.publish\". This activity is significant because adding a DLL to the GAC allows it to be shared across multiple applications, potentially enabling an adversary to execute malicious code system-wide. If confirmed malicious, this could lead to widespread code execution, privil",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

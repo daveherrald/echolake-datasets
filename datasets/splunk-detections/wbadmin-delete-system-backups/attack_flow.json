@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--bc8d92bc-94bc-5777-8d13-9799b71ca2a8",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--4fa77805-6ca0-5195-a282-cc5c53492af7",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--4fa77805-6ca0-5195-a282-cc5c53492af7",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--fc5e088c-ca3d-5624-945c-f2a459fb4b0a",
+      "created_by_ref": "identity--4fa77805-6ca0-5195-a282-cc5c53492af7",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: wbadmin-delete-system-backups",
+      "description": "The following analytic detects the execution of wbadmin.exe with flags that delete backup files, specifically targeting catalog or system state backups. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line arguments. This activity is significant because it is commonly used by ransomware to prevent recovery by deleting system backups. If confirmed malicious, this action could severely hinder recovery efforts, leading to prolonged downtime",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--0af96e2b-e9de-5176-826d-ebf103693adf"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--de3a7343-7c7e-59c1-a7cd-b5e200d024bb",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1490",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1490"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--0af96e2b-e9de-5176-826d-ebf103693adf",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1490",
+      "technique_id": "T1490",
+      "technique_ref": "attack-pattern--de3a7343-7c7e-59c1-a7cd-b5e200d024bb",
+      "description": "The following analytic detects the execution of wbadmin.exe with flags that delete backup files, specifically targeting catalog or system state backups. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line arguments. This activity is significant because it is commonly used by ransomware to prevent recovery by deleting system backups. If confirmed malicious, this action could severely hinder recovery efforts, leading to prolonged downtime",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

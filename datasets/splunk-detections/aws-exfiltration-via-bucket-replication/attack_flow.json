@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--6260b09b-d7a1-57cd-b006-e1d773989f74",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--c06f37b9-b4ea-50c6-a79f-e81043380726",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--c06f37b9-b4ea-50c6-a79f-e81043380726",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--b888609f-4f93-5d21-9a63-0d89486565a0",
+      "created_by_ref": "identity--c06f37b9-b4ea-50c6-a79f-e81043380726",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: aws-exfiltration-via-bucket-replication",
+      "description": "The following analytic detects API calls to enable S3 bucket replication services. It leverages AWS CloudTrail logs to identify `PutBucketReplication` events, focusing on fields like `bucketName`, `ReplicationConfiguration.Rule.Destination.Bucket`, and user details. This activity is significant as it can indicate unauthorized data replication, potentially leading to data exfiltration. If confirmed malicious, attackers could replicate sensitive data to external accounts, leading to data breaches",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--ebaa2ff2-a04a-5f95-8d37-ee5758bc196b"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--acad0631-b6ba-532d-a1b6-378b1b5ff00c",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1537",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1537"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--ebaa2ff2-a04a-5f95-8d37-ee5758bc196b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1537",
+      "technique_id": "T1537",
+      "technique_ref": "attack-pattern--acad0631-b6ba-532d-a1b6-378b1b5ff00c",
+      "description": "The following analytic detects API calls to enable S3 bucket replication services. It leverages AWS CloudTrail logs to identify `PutBucketReplication` events, focusing on fields like `bucketName`, `ReplicationConfiguration.Rule.Destination.Bucket`, and user details. This activity is significant as it can indicate unauthorized data replication, potentially leading to data exfiltration. If confirmed malicious, attackers could replicate sensitive data to external accounts, leading to data breaches",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

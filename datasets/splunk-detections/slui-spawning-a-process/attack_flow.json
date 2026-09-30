@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--98eec1cf-72f1-5a3e-a88c-ff3d486b26ae",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--6bb54b93-d81a-58a3-81c9-6d31200c1f1e",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--6bb54b93-d81a-58a3-81c9-6d31200c1f1e",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--115c261e-23c1-5007-94f8-b64ed3108364",
+      "created_by_ref": "identity--6bb54b93-d81a-58a3-81c9-6d31200c1f1e",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: slui-spawning-a-process",
+      "description": "The following analytic detects the Microsoft Software Licensing User Interface Tool (`slui.exe`) spawning a child process. This behavior is identified using Endpoint Detection and Response (EDR) telemetry, focusing on process creation events where `slui.exe` is the parent process. This activity is significant because `slui.exe` should not typically spawn child processes, and doing so may indicate a UAC bypass attempt, leading to elevated privileges. If confirmed malicious, an attacker could leve",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--ac4ce51e-90eb-55af-a481-e6e05fa13949"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--bb68c1ec-a446-52c5-a1a8-d7b076642346",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1548.002",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1548.002"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--ac4ce51e-90eb-55af-a481-e6e05fa13949",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1548.002",
+      "technique_id": "T1548.002",
+      "technique_ref": "attack-pattern--bb68c1ec-a446-52c5-a1a8-d7b076642346",
+      "description": "The following analytic detects the Microsoft Software Licensing User Interface Tool (`slui.exe`) spawning a child process. This behavior is identified using Endpoint Detection and Response (EDR) telemetry, focusing on process creation events where `slui.exe` is the parent process. This activity is significant because `slui.exe` should not typically spawn child processes, and doing so may indicate a UAC bypass attempt, leading to elevated privileges. If confirmed malicious, an attacker could leve",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

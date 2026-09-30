@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--bd5c1947-85cc-54be-ab1f-ff098c18745e",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--d9c1afde-3776-5935-a943-1c5319d21e9c",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--d9c1afde-3776-5935-a943-1c5319d21e9c",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--efb8e389-80bd-5375-99cb-93fcf2965ba8",
+      "created_by_ref": "identity--d9c1afde-3776-5935-a943-1c5319d21e9c",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: network-discovery-using-route-windows-app",
+      "description": "The following analytic detects the execution of the `route.exe` Windows application, commonly used for network discovery. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process creation events. This activity is significant because adversaries often use `route.exe` to map network routes and identify potential targets within a network. If confirmed malicious, this behavior could allow attackers to gain insights into network topology, facilitating lateral movement",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--2c3ad757-462e-5e0b-8579-521704a5fbc8"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--fb807899-70b6-5b7e-bd19-441eb097533f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1016.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1016.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--2c3ad757-462e-5e0b-8579-521704a5fbc8",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1016.001",
+      "technique_id": "T1016.001",
+      "technique_ref": "attack-pattern--fb807899-70b6-5b7e-bd19-441eb097533f",
+      "description": "The following analytic detects the execution of the `route.exe` Windows application, commonly used for network discovery. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process creation events. This activity is significant because adversaries often use `route.exe` to map network routes and identify potential targets within a network. If confirmed malicious, this behavior could allow attackers to gain insights into network topology, facilitating lateral movement",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--6548b7b5-e360-54a1-b2f4-623245e664e2",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--54bd632e-8c38-51d6-95ac-b7de27600499",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--54bd632e-8c38-51d6-95ac-b7de27600499",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--69089cc7-b5e6-5599-bcd2-f60a605aa3d1",
+      "created_by_ref": "identity--54bd632e-8c38-51d6-95ac-b7de27600499",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: powershell-enable-smb1protocol-feature",
+      "description": "The following analytic detects the enabling of the SMB1 protocol via `powershell.exe`. It leverages PowerShell script block logging (EventCode 4104) to identify the execution of the `Enable-WindowsOptionalFeature` cmdlet with the `SMB1Protocol` parameter. This activity is significant because enabling SMB1 can facilitate lateral movement and file encryption by ransomware, such as RedDot. If confirmed malicious, this action could allow an attacker to propagate through the network, encrypt files, a",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--4009a0aa-6108-51d8-946b-59009959c9bc"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--85bcd034-11d1-5bdc-b141-e4981fc25d6b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1027.005",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1027.005"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--4009a0aa-6108-51d8-946b-59009959c9bc",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1027.005",
+      "technique_id": "T1027.005",
+      "technique_ref": "attack-pattern--85bcd034-11d1-5bdc-b141-e4981fc25d6b",
+      "description": "The following analytic detects the enabling of the SMB1 protocol via `powershell.exe`. It leverages PowerShell script block logging (EventCode 4104) to identify the execution of the `Enable-WindowsOptionalFeature` cmdlet with the `SMB1Protocol` parameter. This activity is significant because enabling SMB1 can facilitate lateral movement and file encryption by ransomware, such as RedDot. If confirmed malicious, this action could allow an attacker to propagate through the network, encrypt files, a",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--b8513e22-03e6-5289-8a7a-9dbdb3744cb8",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--36acb382-dcf9-52c4-b9ee-03c5ac6f60c4",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--36acb382-dcf9-52c4-b9ee-03c5ac6f60c4",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--062e51d3-8fff-5177-8965-426e8ce71055",
+      "created_by_ref": "identity--36acb382-dcf9-52c4-b9ee-03c5ac6f60c4",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: cisco-duo-policy-allow-network-bypass-2fa",
+      "description": "The following analytic detects when a Duo policy is created or updated to allow network-based bypass of two-factor authentication (2FA). \nIt identifies this behavior by searching Duo administrator logs for policy creation or update actions where the networks_allow field is present, \nindicating that specific networks have been permitted to bypass 2FA requirements. This is achieved by parsing the event description and \nfiltering for relevant policy changes, then aggregating the results by user and",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--5841d9dc-6fa0-595c-b184-f62fdfd8bbe7"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--751e7317-366e-5bcd-b630-3900417c9514",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1556",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1556"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--5841d9dc-6fa0-595c-b184-f62fdfd8bbe7",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1556",
+      "technique_id": "T1556",
+      "technique_ref": "attack-pattern--751e7317-366e-5bcd-b630-3900417c9514",
+      "description": "The following analytic detects when a Duo policy is created or updated to allow network-based bypass of two-factor authentication (2FA). \nIt identifies this behavior by searching Duo administrator logs for policy creation or update actions where the networks_allow field is present, \nindicating that specific networks have been permitted to bypass 2FA requirements. This is achieved by parsing the event description and \nfiltering for relevant policy changes, then aggregating the results by user and",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

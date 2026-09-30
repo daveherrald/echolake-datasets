@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--2a04dfa6-634c-5f31-b6e1-f8b6e49147b2",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--b6d9b501-8073-521b-a107-be67fb5fb376",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--b6d9b501-8073-521b-a107-be67fb5fb376",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--55b9cf8a-1f67-5586-b128-ee458f2d097d",
+      "created_by_ref": "identity--b6d9b501-8073-521b-a107-be67fb5fb376",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-http-network-communication-from-msiexec",
+      "description": "The following analytic detects MSIExec making network connections over ports 443 or 80. This behavior is identified by correlating process creation events from Endpoint Detection and Response (EDR) agents with network traffic logs. Typically, MSIExec does not perform network communication to the internet, making this activity unusual and potentially indicative of malicious behavior. If confirmed malicious, an attacker could be using MSIExec to download or communicate with external servers, poten",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--d400c67a-1ba7-5718-8cfe-f668ec8188ff"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--3fc46412-6cd8-59ec-a760-4899d932350e",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1218.007",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1218.007"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--d400c67a-1ba7-5718-8cfe-f668ec8188ff",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1218.007",
+      "technique_id": "T1218.007",
+      "technique_ref": "attack-pattern--3fc46412-6cd8-59ec-a760-4899d932350e",
+      "description": "The following analytic detects MSIExec making network connections over ports 443 or 80. This behavior is identified by correlating process creation events from Endpoint Detection and Response (EDR) agents with network traffic logs. Typically, MSIExec does not perform network communication to the internet, making this activity unusual and potentially indicative of malicious behavior. If confirmed malicious, an attacker could be using MSIExec to download or communicate with external servers, poten",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

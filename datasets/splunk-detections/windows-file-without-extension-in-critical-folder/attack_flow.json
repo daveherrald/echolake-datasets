@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--019b379b-71b7-5ece-bd0a-ba1bc40e6cc7",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--9705ea9b-96e3-5d2e-90f5-6c72ea6e7e18",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--9705ea9b-96e3-5d2e-90f5-6c72ea6e7e18",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--6865f3e9-b0f9-5e21-a49e-59ccf830a0c4",
+      "created_by_ref": "identity--9705ea9b-96e3-5d2e-90f5-6c72ea6e7e18",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-file-without-extension-in-critical-folder",
+      "description": "This analytic detects the creation of files without extensions in critical Windows system and driver-related directories, including but not limited to System32\\Drivers, Windows\\WinSxS, and other known Windows driver storage and loading paths. The detection has been expanded to comprehensively cover all commonly abused and legitimate Windows driver folder locations, increasing visibility into attempts to stage or deploy kernel-mode components. The analytic leverages telemetry from the Endpoint.Fi",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--30254c69-ded2-58e9-b4d1-bce67e396d9d"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--86b5e568-2de4-5d94-94b0-32835e3e0f18",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1485",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1485"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--30254c69-ded2-58e9-b4d1-bce67e396d9d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1485",
+      "technique_id": "T1485",
+      "technique_ref": "attack-pattern--86b5e568-2de4-5d94-94b0-32835e3e0f18",
+      "description": "This analytic detects the creation of files without extensions in critical Windows system and driver-related directories, including but not limited to System32\\Drivers, Windows\\WinSxS, and other known Windows driver storage and loading paths. The detection has been expanded to comprehensively cover all commonly abused and legitimate Windows driver folder locations, increasing visibility into attempts to stage or deploy kernel-mode components. The analytic leverages telemetry from the Endpoint.Fi",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

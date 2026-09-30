@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--a991e0d7-f5c7-5d59-add4-1f425a5bca70",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--fa106d52-ba99-54ca-ba50-df7f520a8f82",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--fa106d52-ba99-54ca-ba50-df7f520a8f82",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--61b235e9-2e34-5e51-a540-c96f2d7346d8",
+      "created_by_ref": "identity--fa106d52-ba99-54ca-ba50-df7f520a8f82",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: getlocaluser-with-powershell",
+      "description": "The following analytic detects the execution of `powershell.exe` with the `Get-LocalUser` commandlet, which is used to query local user accounts. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line arguments. Monitoring this activity is significant because adversaries and Red Teams may use it to enumerate local users for situational awareness and Active Directory discovery. If confirmed malicious, this activity could allow a",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--ccefa6e5-d5c1-52ff-a97c-1a0c362ab4fe"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--ef86fb52-19ad-56aa-9e68-0890ed87b420",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1087.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1087.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--ccefa6e5-d5c1-52ff-a97c-1a0c362ab4fe",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1087.001",
+      "technique_id": "T1087.001",
+      "technique_ref": "attack-pattern--ef86fb52-19ad-56aa-9e68-0890ed87b420",
+      "description": "The following analytic detects the execution of `powershell.exe` with the `Get-LocalUser` commandlet, which is used to query local user accounts. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line arguments. Monitoring this activity is significant because adversaries and Red Teams may use it to enumerate local users for situational awareness and Active Directory discovery. If confirmed malicious, this activity could allow a",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

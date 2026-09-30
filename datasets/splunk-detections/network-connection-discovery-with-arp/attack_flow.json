@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--693e7ade-f3e5-507d-afaf-27d35829ef71",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--d10f29c4-06e0-5def-88c9-3510b72a1a6b",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--d10f29c4-06e0-5def-88c9-3510b72a1a6b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--bfadd506-7737-5cbb-8349-6117b2f080b8",
+      "created_by_ref": "identity--d10f29c4-06e0-5def-88c9-3510b72a1a6b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: network-connection-discovery-with-arp",
+      "description": "The following analytic detects the execution of `arp.exe` with the `-a` flag, which is used to list network connections on a compromised system. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names, command-line executions, and related telemetry. Monitoring this activity is significant because both Red Teams and adversaries use `arp.exe` for situational awareness and Active Directory discovery. If confirmed malicious, this activity could allo",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--a25ddde1-886f-552c-98b2-fd3940d1beb5"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--3619aec5-c41e-5c4f-86eb-60185256dcec",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1049",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1049"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--a25ddde1-886f-552c-98b2-fd3940d1beb5",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1049",
+      "technique_id": "T1049",
+      "technique_ref": "attack-pattern--3619aec5-c41e-5c4f-86eb-60185256dcec",
+      "description": "The following analytic detects the execution of `arp.exe` with the `-a` flag, which is used to list network connections on a compromised system. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names, command-line executions, and related telemetry. Monitoring this activity is significant because both Red Teams and adversaries use `arp.exe` for situational awareness and Active Directory discovery. If confirmed malicious, this activity could allo",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

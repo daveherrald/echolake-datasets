@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--72aecea2-13ff-5b55-ba2b-6492ee6b56ca",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--492449ef-8aba-5d19-b805-35d7b4055d59",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--492449ef-8aba-5d19-b805-35d7b4055d59",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--c5d2f476-1192-59dc-88ad-c5c899f685f7",
+      "created_by_ref": "identity--492449ef-8aba-5d19-b805-35d7b4055d59",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: disable-windows-behavior-monitoring",
+      "description": "The following analytic identifies modifications in the registry to disable Windows Defender's real-time behavior monitoring. It leverages data from the Endpoint.Registry data model, specifically monitoring changes to registry paths associated with Windows Defender settings. This activity is significant because disabling real-time protection is a common tactic used by malware such as RATs, bots, or Trojans to evade detection. If confirmed malicious, this action could allow an attacker to execute",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--bc7070fc-329d-5053-bf1e-9ec510928499"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--2e3a223b-9987-51e2-aa06-e36769ffbec1",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1562.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--bc7070fc-329d-5053-bf1e-9ec510928499",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.001",
+      "technique_id": "T1562.001",
+      "technique_ref": "attack-pattern--2e3a223b-9987-51e2-aa06-e36769ffbec1",
+      "description": "The following analytic identifies modifications in the registry to disable Windows Defender's real-time behavior monitoring. It leverages data from the Endpoint.Registry data model, specifically monitoring changes to registry paths associated with Windows Defender settings. This activity is significant because disabling real-time protection is a common tactic used by malware such as RATs, bots, or Trojans to evade detection. If confirmed malicious, this action could allow an attacker to execute",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--0925a3c9-6024-56f0-b4fe-adb78ba35e46",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--97ac6596-4d81-58c9-86c8-629243ec6b8d",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--97ac6596-4d81-58c9-86c8-629243ec6b8d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--dc994e83-da2f-523c-be01-211be03db611",
+      "created_by_ref": "identity--97ac6596-4d81-58c9-86c8-629243ec6b8d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-list-env-variables-via-set-command-from-uncommon-parent",
+      "description": "The following analytic identifies a suspicious process command line fetching environment variables using the cmd.exe \"set\" command, with a non-shell parent process. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on command-line executions and parent process names. This activity could be significant as it is commonly associated with malware like Qakbot, which uses this technique to gather system information. If confirmed malicious, this behavior could indicate that",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--e12fc023-1181-587b-a49e-859ee7b204b0"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--bb29b2fd-79ff-5182-98d6-9bdc4748ce43",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1055",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1055"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--e12fc023-1181-587b-a49e-859ee7b204b0",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1055",
+      "technique_id": "T1055",
+      "technique_ref": "attack-pattern--bb29b2fd-79ff-5182-98d6-9bdc4748ce43",
+      "description": "The following analytic identifies a suspicious process command line fetching environment variables using the cmd.exe \"set\" command, with a non-shell parent process. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on command-line executions and parent process names. This activity could be significant as it is commonly associated with malware like Qakbot, which uses this technique to gather system information. If confirmed malicious, this behavior could indicate that",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--64c3db87-ae92-5e57-82e8-a451dc580e3c",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--226d7b68-f155-5e5e-9654-f22785e4fba0",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--226d7b68-f155-5e5e-9654-f22785e4fba0",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--5011d33d-66d5-53ce-89dd-4d935c352bf0",
+      "created_by_ref": "identity--226d7b68-f155-5e5e-9654-f22785e4fba0",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: kubernetes-node-port-creation",
+      "description": "The following analytic detects the creation of a Kubernetes NodePort service, which exposes a service to the external network. It identifies this activity by monitoring Kubernetes Audit logs for the creation of NodePort services. This behavior is significant for a SOC as it could allow an attacker to access internal services, posing a threat to the Kubernetes infrastructure's integrity and security. If confirmed malicious, this activity could lead to data breaches, service disruptions, or unauth",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--9821227a-104c-5493-95cd-3dd96e9d6c48"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--786ec3f8-fa00-5b7d-901e-65df8144ae13",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1204",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1204"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--9821227a-104c-5493-95cd-3dd96e9d6c48",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1204",
+      "technique_id": "T1204",
+      "technique_ref": "attack-pattern--786ec3f8-fa00-5b7d-901e-65df8144ae13",
+      "description": "The following analytic detects the creation of a Kubernetes NodePort service, which exposes a service to the external network. It identifies this activity by monitoring Kubernetes Audit logs for the creation of NodePort services. This behavior is significant for a SOC as it could allow an attacker to access internal services, posing a threat to the Kubernetes infrastructure's integrity and security. If confirmed malicious, this activity could lead to data breaches, service disruptions, or unauth",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

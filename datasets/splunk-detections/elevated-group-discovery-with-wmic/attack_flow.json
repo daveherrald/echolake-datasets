@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--63cf02ba-a763-51bf-a5ae-f3075b0feaca",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--c2efc94e-0661-58fb-916b-2109a06e34a7",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--c2efc94e-0661-58fb-916b-2109a06e34a7",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--538a2a7f-1f62-5c8a-86c4-23fb49c41e04",
+      "created_by_ref": "identity--c2efc94e-0661-58fb-916b-2109a06e34a7",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: elevated-group-discovery-with-wmic",
+      "description": "The following analytic detects the execution of `wmic.exe` with command-line arguments querying specific elevated domain groups. It leverages Endpoint Detection and Response (EDR) telemetry to identify processes that access the LDAP namespace and search for groups like \"Domain Admins\" or \"Enterprise Admins.\" This activity is significant as it indicates potential reconnaissance efforts by adversaries to identify high-privilege accounts within Active Directory. If confirmed malicious, this behavio",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--70a7f330-288d-5eea-b5f8-24ebe23167f6"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--ae24b74b-ee42-5266-926d-cd88e968d7a7",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1069.002",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1069.002"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--70a7f330-288d-5eea-b5f8-24ebe23167f6",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1069.002",
+      "technique_id": "T1069.002",
+      "technique_ref": "attack-pattern--ae24b74b-ee42-5266-926d-cd88e968d7a7",
+      "description": "The following analytic detects the execution of `wmic.exe` with command-line arguments querying specific elevated domain groups. It leverages Endpoint Detection and Response (EDR) telemetry to identify processes that access the LDAP namespace and search for groups like \"Domain Admins\" or \"Enterprise Admins.\" This activity is significant as it indicates potential reconnaissance efforts by adversaries to identify high-privilege accounts within Active Directory. If confirmed malicious, this behavio",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

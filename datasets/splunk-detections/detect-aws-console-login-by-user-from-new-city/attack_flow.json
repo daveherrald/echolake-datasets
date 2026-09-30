@@ -1,0 +1,110 @@
+{
+  "type": "bundle",
+  "id": "bundle--8f0e88be-2c4e-5660-ba6d-81105d8b68a7",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--c4801ce0-08a8-5ea1-9098-c663101531b8",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--c4801ce0-08a8-5ea1-9098-c663101531b8",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--db49a1ed-efe7-5f5a-8593-d97594144d6b",
+      "created_by_ref": "identity--c4801ce0-08a8-5ea1-9098-c663101531b8",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: detect-aws-console-login-by-user-from-new-city",
+      "description": "The following analytic identifies AWS console login events by users from a new city within the last hour. It leverages AWS CloudTrail events and compares them against a lookup file of previously seen user locations. This activity is significant for a SOC as it may indicate unauthorized access or credential compromise, especially if the login originates from an unusual location. If confirmed malicious, this could lead to unauthorized access to AWS resources, data exfiltration, or further exploita",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--5351371a-7929-53f6-bc93-36876557285b",
+        "attack-action--c7893662-8c8f-5a58-9ba3-121a8d2f3d29"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--74c486bb-5b02-56d9-9c58-a03cf84f580e",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1535",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1535"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--f20c9046-be92-5ad9-a489-b26ed5eb773f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1586.003",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1586.003"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--5351371a-7929-53f6-bc93-36876557285b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1535",
+      "technique_id": "T1535",
+      "technique_ref": "attack-pattern--74c486bb-5b02-56d9-9c58-a03cf84f580e",
+      "description": "The following analytic identifies AWS console login events by users from a new city within the last hour. It leverages AWS CloudTrail events and compares them against a lookup file of previously seen user locations. This activity is significant for a SOC as it may indicate unauthorized access or credential compromise, especially if the login originates from an unusual location. If confirmed malicious, this could lead to unauthorized access to AWS resources, data exfiltration, or further exploita",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--c7893662-8c8f-5a58-9ba3-121a8d2f3d29",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1586.003",
+      "technique_id": "T1586.003",
+      "technique_ref": "attack-pattern--f20c9046-be92-5ad9-a489-b26ed5eb773f",
+      "description": "The following analytic identifies AWS console login events by users from a new city within the last hour. It leverages AWS CloudTrail events and compares them against a lookup file of previously seen user locations. This activity is significant for a SOC as it may indicate unauthorized access or credential compromise, especially if the login originates from an unusual location. If confirmed malicious, this could lead to unauthorized access to AWS resources, data exfiltration, or further exploita",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

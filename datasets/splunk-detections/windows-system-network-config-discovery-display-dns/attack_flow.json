@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--cf5756ba-d18e-5967-a61c-1e4bd5385fd7",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--cab7c5b9-0e83-5e84-abad-dc048856b029",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--cab7c5b9-0e83-5e84-abad-dc048856b029",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--77894bad-c2fb-5585-b2b0-7cd5687233b4",
+      "created_by_ref": "identity--cab7c5b9-0e83-5e84-abad-dc048856b029",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-system-network-config-discovery-display-dns",
+      "description": "The following analytic identifies the execution of the \"ipconfig /displaydns\" command, which retrieves DNS reply information using the built-in Windows tool IPConfig. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process command-line executions. Monitoring this activity is significant as threat actors and post-exploitation tools like WINPEAS often abuse this command to gather network information. If confirmed malicious, this activity could allow att",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--9180531e-f977-55d8-98d6-11fbe4d35edb"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--ac38e323-f204-589f-84c7-067e48f31216",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1016",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1016"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--9180531e-f977-55d8-98d6-11fbe4d35edb",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1016",
+      "technique_id": "T1016",
+      "technique_ref": "attack-pattern--ac38e323-f204-589f-84c7-067e48f31216",
+      "description": "The following analytic identifies the execution of the \"ipconfig /displaydns\" command, which retrieves DNS reply information using the built-in Windows tool IPConfig. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process command-line executions. Monitoring this activity is significant as threat actors and post-exploitation tools like WINPEAS often abuse this command to gather network information. If confirmed malicious, this activity could allow att",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

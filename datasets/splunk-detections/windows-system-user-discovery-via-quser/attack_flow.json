@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--0e7f2744-c0d3-52b9-b2d6-e5d2e56dc918",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--09726867-f7b9-5755-8f98-5b7a682dd85e",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--09726867-f7b9-5755-8f98-5b7a682dd85e",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--1a0a3924-3b60-5e40-81b5-bf5c69f37294",
+      "created_by_ref": "identity--09726867-f7b9-5755-8f98-5b7a682dd85e",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-system-user-discovery-via-quser",
+      "description": "The following analytic detects the execution of the Windows OS tool quser.exe, commonly used to gather information about user sessions on a Remote Desktop Session Host server. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process execution logs. Monitoring this activity is crucial as quser.exe is often abused by post-exploitation tools like winpeas, used in ransomware attacks to enumerate user sessions. If confirmed malicious, attackers could levera",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--aa040ca7-63ee-5fa8-a439-f4cc9bc30fda"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--53ed2648-bd91-58ad-8757-898c6aec28d7",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1033",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1033"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--aa040ca7-63ee-5fa8-a439-f4cc9bc30fda",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1033",
+      "technique_id": "T1033",
+      "technique_ref": "attack-pattern--53ed2648-bd91-58ad-8757-898c6aec28d7",
+      "description": "The following analytic detects the execution of the Windows OS tool quser.exe, commonly used to gather information about user sessions on a Remote Desktop Session Host server. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process execution logs. Monitoring this activity is crucial as quser.exe is often abused by post-exploitation tools like winpeas, used in ransomware attacks to enumerate user sessions. If confirmed malicious, attackers could levera",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

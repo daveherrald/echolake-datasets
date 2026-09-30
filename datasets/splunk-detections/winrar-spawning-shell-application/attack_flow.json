@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--f181ed90-b445-56cd-bd09-d1a97980656d",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--b1bd51f7-d8de-5cba-8af4-97ebf623ce0d",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--b1bd51f7-d8de-5cba-8af4-97ebf623ce0d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--4c1a03f8-18e7-5a9f-9524-da2834cab752",
+      "created_by_ref": "identity--b1bd51f7-d8de-5cba-8af4-97ebf623ce0d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: winrar-spawning-shell-application",
+      "description": "The following analytic detects the execution of Windows shell processes initiated by WinRAR, such as \"cmd.exe\", \"powershell.exe\", \"certutil.exe\", \"mshta.exe\", or \"bitsadmin.exe\". This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process and parent process relationships. This activity is significant because it may indicate exploitation of the WinRAR CVE-2023-38831 vulnerability, where malicious scripts are executed from spoofed ZIP archives. If confirmed",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--38923268-4e36-528e-932d-564bdb77841e"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--2d1dfa0a-5a67-5b97-a6b4-43e97d58b125",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1105",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1105"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--38923268-4e36-528e-932d-564bdb77841e",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1105",
+      "technique_id": "T1105",
+      "technique_ref": "attack-pattern--2d1dfa0a-5a67-5b97-a6b4-43e97d58b125",
+      "description": "The following analytic detects the execution of Windows shell processes initiated by WinRAR, such as \"cmd.exe\", \"powershell.exe\", \"certutil.exe\", \"mshta.exe\", or \"bitsadmin.exe\". This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process and parent process relationships. This activity is significant because it may indicate exploitation of the WinRAR CVE-2023-38831 vulnerability, where malicious scripts are executed from spoofed ZIP archives. If confirmed",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

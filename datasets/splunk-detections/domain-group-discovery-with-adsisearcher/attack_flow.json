@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--d6f509a8-1621-535d-b0b4-5560092f5173",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--6c34ce32-b562-52c4-a99e-dbac6abe159e",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--6c34ce32-b562-52c4-a99e-dbac6abe159e",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--ba89acef-8acb-559e-bd18-e505d65d02f6",
+      "created_by_ref": "identity--6c34ce32-b562-52c4-a99e-dbac6abe159e",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: domain-group-discovery-with-adsisearcher",
+      "description": "The following analytic detects the use of the `[Adsisearcher]` type accelerator in PowerShell to query Active Directory for domain groups. It leverages PowerShell Script Block Logging (EventCode=4104) to identify specific script blocks containing `[adsisearcher]` and group-related queries. This activity is significant as it may indicate an attempt by adversaries or Red Teams to enumerate domain groups for situational awareness and Active Directory discovery. If confirmed malicious, this behavior",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--ae9aad23-cf43-5dfc-8ea8-0f50073f26dc"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--b50006f4-498e-5d50-85c6-54dd7ae0fdae",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1069.002",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1069.002"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--ae9aad23-cf43-5dfc-8ea8-0f50073f26dc",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1069.002",
+      "technique_id": "T1069.002",
+      "technique_ref": "attack-pattern--b50006f4-498e-5d50-85c6-54dd7ae0fdae",
+      "description": "The following analytic detects the use of the `[Adsisearcher]` type accelerator in PowerShell to query Active Directory for domain groups. It leverages PowerShell Script Block Logging (EventCode=4104) to identify specific script blocks containing `[adsisearcher]` and group-related queries. This activity is significant as it may indicate an attempt by adversaries or Red Teams to enumerate domain groups for situational awareness and Active Directory discovery. If confirmed malicious, this behavior",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

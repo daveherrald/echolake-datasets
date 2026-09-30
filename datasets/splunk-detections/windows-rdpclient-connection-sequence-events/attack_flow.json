@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--6058af3e-376e-5cfe-ad2b-3a75ca947e02",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--e6603fd1-5cd7-582e-8e05-1756ac78ac8b",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--e6603fd1-5cd7-582e-8e05-1756ac78ac8b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--5666e6fb-bee1-5aa9-8aa3-f1e74710ffca",
+      "created_by_ref": "identity--e6603fd1-5cd7-582e-8e05-1756ac78ac8b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-rdpclient-connection-sequence-events",
+      "description": "This analytic monitors Windows RDP client connection sequence events (EventCode 1024) from the Microsoft-Windows-TerminalServices-RDPClient/Operational log. These events track when RDP ClientActiveX initiates connection attempts to remote servers. The connection sequence is a critical phase of RDP where the client and server exchange settings and establish common parameters for the session. Monitoring these events can help identify unusual RDP connection patterns, potential lateral movement atte",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--2790000c-ff28-5982-ba9a-3236b86492b3"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--b41f2709-5331-56f1-9470-8f0b39da4fa1",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1133",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1133"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--2790000c-ff28-5982-ba9a-3236b86492b3",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1133",
+      "technique_id": "T1133",
+      "technique_ref": "attack-pattern--b41f2709-5331-56f1-9470-8f0b39da4fa1",
+      "description": "This analytic monitors Windows RDP client connection sequence events (EventCode 1024) from the Microsoft-Windows-TerminalServices-RDPClient/Operational log. These events track when RDP ClientActiveX initiates connection attempts to remote servers. The connection sequence is a critical phase of RDP where the client and server exchange settings and establish common parameters for the session. Monitoring these events can help identify unusual RDP connection patterns, potential lateral movement atte",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

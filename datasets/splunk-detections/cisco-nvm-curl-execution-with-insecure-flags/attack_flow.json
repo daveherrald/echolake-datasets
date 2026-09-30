@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--81c8080c-77ac-5bfd-b832-d8dc3d4c8ba8",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--c606a16a-a97a-5204-8f2a-59c36d2192ef",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--c606a16a-a97a-5204-8f2a-59c36d2192ef",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--be969473-39eb-594b-af04-8ae1e43c12ae",
+      "created_by_ref": "identity--c606a16a-a97a-5204-8f2a-59c36d2192ef",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: cisco-nvm-curl-execution-with-insecure-flags",
+      "description": "This analytic detects the use of `curl.exe` with insecure flags such as `-k`, `--insecure`, `--proxy-insecure`, or `--doh-insecure`\nwhich disable TLS certificate validation.\nIt leverages Cisco Network Visibility Module (NVM) flow data and process arguments\nto identify outbound connections initiated by curl where TLS checks were explicitly disabled.\nThis behavior may indicate an attempt to bypass certificate validation to connect to potentially untrusted or malicious endpoints,\na common tactic in",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--54e76db4-6fa8-5b15-864b-684a5b75e857"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--2307f8b8-3be8-5c8c-bc3d-71c27d61241b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1197",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1197"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--54e76db4-6fa8-5b15-864b-684a5b75e857",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1197",
+      "technique_id": "T1197",
+      "technique_ref": "attack-pattern--2307f8b8-3be8-5c8c-bc3d-71c27d61241b",
+      "description": "This analytic detects the use of `curl.exe` with insecure flags such as `-k`, `--insecure`, `--proxy-insecure`, or `--doh-insecure`\nwhich disable TLS certificate validation.\nIt leverages Cisco Network Visibility Module (NVM) flow data and process arguments\nto identify outbound connections initiated by curl where TLS checks were explicitly disabled.\nThis behavior may indicate an attempt to bypass certificate validation to connect to potentially untrusted or malicious endpoints,\na common tactic in",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "type": "bundle",
+  "id": "bundle--ad5208c3-05b6-5985-9d1f-fec8dc93cf0b",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--a49eff7d-8569-5f19-89d6-12b1f1557357",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--a49eff7d-8569-5f19-89d6-12b1f1557357",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--59e9909b-f79d-5f67-814e-33de419da6e5",
+      "created_by_ref": "identity--a49eff7d-8569-5f19-89d6-12b1f1557357",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-ad-dangerous-user-acl-modification",
+      "description": "This detection monitors the addition of the following ACLs to an Active Directory user object: \"Full control\",\"All extended rights\",\"All validated writes\", \"Create all child objects\",\"Delete all child objects\",\"Delete subtree\",\"Delete\",\"Modify permissions\",\"Modify owner\",\"Write all properties\".  Such modifications can indicate potential privilege escalation or malicious activity. Immediate investigation is recommended upon alert.",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--d3ed75c6-b9f7-5f6c-bfd8-cc405ca3db75",
+        "attack-action--9b8cc0d7-fb93-5876-b89d-4d86e6e0c8be"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--b4bce87c-4e07-5727-aba7-4f24aeaae4fd",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1222.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1222.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--a62fd8cd-8968-54e0-af36-824d3419cf77",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1484",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1484"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--d3ed75c6-b9f7-5f6c-bfd8-cc405ca3db75",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1222.001",
+      "technique_id": "T1222.001",
+      "technique_ref": "attack-pattern--b4bce87c-4e07-5727-aba7-4f24aeaae4fd",
+      "description": "This detection monitors the addition of the following ACLs to an Active Directory user object: \"Full control\",\"All extended rights\",\"All validated writes\", \"Create all child objects\",\"Delete all child objects\",\"Delete subtree\",\"Delete\",\"Modify permissions\",\"Modify owner\",\"Write all properties\".  Such modifications can indicate potential privilege escalation or malicious activity. Immediate investigation is recommended upon alert.",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--9b8cc0d7-fb93-5876-b89d-4d86e6e0c8be",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1484",
+      "technique_id": "T1484",
+      "technique_ref": "attack-pattern--a62fd8cd-8968-54e0-af36-824d3419cf77",
+      "description": "This detection monitors the addition of the following ACLs to an Active Directory user object: \"Full control\",\"All extended rights\",\"All validated writes\", \"Create all child objects\",\"Delete all child objects\",\"Delete subtree\",\"Delete\",\"Modify permissions\",\"Modify owner\",\"Write all properties\".  Such modifications can indicate potential privilege escalation or malicious activity. Immediate investigation is recommended upon alert.",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

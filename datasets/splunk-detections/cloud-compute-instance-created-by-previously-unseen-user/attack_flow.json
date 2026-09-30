@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--fae11ddd-df1c-5e35-950d-8a8e05d853f0",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--fb9a320d-6b59-5814-8963-290335e17752",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--fb9a320d-6b59-5814-8963-290335e17752",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--f668ed31-9ba7-5240-ae76-dd612e99833f",
+      "created_by_ref": "identity--fb9a320d-6b59-5814-8963-290335e17752",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: cloud-compute-instance-created-by-previously-unseen-user",
+      "description": "The following analytic identifies the creation of cloud compute instances by users who have not previously created them. It leverages data from the Change data model, focusing on 'create' actions by users, and cross-references with a baseline of known user activities. This activity is significant as it may indicate unauthorized access or misuse of cloud resources by new or compromised accounts. If confirmed malicious, attackers could deploy unauthorized compute instances, leading to potential da",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--cb8006b0-9d06-5caa-acf7-32b90ab3c9d5"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--408fbcf2-03f4-599b-8b4f-9a8c2e45fadd",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1078.004",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1078.004"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--cb8006b0-9d06-5caa-acf7-32b90ab3c9d5",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1078.004",
+      "technique_id": "T1078.004",
+      "technique_ref": "attack-pattern--408fbcf2-03f4-599b-8b4f-9a8c2e45fadd",
+      "description": "The following analytic identifies the creation of cloud compute instances by users who have not previously created them. It leverages data from the Change data model, focusing on 'create' actions by users, and cross-references with a baseline of known user activities. This activity is significant as it may indicate unauthorized access or misuse of cloud resources by new or compromised accounts. If confirmed malicious, attackers could deploy unauthorized compute instances, leading to potential da",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

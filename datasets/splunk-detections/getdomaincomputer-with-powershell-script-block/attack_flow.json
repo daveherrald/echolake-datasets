@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--226dc4e3-4899-51dc-95f1-738dc5a9fa52",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--548bb49e-67f2-544b-af90-3df81d6a9911",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--548bb49e-67f2-544b-af90-3df81d6a9911",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--c34f7c3b-677a-568c-9c81-e02b234eb0d1",
+      "created_by_ref": "identity--548bb49e-67f2-544b-af90-3df81d6a9911",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: getdomaincomputer-with-powershell-script-block",
+      "description": "The following analytic detects the execution of the `Get-DomainComputer` commandlet using PowerShell Script Block Logging (EventCode=4104). This commandlet is part of PowerView, a tool often used for enumerating domain computers within Windows environments. The detection leverages script block text analysis to identify this specific command. Monitoring this activity is crucial as it can indicate an adversary's attempt to gather information about domain computers, which is a common step in Active",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--4299c073-a0b4-5e89-9a4f-07dce81382d0"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--d9f4986b-85d8-539d-bd68-442f1cf752dd",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1018",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1018"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--4299c073-a0b4-5e89-9a4f-07dce81382d0",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1018",
+      "technique_id": "T1018",
+      "technique_ref": "attack-pattern--d9f4986b-85d8-539d-bd68-442f1cf752dd",
+      "description": "The following analytic detects the execution of the `Get-DomainComputer` commandlet using PowerShell Script Block Logging (EventCode=4104). This commandlet is part of PowerView, a tool often used for enumerating domain computers within Windows environments. The detection leverages script block text analysis to identify this specific command. Monitoring this activity is crucial as it can indicate an adversary's attempt to gather information about domain computers, which is a common step in Active",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

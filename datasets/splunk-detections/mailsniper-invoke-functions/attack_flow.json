@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--32405595-4b5f-5df4-9af8-cd2ab1cf13b2",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--e84991b5-8eb8-5431-abf1-f6e6f51fb6f5",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--e84991b5-8eb8-5431-abf1-f6e6f51fb6f5",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--d0e9712c-5f7e-5e51-aca7-a95bd695280b",
+      "created_by_ref": "identity--e84991b5-8eb8-5431-abf1-f6e6f51fb6f5",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: mailsniper-invoke-functions",
+      "description": "The following analytic detects the execution of known MailSniper PowerShell functions on a machine. It leverages PowerShell logs (EventCode 4104) to identify specific script block text associated with MailSniper activities. This behavior is significant as MailSniper is often used by attackers to harvest sensitive emails from compromised Exchange servers. If confirmed malicious, this activity could lead to unauthorized access to sensitive email data, credential theft, and further compromise of th",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--7dac5438-5770-5a95-a78b-1dc05ec5c323"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--c6427345-604b-5c22-ad50-f71b61097cb0",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1114.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1114.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--7dac5438-5770-5a95-a78b-1dc05ec5c323",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1114.001",
+      "technique_id": "T1114.001",
+      "technique_ref": "attack-pattern--c6427345-604b-5c22-ad50-f71b61097cb0",
+      "description": "The following analytic detects the execution of known MailSniper PowerShell functions on a machine. It leverages PowerShell logs (EventCode 4104) to identify specific script block text associated with MailSniper activities. This behavior is significant as MailSniper is often used by attackers to harvest sensitive emails from compromised Exchange servers. If confirmed malicious, this activity could lead to unauthorized access to sensitive email data, credential theft, and further compromise of th",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--9b822456-f319-5c5e-97b1-261bef0e7c0c",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--6188dd55-cb4b-57ed-a83f-0a29fd685cad",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--6188dd55-cb4b-57ed-a83f-0a29fd685cad",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--5933fdb3-deb9-5749-8d8d-b70a2c0c57ba",
+      "created_by_ref": "identity--6188dd55-cb4b-57ed-a83f-0a29fd685cad",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: getcurrent-user-with-powershell-script-block",
+      "description": "The following analytic detects the execution of the `GetCurrent` method from the WindowsIdentity .NET class using PowerShell Script Block Logging (EventCode=4104). This method identifies the current Windows user. The detection leverages PowerShell script block logs to identify when this method is called. This activity is significant because adversaries and Red Teams may use it to gain situational awareness and perform Active Directory discovery on compromised endpoints. If confirmed malicious, t",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--c080780c-d6e7-59bb-8bf5-5c06fb52d118"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--6f536828-7bdb-5ec4-9272-473498f3979b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1033",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1033"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--c080780c-d6e7-59bb-8bf5-5c06fb52d118",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1033",
+      "technique_id": "T1033",
+      "technique_ref": "attack-pattern--6f536828-7bdb-5ec4-9272-473498f3979b",
+      "description": "The following analytic detects the execution of the `GetCurrent` method from the WindowsIdentity .NET class using PowerShell Script Block Logging (EventCode=4104). This method identifies the current Windows user. The detection leverages PowerShell script block logs to identify when this method is called. This activity is significant because adversaries and Red Teams may use it to gain situational awareness and perform Active Directory discovery on compromised endpoints. If confirmed malicious, t",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

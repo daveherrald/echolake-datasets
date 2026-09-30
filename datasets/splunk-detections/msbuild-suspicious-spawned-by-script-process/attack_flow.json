@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--1dd130ab-bfe8-57de-ac0a-3203992a3bd5",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--995077fa-459a-5052-865a-ecdbbbb057ac",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--995077fa-459a-5052-865a-ecdbbbb057ac",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--82dfbf7c-b8d1-50ef-a0f9-ea51b287d7c9",
+      "created_by_ref": "identity--995077fa-459a-5052-865a-ecdbbbb057ac",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: msbuild-suspicious-spawned-by-script-process",
+      "description": "The following analytic detects the suspicious spawning of MSBuild.exe by Windows Script Host processes (cscript.exe or wscript.exe). This behavior is often associated with malware or adversaries executing malicious MSBuild processes via scripts on compromised hosts. The detection leverages Endpoint Detection and Response (EDR) telemetry, focusing on process creation events where MSBuild is a child of script hosts. This activity is significant as it may indicate an attempt to execute malicious co",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--505fbbe4-fb75-52da-a9cc-9ee50c29e570"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--c23ef1a9-9eca-546f-8917-46c3657736b6",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1127.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1127.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--505fbbe4-fb75-52da-a9cc-9ee50c29e570",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1127.001",
+      "technique_id": "T1127.001",
+      "technique_ref": "attack-pattern--c23ef1a9-9eca-546f-8917-46c3657736b6",
+      "description": "The following analytic detects the suspicious spawning of MSBuild.exe by Windows Script Host processes (cscript.exe or wscript.exe). This behavior is often associated with malware or adversaries executing malicious MSBuild processes via scripts on compromised hosts. The detection leverages Endpoint Detection and Response (EDR) telemetry, focusing on process creation events where MSBuild is a child of script hosts. This activity is significant as it may indicate an attempt to execute malicious co",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

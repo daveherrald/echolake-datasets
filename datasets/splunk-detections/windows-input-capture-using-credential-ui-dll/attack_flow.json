@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--924fb98e-61a1-5fbd-bb49-c2c922f52e69",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--f7cb668d-7270-5385-8c58-312cb25396d8",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--f7cb668d-7270-5385-8c58-312cb25396d8",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--96d20a39-05a4-5115-bb82-021807bc6ac6",
+      "created_by_ref": "identity--f7cb668d-7270-5385-8c58-312cb25396d8",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-input-capture-using-credential-ui-dll",
+      "description": "The following analytic detects a process loading the credui.dll or wincredui.dll module. This detection leverages Sysmon EventCode 7 to identify instances where these DLLs are loaded by processes outside typical system directories. This activity is significant because adversaries often abuse these modules to create fake credential prompts or dump credentials, posing a risk of credential theft. If confirmed malicious, this activity could allow attackers to harvest user credentials, leading to una",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--a635291e-de55-5555-9e38-81a59ff97825"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--cd492dfc-e86b-59d2-aa67-799b60084209",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1056.002",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1056.002"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--a635291e-de55-5555-9e38-81a59ff97825",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1056.002",
+      "technique_id": "T1056.002",
+      "technique_ref": "attack-pattern--cd492dfc-e86b-59d2-aa67-799b60084209",
+      "description": "The following analytic detects a process loading the credui.dll or wincredui.dll module. This detection leverages Sysmon EventCode 7 to identify instances where these DLLs are loaded by processes outside typical system directories. This activity is significant because adversaries often abuse these modules to create fake credential prompts or dump credentials, posing a risk of credential theft. If confirmed malicious, this activity could allow attackers to harvest user credentials, leading to una",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

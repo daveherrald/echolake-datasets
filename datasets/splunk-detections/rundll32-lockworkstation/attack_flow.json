@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--da719331-e5d4-5a12-98ec-5038d2c31436",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--1ecb44bd-f12b-5fe8-bcd4-30b75e1c61c5",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--1ecb44bd-f12b-5fe8-bcd4-30b75e1c61c5",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--27d0c4f4-59f1-5030-a3eb-825901774ba9",
+      "created_by_ref": "identity--1ecb44bd-f12b-5fe8-bcd4-30b75e1c61c5",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: rundll32-lockworkstation",
+      "description": "The following analytic detects the execution of the rundll32.exe command with the user32.dll,LockWorkStation parameter, which is used to lock the workstation via command line. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line executions. This activity is significant as it is an uncommon method to lock a screen and has been observed in CONTI ransomware tooling for defense evasion. If confirmed malicious, this technique coul",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--13f5f67d-30c0-5e2d-aa43-83cd40b5c979"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--e450f9e0-326c-57eb-9d7e-629355d2fe67",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1218.011",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1218.011"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--13f5f67d-30c0-5e2d-aa43-83cd40b5c979",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1218.011",
+      "technique_id": "T1218.011",
+      "technique_ref": "attack-pattern--e450f9e0-326c-57eb-9d7e-629355d2fe67",
+      "description": "The following analytic detects the execution of the rundll32.exe command with the user32.dll,LockWorkStation parameter, which is used to lock the workstation via command line. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line executions. This activity is significant as it is an uncommon method to lock a screen and has been observed in CONTI ransomware tooling for defense evasion. If confirmed malicious, this technique coul",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

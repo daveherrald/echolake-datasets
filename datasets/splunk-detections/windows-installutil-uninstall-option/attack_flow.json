@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--f4dca97b-7e87-5bb2-9a42-54bba3d798bf",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--c33768d4-c849-56e2-af39-879c9cc910ac",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--c33768d4-c849-56e2-af39-879c9cc910ac",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--3951d25d-a0f3-5e2d-b773-a1ed8610aa57",
+      "created_by_ref": "identity--c33768d4-c849-56e2-af39-879c9cc910ac",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-installutil-uninstall-option",
+      "description": "The following analytic detects the use of the Windows InstallUtil.exe binary with the `/u` (uninstall) switch, which can execute code while bypassing application control. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names, parent processes, and command-line executions. This activity is significant because it can indicate an attempt to execute malicious code without administrative privileges. If confirmed malicious, an attacker could achieve",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--ca3449c2-4c1e-5a49-95b4-6d93710f079b"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--13231eb5-0d02-55f5-8810-4804aee1e924",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1218.004",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1218.004"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--ca3449c2-4c1e-5a49-95b4-6d93710f079b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1218.004",
+      "technique_id": "T1218.004",
+      "technique_ref": "attack-pattern--13231eb5-0d02-55f5-8810-4804aee1e924",
+      "description": "The following analytic detects the use of the Windows InstallUtil.exe binary with the `/u` (uninstall) switch, which can execute code while bypassing application control. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names, parent processes, and command-line executions. This activity is significant because it can indicate an attempt to execute malicious code without administrative privileges. If confirmed malicious, an attacker could achieve",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

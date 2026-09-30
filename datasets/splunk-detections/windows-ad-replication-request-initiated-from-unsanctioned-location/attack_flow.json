@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--2b1ec962-8f20-57a9-93eb-2f81fed04db2",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--9c7ebacf-fa48-5135-9219-534be310afe7",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--9c7ebacf-fa48-5135-9219-534be310afe7",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--4edf96b9-43e2-5595-ae55-3a1ebd8fccba",
+      "created_by_ref": "identity--9c7ebacf-fa48-5135-9219-534be310afe7",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-ad-replication-request-initiated-from-unsanctioned-location",
+      "description": "The following analytic identifies unauthorized Active Directory replication requests initiated from non-domain controller locations. It leverages EventCode 4662 to detect when a computer account with replication permissions creates a handle to domainDNS, filtering out known domain controller IP addresses. This activity is significant as it may indicate a DCSync attack, where an attacker with privileged access can request password hashes for any or all users within the domain. If confirmed malici",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--22f596bd-9470-5acd-a785-e327b5a93ddb"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--fd759649-dfd3-549a-9f2e-80b005cbb004",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1003.006",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1003.006"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--22f596bd-9470-5acd-a785-e327b5a93ddb",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1003.006",
+      "technique_id": "T1003.006",
+      "technique_ref": "attack-pattern--fd759649-dfd3-549a-9f2e-80b005cbb004",
+      "description": "The following analytic identifies unauthorized Active Directory replication requests initiated from non-domain controller locations. It leverages EventCode 4662 to detect when a computer account with replication permissions creates a handle to domainDNS, filtering out known domain controller IP addresses. This activity is significant as it may indicate a DCSync attack, where an attacker with privileged access can request password hashes for any or all users within the domain. If confirmed malici",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

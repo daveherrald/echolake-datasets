@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--7311d0a9-8b29-5186-be9c-b2521a7d5906",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--680f3f36-d7b0-553b-9c58-4a1d05e6db92",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--680f3f36-d7b0-553b-9c58-4a1d05e6db92",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--d641b877-e056-5c3c-9624-f9c819689cee",
+      "created_by_ref": "identity--680f3f36-d7b0-553b-9c58-4a1d05e6db92",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-service-deletion-in-registry",
+      "description": "The following analytic detects the deletion of a service from the Windows Registry under CurrentControlSet\\Services. It leverages data from the Endpoint.Registry datamodel, specifically monitoring registry paths and actions related to service deletion. This activity is significant as adversaries may delete services to evade detection and hinder incident response efforts. If confirmed malicious, this action could disrupt legitimate services, impair system functionality, and potentially allow atta",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--b299aa59-56da-5b27-a970-f0abdb9baeec"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--09ae86d6-d8a5-5e0d-8d08-4831dc05167e",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1489",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1489"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--b299aa59-56da-5b27-a970-f0abdb9baeec",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1489",
+      "technique_id": "T1489",
+      "technique_ref": "attack-pattern--09ae86d6-d8a5-5e0d-8d08-4831dc05167e",
+      "description": "The following analytic detects the deletion of a service from the Windows Registry under CurrentControlSet\\Services. It leverages data from the Endpoint.Registry datamodel, specifically monitoring registry paths and actions related to service deletion. This activity is significant as adversaries may delete services to evade detection and hinder incident response efforts. If confirmed malicious, this action could disrupt legitimate services, impair system functionality, and potentially allow atta",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

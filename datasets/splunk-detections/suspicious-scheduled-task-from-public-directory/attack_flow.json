@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--9118b06f-f63c-53b8-b873-8b9cf3b817fd",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--eba58bd6-d1b7-5f2b-b1bc-ce49b443531e",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--eba58bd6-d1b7-5f2b-b1bc-ce49b443531e",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--9dad3ffd-dc34-5a78-b334-2adda24f83a0",
+      "created_by_ref": "identity--eba58bd6-d1b7-5f2b-b1bc-ce49b443531e",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: suspicious-scheduled-task-from-public-directory",
+      "description": "The following analytic identifies the creation of scheduled tasks that execute binaries or scripts from public directories, such as users\\public, \\programdata\\, or \\windows\\temp, using schtasks.exe with the /create command. It leverages Sysmon Event ID 1 data to detect this behavior. This activity is significant because it often indicates an attempt to maintain persistence or execute malicious scripts, which are common tactics in malware deployment. If confirmed as malicious, this could lead to",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--98c6891a-b732-52d1-8a16-c239c7e828ae"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--855074c6-0eec-53e0-8797-b4bc0f776555",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1053.005",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1053.005"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--98c6891a-b732-52d1-8a16-c239c7e828ae",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1053.005",
+      "technique_id": "T1053.005",
+      "technique_ref": "attack-pattern--855074c6-0eec-53e0-8797-b4bc0f776555",
+      "description": "The following analytic identifies the creation of scheduled tasks that execute binaries or scripts from public directories, such as users\\public, \\programdata\\, or \\windows\\temp, using schtasks.exe with the /create command. It leverages Sysmon Event ID 1 data to detect this behavior. This activity is significant because it often indicates an attempt to maintain persistence or execute malicious scripts, which are common tactics in malware deployment. If confirmed as malicious, this could lead to",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

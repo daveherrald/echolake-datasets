@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--ab136b11-ee70-5647-9089-8bae1ef6edea",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--95d313e3-8657-5382-96c1-68f25f27c278",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--95d313e3-8657-5382-96c1-68f25f27c278",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--88ae5d94-f649-50b2-ad0c-54a70bb307da",
+      "created_by_ref": "identity--95d313e3-8657-5382-96c1-68f25f27c278",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-modify-registry-proxyenable",
+      "description": "The following analytic detects modifications to the Windows registry key \"ProxyEnable\" to enable proxy settings. It leverages data from the Endpoint.Registry datamodel, specifically monitoring changes to the \"Internet Settings\\ProxyEnable\" registry path. This activity is significant as it is commonly exploited by malware and adversaries to establish proxy communication, potentially connecting to malicious Command and Control (C2) servers. If confirmed malicious, this could allow attackers to red",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--400f6f47-739a-52f9-a4f3-60380f2fc537"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--97c4349d-2828-5687-8e84-553b877485e3",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1112",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1112"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--400f6f47-739a-52f9-a4f3-60380f2fc537",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1112",
+      "technique_id": "T1112",
+      "technique_ref": "attack-pattern--97c4349d-2828-5687-8e84-553b877485e3",
+      "description": "The following analytic detects modifications to the Windows registry key \"ProxyEnable\" to enable proxy settings. It leverages data from the Endpoint.Registry datamodel, specifically monitoring changes to the \"Internet Settings\\ProxyEnable\" registry path. This activity is significant as it is commonly exploited by malware and adversaries to establish proxy communication, potentially connecting to malicious Command and Control (C2) servers. If confirmed malicious, this could allow attackers to red",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

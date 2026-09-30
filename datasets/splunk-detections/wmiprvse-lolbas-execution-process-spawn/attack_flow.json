@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--3e17e9a9-b1b3-5bb5-a7bb-7e25714c1386",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--1390bbdc-ac16-5ba9-a342-43a73ea22116",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--1390bbdc-ac16-5ba9-a342-43a73ea22116",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--4e6d563e-65b1-56ae-a676-6860051e3b15",
+      "created_by_ref": "identity--1390bbdc-ac16-5ba9-a342-43a73ea22116",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: wmiprvse-lolbas-execution-process-spawn",
+      "description": "The following analytic detects `wmiprvse.exe` spawning a LOLBAS execution process. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process creation events where `wmiprvse.exe` is the parent process and the child process is a known LOLBAS binary. This activity is significant as it may indicate lateral movement or remote code execution by an adversary abusing Windows Management Instrumentation (WMI). If confirmed malicious, this behavior could allow attackers to ex",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--9e2f010d-ff6a-54b3-98bf-16d4d885d8df"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--9389c3ba-e7f0-5feb-9f40-8b358066ed1e",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1047",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1047"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--9e2f010d-ff6a-54b3-98bf-16d4d885d8df",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1047",
+      "technique_id": "T1047",
+      "technique_ref": "attack-pattern--9389c3ba-e7f0-5feb-9f40-8b358066ed1e",
+      "description": "The following analytic detects `wmiprvse.exe` spawning a LOLBAS execution process. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process creation events where `wmiprvse.exe` is the parent process and the child process is a known LOLBAS binary. This activity is significant as it may indicate lateral movement or remote code execution by an adversary abusing Windows Management Instrumentation (WMI). If confirmed malicious, this behavior could allow attackers to ex",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

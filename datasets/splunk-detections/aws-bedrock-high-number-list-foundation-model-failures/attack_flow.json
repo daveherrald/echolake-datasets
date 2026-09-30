@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--cce002b0-0c22-58f8-a221-8b7a70337a36",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--c381f396-9d31-5942-a94c-029a8d3cb451",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--c381f396-9d31-5942-a94c-029a8d3cb451",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--3ed7ce2c-4f23-5e04-90d3-6f034d5b9fa7",
+      "created_by_ref": "identity--c381f396-9d31-5942-a94c-029a8d3cb451",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: aws-bedrock-high-number-list-foundation-model-failures",
+      "description": "The following analytic identifies an high number of AccessDenied attempts to list AWS Bedrock foundation models. It leverages AWS CloudTrail logs to detect when a user or service experiences multiple failures when calling the ListFoundationModels API. This activity is significant as it may indicate an adversary performing reconnaissance of available AI models after compromising credentials with limited permissions. Repeated failures could suggest brute force attempts to enumerate accessible reso",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--4e62f0f3-9823-5cde-bcc9-1c0634dfb923"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--f55ed235-fceb-5db2-8396-7732fa06359e",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1580",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1580"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--4e62f0f3-9823-5cde-bcc9-1c0634dfb923",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1580",
+      "technique_id": "T1580",
+      "technique_ref": "attack-pattern--f55ed235-fceb-5db2-8396-7732fa06359e",
+      "description": "The following analytic identifies an high number of AccessDenied attempts to list AWS Bedrock foundation models. It leverages AWS CloudTrail logs to detect when a user or service experiences multiple failures when calling the ListFoundationModels API. This activity is significant as it may indicate an adversary performing reconnaissance of available AI models after compromising credentials with limited permissions. Repeated failures could suggest brute force attempts to enumerate accessible reso",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

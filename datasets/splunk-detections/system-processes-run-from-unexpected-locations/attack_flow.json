@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--05e56902-0b53-5368-b00a-f1a26e5004c3",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--dd963e44-8a95-542f-912c-ded601262b28",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--dd963e44-8a95-542f-912c-ded601262b28",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--36dea11d-e330-5267-adc5-ad775d78fdb9",
+      "created_by_ref": "identity--dd963e44-8a95-542f-912c-ded601262b28",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: system-processes-run-from-unexpected-locations",
+      "description": "The following analytic identifies system processes running from unexpected locations outside of paths such as `C:\\Windows\\System32\\` or `C:\\Windows\\SysWOW64`. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process paths, names, and hashes. This activity is significant as it may indicate a malicious process attempting to masquerade as a legitimate system process. If confirmed malicious, this behavior could allow an attacker to execute code, escalate privileges, o",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--9aeeb96d-58f8-5b58-a525-2a1338cb7ede"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--e48bbf65-feeb-5127-b506-f8dcd4eec322",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1036.003",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1036.003"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--9aeeb96d-58f8-5b58-a525-2a1338cb7ede",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1036.003",
+      "technique_id": "T1036.003",
+      "technique_ref": "attack-pattern--e48bbf65-feeb-5127-b506-f8dcd4eec322",
+      "description": "The following analytic identifies system processes running from unexpected locations outside of paths such as `C:\\Windows\\System32\\` or `C:\\Windows\\SysWOW64`. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process paths, names, and hashes. This activity is significant as it may indicate a malicious process attempting to masquerade as a legitimate system process. If confirmed malicious, this behavior could allow an attacker to execute code, escalate privileges, o",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

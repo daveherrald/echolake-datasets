@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--f681bd90-3731-5a38-9c59-df2c1e30e306",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--6201f4e0-80ce-5684-9a51-cf420d672a24",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--6201f4e0-80ce-5684-9a51-cf420d672a24",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--fdf1d803-002b-51e1-97c8-283be902e16c",
+      "created_by_ref": "identity--6201f4e0-80ce-5684-9a51-cf420d672a24",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: detect-regsvcs-with-no-command-line-arguments",
+      "description": "The following analytic detects instances of regsvcs.exe running without command line arguments. This behavior typically indicates process injection, where another process manipulates regsvcs.exe. The detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names, IDs, and command-line executions. This activity is significant as it may signal an attempt to evade detection and execute malicious code. If confirmed malicious, the attacker could achieve code exe",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--baf4a047-493d-5e8c-a65e-e11371aad718"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--3860f282-6637-57b6-9b6a-a7868e43f1df",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1218.009",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1218.009"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--baf4a047-493d-5e8c-a65e-e11371aad718",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1218.009",
+      "technique_id": "T1218.009",
+      "technique_ref": "attack-pattern--3860f282-6637-57b6-9b6a-a7868e43f1df",
+      "description": "The following analytic detects instances of regsvcs.exe running without command line arguments. This behavior typically indicates process injection, where another process manipulates regsvcs.exe. The detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names, IDs, and command-line executions. This activity is significant as it may signal an attempt to evade detection and execute malicious code. If confirmed malicious, the attacker could achieve code exe",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

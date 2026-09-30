@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--cc3a4613-82f6-5628-ad6b-9080ffa87cf8",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--18fee715-a458-5d88-a2af-2c2da6d94c9d",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--18fee715-a458-5d88-a2af-2c2da6d94c9d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--e04936ff-2564-5cef-97ba-dc74671aa69e",
+      "created_by_ref": "identity--18fee715-a458-5d88-a2af-2c2da6d94c9d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-process-execution-from-programdata",
+      "description": "The following analytic identifies processes running from file paths within the ProgramData directory, a common location abused by adversaries for executing malicious code while evading detection. Threat actors often drop and execute payloads from this directory to bypass security controls, as it typically has write permissions for standard users. While this behavior can indicate malware execution or persistence techniques, it is important to note that some legitimate software, installers, and up",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--c4350317-1ffc-5709-9443-d2a8f79dfcbd"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--5f3dff28-b04c-518d-adb1-fcc4c74115ca",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1036.005",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1036.005"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--c4350317-1ffc-5709-9443-d2a8f79dfcbd",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1036.005",
+      "technique_id": "T1036.005",
+      "technique_ref": "attack-pattern--5f3dff28-b04c-518d-adb1-fcc4c74115ca",
+      "description": "The following analytic identifies processes running from file paths within the ProgramData directory, a common location abused by adversaries for executing malicious code while evading detection. Threat actors often drop and execute payloads from this directory to bypass security controls, as it typically has write permissions for standard users. While this behavior can indicate malware execution or persistence techniques, it is important to note that some legitimate software, installers, and up",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

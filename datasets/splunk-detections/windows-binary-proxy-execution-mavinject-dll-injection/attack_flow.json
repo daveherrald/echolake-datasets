@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--1ef2bd0f-0493-5409-92e0-59cbf0d568a2",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--dd938291-5dea-58a1-9c57-0ae6b25e5559",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--dd938291-5dea-58a1-9c57-0ae6b25e5559",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--06551149-6341-5e2c-ab6b-5ba317dfd3ad",
+      "created_by_ref": "identity--dd938291-5dea-58a1-9c57-0ae6b25e5559",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-binary-proxy-execution-mavinject-dll-injection",
+      "description": "The following analytic detects the use of mavinject.exe for DLL injection into running processes, identified by specific command-line parameters such as /INJECTRUNNING and /HMODULE. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line executions. This activity is significant because it indicates potential arbitrary code execution, a common tactic for malware deployment and persistence. If confirmed malicious, this could allow",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--ace64669-fac3-5351-af69-d2b3a049c2de"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--50bc636f-b871-55ba-8318-c54c3095d62e",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1218.013",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1218.013"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--ace64669-fac3-5351-af69-d2b3a049c2de",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1218.013",
+      "technique_id": "T1218.013",
+      "technique_ref": "attack-pattern--50bc636f-b871-55ba-8318-c54c3095d62e",
+      "description": "The following analytic detects the use of mavinject.exe for DLL injection into running processes, identified by specific command-line parameters such as /INJECTRUNNING and /HMODULE. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line executions. This activity is significant because it indicates potential arbitrary code execution, a common tactic for malware deployment and persistence. If confirmed malicious, this could allow",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

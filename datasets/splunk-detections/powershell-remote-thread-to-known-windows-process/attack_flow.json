@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--31c9add9-6994-5b20-8ab9-9b220e085a7b",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--98013dd2-6a09-543d-9744-211d4a589528",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--98013dd2-6a09-543d-9744-211d4a589528",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--c5b21d19-30d9-54a4-a9ab-4e600a0ff6f4",
+      "created_by_ref": "identity--98013dd2-6a09-543d-9744-211d4a589528",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: powershell-remote-thread-to-known-windows-process",
+      "description": "The following analytic detects suspicious PowerShell processes attempting to inject code into critical Windows processes using CreateRemoteThread. It leverages Sysmon EventCode 8 to identify instances where PowerShell spawns threads in processes like svchost.exe, csrss.exe, and others. This activity is significant as it is commonly used by malware such as TrickBot and offensive tools like Cobalt Strike to execute malicious payloads, establish reverse shells, or download additional malware. If co",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--823bd15e-5b15-5da4-b615-2cdd2e3fad20"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--138fd808-45e9-5071-8db9-505d23c99196",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1055",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1055"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--823bd15e-5b15-5da4-b615-2cdd2e3fad20",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1055",
+      "technique_id": "T1055",
+      "technique_ref": "attack-pattern--138fd808-45e9-5071-8db9-505d23c99196",
+      "description": "The following analytic detects suspicious PowerShell processes attempting to inject code into critical Windows processes using CreateRemoteThread. It leverages Sysmon EventCode 8 to identify instances where PowerShell spawns threads in processes like svchost.exe, csrss.exe, and others. This activity is significant as it is commonly used by malware such as TrickBot and offensive tools like Cobalt Strike to execute malicious payloads, establish reverse shells, or download additional malware. If co",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

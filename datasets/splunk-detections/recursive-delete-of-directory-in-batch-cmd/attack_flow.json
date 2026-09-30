@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--1d857b75-957e-5bc0-8311-ebff2935a38a",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--06a81a05-558e-5640-9ff9-3e396d55a264",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--06a81a05-558e-5640-9ff9-3e396d55a264",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--d41af8a1-e065-56bd-9619-a967399dc256",
+      "created_by_ref": "identity--06a81a05-558e-5640-9ff9-3e396d55a264",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: recursive-delete-of-directory-in-batch-cmd",
+      "description": "The following analytic detects the execution of a batch command designed to recursively delete files or directories, a technique often used by ransomware like Reddot to delete files in the recycle bin and prevent recovery. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on command-line executions that include specific flags for recursive and quiet deletions. This activity is significant as it indicates potential ransomware behavior aimed at data destruction. If conf",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--60abb561-b7c1-5173-8170-91026d4770a7"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--d10bc8cf-0ee4-57db-8c1b-66f98fd3b537",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1070.004",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1070.004"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--60abb561-b7c1-5173-8170-91026d4770a7",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1070.004",
+      "technique_id": "T1070.004",
+      "technique_ref": "attack-pattern--d10bc8cf-0ee4-57db-8c1b-66f98fd3b537",
+      "description": "The following analytic detects the execution of a batch command designed to recursively delete files or directories, a technique often used by ransomware like Reddot to delete files in the recycle bin and prevent recovery. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on command-line executions that include specific flags for recursive and quiet deletions. This activity is significant as it indicates potential ransomware behavior aimed at data destruction. If conf",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

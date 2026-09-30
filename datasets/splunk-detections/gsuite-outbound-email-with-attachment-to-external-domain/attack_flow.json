@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--ef784fbd-6d43-5099-baea-8be5675f2f3b",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--311996da-b731-52a5-a704-1383ed492142",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--311996da-b731-52a5-a704-1383ed492142",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--bc5359f4-6c62-5da4-8896-31cf4e503886",
+      "created_by_ref": "identity--311996da-b731-52a5-a704-1383ed492142",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: gsuite-outbound-email-with-attachment-to-external-domain",
+      "description": "The following analytic detects outbound emails with attachments sent from an internal email domain to an external domain. It leverages Gsuite Gmail logs, parsing the source and destination email domains, and flags emails with fewer than 20 outbound instances. This activity is significant as it may indicate potential data exfiltration or insider threats. If confirmed malicious, an attacker could use this method to exfiltrate sensitive information, leading to data breaches and compliance violation",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--fd3ffcfc-d689-55d3-a1a2-451588898144"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--28c39709-d329-5307-aa73-816d74450032",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1048.003",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1048.003"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--fd3ffcfc-d689-55d3-a1a2-451588898144",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1048.003",
+      "technique_id": "T1048.003",
+      "technique_ref": "attack-pattern--28c39709-d329-5307-aa73-816d74450032",
+      "description": "The following analytic detects outbound emails with attachments sent from an internal email domain to an external domain. It leverages Gsuite Gmail logs, parsing the source and destination email domains, and flags emails with fewer than 20 outbound instances. This activity is significant as it may indicate potential data exfiltration or insider threats. If confirmed malicious, an attacker could use this method to exfiltrate sensitive information, leading to data breaches and compliance violation",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

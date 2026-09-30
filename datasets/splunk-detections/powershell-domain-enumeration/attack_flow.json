@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--3bc59ebb-22fb-528d-8895-9188e603dbdc",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--d6bf5ace-dd2f-55a7-827d-68820de7ffbb",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--d6bf5ace-dd2f-55a7-827d-68820de7ffbb",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--b82c912c-5dbe-5359-a8d1-3fa4907bde2a",
+      "created_by_ref": "identity--d6bf5ace-dd2f-55a7-827d-68820de7ffbb",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: powershell-domain-enumeration",
+      "description": "The following analytic detects the execution of PowerShell commands used for domain enumeration, such as `get-netdomaintrust` and `get-adgroupmember`. It leverages PowerShell Script Block Logging (EventCode=4104) to capture and analyze the full command sent to PowerShell. This activity is significant as it often indicates reconnaissance efforts by an attacker to map out the domain structure and identify key users and groups. If confirmed malicious, this behavior could lead to further targeted at",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--5b998981-e4d8-5e3a-9e74-2207f7523b75"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--80fe8a82-f8d6-58a2-8cb0-d90ad5a161f8",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1059.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1059.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--5b998981-e4d8-5e3a-9e74-2207f7523b75",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1059.001",
+      "technique_id": "T1059.001",
+      "technique_ref": "attack-pattern--80fe8a82-f8d6-58a2-8cb0-d90ad5a161f8",
+      "description": "The following analytic detects the execution of PowerShell commands used for domain enumeration, such as `get-netdomaintrust` and `get-adgroupmember`. It leverages PowerShell Script Block Logging (EventCode=4104) to capture and analyze the full command sent to PowerShell. This activity is significant as it often indicates reconnaissance efforts by an attacker to map out the domain structure and identify key users and groups. If confirmed malicious, this behavior could lead to further targeted at",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--180ddb36-2772-5d44-a19f-fbac42af4292",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--96a779d1-9651-5095-bcdc-62b8fb6838c3",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--96a779d1-9651-5095-bcdc-62b8fb6838c3",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--21708bf2-8127-59de-975d-0313f93375d2",
+      "created_by_ref": "identity--96a779d1-9651-5095-bcdc-62b8fb6838c3",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-chromium-process-loaded-extension-via-command-line",
+      "description": "The following analytic detects instances where Google Chrome is started with the --load-extension command-line flag, which allows loading unpacked or non-standard extensions. This behavior can indicate attempts to bypass enterprise extension policies, install malicious extensions, or load potentially harmful browser components. Monitoring such activity helps identify unauthorized extension usage, potential malware persistence mechanisms, or policy violations that could compromise browser securit",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--2d4a56c7-bf91-511e-a550-5a726d98bc8b"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--11650e2b-a4fc-5961-81bb-75dd896172b8",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1185",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1185"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--2d4a56c7-bf91-511e-a550-5a726d98bc8b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1185",
+      "technique_id": "T1185",
+      "technique_ref": "attack-pattern--11650e2b-a4fc-5961-81bb-75dd896172b8",
+      "description": "The following analytic detects instances where Google Chrome is started with the --load-extension command-line flag, which allows loading unpacked or non-standard extensions. This behavior can indicate attempts to bypass enterprise extension policies, install malicious extensions, or load potentially harmful browser components. Monitoring such activity helps identify unauthorized extension usage, potential malware persistence mechanisms, or policy violations that could compromise browser securit",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

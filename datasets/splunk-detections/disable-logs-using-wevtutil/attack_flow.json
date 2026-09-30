@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--c41b88ac-334d-5722-a358-be2c66007c34",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--61615c2c-0715-5eeb-89b5-a267d7641f74",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--61615c2c-0715-5eeb-89b5-a267d7641f74",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--3fd7772d-ba6e-5214-a342-e1442be91ec8",
+      "created_by_ref": "identity--61615c2c-0715-5eeb-89b5-a267d7641f74",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: disable-logs-using-wevtutil",
+      "description": "The following analytic detects the execution of \"wevtutil.exe\" with parameters to disable event logs. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line arguments. This activity is significant because disabling event logs is a common tactic used by ransomware to evade detection and hinder forensic investigations. If confirmed malicious, this action could allow attackers to operate undetected, making it difficult to trace their activiti",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--0addf48d-bbe7-5acf-a1cc-64013a341a76"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--2b28cc59-7155-5bf9-872c-5e8b2268c6e7",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1070.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1070.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--0addf48d-bbe7-5acf-a1cc-64013a341a76",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1070.001",
+      "technique_id": "T1070.001",
+      "technique_ref": "attack-pattern--2b28cc59-7155-5bf9-872c-5e8b2268c6e7",
+      "description": "The following analytic detects the execution of \"wevtutil.exe\" with parameters to disable event logs. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line arguments. This activity is significant because disabling event logs is a common tactic used by ransomware to evade detection and hinder forensic investigations. If confirmed malicious, this action could allow attackers to operate undetected, making it difficult to trace their activiti",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

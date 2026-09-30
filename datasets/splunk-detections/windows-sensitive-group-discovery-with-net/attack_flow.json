@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--496ab7f5-77ac-51b8-b2a6-24d04ebf3ac8",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--b6aadcc6-4342-5f9d-8454-8c8f27d087d8",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--b6aadcc6-4342-5f9d-8454-8c8f27d087d8",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--7e014927-886b-56c6-bfdd-7b1f4c5617d4",
+      "created_by_ref": "identity--b6aadcc6-4342-5f9d-8454-8c8f27d087d8",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-sensitive-group-discovery-with-net",
+      "description": "The following analytic detects the execution of `net.exe` with command-line arguments used to query elevated domain or sensitive groups. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line executions. This activity is significant as it indicates potential reconnaissance efforts by adversaries to identify high-privileged users within Active Directory. If confirmed malicious, this behavior could lead to further attacks aimed at compromisi",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--6950f08e-da2d-5198-968a-da57d794960a"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--fd05ad71-1b8e-518d-ad84-c2e2efca9e04",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1069.002",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1069.002"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--6950f08e-da2d-5198-968a-da57d794960a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1069.002",
+      "technique_id": "T1069.002",
+      "technique_ref": "attack-pattern--fd05ad71-1b8e-518d-ad84-c2e2efca9e04",
+      "description": "The following analytic detects the execution of `net.exe` with command-line arguments used to query elevated domain or sensitive groups. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line executions. This activity is significant as it indicates potential reconnaissance efforts by adversaries to identify high-privileged users within Active Directory. If confirmed malicious, this behavior could lead to further attacks aimed at compromisi",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

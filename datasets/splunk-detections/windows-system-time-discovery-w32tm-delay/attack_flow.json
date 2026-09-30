@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--080428f4-c211-5251-9587-f7fdaad798a5",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--4f54e8c4-8ae2-5557-a571-32b5e3b4687d",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--4f54e8c4-8ae2-5557-a571-32b5e3b4687d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--79b5c42b-9d6c-578b-8c7d-463a1484f0b1",
+      "created_by_ref": "identity--4f54e8c4-8ae2-5557-a571-32b5e3b4687d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-system-time-discovery-w32tm-delay",
+      "description": "The following analytic identifies the use of the w32tm.exe utility with the /stripchart function, which is indicative of DCRat malware delaying its payload execution. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on specific command-line arguments used by w32tm.exe. This activity is significant as it may indicate an attempt to evade detection by delaying malicious actions such as C2 communication and beaconing. If confirmed malicious, this behavior cou",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--6a7d6182-019a-5128-a697-08c977638a5c"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--7adb54aa-70d4-5b6b-b863-e12d7e884a3d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1124",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1124"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--6a7d6182-019a-5128-a697-08c977638a5c",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1124",
+      "technique_id": "T1124",
+      "technique_ref": "attack-pattern--7adb54aa-70d4-5b6b-b863-e12d7e884a3d",
+      "description": "The following analytic identifies the use of the w32tm.exe utility with the /stripchart function, which is indicative of DCRat malware delaying its payload execution. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on specific command-line arguments used by w32tm.exe. This activity is significant as it may indicate an attempt to evade detection by delaying malicious actions such as C2 communication and beaconing. If confirmed malicious, this behavior cou",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--852c57c4-8341-5062-9aca-705bba606076",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--741dac7d-1978-5202-9ee0-8b8cefbf6151",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--741dac7d-1978-5202-9ee0-8b8cefbf6151",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--9feb521d-d8a9-5e64-92d9-736838032ef4",
+      "created_by_ref": "identity--741dac7d-1978-5202-9ee0-8b8cefbf6151",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-mimikatz-crypto-export-file-extensions",
+      "description": "The following analytic detects the creation of files with extensions commonly associated with the Mimikatz Crypto module. It leverages the Endpoint.Filesystem data model to identify specific file names indicative of certificate export activities. This behavior is significant as it may indicate the use of Mimikatz to export cryptographic keys, which is a common tactic for credential theft. If confirmed malicious, this activity could allow an attacker to exfiltrate sensitive cryptographic material",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--70f33065-0f2d-5485-9e45-4ac10dc65252"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--30d0cfc2-7c11-5bda-b03d-968f6ea76168",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1649",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1649"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--70f33065-0f2d-5485-9e45-4ac10dc65252",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1649",
+      "technique_id": "T1649",
+      "technique_ref": "attack-pattern--30d0cfc2-7c11-5bda-b03d-968f6ea76168",
+      "description": "The following analytic detects the creation of files with extensions commonly associated with the Mimikatz Crypto module. It leverages the Endpoint.Filesystem data model to identify specific file names indicative of certificate export activities. This behavior is significant as it may indicate the use of Mimikatz to export cryptographic keys, which is a common tactic for credential theft. If confirmed malicious, this activity could allow an attacker to exfiltrate sensitive cryptographic material",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

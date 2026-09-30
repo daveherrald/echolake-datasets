@@ -1,0 +1,110 @@
+{
+  "type": "bundle",
+  "id": "bundle--6095b8e5-023b-50c5-b5ac-6a5215bbb458",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--d0a6c35d-83a3-58e7-bb7b-6a2b8031522f",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--d0a6c35d-83a3-58e7-bb7b-6a2b8031522f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--cb1460d3-acbe-5bcd-a85c-b9639d4d8eef",
+      "created_by_ref": "identity--d0a6c35d-83a3-58e7-bb7b-6a2b8031522f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: malicious-inprocserver32-modification",
+      "description": "The following analytic detects a process modifying the registry with a known malicious CLSID under InProcServer32. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on registry modifications within the HKLM or HKCU Software Classes CLSID paths. This activity is significant as it may indicate an attempt to load a malicious DLL, potentially leading to code execution. If confirmed malicious, this could allow an attacker to persist in the environment, execute arbitrary co",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--3c080722-c196-5f3a-ac71-5b4dc15a7fe2",
+        "attack-action--a44a15f2-5cbb-5a99-9c79-f26b3c91324b"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--cedaab28-d3f0-5df4-a15d-156d588c2572",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1218.010",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1218.010"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--17098639-e319-58a4-a433-99c9e8e89d68",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1112",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1112"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--3c080722-c196-5f3a-ac71-5b4dc15a7fe2",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1218.010",
+      "technique_id": "T1218.010",
+      "technique_ref": "attack-pattern--cedaab28-d3f0-5df4-a15d-156d588c2572",
+      "description": "The following analytic detects a process modifying the registry with a known malicious CLSID under InProcServer32. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on registry modifications within the HKLM or HKCU Software Classes CLSID paths. This activity is significant as it may indicate an attempt to load a malicious DLL, potentially leading to code execution. If confirmed malicious, this could allow an attacker to persist in the environment, execute arbitrary co",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--a44a15f2-5cbb-5a99-9c79-f26b3c91324b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1112",
+      "technique_id": "T1112",
+      "technique_ref": "attack-pattern--17098639-e319-58a4-a433-99c9e8e89d68",
+      "description": "The following analytic detects a process modifying the registry with a known malicious CLSID under InProcServer32. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on registry modifications within the HKLM or HKCU Software Classes CLSID paths. This activity is significant as it may indicate an attempt to load a malicious DLL, potentially leading to code execution. If confirmed malicious, this could allow an attacker to persist in the environment, execute arbitrary co",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

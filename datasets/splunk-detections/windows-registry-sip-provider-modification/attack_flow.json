@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--cd71c5b3-ede2-5ab7-bc3e-b3c9bfa54a49",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--11881250-aaf4-59c4-9e1b-338da92b7644",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--11881250-aaf4-59c4-9e1b-338da92b7644",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--33696124-410a-5aee-ac06-ae1875f043fe",
+      "created_by_ref": "identity--11881250-aaf4-59c4-9e1b-338da92b7644",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-registry-sip-provider-modification",
+      "description": "The following analytic detects modifications to the Windows Registry SIP Provider. It leverages Sysmon EventID 7 to monitor registry changes in paths and values related to Cryptography Providers and OID Encoding Types. This activity is significant as it may indicate an attempt to subvert trust controls, a common tactic for bypassing security measures and maintaining persistence. If confirmed malicious, an attacker could manipulate the system's cryptographic functions, potentially leading to unau",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--9f1c18fd-967c-5f6e-b950-555e4d027de2"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--f2f4df9f-257e-5c5e-9242-425bfd4ea21a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1553.003",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1553.003"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--9f1c18fd-967c-5f6e-b950-555e4d027de2",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1553.003",
+      "technique_id": "T1553.003",
+      "technique_ref": "attack-pattern--f2f4df9f-257e-5c5e-9242-425bfd4ea21a",
+      "description": "The following analytic detects modifications to the Windows Registry SIP Provider. It leverages Sysmon EventID 7 to monitor registry changes in paths and values related to Cryptography Providers and OID Encoding Types. This activity is significant as it may indicate an attempt to subvert trust controls, a common tactic for bypassing security measures and maintaining persistence. If confirmed malicious, an attacker could manipulate the system's cryptographic functions, potentially leading to unau",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

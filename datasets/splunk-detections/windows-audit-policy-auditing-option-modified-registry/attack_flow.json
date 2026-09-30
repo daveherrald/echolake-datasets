@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--82e19e73-30cc-5d2d-8e5b-d43360f63d4e",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--6bca32cc-d631-58e8-9735-1a52586bdd82",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--6bca32cc-d631-58e8-9735-1a52586bdd82",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--4f5572fa-2823-5986-abe1-e57d0fbc7a4a",
+      "created_by_ref": "identity--6bca32cc-d631-58e8-9735-1a52586bdd82",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-audit-policy-auditing-option-modified-registry",
+      "description": "The following analytic detects potentially suspicious modifications to the Audit Policy auditing options registry values. It leverages data from the Endpoint.Registry data model, focusing on changes to one of the following auditing option values \"CrashOnAuditFail\", \"FullPrivilegeAuditing\", \"AuditBaseObjects\" and \"AuditBaseDirectories\" within the \"HKLM\\\\System\\\\CurrentControlSet\\\\Control\\\\Lsa\\\\\" registry key. This activity is significant as it could be a sign of a threat actor trying to tamper wi",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--c456d9b4-1365-570b-b173-7fcbc27f1c1a"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--26a16833-9c4b-5308-bd72-1cd7dd2e68f8",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1547.014",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1547.014"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--c456d9b4-1365-570b-b173-7fcbc27f1c1a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1547.014",
+      "technique_id": "T1547.014",
+      "technique_ref": "attack-pattern--26a16833-9c4b-5308-bd72-1cd7dd2e68f8",
+      "description": "The following analytic detects potentially suspicious modifications to the Audit Policy auditing options registry values. It leverages data from the Endpoint.Registry data model, focusing on changes to one of the following auditing option values \"CrashOnAuditFail\", \"FullPrivilegeAuditing\", \"AuditBaseObjects\" and \"AuditBaseDirectories\" within the \"HKLM\\\\System\\\\CurrentControlSet\\\\Control\\\\Lsa\\\\\" registry key. This activity is significant as it could be a sign of a threat actor trying to tamper wi",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

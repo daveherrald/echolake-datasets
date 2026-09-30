@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--d999da76-285a-5114-ae15-a47b28731425",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--44094d9f-43fb-5d52-931c-d9beff93eb6c",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--44094d9f-43fb-5d52-931c-d9beff93eb6c",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--02c7533b-33d3-5826-9a05-5afa02ccf78a",
+      "created_by_ref": "identity--44094d9f-43fb-5d52-931c-d9beff93eb6c",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: get-aduserresultantpasswordpolicy-with-powershell",
+      "description": "The following analytic detects the execution of `powershell.exe` running the `Get-ADUserResultantPasswordPolicy` cmdlet, which is used to obtain the password policy in a Windows domain. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line executions. This activity is significant as it indicates potential enumeration of domain policies, a common tactic for situational awareness and Active Directory discovery by adversaries. If confirmed m",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--0a3bafc1-0e2d-5f9a-b07f-f0ec8912c39f"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--c0554e71-705b-5c01-9c19-98565b1e005e",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1201",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1201"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--0a3bafc1-0e2d-5f9a-b07f-f0ec8912c39f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1201",
+      "technique_id": "T1201",
+      "technique_ref": "attack-pattern--c0554e71-705b-5c01-9c19-98565b1e005e",
+      "description": "The following analytic detects the execution of `powershell.exe` running the `Get-ADUserResultantPasswordPolicy` cmdlet, which is used to obtain the password policy in a Windows domain. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line executions. This activity is significant as it indicates potential enumeration of domain policies, a common tactic for situational awareness and Active Directory discovery by adversaries. If confirmed m",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

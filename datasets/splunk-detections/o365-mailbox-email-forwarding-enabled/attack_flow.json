@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--5995c269-e442-582c-8818-c734d6d9e9a1",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--221e4b33-e1ae-5731-9c95-5d649fae6686",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--221e4b33-e1ae-5731-9c95-5d649fae6686",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--e379e3a6-2c6c-535f-81ca-32272b8a20a1",
+      "created_by_ref": "identity--221e4b33-e1ae-5731-9c95-5d649fae6686",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: o365-mailbox-email-forwarding-enabled",
+      "description": "The following analytic identifies instances where email forwarding has been enabled on mailboxes within an Office 365 environment. It detects this activity by monitoring the Set-Mailbox operation within the o365_management_activity logs, specifically looking for changes to the ForwardingAddress or ForwardingSmtpAddress parameters. This activity is significant as unauthorized email forwarding can lead to data exfiltration and unauthorized access to sensitive information. If confirmed malicious, a",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--280500c2-073c-5db8-9093-d30eb8e50da8"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--5f7daf41-c173-53d9-952a-46db08885bc4",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1114.003",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1114.003"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--280500c2-073c-5db8-9093-d30eb8e50da8",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1114.003",
+      "technique_id": "T1114.003",
+      "technique_ref": "attack-pattern--5f7daf41-c173-53d9-952a-46db08885bc4",
+      "description": "The following analytic identifies instances where email forwarding has been enabled on mailboxes within an Office 365 environment. It detects this activity by monitoring the Set-Mailbox operation within the o365_management_activity logs, specifically looking for changes to the ForwardingAddress or ForwardingSmtpAddress parameters. This activity is significant as unauthorized email forwarding can lead to data exfiltration and unauthorized access to sensitive information. If confirmed malicious, a",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

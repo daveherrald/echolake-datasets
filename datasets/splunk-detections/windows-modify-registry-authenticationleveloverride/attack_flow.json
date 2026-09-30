@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--458809ed-d656-5f29-bd4c-b685a91594a0",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--ac454513-5084-56b2-9bb4-94dc3de8fe72",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--ac454513-5084-56b2-9bb4-94dc3de8fe72",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--7e021f1c-15ff-505e-9dc6-764cb9941c2c",
+      "created_by_ref": "identity--ac454513-5084-56b2-9bb4-94dc3de8fe72",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-modify-registry-authenticationleveloverride",
+      "description": "The following analytic detects modifications to the Windows registry key \"AuthenticationLevelOverride\" within the Terminal Server Client settings. It leverages data from the Endpoint.Registry datamodel to identify changes where the registry value is set to 0x00000000. This activity is significant as it may indicate an attempt to override authentication levels for remote connections, a tactic used by DarkGate malware for malicious installations. If confirmed malicious, this could allow attackers",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--ed0a0e22-079a-5b2d-8ef1-9cf022c9e719"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--64d96e5b-140f-53e3-a414-38c6991336aa",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1112",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1112"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--ed0a0e22-079a-5b2d-8ef1-9cf022c9e719",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1112",
+      "technique_id": "T1112",
+      "technique_ref": "attack-pattern--64d96e5b-140f-53e3-a414-38c6991336aa",
+      "description": "The following analytic detects modifications to the Windows registry key \"AuthenticationLevelOverride\" within the Terminal Server Client settings. It leverages data from the Endpoint.Registry datamodel to identify changes where the registry value is set to 0x00000000. This activity is significant as it may indicate an attempt to override authentication levels for remote connections, a tactic used by DarkGate malware for malicious installations. If confirmed malicious, this could allow attackers",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

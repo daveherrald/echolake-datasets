@@ -1,0 +1,110 @@
+{
+  "type": "bundle",
+  "id": "bundle--033b853d-c0f6-5048-b39b-9cb1e4ead077",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--1387a38f-b95b-5189-88f6-3411b31d8075",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--1387a38f-b95b-5189-88f6-3411b31d8075",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--807fa324-3564-5426-83ad-f0565f01b8bb",
+      "created_by_ref": "identity--1387a38f-b95b-5189-88f6-3411b31d8075",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: outbound-network-connection-from-java-using-default-ports",
+      "description": "The following analytic detects outbound network connections from Java processes to default ports used by LDAP and RMI protocols, which may indicate exploitation of the CVE-2021-44228-Log4j vulnerability. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process and network traffic logs. Monitoring this activity is crucial as it can signify an attacker\u2019s attempt to perform JNDI lookups and retrieve malicious payloads. If confirmed malicious, this activit",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--997c3ea7-19d7-5840-95c4-10bb41a88ec3",
+        "attack-action--cfb49a3b-fd60-5682-abd8-ece811abb67f"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--a36e35e4-d55b-5066-9ebf-48b79bc191b6",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1190",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1190"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--200c0de0-861c-52a2-9e09-9fa968213835",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1133",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1133"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--997c3ea7-19d7-5840-95c4-10bb41a88ec3",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1190",
+      "technique_id": "T1190",
+      "technique_ref": "attack-pattern--a36e35e4-d55b-5066-9ebf-48b79bc191b6",
+      "description": "The following analytic detects outbound network connections from Java processes to default ports used by LDAP and RMI protocols, which may indicate exploitation of the CVE-2021-44228-Log4j vulnerability. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process and network traffic logs. Monitoring this activity is crucial as it can signify an attacker\u2019s attempt to perform JNDI lookups and retrieve malicious payloads. If confirmed malicious, this activit",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--cfb49a3b-fd60-5682-abd8-ece811abb67f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1133",
+      "technique_id": "T1133",
+      "technique_ref": "attack-pattern--200c0de0-861c-52a2-9e09-9fa968213835",
+      "description": "The following analytic detects outbound network connections from Java processes to default ports used by LDAP and RMI protocols, which may indicate exploitation of the CVE-2021-44228-Log4j vulnerability. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process and network traffic logs. Monitoring this activity is crucial as it can signify an attacker\u2019s attempt to perform JNDI lookups and retrieve malicious payloads. If confirmed malicious, this activit",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

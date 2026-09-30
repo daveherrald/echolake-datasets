@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--9aec7f50-4830-5b16-9939-9390d45aa531",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--5e132299-c3bb-529e-8330-d5efff16e3c1",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--5e132299-c3bb-529e-8330-d5efff16e3c1",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--f992303b-c136-59ec-aab9-e84551020ca1",
+      "created_by_ref": "identity--5e132299-c3bb-529e-8330-d5efff16e3c1",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-scheduled-task-created-via-xml",
+      "description": "The following analytic detects the creation of scheduled tasks in Windows using schtasks.exe with the \"XML\" parameter.\nThis detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on command-line executions and process details.\nThis activity is significant as it is a common technique for establishing persistence or achieving privilege escalation, often used by malware like Trickbot and Winter-Vivern. While creating a scheduled task via XML may be legitimate, it can a",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--c4450637-b075-5422-84ea-b77ba4226b1c"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--3f6cf307-3028-514d-9933-e1b2dfbb4f06",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1053.005",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1053.005"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--c4450637-b075-5422-84ea-b77ba4226b1c",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1053.005",
+      "technique_id": "T1053.005",
+      "technique_ref": "attack-pattern--3f6cf307-3028-514d-9933-e1b2dfbb4f06",
+      "description": "The following analytic detects the creation of scheduled tasks in Windows using schtasks.exe with the \"XML\" parameter.\nThis detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on command-line executions and process details.\nThis activity is significant as it is a common technique for establishing persistence or achieving privilege escalation, often used by malware like Trickbot and Winter-Vivern. While creating a scheduled task via XML may be legitimate, it can a",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

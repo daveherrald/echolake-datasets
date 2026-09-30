@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--eaea1aef-6654-5210-8873-bdef37b0931f",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--67a6541c-c85a-5d2a-aba7-56714522569e",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--67a6541c-c85a-5d2a-aba7-56714522569e",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--4c4bffc1-b03f-5932-b126-385086bc8d9b",
+      "created_by_ref": "identity--67a6541c-c85a-5d2a-aba7-56714522569e",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-modify-registry-wuserver",
+      "description": "The following analytic detects suspicious modifications to the Windows Update Server (WUServer) registry settings. It leverages data from the Endpoint.Registry data model to identify changes in the registry path associated with Windows Update configurations. This activity is significant because adversaries, including malware like RedLine Stealer, exploit this technique to bypass detection and deploy additional payloads. If confirmed malicious, this registry modification could allow attackers to",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--fc0b8b52-2e32-545f-b7ad-a292789df1ca"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--05f6e5b2-0f00-5ba3-9f63-cce8f223c5f4",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1112",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1112"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--fc0b8b52-2e32-545f-b7ad-a292789df1ca",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1112",
+      "technique_id": "T1112",
+      "technique_ref": "attack-pattern--05f6e5b2-0f00-5ba3-9f63-cce8f223c5f4",
+      "description": "The following analytic detects suspicious modifications to the Windows Update Server (WUServer) registry settings. It leverages data from the Endpoint.Registry data model to identify changes in the registry path associated with Windows Update configurations. This activity is significant because adversaries, including malware like RedLine Stealer, exploit this technique to bypass detection and deploy additional payloads. If confirmed malicious, this registry modification could allow attackers to",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

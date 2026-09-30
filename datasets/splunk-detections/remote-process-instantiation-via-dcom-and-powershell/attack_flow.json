@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--449e0e13-e208-58e2-bf63-ec5a85246bc0",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--7b7fbcd7-a314-5da5-8d1e-142e44cb9e71",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--7b7fbcd7-a314-5da5-8d1e-142e44cb9e71",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--775bf413-e258-59a8-8d62-24ec33dac9b6",
+      "created_by_ref": "identity--7b7fbcd7-a314-5da5-8d1e-142e44cb9e71",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: remote-process-instantiation-via-dcom-and-powershell",
+      "description": "The following analytic detects the execution of `powershell.exe` with arguments used to start a process on a remote endpoint by abusing the DCOM protocol, specifically targeting ShellExecute and ExecuteShellCommand. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names, parent processes, and command-line executions. This activity is significant as it indicates potential lateral movement and remote code execution attempts by adversaries. If confirmed malic",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--6e9d8f54-d380-5ced-a57a-0174c06faf65"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--25460217-c315-5e13-ac63-6f93f15e4b97",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1021.003",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1021.003"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--6e9d8f54-d380-5ced-a57a-0174c06faf65",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1021.003",
+      "technique_id": "T1021.003",
+      "technique_ref": "attack-pattern--25460217-c315-5e13-ac63-6f93f15e4b97",
+      "description": "The following analytic detects the execution of `powershell.exe` with arguments used to start a process on a remote endpoint by abusing the DCOM protocol, specifically targeting ShellExecute and ExecuteShellCommand. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names, parent processes, and command-line executions. This activity is significant as it indicates potential lateral movement and remote code execution attempts by adversaries. If confirmed malic",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

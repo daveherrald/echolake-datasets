@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--29678b9a-f914-5aa7-b1a7-a287999d68e1",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--2c89d9b3-f6eb-59f8-897c-b885cc550722",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--2c89d9b3-f6eb-59f8-897c-b885cc550722",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--9b57d157-2574-5527-9f82-4161441aba5c",
+      "created_by_ref": "identity--2c89d9b3-f6eb-59f8-897c-b885cc550722",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: rubeus-kerberos-ticket-exports-through-winlogon-access",
+      "description": "The following analytic detects a process accessing the winlogon.exe system process, indicative of the Rubeus tool attempting to export Kerberos tickets from memory. This detection leverages Sysmon EventCode 10 logs, focusing on processes obtaining a handle to winlogon.exe with specific access rights. This activity is significant as it often precedes pass-the-ticket attacks, where adversaries use stolen Kerberos tickets to move laterally within an environment. If confirmed malicious, this could a",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--19e46803-4c6f-59a8-9e42-66ebcf6b3ed2"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--315190cc-f339-560a-b085-2f45cf2d2f28",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1550.003",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1550.003"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--19e46803-4c6f-59a8-9e42-66ebcf6b3ed2",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1550.003",
+      "technique_id": "T1550.003",
+      "technique_ref": "attack-pattern--315190cc-f339-560a-b085-2f45cf2d2f28",
+      "description": "The following analytic detects a process accessing the winlogon.exe system process, indicative of the Rubeus tool attempting to export Kerberos tickets from memory. This detection leverages Sysmon EventCode 10 logs, focusing on processes obtaining a handle to winlogon.exe with specific access rights. This activity is significant as it often precedes pass-the-ticket attacks, where adversaries use stolen Kerberos tickets to move laterally within an environment. If confirmed malicious, this could a",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

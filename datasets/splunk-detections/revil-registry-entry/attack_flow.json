@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--31d0e306-9821-5f78-8190-e58cfd7c5a9a",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--f38a767d-19ab-5942-935f-7506798aa842",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--f38a767d-19ab-5942-935f-7506798aa842",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--4edcac3c-41cc-5f5a-9769-7f66e8e4cdcb",
+      "created_by_ref": "identity--f38a767d-19ab-5942-935f-7506798aa842",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: revil-registry-entry",
+      "description": "The following analytic identifies suspicious modifications in the registry entry, specifically targeting paths used by malware like REVIL. It detects changes in registry paths such as `SOFTWARE\\\\WOW6432Node\\\\Facebook_Assistant` and `SOFTWARE\\\\WOW6432Node\\\\BlackLivesMatter`. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on registry modifications linked to process GUIDs. This activity is significant as it indicates potential malware persistence mechanism",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--9e149136-e8ca-553d-8838-03ebc73d7db7"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--174bf06b-3a21-588e-9a39-a817e7310d8f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1112",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1112"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--9e149136-e8ca-553d-8838-03ebc73d7db7",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1112",
+      "technique_id": "T1112",
+      "technique_ref": "attack-pattern--174bf06b-3a21-588e-9a39-a817e7310d8f",
+      "description": "The following analytic identifies suspicious modifications in the registry entry, specifically targeting paths used by malware like REVIL. It detects changes in registry paths such as `SOFTWARE\\\\WOW6432Node\\\\Facebook_Assistant` and `SOFTWARE\\\\WOW6432Node\\\\BlackLivesMatter`. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on registry modifications linked to process GUIDs. This activity is significant as it indicates potential malware persistence mechanism",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

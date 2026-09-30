@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--fea437bc-75bf-5ec4-8d97-b33926eb8b95",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--ff628e7b-6df3-53d8-b475-58441c821538",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--ff628e7b-6df3-53d8-b475-58441c821538",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--1a573c28-843b-575e-9b90-c4d73fa7183e",
+      "created_by_ref": "identity--ff628e7b-6df3-53d8-b475-58441c821538",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-remote-host-computer-management-access",
+      "description": "The following analytic detects the use of mmc.exe to launch Computer Management (compmgmt.msc) and connect to a remote machine. This technique allows administrators to access system management tools, including Event Viewer, Services, Shared Folders, and Local Users & Groups, without initiating a full remote desktop session. While commonly used for legitimate administrative purposes, adversaries may leverage this method for remote reconnaissance, privilege escalation, or persistence. Monitoring t",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--f48a4150-b034-53d1-be87-56d31676608b"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--798baaac-356e-572f-8a95-1dfb2b305078",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1021.006",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1021.006"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--f48a4150-b034-53d1-be87-56d31676608b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1021.006",
+      "technique_id": "T1021.006",
+      "technique_ref": "attack-pattern--798baaac-356e-572f-8a95-1dfb2b305078",
+      "description": "The following analytic detects the use of mmc.exe to launch Computer Management (compmgmt.msc) and connect to a remote machine. This technique allows administrators to access system management tools, including Event Viewer, Services, Shared Folders, and Local Users & Groups, without initiating a full remote desktop session. While commonly used for legitimate administrative purposes, adversaries may leverage this method for remote reconnaissance, privilege escalation, or persistence. Monitoring t",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

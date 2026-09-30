@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--51f6cf10-0b80-5490-b669-9beb689e7463",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--f67356c7-eb7a-5983-839d-610dd85a4c5a",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--f67356c7-eb7a-5983-839d-610dd85a4c5a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--df6c70c1-e0d4-5604-91a4-42a7bdd5abd0",
+      "created_by_ref": "identity--f67356c7-eb7a-5983-839d-610dd85a4c5a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-uac-bypass-suspicious-escalation-behavior",
+      "description": "The following analytic detects when a process spawns an executable known for User Account Control (UAC) bypass exploitation and subsequently monitors for any child processes with a higher integrity level than the original process. This detection leverages Sysmon EventID 1 data, focusing on process integrity levels and known UAC bypass executables. This activity is significant as it may indicate an attacker has successfully used a UAC bypass exploit to escalate privileges. If confirmed malicious,",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--2082ee22-8667-5239-8494-f34a5f7207c5"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--181cfbc2-d101-5cb1-af4c-6fee9fdf1c6a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1548.002",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1548.002"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--2082ee22-8667-5239-8494-f34a5f7207c5",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1548.002",
+      "technique_id": "T1548.002",
+      "technique_ref": "attack-pattern--181cfbc2-d101-5cb1-af4c-6fee9fdf1c6a",
+      "description": "The following analytic detects when a process spawns an executable known for User Account Control (UAC) bypass exploitation and subsequently monitors for any child processes with a higher integrity level than the original process. This detection leverages Sysmon EventID 1 data, focusing on process integrity levels and known UAC bypass executables. This activity is significant as it may indicate an attacker has successfully used a UAC bypass exploit to escalate privileges. If confirmed malicious,",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

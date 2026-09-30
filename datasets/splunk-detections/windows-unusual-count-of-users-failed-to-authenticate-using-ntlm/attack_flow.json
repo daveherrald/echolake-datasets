@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--02a559c5-1848-5b20-a71f-c127bd549a57",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--d2a2a46f-b293-576f-8b32-89e16be8ba9b",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--d2a2a46f-b293-576f-8b32-89e16be8ba9b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--566a7718-59f2-55d6-b844-84c6ad8c23db",
+      "created_by_ref": "identity--d2a2a46f-b293-576f-8b32-89e16be8ba9b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-unusual-count-of-users-failed-to-authenticate-using-ntlm",
+      "description": "The following analytic identifies a source endpoint failing to authenticate multiple valid users using the NTLM protocol, potentially indicating a Password Spraying attack. It leverages Event 4776 from Domain Controllers, calculating the standard deviation for each host and applying the 3-sigma rule to detect anomalies. This activity is significant as it may represent an adversary attempting to gain initial access or elevate privileges. If confirmed malicious, the attacker could compromise multi",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--0dad323e-3937-514e-9f6f-711b770f4291"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--8a4c6376-1ed8-5063-a896-080d1efeaa19",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1110.003",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1110.003"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--0dad323e-3937-514e-9f6f-711b770f4291",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1110.003",
+      "technique_id": "T1110.003",
+      "technique_ref": "attack-pattern--8a4c6376-1ed8-5063-a896-080d1efeaa19",
+      "description": "The following analytic identifies a source endpoint failing to authenticate multiple valid users using the NTLM protocol, potentially indicating a Password Spraying attack. It leverages Event 4776 from Domain Controllers, calculating the standard deviation for each host and applying the 3-sigma rule to detect anomalies. This activity is significant as it may represent an adversary attempting to gain initial access or elevate privileges. If confirmed malicious, the attacker could compromise multi",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--1658a4c1-8907-5cd8-818f-1801b27ed6ea",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--4fb4a753-6d4d-5f00-b110-da1e4c58f25b",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--4fb4a753-6d4d-5f00-b110-da1e4c58f25b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--bb7d1bc8-ad36-5443-af7d-3e7844f0b7bb",
+      "created_by_ref": "identity--4fb4a753-6d4d-5f00-b110-da1e4c58f25b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-hidden-schedule-task-settings",
+      "description": "The following analytic detects the creation of hidden scheduled tasks on Windows systems, which are not visible in the UI. It leverages Windows Security EventCode 4698 to identify tasks where the 'Hidden' setting is enabled. This behavior is significant as it may indicate malware activity, such as Industroyer2, or the use of living-off-the-land binaries (LOLBINs) to download additional payloads. If confirmed malicious, this activity could allow attackers to execute code stealthily, maintain pers",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--1a386a22-a52a-57d8-a964-72785b685621"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--52c3ee5a-f61b-5f53-b9ea-b89cd6e26d83",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1053",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1053"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--1a386a22-a52a-57d8-a964-72785b685621",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1053",
+      "technique_id": "T1053",
+      "technique_ref": "attack-pattern--52c3ee5a-f61b-5f53-b9ea-b89cd6e26d83",
+      "description": "The following analytic detects the creation of hidden scheduled tasks on Windows systems, which are not visible in the UI. It leverages Windows Security EventCode 4698 to identify tasks where the 'Hidden' setting is enabled. This behavior is significant as it may indicate malware activity, such as Industroyer2, or the use of living-off-the-land binaries (LOLBINs) to download additional payloads. If confirmed malicious, this activity could allow attackers to execute code stealthily, maintain pers",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

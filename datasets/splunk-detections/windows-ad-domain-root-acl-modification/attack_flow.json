@@ -1,0 +1,110 @@
+{
+  "type": "bundle",
+  "id": "bundle--1c2849d3-8204-542e-95f7-ebd56914888d",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--4ce661eb-06ae-57b7-b374-296409ac5107",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--4ce661eb-06ae-57b7-b374-296409ac5107",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--b7d0fc75-e2fe-5a6d-a2f8-ac987d662955",
+      "created_by_ref": "identity--4ce661eb-06ae-57b7-b374-296409ac5107",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-ad-domain-root-acl-modification",
+      "description": "ACL modification performed on the domain root object, significant AD change with high impact. Following MS guidance all changes at this level should be reviewed. Drill into the logonID within EventCode 4624 for information on the source device during triage.",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--0fc26435-12e9-528c-a565-d680ea9404ee",
+        "attack-action--412e2444-e1fd-5706-8f7a-fbdc254b10f9"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--96903d73-ce01-5f0d-8367-e88eb55bec4a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1222.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1222.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--d0bdc2b5-415f-55da-ac78-8ee9a7779735",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1484",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1484"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--0fc26435-12e9-528c-a565-d680ea9404ee",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1222.001",
+      "technique_id": "T1222.001",
+      "technique_ref": "attack-pattern--96903d73-ce01-5f0d-8367-e88eb55bec4a",
+      "description": "ACL modification performed on the domain root object, significant AD change with high impact. Following MS guidance all changes at this level should be reviewed. Drill into the logonID within EventCode 4624 for information on the source device during triage.",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--412e2444-e1fd-5706-8f7a-fbdc254b10f9",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1484",
+      "technique_id": "T1484",
+      "technique_ref": "attack-pattern--d0bdc2b5-415f-55da-ac78-8ee9a7779735",
+      "description": "ACL modification performed on the domain root object, significant AD change with high impact. Following MS guidance all changes at this level should be reviewed. Drill into the logonID within EventCode 4624 for information on the source device during triage.",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--f1c231c2-e006-51d0-8469-71a5387e7f96",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--35783465-38c1-5ff9-aa88-6b206d52e6fd",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--35783465-38c1-5ff9-aa88-6b206d52e6fd",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--f3234180-98c7-532f-8923-db4903c9b475",
+      "created_by_ref": "identity--35783465-38c1-5ff9-aa88-6b206d52e6fd",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: suspicious-dllhost-no-command-line-arguments",
+      "description": "The following analytic detects instances of DLLHost.exe executing without command line arguments. This behavior is unusual and often associated with malicious activities, such as those performed by Cobalt Strike. The detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process execution logs. This activity is significant because DLLHost.exe typically requires arguments to function correctly, and its absence may indicate an attempt to evade detection. If confirm",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--c677c83d-5bdd-5469-96bf-90eed8cbd665"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--571e5d59-34f8-5dcb-807a-9b6415d8f0b0",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1055",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1055"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--c677c83d-5bdd-5469-96bf-90eed8cbd665",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1055",
+      "technique_id": "T1055",
+      "technique_ref": "attack-pattern--571e5d59-34f8-5dcb-807a-9b6415d8f0b0",
+      "description": "The following analytic detects instances of DLLHost.exe executing without command line arguments. This behavior is unusual and often associated with malicious activities, such as those performed by Cobalt Strike. The detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process execution logs. This activity is significant because DLLHost.exe typically requires arguments to function correctly, and its absence may indicate an attempt to evade detection. If confirm",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

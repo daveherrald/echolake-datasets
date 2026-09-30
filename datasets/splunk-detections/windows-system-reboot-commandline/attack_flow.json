@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--9779924c-8722-51b1-89f5-47701e3521d4",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--0ed81458-917c-5757-aaf2-ff25d0edc692",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--0ed81458-917c-5757-aaf2-ff25d0edc692",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--e8a8769f-c1b0-54ac-90b2-1b530a068e18",
+      "created_by_ref": "identity--0ed81458-917c-5757-aaf2-ff25d0edc692",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-system-reboot-commandline",
+      "description": "The following analytic identifies the execution of the Windows command line to reboot a host machine using \"shutdown.exe\" with specific parameters. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line arguments. This activity is significant as it is often associated with advanced persistent threats (APTs) and remote access trojans (RATs) like dcrat, which may use system reboots to disrupt operations, aid in system destruction",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--61325bb6-e516-5a1f-8e24-43df0436b3dd"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--cafa95a4-e92e-56a5-b825-fd23008cb196",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1529",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1529"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--61325bb6-e516-5a1f-8e24-43df0436b3dd",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1529",
+      "technique_id": "T1529",
+      "technique_ref": "attack-pattern--cafa95a4-e92e-56a5-b825-fd23008cb196",
+      "description": "The following analytic identifies the execution of the Windows command line to reboot a host machine using \"shutdown.exe\" with specific parameters. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line arguments. This activity is significant as it is often associated with advanced persistent threats (APTs) and remote access trojans (RATs) like dcrat, which may use system reboots to disrupt operations, aid in system destruction",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

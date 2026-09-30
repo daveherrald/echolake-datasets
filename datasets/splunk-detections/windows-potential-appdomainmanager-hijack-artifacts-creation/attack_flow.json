@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--02e97e6c-e9a1-5950-b0ee-8b96004d2085",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--483e17df-4eec-5c3b-ae3a-6c446ca2c873",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--483e17df-4eec-5c3b-ae3a-6c446ca2c873",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--7f454437-5acb-56bd-8b98-ffd9b29cec1b",
+      "created_by_ref": "identity--483e17df-4eec-5c3b-ae3a-6c446ca2c873",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-potential-appdomainmanager-hijack-artifacts-creation",
+      "description": "The following analytic detects the creation of an .exe file along with its corresponding .exe.config and a .dll in the same directory, which is a common pattern indicative of potential AppDomain hijacking or CLR code injection attempts. This behavior may signal that a malicious actor is attempting to load a rogue assembly into a legitimate application's AppDomain, allowing code execution under the context of a trusted process.",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--7c8e46a2-ba13-5fee-b044-6f657f975f62"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--fcb032a4-ed8d-5648-a05a-4f65e8706239",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1574.014",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1574.014"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--7c8e46a2-ba13-5fee-b044-6f657f975f62",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1574.014",
+      "technique_id": "T1574.014",
+      "technique_ref": "attack-pattern--fcb032a4-ed8d-5648-a05a-4f65e8706239",
+      "description": "The following analytic detects the creation of an .exe file along with its corresponding .exe.config and a .dll in the same directory, which is a common pattern indicative of potential AppDomain hijacking or CLR code injection attempts. This behavior may signal that a malicious actor is attempting to load a rogue assembly into a legitimate application's AppDomain, allowing code execution under the context of a trusted process.",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

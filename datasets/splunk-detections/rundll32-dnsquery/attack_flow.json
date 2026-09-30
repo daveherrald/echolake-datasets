@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--9f49398f-225f-5934-a7a5-8d0ad2c9bdbf",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--3881be6c-59e5-50cd-b506-f6c285c8654a",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--3881be6c-59e5-50cd-b506-f6c285c8654a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--74ce3812-561d-5867-92be-980681cd25dd",
+      "created_by_ref": "identity--3881be6c-59e5-50cd-b506-f6c285c8654a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: rundll32-dnsquery",
+      "description": "The following analytic detects a suspicious `rundll32.exe` process making HTTP connections and performing DNS queries to web domains. It leverages Sysmon EventCode 22 logs to identify these activities. This behavior is significant as it is commonly associated with IcedID malware, where `rundll32.exe` checks internet connectivity and communicates with C&C servers to download configurations and other components. If confirmed malicious, this activity could allow attackers to establish persistence,",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--f30f4d2f-fcb0-50ee-a7c4-9d341d6c0e6a"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--0ff55ccf-7640-58f7-ba98-8a3da87cf32a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1218.011",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1218.011"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--f30f4d2f-fcb0-50ee-a7c4-9d341d6c0e6a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1218.011",
+      "technique_id": "T1218.011",
+      "technique_ref": "attack-pattern--0ff55ccf-7640-58f7-ba98-8a3da87cf32a",
+      "description": "The following analytic detects a suspicious `rundll32.exe` process making HTTP connections and performing DNS queries to web domains. It leverages Sysmon EventCode 22 logs to identify these activities. This behavior is significant as it is commonly associated with IcedID malware, where `rundll32.exe` checks internet connectivity and communicates with C&C servers to download configurations and other components. If confirmed malicious, this activity could allow attackers to establish persistence,",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

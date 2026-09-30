@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--e59c657b-0426-5716-bab1-96448ced4d86",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--01ba2027-ecb4-5d11-bf91-65efc250f292",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--01ba2027-ecb4-5d11-bf91-65efc250f292",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--add2b77d-9da6-5315-9fba-6c098c74e2d0",
+      "created_by_ref": "identity--01ba2027-ecb4-5d11-bf91-65efc250f292",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-installutil-credential-theft",
+      "description": "The following analytic detects instances where the Windows InstallUtil.exe binary loads `vaultcli.dll` and `Samlib.dll`. This detection leverages Sysmon EventCode 7 to identify these specific DLL loads. This activity is significant because it can indicate an attempt to execute code that bypasses application control and captures credentials using tools like Mimikatz. If confirmed malicious, this behavior could allow an attacker to steal credentials, potentially leading to unauthorized access and",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--84777cdf-eae5-5100-a6e8-2950869da771"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--b3414b26-25ae-59ea-a5e4-8d0737837b36",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1218.004",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1218.004"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--84777cdf-eae5-5100-a6e8-2950869da771",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1218.004",
+      "technique_id": "T1218.004",
+      "technique_ref": "attack-pattern--b3414b26-25ae-59ea-a5e4-8d0737837b36",
+      "description": "The following analytic detects instances where the Windows InstallUtil.exe binary loads `vaultcli.dll` and `Samlib.dll`. This detection leverages Sysmon EventCode 7 to identify these specific DLL loads. This activity is significant because it can indicate an attempt to execute code that bypasses application control and captures credentials using tools like Mimikatz. If confirmed malicious, this behavior could allow an attacker to steal credentials, potentially leading to unauthorized access and",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

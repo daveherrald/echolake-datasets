@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--342ded9b-dbf9-5b48-a6d8-c2a5d9121873",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--084cad2e-e1e3-5068-83ed-635bcd114d39",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--084cad2e-e1e3-5068-83ed-635bcd114d39",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--97dffe93-686d-5627-bfaf-f9b8c198a212",
+      "created_by_ref": "identity--084cad2e-e1e3-5068-83ed-635bcd114d39",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: kubernetes-cron-job-creation",
+      "description": "The following analytic detects the creation of a Kubernetes cron job, which is a task scheduled to run automatically at specified intervals. It identifies this activity by monitoring Kubernetes Audit logs for the creation events of cron jobs. This behavior is significant for a SOC as it could allow an attacker to execute malicious tasks repeatedly and automatically, posing a threat to the Kubernetes infrastructure. If confirmed malicious, this activity could lead to persistent attacks, service d",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--b12e4e46-7630-58a6-be30-0c958ea2c1e0"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--bd9c082f-b31f-5403-ae44-575531fa3a1b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1053.007",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1053.007"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--b12e4e46-7630-58a6-be30-0c958ea2c1e0",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1053.007",
+      "technique_id": "T1053.007",
+      "technique_ref": "attack-pattern--bd9c082f-b31f-5403-ae44-575531fa3a1b",
+      "description": "The following analytic detects the creation of a Kubernetes cron job, which is a task scheduled to run automatically at specified intervals. It identifies this activity by monitoring Kubernetes Audit logs for the creation events of cron jobs. This behavior is significant for a SOC as it could allow an attacker to execute malicious tasks repeatedly and automatically, posing a threat to the Kubernetes infrastructure. If confirmed malicious, this activity could lead to persistent attacks, service d",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

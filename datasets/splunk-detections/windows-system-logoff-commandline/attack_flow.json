@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--4793e034-f2a2-5110-bf7e-7da18fb4b59a",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--aadd5278-8019-550b-9c06-7521969513a4",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--aadd5278-8019-550b-9c06-7521969513a4",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--4cbec4fd-b177-558f-9c0c-8e5c2d880006",
+      "created_by_ref": "identity--aadd5278-8019-550b-9c06-7521969513a4",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-system-logoff-commandline",
+      "description": "The following analytic detects the execution of the Windows command line to log off a host machine. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on processes involving `shutdown.exe` with specific parameters. This activity is significant as it is often associated with Advanced Persistent Threats (APTs) and Remote Access Trojans (RATs) like dcrat, which use this technique to disrupt operations, aid in system destruction, or inhibit recovery. If confirmed malicious",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--4eec4978-28a0-5e13-bf8f-3977cec6d79b"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--b3301459-4cc8-506b-ba8c-cc903b61e361",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1529",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1529"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--4eec4978-28a0-5e13-bf8f-3977cec6d79b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1529",
+      "technique_id": "T1529",
+      "technique_ref": "attack-pattern--b3301459-4cc8-506b-ba8c-cc903b61e361",
+      "description": "The following analytic detects the execution of the Windows command line to log off a host machine. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on processes involving `shutdown.exe` with specific parameters. This activity is significant as it is often associated with Advanced Persistent Threats (APTs) and Remote Access Trojans (RATs) like dcrat, which use this technique to disrupt operations, aid in system destruction, or inhibit recovery. If confirmed malicious",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

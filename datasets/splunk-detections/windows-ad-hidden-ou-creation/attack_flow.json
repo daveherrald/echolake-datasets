@@ -1,0 +1,110 @@
+{
+  "type": "bundle",
+  "id": "bundle--cad79587-3f8b-5be8-9ffb-f9f3af2caf26",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--93237ce0-bcd3-5994-bd52-04c62644442a",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--93237ce0-bcd3-5994-bd52-04c62644442a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--eb5a2b78-5bda-5751-a398-7c90d98cf121",
+      "created_by_ref": "identity--93237ce0-bcd3-5994-bd52-04c62644442a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-ad-hidden-ou-creation",
+      "description": "This analytic is looking for when an ACL is applied to an OU which denies listing the objects residing in the OU. This activity combined with modifying the owner of the OU will hide AD objects even from domain administrators.",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--ff0a320b-0ad4-5631-802f-f0a23dcd76c5",
+        "attack-action--eb0e56e8-b8c6-54a2-9249-21ea7c7b4c2d"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--04d7975d-9711-5694-a23d-aa89ee9eba28",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1222.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1222.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--e51182eb-ae08-593d-a8ce-67d2967ae1d7",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1484",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1484"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--ff0a320b-0ad4-5631-802f-f0a23dcd76c5",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1222.001",
+      "technique_id": "T1222.001",
+      "technique_ref": "attack-pattern--04d7975d-9711-5694-a23d-aa89ee9eba28",
+      "description": "This analytic is looking for when an ACL is applied to an OU which denies listing the objects residing in the OU. This activity combined with modifying the owner of the OU will hide AD objects even from domain administrators.",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--eb0e56e8-b8c6-54a2-9249-21ea7c7b4c2d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1484",
+      "technique_id": "T1484",
+      "technique_ref": "attack-pattern--e51182eb-ae08-593d-a8ce-67d2967ae1d7",
+      "description": "This analytic is looking for when an ACL is applied to an OU which denies listing the objects residing in the OU. This activity combined with modifying the owner of the OU will hide AD objects even from domain administrators.",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

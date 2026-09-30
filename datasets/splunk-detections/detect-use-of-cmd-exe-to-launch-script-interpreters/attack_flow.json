@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--d5a3bb62-0d8f-5bb3-bccd-31787c443e03",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--cddb80b6-0d8f-593c-9bae-f4eff543f15b",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--cddb80b6-0d8f-593c-9bae-f4eff543f15b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--c78e11c8-5d4b-5487-98e7-852440b1377f",
+      "created_by_ref": "identity--cddb80b6-0d8f-593c-9bae-f4eff543f15b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: detect-use-of-cmd-exe-to-launch-script-interpreters",
+      "description": "The following analytic detects the execution of cscript.exe or wscript.exe processes initiated by cmd.exe. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and parent processes within the Endpoint data model. This activity is significant as it may indicate script-based attacks or administrative actions that could be leveraged for malicious purposes. If confirmed malicious, this behavior could allow attackers to execute scripts, potentially leading to",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--f1080867-3270-549a-a670-83fce83d0b91"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--eff57214-709c-5a68-99ae-f4f9e65f8e3c",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1059.003",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1059.003"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--f1080867-3270-549a-a670-83fce83d0b91",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1059.003",
+      "technique_id": "T1059.003",
+      "technique_ref": "attack-pattern--eff57214-709c-5a68-99ae-f4f9e65f8e3c",
+      "description": "The following analytic detects the execution of cscript.exe or wscript.exe processes initiated by cmd.exe. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and parent processes within the Endpoint data model. This activity is significant as it may indicate script-based attacks or administrative actions that could be leveraged for malicious purposes. If confirmed malicious, this behavior could allow attackers to execute scripts, potentially leading to",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

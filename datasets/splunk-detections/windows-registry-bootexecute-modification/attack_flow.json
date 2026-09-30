@@ -1,0 +1,110 @@
+{
+  "type": "bundle",
+  "id": "bundle--c46d8e2d-f078-5fa8-9a83-4b0f09c920ec",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--d6c20b5a-74e6-5e1e-98ee-096a110a22f1",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--d6c20b5a-74e6-5e1e-98ee-096a110a22f1",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--6167639a-dbe1-5cd0-a891-5d1070381a47",
+      "created_by_ref": "identity--d6c20b5a-74e6-5e1e-98ee-096a110a22f1",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-registry-bootexecute-modification",
+      "description": "The following analytic detects modifications to the BootExecute registry key, which manages applications and services executed during system boot. It leverages data from the Endpoint.Registry data model, focusing on changes to the registry path \"HKLM\\\\System\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\BootExecute\". This activity is significant because unauthorized changes to this key can indicate attempts to achieve persistence, load malicious code, or tamper with the boot process. If confirme",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--87962266-171b-5cef-80a9-52333cce6a5a",
+        "attack-action--eeef7353-e9d0-5fe9-959f-d08549cb0ccd"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--1275bdf2-37d4-5cdd-8593-8ec2370bcd03",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1542",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1542"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--fbb6a3ff-3b52-5d54-aa7f-86d5ebe2667d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1547.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1547.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--87962266-171b-5cef-80a9-52333cce6a5a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1542",
+      "technique_id": "T1542",
+      "technique_ref": "attack-pattern--1275bdf2-37d4-5cdd-8593-8ec2370bcd03",
+      "description": "The following analytic detects modifications to the BootExecute registry key, which manages applications and services executed during system boot. It leverages data from the Endpoint.Registry data model, focusing on changes to the registry path \"HKLM\\\\System\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\BootExecute\". This activity is significant because unauthorized changes to this key can indicate attempts to achieve persistence, load malicious code, or tamper with the boot process. If confirme",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--eeef7353-e9d0-5fe9-959f-d08549cb0ccd",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1547.001",
+      "technique_id": "T1547.001",
+      "technique_ref": "attack-pattern--fbb6a3ff-3b52-5d54-aa7f-86d5ebe2667d",
+      "description": "The following analytic detects modifications to the BootExecute registry key, which manages applications and services executed during system boot. It leverages data from the Endpoint.Registry data model, focusing on changes to the registry path \"HKLM\\\\System\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\BootExecute\". This activity is significant because unauthorized changes to this key can indicate attempts to achieve persistence, load malicious code, or tamper with the boot process. If confirme",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--879900d6-f241-5cd3-a9f8-2d677b9764e7",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--0ba3cb97-d4d7-58b2-a3ed-94475c46ae43",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--0ba3cb97-d4d7-58b2-a3ed-94475c46ae43",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--617da875-edc9-52d7-ac6a-6877d73063f6",
+      "created_by_ref": "identity--0ba3cb97-d4d7-58b2-a3ed-94475c46ae43",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: remcos-client-registry-install-entry",
+      "description": "The following analytic detects the presence of a registry key associated with the Remcos RAT agent on a host. It leverages data from the Endpoint.Processes and Endpoint.Registry data models in Splunk, focusing on instances where the \"license\" key is found in the \"Software\\Remcos\" path. This behavior is significant as it indicates potential compromise by the Remcos RAT, a remote access Trojan used for unauthorized access and data exfiltration. If confirmed malicious, the attacker could gain contr",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--afde8c6e-398b-510b-8c1c-4a24cf404482"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--a345d7cf-da99-50c8-9b78-00b7429f69bf",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1112",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1112"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--afde8c6e-398b-510b-8c1c-4a24cf404482",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1112",
+      "technique_id": "T1112",
+      "technique_ref": "attack-pattern--a345d7cf-da99-50c8-9b78-00b7429f69bf",
+      "description": "The following analytic detects the presence of a registry key associated with the Remcos RAT agent on a host. It leverages data from the Endpoint.Processes and Endpoint.Registry data models in Splunk, focusing on instances where the \"license\" key is found in the \"Software\\Remcos\" path. This behavior is significant as it indicates potential compromise by the Remcos RAT, a remote access Trojan used for unauthorized access and data exfiltration. If confirmed malicious, the attacker could gain contr",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

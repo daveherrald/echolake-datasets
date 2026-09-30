@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--ab2cc57c-af59-5bdf-aeb9-a9c8f8158b8f",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--8725f750-10ec-5904-8688-939926f57f32",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--8725f750-10ec-5904-8688-939926f57f32",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--7884b7d0-92f0-529d-aa28-cb0c2d3affce",
+      "created_by_ref": "identity--8725f750-10ec-5904-8688-939926f57f32",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-office-product-spawned-child-process-for-download",
+      "description": "The following analytic identifies Office applications spawning child processes to download content via HTTP/HTTPS. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process creation events where Office applications like Word or Excel initiate network connections, excluding common browsers. This activity is significant as it often indicates the use of malicious documents to execute living-off-the-land binaries (LOLBins) for payload delivery. If confirmed malicious,",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--72006304-6eea-5c98-b138-4bd6f298399f"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--44df2a70-481f-5e5e-906c-5cbdbe96d462",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1566.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1566.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--72006304-6eea-5c98-b138-4bd6f298399f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1566.001",
+      "technique_id": "T1566.001",
+      "technique_ref": "attack-pattern--44df2a70-481f-5e5e-906c-5cbdbe96d462",
+      "description": "The following analytic identifies Office applications spawning child processes to download content via HTTP/HTTPS. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process creation events where Office applications like Word or Excel initiate network connections, excluding common browsers. This activity is significant as it often indicates the use of malicious documents to execute living-off-the-land binaries (LOLBins) for payload delivery. If confirmed malicious,",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

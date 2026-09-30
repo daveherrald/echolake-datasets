@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--4ec0e3cf-d924-54e9-99c0-695574fcf65c",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--60997974-bef1-515a-b520-e5a1a13aef4a",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--60997974-bef1-515a-b520-e5a1a13aef4a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--973bda13-a54e-5dbc-a0ea-1264f0a54313",
+      "created_by_ref": "identity--60997974-bef1-515a-b520-e5a1a13aef4a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: cisco-asa-logging-disabled-via-cli",
+      "description": "This analytic detects the disabling of logging functionality on a Cisco ASA device\nthrough CLI commands. Adversaries or malicious insiders may attempt to disable logging\nto evade detection and hide malicious activity. The detection looks for specific ASA\nsyslog message IDs (111010, 111008) associated with command execution,\ncombined with suspicious commands such as `no logging`, `logging disable`,\n`clear logging`, or `no logging host`. Disabling logging on a firewall or security device\nis a stro",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--ca2ffa41-e6d8-599e-a056-7dc030e7ab79"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--8e3a5452-1a09-5379-9108-101b9e406cb8",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1562"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--ca2ffa41-e6d8-599e-a056-7dc030e7ab79",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562",
+      "technique_id": "T1562",
+      "technique_ref": "attack-pattern--8e3a5452-1a09-5379-9108-101b9e406cb8",
+      "description": "This analytic detects the disabling of logging functionality on a Cisco ASA device\nthrough CLI commands. Adversaries or malicious insiders may attempt to disable logging\nto evade detection and hide malicious activity. The detection looks for specific ASA\nsyslog message IDs (111010, 111008) associated with command execution,\ncombined with suspicious commands such as `no logging`, `logging disable`,\n`clear logging`, or `no logging host`. Disabling logging on a firewall or security device\nis a stro",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--c6d281bd-1385-5de8-97b6-5106275a12ab",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--146df6b9-ad5e-510d-9bb6-0f7decab1e74",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--146df6b9-ad5e-510d-9bb6-0f7decab1e74",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--735c1667-b960-5378-aed4-2538c222aac2",
+      "created_by_ref": "identity--146df6b9-ad5e-510d-9bb6-0f7decab1e74",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: excessive-usage-of-cacls-app",
+      "description": "The following analytic identifies excessive usage of `cacls.exe`, `xcacls.exe`,\nor `icacls.exe` to change file or folder permissions.\nIt looks for 10 or more execution of the aforementioned processes in the span of 1 minute. \nIt leverages data from Endpoint Detection and Response (EDR) agents, \nfocusing on process names and command-line executions.\nThis activity is significant as it may indicate an adversary attempting\nto restrict access to malware components or artifacts on a compromised system",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--7778238e-2cbd-5788-b595-40438d45d316"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--caa9bee6-a77c-5f48-b554-d5aac55be191",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1222",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1222"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--7778238e-2cbd-5788-b595-40438d45d316",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1222",
+      "technique_id": "T1222",
+      "technique_ref": "attack-pattern--caa9bee6-a77c-5f48-b554-d5aac55be191",
+      "description": "The following analytic identifies excessive usage of `cacls.exe`, `xcacls.exe`,\nor `icacls.exe` to change file or folder permissions.\nIt looks for 10 or more execution of the aforementioned processes in the span of 1 minute. \nIt leverages data from Endpoint Detection and Response (EDR) agents, \nfocusing on process names and command-line executions.\nThis activity is significant as it may indicate an adversary attempting\nto restrict access to malware components or artifacts on a compromised system",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--f29d90b5-b1d9-5538-856c-7b01b3931347",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--c65ec611-2280-5283-9a8b-b74bb2c5b131",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--c65ec611-2280-5283-9a8b-b74bb2c5b131",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--ecdf15e7-b04c-587b-98a3-1d637805a57d",
+      "created_by_ref": "identity--c65ec611-2280-5283-9a8b-b74bb2c5b131",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: detect-new-open-s3-buckets",
+      "description": "The following analytic identifies the creation of open/public S3 buckets in AWS. It detects this activity by analyzing AWS CloudTrail events for `PutBucketAcl` actions where the access control list (ACL) grants permissions to all users or authenticated users. This activity is significant because open S3 buckets can expose sensitive data to unauthorized access, leading to data breaches. If confirmed malicious, an attacker could read, write, or fully control the contents of the bucket, potentially",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--54166b45-eab3-5437-9563-944cfa632f24"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--4b0f908e-6c24-5fda-9149-02a30393d72d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1530",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1530"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--54166b45-eab3-5437-9563-944cfa632f24",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1530",
+      "technique_id": "T1530",
+      "technique_ref": "attack-pattern--4b0f908e-6c24-5fda-9149-02a30393d72d",
+      "description": "The following analytic identifies the creation of open/public S3 buckets in AWS. It detects this activity by analyzing AWS CloudTrail events for `PutBucketAcl` actions where the access control list (ACL) grants permissions to all users or authenticated users. This activity is significant because open S3 buckets can expose sensitive data to unauthorized access, leading to data breaches. If confirmed malicious, an attacker could read, write, or fully control the contents of the bucket, potentially",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

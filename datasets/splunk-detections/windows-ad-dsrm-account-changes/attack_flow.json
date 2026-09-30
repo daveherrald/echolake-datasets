@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--73ebd05a-816a-575d-bff3-22a2db240fab",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--520c5e49-896a-52d1-bbb6-73732b3e270a",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--520c5e49-896a-52d1-bbb6-73732b3e270a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--434f27ab-ecfd-5ead-ac8c-7d1073e4b81f",
+      "created_by_ref": "identity--520c5e49-896a-52d1-bbb6-73732b3e270a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-ad-dsrm-account-changes",
+      "description": "The following analytic identifies changes to the Directory Services Restore Mode (DSRM) account behavior via registry modifications. It detects alterations in the registry path \"*\\\\System\\\\CurrentControlSet\\\\Control\\\\Lsa\\\\DSRMAdminLogonBehavior\" with specific values indicating potential misuse. This activity is significant because the DSRM account, if misconfigured, can be exploited to persist within a domain, similar to a local administrator account. If confirmed malicious, an attacker could ga",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--504c1717-71d6-54f4-8830-320f819a6184"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--9eb44c92-87b7-5fc5-bc0e-1ea38b7e1100",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1098",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1098"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--504c1717-71d6-54f4-8830-320f819a6184",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1098",
+      "technique_id": "T1098",
+      "technique_ref": "attack-pattern--9eb44c92-87b7-5fc5-bc0e-1ea38b7e1100",
+      "description": "The following analytic identifies changes to the Directory Services Restore Mode (DSRM) account behavior via registry modifications. It detects alterations in the registry path \"*\\\\System\\\\CurrentControlSet\\\\Control\\\\Lsa\\\\DSRMAdminLogonBehavior\" with specific values indicating potential misuse. This activity is significant because the DSRM account, if misconfigured, can be exploited to persist within a domain, similar to a local administrator account. If confirmed malicious, an attacker could ga",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

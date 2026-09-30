@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--18e62fee-078a-50ed-8a3e-0ab5bd828030",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--dcd96fd4-99c0-5e53-af9d-8e687b2d9ac0",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--dcd96fd4-99c0-5e53-af9d-8e687b2d9ac0",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--dd497745-9104-573c-9f50-32d74b9750da",
+      "created_by_ref": "identity--dcd96fd4-99c0-5e53-af9d-8e687b2d9ac0",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: linux-auditd-possible-append-cronjob-entry-on-existing-cronjob-file",
+      "description": "The following analytic detects potential tampering with cronjob files on a Linux system.\nIt leverages logs from Linux Auditd, focusing on events of type PATH or CWD.\nThis activity could be significant because adversaries often use it for persistence or privilege escalation.\nCorrelate this with related EXECVE or PROCTITLE events to identify the process or user responsible for the access or modification.\nIf confirmed malicious, this could allow attackers to execute unauthorized code automatically,",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--7c1f526d-afed-5254-99b6-8a5115632b3c"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--6e203d5b-1270-5ffe-8d0a-6e305f10081e",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1053.003",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1053.003"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--7c1f526d-afed-5254-99b6-8a5115632b3c",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1053.003",
+      "technique_id": "T1053.003",
+      "technique_ref": "attack-pattern--6e203d5b-1270-5ffe-8d0a-6e305f10081e",
+      "description": "The following analytic detects potential tampering with cronjob files on a Linux system.\nIt leverages logs from Linux Auditd, focusing on events of type PATH or CWD.\nThis activity could be significant because adversaries often use it for persistence or privilege escalation.\nCorrelate this with related EXECVE or PROCTITLE events to identify the process or user responsible for the access or modification.\nIf confirmed malicious, this could allow attackers to execute unauthorized code automatically,",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--290d637f-fb80-573a-82a6-6b58339e8e47",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--663d6aff-53c0-54e5-808c-b09e42382e4c",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--663d6aff-53c0-54e5-808c-b09e42382e4c",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--e32f381c-5ec2-5cfb-9ee5-609936846b16",
+      "created_by_ref": "identity--663d6aff-53c0-54e5-808c-b09e42382e4c",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-modify-registry-maxconnectionperserver",
+      "description": "The following analytic identifies a suspicious modification of the Windows registry setting for max connections per server. It detects changes to specific registry paths using data from the Endpoint.Registry datamodel. This activity is significant because altering this setting can be exploited by attackers to increase the number of concurrent connections to a remote server, potentially facilitating DDoS attacks or enabling more effective lateral movement within a compromised network. If confirme",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--9a6726e2-bbaa-5678-9683-3d97a9492453"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--29393cf1-d176-56f4-92db-7f58a2eee696",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1112",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1112"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--9a6726e2-bbaa-5678-9683-3d97a9492453",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1112",
+      "technique_id": "T1112",
+      "technique_ref": "attack-pattern--29393cf1-d176-56f4-92db-7f58a2eee696",
+      "description": "The following analytic identifies a suspicious modification of the Windows registry setting for max connections per server. It detects changes to specific registry paths using data from the Endpoint.Registry datamodel. This activity is significant because altering this setting can be exploited by attackers to increase the number of concurrent connections to a remote server, potentially facilitating DDoS attacks or enabling more effective lateral movement within a compromised network. If confirme",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

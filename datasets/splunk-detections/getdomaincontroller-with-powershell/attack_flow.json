@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--79aa89b1-7116-5380-8349-71b869f9b35b",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--9f863bd0-a6aa-53c7-9634-6dafd42d743f",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--9f863bd0-a6aa-53c7-9634-6dafd42d743f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--ca99f26e-9b0a-545c-a2c6-d6626b503dc1",
+      "created_by_ref": "identity--9f863bd0-a6aa-53c7-9634-6dafd42d743f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: getdomaincontroller-with-powershell",
+      "description": "The following analytic detects the execution of `powershell.exe` with the `Get-DomainController` command, which is used to discover remote systems within a Windows domain. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line arguments. Monitoring this activity is crucial as it may indicate an attempt to enumerate domain controllers, a common tactic in Active Directory discovery. If confirmed malicious, this activity could all",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--33813ed4-f072-578d-8768-8387b1529ba2"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--317dd827-8ff0-5962-93bb-540827147ad1",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1018",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1018"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--33813ed4-f072-578d-8768-8387b1529ba2",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1018",
+      "technique_id": "T1018",
+      "technique_ref": "attack-pattern--317dd827-8ff0-5962-93bb-540827147ad1",
+      "description": "The following analytic detects the execution of `powershell.exe` with the `Get-DomainController` command, which is used to discover remote systems within a Windows domain. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line arguments. Monitoring this activity is crucial as it may indicate an attempt to enumerate domain controllers, a common tactic in Active Directory discovery. If confirmed malicious, this activity could all",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

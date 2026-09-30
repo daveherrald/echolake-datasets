@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--1ac6f43f-41db-537a-bde4-aaf64b617171",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--3c6b37d7-8958-5b2c-8d59-c7cdcddbe9e2",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--3c6b37d7-8958-5b2c-8d59-c7cdcddbe9e2",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--ff0f401c-6657-5ec4-a7bb-c82c90a8579a",
+      "created_by_ref": "identity--3c6b37d7-8958-5b2c-8d59-c7cdcddbe9e2",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-process-injection-remote-thread",
+      "description": "The following analytic detects suspicious remote thread execution in processes such as Taskmgr.exe, calc.exe, and notepad.exe, which may indicate process injection by malware like Qakbot. This detection leverages Sysmon EventCode 8 to identify remote thread creation in specific target processes. This activity is significant as it often signifies an attempt by malware to inject malicious code into legitimate processes, potentially leading to unauthorized code execution. If confirmed malicious, th",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--0cfb0997-f6ea-559d-a1be-deeadd83a973"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--8f9f2bfb-f59f-59b5-9b7a-056bef3d145e",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1055.002",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1055.002"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--0cfb0997-f6ea-559d-a1be-deeadd83a973",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1055.002",
+      "technique_id": "T1055.002",
+      "technique_ref": "attack-pattern--8f9f2bfb-f59f-59b5-9b7a-056bef3d145e",
+      "description": "The following analytic detects suspicious remote thread execution in processes such as Taskmgr.exe, calc.exe, and notepad.exe, which may indicate process injection by malware like Qakbot. This detection leverages Sysmon EventCode 8 to identify remote thread creation in specific target processes. This activity is significant as it often signifies an attempt by malware to inject malicious code into legitimate processes, potentially leading to unauthorized code execution. If confirmed malicious, th",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

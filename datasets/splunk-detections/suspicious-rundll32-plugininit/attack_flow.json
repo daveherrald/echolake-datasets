@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--d9c0972a-cdf1-5440-9a33-0321b22c9c15",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--1503ed7e-c83b-56ba-b3fb-f943914f8970",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--1503ed7e-c83b-56ba-b3fb-f943914f8970",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--b447cb48-c760-5c0f-8bd9-e73d0a2d3663",
+      "created_by_ref": "identity--1503ed7e-c83b-56ba-b3fb-f943914f8970",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: suspicious-rundll32-plugininit",
+      "description": "The following analytic identifies the execution of the rundll32.exe process with the \"plugininit\" parameter. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process creation events and command-line arguments. This activity is significant because the \"plugininit\" parameter is commonly associated with IcedID malware, which uses it to execute an initial DLL stager to download additional payloads. If confirmed malicious, this behavior could lead to furthe",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--75ef204b-1c26-54ef-9450-69fc8252fb65"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--9aa23887-01e1-5e60-bc51-30b1e231998b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1218.011",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1218.011"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--75ef204b-1c26-54ef-9450-69fc8252fb65",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1218.011",
+      "technique_id": "T1218.011",
+      "technique_ref": "attack-pattern--9aa23887-01e1-5e60-bc51-30b1e231998b",
+      "description": "The following analytic identifies the execution of the rundll32.exe process with the \"plugininit\" parameter. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process creation events and command-line arguments. This activity is significant because the \"plugininit\" parameter is commonly associated with IcedID malware, which uses it to execute an initial DLL stager to download additional payloads. If confirmed malicious, this behavior could lead to furthe",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

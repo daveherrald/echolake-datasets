@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--18715d3f-9948-53ae-8acc-53480a773fec",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--a7959425-6bf6-5a36-aea0-96a97a145b13",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--a7959425-6bf6-5a36-aea0-96a97a145b13",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--199f1fe3-3d09-550f-8495-e83d0fcbc13c",
+      "created_by_ref": "identity--a7959425-6bf6-5a36-aea0-96a97a145b13",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-masquerading-msdtc-process",
+      "description": "The following analytic identifies the execution of msdtc.exe with specific command-line parameters (-a or -b), which are indicative of the PlugX malware. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line arguments. This activity is significant because PlugX uses these parameters to masquerade its malicious operations within legitimate processes, making it harder to detect. If confirmed malicious, this behavior could allow",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--8cd3eae1-aaad-569e-983f-7078a9696cb7"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--6f28f2fc-33e3-59cd-890e-97d404e57685",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1036",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1036"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--8cd3eae1-aaad-569e-983f-7078a9696cb7",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1036",
+      "technique_id": "T1036",
+      "technique_ref": "attack-pattern--6f28f2fc-33e3-59cd-890e-97d404e57685",
+      "description": "The following analytic identifies the execution of msdtc.exe with specific command-line parameters (-a or -b), which are indicative of the PlugX malware. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line arguments. This activity is significant because PlugX uses these parameters to masquerade its malicious operations within legitimate processes, making it harder to detect. If confirmed malicious, this behavior could allow",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

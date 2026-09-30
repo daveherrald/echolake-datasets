@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--33d86ded-228b-5a68-835e-c3036599338d",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--d16cefa5-7cf5-552b-a3ea-5bdeca356cb3",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--d16cefa5-7cf5-552b-a3ea-5bdeca356cb3",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--60f8d293-00a1-5cc5-9209-03ca6bcc0fff",
+      "created_by_ref": "identity--d16cefa5-7cf5-552b-a3ea-5bdeca356cb3",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: linux-auditd-auditd-daemon-shutdown",
+      "description": "The following analytic detects the unexpected termination of the Linux Audit daemon (auditd) by monitoring for log entries of type DAEMON_END. This event signifies that the audit logging service has stopped, either due to a legitimate system shutdown, manual administrative action, or potentially malicious tampering. Since auditd is responsible for recording critical security events, its sudden stoppage may indicate an attempt to disable security monitoring or evade detection during an attack. Th",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--152ea51d-fdcc-56e6-8586-62a5d646700f"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--ed0672f9-6ab4-5540-a729-4665b086aacf",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.012",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1562.012"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--152ea51d-fdcc-56e6-8586-62a5d646700f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.012",
+      "technique_id": "T1562.012",
+      "technique_ref": "attack-pattern--ed0672f9-6ab4-5540-a729-4665b086aacf",
+      "description": "The following analytic detects the unexpected termination of the Linux Audit daemon (auditd) by monitoring for log entries of type DAEMON_END. This event signifies that the audit logging service has stopped, either due to a legitimate system shutdown, manual administrative action, or potentially malicious tampering. Since auditd is responsible for recording critical security events, its sudden stoppage may indicate an attempt to disable security monitoring or evade detection during an attack. Th",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

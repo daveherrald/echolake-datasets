@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--c93d4e8f-db9d-5df7-8c9e-877e0f8ed220",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--34f6a0ad-0c84-53e7-a6b8-8fb2bc4fc633",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--34f6a0ad-0c84-53e7-a6b8-8fb2bc4fc633",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--a8b76684-24cf-505c-9644-8485f9dc5391",
+      "created_by_ref": "identity--34f6a0ad-0c84-53e7-a6b8-8fb2bc4fc633",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-process-injection-into-commonly-abused-processes",
+      "description": "The following analytic detects process injection into executables that are commonly abused using Sysmon EventCode 10. It identifies suspicious GrantedAccess requests (0x40 and 0x1fffff) to processes such as notepad.exe, wordpad.exe and calc.exe, excluding common system paths like System32, Syswow64, and Program Files. This behavior is often associated with the SliverC2 framework by BishopFox. Monitoring this activity is crucial as it may indicate an initial payload attempting to execute maliciou",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--94cddbc9-1a89-56da-b1ea-0a21436ff8df"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--275deb49-4c3c-57bf-a84e-c012bc9c024f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1055.002",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1055.002"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--94cddbc9-1a89-56da-b1ea-0a21436ff8df",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1055.002",
+      "technique_id": "T1055.002",
+      "technique_ref": "attack-pattern--275deb49-4c3c-57bf-a84e-c012bc9c024f",
+      "description": "The following analytic detects process injection into executables that are commonly abused using Sysmon EventCode 10. It identifies suspicious GrantedAccess requests (0x40 and 0x1fffff) to processes such as notepad.exe, wordpad.exe and calc.exe, excluding common system paths like System32, Syswow64, and Program Files. This behavior is often associated with the SliverC2 framework by BishopFox. Monitoring this activity is crucial as it may indicate an initial payload attempting to execute maliciou",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

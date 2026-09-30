@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--08a7ff8d-b216-5ddf-97ab-d95000143bd4",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--1eb300df-57f2-5919-91b4-a306e31c2a62",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--1eb300df-57f2-5919-91b4-a306e31c2a62",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--c053365a-5fe7-5f4d-8354-79589425bd82",
+      "created_by_ref": "identity--1eb300df-57f2-5919-91b4-a306e31c2a62",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: check-elevated-cmd-using-whoami",
+      "description": "The following analytic identifies the execution of the \"whoami\" command with the \"/group\" flag, where the results are passed to the \"find\" command in order to look for a the string \"12288\". This string represents the SID of the group \"Mandatory Label\\High Mandatory Level\" effectively checking if the current process is running as a \"High\" integrity process or with Administrator privileges. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process and command-line te",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--e36ed233-0e2e-5a9a-836e-d4ef2dab5265"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--92e101a0-22b8-549d-a805-a6ab23ecacf2",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1033",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1033"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--e36ed233-0e2e-5a9a-836e-d4ef2dab5265",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1033",
+      "technique_id": "T1033",
+      "technique_ref": "attack-pattern--92e101a0-22b8-549d-a805-a6ab23ecacf2",
+      "description": "The following analytic identifies the execution of the \"whoami\" command with the \"/group\" flag, where the results are passed to the \"find\" command in order to look for a the string \"12288\". This string represents the SID of the group \"Mandatory Label\\High Mandatory Level\" effectively checking if the current process is running as a \"High\" integrity process or with Administrator privileges. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process and command-line te",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

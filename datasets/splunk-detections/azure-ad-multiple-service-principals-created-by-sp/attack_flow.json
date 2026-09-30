@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--32a6b6d0-8f71-5768-8ea5-a6b58738f706",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--fe64a40f-fa84-56d1-b7bc-3277995fff31",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--fe64a40f-fa84-56d1-b7bc-3277995fff31",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--097cbeb4-e525-5f10-a50a-23ce053dd4ea",
+      "created_by_ref": "identity--fe64a40f-fa84-56d1-b7bc-3277995fff31",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: azure-ad-multiple-service-principals-created-by-sp",
+      "description": "The following analytic detects when a single service principal in Azure AD creates more than three unique OAuth applications within a 10-minute span. It leverages Azure AD audit logs, specifically monitoring the 'Add service principal' operation initiated by service principals. This behavior is significant as it may indicate an attacker using a compromised or malicious service principal to rapidly establish multiple service principals, potentially staging an attack. If confirmed malicious, this",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--8e669c21-8b20-5764-987f-699d2a849978"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--655417c6-c8c0-5eeb-a283-aff81401ef96",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1136.003",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1136.003"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--8e669c21-8b20-5764-987f-699d2a849978",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1136.003",
+      "technique_id": "T1136.003",
+      "technique_ref": "attack-pattern--655417c6-c8c0-5eeb-a283-aff81401ef96",
+      "description": "The following analytic detects when a single service principal in Azure AD creates more than three unique OAuth applications within a 10-minute span. It leverages Azure AD audit logs, specifically monitoring the 'Add service principal' operation initiated by service principals. This behavior is significant as it may indicate an attacker using a compromised or malicious service principal to rapidly establish multiple service principals, potentially staging an attack. If confirmed malicious, this",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

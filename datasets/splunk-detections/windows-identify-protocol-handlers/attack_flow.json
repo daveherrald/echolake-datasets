@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--e7acad33-335e-548e-a6e2-60ce97c9c239",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--97b88b35-6a47-5cd6-9f19-3f35b11cd32d",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--97b88b35-6a47-5cd6-9f19-3f35b11cd32d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--b0395dbb-8b0d-56d9-8088-09d19a545066",
+      "created_by_ref": "identity--97b88b35-6a47-5cd6-9f19-3f35b11cd32d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-identify-protocol-handlers",
+      "description": "The following analytic identifies the use of protocol handlers executed via the command line. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process and command-line telemetry. This activity is significant because protocol handlers can be exploited to execute arbitrary commands or launch applications, potentially leading to unauthorized actions. If confirmed malicious, an attacker could use this technique to gain code execution, escalate privileges, or maintain",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--3c6331a2-2e11-585c-923d-757b97ea180d"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--cb341963-0827-5461-a590-f593298a9030",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1059",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1059"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--3c6331a2-2e11-585c-923d-757b97ea180d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1059",
+      "technique_id": "T1059",
+      "technique_ref": "attack-pattern--cb341963-0827-5461-a590-f593298a9030",
+      "description": "The following analytic identifies the use of protocol handlers executed via the command line. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process and command-line telemetry. This activity is significant because protocol handlers can be exploited to execute arbitrary commands or launch applications, potentially leading to unauthorized actions. If confirmed malicious, an attacker could use this technique to gain code execution, escalate privileges, or maintain",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

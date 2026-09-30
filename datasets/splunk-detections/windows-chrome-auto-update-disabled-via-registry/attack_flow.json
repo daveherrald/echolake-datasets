@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--68809396-bc75-52dc-9eeb-782470ff5dc0",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--cc49f46d-fa63-5f4a-a7af-8c75d858519c",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--cc49f46d-fa63-5f4a-a7af-8c75d858519c",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--adc094a4-6e65-54a3-a40f-12c98f561661",
+      "created_by_ref": "identity--cc49f46d-fa63-5f4a-a7af-8c75d858519c",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-chrome-auto-update-disabled-via-registry",
+      "description": "The following analytic detects modifications to Windows registry values that disable Google Chrome auto-updates.\nChanges to values such as DisableAutoUpdateChecksCheckboxValue = 1, Update{8A69D345-D564-463C-AFF1-A69D9E530F96} = 0, UpdateDefault = 0, and AutoUpdateCheckPeriodMinutes = 0 can prevent Chrome from receiving security updates.\nThis behavior may indicate attempts to bypass update policies, maintain unauthorized extensions, or facilitate malware persistence.\nMonitoring these registry cha",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--c49c63e4-66a2-5d7b-a5d4-2d0176eac2f4"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--a52ad123-c148-56c7-acdf-a25a9b51cd55",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1185",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1185"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--c49c63e4-66a2-5d7b-a5d4-2d0176eac2f4",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1185",
+      "technique_id": "T1185",
+      "technique_ref": "attack-pattern--a52ad123-c148-56c7-acdf-a25a9b51cd55",
+      "description": "The following analytic detects modifications to Windows registry values that disable Google Chrome auto-updates.\nChanges to values such as DisableAutoUpdateChecksCheckboxValue = 1, Update{8A69D345-D564-463C-AFF1-A69D9E530F96} = 0, UpdateDefault = 0, and AutoUpdateCheckPeriodMinutes = 0 can prevent Chrome from receiving security updates.\nThis behavior may indicate attempts to bypass update policies, maintain unauthorized extensions, or facilitate malware persistence.\nMonitoring these registry cha",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

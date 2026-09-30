@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--79f06faf-c597-5392-aaa9-fba0947be4ca",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--5f10fc43-3dfc-5223-9bdc-e297e62fab3b",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--5f10fc43-3dfc-5223-9bdc-e297e62fab3b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--4ba8d899-66d6-5d87-b3e8-3a76e0597130",
+      "created_by_ref": "identity--5f10fc43-3dfc-5223-9bdc-e297e62fab3b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: linux-busybox-privilege-escalation",
+      "description": "The following analytic detects the execution of BusyBox with sudo privileges, which can lead to privilege escalation on Linux systems. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process creation events where BusyBox is executed with both 'sh' and 'sudo' commands. This activity is significant because it indicates a user may be attempting to gain root access, bypassing standard security controls. If confirmed malicious, this could allow an attacker to execute",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--4bf508c6-11bd-5ad7-8018-dd08e926633f"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--1dd76625-8f95-59fd-a45c-31006d1c99ff",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1548.003",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1548.003"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--4bf508c6-11bd-5ad7-8018-dd08e926633f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1548.003",
+      "technique_id": "T1548.003",
+      "technique_ref": "attack-pattern--1dd76625-8f95-59fd-a45c-31006d1c99ff",
+      "description": "The following analytic detects the execution of BusyBox with sudo privileges, which can lead to privilege escalation on Linux systems. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process creation events where BusyBox is executed with both 'sh' and 'sudo' commands. This activity is significant because it indicates a user may be attempting to gain root access, bypassing standard security controls. If confirmed malicious, this could allow an attacker to execute",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

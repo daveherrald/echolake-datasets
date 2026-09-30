@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--2bcb9f56-c5ca-50e8-b0b3-a7818053005a",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--3af3d6c4-e529-54bf-ada7-bd99d2e67d67",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--3af3d6c4-e529-54bf-ada7-bd99d2e67d67",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--9af990a4-7745-5609-b1a7-b9179d1bf3e7",
+      "created_by_ref": "identity--3af3d6c4-e529-54bf-ada7-bd99d2e67d67",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: rundll32-process-creating-exe-dll-files",
+      "description": "The following analytic detects a rundll32 process creating executable (.exe) or dynamic link library (.dll) files. It leverages Sysmon EventCode 11 to identify instances where rundll32.exe generates these file types. This activity is significant because rundll32 is often exploited by malware, such as IcedID, to drop malicious payloads in directories like Temp, AppData, or ProgramData. If confirmed malicious, this behavior could allow an attacker to execute arbitrary code, establish persistence,",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--53266032-0499-5369-b667-ec9e6a13a85d"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--d6cba9a3-cd50-557d-8c3c-1e53b12aacd2",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1218.011",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1218.011"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--53266032-0499-5369-b667-ec9e6a13a85d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1218.011",
+      "technique_id": "T1218.011",
+      "technique_ref": "attack-pattern--d6cba9a3-cd50-557d-8c3c-1e53b12aacd2",
+      "description": "The following analytic detects a rundll32 process creating executable (.exe) or dynamic link library (.dll) files. It leverages Sysmon EventCode 11 to identify instances where rundll32.exe generates these file types. This activity is significant because rundll32 is often exploited by malware, such as IcedID, to drop malicious payloads in directories like Temp, AppData, or ProgramData. If confirmed malicious, this behavior could allow an attacker to execute arbitrary code, establish persistence,",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

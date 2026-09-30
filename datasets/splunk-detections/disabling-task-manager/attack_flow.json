@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--688bd5fe-bdab-590c-8823-437d191675aa",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--5f65da68-b6e5-5c48-b54a-373dcfc8296b",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--5f65da68-b6e5-5c48-b54a-373dcfc8296b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--6bc32b6d-d13d-5ef0-9fc3-c0b2e0d59db9",
+      "created_by_ref": "identity--5f65da68-b6e5-5c48-b54a-373dcfc8296b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: disabling-task-manager",
+      "description": "The following analytic identifies modifications to the Windows registry that disable Task Manager. It leverages data from the Endpoint.Registry data model, specifically looking for changes to the registry path \"*\\\\SOFTWARE\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Policies\\\\System\\\\DisableTaskMgr\" with a value of \"0x00000001\". This activity is significant as it is commonly associated with malware such as RATs, Trojans, and worms, which disable Task Manager to prevent users from terminating malicious",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--33159739-e351-5358-b43f-12f55463d6f3"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--de2da3c6-4198-5c30-8675-9ac1acd8de80",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1562.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--33159739-e351-5358-b43f-12f55463d6f3",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.001",
+      "technique_id": "T1562.001",
+      "technique_ref": "attack-pattern--de2da3c6-4198-5c30-8675-9ac1acd8de80",
+      "description": "The following analytic identifies modifications to the Windows registry that disable Task Manager. It leverages data from the Endpoint.Registry data model, specifically looking for changes to the registry path \"*\\\\SOFTWARE\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Policies\\\\System\\\\DisableTaskMgr\" with a value of \"0x00000001\". This activity is significant as it is commonly associated with malware such as RATs, Trojans, and worms, which disable Task Manager to prevent users from terminating malicious",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "type": "bundle",
+  "id": "bundle--8708da43-a128-5e4d-890d-b93c1e7ccf6d",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--993c9149-79f4-547a-9c9a-0f62465bb2fd",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--993c9149-79f4-547a-9c9a-0f62465bb2fd",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--88b6cdc0-3e40-592f-a635-215592fc6502",
+      "created_by_ref": "identity--993c9149-79f4-547a-9c9a-0f62465bb2fd",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: http-request-to-reserved-name-on-iis-server",
+      "description": "Detects attempts to exploit a request smuggling technique against IIS that leverages a Windows quirk where requests for reserved Windows device names such as \"/con\" trigger an early server response before the request body is received. When combined with a Content-Length desynchronization, this behavior can lead to a parsing confusion between frontend and backend.",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--640c5298-6b1a-5d60-8d0f-b2c0e1c85bac",
+        "attack-action--c0c32490-67c6-55cc-ab62-0291e034913d"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--b145ff27-0aa9-5382-8508-9c3b866d007b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1071.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1071.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--6f3bd6a9-7984-584b-ace0-23fac5acc8ab",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1190",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1190"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--640c5298-6b1a-5d60-8d0f-b2c0e1c85bac",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1071.001",
+      "technique_id": "T1071.001",
+      "technique_ref": "attack-pattern--b145ff27-0aa9-5382-8508-9c3b866d007b",
+      "description": "Detects attempts to exploit a request smuggling technique against IIS that leverages a Windows quirk where requests for reserved Windows device names such as \"/con\" trigger an early server response before the request body is received. When combined with a Content-Length desynchronization, this behavior can lead to a parsing confusion between frontend and backend.",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--c0c32490-67c6-55cc-ab62-0291e034913d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1190",
+      "technique_id": "T1190",
+      "technique_ref": "attack-pattern--6f3bd6a9-7984-584b-ace0-23fac5acc8ab",
+      "description": "Detects attempts to exploit a request smuggling technique against IIS that leverages a Windows quirk where requests for reserved Windows device names such as \"/con\" trigger an early server response before the request body is received. When combined with a Content-Length desynchronization, this behavior can lead to a parsing confusion between frontend and backend.",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

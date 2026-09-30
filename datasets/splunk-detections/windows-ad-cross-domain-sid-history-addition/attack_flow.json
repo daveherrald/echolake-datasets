@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--c61892ce-d33a-500a-86fe-74d9167a0804",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--5c04ddc5-7c82-5aee-937c-22fe66a74186",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--5c04ddc5-7c82-5aee-937c-22fe66a74186",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--6516c067-937d-5a11-9362-269f18d8a0c0",
+      "created_by_ref": "identity--5c04ddc5-7c82-5aee-937c-22fe66a74186",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-ad-cross-domain-sid-history-addition",
+      "description": "The following analytic detects changes to the sIDHistory attribute of user or computer objects across different domains. It leverages Windows Security Event Codes 4738 and 4742 to identify when the sIDHistory attribute is modified. This activity is significant because the sIDHistory attribute allows users to inherit permissions from other AD accounts, which can be exploited by adversaries for inter-domain privilege escalation and persistence. If confirmed malicious, this could enable attackers t",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--8eb1c9a7-001b-5e2c-9ae8-c754097ae1a6"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--a11aeb02-0e0b-550e-b22d-98417a1003e7",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1134.005",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1134.005"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--8eb1c9a7-001b-5e2c-9ae8-c754097ae1a6",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1134.005",
+      "technique_id": "T1134.005",
+      "technique_ref": "attack-pattern--a11aeb02-0e0b-550e-b22d-98417a1003e7",
+      "description": "The following analytic detects changes to the sIDHistory attribute of user or computer objects across different domains. It leverages Windows Security Event Codes 4738 and 4742 to identify when the sIDHistory attribute is modified. This activity is significant because the sIDHistory attribute allows users to inherit permissions from other AD accounts, which can be exploited by adversaries for inter-domain privilege escalation and persistence. If confirmed malicious, this could enable attackers t",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

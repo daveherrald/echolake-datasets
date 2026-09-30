@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--3f6dbdf5-2ebd-5c19-a0e0-5fe124afba6b",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--38e05819-9e89-54f5-9040-1179c82e7865",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--38e05819-9e89-54f5-9040-1179c82e7865",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--48649c95-374f-57a0-bc88-3233aee09d6b",
+      "created_by_ref": "identity--38e05819-9e89-54f5-9040-1179c82e7865",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: disable-security-logs-using-minint-registry",
+      "description": "The following analytic detects a suspicious registry modification aimed at disabling security audit logs by adding a specific registry entry. It leverages data from the Endpoint.Registry data model, focusing on changes to the \"Control\\\\MiniNt\" registry path. This activity is significant because it can prevent Windows from logging any events to the Security Log, effectively blinding security monitoring efforts. If confirmed malicious, this technique could allow an attacker to operate undetected,",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--1cd9bc46-9d67-54d4-8746-c1c946b003d5"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--25371c4b-c6ea-5d27-8f96-b806d5153786",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1112",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1112"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--1cd9bc46-9d67-54d4-8746-c1c946b003d5",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1112",
+      "technique_id": "T1112",
+      "technique_ref": "attack-pattern--25371c4b-c6ea-5d27-8f96-b806d5153786",
+      "description": "The following analytic detects a suspicious registry modification aimed at disabling security audit logs by adding a specific registry entry. It leverages data from the Endpoint.Registry data model, focusing on changes to the \"Control\\\\MiniNt\" registry path. This activity is significant because it can prevent Windows from logging any events to the Security Log, effectively blinding security monitoring efforts. If confirmed malicious, this technique could allow an attacker to operate undetected,",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

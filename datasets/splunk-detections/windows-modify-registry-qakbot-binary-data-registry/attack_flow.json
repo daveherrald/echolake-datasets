@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--dc64898b-e204-5082-9538-67c87dc4292f",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--7e242147-be01-530f-bfb2-4f3e50b05b95",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--7e242147-be01-530f-bfb2-4f3e50b05b95",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--7b8587a2-5ed0-585e-8bfa-c154e51f42f7",
+      "created_by_ref": "identity--7e242147-be01-530f-bfb2-4f3e50b05b95",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-modify-registry-qakbot-binary-data-registry",
+      "description": "The following analytic detects the creation of a suspicious registry entry by Qakbot malware, characterized by 8 random registry value names with encrypted binary data. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on registry modifications under the \"SOFTWARE\\\\Microsoft\\\\\" path by processes like explorer.exe. This activity is significant as it indicates potential Qakbot infection, which uses the registry to store malicious code or configuration data.",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--e0d0ee83-730d-53c1-bceb-e65ba3eade8d"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--e25b040c-d76c-5b79-91ec-eca9965de29c",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1112",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1112"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--e0d0ee83-730d-53c1-bceb-e65ba3eade8d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1112",
+      "technique_id": "T1112",
+      "technique_ref": "attack-pattern--e25b040c-d76c-5b79-91ec-eca9965de29c",
+      "description": "The following analytic detects the creation of a suspicious registry entry by Qakbot malware, characterized by 8 random registry value names with encrypted binary data. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on registry modifications under the \"SOFTWARE\\\\Microsoft\\\\\" path by processes like explorer.exe. This activity is significant as it indicates potential Qakbot infection, which uses the registry to store malicious code or configuration data.",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

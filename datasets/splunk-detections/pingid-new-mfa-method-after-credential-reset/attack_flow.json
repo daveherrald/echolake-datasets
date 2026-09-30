@@ -1,0 +1,141 @@
+{
+  "type": "bundle",
+  "id": "bundle--79a53d49-e7fe-5227-888e-d8c33ef02b07",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--d260bd7c-3d8a-5dbf-8c24-8031d2855a66",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--d260bd7c-3d8a-5dbf-8c24-8031d2855a66",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--1b8f7367-fac6-5c3b-b5f2-7f03f8f4359a",
+      "created_by_ref": "identity--d260bd7c-3d8a-5dbf-8c24-8031d2855a66",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: pingid-new-mfa-method-after-credential-reset",
+      "description": "The following analytic identifies the provisioning of a new MFA device shortly after a password reset. It detects this activity by correlating Windows Event Log events for password changes (EventID 4723, 4724) with PingID logs indicating device pairing. This behavior is significant as it may indicate a social engineering attack where a threat actor impersonates a valid user to reset credentials and add a new MFA device. If confirmed malicious, this activity could allow an attacker to gain persis",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--bc6b1ce0-29f1-5b52-b4c6-de56d685ca15",
+        "attack-action--1a9e3266-2108-589c-a99e-bba783bd54e0",
+        "attack-action--81f84d39-7bc4-5eba-997f-8cad8c03d079"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--8e0ec66f-1502-5564-baaf-3746ab943bd1",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1621",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1621"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--da259630-13a1-593b-8149-47a1d3164623",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1556.006",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1556.006"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--86658881-3176-5d97-aad0-1b784da67446",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1098.005",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1098.005"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--bc6b1ce0-29f1-5b52-b4c6-de56d685ca15",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1621",
+      "technique_id": "T1621",
+      "technique_ref": "attack-pattern--8e0ec66f-1502-5564-baaf-3746ab943bd1",
+      "description": "The following analytic identifies the provisioning of a new MFA device shortly after a password reset. It detects this activity by correlating Windows Event Log events for password changes (EventID 4723, 4724) with PingID logs indicating device pairing. This behavior is significant as it may indicate a social engineering attack where a threat actor impersonates a valid user to reset credentials and add a new MFA device. If confirmed malicious, this activity could allow an attacker to gain persis",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--1a9e3266-2108-589c-a99e-bba783bd54e0",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1556.006",
+      "technique_id": "T1556.006",
+      "technique_ref": "attack-pattern--da259630-13a1-593b-8149-47a1d3164623",
+      "description": "The following analytic identifies the provisioning of a new MFA device shortly after a password reset. It detects this activity by correlating Windows Event Log events for password changes (EventID 4723, 4724) with PingID logs indicating device pairing. This behavior is significant as it may indicate a social engineering attack where a threat actor impersonates a valid user to reset credentials and add a new MFA device. If confirmed malicious, this activity could allow an attacker to gain persis",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--81f84d39-7bc4-5eba-997f-8cad8c03d079",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1098.005",
+      "technique_id": "T1098.005",
+      "technique_ref": "attack-pattern--86658881-3176-5d97-aad0-1b784da67446",
+      "description": "The following analytic identifies the provisioning of a new MFA device shortly after a password reset. It detects this activity by correlating Windows Event Log events for password changes (EventID 4723, 4724) with PingID logs indicating device pairing. This behavior is significant as it may indicate a social engineering attack where a threat actor impersonates a valid user to reset credentials and add a new MFA device. If confirmed malicious, this activity could allow an attacker to gain persis",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

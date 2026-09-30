@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--fc4a34b1-f454-5fde-992f-d69c914278a0",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--7ceb4ef0-8295-5a9b-aca0-98b77f973ae2",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--7ceb4ef0-8295-5a9b-aca0-98b77f973ae2",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--e9edfcc9-5320-5308-bd7f-1fcecab5e548",
+      "created_by_ref": "identity--7ceb4ef0-8295-5a9b-aca0-98b77f973ae2",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: getwmiobject-ds-group-with-powershell-script-block",
+      "description": "The following analytic detects the execution of the `Get-WmiObject` commandlet with the `DS_Group` parameter via PowerShell Script Block Logging (EventCode=4104). This method leverages WMI to query all domain groups. Monitoring this activity is crucial as adversaries and Red Teams may use it for domain group enumeration, aiding in situational awareness and Active Directory discovery. If confirmed malicious, this activity could allow attackers to map out the domain structure, potentially leading",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--a8877fde-acec-5833-ac2c-caa3e66f5c48"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--833a45a1-563b-5f37-9ff9-78433dfb0dff",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1069.002",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1069.002"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--a8877fde-acec-5833-ac2c-caa3e66f5c48",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1069.002",
+      "technique_id": "T1069.002",
+      "technique_ref": "attack-pattern--833a45a1-563b-5f37-9ff9-78433dfb0dff",
+      "description": "The following analytic detects the execution of the `Get-WmiObject` commandlet with the `DS_Group` parameter via PowerShell Script Block Logging (EventCode=4104). This method leverages WMI to query all domain groups. Monitoring this activity is crucial as adversaries and Red Teams may use it for domain group enumeration, aiding in situational awareness and Active Directory discovery. If confirmed malicious, this activity could allow attackers to map out the domain structure, potentially leading",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

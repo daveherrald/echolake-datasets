@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--75caf995-eb7d-582b-be96-992ca8e9363a",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--3cc78a86-90b5-54fc-a532-961dc6722842",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--3cc78a86-90b5-54fc-a532-961dc6722842",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--a0f00844-651e-5889-a9d6-a41503d78d6a",
+      "created_by_ref": "identity--3cc78a86-90b5-54fc-a532-961dc6722842",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-raw-access-to-master-boot-record-drive",
+      "description": "The following analytic detects suspicious raw access reads to the drive containing the Master Boot Record (MBR). It leverages Sysmon EventCode 9 to identify processes attempting to read or write to the MBR sector, excluding legitimate system processes. This activity is significant because adversaries often target the MBR to wipe, encrypt, or overwrite it as part of their impact payload. If confirmed malicious, this could lead to system instability, data loss, or a complete system compromise, sev",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--f665513a-9211-5f4f-abc6-0219e7c7dbe4"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--f8684dda-e4bb-5621-8fbf-259661cb5f4c",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1561.002",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1561.002"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--f665513a-9211-5f4f-abc6-0219e7c7dbe4",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1561.002",
+      "technique_id": "T1561.002",
+      "technique_ref": "attack-pattern--f8684dda-e4bb-5621-8fbf-259661cb5f4c",
+      "description": "The following analytic detects suspicious raw access reads to the drive containing the Master Boot Record (MBR). It leverages Sysmon EventCode 9 to identify processes attempting to read or write to the MBR sector, excluding legitimate system processes. This activity is significant because adversaries often target the MBR to wipe, encrypt, or overwrite it as part of their impact payload. If confirmed malicious, this could lead to system instability, data loss, or a complete system compromise, sev",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

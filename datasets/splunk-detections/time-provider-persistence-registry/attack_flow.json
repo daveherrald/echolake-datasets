@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--ed3ced30-7c07-532f-9340-b9175c689cdd",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--b0d5dff5-f8e1-5f4f-bcaa-fe94ec577af1",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--b0d5dff5-f8e1-5f4f-bcaa-fe94ec577af1",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--21664611-4c5a-5136-b511-844357037d04",
+      "created_by_ref": "identity--b0d5dff5-f8e1-5f4f-bcaa-fe94ec577af1",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: time-provider-persistence-registry",
+      "description": "The following analytic detects suspicious modifications to the time provider registry for persistence and autostart. It leverages data from the Endpoint.Registry data model, focusing on changes to the \"CurrentControlSet\\\\Services\\\\W32Time\\\\TimeProviders\" registry path. This activity is significant because such modifications are uncommon and can indicate an attempt to establish persistence on a compromised host. If confirmed malicious, this technique allows an attacker to maintain access and exec",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--e49728c6-604a-578c-a36a-52cb703f75bd"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--33741937-ed82-5530-aa23-6039c1e3a67d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1547.003",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1547.003"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--e49728c6-604a-578c-a36a-52cb703f75bd",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1547.003",
+      "technique_id": "T1547.003",
+      "technique_ref": "attack-pattern--33741937-ed82-5530-aa23-6039c1e3a67d",
+      "description": "The following analytic detects suspicious modifications to the time provider registry for persistence and autostart. It leverages data from the Endpoint.Registry data model, focusing on changes to the \"CurrentControlSet\\\\Services\\\\W32Time\\\\TimeProviders\" registry path. This activity is significant because such modifications are uncommon and can indicate an attempt to establish persistence on a compromised host. If confirmed malicious, this technique allows an attacker to maintain access and exec",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

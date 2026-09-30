@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--72471d6d-3980-5bef-b5bf-9dbe25ef12b3",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--21c441ff-ebd8-515e-a24a-a680159b9285",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--21c441ff-ebd8-515e-a24a-a680159b9285",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--6aa2f67b-1361-5c51-88fc-4c3e101bf80f",
+      "created_by_ref": "identity--21c441ff-ebd8-515e-a24a-a680159b9285",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: detect-hosts-connecting-to-dynamic-domain-providers",
+      "description": "The following analytic identifies DNS queries from internal hosts to dynamic domain providers. It leverages DNS query logs from the `Network_Resolution` data model and cross-references them with a lookup file containing known dynamic DNS providers. This activity is significant because attackers often use dynamic DNS services to host malicious payloads or command-and-control servers, making it crucial for security teams to monitor. If confirmed malicious, this activity could allow attackers to by",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--97aee47c-8b9a-52ac-bffd-627245d0dd74"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--3c6e008f-e514-5c62-8d52-ca37a9a81101",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1189",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1189"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--97aee47c-8b9a-52ac-bffd-627245d0dd74",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1189",
+      "technique_id": "T1189",
+      "technique_ref": "attack-pattern--3c6e008f-e514-5c62-8d52-ca37a9a81101",
+      "description": "The following analytic identifies DNS queries from internal hosts to dynamic domain providers. It leverages DNS query logs from the `Network_Resolution` data model and cross-references them with a lookup file containing known dynamic DNS providers. This activity is significant because attackers often use dynamic DNS services to host malicious payloads or command-and-control servers, making it crucial for security teams to monitor. If confirmed malicious, this activity could allow attackers to by",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--bf14958e-9f33-5d11-a311-77dc69b980ef",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--63c12aeb-2583-5f0f-ab5d-4f1b1b07a23f",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--63c12aeb-2583-5f0f-ab5d-4f1b1b07a23f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--05944e64-e978-5e35-8564-518412bf7100",
+      "created_by_ref": "identity--63c12aeb-2583-5f0f-ab5d-4f1b1b07a23f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-credentials-from-password-stores-chrome-login-data-access",
+      "description": "The following analytic identifies non-Chrome processes accessing the Chrome user data file \"login data.\" This file is an SQLite database containing sensitive information, including saved passwords. The detection leverages Windows Security Event logs, specifically event code 4663, to monitor access attempts. This activity is significant as it may indicate attempts by threat actors to extract and decrypt stored passwords, posing a risk to user credentials. If confirmed malicious, attackers could g",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--e5d2b795-8fa9-5001-8e5b-584c3e600a00"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--28348397-3c50-5ad3-a9e5-336c02f1a10b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1012",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1012"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--e5d2b795-8fa9-5001-8e5b-584c3e600a00",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1012",
+      "technique_id": "T1012",
+      "technique_ref": "attack-pattern--28348397-3c50-5ad3-a9e5-336c02f1a10b",
+      "description": "The following analytic identifies non-Chrome processes accessing the Chrome user data file \"login data.\" This file is an SQLite database containing sensitive information, including saved passwords. The detection leverages Windows Security Event logs, specifically event code 4663, to monitor access attempts. This activity is significant as it may indicate attempts by threat actors to extract and decrypt stored passwords, posing a risk to user credentials. If confirmed malicious, attackers could g",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

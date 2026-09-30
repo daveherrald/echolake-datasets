@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--be1ce33e-5e0b-5a6a-8b83-1adb082ff5b8",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--e09cc15d-0912-517f-bc9b-6e89f7a43059",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--e09cc15d-0912-517f-bc9b-6e89f7a43059",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--50b843b9-0227-5b5c-9af7-c7bb3952ba8a",
+      "created_by_ref": "identity--e09cc15d-0912-517f-bc9b-6e89f7a43059",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: suspicious-gpupdate-no-command-line-arguments",
+      "description": "The following analytic detects the execution of gpupdate.exe without any command line arguments. This behavior is identified using data from Endpoint Detection and Response (EDR) agents, focusing on process execution logs. It is significant because gpupdate.exe typically runs with specific arguments, and its execution without them is often associated with malicious activities, such as those performed by Cobalt Strike. If confirmed malicious, this activity could indicate an attempt to execute una",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--bc89d758-d812-5fce-816e-8c017bcbc623"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--2034219c-a6c5-5f85-9521-79c600a1b520",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1055",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1055"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--bc89d758-d812-5fce-816e-8c017bcbc623",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1055",
+      "technique_id": "T1055",
+      "technique_ref": "attack-pattern--2034219c-a6c5-5f85-9521-79c600a1b520",
+      "description": "The following analytic detects the execution of gpupdate.exe without any command line arguments. This behavior is identified using data from Endpoint Detection and Response (EDR) agents, focusing on process execution logs. It is significant because gpupdate.exe typically runs with specific arguments, and its execution without them is often associated with malicious activities, such as those performed by Cobalt Strike. If confirmed malicious, this activity could indicate an attempt to execute una",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

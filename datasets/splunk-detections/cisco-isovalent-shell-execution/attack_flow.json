@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--8ccd1150-8225-529f-8817-44fd13898681",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--0a3ce204-c452-5107-8850-0d8071763089",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--0a3ce204-c452-5107-8850-0d8071763089",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--4cfaf862-6d5f-53bb-9e8c-374f0a469df4",
+      "created_by_ref": "identity--0a3ce204-c452-5107-8850-0d8071763089",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: cisco-isovalent-shell-execution",
+      "description": "The following analytic detects the execution of a shell inside a container namespace within the Cisco Isovalent environment. It identifies this activity by monitoring process execution logs for the execution of a shell (sh or bash) inside a container namespace. This behavior is significant for a SOC as it could allow an attacker to gain shell access to the container, potentially leading to further compromise of the Kubernetes cluster. If confirmed malicious, this activity could lead to data thef",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--a047d171-4a13-547d-9049-d2b7261f65fe"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--9132bc6a-7b46-5306-b09d-127b19042ba7",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1543",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1543"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--a047d171-4a13-547d-9049-d2b7261f65fe",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1543",
+      "technique_id": "T1543",
+      "technique_ref": "attack-pattern--9132bc6a-7b46-5306-b09d-127b19042ba7",
+      "description": "The following analytic detects the execution of a shell inside a container namespace within the Cisco Isovalent environment. It identifies this activity by monitoring process execution logs for the execution of a shell (sh or bash) inside a container namespace. This behavior is significant for a SOC as it could allow an attacker to gain shell access to the container, potentially leading to further compromise of the Kubernetes cluster. If confirmed malicious, this activity could lead to data thef",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

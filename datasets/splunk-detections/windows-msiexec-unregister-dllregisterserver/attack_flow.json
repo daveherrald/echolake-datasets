@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--5472e036-0cd0-529b-a901-dc69673183bb",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--48c967a6-988f-5da7-9bb4-7cefd3206297",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--48c967a6-988f-5da7-9bb4-7cefd3206297",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--d60e0dcd-c76a-508c-bafe-519c82619708",
+      "created_by_ref": "identity--48c967a6-988f-5da7-9bb4-7cefd3206297",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-msiexec-unregister-dllregisterserver",
+      "description": "The following analytic detects the use of msiexec.exe with the /z switch parameter, which is used to unload DLLRegisterServer. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process execution logs, including command-line arguments. This activity is significant because unloading DLLRegisterServer can be indicative of an attempt to deregister a DLL, potentially disrupting legitimate services or hiding malicious activity. If confirmed malicious, this co",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--7e5271c4-2825-54aa-b184-67c1bae84d19"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--7bf7c09c-d9bb-5509-9464-19443233b1d3",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1218.007",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1218.007"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--7e5271c4-2825-54aa-b184-67c1bae84d19",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1218.007",
+      "technique_id": "T1218.007",
+      "technique_ref": "attack-pattern--7bf7c09c-d9bb-5509-9464-19443233b1d3",
+      "description": "The following analytic detects the use of msiexec.exe with the /z switch parameter, which is used to unload DLLRegisterServer. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process execution logs, including command-line arguments. This activity is significant because unloading DLLRegisterServer can be indicative of an attempt to deregister a DLL, potentially disrupting legitimate services or hiding malicious activity. If confirmed malicious, this co",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--e39d3956-6bc2-5e8e-ac3c-acb2827f4b6e",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--dd9f0536-c180-5bdf-80e5-ec78576e0f25",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--dd9f0536-c180-5bdf-80e5-ec78576e0f25",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--def40dbd-2b12-562e-aea2-50bad5887891",
+      "created_by_ref": "identity--dd9f0536-c180-5bdf-80e5-ec78576e0f25",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: getwmiobject-ds-computer-with-powershell",
+      "description": "The following analytic detects the execution of `powershell.exe` with command-line arguments that utilize the `Get-WmiObject` cmdlet to discover remote systems, specifically targeting the `DS_Computer` parameter. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line executions. This activity is significant as it indicates potential reconnaissance efforts by adversaries to enumerate domain computers and gather situational aware",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--86854b81-0059-51ba-a890-55aa86edceda"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--568b98e7-cfae-5579-8945-11ffd4f7a35c",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1018",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1018"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--86854b81-0059-51ba-a890-55aa86edceda",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1018",
+      "technique_id": "T1018",
+      "technique_ref": "attack-pattern--568b98e7-cfae-5579-8945-11ffd4f7a35c",
+      "description": "The following analytic detects the execution of `powershell.exe` with command-line arguments that utilize the `Get-WmiObject` cmdlet to discover remote systems, specifically targeting the `DS_Computer` parameter. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line executions. This activity is significant as it indicates potential reconnaissance efforts by adversaries to enumerate domain computers and gather situational aware",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

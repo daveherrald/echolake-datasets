@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--c3fe0017-8c9a-5836-9670-4e114a3e9088",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--82be6913-b76c-5667-bfe6-f8e7ca6568ff",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--82be6913-b76c-5667-bfe6-f8e7ca6568ff",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--dfb08813-41eb-5b3d-a433-533e07862ae5",
+      "created_by_ref": "identity--82be6913-b76c-5667-bfe6-f8e7ca6568ff",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: suspicious-icedid-rundll32-cmdline",
+      "description": "The following analytic detects a suspicious `rundll32.exe` command line used to execute a DLL file, a technique associated with IcedID malware. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on command-line executions containing the pattern `*/i:*`. This activity is significant as it indicates potential malware attempting to load an encrypted DLL payload, often named `license.dat`. If confirmed malicious, this could allow attackers to execute arbitrary code, leadin",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--8350a821-53a1-5380-b4f9-410e39bb17db"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--cea335c8-4853-5ae2-94f4-5fef522ce6b7",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1218.011",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1218.011"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--8350a821-53a1-5380-b4f9-410e39bb17db",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1218.011",
+      "technique_id": "T1218.011",
+      "technique_ref": "attack-pattern--cea335c8-4853-5ae2-94f4-5fef522ce6b7",
+      "description": "The following analytic detects a suspicious `rundll32.exe` command line used to execute a DLL file, a technique associated with IcedID malware. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on command-line executions containing the pattern `*/i:*`. This activity is significant as it indicates potential malware attempting to load an encrypted DLL payload, often named `license.dat`. If confirmed malicious, this could allow attackers to execute arbitrary code, leadin",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

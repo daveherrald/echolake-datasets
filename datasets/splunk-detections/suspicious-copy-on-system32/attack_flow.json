@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--a41d7b55-b3f9-5937-a1cf-4990303922bb",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--a46ccb6b-6d8c-5efc-9294-16d56221402e",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--a46ccb6b-6d8c-5efc-9294-16d56221402e",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--1e16eaa0-e9ce-5d9b-b1f2-938a8d76bc07",
+      "created_by_ref": "identity--a46ccb6b-6d8c-5efc-9294-16d56221402e",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: suspicious-copy-on-system32",
+      "description": "The following analytic detects potentially suspicious file copy operations targeting the\nSystem32 or SysWow64 directories as source, often indicative of malicious activity.\nIt leverages data from Endpoint Detection and Response (EDR) agents, \nfocusing on activity initiated by command-line tools like cmd.exe or PowerShell.\nThis behavior is significant as it may indicate an attempt to evade defenses by copying\nan existing binary from the system directory and renaming it.\nIf confirmed malicious, th",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--35760173-6997-5f71-a712-4b7102947258"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--52691c10-5d94-55f6-aae0-846ba86085e6",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1036.003",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1036.003"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--35760173-6997-5f71-a712-4b7102947258",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1036.003",
+      "technique_id": "T1036.003",
+      "technique_ref": "attack-pattern--52691c10-5d94-55f6-aae0-846ba86085e6",
+      "description": "The following analytic detects potentially suspicious file copy operations targeting the\nSystem32 or SysWow64 directories as source, often indicative of malicious activity.\nIt leverages data from Endpoint Detection and Response (EDR) agents, \nfocusing on activity initiated by command-line tools like cmd.exe or PowerShell.\nThis behavior is significant as it may indicate an attempt to evade defenses by copying\nan existing binary from the system directory and renaming it.\nIf confirmed malicious, th",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

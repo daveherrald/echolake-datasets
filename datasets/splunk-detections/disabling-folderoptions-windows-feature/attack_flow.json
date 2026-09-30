@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--831a69f1-f81f-5a80-bb6d-49efb9b4c538",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--f50c9fac-3685-50e6-b44e-c4ca22bb8307",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--f50c9fac-3685-50e6-b44e-c4ca22bb8307",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--156a06b3-ea79-58ab-945e-ac04baa832ee",
+      "created_by_ref": "identity--f50c9fac-3685-50e6-b44e-c4ca22bb8307",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: disabling-folderoptions-windows-feature",
+      "description": "The following analytic detects the modification of the Windows registry to disable the Folder Options feature, which prevents users from showing hidden files and file extensions. It leverages data from the Endpoint.Registry data model, specifically monitoring changes to the registry path \"*\\\\SOFTWARE\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Policies\\\\Explorer\\\\NoFolderOptions\" with a value of \"0x00000001\". This activity is significant as it is commonly used by malware to conceal malicious files and",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--e0cb6427-1595-5651-b557-04799988113f"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--9c6772ea-92da-53b4-8ec0-b47a301da96e",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1562.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--e0cb6427-1595-5651-b557-04799988113f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.001",
+      "technique_id": "T1562.001",
+      "technique_ref": "attack-pattern--9c6772ea-92da-53b4-8ec0-b47a301da96e",
+      "description": "The following analytic detects the modification of the Windows registry to disable the Folder Options feature, which prevents users from showing hidden files and file extensions. It leverages data from the Endpoint.Registry data model, specifically monitoring changes to the registry path \"*\\\\SOFTWARE\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Policies\\\\Explorer\\\\NoFolderOptions\" with a value of \"0x00000001\". This activity is significant as it is commonly used by malware to conceal malicious files and",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--d0d0ecd8-414e-5122-bc8f-f6f0d85e25e0",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--e0f836a3-3f42-5227-82ce-22fb96a75986",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--e0f836a3-3f42-5227-82ce-22fb96a75986",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--e156fd1e-b3b8-5469-8eed-b7fa37625cad",
+      "created_by_ref": "identity--e0f836a3-3f42-5227-82ce-22fb96a75986",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-kerberos-local-successful-logon",
+      "description": "The following analytic identifies a local successful authentication event on a Windows endpoint using the Kerberos package. It detects EventCode 4624 with LogonType 3 and source address 127.0.0.1, indicating a login to the built-in local Administrator account. This activity is significant as it may suggest a Kerberos relay attack, a method attackers use to escalate privileges. If confirmed malicious, this could allow an attacker to gain unauthorized access to sensitive systems, execute arbitrary",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--35e93f22-f0da-55bf-afe4-1980c2e9378b"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--ff4c1a0d-7c61-572b-9a57-96538e0a4898",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1558",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1558"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--35e93f22-f0da-55bf-afe4-1980c2e9378b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1558",
+      "technique_id": "T1558",
+      "technique_ref": "attack-pattern--ff4c1a0d-7c61-572b-9a57-96538e0a4898",
+      "description": "The following analytic identifies a local successful authentication event on a Windows endpoint using the Kerberos package. It detects EventCode 4624 with LogonType 3 and source address 127.0.0.1, indicating a login to the built-in local Administrator account. This activity is significant as it may suggest a Kerberos relay attack, a method attackers use to escalate privileges. If confirmed malicious, this could allow an attacker to gain unauthorized access to sensitive systems, execute arbitrary",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

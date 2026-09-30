@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--285114f0-27fd-50cb-8791-790390a0446b",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--7a2c263e-16d8-55e1-9d32-544e638874ba",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--7a2c263e-16d8-55e1-9d32-544e638874ba",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--4530dd6a-f6ec-5299-b6da-58e807c43c41",
+      "created_by_ref": "identity--7a2c263e-16d8-55e1-9d32-544e638874ba",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: exchange-powershell-module-usage",
+      "description": "The following analytic detects the usage of specific Exchange PowerShell modules, such as New-MailboxExportRequest, New-ManagementRoleAssignment, New-MailboxSearch, and Get-Recipient. It leverages PowerShell Script Block Logging (EventCode 4104) to identify these commands. This activity is significant because these modules can be exploited by adversaries who have gained access via ProxyShell or ProxyNotShell vulnerabilities. If confirmed malicious, attackers could export mailbox contents, assign",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--9a979aaf-91fa-53f3-95a7-39af25f1901e"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--6d2ac98e-ed59-55eb-aba0-092262a73fd6",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1059.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1059.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--9a979aaf-91fa-53f3-95a7-39af25f1901e",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1059.001",
+      "technique_id": "T1059.001",
+      "technique_ref": "attack-pattern--6d2ac98e-ed59-55eb-aba0-092262a73fd6",
+      "description": "The following analytic detects the usage of specific Exchange PowerShell modules, such as New-MailboxExportRequest, New-ManagementRoleAssignment, New-MailboxSearch, and Get-Recipient. It leverages PowerShell Script Block Logging (EventCode 4104) to identify these commands. This activity is significant because these modules can be exploited by adversaries who have gained access via ProxyShell or ProxyNotShell vulnerabilities. If confirmed malicious, attackers could export mailbox contents, assign",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

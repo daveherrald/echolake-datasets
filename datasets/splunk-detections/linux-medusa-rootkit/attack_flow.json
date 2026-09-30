@@ -1,0 +1,110 @@
+{
+  "type": "bundle",
+  "id": "bundle--0a510e4e-d018-540c-be1e-cd3d6efdae7d",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--507dcdbc-7443-566c-ac41-e99d56b28eab",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--507dcdbc-7443-566c-ac41-e99d56b28eab",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--3f6393b5-6025-56f3-ab04-6b9d7d8814e9",
+      "created_by_ref": "identity--507dcdbc-7443-566c-ac41-e99d56b28eab",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: linux-medusa-rootkit",
+      "description": "This detection identifies file creation events associated with the installation of the Medusa rootkit, a userland LD_PRELOAD-based rootkit known for deploying shared objects, loader binaries, and configuration files into specific system directories. These files typically facilitate process hiding, credential theft, and backdoor access. Monitoring for such file creation patterns enables early detection of rootkit deployment before full compromise.",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--616a7669-5525-5ffe-bad9-fb0b9b3a3d18",
+        "attack-action--b6531548-36e7-5ab7-8b43-eeeeee7b832e"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--a7144bb9-ab3c-58a4-8ab5-0884a31c16c8",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1014",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1014"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--600f86d9-1d7c-5e79-babe-f7833e922cc0",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1589.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1589.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--616a7669-5525-5ffe-bad9-fb0b9b3a3d18",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1014",
+      "technique_id": "T1014",
+      "technique_ref": "attack-pattern--a7144bb9-ab3c-58a4-8ab5-0884a31c16c8",
+      "description": "This detection identifies file creation events associated with the installation of the Medusa rootkit, a userland LD_PRELOAD-based rootkit known for deploying shared objects, loader binaries, and configuration files into specific system directories. These files typically facilitate process hiding, credential theft, and backdoor access. Monitoring for such file creation patterns enables early detection of rootkit deployment before full compromise.",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--b6531548-36e7-5ab7-8b43-eeeeee7b832e",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1589.001",
+      "technique_id": "T1589.001",
+      "technique_ref": "attack-pattern--600f86d9-1d7c-5e79-babe-f7833e922cc0",
+      "description": "This detection identifies file creation events associated with the installation of the Medusa rootkit, a userland LD_PRELOAD-based rootkit known for deploying shared objects, loader binaries, and configuration files into specific system directories. These files typically facilitate process hiding, credential theft, and backdoor access. Monitoring for such file creation patterns enables early detection of rootkit deployment before full compromise.",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

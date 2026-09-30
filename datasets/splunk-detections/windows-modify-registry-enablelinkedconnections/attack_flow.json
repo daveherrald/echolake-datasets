@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--cbf6bed5-1e36-527a-b4a6-b07eb5435411",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--674f2ffb-be4f-57a6-b868-155863a31592",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--674f2ffb-be4f-57a6-b868-155863a31592",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--5f33f801-f650-5799-b327-acbfdabd7c26",
+      "created_by_ref": "identity--674f2ffb-be4f-57a6-b868-155863a31592",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-modify-registry-enablelinkedconnections",
+      "description": "The following analytic detects a suspicious modification to the Windows registry setting for EnableLinkedConnections. It leverages data from the Endpoint.Registry datamodel to identify changes where the registry path is \"*\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Policies\\\\System\\\\EnableLinkedConnections\" and the value is set to \"0x00000001\". This activity is significant because enabling linked connections can allow network shares to be accessed with both standard and administrator-level privileges,",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--56a0541b-7625-50f5-b7c9-22f448fb0ed5"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--a2cd56c9-a554-5788-8222-d0df54ec875a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1112",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1112"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--56a0541b-7625-50f5-b7c9-22f448fb0ed5",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1112",
+      "technique_id": "T1112",
+      "technique_ref": "attack-pattern--a2cd56c9-a554-5788-8222-d0df54ec875a",
+      "description": "The following analytic detects a suspicious modification to the Windows registry setting for EnableLinkedConnections. It leverages data from the Endpoint.Registry datamodel to identify changes where the registry path is \"*\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Policies\\\\System\\\\EnableLinkedConnections\" and the value is set to \"0x00000001\". This activity is significant because enabling linked connections can allow network shares to be accessed with both standard and administrator-level privileges,",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--905c6001-014c-574e-af1c-b8eadbf91bc0",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--3e61b8c0-5ab1-5191-b220-a367590f34a9",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--3e61b8c0-5ab1-5191-b220-a367590f34a9",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--dfaedd5a-376a-59df-a327-5c2e20d205d7",
+      "created_by_ref": "identity--3e61b8c0-5ab1-5191-b220-a367590f34a9",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: kerberos-pre-authentication-flag-disabled-in-useraccountcontrol",
+      "description": "The following analytic detects when the Kerberos Pre-Authentication flag is disabled in a user account, using Windows Security Event 4738. This event indicates a change in the UserAccountControl property of a domain user object. Disabling this flag allows adversaries to perform offline brute force attacks on the user's password using the AS-REP Roasting technique. This activity is significant as it can be used by attackers with existing privileges to escalate their access or maintain persistence",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--ddb73ae1-e755-54d2-ac1f-7552f30209e9"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--f3131e91-81bd-5c44-b04f-8d17bedcd317",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1558.004",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1558.004"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--ddb73ae1-e755-54d2-ac1f-7552f30209e9",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1558.004",
+      "technique_id": "T1558.004",
+      "technique_ref": "attack-pattern--f3131e91-81bd-5c44-b04f-8d17bedcd317",
+      "description": "The following analytic detects when the Kerberos Pre-Authentication flag is disabled in a user account, using Windows Security Event 4738. This event indicates a change in the UserAccountControl property of a domain user object. Disabling this flag allows adversaries to perform offline brute force attacks on the user's password using the AS-REP Roasting technique. This activity is significant as it can be used by attackers with existing privileges to escalate their access or maintain persistence",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--ef75b526-9c5b-59ed-bcb9-ba31f885ff89",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--51714a60-42c8-5733-9a83-97eed2195822",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--51714a60-42c8-5733-9a83-97eed2195822",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--6065d0fe-2fa6-56b3-bb28-0187df4a786e",
+      "created_by_ref": "identity--51714a60-42c8-5733-9a83-97eed2195822",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-admon-default-group-policy-object-modified",
+      "description": "The following analytic detects modifications to the default Group Policy Objects (GPOs) in an Active Directory environment. It leverages Splunk's Admon to monitor updates to the \"Default Domain Policy\" and \"Default Domain Controllers Policy.\" This activity is significant because changes to these default GPOs can indicate an adversary with privileged access attempting to gain further control, establish persistence, or deploy malware across multiple hosts. If confirmed malicious, such modification",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--dda54ce9-f677-50d9-a268-91a58efa9e82"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--32472b91-3af8-556a-8d77-c3f6e6121b9d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1484.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1484.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--dda54ce9-f677-50d9-a268-91a58efa9e82",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1484.001",
+      "technique_id": "T1484.001",
+      "technique_ref": "attack-pattern--32472b91-3af8-556a-8d77-c3f6e6121b9d",
+      "description": "The following analytic detects modifications to the default Group Policy Objects (GPOs) in an Active Directory environment. It leverages Splunk's Admon to monitor updates to the \"Default Domain Policy\" and \"Default Domain Controllers Policy.\" This activity is significant because changes to these default GPOs can indicate an adversary with privileged access attempting to gain further control, establish persistence, or deploy malware across multiple hosts. If confirmed malicious, such modification",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

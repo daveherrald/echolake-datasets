@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--8d997a10-e608-5655-8079-0bf8498dc0c2",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--7f96fa03-3dbe-59a8-9db5-33f57b150397",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--7f96fa03-3dbe-59a8-9db5-33f57b150397",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--1c48ebbd-aeeb-5e87-af9f-04f9c53dc4b0",
+      "created_by_ref": "identity--7f96fa03-3dbe-59a8-9db5-33f57b150397",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: rundll-loading-dll-by-ordinal",
+      "description": "The following analytic detects rundll32.exe loading a DLL export function by ordinal value. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process command-line executions. This behavior is significant because adversaries may use rundll32.exe to execute malicious code while evading security tools that do not monitor this process. If confirmed malicious, this activity could allow attackers to execute arbitrary code, potentially leading to system compromise, privil",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--8852287d-a819-5c02-9913-9e06435b16d8"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--e83705d9-ddf9-51ce-a715-546ec46f9b37",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1218.011",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1218.011"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--8852287d-a819-5c02-9913-9e06435b16d8",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1218.011",
+      "technique_id": "T1218.011",
+      "technique_ref": "attack-pattern--e83705d9-ddf9-51ce-a715-546ec46f9b37",
+      "description": "The following analytic detects rundll32.exe loading a DLL export function by ordinal value. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process command-line executions. This behavior is significant because adversaries may use rundll32.exe to execute malicious code while evading security tools that do not monitor this process. If confirmed malicious, this activity could allow attackers to execute arbitrary code, potentially leading to system compromise, privil",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,141 @@
+{
+  "type": "bundle",
+  "id": "bundle--e2aa9ba4-e42e-5f42-8938-1aee3834ae80",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--4a0046ab-2a59-501e-bb7f-f98d3a0a5001",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--4a0046ab-2a59-501e-bb7f-f98d3a0a5001",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--b22fc06b-475c-50d4-8d43-58f2aeab406f",
+      "created_by_ref": "identity--4a0046ab-2a59-501e-bb7f-f98d3a0a5001",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-rmm-named-pipe",
+      "description": "The following analytic detects the creation or connection to known suspicious named pipes, which is a technique often used by offensive tools.\nIt leverages Sysmon EventCodes 17 and 18 to identify  known default pipe names used by RMM tools.\nIf confirmed malicious,  this could allow an attacker to abuse these to potentially gain persistence, command and control, or further system compromise.",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--cbd5ad12-fd62-5fe8-9d75-f5ce342e5833",
+        "attack-action--d88fce3e-ce6d-5006-a04d-25927c660633",
+        "attack-action--1105c0d0-22a4-5ebb-bf43-f98b87156008"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--19dac651-1167-5d71-a64e-3c259cd25cad",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1559",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1559"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--419d6ff9-7565-5164-8928-c1bc9ee35afa",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1021.002",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1021.002"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--e4f04b4e-3c56-57ca-9264-c0274ff3a3d1",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1055",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1055"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--cbd5ad12-fd62-5fe8-9d75-f5ce342e5833",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1559",
+      "technique_id": "T1559",
+      "technique_ref": "attack-pattern--19dac651-1167-5d71-a64e-3c259cd25cad",
+      "description": "The following analytic detects the creation or connection to known suspicious named pipes, which is a technique often used by offensive tools.\nIt leverages Sysmon EventCodes 17 and 18 to identify  known default pipe names used by RMM tools.\nIf confirmed malicious,  this could allow an attacker to abuse these to potentially gain persistence, command and control, or further system compromise.",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--d88fce3e-ce6d-5006-a04d-25927c660633",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1021.002",
+      "technique_id": "T1021.002",
+      "technique_ref": "attack-pattern--419d6ff9-7565-5164-8928-c1bc9ee35afa",
+      "description": "The following analytic detects the creation or connection to known suspicious named pipes, which is a technique often used by offensive tools.\nIt leverages Sysmon EventCodes 17 and 18 to identify  known default pipe names used by RMM tools.\nIf confirmed malicious,  this could allow an attacker to abuse these to potentially gain persistence, command and control, or further system compromise.",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--1105c0d0-22a4-5ebb-bf43-f98b87156008",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1055",
+      "technique_id": "T1055",
+      "technique_ref": "attack-pattern--e4f04b4e-3c56-57ca-9264-c0274ff3a3d1",
+      "description": "The following analytic detects the creation or connection to known suspicious named pipes, which is a technique often used by offensive tools.\nIt leverages Sysmon EventCodes 17 and 18 to identify  known default pipe names used by RMM tools.\nIf confirmed malicious,  this could allow an attacker to abuse these to potentially gain persistence, command and control, or further system compromise.",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

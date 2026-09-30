@@ -1,0 +1,110 @@
+{
+  "type": "bundle",
+  "id": "bundle--86edb6d5-05d9-5612-b211-f8ad531bdfcd",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--cdc9e708-02f7-582b-99b5-764a81599f7c",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--cdc9e708-02f7-582b-99b5-764a81599f7c",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--602629ed-7cea-5323-924e-80faeb78100c",
+      "created_by_ref": "identity--cdc9e708-02f7-582b-99b5-764a81599f7c",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-powershell-import-applocker-policy",
+      "description": "The following analytic detects the import of Windows PowerShell Applocker cmdlets, specifically identifying the use of \"Import-Module Applocker\" and \"Set-AppLockerPolicy\" with an XML policy. It leverages PowerShell Script Block Logging (EventCode 4104) to capture and analyze script block text. This activity is significant as it may indicate an attempt to enforce restrictive Applocker policies, potentially used by malware like Azorult to disable antivirus products. If confirmed malicious, this co",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--8f616d34-b870-54fb-a0be-afcb6feb5ab8",
+        "attack-action--483d1939-46dd-50d1-a420-014ab6e86420"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--321875e8-b079-51c5-9fbd-92803e68e166",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1059.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1059.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--ee45a5df-f14d-5bda-8a5b-ae2e45ce9e2a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1562.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--8f616d34-b870-54fb-a0be-afcb6feb5ab8",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1059.001",
+      "technique_id": "T1059.001",
+      "technique_ref": "attack-pattern--321875e8-b079-51c5-9fbd-92803e68e166",
+      "description": "The following analytic detects the import of Windows PowerShell Applocker cmdlets, specifically identifying the use of \"Import-Module Applocker\" and \"Set-AppLockerPolicy\" with an XML policy. It leverages PowerShell Script Block Logging (EventCode 4104) to capture and analyze script block text. This activity is significant as it may indicate an attempt to enforce restrictive Applocker policies, potentially used by malware like Azorult to disable antivirus products. If confirmed malicious, this co",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--483d1939-46dd-50d1-a420-014ab6e86420",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.001",
+      "technique_id": "T1562.001",
+      "technique_ref": "attack-pattern--ee45a5df-f14d-5bda-8a5b-ae2e45ce9e2a",
+      "description": "The following analytic detects the import of Windows PowerShell Applocker cmdlets, specifically identifying the use of \"Import-Module Applocker\" and \"Set-AppLockerPolicy\" with an XML policy. It leverages PowerShell Script Block Logging (EventCode 4104) to capture and analyze script block text. This activity is significant as it may indicate an attempt to enforce restrictive Applocker policies, potentially used by malware like Azorult to disable antivirus products. If confirmed malicious, this co",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

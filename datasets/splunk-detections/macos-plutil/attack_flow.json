@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--70a48eea-368b-546d-b809-acc985ac376f",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--1088b62e-6961-50b4-b396-5527d5d9c8ff",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--1088b62e-6961-50b4-b396-5527d5d9c8ff",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--713a40a5-d68d-5f83-9665-0c5d753bac1a",
+      "created_by_ref": "identity--1088b62e-6961-50b4-b396-5527d5d9c8ff",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: macos-plutil",
+      "description": "The following analytic detects the usage of the `plutil` command to modify plist files on macOS systems. It leverages osquery to monitor process events, specifically looking for executions of `/usr/bin/plutil`. This activity is significant because adversaries can use `plutil` to alter plist files, potentially adding malicious binaries or command-line arguments that execute upon user logon or system startup. If confirmed malicious, this could allow attackers to achieve persistence, execute arbitr",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--ee9f5d57-6ffb-5732-9167-5aad5efdb140"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--2035ac6c-5a04-5610-ad6f-ecca3d49d217",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1647",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1647"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--ee9f5d57-6ffb-5732-9167-5aad5efdb140",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1647",
+      "technique_id": "T1647",
+      "technique_ref": "attack-pattern--2035ac6c-5a04-5610-ad6f-ecca3d49d217",
+      "description": "The following analytic detects the usage of the `plutil` command to modify plist files on macOS systems. It leverages osquery to monitor process events, specifically looking for executions of `/usr/bin/plutil`. This activity is significant because adversaries can use `plutil` to alter plist files, potentially adding malicious binaries or command-line arguments that execute upon user logon or system startup. If confirmed malicious, this could allow attackers to achieve persistence, execute arbitr",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

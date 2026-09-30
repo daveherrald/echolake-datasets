@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--1b3b5e42-7e80-569c-85a2-009c96287349",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--9e2c1564-bb86-53a5-8821-b70e26882783",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--9e2c1564-bb86-53a5-8821-b70e26882783",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--97c1a90d-1050-5682-aa64-55ccbee4a986",
+      "created_by_ref": "identity--9e2c1564-bb86-53a5-8821-b70e26882783",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-ad-short-lived-server-object",
+      "description": "The following analytic identifies the creation and quick deletion of a Domain Controller (DC) object within 30 seconds in an Active Directory environment, indicative of a potential DCShadow attack. This detection leverages Windows Security Event Codes 5137 and 5141, analyzing the duration between these events. This activity is significant as DCShadow allows attackers with privileged access to register a rogue DC, enabling unauthorized changes to AD objects, including credentials. If confirmed ma",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--e03d0ad8-6b54-550d-a703-1e19dfd280e8"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--d776869d-f332-50ac-8796-74fb773e2575",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1207",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1207"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--e03d0ad8-6b54-550d-a703-1e19dfd280e8",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1207",
+      "technique_id": "T1207",
+      "technique_ref": "attack-pattern--d776869d-f332-50ac-8796-74fb773e2575",
+      "description": "The following analytic identifies the creation and quick deletion of a Domain Controller (DC) object within 30 seconds in an Active Directory environment, indicative of a potential DCShadow attack. This detection leverages Windows Security Event Codes 5137 and 5141, analyzing the duration between these events. This activity is significant as DCShadow allows attackers with privileged access to register a rogue DC, enabling unauthorized changes to AD objects, including credentials. If confirmed ma",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

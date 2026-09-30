@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--bbed9822-e2e9-5688-9e06-89de3cf1f944",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--11101b42-d50b-53ab-961a-1840a54f7339",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--11101b42-d50b-53ab-961a-1840a54f7339",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--2bbb9944-20d3-5298-a99c-0b4a03fdecfa",
+      "created_by_ref": "identity--11101b42-d50b-53ab-961a-1840a54f7339",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-impair-defense-set-win-defender-smart-screen-level-to-warn",
+      "description": "The following analytic detects modifications to the Windows registry that set the Windows Defender SmartScreen level to \"warn.\" This detection leverages data from the Endpoint.Registry data model, specifically monitoring changes to the ShellSmartScreenLevel registry value. This activity is significant because altering SmartScreen settings to \"warn\" can reduce immediate suspicion from users, allowing potentially malicious executables to run with just a warning prompt. If confirmed malicious, this",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--574f0f94-7255-5bb8-8765-99d39450ad41"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--ea3683a5-cd8d-50f6-a3c4-48e147b53982",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1562.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--574f0f94-7255-5bb8-8765-99d39450ad41",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.001",
+      "technique_id": "T1562.001",
+      "technique_ref": "attack-pattern--ea3683a5-cd8d-50f6-a3c4-48e147b53982",
+      "description": "The following analytic detects modifications to the Windows registry that set the Windows Defender SmartScreen level to \"warn.\" This detection leverages data from the Endpoint.Registry data model, specifically monitoring changes to the ShellSmartScreenLevel registry value. This activity is significant because altering SmartScreen settings to \"warn\" can reduce immediate suspicion from users, allowing potentially malicious executables to run with just a warning prompt. If confirmed malicious, this",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

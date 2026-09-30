@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--1d4d6cfd-7db7-55c3-8b90-cb2949f39507",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--51cf49c7-7168-59d2-8684-5b8140052e6d",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--51cf49c7-7168-59d2-8684-5b8140052e6d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--5d606f05-540b-5222-842a-558e0c124658",
+      "created_by_ref": "identity--51cf49c7-7168-59d2-8684-5b8140052e6d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: remote-system-discovery-with-adsisearcher",
+      "description": "The following analytic detects the use of the `[Adsisearcher]` type accelerator in PowerShell scripts to query Active Directory for domain computers. It leverages PowerShell Script Block Logging (EventCode=4104) to identify specific script blocks containing `adsisearcher` and `objectcategory=computer` with methods like `findAll()` or `findOne()`. This activity is significant as it may indicate an attempt by adversaries or Red Teams to perform Active Directory discovery and gain situational aware",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--30aad66b-3de6-5053-8ae4-fd30c545f0bc"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--920bff31-52d1-508e-a090-07b0b27f02eb",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1018",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1018"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--30aad66b-3de6-5053-8ae4-fd30c545f0bc",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1018",
+      "technique_id": "T1018",
+      "technique_ref": "attack-pattern--920bff31-52d1-508e-a090-07b0b27f02eb",
+      "description": "The following analytic detects the use of the `[Adsisearcher]` type accelerator in PowerShell scripts to query Active Directory for domain computers. It leverages PowerShell Script Block Logging (EventCode=4104) to identify specific script blocks containing `adsisearcher` and `objectcategory=computer` with methods like `findAll()` or `findOne()`. This activity is significant as it may indicate an attempt by adversaries or Red Teams to perform Active Directory discovery and gain situational aware",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

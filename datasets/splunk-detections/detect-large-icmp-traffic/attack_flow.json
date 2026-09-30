@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--bef82265-add5-50c2-80b6-3fd6cfc4e934",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--123472ad-8e17-5467-a8b2-3bbe42aee9bd",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--123472ad-8e17-5467-a8b2-3bbe42aee9bd",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--f70997f6-ab2a-5795-b5df-a55301e80bb9",
+      "created_by_ref": "identity--123472ad-8e17-5467-a8b2-3bbe42aee9bd",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: detect-large-icmp-traffic",
+      "description": "The following analytic identifies ICMP traffic to external IP addresses with total bytes (sum of bytes in and bytes out) greater than 1,000 bytes. It leverages the Network_Traffic data model to detect large ICMP packet that aren't blocked and are directed toward external networks. We use  All_Traffic.bytes in the detection to capture variations in inbound versus outbound traffic sizes, as significant discrepancies or unusually large ICMP exchanges can indicate information smuggling, covert commu",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--f2fdc3d0-d495-51f0-a3d7-cad8cef6956d"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--87902227-edae-515b-aad4-a760103cadaf",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1095",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1095"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--f2fdc3d0-d495-51f0-a3d7-cad8cef6956d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1095",
+      "technique_id": "T1095",
+      "technique_ref": "attack-pattern--87902227-edae-515b-aad4-a760103cadaf",
+      "description": "The following analytic identifies ICMP traffic to external IP addresses with total bytes (sum of bytes in and bytes out) greater than 1,000 bytes. It leverages the Network_Traffic data model to detect large ICMP packet that aren't blocked and are directed toward external networks. We use  All_Traffic.bytes in the detection to capture variations in inbound versus outbound traffic sizes, as significant discrepancies or unusually large ICMP exchanges can indicate information smuggling, covert commu",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

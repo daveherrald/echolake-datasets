@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--a0c491e8-85bb-5b8c-b4ca-3a536b9979af",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--ae9e9974-9820-5487-beaf-bec992e01673",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--ae9e9974-9820-5487-beaf-bec992e01673",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--289af235-ebc1-5cf4-b333-dcb25fda2204",
+      "created_by_ref": "identity--ae9e9974-9820-5487-beaf-bec992e01673",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: scheduled-task-deleted-or-created-via-cmd",
+      "description": "The following analytic identifies the creation or deletion of scheduled tasks using the schtasks.exe utility with the -create or -delete flags. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line executions. This activity is significant as it can indicate unauthorized system manipulation or malicious intent, often associated with threat actors like Dragonfly and incidents such as the SUNBURST attack. If confirmed malicious, this activit",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--0f5e23b1-9ff3-5443-931b-3d9cd33ad873"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--392315f7-a6cc-5192-9007-4710d84a06e9",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1053.005",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1053.005"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--0f5e23b1-9ff3-5443-931b-3d9cd33ad873",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1053.005",
+      "technique_id": "T1053.005",
+      "technique_ref": "attack-pattern--392315f7-a6cc-5192-9007-4710d84a06e9",
+      "description": "The following analytic identifies the creation or deletion of scheduled tasks using the schtasks.exe utility with the -create or -delete flags. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line executions. This activity is significant as it can indicate unauthorized system manipulation or malicious intent, often associated with threat actors like Dragonfly and incidents such as the SUNBURST attack. If confirmed malicious, this activit",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

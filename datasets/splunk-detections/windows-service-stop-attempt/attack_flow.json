@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--a293a000-db30-5b39-b775-32829c17bd29",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--9f5ab5e4-f514-502d-805e-2d6551717ee5",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--9f5ab5e4-f514-502d-805e-2d6551717ee5",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--75dd7403-bfad-52f6-86b7-708f8786fe12",
+      "created_by_ref": "identity--9f5ab5e4-f514-502d-805e-2d6551717ee5",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-service-stop-attempt",
+      "description": "The following analytic identifies attempts to stop services on a system using `net.exe`, `sc.exe` or the \"Stop-Service\" cmdlet. It leverages Endpoint Detection and Response (EDR) telemetry. This activity can be significant as adversaries often terminate security or critical services to evade detection and further their objectives. If confirmed malicious, this behavior could allow attackers to disable security defenses, facilitate ransomware encryption, or disrupt essential services, leading to p",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--6663cfaf-2823-5f4c-a301-bfb0ef78204e"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--94c40cf5-1fb3-578c-b647-4775cdefdefb",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1489",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1489"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--6663cfaf-2823-5f4c-a301-bfb0ef78204e",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1489",
+      "technique_id": "T1489",
+      "technique_ref": "attack-pattern--94c40cf5-1fb3-578c-b647-4775cdefdefb",
+      "description": "The following analytic identifies attempts to stop services on a system using `net.exe`, `sc.exe` or the \"Stop-Service\" cmdlet. It leverages Endpoint Detection and Response (EDR) telemetry. This activity can be significant as adversaries often terminate security or critical services to evade detection and further their objectives. If confirmed malicious, this behavior could allow attackers to disable security defenses, facilitate ransomware encryption, or disrupt essential services, leading to p",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

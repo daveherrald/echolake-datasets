@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--c1b3abaa-9958-5925-ad48-5babd7548c06",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--ba2f8d42-3c3e-5f90-88ad-6e0a3e5f9f7d",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--ba2f8d42-3c3e-5f90-88ad-6e0a3e5f9f7d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--b56fc491-ee26-53d8-a8d9-713e29a451d2",
+      "created_by_ref": "identity--ba2f8d42-3c3e-5f90-88ad-6e0a3e5f9f7d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: high-number-of-login-failures-from-a-single-source",
+      "description": "The following analytic detects multiple failed login attempts in Office365 Azure Active Directory from a single source IP address. It leverages Office365 management activity logs, specifically AzureActiveDirectoryStsLogon records, aggregating these logs in 5-minute intervals to count failed login attempts. This activity is significant as it may indicate brute-force attacks or password spraying, which are critical to monitor. If confirmed malicious, an attacker could gain unauthorized access to O",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--f07dc1df-d2be-5e6e-814f-611c1d2c1a95"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--234ff0ad-6392-503b-86de-7230c76d225d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1110.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1110.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--f07dc1df-d2be-5e6e-814f-611c1d2c1a95",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1110.001",
+      "technique_id": "T1110.001",
+      "technique_ref": "attack-pattern--234ff0ad-6392-503b-86de-7230c76d225d",
+      "description": "The following analytic detects multiple failed login attempts in Office365 Azure Active Directory from a single source IP address. It leverages Office365 management activity logs, specifically AzureActiveDirectoryStsLogon records, aggregating these logs in 5-minute intervals to count failed login attempts. This activity is significant as it may indicate brute-force attacks or password spraying, which are critical to monitor. If confirmed malicious, an attacker could gain unauthorized access to O",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

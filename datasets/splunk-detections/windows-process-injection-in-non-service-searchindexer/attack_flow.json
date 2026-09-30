@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--ad09e265-fa18-5771-8f5b-b14a9f5eac46",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--6bf79939-e0b4-5a42-825f-1b4a327d5513",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--6bf79939-e0b4-5a42-825f-1b4a327d5513",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--b32060a6-05b9-508d-96a0-b523524f4c18",
+      "created_by_ref": "identity--6bf79939-e0b4-5a42-825f-1b4a327d5513",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-process-injection-in-non-service-searchindexer",
+      "description": "The following analytic identifies instances of the searchindexer.exe process that are not spawned by services.exe, indicating potential process injection. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and parent processes. This activity is significant because QakBot malware often uses a fake searchindexer.exe to evade detection and perform malicious actions such as data exfiltration and keystroke logging. If confirmed malicious, this a",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--6e5a74ba-7239-5153-b88a-d4877ceea4a5"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--6932b354-d2f8-518f-9a3e-d682b2554e22",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1055",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1055"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--6e5a74ba-7239-5153-b88a-d4877ceea4a5",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1055",
+      "technique_id": "T1055",
+      "technique_ref": "attack-pattern--6932b354-d2f8-518f-9a3e-d682b2554e22",
+      "description": "The following analytic identifies instances of the searchindexer.exe process that are not spawned by services.exe, indicating potential process injection. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and parent processes. This activity is significant because QakBot malware often uses a fake searchindexer.exe to evade detection and perform malicious actions such as data exfiltration and keystroke logging. If confirmed malicious, this a",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

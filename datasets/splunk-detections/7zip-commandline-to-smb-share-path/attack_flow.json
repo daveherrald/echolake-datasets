@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--25bc25c2-3715-5012-8751-ece5ccae6c38",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--dceaa64b-318e-536b-bb12-4c5c3e8a901d",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--dceaa64b-318e-536b-bb12-4c5c3e8a901d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--762bdb55-13c6-5ef1-9a90-2f071ae6b6e5",
+      "created_by_ref": "identity--dceaa64b-318e-536b-bb12-4c5c3e8a901d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: 7zip-commandline-to-smb-share-path",
+      "description": "The following analytic detects the execution of 7z or 7za processes with command lines pointing to SMB network shares. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line arguments. This activity is significant as it may indicate an attempt to archive and exfiltrate sensitive files to a network share, a technique observed in CONTI LEAK tools. If confirmed malicious, this behavior could lead to data exfiltration, compromising sensitive i",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--5c70723a-8ab7-5fc2-99e8-5d0b0a1f46d7"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--f99eee29-2c87-5a0c-a8a4-cd2ddd6bf501",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1560.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1560.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--5c70723a-8ab7-5fc2-99e8-5d0b0a1f46d7",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1560.001",
+      "technique_id": "T1560.001",
+      "technique_ref": "attack-pattern--f99eee29-2c87-5a0c-a8a4-cd2ddd6bf501",
+      "description": "The following analytic detects the execution of 7z or 7za processes with command lines pointing to SMB network shares. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line arguments. This activity is significant as it may indicate an attempt to archive and exfiltrate sensitive files to a network share, a technique observed in CONTI LEAK tools. If confirmed malicious, this behavior could lead to data exfiltration, compromising sensitive i",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

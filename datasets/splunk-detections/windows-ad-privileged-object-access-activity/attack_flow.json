@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--780ed25f-82e8-5aa4-afb4-0f694d807b22",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--8a0db7f3-edcf-5f6b-9f85-e9920e96a949",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--8a0db7f3-edcf-5f6b-9f85-e9920e96a949",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--4581a696-cf3b-55f4-a91b-eb0ce3411cb6",
+      "created_by_ref": "identity--8a0db7f3-edcf-5f6b-9f85-e9920e96a949",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-ad-privileged-object-access-activity",
+      "description": "The following analytic detects access attempts to privileged Active Directory objects, such as Domain Admins or Enterprise Admins. It leverages Windows Security Event Code 4662 to identify when these sensitive objects are accessed. This activity is significant because such objects should rarely be accessed by normal users or processes, and unauthorized access attempts may indicate attacker enumeration or lateral movement within the domain. If confirmed malicious, this activity could allow attack",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--6b9bc579-80a6-502e-9ddb-8adbd40c0813"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--8d1e34ad-8650-5e2f-8f64-e81a09754aa3",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1087.002",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1087.002"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--6b9bc579-80a6-502e-9ddb-8adbd40c0813",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1087.002",
+      "technique_id": "T1087.002",
+      "technique_ref": "attack-pattern--8d1e34ad-8650-5e2f-8f64-e81a09754aa3",
+      "description": "The following analytic detects access attempts to privileged Active Directory objects, such as Domain Admins or Enterprise Admins. It leverages Windows Security Event Code 4662 to identify when these sensitive objects are accessed. This activity is significant because such objects should rarely be accessed by normal users or processes, and unauthorized access attempts may indicate attacker enumeration or lateral movement within the domain. If confirmed malicious, this activity could allow attack",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

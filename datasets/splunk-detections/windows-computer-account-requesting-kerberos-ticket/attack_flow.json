@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--151ccbaf-6ea4-59d1-b4fb-1cf29b9e9d48",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--27a32106-6d31-59d2-becd-66b573540a33",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--27a32106-6d31-59d2-becd-66b573540a33",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--1ebc8a74-89a6-5125-9245-5a47207f364d",
+      "created_by_ref": "identity--27a32106-6d31-59d2-becd-66b573540a33",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-computer-account-requesting-kerberos-ticket",
+      "description": "The following analytic detects a computer account requesting a Kerberos ticket, which is unusual as typically user accounts request these tickets. This detection leverages Windows Security Event Logs, specifically EventCode 4768, to identify instances where the TargetUserName ends with a dollar sign ($), indicating a computer account. This activity is significant because it may indicate the use of tools like KrbUpRelay or other Kerberos-based attacks. If confirmed malicious, this could allow att",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--0cec284f-5781-5584-a8d8-936bbabeaa3b"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--13173a95-0ed0-58cd-b581-c5a08e021a4e",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1558",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1558"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--0cec284f-5781-5584-a8d8-936bbabeaa3b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1558",
+      "technique_id": "T1558",
+      "technique_ref": "attack-pattern--13173a95-0ed0-58cd-b581-c5a08e021a4e",
+      "description": "The following analytic detects a computer account requesting a Kerberos ticket, which is unusual as typically user accounts request these tickets. This detection leverages Windows Security Event Logs, specifically EventCode 4768, to identify instances where the TargetUserName ends with a dollar sign ($), indicating a computer account. This activity is significant because it may indicate the use of tools like KrbUpRelay or other Kerberos-based attacks. If confirmed malicious, this could allow att",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

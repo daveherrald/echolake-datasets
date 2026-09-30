@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--d86ee38a-8794-5fab-9c42-36ba19c3add8",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--9b013500-dfb0-55e2-aec6-31a1d2956e06",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--9b013500-dfb0-55e2-aec6-31a1d2956e06",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--1871731b-b133-5a29-b3cd-609d534cecb6",
+      "created_by_ref": "identity--9b013500-dfb0-55e2-aec6-31a1d2956e06",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: user-discovery-with-env-vars-powershell",
+      "description": "The following analytic detects the execution of `powershell.exe` with command-line arguments that use PowerShell environment variables to identify the current logged user. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line executions. This activity is significant as adversaries may use it for situational awareness and Active Directory discovery on compromised endpoints. If confirmed malicious, this behavior could allow attackers to gat",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--2cea4e05-beb3-5e47-9e1f-11f5d5a18d71"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--3fcc0bdf-2826-529b-8853-c2bbdd404ea7",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1033",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1033"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--2cea4e05-beb3-5e47-9e1f-11f5d5a18d71",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1033",
+      "technique_id": "T1033",
+      "technique_ref": "attack-pattern--3fcc0bdf-2826-529b-8853-c2bbdd404ea7",
+      "description": "The following analytic detects the execution of `powershell.exe` with command-line arguments that use PowerShell environment variables to identify the current logged user. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line executions. This activity is significant as adversaries may use it for situational awareness and Active Directory discovery on compromised endpoints. If confirmed malicious, this behavior could allow attackers to gat",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

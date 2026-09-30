@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--c006789d-bb6d-5c86-8c43-69487bfcf125",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--8d730799-381c-5144-ade4-6362f6c6e4d0",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--8d730799-381c-5144-ade4-6362f6c6e4d0",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--a2faae9e-0817-55bf-8dcc-6d1980a1ac94",
+      "created_by_ref": "identity--8d730799-381c-5144-ade4-6362f6c6e4d0",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: azure-ad-multiple-appids-and-useragents-authentication-spike",
+      "description": "The following analytic detects unusual authentication activity in Azure AD, specifically when a single user account has over 8 authentication attempts using 3+ unique application IDs and 5+ unique user agents within a short period. It leverages Azure AD audit logs, focusing on authentication events and using statistical thresholds. This behavior is significant as it may indicate an adversary probing for MFA requirements. If confirmed malicious, it suggests a compromised account, potentially lead",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--912aa1dc-cd56-5360-a032-6d900c22e65c"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--2bf38d10-ce0a-59d6-ab98-de4229b514fc",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1078",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1078"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--912aa1dc-cd56-5360-a032-6d900c22e65c",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1078",
+      "technique_id": "T1078",
+      "technique_ref": "attack-pattern--2bf38d10-ce0a-59d6-ab98-de4229b514fc",
+      "description": "The following analytic detects unusual authentication activity in Azure AD, specifically when a single user account has over 8 authentication attempts using 3+ unique application IDs and 5+ unique user agents within a short period. It leverages Azure AD audit logs, focusing on authentication events and using statistical thresholds. This behavior is significant as it may indicate an adversary probing for MFA requirements. If confirmed malicious, it suggests a compromised account, potentially lead",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

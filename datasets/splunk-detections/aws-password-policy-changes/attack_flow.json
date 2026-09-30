@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--f73ca027-8691-50b9-95c1-3085f1272d63",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--7f41130a-172e-5a0c-b29b-5843189c3861",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--7f41130a-172e-5a0c-b29b-5843189c3861",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--d24f34ad-fa7d-50c2-955a-55764c72f582",
+      "created_by_ref": "identity--7f41130a-172e-5a0c-b29b-5843189c3861",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: aws-password-policy-changes",
+      "description": "The following analytic detects successful API calls to view, update, or delete the password policy in an AWS organization. It leverages AWS CloudTrail logs to identify events such as \"UpdateAccountPasswordPolicy,\" \"GetAccountPasswordPolicy,\" and \"DeleteAccountPasswordPolicy.\" This activity is significant because it is uncommon for regular users to perform these actions, and such changes can indicate an adversary attempting to understand or weaken password defenses. If confirmed malicious, this c",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--9f2f58d7-e2cb-544d-a4d0-2633dc81402d"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--7466b5cd-6e74-54a2-836c-f414a4b0b09d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1201",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1201"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--9f2f58d7-e2cb-544d-a4d0-2633dc81402d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1201",
+      "technique_id": "T1201",
+      "technique_ref": "attack-pattern--7466b5cd-6e74-54a2-836c-f414a4b0b09d",
+      "description": "The following analytic detects successful API calls to view, update, or delete the password policy in an AWS organization. It leverages AWS CloudTrail logs to identify events such as \"UpdateAccountPasswordPolicy,\" \"GetAccountPasswordPolicy,\" and \"DeleteAccountPasswordPolicy.\" This activity is significant because it is uncommon for regular users to perform these actions, and such changes can indicate an adversary attempting to understand or weaken password defenses. If confirmed malicious, this c",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

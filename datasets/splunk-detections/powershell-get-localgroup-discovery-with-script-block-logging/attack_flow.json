@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--5df2afa5-5b72-5064-af7f-ef1a788fa224",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--fe1d26e1-4448-5604-89c6-e3e79f09bcc4",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--fe1d26e1-4448-5604-89c6-e3e79f09bcc4",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--002ada4e-39d3-5e49-95aa-bba51834ce5a",
+      "created_by_ref": "identity--fe1d26e1-4448-5604-89c6-e3e79f09bcc4",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: powershell-get-localgroup-discovery-with-script-block-logging",
+      "description": "The following analytic detects the execution of the PowerShell cmdlet `get-localgroup` using PowerShell Script Block Logging (EventCode=4104). This method captures the full command sent to PowerShell, providing detailed visibility into script execution. Monitoring this activity is significant as it can indicate an attempt to enumerate local groups, which may be a precursor to privilege escalation or lateral movement. If confirmed malicious, an attacker could gain insights into group memberships,",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--4594721b-1740-566e-b6dc-725b385353bc"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--278a1e32-002a-5781-8644-c0cd3e93ce27",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1069.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1069.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--4594721b-1740-566e-b6dc-725b385353bc",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1069.001",
+      "technique_id": "T1069.001",
+      "technique_ref": "attack-pattern--278a1e32-002a-5781-8644-c0cd3e93ce27",
+      "description": "The following analytic detects the execution of the PowerShell cmdlet `get-localgroup` using PowerShell Script Block Logging (EventCode=4104). This method captures the full command sent to PowerShell, providing detailed visibility into script execution. Monitoring this activity is significant as it can indicate an attempt to enumerate local groups, which may be a precursor to privilege escalation or lateral movement. If confirmed malicious, an attacker could gain insights into group memberships,",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "type": "bundle",
+  "id": "bundle--ed4c4cba-b0d0-5da2-b269-d8ab1e5d2d85",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--b9bd272f-7f0d-5818-9593-58d2c51e7ad5",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--b9bd272f-7f0d-5818-9593-58d2c51e7ad5",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--f1acb542-fada-562b-9bef-e1c67da9d619",
+      "created_by_ref": "identity--b9bd272f-7f0d-5818-9593-58d2c51e7ad5",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: disabling-norun-windows-app",
+      "description": "The following analytic detects the modification of the Windows registry to disable the Run application in the Start menu. It leverages data from the Endpoint.Registry data model, specifically monitoring changes to the registry path \"*\\\\SOFTWARE\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Policies\\\\Explorer\\\\NoRun\" with a value of \"0x00000001\". This activity is significant because the Run application is a useful shortcut for executing known applications and scripts. If confirmed malicious, this action c",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--9291790d-6d8a-512b-a281-d915215d98d0",
+        "attack-action--0fe37d6f-18e5-5d8f-9c3a-8ba068de9369"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--b8961b73-aa74-50e5-b612-47e7b9d2e88b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1112",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1112"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--def3d3d0-0dac-56d1-8b33-cd4c7afe9ea9",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1562.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--9291790d-6d8a-512b-a281-d915215d98d0",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1112",
+      "technique_id": "T1112",
+      "technique_ref": "attack-pattern--b8961b73-aa74-50e5-b612-47e7b9d2e88b",
+      "description": "The following analytic detects the modification of the Windows registry to disable the Run application in the Start menu. It leverages data from the Endpoint.Registry data model, specifically monitoring changes to the registry path \"*\\\\SOFTWARE\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Policies\\\\Explorer\\\\NoRun\" with a value of \"0x00000001\". This activity is significant because the Run application is a useful shortcut for executing known applications and scripts. If confirmed malicious, this action c",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--0fe37d6f-18e5-5d8f-9c3a-8ba068de9369",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.001",
+      "technique_id": "T1562.001",
+      "technique_ref": "attack-pattern--def3d3d0-0dac-56d1-8b33-cd4c7afe9ea9",
+      "description": "The following analytic detects the modification of the Windows registry to disable the Run application in the Start menu. It leverages data from the Endpoint.Registry data model, specifically monitoring changes to the registry path \"*\\\\SOFTWARE\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Policies\\\\Explorer\\\\NoRun\" with a value of \"0x00000001\". This activity is significant because the Run application is a useful shortcut for executing known applications and scripts. If confirmed malicious, this action c",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

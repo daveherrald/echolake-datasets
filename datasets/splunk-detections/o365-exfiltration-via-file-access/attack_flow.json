@@ -1,0 +1,110 @@
+{
+  "type": "bundle",
+  "id": "bundle--587cfb2d-9dc9-5136-94a8-8419a240d11c",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--654023be-5572-5790-bd57-fb09935176b6",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--654023be-5572-5790-bd57-fb09935176b6",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--00295e83-b8a5-5faa-acb9-eac13c3b3b5c",
+      "created_by_ref": "identity--654023be-5572-5790-bd57-fb09935176b6",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: o365-exfiltration-via-file-access",
+      "description": "The following analytic detects when an excessive number of files are access from o365 by the same user over a short period of time. A malicious actor may abuse the \"open in app\" functionality of SharePoint through scripted or Graph API based access to evade triggering the FileDownloaded Event. This behavior may indicate an attacker staging data for exfiltration or an insider threat removing organizational data. Additional attention should be take with any Azure Guest (#EXT#) accounts.",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--f3ce128a-9582-541e-9e17-fca1bdc290fc",
+        "attack-action--ccff0039-267f-5a99-9b55-48ee706d39ca"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--ab6298ed-fbfe-573c-a9a2-34ee6f1d68c5",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1567",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1567"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--5a92ed2f-bdd5-5f10-a76c-994c372b1fb1",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1530",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1530"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--f3ce128a-9582-541e-9e17-fca1bdc290fc",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1567",
+      "technique_id": "T1567",
+      "technique_ref": "attack-pattern--ab6298ed-fbfe-573c-a9a2-34ee6f1d68c5",
+      "description": "The following analytic detects when an excessive number of files are access from o365 by the same user over a short period of time. A malicious actor may abuse the \"open in app\" functionality of SharePoint through scripted or Graph API based access to evade triggering the FileDownloaded Event. This behavior may indicate an attacker staging data for exfiltration or an insider threat removing organizational data. Additional attention should be take with any Azure Guest (#EXT#) accounts.",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--ccff0039-267f-5a99-9b55-48ee706d39ca",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1530",
+      "technique_id": "T1530",
+      "technique_ref": "attack-pattern--5a92ed2f-bdd5-5f10-a76c-994c372b1fb1",
+      "description": "The following analytic detects when an excessive number of files are access from o365 by the same user over a short period of time. A malicious actor may abuse the \"open in app\" functionality of SharePoint through scripted or Graph API based access to evade triggering the FileDownloaded Event. This behavior may indicate an attacker staging data for exfiltration or an insider threat removing organizational data. Additional attention should be take with any Azure Guest (#EXT#) accounts.",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--782146cd-953a-51b7-b7fc-aa83830040e7",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--b3e41356-6039-57d8-92e7-76a515bdf947",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--b3e41356-6039-57d8-92e7-76a515bdf947",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--e5bc13d0-6666-50d6-8895-6e22616998e4",
+      "created_by_ref": "identity--b3e41356-6039-57d8-92e7-76a515bdf947",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: o365-privileged-graph-api-permission-assigned",
+      "description": "The following analytic detects the assignment of critical Graph API permissions in Azure AD using the O365 Unified Audit Log. It focuses on permissions such as Application.ReadWrite.All, AppRoleAssignment.ReadWrite.All, and RoleManagement.ReadWrite.Directory. The detection method leverages Azure Active Directory workload events, specifically 'Update application' operations. This activity is significant as these permissions provide extensive control over Azure AD settings, posing a high risk if m",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--f18645ec-e830-5870-be97-d604790d70a0"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--2c4a1981-a4ae-5ea6-b60b-8eab0d5b89d5",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1003.002",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1003.002"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--f18645ec-e830-5870-be97-d604790d70a0",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1003.002",
+      "technique_id": "T1003.002",
+      "technique_ref": "attack-pattern--2c4a1981-a4ae-5ea6-b60b-8eab0d5b89d5",
+      "description": "The following analytic detects the assignment of critical Graph API permissions in Azure AD using the O365 Unified Audit Log. It focuses on permissions such as Application.ReadWrite.All, AppRoleAssignment.ReadWrite.All, and RoleManagement.ReadWrite.Directory. The detection method leverages Azure Active Directory workload events, specifically 'Update application' operations. This activity is significant as these permissions provide extensive control over Azure AD settings, posing a high risk if m",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

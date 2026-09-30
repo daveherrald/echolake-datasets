@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--b922cce6-b5b9-5995-bbd6-092ca4fccdc8",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--42ba8abb-029a-53c2-8219-45ee63ae71cd",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--42ba8abb-029a-53c2-8219-45ee63ae71cd",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--c7926d33-94fc-5f99-8448-c318bc18ad0c",
+      "created_by_ref": "identity--42ba8abb-029a-53c2-8219-45ee63ae71cd",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-security-account-manager-stopped",
+      "description": "The following analytic detects the stopping of the Windows Security Account Manager (SAM) service via command-line, typically using the \"net stop samss\" command. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line executions. This activity is significant because stopping the SAM service can disrupt authentication mechanisms and is often associated with ransomware attacks like Ryuk. If confirmed malicious, this action could l",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--05cebcbb-a8d6-5a48-bbdc-9107ea547d6a"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--3bc1182b-4a08-5147-95b6-1eddda84648a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1489",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1489"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--05cebcbb-a8d6-5a48-bbdc-9107ea547d6a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1489",
+      "technique_id": "T1489",
+      "technique_ref": "attack-pattern--3bc1182b-4a08-5147-95b6-1eddda84648a",
+      "description": "The following analytic detects the stopping of the Windows Security Account Manager (SAM) service via command-line, typically using the \"net stop samss\" command. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line executions. This activity is significant because stopping the SAM service can disrupt authentication mechanisms and is often associated with ransomware attacks like Ryuk. If confirmed malicious, this action could l",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

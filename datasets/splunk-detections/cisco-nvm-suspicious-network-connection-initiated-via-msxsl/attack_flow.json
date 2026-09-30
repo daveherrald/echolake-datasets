@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--615a6518-1ac7-53c0-ae0a-50be41875c9e",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--0b80a204-04e1-518b-86e7-a655f8ad7564",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--0b80a204-04e1-518b-86e7-a655f8ad7564",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--5246149c-4b32-5efb-a394-df0332132ac1",
+      "created_by_ref": "identity--0b80a204-04e1-518b-86e7-a655f8ad7564",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: cisco-nvm-suspicious-network-connection-initiated-via-msxsl",
+      "description": "This analytic identifies the use of `msxsl.exe` initiating a network connection to a non-private IP address.\nAlthough `msxsl.exe` is a legitimate Microsoft utility used to apply XSLT transformations, adversaries can abuse it\nto execute arbitrary code or load external resources in an evasive manner.\nThis detection leverages Cisco NVM telemetry to identify potentially malicious use of `msxsl.exe` making network connections\nthat may indicate command and control (C2) or data exfiltration activity.",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--2ae47b82-aa22-5177-86a2-7d1e21ed0982"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--ffdb13bf-f749-54a9-a941-e0c0886751dc",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1220",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1220"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--2ae47b82-aa22-5177-86a2-7d1e21ed0982",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1220",
+      "technique_id": "T1220",
+      "technique_ref": "attack-pattern--ffdb13bf-f749-54a9-a941-e0c0886751dc",
+      "description": "This analytic identifies the use of `msxsl.exe` initiating a network connection to a non-private IP address.\nAlthough `msxsl.exe` is a legitimate Microsoft utility used to apply XSLT transformations, adversaries can abuse it\nto execute arbitrary code or load external resources in an evasive manner.\nThis detection leverages Cisco NVM telemetry to identify potentially malicious use of `msxsl.exe` making network connections\nthat may indicate command and control (C2) or data exfiltration activity.",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

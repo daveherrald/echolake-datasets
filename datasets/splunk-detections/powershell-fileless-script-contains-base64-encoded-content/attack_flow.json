@@ -1,0 +1,110 @@
+{
+  "type": "bundle",
+  "id": "bundle--0dc2070b-682e-5ef1-ade9-d2bde028fe7c",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--dd01d1ce-55ab-51d6-99d5-169b42823b25",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--dd01d1ce-55ab-51d6-99d5-169b42823b25",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--07e1f3ff-d236-5f23-88c6-14940f1ee027",
+      "created_by_ref": "identity--dd01d1ce-55ab-51d6-99d5-169b42823b25",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: powershell-fileless-script-contains-base64-encoded-content",
+      "description": "The following analytic detects the execution of PowerShell scripts containing Base64 encoded content, specifically identifying the use of `FromBase64String`. It leverages PowerShell Script Block Logging (EventCode=4104) to capture and analyze the full command sent to PowerShell. This activity is significant as Base64 encoding is often used by attackers to obfuscate malicious payloads, making it harder to detect. If confirmed malicious, this could lead to code execution, allowing attackers to run",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--244b5350-c8f7-5bee-b61f-8a79feb8fcba",
+        "attack-action--11de4cbf-da90-5340-985d-f1bdd3e4c9e9"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--8aee60eb-cb48-5532-ae99-104c149f5d12",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1027",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1027"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--51a25599-8a08-5288-b067-d03a99f8725d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1059.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1059.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--244b5350-c8f7-5bee-b61f-8a79feb8fcba",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1027",
+      "technique_id": "T1027",
+      "technique_ref": "attack-pattern--8aee60eb-cb48-5532-ae99-104c149f5d12",
+      "description": "The following analytic detects the execution of PowerShell scripts containing Base64 encoded content, specifically identifying the use of `FromBase64String`. It leverages PowerShell Script Block Logging (EventCode=4104) to capture and analyze the full command sent to PowerShell. This activity is significant as Base64 encoding is often used by attackers to obfuscate malicious payloads, making it harder to detect. If confirmed malicious, this could lead to code execution, allowing attackers to run",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--11de4cbf-da90-5340-985d-f1bdd3e4c9e9",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1059.001",
+      "technique_id": "T1059.001",
+      "technique_ref": "attack-pattern--51a25599-8a08-5288-b067-d03a99f8725d",
+      "description": "The following analytic detects the execution of PowerShell scripts containing Base64 encoded content, specifically identifying the use of `FromBase64String`. It leverages PowerShell Script Block Logging (EventCode=4104) to capture and analyze the full command sent to PowerShell. This activity is significant as Base64 encoding is often used by attackers to obfuscate malicious payloads, making it harder to detect. If confirmed malicious, this could lead to code execution, allowing attackers to run",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

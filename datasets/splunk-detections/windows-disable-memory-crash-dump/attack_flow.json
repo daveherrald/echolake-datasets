@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--a9571f5b-2d8b-5362-b046-fc0741b02e55",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--0bc5a3f5-35d2-59c7-b789-8ab4421fee84",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--0bc5a3f5-35d2-59c7-b789-8ab4421fee84",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--cb28fd59-db77-57c4-9497-6e7fec3826bc",
+      "created_by_ref": "identity--0bc5a3f5-35d2-59c7-b789-8ab4421fee84",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-disable-memory-crash-dump",
+      "description": "The following analytic detects attempts to disable the memory crash dump feature on Windows systems by setting the registry value to 0. It leverages data from the Endpoint.Registry datamodel, specifically monitoring changes to the CrashDumpEnabled registry key. This activity is significant because disabling crash dumps can hinder forensic analysis and incident response efforts. If confirmed malicious, this action could be part of a broader attack strategy, such as data destruction or system dest",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--8e7adc8b-5298-5bed-8cca-aa0099700e07"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--41985daf-54c8-504d-b29e-c90e9f4b5709",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1485",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1485"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--8e7adc8b-5298-5bed-8cca-aa0099700e07",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1485",
+      "technique_id": "T1485",
+      "technique_ref": "attack-pattern--41985daf-54c8-504d-b29e-c90e9f4b5709",
+      "description": "The following analytic detects attempts to disable the memory crash dump feature on Windows systems by setting the registry value to 0. It leverages data from the Endpoint.Registry datamodel, specifically monitoring changes to the CrashDumpEnabled registry key. This activity is significant because disabling crash dumps can hinder forensic analysis and incident response efforts. If confirmed malicious, this action could be part of a broader attack strategy, such as data destruction or system dest",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

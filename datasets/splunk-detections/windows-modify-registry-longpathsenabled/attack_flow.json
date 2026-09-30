@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--6408c73f-ef98-5fb1-bcb6-4eda2ba9d051",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--253b9b93-6929-58d3-95b7-3e397ed2065d",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--253b9b93-6929-58d3-95b7-3e397ed2065d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--ffcf9599-746f-59a2-a8e9-0fe16cf25c77",
+      "created_by_ref": "identity--253b9b93-6929-58d3-95b7-3e397ed2065d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-modify-registry-longpathsenabled",
+      "description": "The following analytic detects a modification to the Windows registry setting \"LongPathsEnabled,\" which allows file paths longer than 260 characters. This detection leverages data from the Endpoint.Registry datamodel, focusing on changes to the specific registry path and value. This activity is significant because adversaries, including malware like BlackByte, exploit this setting to bypass file path limitations, potentially aiding in evasion techniques. If confirmed malicious, this modification",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--af47efba-d37b-5388-834a-4187df5d1753"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--472792da-e4f1-554d-a9e1-e8e36e613988",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1112",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1112"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--af47efba-d37b-5388-834a-4187df5d1753",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1112",
+      "technique_id": "T1112",
+      "technique_ref": "attack-pattern--472792da-e4f1-554d-a9e1-e8e36e613988",
+      "description": "The following analytic detects a modification to the Windows registry setting \"LongPathsEnabled,\" which allows file paths longer than 260 characters. This detection leverages data from the Endpoint.Registry datamodel, focusing on changes to the specific registry path and value. This activity is significant because adversaries, including malware like BlackByte, exploit this setting to bypass file path limitations, potentially aiding in evasion techniques. If confirmed malicious, this modification",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

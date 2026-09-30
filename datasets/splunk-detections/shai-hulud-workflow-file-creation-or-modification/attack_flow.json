@@ -1,0 +1,141 @@
+{
+  "type": "bundle",
+  "id": "bundle--e62ba70c-630c-51d1-9f01-b210953091d9",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--a5b3cd6c-82f9-5006-8a30-4f13d5d3bada",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--a5b3cd6c-82f9-5006-8a30-4f13d5d3bada",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--5bfde196-d9b7-5d70-900f-c5fbb17bdf5f",
+      "created_by_ref": "identity--a5b3cd6c-82f9-5006-8a30-4f13d5d3bada",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: shai-hulud-workflow-file-creation-or-modification",
+      "description": "Detects creation or deletion of malicious GitHub Actions workflow files associated with\nShai-Hulud worm variants on Linux or Windows endpoints. This includes the original shai-hulud-workflow.yml,\nthe 2.0 backdoor discussion.yaml (enables command injection via GitHub Discussions on self-hosted\nrunners named SHA1HULUD), and the secrets exfiltration workflow formatter_*.yml pattern. These\nfiles are used to exfiltrate credentials and propagate across repositories.",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--6185554c-a2ea-56ce-8e44-7803ca9c57e2",
+        "attack-action--61f251cf-3dbc-58a4-bb5f-28df5da1cf14",
+        "attack-action--651e0050-06eb-5035-ac02-d72f15f7389a"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--59207e68-8982-5cd9-8afd-d820c9dce56f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1574.006",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1574.006"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--fada93b0-c6d9-5ac7-a48c-7da654d44619",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1554",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1554"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--9594a6cc-fcd0-5db5-b702-8f87da3d5b2b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1195",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1195"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--6185554c-a2ea-56ce-8e44-7803ca9c57e2",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1574.006",
+      "technique_id": "T1574.006",
+      "technique_ref": "attack-pattern--59207e68-8982-5cd9-8afd-d820c9dce56f",
+      "description": "Detects creation or deletion of malicious GitHub Actions workflow files associated with\nShai-Hulud worm variants on Linux or Windows endpoints. This includes the original shai-hulud-workflow.yml,\nthe 2.0 backdoor discussion.yaml (enables command injection via GitHub Discussions on self-hosted\nrunners named SHA1HULUD), and the secrets exfiltration workflow formatter_*.yml pattern. These\nfiles are used to exfiltrate credentials and propagate across repositories.",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--61f251cf-3dbc-58a4-bb5f-28df5da1cf14",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1554",
+      "technique_id": "T1554",
+      "technique_ref": "attack-pattern--fada93b0-c6d9-5ac7-a48c-7da654d44619",
+      "description": "Detects creation or deletion of malicious GitHub Actions workflow files associated with\nShai-Hulud worm variants on Linux or Windows endpoints. This includes the original shai-hulud-workflow.yml,\nthe 2.0 backdoor discussion.yaml (enables command injection via GitHub Discussions on self-hosted\nrunners named SHA1HULUD), and the secrets exfiltration workflow formatter_*.yml pattern. These\nfiles are used to exfiltrate credentials and propagate across repositories.",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--651e0050-06eb-5035-ac02-d72f15f7389a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1195",
+      "technique_id": "T1195",
+      "technique_ref": "attack-pattern--9594a6cc-fcd0-5db5-b702-8f87da3d5b2b",
+      "description": "Detects creation or deletion of malicious GitHub Actions workflow files associated with\nShai-Hulud worm variants on Linux or Windows endpoints. This includes the original shai-hulud-workflow.yml,\nthe 2.0 backdoor discussion.yaml (enables command injection via GitHub Discussions on self-hosted\nrunners named SHA1HULUD), and the secrets exfiltration workflow formatter_*.yml pattern. These\nfiles are used to exfiltrate credentials and propagate across repositories.",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

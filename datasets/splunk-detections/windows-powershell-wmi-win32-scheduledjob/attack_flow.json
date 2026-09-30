@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--bb62f5ca-3ef3-5884-8f11-d3eacfed32f8",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--2915a41f-1e8a-5fad-ae18-cea2da2d85d9",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--2915a41f-1e8a-5fad-ae18-cea2da2d85d9",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--3dc7e2b3-67ac-51f0-b77e-a2717084db82",
+      "created_by_ref": "identity--2915a41f-1e8a-5fad-ae18-cea2da2d85d9",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-powershell-wmi-win32-scheduledjob",
+      "description": "The following analytic detects the use of the Win32_ScheduledJob WMI class via PowerShell script block logging. This class, which manages scheduled tasks, is disabled by default due to security concerns and must be explicitly enabled through registry modifications. The detection leverages PowerShell event code 4104 and script block text analysis. Monitoring this activity is crucial as it may indicate malicious intent, especially if the class was enabled by an attacker. If confirmed malicious, th",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--9ca1f05c-c790-555c-8509-0f0dcfbbf389"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--b0fd4d61-f3d5-51ea-bea0-a8c6f6e15364",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1059.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1059.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--9ca1f05c-c790-555c-8509-0f0dcfbbf389",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1059.001",
+      "technique_id": "T1059.001",
+      "technique_ref": "attack-pattern--b0fd4d61-f3d5-51ea-bea0-a8c6f6e15364",
+      "description": "The following analytic detects the use of the Win32_ScheduledJob WMI class via PowerShell script block logging. This class, which manages scheduled tasks, is disabled by default due to security concerns and must be explicitly enabled through registry modifications. The detection leverages PowerShell event code 4104 and script block text analysis. Monitoring this activity is crucial as it may indicate malicious intent, especially if the class was enabled by an attacker. If confirmed malicious, th",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

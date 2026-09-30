@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--73eb969f-4fc8-50ed-8fcc-9d5200096ae2",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--c4d0f923-bdbc-5b56-ba23-dede0b503d08",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--c4d0f923-bdbc-5b56-ba23-dede0b503d08",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--5b94ac41-f2fd-5436-88a0-a2304c1e00e8",
+      "created_by_ref": "identity--c4d0f923-bdbc-5b56-ba23-dede0b503d08",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: set-default-powershell-execution-policy-to-unrestricted-or-bypass",
+      "description": "The following analytic detects changes to the PowerShell ExecutionPolicy in the registry to \"Unrestricted\" or \"Bypass.\" It leverages data from Endpoint Detection and Response (EDR) agents, focusing on registry modifications under the path *Software\\Microsoft\\Powershell\\1\\ShellIds\\Microsoft.PowerShell*. This activity is significant because setting the ExecutionPolicy to these values can allow the execution of potentially malicious scripts without restriction. If confirmed malicious, this could en",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--e586187d-e418-5748-887a-40bed808544b"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--271e5e78-f933-5483-8ec0-6a570ebcbc6a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1059.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1059.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--e586187d-e418-5748-887a-40bed808544b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1059.001",
+      "technique_id": "T1059.001",
+      "technique_ref": "attack-pattern--271e5e78-f933-5483-8ec0-6a570ebcbc6a",
+      "description": "The following analytic detects changes to the PowerShell ExecutionPolicy in the registry to \"Unrestricted\" or \"Bypass.\" It leverages data from Endpoint Detection and Response (EDR) agents, focusing on registry modifications under the path *Software\\Microsoft\\Powershell\\1\\ShellIds\\Microsoft.PowerShell*. This activity is significant because setting the ExecutionPolicy to these values can allow the execution of potentially malicious scripts without restriction. If confirmed malicious, this could en",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "type": "bundle",
+  "id": "bundle--f02e447e-5d64-5402-bf5b-d8b8bef89a5d",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--234029bd-9d50-5658-9ef9-773f72670ea4",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--234029bd-9d50-5658-9ef9-773f72670ea4",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--5d4d8ea9-236a-5ea4-98a8-120722d0e335",
+      "created_by_ref": "identity--234029bd-9d50-5658-9ef9-773f72670ea4",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-registry-delete-task-sd",
+      "description": "The following analytic detects a process attempting to delete a scheduled task's Security Descriptor (SD) from the registry path of that task. It leverages the Endpoint.Registry data model to identify registry actions performed by the SYSTEM user, specifically targeting deletions or modifications of the SD value. This activity is significant as it may indicate an attempt to remove evidence of a scheduled task for defense evasion. If confirmed malicious, it suggests an attacker with privileged ac",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--3677371e-48f6-5686-84a7-81e0b4e15a14",
+        "attack-action--6ad7c45c-73d6-594e-8f74-6f7cd34408d3"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--068c3a8c-1b7e-5fc5-991f-f27392ee6748",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1053.005",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1053.005"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--2dab7d85-0c75-540b-816f-aaa264c4cb9e",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1562"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--3677371e-48f6-5686-84a7-81e0b4e15a14",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1053.005",
+      "technique_id": "T1053.005",
+      "technique_ref": "attack-pattern--068c3a8c-1b7e-5fc5-991f-f27392ee6748",
+      "description": "The following analytic detects a process attempting to delete a scheduled task's Security Descriptor (SD) from the registry path of that task. It leverages the Endpoint.Registry data model to identify registry actions performed by the SYSTEM user, specifically targeting deletions or modifications of the SD value. This activity is significant as it may indicate an attempt to remove evidence of a scheduled task for defense evasion. If confirmed malicious, it suggests an attacker with privileged ac",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--6ad7c45c-73d6-594e-8f74-6f7cd34408d3",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562",
+      "technique_id": "T1562",
+      "technique_ref": "attack-pattern--2dab7d85-0c75-540b-816f-aaa264c4cb9e",
+      "description": "The following analytic detects a process attempting to delete a scheduled task's Security Descriptor (SD) from the registry path of that task. It leverages the Endpoint.Registry data model to identify registry actions performed by the SYSTEM user, specifically targeting deletions or modifications of the SD value. This activity is significant as it may indicate an attempt to remove evidence of a scheduled task for defense evasion. If confirmed malicious, it suggests an attacker with privileged ac",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

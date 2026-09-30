@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--019394f2-fd91-5e26-9dda-191f7bc318ed",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--f7965e0c-1c98-52e1-827d-beef6ada7e26",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--f7965e0c-1c98-52e1-827d-beef6ada7e26",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--864dfe4d-20a4-5ed9-91f9-7dc44295cda4",
+      "created_by_ref": "identity--f7965e0c-1c98-52e1-827d-beef6ada7e26",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-rdp-server-registry-deletion",
+      "description": "This detection identifies the deletion of registry keys under HKEY_CURRENT_USER\\Software\\Microsoft\\Terminal Server Client\\Servers\\, which store records of previously connected remote systems via Remote Desktop Protocol (RDP). These keys are created automatically when a user connects to a remote host using the native Windows RDP client (mstsc.exe) and can be valuable forensic artifacts for tracking remote access activity. Malicious actors aware of this behavior may delete these keys after using R",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--ef5d6541-f428-5f60-b3ca-af298752e66f"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--d90d7853-c766-5a14-82c4-17c71b48bd2a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1070.004",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1070.004"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--ef5d6541-f428-5f60-b3ca-af298752e66f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1070.004",
+      "technique_id": "T1070.004",
+      "technique_ref": "attack-pattern--d90d7853-c766-5a14-82c4-17c71b48bd2a",
+      "description": "This detection identifies the deletion of registry keys under HKEY_CURRENT_USER\\Software\\Microsoft\\Terminal Server Client\\Servers\\, which store records of previously connected remote systems via Remote Desktop Protocol (RDP). These keys are created automatically when a user connects to a remote host using the native Windows RDP client (mstsc.exe) and can be valuable forensic artifacts for tracking remote access activity. Malicious actors aware of this behavior may delete these keys after using R",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

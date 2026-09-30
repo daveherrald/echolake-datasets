@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--aa87080f-898d-5a27-9def-2a0966ee43a7",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--907c13e9-dc4d-5cef-bcca-24614aab9d87",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--907c13e9-dc4d-5cef-bcca-24614aab9d87",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--075e9013-d9b3-56bf-ae1f-8f798c306a77",
+      "created_by_ref": "identity--907c13e9-dc4d-5cef-bcca-24614aab9d87",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-symlink-evaluation-change-via-fsutil",
+      "description": "This analytic detects the execution of the Windows built-in tool Fsutil.exe with\nthe \"behavior\", \"set\" and \"SymlinkEvaluation\" parameters.\nAttackers can abuse this to alter symlink evaluation behavior on Windows, potentially enabling remote traversal over SMB shares or evading defenses. \nSuch changes should be uncommon or even rare in enterprise environments and should be investigated.",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--e4358c13-4549-5f0b-abb2-41f0c818f1d7"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--2e3902a3-9bf7-5d08-a28a-d40872b2b594",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1222.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1222.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--e4358c13-4549-5f0b-abb2-41f0c818f1d7",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1222.001",
+      "technique_id": "T1222.001",
+      "technique_ref": "attack-pattern--2e3902a3-9bf7-5d08-a28a-d40872b2b594",
+      "description": "This analytic detects the execution of the Windows built-in tool Fsutil.exe with\nthe \"behavior\", \"set\" and \"SymlinkEvaluation\" parameters.\nAttackers can abuse this to alter symlink evaluation behavior on Windows, potentially enabling remote traversal over SMB shares or evading defenses. \nSuch changes should be uncommon or even rare in enterprise environments and should be investigated.",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "type": "bundle",
+  "id": "bundle--2819d030-7e7c-5f52-a757-56719b4ee0d2",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--bc8379a8-8223-564e-9cbc-e84e259788ba",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--bc8379a8-8223-564e-9cbc-e84e259788ba",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--2d9af22c-3fde-508e-8493-8369ca055ab2",
+      "created_by_ref": "identity--bc8379a8-8223-564e-9cbc-e84e259788ba",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: cisco-nvm-mshtml-or-mshta-network-execution-without-url-in-cli",
+      "description": "This analytic detects suspicious use of 'mshta.exe' or 'rundll32.exe' invoking 'mshtml.dll'\nor the 'RunHTMLApplication' export without including a direct HTTP/HTTPS URL in the command line.\nThis pattern could be associated with obfuscated script execution used by threat actors during\ninitial access or payload staging. The absence of a visible URL may indicate attempts to evade static\ndetections by embedding the URL via string concatenation, encoding (e.g., hex), or indirect script loaders\nlike '",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--c6910468-4266-59a7-81e8-12a41ef5549b",
+        "attack-action--ef02316a-f39a-5c86-a98d-baaa71d9f2a8"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--7c04057e-3f12-5d3b-ab40-fdc44626fac5",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1218.005",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1218.005"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--be51ad39-3da2-5db3-84e6-7bd0201b7acb",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1059.005",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1059.005"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--c6910468-4266-59a7-81e8-12a41ef5549b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1218.005",
+      "technique_id": "T1218.005",
+      "technique_ref": "attack-pattern--7c04057e-3f12-5d3b-ab40-fdc44626fac5",
+      "description": "This analytic detects suspicious use of 'mshta.exe' or 'rundll32.exe' invoking 'mshtml.dll'\nor the 'RunHTMLApplication' export without including a direct HTTP/HTTPS URL in the command line.\nThis pattern could be associated with obfuscated script execution used by threat actors during\ninitial access or payload staging. The absence of a visible URL may indicate attempts to evade static\ndetections by embedding the URL via string concatenation, encoding (e.g., hex), or indirect script loaders\nlike '",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--ef02316a-f39a-5c86-a98d-baaa71d9f2a8",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1059.005",
+      "technique_id": "T1059.005",
+      "technique_ref": "attack-pattern--be51ad39-3da2-5db3-84e6-7bd0201b7acb",
+      "description": "This analytic detects suspicious use of 'mshta.exe' or 'rundll32.exe' invoking 'mshtml.dll'\nor the 'RunHTMLApplication' export without including a direct HTTP/HTTPS URL in the command line.\nThis pattern could be associated with obfuscated script execution used by threat actors during\ninitial access or payload staging. The absence of a visible URL may indicate attempts to evade static\ndetections by embedding the URL via string concatenation, encoding (e.g., hex), or indirect script loaders\nlike '",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

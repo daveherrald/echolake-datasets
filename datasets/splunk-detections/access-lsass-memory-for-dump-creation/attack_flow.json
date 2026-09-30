@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--3980ef4b-db1e-5e45-85f0-1feed0a00598",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--53de21c1-1faa-5ab7-b438-522dc441ff5a",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--53de21c1-1faa-5ab7-b438-522dc441ff5a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--4fd9e15f-ba22-5136-bc77-69e8cfd50e21",
+      "created_by_ref": "identity--53de21c1-1faa-5ab7-b438-522dc441ff5a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: access-lsass-memory-for-dump-creation",
+      "description": "The following analytic detects attempts to dump the LSASS process memory, a common technique in credential dumping attacks. It leverages Sysmon logs, specifically EventCode 10, to identify suspicious call traces to dbgcore.dll and dbghelp.dll associated with lsass.exe. This activity is significant as it often precedes the theft of sensitive login credentials, posing a high risk of unauthorized access to systems and data. If confirmed malicious, attackers could gain access to critical credentials",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--e82de900-6cb0-54d4-979c-fbcd3dda10f0"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--1da3479d-9056-5c8e-babf-289292f9439d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1003.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1003.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--e82de900-6cb0-54d4-979c-fbcd3dda10f0",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1003.001",
+      "technique_id": "T1003.001",
+      "technique_ref": "attack-pattern--1da3479d-9056-5c8e-babf-289292f9439d",
+      "description": "The following analytic detects attempts to dump the LSASS process memory, a common technique in credential dumping attacks. It leverages Sysmon logs, specifically EventCode 10, to identify suspicious call traces to dbgcore.dll and dbghelp.dll associated with lsass.exe. This activity is significant as it often precedes the theft of sensitive login credentials, posing a high risk of unauthorized access to systems and data. If confirmed malicious, attackers could gain access to critical credentials",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

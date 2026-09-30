@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--a6c1ccba-dfcb-5236-8b13-4e8b15de6894",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--da7becee-1e90-5c11-a045-254870313c7b",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--da7becee-1e90-5c11-a045-254870313c7b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--cd298414-6fe0-5a53-95bd-17754621d907",
+      "created_by_ref": "identity--da7becee-1e90-5c11-a045-254870313c7b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: rundll32-create-remote-thread-to-a-process",
+      "description": "The following analytic detects the creation of a remote thread by rundll32.exe into another process. It leverages Sysmon EventCode 8 logs, specifically monitoring SourceImage and TargetImage fields. This activity is significant as it is a common technique used by malware, such as IcedID, to execute malicious code within legitimate processes, aiding in defense evasion and data theft. If confirmed malicious, this behavior could allow an attacker to execute arbitrary code, escalate privileges, and",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--eafafc43-e900-57b3-a39d-8a747bfdd5f0"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--709d452f-458c-5cf3-bb0e-6309b3c60921",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1055",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1055"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--eafafc43-e900-57b3-a39d-8a747bfdd5f0",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1055",
+      "technique_id": "T1055",
+      "technique_ref": "attack-pattern--709d452f-458c-5cf3-bb0e-6309b3c60921",
+      "description": "The following analytic detects the creation of a remote thread by rundll32.exe into another process. It leverages Sysmon EventCode 8 logs, specifically monitoring SourceImage and TargetImage fields. This activity is significant as it is a common technique used by malware, such as IcedID, to execute malicious code within legitimate processes, aiding in defense evasion and data theft. If confirmed malicious, this behavior could allow an attacker to execute arbitrary code, escalate privileges, and",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

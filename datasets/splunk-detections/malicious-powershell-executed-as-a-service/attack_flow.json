@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--aaf3ed87-46e9-59b1-859f-8b5645b8557c",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--df33f7d8-7b56-5cca-ab13-daf8a622bcec",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--df33f7d8-7b56-5cca-ab13-daf8a622bcec",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--8d63f342-8bf3-5002-8953-5b4f37fef703",
+      "created_by_ref": "identity--df33f7d8-7b56-5cca-ab13-daf8a622bcec",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: malicious-powershell-executed-as-a-service",
+      "description": "The following analytic identifies the execution of malicious PowerShell commands or payloads via the Windows SC.exe utility. It detects this activity by analyzing Windows System logs (EventCode 7045) and filtering for specific PowerShell-related patterns in the ImagePath field. This behavior is significant because it indicates potential abuse of the Windows Service Control Manager to run unauthorized or harmful scripts, which could lead to system compromise. If confirmed malicious, this activity",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--6a7e4c0b-fcae-567a-a372-c391f07de272"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--44a4f25f-1979-5a92-b2d8-2341f9552aa2",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1569.002",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1569.002"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--6a7e4c0b-fcae-567a-a372-c391f07de272",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1569.002",
+      "technique_id": "T1569.002",
+      "technique_ref": "attack-pattern--44a4f25f-1979-5a92-b2d8-2341f9552aa2",
+      "description": "The following analytic identifies the execution of malicious PowerShell commands or payloads via the Windows SC.exe utility. It detects this activity by analyzing Windows System logs (EventCode 7045) and filtering for specific PowerShell-related patterns in the ImagePath field. This behavior is significant because it indicates potential abuse of the Windows Service Control Manager to run unauthorized or harmful scripts, which could lead to system compromise. If confirmed malicious, this activity",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--c86110f0-911a-55e4-a616-b6500107f92c",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--5c5ad448-f8e2-5450-9b0b-3f6da7517706",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--5c5ad448-f8e2-5450-9b0b-3f6da7517706",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--95cb54bf-9adf-54aa-bf72-a2a7a17f4e0f",
+      "created_by_ref": "identity--5c5ad448-f8e2-5450-9b0b-3f6da7517706",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: high-frequency-copy-of-files-in-network-share",
+      "description": "The following analytic detects a high frequency of file copying or moving within network shares, which may indicate potential data sabotage or exfiltration attempts. It leverages Windows Security Event Logs (EventCode 5145) to monitor access to specific file types and network shares. This activity is significant as it can reveal insider threats attempting to transfer classified or internal files, potentially leading to data breaches or evidence tampering. If confirmed malicious, this behavior co",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--991d60b5-3706-5609-8952-c68ca2adba41"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--5f501006-012c-5492-881a-48a6e9aec673",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1537",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1537"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--991d60b5-3706-5609-8952-c68ca2adba41",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1537",
+      "technique_id": "T1537",
+      "technique_ref": "attack-pattern--5f501006-012c-5492-881a-48a6e9aec673",
+      "description": "The following analytic detects a high frequency of file copying or moving within network shares, which may indicate potential data sabotage or exfiltration attempts. It leverages Windows Security Event Logs (EventCode 5145) to monitor access to specific file types and network shares. This activity is significant as it can reveal insider threats attempting to transfer classified or internal files, potentially leading to data breaches or evidence tampering. If confirmed malicious, this behavior co",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

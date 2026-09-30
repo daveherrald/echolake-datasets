@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--3b6c359e-5d15-5db9-9c75-a95fbdd23e69",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--27922db4-3cf6-5823-9ebd-b956151a0b16",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--27922db4-3cf6-5823-9ebd-b956151a0b16",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--57de9dfe-931d-58a0-acff-7060a07b5c14",
+      "created_by_ref": "identity--27922db4-3cf6-5823-9ebd-b956151a0b16",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: wmic-xsl-execution-via-url",
+      "description": "The following analytic detects `wmic.exe` loading a remote XSL script\nvia a URL. This detection leverages Endpoint Detection and Response (EDR) data,\nfocusing on command-line executions that include HTTP/HTTPS URLs and the /FORMAT\nswitch. This activity is significant as it indicates a potential application control\nbypass, allowing adversaries to execute JScript or VBScript within an XSL file.\nIf confirmed malicious, this technique can enable attackers to execute arbitrary\ncode, escalate privileg",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--132a9020-16f1-5495-a353-bab8539e222d"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--1d25673f-ef21-5da9-89ed-de5b01176ce9",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1220",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1220"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--132a9020-16f1-5495-a353-bab8539e222d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1220",
+      "technique_id": "T1220",
+      "technique_ref": "attack-pattern--1d25673f-ef21-5da9-89ed-de5b01176ce9",
+      "description": "The following analytic detects `wmic.exe` loading a remote XSL script\nvia a URL. This detection leverages Endpoint Detection and Response (EDR) data,\nfocusing on command-line executions that include HTTP/HTTPS URLs and the /FORMAT\nswitch. This activity is significant as it indicates a potential application control\nbypass, allowing adversaries to execute JScript or VBScript within an XSL file.\nIf confirmed malicious, this technique can enable attackers to execute arbitrary\ncode, escalate privileg",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

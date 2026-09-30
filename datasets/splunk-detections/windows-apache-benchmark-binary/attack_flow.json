@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--8605ea92-8979-520e-b66f-19b939f429f4",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--93c456fb-fc30-58c1-a24c-127325d470d8",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--93c456fb-fc30-58c1-a24c-127325d470d8",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--93cbbe3b-6171-5d95-94fb-3027fc724057",
+      "created_by_ref": "identity--93c456fb-fc30-58c1-a24c-127325d470d8",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-apache-benchmark-binary",
+      "description": "The following analytic detects the execution of the Apache Benchmark binary (ab.exe), commonly used by MetaSploit payloads. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process creation events where the original file name is ab.exe. This activity is significant as it may indicate the presence of a MetaSploit attack, which uses Apache Benchmark to generate malicious payloads. If confirmed malicious, this could lead to unauthorized network connections, further s",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--bdd9643b-f86d-5b85-9c39-ee7a22c52af0"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--757dacd0-8027-575b-8c65-c5000fc4a14b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1059",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1059"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--bdd9643b-f86d-5b85-9c39-ee7a22c52af0",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1059",
+      "technique_id": "T1059",
+      "technique_ref": "attack-pattern--757dacd0-8027-575b-8c65-c5000fc4a14b",
+      "description": "The following analytic detects the execution of the Apache Benchmark binary (ab.exe), commonly used by MetaSploit payloads. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process creation events where the original file name is ab.exe. This activity is significant as it may indicate the presence of a MetaSploit attack, which uses Apache Benchmark to generate malicious payloads. If confirmed malicious, this could lead to unauthorized network connections, further s",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

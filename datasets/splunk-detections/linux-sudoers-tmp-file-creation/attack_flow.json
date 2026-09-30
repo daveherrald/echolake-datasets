@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--ac7b9a71-7d4f-5377-9475-7327741a1949",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--04d92390-1da3-564d-bb4b-37fa8230a18a",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--04d92390-1da3-564d-bb4b-37fa8230a18a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--4a77b046-b87d-5194-83b0-3a797765d270",
+      "created_by_ref": "identity--04d92390-1da3-564d-bb4b-37fa8230a18a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: linux-sudoers-tmp-file-creation",
+      "description": "The following analytic detects the creation of the \"sudoers.tmp\" file, which occurs when editing the /etc/sudoers file using visudo or another editor on a Linux platform. This detection leverages filesystem data to identify the presence of \"sudoers.tmp\" files. Monitoring this activity is crucial as adversaries may exploit it to gain elevated privileges on a compromised host. If confirmed malicious, this activity could allow attackers to modify sudoers configurations, potentially granting them un",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--81363d7d-3626-5bd6-bc2b-dd0d3cf08d3c"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--36cfcef5-2b9d-5c2a-a8e7-c58c0432dcd1",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1548.003",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1548.003"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--81363d7d-3626-5bd6-bc2b-dd0d3cf08d3c",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1548.003",
+      "technique_id": "T1548.003",
+      "technique_ref": "attack-pattern--36cfcef5-2b9d-5c2a-a8e7-c58c0432dcd1",
+      "description": "The following analytic detects the creation of the \"sudoers.tmp\" file, which occurs when editing the /etc/sudoers file using visudo or another editor on a Linux platform. This detection leverages filesystem data to identify the presence of \"sudoers.tmp\" files. Monitoring this activity is crucial as adversaries may exploit it to gain elevated privileges on a compromised host. If confirmed malicious, this activity could allow attackers to modify sudoers configurations, potentially granting them un",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--1cb3c479-993b-5238-bbba-46cb311cf1fb",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--2cf8b787-f405-5d96-8d98-5695476191f6",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--2cf8b787-f405-5d96-8d98-5695476191f6",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--7308e9ab-a69d-5e9c-b84c-bb6911bb0fa9",
+      "created_by_ref": "identity--2cf8b787-f405-5d96-8d98-5695476191f6",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-audit-policy-cleared-via-auditpol",
+      "description": "The following analytic identifies the execution of `auditpol.exe` with the \"/clear\" command-line argument used to clears the audit policy. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line executions. This activity can be significant as it indicates potential defense evasion by adversaries or Red Teams, aiming to limit data that can be leveraged for detections and audits. If confirmed malicious, this behavior could allow attackers to",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--8daf5c91-1f81-58c7-9eaf-51082a211235"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--3bfd2810-8b3f-5dfc-a6d6-217456267194",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.002",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1562.002"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--8daf5c91-1f81-58c7-9eaf-51082a211235",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.002",
+      "technique_id": "T1562.002",
+      "technique_ref": "attack-pattern--3bfd2810-8b3f-5dfc-a6d6-217456267194",
+      "description": "The following analytic identifies the execution of `auditpol.exe` with the \"/clear\" command-line argument used to clears the audit policy. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line executions. This activity can be significant as it indicates potential defense evasion by adversaries or Red Teams, aiming to limit data that can be leveraged for detections and audits. If confirmed malicious, this behavior could allow attackers to",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

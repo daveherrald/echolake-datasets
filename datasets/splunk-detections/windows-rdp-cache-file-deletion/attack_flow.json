@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--551600b4-5adf-53cd-8b5f-fc5a2d437dbc",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--b483226d-172c-5a30-9683-ece2cc7bca36",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--b483226d-172c-5a30-9683-ece2cc7bca36",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--84dbcde6-50ed-55c9-a4d3-97a9d6059cca",
+      "created_by_ref": "identity--b483226d-172c-5a30-9683-ece2cc7bca36",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-rdp-cache-file-deletion",
+      "description": "This detection identifies the deletion of RDP bitmap cache files\u2014specifically .bmc and .bin files\u2014typically stored in the user profile under the Terminal Server Client\\Cache directory. These files are created by the native Windows Remote Desktop Client (mstsc.exe) and store graphical elements from remote sessions to improve performance. Deleting these files may indicate an attempt to remove forensic evidence of RDP usage. While rare in legitimate user behavior, this action is commonly associated",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--1dc259bf-f2fb-5bdd-ace4-a2db9085f003"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--9d9fdf82-ef6e-515d-9e55-fb2fce0b9eff",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1070.004",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1070.004"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--1dc259bf-f2fb-5bdd-ace4-a2db9085f003",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1070.004",
+      "technique_id": "T1070.004",
+      "technique_ref": "attack-pattern--9d9fdf82-ef6e-515d-9e55-fb2fce0b9eff",
+      "description": "This detection identifies the deletion of RDP bitmap cache files\u2014specifically .bmc and .bin files\u2014typically stored in the user profile under the Terminal Server Client\\Cache directory. These files are created by the native Windows Remote Desktop Client (mstsc.exe) and store graphical elements from remote sessions to improve performance. Deleting these files may indicate an attempt to remove forensic evidence of RDP usage. While rare in legitimate user behavior, this action is commonly associated",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

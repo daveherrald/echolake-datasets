@@ -1,0 +1,110 @@
+{
+  "type": "bundle",
+  "id": "bundle--a6a483ca-cd78-5bd3-aa6f-2ffbae22398e",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--290db6a7-8e58-5a45-87f4-a7fd78f9e8cb",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--290db6a7-8e58-5a45-87f4-a7fd78f9e8cb",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--a2040036-a53e-5390-a819-a3fffbb69df8",
+      "created_by_ref": "identity--290db6a7-8e58-5a45-87f4-a7fd78f9e8cb",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-powershell-disable-http-logging",
+      "description": "The following analytic detects the use of `get-WebConfigurationProperty` and `Set-ItemProperty` commands in PowerShell to disable HTTP logging on Windows systems. This detection leverages PowerShell Script Block Logging, specifically looking for script blocks that reference HTTP logging properties and attempt to set them to \"false\" or \"dontLog\". Disabling HTTP logging is significant as it can be used by adversaries to cover their tracks and delete logs, hindering forensic investigations. If conf",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--43ca1037-3c2f-537e-8c16-bfa8bbc1262e",
+        "attack-action--61e42301-7f55-58a8-9038-24b5a8d7f394"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--f2d360ff-6553-56c5-b72e-192e7e68b66d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1505.004",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1505.004"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--aeed0a48-0fbb-5e12-b7d7-a22a2a7f64c3",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.002",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1562.002"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--43ca1037-3c2f-537e-8c16-bfa8bbc1262e",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1505.004",
+      "technique_id": "T1505.004",
+      "technique_ref": "attack-pattern--f2d360ff-6553-56c5-b72e-192e7e68b66d",
+      "description": "The following analytic detects the use of `get-WebConfigurationProperty` and `Set-ItemProperty` commands in PowerShell to disable HTTP logging on Windows systems. This detection leverages PowerShell Script Block Logging, specifically looking for script blocks that reference HTTP logging properties and attempt to set them to \"false\" or \"dontLog\". Disabling HTTP logging is significant as it can be used by adversaries to cover their tracks and delete logs, hindering forensic investigations. If conf",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--61e42301-7f55-58a8-9038-24b5a8d7f394",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.002",
+      "technique_id": "T1562.002",
+      "technique_ref": "attack-pattern--aeed0a48-0fbb-5e12-b7d7-a22a2a7f64c3",
+      "description": "The following analytic detects the use of `get-WebConfigurationProperty` and `Set-ItemProperty` commands in PowerShell to disable HTTP logging on Windows systems. This detection leverages PowerShell Script Block Logging, specifically looking for script blocks that reference HTTP logging properties and attempt to set them to \"false\" or \"dontLog\". Disabling HTTP logging is significant as it can be used by adversaries to cover their tracks and delete logs, hindering forensic investigations. If conf",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--9bc59700-7d3a-53d6-8206-a361bfd8b32e",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--025ac542-8209-56aa-a541-66b7850239fb",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--025ac542-8209-56aa-a541-66b7850239fb",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--27120c04-9bee-5f40-b098-a8970cacf48d",
+      "created_by_ref": "identity--025ac542-8209-56aa-a541-66b7850239fb",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-indirect-command-execution-via-pcalua",
+      "description": "The following analytic detects programs initiated by pcalua.exe, the Microsoft Windows Program Compatibility Assistant. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process and parent process information. While pcalua.exe can start legitimate programs, it is significant because attackers may use it to bypass command line execution protections. If confirmed malicious, this activity could allow attackers to execute arbitrary commands, potentially lea",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--18753d08-1cc0-509a-9ed3-d7229dff51c4"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--a1285f6c-43ad-58e9-9f17-0a0dfd5ce8e5",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1202",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1202"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--18753d08-1cc0-509a-9ed3-d7229dff51c4",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1202",
+      "technique_id": "T1202",
+      "technique_ref": "attack-pattern--a1285f6c-43ad-58e9-9f17-0a0dfd5ce8e5",
+      "description": "The following analytic detects programs initiated by pcalua.exe, the Microsoft Windows Program Compatibility Assistant. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process and parent process information. While pcalua.exe can start legitimate programs, it is significant because attackers may use it to bypass command line execution protections. If confirmed malicious, this activity could allow attackers to execute arbitrary commands, potentially lea",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

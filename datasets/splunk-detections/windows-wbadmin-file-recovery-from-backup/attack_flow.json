@@ -1,0 +1,110 @@
+{
+  "type": "bundle",
+  "id": "bundle--71c91243-6c04-5d1b-9037-c2796ec95921",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--302572e5-f66f-522a-babe-bba4c4a0ce1b",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--302572e5-f66f-522a-babe-bba4c4a0ce1b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--cf435807-9a63-5269-bff8-bfa36ece1386",
+      "created_by_ref": "identity--302572e5-f66f-522a-babe-bba4c4a0ce1b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-wbadmin-file-recovery-from-backup",
+      "description": "The following analytic identifies the execution of wbadmin.exe with arguments indicative of restoring files from an existing backup. \nWBAdmin is a legitimate Windows Backup utility used for creating, managing, and restoring backups. However, adversaries may abuse it to restore specific files (e.g., sensitive credentials, configuration files, or malware stagers) from prior backups to regain access or re-establish persistence after cleanup or encryption events.\nMonitoring this behavior is importan",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--459b4292-d420-5f7a-b306-581e856e4393",
+        "attack-action--9dbb4f4b-c38c-5421-a3ba-610b47c386b5"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--113fbc21-7236-5e58-a0b6-418dcb24d431",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1490",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1490"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--ab1f8a71-d5f5-52a8-a56d-c742bfefff33",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1565.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1565.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--459b4292-d420-5f7a-b306-581e856e4393",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1490",
+      "technique_id": "T1490",
+      "technique_ref": "attack-pattern--113fbc21-7236-5e58-a0b6-418dcb24d431",
+      "description": "The following analytic identifies the execution of wbadmin.exe with arguments indicative of restoring files from an existing backup. \nWBAdmin is a legitimate Windows Backup utility used for creating, managing, and restoring backups. However, adversaries may abuse it to restore specific files (e.g., sensitive credentials, configuration files, or malware stagers) from prior backups to regain access or re-establish persistence after cleanup or encryption events.\nMonitoring this behavior is importan",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--9dbb4f4b-c38c-5421-a3ba-610b47c386b5",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1565.001",
+      "technique_id": "T1565.001",
+      "technique_ref": "attack-pattern--ab1f8a71-d5f5-52a8-a56d-c742bfefff33",
+      "description": "The following analytic identifies the execution of wbadmin.exe with arguments indicative of restoring files from an existing backup. \nWBAdmin is a legitimate Windows Backup utility used for creating, managing, and restoring backups. However, adversaries may abuse it to restore specific files (e.g., sensitive credentials, configuration files, or malware stagers) from prior backups to regain access or re-establish persistence after cleanup or encryption events.\nMonitoring this behavior is importan",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

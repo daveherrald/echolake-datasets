@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--b0300811-c639-5d92-831f-950e67fa2fec",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--22acaafb-eb41-5775-ac9a-d03a6809a50a",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--22acaafb-eb41-5775-ac9a-d03a6809a50a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--85fef203-0153-52e4-b404-270e3e5416b3",
+      "created_by_ref": "identity--22acaafb-eb41-5775-ac9a-d03a6809a50a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-steal-authentication-certificates-export-certificate",
+      "description": "The following analytic detects the use of the PowerShell cmdlet 'export-certificate' executed via the command line, indicating an attempt to export a certificate from the local Windows Certificate Store. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process execution logs and command-line arguments. Exporting certificates is significant as it may indicate credential theft or preparation for man-in-the-middle attacks. If confirmed malicious, this act",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--e52e8242-1a37-53b6-8ea2-112d2509efff"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--e3463373-7e6d-5776-8baf-2a1e55947d52",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1649",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1649"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--e52e8242-1a37-53b6-8ea2-112d2509efff",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1649",
+      "technique_id": "T1649",
+      "technique_ref": "attack-pattern--e3463373-7e6d-5776-8baf-2a1e55947d52",
+      "description": "The following analytic detects the use of the PowerShell cmdlet 'export-certificate' executed via the command line, indicating an attempt to export a certificate from the local Windows Certificate Store. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process execution logs and command-line arguments. Exporting certificates is significant as it may indicate credential theft or preparation for man-in-the-middle attacks. If confirmed malicious, this act",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

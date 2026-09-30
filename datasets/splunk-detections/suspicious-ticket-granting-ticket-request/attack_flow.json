@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--7ce13a96-73f8-545a-b70f-8db9e5eaada5",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--eac09e12-6420-5a4b-9b5a-149960568305",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--eac09e12-6420-5a4b-9b5a-149960568305",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--1d541abb-ce7a-5aed-b31e-8bacb7726a8e",
+      "created_by_ref": "identity--eac09e12-6420-5a4b-9b5a-149960568305",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: suspicious-ticket-granting-ticket-request",
+      "description": "The following analytic detects suspicious Kerberos Ticket Granting Ticket (TGT) requests that may indicate exploitation of CVE-2021-42278 and CVE-2021-42287. It leverages Event ID 4781 (account name change) and Event ID 4768 (TGT request) to identify sequences where a newly renamed computer account requests a TGT. This behavior is significant as it could represent an attempt to escalate privileges by impersonating a Domain Controller. If confirmed malicious, this activity could allow attackers t",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--7b013c1b-bfe7-5c8d-ad92-4bd0792b809f"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--6038dbb2-0a7a-5ae8-921f-d149d405f105",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1078.002",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1078.002"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--7b013c1b-bfe7-5c8d-ad92-4bd0792b809f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1078.002",
+      "technique_id": "T1078.002",
+      "technique_ref": "attack-pattern--6038dbb2-0a7a-5ae8-921f-d149d405f105",
+      "description": "The following analytic detects suspicious Kerberos Ticket Granting Ticket (TGT) requests that may indicate exploitation of CVE-2021-42278 and CVE-2021-42287. It leverages Event ID 4781 (account name change) and Event ID 4768 (TGT request) to identify sequences where a newly renamed computer account requests a TGT. This behavior is significant as it could represent an attempt to escalate privileges by impersonating a Domain Controller. If confirmed malicious, this activity could allow attackers t",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

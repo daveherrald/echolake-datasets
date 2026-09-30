@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--20e5d15e-c9d1-5324-bbe0-279d530a980b",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--fa9f6cd6-ccd1-5d4e-99c5-dd2a33c6a72f",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--fa9f6cd6-ccd1-5d4e-99c5-dd2a33c6a72f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--02dc35ae-f7d0-51e7-ba39-2cf36f11cba1",
+      "created_by_ref": "identity--fa9f6cd6-ccd1-5d4e-99c5-dd2a33c6a72f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-rundll32-load-dll-in-temp-dir",
+      "description": "This detection identifies instances where rundll32.exe is used to load a DLL from a temporary directory, such as C:\\Users\\<User>\\AppData\\Local\\Temp\\ or C:\\Windows\\Temp\\. While rundll32.exe is a legitimate Windows utility used to execute functions exported from DLLs, its use to load libraries from temporary locations is highly suspicious. These directories are commonly used by malware and red team tools to stage payloads or execute code in-memory without writing it to more persistent locations. T",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--8e179c93-a610-544f-8015-6cedd9faafc9"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--c172cbd4-e5ea-5df3-9e80-cdc3e651244c",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1218.011",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1218.011"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--8e179c93-a610-544f-8015-6cedd9faafc9",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1218.011",
+      "technique_id": "T1218.011",
+      "technique_ref": "attack-pattern--c172cbd4-e5ea-5df3-9e80-cdc3e651244c",
+      "description": "This detection identifies instances where rundll32.exe is used to load a DLL from a temporary directory, such as C:\\Users\\<User>\\AppData\\Local\\Temp\\ or C:\\Windows\\Temp\\. While rundll32.exe is a legitimate Windows utility used to execute functions exported from DLLs, its use to load libraries from temporary locations is highly suspicious. These directories are commonly used by malware and red team tools to stage payloads or execute code in-memory without writing it to more persistent locations. T",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

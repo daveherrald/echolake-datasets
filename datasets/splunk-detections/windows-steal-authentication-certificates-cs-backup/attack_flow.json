@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--f57a9835-f1b4-5ecd-837b-41bc7701ed64",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--21b7b464-3a16-59e3-b576-2269de14ee0f",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--21b7b464-3a16-59e3-b576-2269de14ee0f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--f05a74cc-551c-59d7-af68-31ab71e14118",
+      "created_by_ref": "identity--21b7b464-3a16-59e3-b576-2269de14ee0f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-steal-authentication-certificates-cs-backup",
+      "description": "The following analytic identifies the backup of the Active Directory Certificate Services (AD CS) store, detected via Event ID 4876. This event is logged when a backup is performed using the CertSrv.msc UI or the CertUtil.exe -BackupDB command. Monitoring this activity is crucial as unauthorized backups can indicate an attempt to steal authentication certificates, which are critical for secure communications. If confirmed malicious, this activity could allow an attacker to impersonate users, esc",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--0580259b-96aa-5bd3-b7ca-1f09800e57ca"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--2f3e9991-825c-55f0-83f9-298bb8ca4e31",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1649",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1649"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--0580259b-96aa-5bd3-b7ca-1f09800e57ca",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1649",
+      "technique_id": "T1649",
+      "technique_ref": "attack-pattern--2f3e9991-825c-55f0-83f9-298bb8ca4e31",
+      "description": "The following analytic identifies the backup of the Active Directory Certificate Services (AD CS) store, detected via Event ID 4876. This event is logged when a backup is performed using the CertSrv.msc UI or the CertUtil.exe -BackupDB command. Monitoring this activity is crucial as unauthorized backups can indicate an attempt to steal authentication certificates, which are critical for secure communications. If confirmed malicious, this activity could allow an attacker to impersonate users, esc",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

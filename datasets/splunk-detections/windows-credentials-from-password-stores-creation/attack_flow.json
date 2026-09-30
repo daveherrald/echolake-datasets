@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--22392774-bbbd-5116-9925-e1081ea16031",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--700400d6-097d-55b3-bdee-37705df13d44",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--700400d6-097d-55b3-bdee-37705df13d44",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--6f4c003b-d124-54c8-b516-46659203bbc3",
+      "created_by_ref": "identity--700400d6-097d-55b3-bdee-37705df13d44",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-credentials-from-password-stores-creation",
+      "description": "The following analytic detects the execution of the Windows OS tool cmdkey.exe, which is used to create stored usernames, passwords, or credentials. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process execution logs and command-line arguments. This activity is significant because cmdkey.exe is often abused by post-exploitation tools and malware, such as Darkgate, to gain unauthorized access. If confirmed malicious, this behavior could allow attack",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--e2b48367-afc0-5416-8070-ef9ef44e761c"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--251fff67-85b2-5e7e-99a4-c6326bb6b429",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1555",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1555"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--e2b48367-afc0-5416-8070-ef9ef44e761c",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1555",
+      "technique_id": "T1555",
+      "technique_ref": "attack-pattern--251fff67-85b2-5e7e-99a4-c6326bb6b429",
+      "description": "The following analytic detects the execution of the Windows OS tool cmdkey.exe, which is used to create stored usernames, passwords, or credentials. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process execution logs and command-line arguments. This activity is significant because cmdkey.exe is often abused by post-exploitation tools and malware, such as Darkgate, to gain unauthorized access. If confirmed malicious, this behavior could allow attack",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

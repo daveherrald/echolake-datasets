@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--facc80d5-5428-50ff-a6e2-bfcba498c47b",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--3460f36b-8a2e-525c-81e3-5e97d4933cca",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--3460f36b-8a2e-525c-81e3-5e97d4933cca",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--f52d1760-67a2-5903-a9b1-493363c63049",
+      "created_by_ref": "identity--3460f36b-8a2e-525c-81e3-5e97d4933cca",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: usn-journal-deletion",
+      "description": "The following analytic detects the deletion of the USN Journal using the fsutil.exe utility. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process execution logs that include command-line details. This activity is significant because the USN Journal maintains a log of all changes made to files on the disk, and its deletion can be an indicator of an attempt to cover tracks or hinder forensic investigations. If confirmed malicious, this action could allow an atta",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--62595ea2-842f-55ae-b96f-9f21353e9c92"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--913df704-7856-5dd1-85fc-e34d49d64a75",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1070",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1070"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--62595ea2-842f-55ae-b96f-9f21353e9c92",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1070",
+      "technique_id": "T1070",
+      "technique_ref": "attack-pattern--913df704-7856-5dd1-85fc-e34d49d64a75",
+      "description": "The following analytic detects the deletion of the USN Journal using the fsutil.exe utility. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process execution logs that include command-line details. This activity is significant because the USN Journal maintains a log of all changes made to files on the disk, and its deletion can be an indicator of an attempt to cover tracks or hinder forensic investigations. If confirmed malicious, this action could allow an atta",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

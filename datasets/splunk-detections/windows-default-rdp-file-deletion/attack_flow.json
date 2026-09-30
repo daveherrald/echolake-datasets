@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--ca4bdb29-bbe3-54cc-8af4-6a523bd511b6",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--8fd3e71b-414a-5106-bb49-86ff5915048f",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--8fd3e71b-414a-5106-bb49-86ff5915048f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--4ff135ad-f353-5ebb-9b1b-d1cfc06b03fe",
+      "created_by_ref": "identity--8fd3e71b-414a-5106-bb49-86ff5915048f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-default-rdp-file-deletion",
+      "description": "This detection identifies the deletion of the Default.rdp file from a user\u2019s Documents folder. This file is automatically created or updated by the Remote Desktop Connection client (mstsc.exe) whenever a user initiates an RDP session. It contains session configuration data, such as the remote hostname and display settings. While the presence of this file is normal during legitimate RDP usage, its deletion may indicate an attempt to conceal evidence of remote access activity. Threat actors and re",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--bcfeb8a5-4ce2-52f6-a182-062568e4854b"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--96f0f0b9-f9f8-534b-8b89-22937e1ea644",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1070.004",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1070.004"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--bcfeb8a5-4ce2-52f6-a182-062568e4854b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1070.004",
+      "technique_id": "T1070.004",
+      "technique_ref": "attack-pattern--96f0f0b9-f9f8-534b-8b89-22937e1ea644",
+      "description": "This detection identifies the deletion of the Default.rdp file from a user\u2019s Documents folder. This file is automatically created or updated by the Remote Desktop Connection client (mstsc.exe) whenever a user initiates an RDP session. It contains session configuration data, such as the remote hostname and display settings. While the presence of this file is normal during legitimate RDP usage, its deletion may indicate an attempt to conceal evidence of remote access activity. Threat actors and re",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

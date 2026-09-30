@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--d2818a11-312f-50aa-8af9-d04cccc7c374",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--34822bf9-f092-51e5-b5e9-3ee44fb8b5cc",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--34822bf9-f092-51e5-b5e9-3ee44fb8b5cc",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--f964a55c-f8fc-551b-8110-d35093009419",
+      "created_by_ref": "identity--34822bf9-f092-51e5-b5e9-3ee44fb8b5cc",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-file-share-discovery-with-powerview",
+      "description": "The following analytic detects the execution of the Invoke-ShareFinder PowerShell cmdlet from PowerView. This detection leverages PowerShell Script Block Logging to identify instances where this specific command is executed. Monitoring this activity is crucial as it indicates an attempt to enumerate network file shares, which may contain sensitive information such as backups, scripts, and credentials. If confirmed malicious, this activity could enable an attacker to escalate privileges or move l",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--461905bd-a9c1-522c-92ef-50da510f7089"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--5b71b931-8b55-5a5c-a408-8d082ea4d6fc",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1135",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1135"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--461905bd-a9c1-522c-92ef-50da510f7089",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1135",
+      "technique_id": "T1135",
+      "technique_ref": "attack-pattern--5b71b931-8b55-5a5c-a408-8d082ea4d6fc",
+      "description": "The following analytic detects the execution of the Invoke-ShareFinder PowerShell cmdlet from PowerView. This detection leverages PowerShell Script Block Logging to identify instances where this specific command is executed. Monitoring this activity is crucial as it indicates an attempt to enumerate network file shares, which may contain sensitive information such as backups, scripts, and credentials. If confirmed malicious, this activity could enable an attacker to escalate privileges or move l",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

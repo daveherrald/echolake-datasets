@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--0e5566c4-5342-559f-b50a-51a07fa5aa58",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--0fa2d9d6-dc0b-55c3-b279-8f34f27978ed",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--0fa2d9d6-dc0b-55c3-b279-8f34f27978ed",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--1e57038e-74dc-51ef-bdf3-46766ade834d",
+      "created_by_ref": "identity--0fa2d9d6-dc0b-55c3-b279-8f34f27978ed",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-modify-registry-disable-toast-notifications",
+      "description": "The following analytic detects modifications to the Windows registry that disable toast notifications. It leverages data from the Endpoint.Registry datamodel, specifically monitoring changes to the registry path \"*\\\\SOFTWARE\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\PushNotifications\\\\ToastEnabled*\" with a value set to \"0x00000000\". This activity is significant because disabling toast notifications can prevent users from receiving critical system and application updates, which adversaries like Azorul",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--cace95a1-83c8-5105-ae6c-a78644671964"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--d68dca92-d53b-5078-93f6-3482fe2b3367",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1112",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1112"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--cace95a1-83c8-5105-ae6c-a78644671964",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1112",
+      "technique_id": "T1112",
+      "technique_ref": "attack-pattern--d68dca92-d53b-5078-93f6-3482fe2b3367",
+      "description": "The following analytic detects modifications to the Windows registry that disable toast notifications. It leverages data from the Endpoint.Registry datamodel, specifically monitoring changes to the registry path \"*\\\\SOFTWARE\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\PushNotifications\\\\ToastEnabled*\" with a value set to \"0x00000000\". This activity is significant because disabling toast notifications can prevent users from receiving critical system and application updates, which adversaries like Azorul",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--0bf82ada-d5f4-56e8-b944-ab8cfaa485af",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--009100e4-4eb8-567a-8379-a1434b149a91",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--009100e4-4eb8-567a-8379-a1434b149a91",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--0c46372f-603e-5dd4-87ff-63c55cd03d2b",
+      "created_by_ref": "identity--009100e4-4eb8-567a-8379-a1434b149a91",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: esxi-vib-acceptance-level-tampering",
+      "description": "This detection identifies changes to the VIB (vSphere Installation Bundle) acceptance level on an ESXi host. Modifying the acceptance level, such as setting it to CommunitySupported, lowers the system's integrity enforcement and may allow the installation of unsigned or unverified software.",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--b79ccfe5-aff0-5817-92bc-13d316fd119b"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--2c99b3b7-bc6d-51fa-9143-0d58a2da212f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1562"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--b79ccfe5-aff0-5817-92bc-13d316fd119b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562",
+      "technique_id": "T1562",
+      "technique_ref": "attack-pattern--2c99b3b7-bc6d-51fa-9143-0d58a2da212f",
+      "description": "This detection identifies changes to the VIB (vSphere Installation Bundle) acceptance level on an ESXi host. Modifying the acceptance level, such as setting it to CommunitySupported, lowers the system's integrity enforcement and may allow the installation of unsigned or unverified software.",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

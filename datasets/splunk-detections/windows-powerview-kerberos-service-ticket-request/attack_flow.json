@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--a87b7985-7369-546f-a38a-37b539bbc967",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--14b44a85-f3c7-589f-aacd-7b295fd5ac92",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--14b44a85-f3c7-589f-aacd-7b295fd5ac92",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--5b6f105a-87fd-57f1-b2fd-7ec1bff74c64",
+      "created_by_ref": "identity--14b44a85-f3c7-589f-aacd-7b295fd5ac92",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-powerview-kerberos-service-ticket-request",
+      "description": "The following analytic detects the execution of the `Get-DomainSPNTicket` commandlet, part of the PowerView tool, by leveraging PowerShell Script Block Logging (EventCode=4104). This commandlet requests Kerberos service tickets for specified service principal names (SPNs). Monitoring this activity is crucial as it can indicate attempts to perform Kerberoasting, a technique used to extract SPN account passwords via cracking tools like hashcat. If confirmed malicious, this activity could allow att",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--1a2baabb-66cc-587d-96d9-1535d823f19e"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--f6415c90-3309-522c-817c-3301275d530c",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1558.003",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1558.003"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--1a2baabb-66cc-587d-96d9-1535d823f19e",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1558.003",
+      "technique_id": "T1558.003",
+      "technique_ref": "attack-pattern--f6415c90-3309-522c-817c-3301275d530c",
+      "description": "The following analytic detects the execution of the `Get-DomainSPNTicket` commandlet, part of the PowerView tool, by leveraging PowerShell Script Block Logging (EventCode=4104). This commandlet requests Kerberos service tickets for specified service principal names (SPNs). Monitoring this activity is crucial as it can indicate attempts to perform Kerberoasting, a technique used to extract SPN account passwords via cracking tools like hashcat. If confirmed malicious, this activity could allow att",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

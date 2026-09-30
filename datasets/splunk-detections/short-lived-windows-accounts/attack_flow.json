@@ -1,0 +1,110 @@
+{
+  "type": "bundle",
+  "id": "bundle--73d891c3-427f-5009-a9d6-3c506354b0e7",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--09fdf356-63af-564e-9428-7a047cc648dd",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--09fdf356-63af-564e-9428-7a047cc648dd",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--e312a9ad-2f14-53a6-819f-0600ad67aab6",
+      "created_by_ref": "identity--09fdf356-63af-564e-9428-7a047cc648dd",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: short-lived-windows-accounts",
+      "description": "The following analytic detects the rapid creation and deletion of Windows accounts within a short time frame of 1 hour. It leverages the \"Change\" data model in Splunk, specifically monitoring events with result IDs 4720 (account creation) and 4726 (account deletion). This behavior is significant as it may indicate an attacker attempting to create and remove accounts quickly to evade detection or gain unauthorized access. If confirmed malicious, this activity could lead to unauthorized access, pr",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--4e1a3aae-d4ac-515c-8e4b-d4f1f1978397",
+        "attack-action--c126c85b-e81c-5e95-b0ff-94178ba89f89"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--9d7787f6-cf27-5bc7-b6d3-5b87865921d6",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1078.003",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1078.003"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--5f4f01ce-32e3-5de2-aa29-d06a43d3dfb0",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1136.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1136.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--4e1a3aae-d4ac-515c-8e4b-d4f1f1978397",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1078.003",
+      "technique_id": "T1078.003",
+      "technique_ref": "attack-pattern--9d7787f6-cf27-5bc7-b6d3-5b87865921d6",
+      "description": "The following analytic detects the rapid creation and deletion of Windows accounts within a short time frame of 1 hour. It leverages the \"Change\" data model in Splunk, specifically monitoring events with result IDs 4720 (account creation) and 4726 (account deletion). This behavior is significant as it may indicate an attacker attempting to create and remove accounts quickly to evade detection or gain unauthorized access. If confirmed malicious, this activity could lead to unauthorized access, pr",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--c126c85b-e81c-5e95-b0ff-94178ba89f89",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1136.001",
+      "technique_id": "T1136.001",
+      "technique_ref": "attack-pattern--5f4f01ce-32e3-5de2-aa29-d06a43d3dfb0",
+      "description": "The following analytic detects the rapid creation and deletion of Windows accounts within a short time frame of 1 hour. It leverages the \"Change\" data model in Splunk, specifically monitoring events with result IDs 4720 (account creation) and 4726 (account deletion). This behavior is significant as it may indicate an attacker attempting to create and remove accounts quickly to evade detection or gain unauthorized access. If confirmed malicious, this activity could lead to unauthorized access, pr",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

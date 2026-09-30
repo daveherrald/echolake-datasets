@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--46c4b22e-d7ad-5e84-bc8b-b33ecfe3bc51",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--ab24a9bf-6302-5a9e-8d64-c8d613fced39",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--ab24a9bf-6302-5a9e-8d64-c8d613fced39",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--68e54491-e260-56cd-95c0-56bade8d66a4",
+      "created_by_ref": "identity--ab24a9bf-6302-5a9e-8d64-c8d613fced39",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: get-domainpolicy-with-powershell",
+      "description": "The following analytic detects the execution of `powershell.exe` running the `Get-DomainPolicy` cmdlet, which is used to retrieve password policies in a Windows domain. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line executions. This activity is significant as it indicates potential reconnaissance efforts by adversaries to gather domain policy information, which is crucial for planning further attacks. If confirmed malicious, this c",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--ab17a829-6cb9-5980-add3-69df444b24bf"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--1bc914f7-4f3e-5d8c-896f-194ec1c34465",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1201",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1201"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--ab17a829-6cb9-5980-add3-69df444b24bf",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1201",
+      "technique_id": "T1201",
+      "technique_ref": "attack-pattern--1bc914f7-4f3e-5d8c-896f-194ec1c34465",
+      "description": "The following analytic detects the execution of `powershell.exe` running the `Get-DomainPolicy` cmdlet, which is used to retrieve password policies in a Windows domain. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line executions. This activity is significant as it indicates potential reconnaissance efforts by adversaries to gather domain policy information, which is crucial for planning further attacks. If confirmed malicious, this c",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

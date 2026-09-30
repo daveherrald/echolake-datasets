@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--44ef19d2-0948-5d04-9b3d-3e67dbe94eaa",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--3c669112-043e-57bf-b35b-a6eddefe80d2",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--3c669112-043e-57bf-b35b-a6eddefe80d2",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--d3ea7617-c160-5372-a2ae-38b7beeaeb2d",
+      "created_by_ref": "identity--3c669112-043e-57bf-b35b-a6eddefe80d2",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-dll-module-loaded-in-temp-dir",
+      "description": "The following analytic detects instances where a Dynamic Link Library (DLL) is loaded from a temporary directory on a Windows system. Loading DLLs from non-standard paths such as %TEMP% is uncommon for legitimate applications and is often associated with adversary tradecraft, including DLL search order hijacking, side-loading, or execution of malicious payloads staged in temporary folders. Adversaries frequently leverage these directories because they are writable by standard users and often ove",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--8ecc09a5-929f-55ad-b7c3-3ca9edfa7713"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--fce19972-7bca-5ada-9712-5bebf19cd2f6",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1105",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1105"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--8ecc09a5-929f-55ad-b7c3-3ca9edfa7713",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1105",
+      "technique_id": "T1105",
+      "technique_ref": "attack-pattern--fce19972-7bca-5ada-9712-5bebf19cd2f6",
+      "description": "The following analytic detects instances where a Dynamic Link Library (DLL) is loaded from a temporary directory on a Windows system. Loading DLLs from non-standard paths such as %TEMP% is uncommon for legitimate applications and is often associated with adversary tradecraft, including DLL search order hijacking, side-loading, or execution of malicious payloads staged in temporary folders. Adversaries frequently leverage these directories because they are writable by standard users and often ove",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

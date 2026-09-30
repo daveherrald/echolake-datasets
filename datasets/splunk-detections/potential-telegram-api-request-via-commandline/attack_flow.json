@@ -1,0 +1,110 @@
+{
+  "type": "bundle",
+  "id": "bundle--168edc8a-88e9-59a2-8653-e69b62de56e6",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--3c71cfae-0623-5705-a795-e7e7efeaa81d",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--3c71cfae-0623-5705-a795-e7e7efeaa81d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--a2df9a2b-843f-5909-8f07-10fb52f23605",
+      "created_by_ref": "identity--3c71cfae-0623-5705-a795-e7e7efeaa81d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: potential-telegram-api-request-via-commandline",
+      "description": "The following analytic detects the presence of \"api.telegram.org\" in the CommandLine of a process. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process execution logs that include command-line details. This activity can be significant as the telegram API has been used as an exfiltration mechanism or even as a C2 channel. If confirmed malicious, this could allow an attacker or malware to exfiltrate data or receive additional C2 instruction, potentially leading",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--a9e38b1e-8c5c-53c4-846e-19cb3ef8a0cb",
+        "attack-action--c3de09a3-f243-56dc-8177-50323a36cbcd"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--d2fcc4de-a697-5a3d-879d-c8978404928a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1102.002",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1102.002"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--295a0535-aa06-55a3-9a71-ba6b160449d1",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1041",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1041"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--a9e38b1e-8c5c-53c4-846e-19cb3ef8a0cb",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1102.002",
+      "technique_id": "T1102.002",
+      "technique_ref": "attack-pattern--d2fcc4de-a697-5a3d-879d-c8978404928a",
+      "description": "The following analytic detects the presence of \"api.telegram.org\" in the CommandLine of a process. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process execution logs that include command-line details. This activity can be significant as the telegram API has been used as an exfiltration mechanism or even as a C2 channel. If confirmed malicious, this could allow an attacker or malware to exfiltrate data or receive additional C2 instruction, potentially leading",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--c3de09a3-f243-56dc-8177-50323a36cbcd",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1041",
+      "technique_id": "T1041",
+      "technique_ref": "attack-pattern--295a0535-aa06-55a3-9a71-ba6b160449d1",
+      "description": "The following analytic detects the presence of \"api.telegram.org\" in the CommandLine of a process. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process execution logs that include command-line details. This activity can be significant as the telegram API has been used as an exfiltration mechanism or even as a C2 channel. If confirmed malicious, this could allow an attacker or malware to exfiltrate data or receive additional C2 instruction, potentially leading",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--5c343b18-bbd1-5693-b735-5d10f9e3410c",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--8bef94cd-c714-5d58-939f-fdf4b8a46d8c",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--8bef94cd-c714-5d58-939f-fdf4b8a46d8c",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--6dc9197f-7527-5660-9161-70059fe5b5d4",
+      "created_by_ref": "identity--8bef94cd-c714-5d58-939f-fdf4b8a46d8c",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-registry-entries-exported-via-reg",
+      "description": "The following analytic detects the execution of the reg.exe process with either the \"save\" or \"export\" parameters. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process execution logs and command-line arguments. This activity is significant because threat actors often use the \"reg save\" or \"reg export\" command to dump credentials or test registry modification capabilities on compromised hosts. If confirmed malicious, this behavior could allow attack",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--a3562736-a55b-55c2-a48a-83a8af248a87"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--53ad9081-eacd-5bb6-af01-863750e3faee",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1012",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1012"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--a3562736-a55b-55c2-a48a-83a8af248a87",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1012",
+      "technique_id": "T1012",
+      "technique_ref": "attack-pattern--53ad9081-eacd-5bb6-af01-863750e3faee",
+      "description": "The following analytic detects the execution of the reg.exe process with either the \"save\" or \"export\" parameters. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process execution logs and command-line arguments. This activity is significant because threat actors often use the \"reg save\" or \"reg export\" command to dump credentials or test registry modification capabilities on compromised hosts. If confirmed malicious, this behavior could allow attack",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

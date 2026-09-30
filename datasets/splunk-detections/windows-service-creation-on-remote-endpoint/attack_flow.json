@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--5474d367-3ba2-5d95-b4d6-585bc0c910af",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--ae6d290d-dfad-5515-abad-6fc470204837",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--ae6d290d-dfad-5515-abad-6fc470204837",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--afb0840e-d497-52f8-88d1-da08ad70b8d8",
+      "created_by_ref": "identity--ae6d290d-dfad-5515-abad-6fc470204837",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-service-creation-on-remote-endpoint",
+      "description": "The following analytic identifies the creation of a Windows Service on a remote endpoint using `sc.exe`. It detects this activity by analyzing process execution logs from Endpoint Detection and Response (EDR) agents, focusing on command-line arguments that include remote paths and service creation commands. This behavior is significant because adversaries often exploit the Service Control Manager for lateral movement and remote code execution. If confirmed malicious, this activity could allow at",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--6006cdf6-7efa-5e9c-9de4-8ea69a434e22"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--d598b6b2-c697-5e50-80d2-2bc9ab7eaf49",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1543.003",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1543.003"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--6006cdf6-7efa-5e9c-9de4-8ea69a434e22",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1543.003",
+      "technique_id": "T1543.003",
+      "technique_ref": "attack-pattern--d598b6b2-c697-5e50-80d2-2bc9ab7eaf49",
+      "description": "The following analytic identifies the creation of a Windows Service on a remote endpoint using `sc.exe`. It detects this activity by analyzing process execution logs from Endpoint Detection and Response (EDR) agents, focusing on command-line arguments that include remote paths and service creation commands. This behavior is significant because adversaries often exploit the Service Control Manager for lateral movement and remote code execution. If confirmed malicious, this activity could allow at",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

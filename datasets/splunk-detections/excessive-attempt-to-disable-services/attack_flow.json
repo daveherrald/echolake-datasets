@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--d82ebf10-8daf-5ae8-9f23-2949892139a0",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--e1a72a8e-8533-50f8-8817-23058d389875",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--e1a72a8e-8533-50f8-8817-23058d389875",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--01560d08-2a0a-590b-9416-50000a2cbf57",
+      "created_by_ref": "identity--e1a72a8e-8533-50f8-8817-23058d389875",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: excessive-attempt-to-disable-services",
+      "description": "The following analytic identifies a suspicious series of command-line executions attempting to disable multiple services. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on processes where \"sc.exe\" is used with parameters like \"config\" or \"Disabled\" within a short time frame. This activity is significant as it may indicate an adversary's attempt to disable security or other critical services to further compromise the system. If confirmed malicious, this could lead t",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--ee1d76ec-aa20-5879-b654-bcd36e42158b"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--076332a0-cddb-5088-9ec7-1465fd558fb3",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1489",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1489"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--ee1d76ec-aa20-5879-b654-bcd36e42158b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1489",
+      "technique_id": "T1489",
+      "technique_ref": "attack-pattern--076332a0-cddb-5088-9ec7-1465fd558fb3",
+      "description": "The following analytic identifies a suspicious series of command-line executions attempting to disable multiple services. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on processes where \"sc.exe\" is used with parameters like \"config\" or \"Disabled\" within a short time frame. This activity is significant as it may indicate an adversary's attempt to disable security or other critical services to further compromise the system. If confirmed malicious, this could lead t",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

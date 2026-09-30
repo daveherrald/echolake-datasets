@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--4dcf9f70-9a8b-5ed1-9772-7c7d140fd492",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--fea6b8e6-3928-50e8-9136-b47efbfd921f",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--fea6b8e6-3928-50e8-9136-b47efbfd921f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--40f1a409-6061-500c-89e0-640425f69bf3",
+      "created_by_ref": "identity--fea6b8e6-3928-50e8-9136-b47efbfd921f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: domain-group-discovery-with-wmic",
+      "description": "The following analytic identifies the execution of `wmic.exe` with command-line arguments used to query for domain groups. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line executions. This activity is significant as it indicates potential reconnaissance efforts by adversaries to gain situational awareness and map out Active Directory structures. If confirmed malicious, this behavior could allow attackers to identify and target specif",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--448607d0-d5ce-5cb7-973d-aded80608d70"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--614b2333-86ad-5e1c-a15a-5c1bd110100e",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1069.002",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1069.002"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--448607d0-d5ce-5cb7-973d-aded80608d70",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1069.002",
+      "technique_id": "T1069.002",
+      "technique_ref": "attack-pattern--614b2333-86ad-5e1c-a15a-5c1bd110100e",
+      "description": "The following analytic identifies the execution of `wmic.exe` with command-line arguments used to query for domain groups. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line executions. This activity is significant as it indicates potential reconnaissance efforts by adversaries to gain situational awareness and map out Active Directory structures. If confirmed malicious, this behavior could allow attackers to identify and target specif",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

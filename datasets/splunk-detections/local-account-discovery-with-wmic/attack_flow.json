@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--a63bcaff-0dbf-5c06-b88f-d4387ecc20c4",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--abbb85e0-71fd-5449-9cf1-b5b76837741d",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--abbb85e0-71fd-5449-9cf1-b5b76837741d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--9f6f4427-02b6-567c-b427-38dcd808c23a",
+      "created_by_ref": "identity--abbb85e0-71fd-5449-9cf1-b5b76837741d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: local-account-discovery-with-wmic",
+      "description": "The following analytic detects the execution of `wmic.exe` with command-line arguments used to query local user accounts, specifically the `useraccount` argument. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process execution logs that include command-line details. This activity is significant as it indicates potential reconnaissance efforts by adversaries to enumerate local users, which is a common step in situational awareness and Active Directory discovery.",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--58b84f6d-0051-5b05-a2d0-b63f7b3f7669"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--069788dd-abbd-528a-92a7-a3c888938369",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1087.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1087.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--58b84f6d-0051-5b05-a2d0-b63f7b3f7669",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1087.001",
+      "technique_id": "T1087.001",
+      "technique_ref": "attack-pattern--069788dd-abbd-528a-92a7-a3c888938369",
+      "description": "The following analytic detects the execution of `wmic.exe` with command-line arguments used to query local user accounts, specifically the `useraccount` argument. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process execution logs that include command-line details. This activity is significant as it indicates potential reconnaissance efforts by adversaries to enumerate local users, which is a common step in situational awareness and Active Directory discovery.",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

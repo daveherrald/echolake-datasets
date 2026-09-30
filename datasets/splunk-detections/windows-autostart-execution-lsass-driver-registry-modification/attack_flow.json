@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--ca49164e-070b-54fb-a7b2-9f5b563cfc65",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--456c00a7-9836-51e8-a128-452f55527a8b",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--456c00a7-9836-51e8-a128-452f55527a8b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--06cc9959-c21b-5577-b7ca-19d7659a39ee",
+      "created_by_ref": "identity--456c00a7-9836-51e8-a128-452f55527a8b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-autostart-execution-lsass-driver-registry-modification",
+      "description": "The following analytic detects modifications to undocumented registry keys that allow a DLL to load into lsass.exe, potentially capturing credentials. It leverages the Endpoint.Registry data model to identify changes to \\CurrentControlSet\\Services\\NTDS\\DirectoryServiceExtPt or \\CurrentControlSet\\Services\\NTDS\\LsaDbExtPt. This activity is significant as it indicates a possible attempt to inject malicious code into the Local Security Authority Subsystem Service (LSASS), which can lead to credentia",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--b9267654-1672-5792-ab69-940822e82923"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--b2b8d31b-1c48-5e62-bafc-bbfde713da18",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1547.008",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1547.008"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--b9267654-1672-5792-ab69-940822e82923",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1547.008",
+      "technique_id": "T1547.008",
+      "technique_ref": "attack-pattern--b2b8d31b-1c48-5e62-bafc-bbfde713da18",
+      "description": "The following analytic detects modifications to undocumented registry keys that allow a DLL to load into lsass.exe, potentially capturing credentials. It leverages the Endpoint.Registry data model to identify changes to \\CurrentControlSet\\Services\\NTDS\\DirectoryServiceExtPt or \\CurrentControlSet\\Services\\NTDS\\LsaDbExtPt. This activity is significant as it indicates a possible attempt to inject malicious code into the Local Security Authority Subsystem Service (LSASS), which can lead to credentia",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

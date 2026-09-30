@@ -1,0 +1,110 @@
+{
+  "type": "bundle",
+  "id": "bundle--cd58f100-42c5-5b2a-988f-dda7989bc458",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--2ea9965c-4703-5f63-995c-56e3c7aeba8d",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--2ea9965c-4703-5f63-995c-56e3c7aeba8d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--294a761d-5a97-5b82-b8a5-67b23b606539",
+      "created_by_ref": "identity--2ea9965c-4703-5f63-995c-56e3c7aeba8d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-wsus-spawning-shell",
+      "description": "The following analytic identifies instances where a shell (PowerShell.exe or Cmd.exe) is spawned from wsusservice.exe, the Windows Server Update Services process. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process creation events where the parent process is wsusservice.exe. This activity is significant as it may indicate exploitation of CVE-2025-59287, a critical deserialization vulnerability in WSUS that allows unauthenticated remote code execut",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--5d182a29-d4ce-5e7d-af95-8dda0889cca2",
+        "attack-action--6e11f965-60d7-5b77-a622-8b2a035c3993"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--ebb711a0-ff56-5272-a5ff-904e3142ea1a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1190",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1190"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--71a702c6-1c3e-5ca8-847c-72d4faf008d2",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1505.003",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1505.003"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--5d182a29-d4ce-5e7d-af95-8dda0889cca2",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1190",
+      "technique_id": "T1190",
+      "technique_ref": "attack-pattern--ebb711a0-ff56-5272-a5ff-904e3142ea1a",
+      "description": "The following analytic identifies instances where a shell (PowerShell.exe or Cmd.exe) is spawned from wsusservice.exe, the Windows Server Update Services process. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process creation events where the parent process is wsusservice.exe. This activity is significant as it may indicate exploitation of CVE-2025-59287, a critical deserialization vulnerability in WSUS that allows unauthenticated remote code execut",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--6e11f965-60d7-5b77-a622-8b2a035c3993",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1505.003",
+      "technique_id": "T1505.003",
+      "technique_ref": "attack-pattern--71a702c6-1c3e-5ca8-847c-72d4faf008d2",
+      "description": "The following analytic identifies instances where a shell (PowerShell.exe or Cmd.exe) is spawned from wsusservice.exe, the Windows Server Update Services process. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process creation events where the parent process is wsusservice.exe. This activity is significant as it may indicate exploitation of CVE-2025-59287, a critical deserialization vulnerability in WSUS that allows unauthenticated remote code execut",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "type": "bundle",
+  "id": "bundle--ba312557-e80b-5a98-88bb-f163a5575367",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--8815334b-058c-5785-8e7e-18cb4661bca8",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--8815334b-058c-5785-8e7e-18cb4661bca8",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--c4e36b88-2e09-5fea-a601-0b412b665ce1",
+      "created_by_ref": "identity--8815334b-058c-5785-8e7e-18cb4661bca8",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: web-or-application-server-spawning-a-shell",
+      "description": "The following analytic detects instances where Java, or Tomcat\nprocesses spawn a Linux shell, which may indicate exploitation attempts, such as\nthose related to CVE-2021-44228 (Log4Shell). This detection leverages Endpoint Detection\nand Response (EDR) telemetry, focusing on process names and parent-child process\nrelationships. This activity is significant as it can signify a compromised Java\napplication, potentially leading to unauthorized shell access. If confirmed malicious,\nattackers could ex",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--5b9ccf99-2022-58d6-9b01-607037278a9d",
+        "attack-action--b388e396-e5a6-5657-80be-d6d602e4e456"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--e4d44c31-d02d-5361-ae73-35afc69ca777",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1190",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1190"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--26877f15-34c8-5a7c-8751-c89435ea92e1",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1133",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1133"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--5b9ccf99-2022-58d6-9b01-607037278a9d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1190",
+      "technique_id": "T1190",
+      "technique_ref": "attack-pattern--e4d44c31-d02d-5361-ae73-35afc69ca777",
+      "description": "The following analytic detects instances where Java, or Tomcat\nprocesses spawn a Linux shell, which may indicate exploitation attempts, such as\nthose related to CVE-2021-44228 (Log4Shell). This detection leverages Endpoint Detection\nand Response (EDR) telemetry, focusing on process names and parent-child process\nrelationships. This activity is significant as it can signify a compromised Java\napplication, potentially leading to unauthorized shell access. If confirmed malicious,\nattackers could ex",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--b388e396-e5a6-5657-80be-d6d602e4e456",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1133",
+      "technique_id": "T1133",
+      "technique_ref": "attack-pattern--26877f15-34c8-5a7c-8751-c89435ea92e1",
+      "description": "The following analytic detects instances where Java, or Tomcat\nprocesses spawn a Linux shell, which may indicate exploitation attempts, such as\nthose related to CVE-2021-44228 (Log4Shell). This detection leverages Endpoint Detection\nand Response (EDR) telemetry, focusing on process names and parent-child process\nrelationships. This activity is significant as it can signify a compromised Java\napplication, potentially leading to unauthorized shell access. If confirmed malicious,\nattackers could ex",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

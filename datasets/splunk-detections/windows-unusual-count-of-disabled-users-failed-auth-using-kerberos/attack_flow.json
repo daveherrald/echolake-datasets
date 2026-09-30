@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--c8f7f824-d41f-5741-8a68-2d4030db71d2",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--740e82c6-d6ee-5e10-b663-d06a42eeecda",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--740e82c6-d6ee-5e10-b663-d06a42eeecda",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--a3e06f55-974f-5ce4-9f24-29591f6c3a0a",
+      "created_by_ref": "identity--740e82c6-d6ee-5e10-b663-d06a42eeecda",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-unusual-count-of-disabled-users-failed-auth-using-kerberos",
+      "description": "The following analytic identifies a source endpoint failing to authenticate with multiple disabled domain users using the Kerberos protocol. It leverages EventCode 4768, which is generated when the Key Distribution Center issues a Kerberos Ticket Granting Ticket (TGT) and detects failure code `0x12` (credentials revoked). This behavior is significant as it may indicate a Password Spraying attack targeting disabled accounts, potentially leading to initial access or privilege escalation. If confir",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--e048d2e5-160c-5c8d-a445-2db1da461c92"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--41491319-7bb1-5db0-9d4e-7f9fdf1a84e4",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1110.003",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1110.003"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--e048d2e5-160c-5c8d-a445-2db1da461c92",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1110.003",
+      "technique_id": "T1110.003",
+      "technique_ref": "attack-pattern--41491319-7bb1-5db0-9d4e-7f9fdf1a84e4",
+      "description": "The following analytic identifies a source endpoint failing to authenticate with multiple disabled domain users using the Kerberos protocol. It leverages EventCode 4768, which is generated when the Key Distribution Center issues a Kerberos Ticket Granting Ticket (TGT) and detects failure code `0x12` (credentials revoked). This behavior is significant as it may indicate a Password Spraying attack targeting disabled accounts, potentially leading to initial access or privilege escalation. If confir",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

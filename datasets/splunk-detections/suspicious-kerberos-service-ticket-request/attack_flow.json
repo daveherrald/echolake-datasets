@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--60c3fdb3-1ff1-533b-a9d5-5c1b3a7fb6ca",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--d8b12b85-a512-5f3e-8626-d8bc22496c6c",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--d8b12b85-a512-5f3e-8626-d8bc22496c6c",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--88e158d3-589e-5b6f-b81b-fa1635a7704a",
+      "created_by_ref": "identity--d8b12b85-a512-5f3e-8626-d8bc22496c6c",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: suspicious-kerberos-service-ticket-request",
+      "description": "The following analytic detects suspicious Kerberos Service Ticket (TGS) requests where the requesting account name matches the service name, potentially indicating an exploitation attempt of CVE-2021-42278 and CVE-2021-42287. This detection leverages Event ID 4769 from Domain Controller and Kerberos events. Such activity is significant as it may represent an adversary attempting to escalate privileges by impersonating a domain controller. If confirmed malicious, this could allow an attacker to t",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--75dbbd0a-da8d-560d-818a-c390b527ae45"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--82860c8f-1e3e-5cca-802e-36729aff7635",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1078.002",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1078.002"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--75dbbd0a-da8d-560d-818a-c390b527ae45",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1078.002",
+      "technique_id": "T1078.002",
+      "technique_ref": "attack-pattern--82860c8f-1e3e-5cca-802e-36729aff7635",
+      "description": "The following analytic detects suspicious Kerberos Service Ticket (TGS) requests where the requesting account name matches the service name, potentially indicating an exploitation attempt of CVE-2021-42278 and CVE-2021-42287. This detection leverages Event ID 4769 from Domain Controller and Kerberos events. Such activity is significant as it may represent an adversary attempting to escalate privileges by impersonating a domain controller. If confirmed malicious, this could allow an attacker to t",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

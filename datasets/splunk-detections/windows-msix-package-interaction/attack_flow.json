@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--ccf25d3d-5599-5aa6-b107-d8d22f1fc92c",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--ed4bf292-d07e-536f-8e90-e4f5f68930c4",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--ed4bf292-d07e-536f-8e90-e4f5f68930c4",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--d24b1869-acc5-553d-8ea7-b421f5a446f5",
+      "created_by_ref": "identity--ed4bf292-d07e-536f-8e90-e4f5f68930c4",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-msix-package-interaction",
+      "description": "This hunting query detects user interactions with MSIX packages by monitoring EventCode 171 in the Microsoft-Windows-AppXPackaging/Operational logs. These events are generated when a user clicks on or attempts to interact with an MSIX package, even if the package is not fully installed. This information can be valuable for security teams to identify what MSIX packages users are attempting to open in their environment, which may help detect malicious MSIX packages before they're fully installed.",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--659ce508-5415-5639-8999-6c9fba72e2b2"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--df4100f0-64f6-552a-bfe1-d1e39382794e",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1204.002",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1204.002"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--659ce508-5415-5639-8999-6c9fba72e2b2",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1204.002",
+      "technique_id": "T1204.002",
+      "technique_ref": "attack-pattern--df4100f0-64f6-552a-bfe1-d1e39382794e",
+      "description": "This hunting query detects user interactions with MSIX packages by monitoring EventCode 171 in the Microsoft-Windows-AppXPackaging/Operational logs. These events are generated when a user clicks on or attempts to interact with an MSIX package, even if the package is not fully installed. This information can be valuable for security teams to identify what MSIX packages users are attempting to open in their environment, which may help detect malicious MSIX packages before they're fully installed.",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

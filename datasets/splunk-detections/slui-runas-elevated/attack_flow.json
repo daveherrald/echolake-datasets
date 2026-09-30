@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--d7cdc289-7e2d-5703-9ee4-baf7ca1e7cff",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--2d13bdbb-c96c-5e16-9738-ad847c73d81f",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--2d13bdbb-c96c-5e16-9738-ad847c73d81f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--a68cb39b-60c0-5890-b4d2-e93bd143e684",
+      "created_by_ref": "identity--2d13bdbb-c96c-5e16-9738-ad847c73d81f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: slui-runas-elevated",
+      "description": "The following analytic detects the execution of the Microsoft Software Licensing User Interface Tool (`slui.exe`) with elevated privileges using the `-verb runas` function. This activity is identified through logs from Endpoint Detection and Response (EDR) agents, focusing on specific registry keys and command-line parameters. This behavior is significant as it indicates a potential privilege escalation attempt, which could allow an attacker to gain elevated access and execute malicious actions",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--8a2370de-3735-51d4-963d-b534ae1ef5d9"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--4563b92e-0ba4-5397-b86f-9360cfab9324",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1548.002",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1548.002"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--8a2370de-3735-51d4-963d-b534ae1ef5d9",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1548.002",
+      "technique_id": "T1548.002",
+      "technique_ref": "attack-pattern--4563b92e-0ba4-5397-b86f-9360cfab9324",
+      "description": "The following analytic detects the execution of the Microsoft Software Licensing User Interface Tool (`slui.exe`) with elevated privileges using the `-verb runas` function. This activity is identified through logs from Endpoint Detection and Response (EDR) agents, focusing on specific registry keys and command-line parameters. This behavior is significant as it indicates a potential privilege escalation attempt, which could allow an attacker to gain elevated access and execute malicious actions",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

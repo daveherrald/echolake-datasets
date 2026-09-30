@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--5a2da8cf-5885-5518-8b14-d73f4f2d819c",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--563b3384-a647-568f-bf02-26ca805c88ba",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--563b3384-a647-568f-bf02-26ca805c88ba",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--fec88627-cd3e-53f9-b4d2-9ba0054583cb",
+      "created_by_ref": "identity--563b3384-a647-568f-bf02-26ca805c88ba",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-ad-adminsdholder-acl-modified",
+      "description": "The following analytic detects modifications to the Access Control List (ACL) of the AdminSDHolder object in a Windows domain, specifically the addition of new rules. It leverages EventCode 5136 from the Security Event Log, focusing on changes to the nTSecurityDescriptor attribute. This activity is significant because the AdminSDHolder object secures privileged group members, and unauthorized changes can allow attackers to establish persistence and escalate privileges. If confirmed malicious, th",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--2784bc43-5424-5a97-86c7-6570ec5a4084"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--096edc1a-3476-59f1-80e7-5b09802f29e2",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1546",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1546"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--2784bc43-5424-5a97-86c7-6570ec5a4084",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1546",
+      "technique_id": "T1546",
+      "technique_ref": "attack-pattern--096edc1a-3476-59f1-80e7-5b09802f29e2",
+      "description": "The following analytic detects modifications to the Access Control List (ACL) of the AdminSDHolder object in a Windows domain, specifically the addition of new rules. It leverages EventCode 5136 from the Security Event Log, focusing on changes to the nTSecurityDescriptor attribute. This activity is significant because the AdminSDHolder object secures privileged group members, and unauthorized changes can allow attackers to establish persistence and escalate privileges. If confirmed malicious, th",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--41e33396-d3c9-5034-a271-ff37ca09e18b",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--47c88e9a-36bd-5ba5-b40a-c096fdf309af",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--47c88e9a-36bd-5ba5-b40a-c096fdf309af",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--ea784165-6e5a-5915-a059-d7e4834fb1e1",
+      "created_by_ref": "identity--47c88e9a-36bd-5ba5-b40a-c096fdf309af",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: o365-multiple-mailboxes-accessed-via-api",
+      "description": "The following analytic detects when a high number of Office 365 Exchange mailboxes are accessed via API (Microsoft Graph API or Exchange Web Services) within a short timeframe. It leverages 'MailItemsAccessed' operations in Exchange, using AppId and regex to identify API interactions. This activity is significant as it may indicate unauthorized mass email access, potentially signaling data exfiltration or account compromise. If confirmed malicious, attackers could gain access to sensitive inform",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--e287c807-c806-5dbd-87f8-7e87a884cdb3"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--345b52fb-cbfd-569b-a018-000071eb76f6",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1114.002",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1114.002"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--e287c807-c806-5dbd-87f8-7e87a884cdb3",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1114.002",
+      "technique_id": "T1114.002",
+      "technique_ref": "attack-pattern--345b52fb-cbfd-569b-a018-000071eb76f6",
+      "description": "The following analytic detects when a high number of Office 365 Exchange mailboxes are accessed via API (Microsoft Graph API or Exchange Web Services) within a short timeframe. It leverages 'MailItemsAccessed' operations in Exchange, using AppId and regex to identify API interactions. This activity is significant as it may indicate unauthorized mass email access, potentially signaling data exfiltration or account compromise. If confirmed malicious, attackers could gain access to sensitive inform",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--79f5a66a-b9cf-50da-9185-c7aaae605090",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--d9d05e71-44e1-5467-8292-0ce35d60c125",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--d9d05e71-44e1-5467-8292-0ce35d60c125",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--90cd981a-a348-5a67-908f-0724c8de79dc",
+      "created_by_ref": "identity--d9d05e71-44e1-5467-8292-0ce35d60c125",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-rdp-bitmap-cache-file-creation",
+      "description": "This detection identifies the creation of Remote Desktop Protocol (RDP) bitmap cache files on a Windows system, typically located in the user\u2019s profile under the Terminal Server Client cache directory. These files (*.bmc, cache*.bin) are generated when a user initiates an RDP session using the built-in mstsc.exe client. Their presence can indicate interactive remote access activity and may be useful in detecting lateral movement or unauthorized RDP usage. Monitoring this behavior is especially i",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--3e5da29c-0c09-53ff-9f3d-5a2007cb7b71"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--74f225b6-9381-58a1-a424-2a0fc79d5ca8",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1021.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1021.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--3e5da29c-0c09-53ff-9f3d-5a2007cb7b71",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1021.001",
+      "technique_id": "T1021.001",
+      "technique_ref": "attack-pattern--74f225b6-9381-58a1-a424-2a0fc79d5ca8",
+      "description": "This detection identifies the creation of Remote Desktop Protocol (RDP) bitmap cache files on a Windows system, typically located in the user\u2019s profile under the Terminal Server Client cache directory. These files (*.bmc, cache*.bin) are generated when a user initiates an RDP session using the built-in mstsc.exe client. Their presence can indicate interactive remote access activity and may be useful in detecting lateral movement or unauthorized RDP usage. Monitoring this behavior is especially i",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

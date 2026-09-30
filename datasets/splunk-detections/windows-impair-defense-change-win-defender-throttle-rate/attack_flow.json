@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--a7b56422-c6aa-5452-bcd0-b3ee9dd0b53a",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--19ae41eb-2113-5ad2-bcac-ab415bb1252a",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--19ae41eb-2113-5ad2-bcac-ab415bb1252a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--7ccbd360-a07b-551a-bdb3-7bdd68058de5",
+      "created_by_ref": "identity--19ae41eb-2113-5ad2-bcac-ab415bb1252a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-impair-defense-change-win-defender-throttle-rate",
+      "description": "The following analytic detects modifications to the ThrottleDetectionEventsRate registry setting in Windows Defender. It leverages data from the Endpoint.Registry datamodel to identify changes in the registry path related to Windows Defender's event logging rate. This activity is significant because altering the ThrottleDetectionEventsRate can reduce the frequency of logged detection events, potentially masking malicious activities. If confirmed malicious, this could allow an attacker to evade d",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--b0b85f0c-4e4e-5f90-934f-b3f5ce4a96bb"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--28961eb3-282f-51fa-925f-c73b082531e3",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1562.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--b0b85f0c-4e4e-5f90-934f-b3f5ce4a96bb",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.001",
+      "technique_id": "T1562.001",
+      "technique_ref": "attack-pattern--28961eb3-282f-51fa-925f-c73b082531e3",
+      "description": "The following analytic detects modifications to the ThrottleDetectionEventsRate registry setting in Windows Defender. It leverages data from the Endpoint.Registry datamodel to identify changes in the registry path related to Windows Defender's event logging rate. This activity is significant because altering the ThrottleDetectionEventsRate can reduce the frequency of logged detection events, potentially masking malicious activities. If confirmed malicious, this could allow an attacker to evade d",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

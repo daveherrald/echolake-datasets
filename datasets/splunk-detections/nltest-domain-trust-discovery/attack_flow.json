@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--17b0f7a2-7ca9-526a-b353-260347d8787c",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--b60a0582-605b-5d29-b179-6af9b37ef052",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--b60a0582-605b-5d29-b179-6af9b37ef052",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--8bf73589-5cd7-5d6a-ab37-5cc70e4236c0",
+      "created_by_ref": "identity--b60a0582-605b-5d29-b179-6af9b37ef052",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: nltest-domain-trust-discovery",
+      "description": "The following analytic identifies the execution of `nltest.exe` with command-line arguments `/domain_trusts` or `/all_trusts` to query Domain Trust information. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process execution logs and command-line arguments. This activity is significant as it indicates potential reconnaissance efforts by adversaries to understand domain trust relationships, which can inform their lateral movement strategies. If confirmed malicio",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--2780065e-daa6-597b-8c9d-840080adb82b"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--5999992d-219a-508c-961c-cb2781d1a195",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1482",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1482"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--2780065e-daa6-597b-8c9d-840080adb82b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1482",
+      "technique_id": "T1482",
+      "technique_ref": "attack-pattern--5999992d-219a-508c-961c-cb2781d1a195",
+      "description": "The following analytic identifies the execution of `nltest.exe` with command-line arguments `/domain_trusts` or `/all_trusts` to query Domain Trust information. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process execution logs and command-line arguments. This activity is significant as it indicates potential reconnaissance efforts by adversaries to understand domain trust relationships, which can inform their lateral movement strategies. If confirmed malicio",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

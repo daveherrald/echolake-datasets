@@ -1,0 +1,110 @@
+{
+  "type": "bundle",
+  "id": "bundle--12c09000-0822-51f0-8389-d64cc16492da",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--4604b3f4-4995-5919-8eb1-4fe0ce06ca12",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--4604b3f4-4995-5919-8eb1-4fe0ce06ca12",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--a6ddcabe-d8a3-5181-a656-09c7f43df0b3",
+      "created_by_ref": "identity--4604b3f4-4995-5919-8eb1-4fe0ce06ca12",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: asl-aws-credential-access-rds-password-reset",
+      "description": "The following analytic detects the resetting of the master user password for an Amazon RDS DB instance. It leverages AWS CloudTrail logs from Amazon Security Lake to identify events where the `ModifyDBInstance` API call includes a new `masterUserPassword` parameter. This activity is significant because unauthorized password resets can grant attackers access to sensitive data stored in production databases, such as credit card information, PII, and healthcare data. If confirmed malicious, this co",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--1b9c5d51-2432-5415-9f8a-f8cf67f8b0de",
+        "attack-action--dccb07fc-1f3e-5542-a370-354b1ee2c571"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--33474102-7084-519d-8f02-c6025eb28539",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1110",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1110"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--5c86c39d-1c37-56de-aedc-7c8447bf2d69",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1586.003",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1586.003"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--1b9c5d51-2432-5415-9f8a-f8cf67f8b0de",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1110",
+      "technique_id": "T1110",
+      "technique_ref": "attack-pattern--33474102-7084-519d-8f02-c6025eb28539",
+      "description": "The following analytic detects the resetting of the master user password for an Amazon RDS DB instance. It leverages AWS CloudTrail logs from Amazon Security Lake to identify events where the `ModifyDBInstance` API call includes a new `masterUserPassword` parameter. This activity is significant because unauthorized password resets can grant attackers access to sensitive data stored in production databases, such as credit card information, PII, and healthcare data. If confirmed malicious, this co",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--dccb07fc-1f3e-5542-a370-354b1ee2c571",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1586.003",
+      "technique_id": "T1586.003",
+      "technique_ref": "attack-pattern--5c86c39d-1c37-56de-aedc-7c8447bf2d69",
+      "description": "The following analytic detects the resetting of the master user password for an Amazon RDS DB instance. It leverages AWS CloudTrail logs from Amazon Security Lake to identify events where the `ModifyDBInstance` API call includes a new `masterUserPassword` parameter. This activity is significant because unauthorized password resets can grant attackers access to sensitive data stored in production databases, such as credit card information, PII, and healthcare data. If confirmed malicious, this co",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

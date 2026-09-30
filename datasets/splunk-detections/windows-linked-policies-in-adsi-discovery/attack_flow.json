@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--a5a0bf19-7b4b-547e-9829-828a0197ca41",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--2d75de30-6564-5f9b-930d-663bc7c89f96",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--2d75de30-6564-5f9b-930d-663bc7c89f96",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--bb9403c0-c7fd-5a96-90da-c592c41a8008",
+      "created_by_ref": "identity--2d75de30-6564-5f9b-930d-663bc7c89f96",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-linked-policies-in-adsi-discovery",
+      "description": "The following analytic detects the use of the `[Adsisearcher]` type accelerator in PowerShell Script Block Logging (EventCode=4104) to query Active Directory for domain organizational units. This detection leverages PowerShell operational logs to identify script blocks containing `[adsisearcher]`, `objectcategory=organizationalunit`, and `findAll()`. This activity is significant as it indicates potential reconnaissance efforts by adversaries to gain situational awareness of the domain structure.",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--30b9e9e1-3b2d-53d4-a09d-5b8d1a615e0b"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--02c1081f-8af7-5fa3-8dd3-934b0675ae4e",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1087.002",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1087.002"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--30b9e9e1-3b2d-53d4-a09d-5b8d1a615e0b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1087.002",
+      "technique_id": "T1087.002",
+      "technique_ref": "attack-pattern--02c1081f-8af7-5fa3-8dd3-934b0675ae4e",
+      "description": "The following analytic detects the use of the `[Adsisearcher]` type accelerator in PowerShell Script Block Logging (EventCode=4104) to query Active Directory for domain organizational units. This detection leverages PowerShell operational logs to identify script blocks containing `[adsisearcher]`, `objectcategory=organizationalunit`, and `findAll()`. This activity is significant as it indicates potential reconnaissance efforts by adversaries to gain situational awareness of the domain structure.",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "type": "bundle",
+  "id": "bundle--48d68023-26c5-54ff-b159-69c4a73cbd73",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--929626d3-d8f1-52e7-b598-44f3f93055fe",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--929626d3-d8f1-52e7-b598-44f3f93055fe",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--5cc9ba1c-2e5e-591f-8d5f-6f95558e3074",
+      "created_by_ref": "identity--929626d3-d8f1-52e7-b598-44f3f93055fe",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: uac-bypass-mmc-load-unsigned-dll",
+      "description": "The following analytic detects the loading of an unsigned DLL by the MMC.exe application, which is indicative of a potential UAC bypass or privilege escalation attempt. It leverages Sysmon EventCode 7 to identify instances where MMC.exe loads a non-Microsoft, unsigned DLL. This activity is significant because attackers often use this technique to modify CLSID registry entries, causing MMC.exe to load malicious DLLs, thereby bypassing User Account Control (UAC) and gaining elevated privileges. If",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--b87ef5cb-4fb0-5931-9c37-4346a4d105e2",
+        "attack-action--206766d3-9145-5344-bbd5-bad04927fcb4"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--d2caf677-5544-5b81-8f2e-2cd87d84c588",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1218.014",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1218.014"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--fe4588e8-dbf7-5652-a72b-45fc264da32e",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1548.002",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1548.002"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--b87ef5cb-4fb0-5931-9c37-4346a4d105e2",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1218.014",
+      "technique_id": "T1218.014",
+      "technique_ref": "attack-pattern--d2caf677-5544-5b81-8f2e-2cd87d84c588",
+      "description": "The following analytic detects the loading of an unsigned DLL by the MMC.exe application, which is indicative of a potential UAC bypass or privilege escalation attempt. It leverages Sysmon EventCode 7 to identify instances where MMC.exe loads a non-Microsoft, unsigned DLL. This activity is significant because attackers often use this technique to modify CLSID registry entries, causing MMC.exe to load malicious DLLs, thereby bypassing User Account Control (UAC) and gaining elevated privileges. If",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--206766d3-9145-5344-bbd5-bad04927fcb4",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1548.002",
+      "technique_id": "T1548.002",
+      "technique_ref": "attack-pattern--fe4588e8-dbf7-5652-a72b-45fc264da32e",
+      "description": "The following analytic detects the loading of an unsigned DLL by the MMC.exe application, which is indicative of a potential UAC bypass or privilege escalation attempt. It leverages Sysmon EventCode 7 to identify instances where MMC.exe loads a non-Microsoft, unsigned DLL. This activity is significant because attackers often use this technique to modify CLSID registry entries, causing MMC.exe to load malicious DLLs, thereby bypassing User Account Control (UAC) and gaining elevated privileges. If",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

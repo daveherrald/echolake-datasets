@@ -1,0 +1,110 @@
+{
+  "type": "bundle",
+  "id": "bundle--1b3b810e-f6f8-5917-a45b-7319e226525e",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--877bac8b-bf01-51e1-bac9-b6f6e9960d1f",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--877bac8b-bf01-51e1-bac9-b6f6e9960d1f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--f6c85338-04dd-54bd-bbe5-265cb7c56ed7",
+      "created_by_ref": "identity--877bac8b-bf01-51e1-bac9-b6f6e9960d1f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: powershell-creating-thread-mutex",
+      "description": "The following analytic detects the execution of PowerShell scripts using the `mutex` function via EventCode 4104. This detection leverages PowerShell Script Block Logging to identify scripts that create thread mutexes, a technique often used in obfuscated scripts to ensure only one instance runs on a compromised machine. This activity is significant as it may indicate the presence of sophisticated malware or persistence mechanisms. If confirmed malicious, the attacker could maintain exclusive co",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--850cdfe1-2326-58a7-ba39-ca31d03390f0",
+        "attack-action--9859179e-8e97-5f7d-8228-3bfa48678081"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--4d68a644-6139-514a-b49d-cf8293d56337",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1027.005",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1027.005"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--5f4f4671-f4e5-543d-aa5f-002d47d0419c",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1059.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1059.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--850cdfe1-2326-58a7-ba39-ca31d03390f0",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1027.005",
+      "technique_id": "T1027.005",
+      "technique_ref": "attack-pattern--4d68a644-6139-514a-b49d-cf8293d56337",
+      "description": "The following analytic detects the execution of PowerShell scripts using the `mutex` function via EventCode 4104. This detection leverages PowerShell Script Block Logging to identify scripts that create thread mutexes, a technique often used in obfuscated scripts to ensure only one instance runs on a compromised machine. This activity is significant as it may indicate the presence of sophisticated malware or persistence mechanisms. If confirmed malicious, the attacker could maintain exclusive co",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--9859179e-8e97-5f7d-8228-3bfa48678081",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1059.001",
+      "technique_id": "T1059.001",
+      "technique_ref": "attack-pattern--5f4f4671-f4e5-543d-aa5f-002d47d0419c",
+      "description": "The following analytic detects the execution of PowerShell scripts using the `mutex` function via EventCode 4104. This detection leverages PowerShell Script Block Logging to identify scripts that create thread mutexes, a technique often used in obfuscated scripts to ensure only one instance runs on a compromised machine. This activity is significant as it may indicate the presence of sophisticated malware or persistence mechanisms. If confirmed malicious, the attacker could maintain exclusive co",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

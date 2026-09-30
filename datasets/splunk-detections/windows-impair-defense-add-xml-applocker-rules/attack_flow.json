@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--c91c8a18-30b8-5e51-9376-f0570205d7f7",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--e04b017c-2510-51b6-888e-4f29bc34095d",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--e04b017c-2510-51b6-888e-4f29bc34095d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--981c1345-516f-53c0-a387-f77aa3ebb1bf",
+      "created_by_ref": "identity--e04b017c-2510-51b6-888e-4f29bc34095d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-impair-defense-add-xml-applocker-rules",
+      "description": "The following analytic detects the use of a PowerShell commandlet to import an AppLocker XML policy. This behavior is identified by monitoring processes that execute the \"Import-Module Applocker\" and \"Set-AppLockerPolicy\" commands with the \"-XMLPolicy\" parameter. This activity is significant because it can indicate an attempt to disable or bypass security controls, as seen in the Azorult malware. If confirmed malicious, this could allow an attacker to disable antivirus products, leading to furth",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--04db0945-1644-5e76-87e7-0d962f1db477"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--2e59a435-85d5-5f56-9531-f7927b22d316",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1562.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--04db0945-1644-5e76-87e7-0d962f1db477",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.001",
+      "technique_id": "T1562.001",
+      "technique_ref": "attack-pattern--2e59a435-85d5-5f56-9531-f7927b22d316",
+      "description": "The following analytic detects the use of a PowerShell commandlet to import an AppLocker XML policy. This behavior is identified by monitoring processes that execute the \"Import-Module Applocker\" and \"Set-AppLockerPolicy\" commands with the \"-XMLPolicy\" parameter. This activity is significant because it can indicate an attempt to disable or bypass security controls, as seen in the Azorult malware. If confirmed malicious, this could allow an attacker to disable antivirus products, leading to furth",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

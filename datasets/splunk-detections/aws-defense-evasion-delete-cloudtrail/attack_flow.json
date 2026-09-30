@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--5b2c3c22-393e-518f-8b10-2d675c522241",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--98108d7b-dc08-5866-be0b-4aad072317b9",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--98108d7b-dc08-5866-be0b-4aad072317b9",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--b6c21293-b4c7-5b69-ab06-d6d2b3d71032",
+      "created_by_ref": "identity--98108d7b-dc08-5866-be0b-4aad072317b9",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: aws-defense-evasion-delete-cloudtrail",
+      "description": "The following analytic detects the deletion of AWS CloudTrail logs by identifying `DeleteTrail` events within CloudTrail logs. This detection leverages CloudTrail data to monitor for successful `DeleteTrail` actions, excluding those initiated from the AWS console. This activity is significant because adversaries may delete CloudTrail logs to evade detection and operate stealthily within the compromised environment. If confirmed malicious, this action could allow attackers to cover their tracks,",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--a3155578-90be-5f12-b190-40843cafd100"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--d55af8fd-1e72-5f68-9367-9be7515e6f0e",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.008",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1562.008"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--a3155578-90be-5f12-b190-40843cafd100",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.008",
+      "technique_id": "T1562.008",
+      "technique_ref": "attack-pattern--d55af8fd-1e72-5f68-9367-9be7515e6f0e",
+      "description": "The following analytic detects the deletion of AWS CloudTrail logs by identifying `DeleteTrail` events within CloudTrail logs. This detection leverages CloudTrail data to monitor for successful `DeleteTrail` actions, excluding those initiated from the AWS console. This activity is significant because adversaries may delete CloudTrail logs to evade detection and operate stealthily within the compromised environment. If confirmed malicious, this action could allow attackers to cover their tracks,",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--cd3da7a5-d700-5576-97d7-3003e437dc25",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--b2b2aeb3-2fd9-5568-8fe3-d49b9869a446",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--b2b2aeb3-2fd9-5568-8fe3-d49b9869a446",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--71dc68d3-1c4f-5bd7-9b24-5a2a8995e94a",
+      "created_by_ref": "identity--b2b2aeb3-2fd9-5568-8fe3-d49b9869a446",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: scheduled-task-creation-on-remote-endpoint-using-at",
+      "description": "The following analytic detects the creation of scheduled tasks on remote Windows endpoints using the at.exe command. This detection leverages Endpoint Detection and Response (EDR) telemetry, focusing on process creation events involving at.exe with remote command-line arguments. Identifying this activity is significant for a SOC as it may indicate lateral movement or remote code execution attempts by an attacker. If confirmed malicious, this activity could lead to unauthorized access, persistenc",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--64867afe-5ee0-5b3f-8965-4241657e9348"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--c564e611-d2f2-5c29-8216-d42be8196195",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1053.002",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1053.002"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--64867afe-5ee0-5b3f-8965-4241657e9348",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1053.002",
+      "technique_id": "T1053.002",
+      "technique_ref": "attack-pattern--c564e611-d2f2-5c29-8216-d42be8196195",
+      "description": "The following analytic detects the creation of scheduled tasks on remote Windows endpoints using the at.exe command. This detection leverages Endpoint Detection and Response (EDR) telemetry, focusing on process creation events involving at.exe with remote command-line arguments. Identifying this activity is significant for a SOC as it may indicate lateral movement or remote code execution attempts by an attacker. If confirmed malicious, this activity could lead to unauthorized access, persistenc",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

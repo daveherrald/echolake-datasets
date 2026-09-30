@@ -1,0 +1,110 @@
+{
+  "type": "bundle",
+  "id": "bundle--10f1fda2-9278-521b-9b2a-16fe33b40eb6",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--5d1e0007-6db9-589e-ab1a-21e0ca5160ba",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--5d1e0007-6db9-589e-ab1a-21e0ca5160ba",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--69b71839-e15e-5f11-9095-91c6197b00c1",
+      "created_by_ref": "identity--5d1e0007-6db9-589e-ab1a-21e0ca5160ba",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-protocol-tunneling-with-plink",
+      "description": "This analytic detects the use of Plink (including renamed versions like pvhost.exe) for protocol tunneling, which may be used for egress or lateral movement within an organization. It identifies specific command-line options (-R, -L, -D, -l, -N, -P, -pw) commonly used for port forwarding and tunneling by analyzing process execution logs from Endpoint Detection and Response (EDR) agents. This activity is significant as it may indicate an attempt to bypass network security controls or establish un",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--e6b73f5d-1596-58eb-b48b-3d4ccc6b775d",
+        "attack-action--e33944d3-4296-5b8b-b4ca-ffa6d3998c12"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--de8bf6bd-a4dc-5896-83ae-0f7cc73a64a7",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1572",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1572"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--70e4228b-1e2d-5a1e-9d06-bbd1c2e8b705",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1021.004",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1021.004"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--e6b73f5d-1596-58eb-b48b-3d4ccc6b775d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1572",
+      "technique_id": "T1572",
+      "technique_ref": "attack-pattern--de8bf6bd-a4dc-5896-83ae-0f7cc73a64a7",
+      "description": "This analytic detects the use of Plink (including renamed versions like pvhost.exe) for protocol tunneling, which may be used for egress or lateral movement within an organization. It identifies specific command-line options (-R, -L, -D, -l, -N, -P, -pw) commonly used for port forwarding and tunneling by analyzing process execution logs from Endpoint Detection and Response (EDR) agents. This activity is significant as it may indicate an attempt to bypass network security controls or establish un",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--e33944d3-4296-5b8b-b4ca-ffa6d3998c12",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1021.004",
+      "technique_id": "T1021.004",
+      "technique_ref": "attack-pattern--70e4228b-1e2d-5a1e-9d06-bbd1c2e8b705",
+      "description": "This analytic detects the use of Plink (including renamed versions like pvhost.exe) for protocol tunneling, which may be used for egress or lateral movement within an organization. It identifies specific command-line options (-R, -L, -D, -l, -N, -P, -pw) commonly used for port forwarding and tunneling by analyzing process execution logs from Endpoint Detection and Response (EDR) agents. This activity is significant as it may indicate an attempt to bypass network security controls or establish un",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

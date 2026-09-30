@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--816ce43a-6cb0-5bc1-9da7-afbd905b14df",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--0397ba7a-86a3-594f-8aeb-4644fc9d3295",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--0397ba7a-86a3-594f-8aeb-4644fc9d3295",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--1e01d971-17d2-5282-9746-788d2979628f",
+      "created_by_ref": "identity--0397ba7a-86a3-594f-8aeb-4644fc9d3295",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: aws-excessive-security-scanning",
+      "description": "The following analytic identifies excessive security scanning activities in AWS by detecting a high number of Describe, List, or Get API calls from a single user. It leverages AWS CloudTrail logs to count distinct event names and flags users with more than 50 such events. This behavior is significant as it may indicate reconnaissance activities by an attacker attempting to map out your AWS environment. If confirmed malicious, this could lead to unauthorized access, data exfiltration, or further",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--dd5ae8d8-78de-52f8-9464-4ac2060c31d4"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--8d0e1e62-c242-55ad-8d1c-4c9e9dc74f10",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1526",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1526"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--dd5ae8d8-78de-52f8-9464-4ac2060c31d4",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1526",
+      "technique_id": "T1526",
+      "technique_ref": "attack-pattern--8d0e1e62-c242-55ad-8d1c-4c9e9dc74f10",
+      "description": "The following analytic identifies excessive security scanning activities in AWS by detecting a high number of Describe, List, or Get API calls from a single user. It leverages AWS CloudTrail logs to count distinct event names and flags users with more than 50 such events. This behavior is significant as it may indicate reconnaissance activities by an attacker attempting to map out your AWS environment. If confirmed malicious, this could lead to unauthorized access, data exfiltration, or further",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

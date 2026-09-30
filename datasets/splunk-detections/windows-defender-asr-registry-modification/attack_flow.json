@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--394e009f-fb88-523f-9ebd-acca3bcc0122",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--737f1e03-bb4a-507c-b800-9bd89f398425",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--737f1e03-bb4a-507c-b800-9bd89f398425",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--bd610ce7-bcab-5d7e-9bfc-c38a376288d2",
+      "created_by_ref": "identity--737f1e03-bb4a-507c-b800-9bd89f398425",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-defender-asr-registry-modification",
+      "description": "The following analytic detects modifications to Windows Defender Attack Surface Reduction (ASR) registry settings. It leverages Windows Defender Operational logs, specifically EventCode 5007, to identify changes in ASR rules. This activity is significant because ASR rules are designed to block actions commonly used by malware to exploit systems. Unauthorized modifications to these settings could indicate an attempt to weaken system defenses. If confirmed malicious, this could allow an attacker t",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--858e78e2-7a0e-5f73-8e30-03233f95d511"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--5444f53a-5eab-529d-ba3e-b461533434ff",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1112",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1112"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--858e78e2-7a0e-5f73-8e30-03233f95d511",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1112",
+      "technique_id": "T1112",
+      "technique_ref": "attack-pattern--5444f53a-5eab-529d-ba3e-b461533434ff",
+      "description": "The following analytic detects modifications to Windows Defender Attack Surface Reduction (ASR) registry settings. It leverages Windows Defender Operational logs, specifically EventCode 5007, to identify changes in ASR rules. This activity is significant because ASR rules are designed to block actions commonly used by malware to exploit systems. Unauthorized modifications to these settings could indicate an attempt to weaken system defenses. If confirmed malicious, this could allow an attacker t",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--35f9f080-cb16-5b4e-b84c-2c29e0946b24",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--73cec678-129f-5b3a-a27b-235126c2acd5",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--73cec678-129f-5b3a-a27b-235126c2acd5",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--3b76dfa6-bf08-558d-85ec-531ac5dcc650",
+      "created_by_ref": "identity--73cec678-129f-5b3a-a27b-235126c2acd5",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-mail-protocol-in-non-common-process-path",
+      "description": "The following analytic detects a Windows application establishing an SMTP connection from a non-common installation path. It leverages Sysmon EventCode 3 to identify processes not typically associated with email clients (e.g., Thunderbird, Outlook) making SMTP connections. This activity is significant as adversaries, including malware like AgentTesla, use such connections for Command and Control (C2) communication to exfiltrate stolen data. If confirmed malicious, this behavior could lead to una",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--8ec0320f-8769-5ad9-a5ba-2316fbbbf75b"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--7b6082e3-2727-583b-90f3-953258355737",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1071.003",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1071.003"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--8ec0320f-8769-5ad9-a5ba-2316fbbbf75b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1071.003",
+      "technique_id": "T1071.003",
+      "technique_ref": "attack-pattern--7b6082e3-2727-583b-90f3-953258355737",
+      "description": "The following analytic detects a Windows application establishing an SMTP connection from a non-common installation path. It leverages Sysmon EventCode 3 to identify processes not typically associated with email clients (e.g., Thunderbird, Outlook) making SMTP connections. This activity is significant as adversaries, including malware like AgentTesla, use such connections for Command and Control (C2) communication to exfiltrate stolen data. If confirmed malicious, this behavior could lead to una",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

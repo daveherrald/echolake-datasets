@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--88378a21-4eb5-5156-89e5-331f609a63ba",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--78d8adbc-a6dd-5e5c-be68-8817b99cc8e3",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--78d8adbc-a6dd-5e5c-be68-8817b99cc8e3",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--23727078-65fd-5e85-af1b-cb055b26d375",
+      "created_by_ref": "identity--78d8adbc-a6dd-5e5c-be68-8817b99cc8e3",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-scheduled-task-with-suspicious-command",
+      "description": "The following analytic detects the creation of scheduled tasks designed to execute commands using native Windows shells like PowerShell, Cmd, Wscript, or Cscript or from public folders such as Users, Temp, or ProgramData. It leverages Windows Security EventCode 4698, 4700, and 4702 to identify when such tasks are registered, enabled, or modified. This activity is significant as it may indicate an attempt to establish persistence or execute malicious commands on a system. If confirmed malicious,",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--8b92e4ca-22a9-52fe-b186-6ba4dfe324c7"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--063d31df-fb46-5132-a05a-c24b7930add1",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1053.005",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1053.005"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--8b92e4ca-22a9-52fe-b186-6ba4dfe324c7",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1053.005",
+      "technique_id": "T1053.005",
+      "technique_ref": "attack-pattern--063d31df-fb46-5132-a05a-c24b7930add1",
+      "description": "The following analytic detects the creation of scheduled tasks designed to execute commands using native Windows shells like PowerShell, Cmd, Wscript, or Cscript or from public folders such as Users, Temp, or ProgramData. It leverages Windows Security EventCode 4698, 4700, and 4702 to identify when such tasks are registered, enabled, or modified. This activity is significant as it may indicate an attempt to establish persistence or execute malicious commands on a system. If confirmed malicious,",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

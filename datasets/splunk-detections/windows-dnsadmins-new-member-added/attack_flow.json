@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--3edbedb5-7a1f-59ff-b312-b56a57b3c52d",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--21275581-a1c2-5621-92c4-bbd3f6097fad",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--21275581-a1c2-5621-92c4-bbd3f6097fad",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--0ac533bd-0f1f-59c5-ad69-dc2ba0f6bf37",
+      "created_by_ref": "identity--21275581-a1c2-5621-92c4-bbd3f6097fad",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-dnsadmins-new-member-added",
+      "description": "The following analytic detects the addition of a new member to the DnsAdmins group in Active Directory by leveraging Event ID 4732. This detection uses security event logs to identify changes to this high-privilege group. Monitoring this activity is crucial because members of the DnsAdmins group can manage the DNS service, often running on Domain Controllers, and potentially execute malicious code with SYSTEM privileges. If confirmed malicious, this activity could allow an attacker to escalate p",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--018c1a9d-0c2f-5a8c-b59d-2ca356235f63"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--d8f7391a-b2e1-5f22-ae00-047214d7256c",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1098",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1098"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--018c1a9d-0c2f-5a8c-b59d-2ca356235f63",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1098",
+      "technique_id": "T1098",
+      "technique_ref": "attack-pattern--d8f7391a-b2e1-5f22-ae00-047214d7256c",
+      "description": "The following analytic detects the addition of a new member to the DnsAdmins group in Active Directory by leveraging Event ID 4732. This detection uses security event logs to identify changes to this high-privilege group. Monitoring this activity is crucial because members of the DnsAdmins group can manage the DNS service, often running on Domain Controllers, and potentially execute malicious code with SYSTEM privileges. If confirmed malicious, this activity could allow an attacker to escalate p",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

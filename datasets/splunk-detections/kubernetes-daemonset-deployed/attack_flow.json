@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--8646c361-3f3e-5952-a8e5-779e87aef963",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--97747f8c-b008-5038-ae73-8e8eaf6d88a4",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--97747f8c-b008-5038-ae73-8e8eaf6d88a4",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--afd20174-f2ea-5547-a33c-19ed98c663a8",
+      "created_by_ref": "identity--97747f8c-b008-5038-ae73-8e8eaf6d88a4",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: kubernetes-daemonset-deployed",
+      "description": "The following analytic detects the creation of a DaemonSet in a Kubernetes cluster. This behavior is identified by monitoring Kubernetes Audit logs for the creation event of a DaemonSet. DaemonSets ensure a specific pod runs on every node, making them a potential vector for persistent access. This activity is significant for a SOC as it could indicate an attempt to maintain persistent access to the Kubernetes infrastructure. If confirmed malicious, it could lead to persistent attacks, service di",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--6b97c9b4-49e9-58c5-8a31-4b6655ed1ea7"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--b80614a1-1dd4-575c-a874-994daa06d074",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1204",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1204"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--6b97c9b4-49e9-58c5-8a31-4b6655ed1ea7",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1204",
+      "technique_id": "T1204",
+      "technique_ref": "attack-pattern--b80614a1-1dd4-575c-a874-994daa06d074",
+      "description": "The following analytic detects the creation of a DaemonSet in a Kubernetes cluster. This behavior is identified by monitoring Kubernetes Audit logs for the creation event of a DaemonSet. DaemonSets ensure a specific pod runs on every node, making them a potential vector for persistent access. This activity is significant for a SOC as it could indicate an attempt to maintain persistent access to the Kubernetes infrastructure. If confirmed malicious, it could lead to persistent attacks, service di",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

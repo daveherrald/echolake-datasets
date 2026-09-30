@@ -1,0 +1,110 @@
+{
+  "type": "bundle",
+  "id": "bundle--67df69a8-a400-5727-b0c0-c8a2b92ca872",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--ee6bd3ea-a72e-5367-a80f-acbdc4da7130",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--ee6bd3ea-a72e-5367-a80f-acbdc4da7130",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--98b79e9a-8f39-5c51-8ae4-92cde50ed556",
+      "created_by_ref": "identity--ee6bd3ea-a72e-5367-a80f-acbdc4da7130",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-sql-server-extended-procedure-dll-loading-hunt",
+      "description": "This analytic detects when SQL Server loads DLLs to execute extended stored procedures. This is particularly important for security monitoring as it indicates the first-time use or version changes of potentially dangerous procedures like xp_cmdshell, sp_OACreate, and others. While this is a legitimate operation, adversaries may abuse these procedures for execution, discovery, or privilege escalation.",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--b8890f9b-7d88-58d8-87d0-88d5c6f1e2ba",
+        "attack-action--bf7dcd1d-bf71-508f-93a1-f22805f51ff7"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--e34b8c4f-25c5-5aa1-8595-6ab2da81b1b9",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1505.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1505.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--2523e9c0-3fc0-5668-91e8-7ed929b27846",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1059.009",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1059.009"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--b8890f9b-7d88-58d8-87d0-88d5c6f1e2ba",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1505.001",
+      "technique_id": "T1505.001",
+      "technique_ref": "attack-pattern--e34b8c4f-25c5-5aa1-8595-6ab2da81b1b9",
+      "description": "This analytic detects when SQL Server loads DLLs to execute extended stored procedures. This is particularly important for security monitoring as it indicates the first-time use or version changes of potentially dangerous procedures like xp_cmdshell, sp_OACreate, and others. While this is a legitimate operation, adversaries may abuse these procedures for execution, discovery, or privilege escalation.",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--bf7dcd1d-bf71-508f-93a1-f22805f51ff7",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1059.009",
+      "technique_id": "T1059.009",
+      "technique_ref": "attack-pattern--2523e9c0-3fc0-5668-91e8-7ed929b27846",
+      "description": "This analytic detects when SQL Server loads DLLs to execute extended stored procedures. This is particularly important for security monitoring as it indicates the first-time use or version changes of potentially dangerous procedures like xp_cmdshell, sp_OACreate, and others. While this is a legitimate operation, adversaries may abuse these procedures for execution, discovery, or privilege escalation.",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

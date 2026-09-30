@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--5fe2a43e-b07e-5e73-af01-d84e8adead4b",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--afc22fed-4c64-537d-9a10-6704b9aa56e1",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--afc22fed-4c64-537d-9a10-6704b9aa56e1",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--eecd9d0f-d722-58ca-b01c-057c2c413cb2",
+      "created_by_ref": "identity--afc22fed-4c64-537d-9a10-6704b9aa56e1",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: recon-avproduct-through-pwh-or-wmi",
+      "description": "The following analytic detects suspicious PowerShell script execution via EventCode 4104, specifically targeting checks for installed anti-virus products using WMI or PowerShell commands. This detection leverages PowerShell Script Block Logging to identify scripts containing keywords like \"SELECT,\" \"WMIC,\" \"AntiVirusProduct,\" or \"AntiSpywareProduct.\" This activity is significant as it is commonly used by malware and APT actors to map running security applications or services, potentially aiding",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--203780bd-1a77-50fc-aafc-fc02daee3ec8"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--7d745908-e02a-5e3e-81a8-8c76dd2b5b61",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1592",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1592"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--203780bd-1a77-50fc-aafc-fc02daee3ec8",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1592",
+      "technique_id": "T1592",
+      "technique_ref": "attack-pattern--7d745908-e02a-5e3e-81a8-8c76dd2b5b61",
+      "description": "The following analytic detects suspicious PowerShell script execution via EventCode 4104, specifically targeting checks for installed anti-virus products using WMI or PowerShell commands. This detection leverages PowerShell Script Block Logging to identify scripts containing keywords like \"SELECT,\" \"WMIC,\" \"AntiVirusProduct,\" or \"AntiSpywareProduct.\" This activity is significant as it is commonly used by malware and APT actors to map running security applications or services, potentially aiding",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

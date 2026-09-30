@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--73228102-da69-5a74-8254-c1ce8ecb9e07",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--048c4e60-ead3-542a-a340-b8043c27a78f",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--048c4e60-ead3-542a-a340-b8043c27a78f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--587f7abd-fd32-5007-ad24-e78b45e45ce7",
+      "created_by_ref": "identity--048c4e60-ead3-542a-a340-b8043c27a78f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-application-whitelisting-bypass-attempt-via-rundll32",
+      "description": "The following analytic detects the execution of rundll32.exe calling one of the following DLLs:\n\n- Advpack.dll\n- Ieadvpack.dll\n- Syssetup.dll\n- Setupapi.dll\n\nwith one of the following functions: \"LaunchINFSection\", \"InstallHinfSection\", \"SetupInfObjectInstallAction\".\nThis method is identified through Endpoint Detection and Response (EDR) telemetry, \nfocusing on command-line executions and process details. \nThis activity is significant as it indicates a potential application\ncontrol or whitelisti",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--c5860c01-edb2-533f-b4cf-c86bbd24237c"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--21cdb205-8b50-533b-bc1b-04fd02db6568",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1218.011",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1218.011"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--c5860c01-edb2-533f-b4cf-c86bbd24237c",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1218.011",
+      "technique_id": "T1218.011",
+      "technique_ref": "attack-pattern--21cdb205-8b50-533b-bc1b-04fd02db6568",
+      "description": "The following analytic detects the execution of rundll32.exe calling one of the following DLLs:\n\n- Advpack.dll\n- Ieadvpack.dll\n- Syssetup.dll\n- Setupapi.dll\n\nwith one of the following functions: \"LaunchINFSection\", \"InstallHinfSection\", \"SetupInfObjectInstallAction\".\nThis method is identified through Endpoint Detection and Response (EDR) telemetry, \nfocusing on command-line executions and process details. \nThis activity is significant as it indicates a potential application\ncontrol or whitelisti",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

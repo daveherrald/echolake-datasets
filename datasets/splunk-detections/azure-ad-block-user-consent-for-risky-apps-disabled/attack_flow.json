@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--3f45914f-d634-54c1-8bdc-0ae4581fa3d1",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--94d92379-7db8-581d-a680-6feff5e12c6c",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--94d92379-7db8-581d-a680-6feff5e12c6c",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--7ea23163-1dbb-5b78-b240-0655bfe524e2",
+      "created_by_ref": "identity--94d92379-7db8-581d-a680-6feff5e12c6c",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: azure-ad-block-user-consent-for-risky-apps-disabled",
+      "description": "The following analytic detects when the risk-based step-up consent security setting in Azure AD is disabled. It monitors Azure Active Directory logs for the \"Update authorization policy\" operation, specifically changes to the \"AllowUserConsentForRiskyApps\" setting. This activity is significant because disabling this feature can expose the organization to OAuth phishing threats by allowing users to grant consent to potentially malicious applications. If confirmed malicious, attackers could gain u",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--4bf26bc2-dfc5-5fad-99a4-ec5a54eefa43"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--c0b68613-bee4-5fee-9632-b6ed1fa10d62",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1562"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--4bf26bc2-dfc5-5fad-99a4-ec5a54eefa43",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562",
+      "technique_id": "T1562",
+      "technique_ref": "attack-pattern--c0b68613-bee4-5fee-9632-b6ed1fa10d62",
+      "description": "The following analytic detects when the risk-based step-up consent security setting in Azure AD is disabled. It monitors Azure Active Directory logs for the \"Update authorization policy\" operation, specifically changes to the \"AllowUserConsentForRiskyApps\" setting. This activity is significant because disabling this feature can expose the organization to OAuth phishing threats by allowing users to grant consent to potentially malicious applications. If confirmed malicious, attackers could gain u",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--f08dd648-6581-5924-88e5-9e7ca0c3a3eb",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--1e21683b-9498-5e98-ad1b-0e765497f9e4",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--1e21683b-9498-5e98-ad1b-0e765497f9e4",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--b548ba32-6177-5302-8e7f-58ea010732f3",
+      "created_by_ref": "identity--1e21683b-9498-5e98-ad1b-0e765497f9e4",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-rdp-server-registry-entry-created",
+      "description": "This detection identifies the creation of registry keys under HKEY_CURRENT_USER\\Software\\Microsoft\\Terminal Server Client\\Servers\\, which occur when a user initiates a Remote Desktop Protocol (RDP) connection using the built-in Windows RDP client (mstsc.exe). These registry entries store information about previously connected remote hosts, including usernames and display settings. Their creation is a strong indicator that an outbound RDP session was initiated from the system. While the presence",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--c8c58e45-a979-5e5a-849a-b693196ecc42"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--4181706a-2d6d-55a2-b123-33ac7a75fff9",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1021.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1021.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--c8c58e45-a979-5e5a-849a-b693196ecc42",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1021.001",
+      "technique_id": "T1021.001",
+      "technique_ref": "attack-pattern--4181706a-2d6d-55a2-b123-33ac7a75fff9",
+      "description": "This detection identifies the creation of registry keys under HKEY_CURRENT_USER\\Software\\Microsoft\\Terminal Server Client\\Servers\\, which occur when a user initiates a Remote Desktop Protocol (RDP) connection using the built-in Windows RDP client (mstsc.exe). These registry entries store information about previously connected remote hosts, including usernames and display settings. Their creation is a strong indicator that an outbound RDP session was initiated from the system. While the presence",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

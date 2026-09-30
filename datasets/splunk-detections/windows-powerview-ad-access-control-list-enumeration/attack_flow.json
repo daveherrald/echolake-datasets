@@ -1,0 +1,110 @@
+{
+  "type": "bundle",
+  "id": "bundle--c1a3d7f6-b82c-54ab-bd52-2155f6c5f7e0",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--5d3a75a7-cd22-5a74-a60c-9b50ec574c04",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--5d3a75a7-cd22-5a74-a60c-9b50ec574c04",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--6ed83517-71f8-537b-bbad-448212b1b6ff",
+      "created_by_ref": "identity--5d3a75a7-cd22-5a74-a60c-9b50ec574c04",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-powerview-ad-access-control-list-enumeration",
+      "description": "The following analytic detects the execution of PowerView PowerShell cmdlets `Get-ObjectAcl` or `Get-DomainObjectAcl`, which are used to enumerate Access Control List (ACL) permissions for Active Directory objects. It leverages Event ID 4104 from PowerShell Script Block Logging to identify this activity. This behavior is significant as it may indicate an attempt to discover weak permissions in Active Directory, potentially leading to privilege escalation. If confirmed malicious, attackers could",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--fa5760a6-7c0d-56ee-ad81-345f92dbd9b6",
+        "attack-action--b81a357f-e82c-5c63-9125-13c4d48c6397"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--e6234cdd-8334-5cd7-b95a-817c1b257022",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1078.002",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1078.002"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--99e6e1a0-5773-5fce-a88a-69b06a5d2b60",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1069",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1069"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--fa5760a6-7c0d-56ee-ad81-345f92dbd9b6",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1078.002",
+      "technique_id": "T1078.002",
+      "technique_ref": "attack-pattern--e6234cdd-8334-5cd7-b95a-817c1b257022",
+      "description": "The following analytic detects the execution of PowerView PowerShell cmdlets `Get-ObjectAcl` or `Get-DomainObjectAcl`, which are used to enumerate Access Control List (ACL) permissions for Active Directory objects. It leverages Event ID 4104 from PowerShell Script Block Logging to identify this activity. This behavior is significant as it may indicate an attempt to discover weak permissions in Active Directory, potentially leading to privilege escalation. If confirmed malicious, attackers could",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--b81a357f-e82c-5c63-9125-13c4d48c6397",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1069",
+      "technique_id": "T1069",
+      "technique_ref": "attack-pattern--99e6e1a0-5773-5fce-a88a-69b06a5d2b60",
+      "description": "The following analytic detects the execution of PowerView PowerShell cmdlets `Get-ObjectAcl` or `Get-DomainObjectAcl`, which are used to enumerate Access Control List (ACL) permissions for Active Directory objects. It leverages Event ID 4104 from PowerShell Script Block Logging to identify this activity. This behavior is significant as it may indicate an attempt to discover weak permissions in Active Directory, potentially leading to privilege escalation. If confirmed malicious, attackers could",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--6c1405cd-65ea-59d6-b38f-52658ca89f98",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--1f2cdbb5-e358-5af7-a632-01be7435e1e5",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--1f2cdbb5-e358-5af7-a632-01be7435e1e5",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--80d1d691-3904-59e9-9ff4-86999b19480d",
+      "created_by_ref": "identity--1f2cdbb5-e358-5af7-a632-01be7435e1e5",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: cisco-duo-policy-allow-old-java",
+      "description": "The following analytic detects when a Duo policy is created or updated to allow the use of outdated Java versions, which can introduce significant \nsecurity risks. It works by searching Duo administrator activity logs for policy creation or update actions where the policy explicitly sets \n'java_remediation' to 'no remediation', indicating that no restrictions are enforced against old Java. The analytic aggregates relevant details \nsuch as the user, admin email, and action context for further inv",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--2eb48e22-f71f-5303-99b7-e1278cfb2e57"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--d5a5ddbf-d3d7-54e8-bf8b-ee8169554e6c",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1556",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1556"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--2eb48e22-f71f-5303-99b7-e1278cfb2e57",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1556",
+      "technique_id": "T1556",
+      "technique_ref": "attack-pattern--d5a5ddbf-d3d7-54e8-bf8b-ee8169554e6c",
+      "description": "The following analytic detects when a Duo policy is created or updated to allow the use of outdated Java versions, which can introduce significant \nsecurity risks. It works by searching Duo administrator activity logs for policy creation or update actions where the policy explicitly sets \n'java_remediation' to 'no remediation', indicating that no restrictions are enforced against old Java. The analytic aggregates relevant details \nsuch as the user, admin email, and action context for further inv",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

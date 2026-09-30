@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--c85a5f08-9a31-577e-9840-16ac626f50d1",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--764972ad-bc53-5a81-b575-255445670f54",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--764972ad-bc53-5a81-b575-255445670f54",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--71d0fa66-6280-5f61-9eb5-4cd94a09f83d",
+      "created_by_ref": "identity--764972ad-bc53-5a81-b575-255445670f54",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: suspicious-image-creation-in-appdata-folder",
+      "description": "The following analytic detects the creation of image files in the AppData folder by processes that also have a file reference in the same folder. It leverages data from the Endpoint.Processes and Endpoint.Filesystem datamodels to identify this behavior. This activity is significant because it is commonly associated with malware, such as the Remcos RAT, which captures screenshots and stores them in the AppData folder before exfiltrating them to a command-and-control server. If confirmed malicious",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--cf07d53f-89f0-5d24-8ae3-28bdbe70cd82"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--eff33267-7b65-51be-84a8-d7f1eeefa14a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1113",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1113"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--cf07d53f-89f0-5d24-8ae3-28bdbe70cd82",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1113",
+      "technique_id": "T1113",
+      "technique_ref": "attack-pattern--eff33267-7b65-51be-84a8-d7f1eeefa14a",
+      "description": "The following analytic detects the creation of image files in the AppData folder by processes that also have a file reference in the same folder. It leverages data from the Endpoint.Processes and Endpoint.Filesystem datamodels to identify this behavior. This activity is significant because it is commonly associated with malware, such as the Remcos RAT, which captures screenshots and stores them in the AppData folder before exfiltrating them to a command-and-control server. If confirmed malicious",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

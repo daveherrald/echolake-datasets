@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--513bd636-4974-570a-8bab-5fbad0bb64c8",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--31e75ea5-9027-5e4e-b94d-af98659ee3a5",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--31e75ea5-9027-5e4e-b94d-af98659ee3a5",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--574b360d-04d7-5d7a-b45e-1423e8348ef2",
+      "created_by_ref": "identity--31e75ea5-9027-5e4e-b94d-af98659ee3a5",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-registry-dotnet-etw-disabled-via-env-variable",
+      "description": "The following analytic detects a registry modification that disables the ETW for the .NET Framework. It leverages data from the Endpoint.Registry data model, specifically monitoring changes to the COMPlus_ETWEnabled registry value under the \"Environment\" registry key path for both user (HKCU\\Environment) and machine (HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Environment) scopes. This activity is significant because disabling ETW can allow attackers to evade Endpoint Detection and Res",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--b5e14c66-b183-5d3d-b48d-1b40d61a3394"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--3712166b-3d3e-585b-bbf8-3bdc29577363",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.006",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1562.006"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--b5e14c66-b183-5d3d-b48d-1b40d61a3394",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.006",
+      "technique_id": "T1562.006",
+      "technique_ref": "attack-pattern--3712166b-3d3e-585b-bbf8-3bdc29577363",
+      "description": "The following analytic detects a registry modification that disables the ETW for the .NET Framework. It leverages data from the Endpoint.Registry data model, specifically monitoring changes to the COMPlus_ETWEnabled registry value under the \"Environment\" registry key path for both user (HKCU\\Environment) and machine (HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Environment) scopes. This activity is significant because disabling ETW can allow attackers to evade Endpoint Detection and Res",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

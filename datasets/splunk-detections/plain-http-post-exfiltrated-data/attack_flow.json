@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--7f56a059-8651-5663-9a1f-ba0911f7f047",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--97ace3c2-8acf-5d05-8498-00ea0e184599",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--97ace3c2-8acf-5d05-8498-00ea0e184599",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--b9a39e0b-4c10-5678-b9be-ded660fe7e15",
+      "created_by_ref": "identity--97ace3c2-8acf-5d05-8498-00ea0e184599",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: plain-http-post-exfiltrated-data",
+      "description": "The following analytic detects potential data exfiltration using plain HTTP POST requests. It leverages network traffic logs, specifically monitoring the `stream_http` data source for POST methods containing suspicious form data such as \"wermgr.exe\" or \"svchost.exe\". This activity is significant because it is commonly associated with malware like Trickbot, trojans, keyloggers, or APT adversaries, which use plain text HTTP POST requests to communicate with remote C2 servers. If confirmed maliciou",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--4f060c83-b095-5313-be2f-8224c4930b77"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--35711786-6bfa-52a3-a0ff-23f779d58903",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1048.003",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1048.003"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--4f060c83-b095-5313-be2f-8224c4930b77",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1048.003",
+      "technique_id": "T1048.003",
+      "technique_ref": "attack-pattern--35711786-6bfa-52a3-a0ff-23f779d58903",
+      "description": "The following analytic detects potential data exfiltration using plain HTTP POST requests. It leverages network traffic logs, specifically monitoring the `stream_http` data source for POST methods containing suspicious form data such as \"wermgr.exe\" or \"svchost.exe\". This activity is significant because it is commonly associated with malware like Trickbot, trojans, keyloggers, or APT adversaries, which use plain text HTTP POST requests to communicate with remote C2 servers. If confirmed maliciou",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

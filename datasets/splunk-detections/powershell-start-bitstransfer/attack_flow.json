@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--c7dbd5c7-a64e-5649-baa6-9b3a71e25750",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--f317e6b2-4ee3-5f30-a4c7-c4a715508c4e",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--f317e6b2-4ee3-5f30-a4c7-c4a715508c4e",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--48092cb9-443b-5c92-b4c4-3b25cbd16148",
+      "created_by_ref": "identity--f317e6b2-4ee3-5f30-a4c7-c4a715508c4e",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: powershell-start-bitstransfer",
+      "description": "The following analytic detects the execution of the PowerShell command `Start-BitsTransfer`, which can be used for file transfers, including potential data exfiltration. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process creation events and command-line arguments. This activity is significant because `Start-BitsTransfer` can be abused by adversaries to upload sensitive files to remote locations, posing a risk of data loss. If confirmed malicious, this could",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--83a001e7-3983-5422-89e0-181e4b3b22a9"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--d0a491df-6ffa-5fb0-a8d7-f17e287988c8",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1197",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1197"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--83a001e7-3983-5422-89e0-181e4b3b22a9",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1197",
+      "technique_id": "T1197",
+      "technique_ref": "attack-pattern--d0a491df-6ffa-5fb0-a8d7-f17e287988c8",
+      "description": "The following analytic detects the execution of the PowerShell command `Start-BitsTransfer`, which can be used for file transfers, including potential data exfiltration. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process creation events and command-line arguments. This activity is significant because `Start-BitsTransfer` can be abused by adversaries to upload sensitive files to remote locations, posing a risk of data loss. If confirmed malicious, this could",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

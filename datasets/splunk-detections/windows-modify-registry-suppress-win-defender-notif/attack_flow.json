@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--3e39e9e9-aee9-53c5-9801-56e38943b232",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--26c516c9-5363-5f5f-a216-aafc00e464bf",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--26c516c9-5363-5f5f-a216-aafc00e464bf",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--167261ae-d2fd-5356-89fe-1fef7d3504c4",
+      "created_by_ref": "identity--26c516c9-5363-5f5f-a216-aafc00e464bf",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-modify-registry-suppress-win-defender-notif",
+      "description": "The following analytic detects modifications in the Windows registry to suppress Windows Defender notifications. It leverages data from the Endpoint.Registry datamodel, specifically targeting changes to the \"Notification_Suppress\" registry value. This activity is significant because adversaries, including those deploying Azorult malware, use this technique to bypass Windows Defender and disable critical notifications. If confirmed malicious, this behavior could allow attackers to evade detection",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--dd0ae803-dc05-56af-9070-3a91f0801683"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--d464fdac-c82c-5a80-8152-c6ee0adf2279",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1112",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1112"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--dd0ae803-dc05-56af-9070-3a91f0801683",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1112",
+      "technique_id": "T1112",
+      "technique_ref": "attack-pattern--d464fdac-c82c-5a80-8152-c6ee0adf2279",
+      "description": "The following analytic detects modifications in the Windows registry to suppress Windows Defender notifications. It leverages data from the Endpoint.Registry datamodel, specifically targeting changes to the \"Notification_Suppress\" registry value. This activity is significant because adversaries, including those deploying Azorult malware, use this technique to bypass Windows Defender and disable critical notifications. If confirmed malicious, this behavior could allow attackers to evade detection",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

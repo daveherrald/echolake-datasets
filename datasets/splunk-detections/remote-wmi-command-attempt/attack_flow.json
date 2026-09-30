@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--5aeaeb5c-35f6-5fd7-9236-94806750c5d7",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--a8938c9d-1d5a-503f-9a08-362f0863b472",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--a8938c9d-1d5a-503f-9a08-362f0863b472",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--8ae7ccaf-b8ad-5c3b-b230-18b330d663db",
+      "created_by_ref": "identity--a8938c9d-1d5a-503f-9a08-362f0863b472",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: remote-wmi-command-attempt",
+      "description": "The following analytic detects the execution of `wmic.exe` with the `node` switch, indicating an attempt to spawn a local or remote process. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process creation events and command-line arguments. This activity is significant as it may indicate lateral movement or remote code execution attempts by an attacker. If confirmed malicious, the attacker could gain remote control over the targeted system, execute ar",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--2230fb64-0614-51e5-bd1c-6896d0b85e7b"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--1490c13a-9559-5819-8413-ce9a36524963",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1047",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1047"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--2230fb64-0614-51e5-bd1c-6896d0b85e7b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1047",
+      "technique_id": "T1047",
+      "technique_ref": "attack-pattern--1490c13a-9559-5819-8413-ce9a36524963",
+      "description": "The following analytic detects the execution of `wmic.exe` with the `node` switch, indicating an attempt to spawn a local or remote process. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process creation events and command-line arguments. This activity is significant as it may indicate lateral movement or remote code execution attempts by an attacker. If confirmed malicious, the attacker could gain remote control over the targeted system, execute ar",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

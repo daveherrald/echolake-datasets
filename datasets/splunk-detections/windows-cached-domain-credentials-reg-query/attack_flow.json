@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--a02c161a-81c9-5ba4-ba3c-ff3fe0b684d5",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--f2114e14-8f81-5bba-a93e-34dab39238a6",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--f2114e14-8f81-5bba-a93e-34dab39238a6",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--e2c891a7-e509-5657-b3de-0e238cce78be",
+      "created_by_ref": "identity--f2114e14-8f81-5bba-a93e-34dab39238a6",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-cached-domain-credentials-reg-query",
+      "description": "The following analytic identifies a process command line querying the CachedLogonsCount registry value in the Winlogon registry. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on command-line executions and registry queries. Monitoring this activity is significant as it can indicate the use of post-exploitation tools like Winpeas, which gather information about login caching settings. If confirmed malicious, this activity could help attackers understand",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--063dfa11-890f-52ab-bd17-b3cf31d6d5af"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--66b7d184-6903-5f19-aab4-3cb555355b6e",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1003.005",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1003.005"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--063dfa11-890f-52ab-bd17-b3cf31d6d5af",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1003.005",
+      "technique_id": "T1003.005",
+      "technique_ref": "attack-pattern--66b7d184-6903-5f19-aab4-3cb555355b6e",
+      "description": "The following analytic identifies a process command line querying the CachedLogonsCount registry value in the Winlogon registry. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on command-line executions and registry queries. Monitoring this activity is significant as it can indicate the use of post-exploitation tools like Winpeas, which gather information about login caching settings. If confirmed malicious, this activity could help attackers understand",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

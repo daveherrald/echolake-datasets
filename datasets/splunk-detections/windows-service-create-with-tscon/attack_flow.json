@@ -1,0 +1,110 @@
+{
+  "type": "bundle",
+  "id": "bundle--6cb65a39-ef08-5e7d-b0f3-d4a16e94c019",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--e7b091b8-d23a-5b10-908a-66e19e841897",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--e7b091b8-d23a-5b10-908a-66e19e841897",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--06960034-2da6-5c5b-85ea-90c3c3f1514f",
+      "created_by_ref": "identity--e7b091b8-d23a-5b10-908a-66e19e841897",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-service-create-with-tscon",
+      "description": "The following analytic detects potential RDP Hijacking attempts by identifying the creation of a Windows service using sc.exe with a binary path that includes tscon.exe. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process creation events and command-line arguments. This activity is significant as it indicates an attacker may be trying to hijack a disconnected RDP session, posing a risk of unauthorized access. If confirmed malicious, the attacker c",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--7e3c241b-8e6d-5c7d-bbd8-1d3d9d860c49",
+        "attack-action--f08abd16-a78e-50db-8715-256130bbacec"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--eb4ebb77-fe72-52f0-a877-749f2fc526bd",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1543.003",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1543.003"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--84e637b9-1b06-5bb5-8369-d883bf3faf5f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1563.002",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1563.002"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--7e3c241b-8e6d-5c7d-bbd8-1d3d9d860c49",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1543.003",
+      "technique_id": "T1543.003",
+      "technique_ref": "attack-pattern--eb4ebb77-fe72-52f0-a877-749f2fc526bd",
+      "description": "The following analytic detects potential RDP Hijacking attempts by identifying the creation of a Windows service using sc.exe with a binary path that includes tscon.exe. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process creation events and command-line arguments. This activity is significant as it indicates an attacker may be trying to hijack a disconnected RDP session, posing a risk of unauthorized access. If confirmed malicious, the attacker c",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--f08abd16-a78e-50db-8715-256130bbacec",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1563.002",
+      "technique_id": "T1563.002",
+      "technique_ref": "attack-pattern--84e637b9-1b06-5bb5-8369-d883bf3faf5f",
+      "description": "The following analytic detects potential RDP Hijacking attempts by identifying the creation of a Windows service using sc.exe with a binary path that includes tscon.exe. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process creation events and command-line arguments. This activity is significant as it indicates an attacker may be trying to hijack a disconnected RDP session, posing a risk of unauthorized access. If confirmed malicious, the attacker c",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

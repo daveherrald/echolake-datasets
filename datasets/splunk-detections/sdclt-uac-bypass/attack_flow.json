@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--7072265e-c303-5084-8119-be458040e902",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--30b63739-50ff-561f-afdc-a7c00345d6fc",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--30b63739-50ff-561f-afdc-a7c00345d6fc",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--89f68821-127e-547b-8a11-98c7ddb93d08",
+      "created_by_ref": "identity--30b63739-50ff-561f-afdc-a7c00345d6fc",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: sdclt-uac-bypass",
+      "description": "The following analytic detects suspicious modifications to the sdclt.exe registry, a technique often used to bypass User Account Control (UAC). It leverages data from Endpoint Detection and Response (EDR) agents, focusing on specific registry paths and values associated with sdclt.exe. This activity is significant because UAC bypasses can allow attackers to execute payloads with elevated privileges without user consent. If confirmed malicious, this could lead to unauthorized code execution, priv",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--27ed4ac9-4625-5713-9dc0-50f31bde39f1"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--fcf6fc5f-4cfa-5b06-95bc-7335c8067ad8",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1548.002",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1548.002"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--27ed4ac9-4625-5713-9dc0-50f31bde39f1",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1548.002",
+      "technique_id": "T1548.002",
+      "technique_ref": "attack-pattern--fcf6fc5f-4cfa-5b06-95bc-7335c8067ad8",
+      "description": "The following analytic detects suspicious modifications to the sdclt.exe registry, a technique often used to bypass User Account Control (UAC). It leverages data from Endpoint Detection and Response (EDR) agents, focusing on specific registry paths and values associated with sdclt.exe. This activity is significant because UAC bypasses can allow attackers to execute payloads with elevated privileges without user consent. If confirmed malicious, this could lead to unauthorized code execution, priv",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

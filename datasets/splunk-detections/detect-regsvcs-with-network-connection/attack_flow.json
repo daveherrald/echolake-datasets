@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--dec2f8cf-0e26-51c7-a03f-e6b5b5f2cb32",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--0ade7153-8b0b-52b7-a643-f1a42fd1223d",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--0ade7153-8b0b-52b7-a643-f1a42fd1223d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--00ef5e53-01e4-5d4f-acdc-c0acece68a4b",
+      "created_by_ref": "identity--0ade7153-8b0b-52b7-a643-f1a42fd1223d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: detect-regsvcs-with-network-connection",
+      "description": "The following analytic identifies instances of Regsvcs.exe establishing a network connection to a public IP address, excluding private IP ranges. This detection leverages Sysmon EventID 3 logs to monitor network connections initiated by Regsvcs.exe. This activity is significant as Regsvcs.exe, a legitimate Microsoft-signed binary, can be exploited to bypass application control mechanisms and establish remote Command and Control (C2) channels. If confirmed malicious, this behavior could allow an",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--9286dd8c-4656-5c4a-9f0a-bba4f4a71e1a"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--43bf770a-029b-579a-881b-e4dec516386a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1218.009",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1218.009"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--9286dd8c-4656-5c4a-9f0a-bba4f4a71e1a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1218.009",
+      "technique_id": "T1218.009",
+      "technique_ref": "attack-pattern--43bf770a-029b-579a-881b-e4dec516386a",
+      "description": "The following analytic identifies instances of Regsvcs.exe establishing a network connection to a public IP address, excluding private IP ranges. This detection leverages Sysmon EventID 3 logs to monitor network connections initiated by Regsvcs.exe. This activity is significant as Regsvcs.exe, a legitimate Microsoft-signed binary, can be exploited to bypass application control mechanisms and establish remote Command and Control (C2) channels. If confirmed malicious, this behavior could allow an",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

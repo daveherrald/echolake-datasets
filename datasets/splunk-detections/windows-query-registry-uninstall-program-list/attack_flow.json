@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--9140affa-7939-5398-9bc7-29a96676efd5",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--25c06060-ebb1-5bdd-9433-7dfc6a83e893",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--25c06060-ebb1-5bdd-9433-7dfc6a83e893",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--bfa143d4-49c4-57b4-9d46-3d4f0d0c0b5e",
+      "created_by_ref": "identity--25c06060-ebb1-5bdd-9433-7dfc6a83e893",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-query-registry-uninstall-program-list",
+      "description": "The following analytic detects an access request on the uninstall registry key. It leverages Windows Security Event logs, specifically event code 4663. This activity is significant because adversaries or malware can exploit this key to gather information about installed applications, aiding in further attacks. If confirmed malicious, this behavior could allow attackers to map out installed software, potentially identifying vulnerabilities or software to exploit, leading to further system comprom",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--dd1707ee-e56a-5938-9c1c-fe2f104a36e2"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--d1cc18c6-01d2-5346-a734-166614bdcc1d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1012",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1012"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--dd1707ee-e56a-5938-9c1c-fe2f104a36e2",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1012",
+      "technique_id": "T1012",
+      "technique_ref": "attack-pattern--d1cc18c6-01d2-5346-a734-166614bdcc1d",
+      "description": "The following analytic detects an access request on the uninstall registry key. It leverages Windows Security Event logs, specifically event code 4663. This activity is significant because adversaries or malware can exploit this key to gather information about installed applications, aiding in further attacks. If confirmed malicious, this behavior could allow attackers to map out installed software, potentially identifying vulnerabilities or software to exploit, leading to further system comprom",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

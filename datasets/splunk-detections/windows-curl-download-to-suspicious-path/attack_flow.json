@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--4bf93b59-95d9-59d0-9e97-7d9dc4e345ab",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--fa0edeee-b5e3-5563-83d5-9f1b6a4158f9",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--fa0edeee-b5e3-5563-83d5-9f1b6a4158f9",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--3ee79b90-dc5d-5bad-8d7d-ba3b55ce699c",
+      "created_by_ref": "identity--fa0edeee-b5e3-5563-83d5-9f1b6a4158f9",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-curl-download-to-suspicious-path",
+      "description": "The following analytic detects the use of Windows Curl.exe to download\na file to a suspicious location, such as AppData, ProgramData, or Public directories.\nIt leverages data from Endpoint Detection and Response (EDR) agents, focusing on\ncommand-line executions that include the -O or --output options. This activity is\nsignificant because downloading files to these locations can indicate an attempt\nto bypass security controls or establish persistence. If confirmed malicious, this\nbehavior could l",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--2ebadf90-6bcb-589d-ac42-61f6362b660e"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--034d17a8-6897-5244-b3af-c90d8f9bfc33",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1105",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1105"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--2ebadf90-6bcb-589d-ac42-61f6362b660e",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1105",
+      "technique_id": "T1105",
+      "technique_ref": "attack-pattern--034d17a8-6897-5244-b3af-c90d8f9bfc33",
+      "description": "The following analytic detects the use of Windows Curl.exe to download\na file to a suspicious location, such as AppData, ProgramData, or Public directories.\nIt leverages data from Endpoint Detection and Response (EDR) agents, focusing on\ncommand-line executions that include the -O or --output options. This activity is\nsignificant because downloading files to these locations can indicate an attempt\nto bypass security controls or establish persistence. If confirmed malicious, this\nbehavior could l",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

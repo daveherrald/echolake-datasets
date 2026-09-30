@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--f2232bb8-a831-5a85-bb0f-0101085a8b0f",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--0620c2fd-6472-5d04-8d68-e6ce4669cc48",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--0620c2fd-6472-5d04-8d68-e6ce4669cc48",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--648bd3c3-e80b-5754-a303-5494dcc2c259",
+      "created_by_ref": "identity--0620c2fd-6472-5d04-8d68-e6ce4669cc48",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: high-volume-of-bytes-out-to-url",
+      "description": "The following analytic detects a high volume of outbound web traffic, specifically over 1GB of data sent to a URL within a 2-minute window. It leverages the Web data model to identify significant uploads by analyzing the sum of bytes out. This activity is significant as it may indicate potential data exfiltration by malware or malicious insiders. If confirmed as malicious, this behavior could lead to unauthorized data transfer, resulting in data breaches and loss of sensitive information. Immedi",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--576eb9a5-abe9-5a42-a4fa-ff47ae5d55a4"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--3369d968-e6e8-5fac-9551-0111f028f1f0",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1567",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1567"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--576eb9a5-abe9-5a42-a4fa-ff47ae5d55a4",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1567",
+      "technique_id": "T1567",
+      "technique_ref": "attack-pattern--3369d968-e6e8-5fac-9551-0111f028f1f0",
+      "description": "The following analytic detects a high volume of outbound web traffic, specifically over 1GB of data sent to a URL within a 2-minute window. It leverages the Web data model to identify significant uploads by analyzing the sum of bytes out. This activity is significant as it may indicate potential data exfiltration by malware or malicious insiders. If confirmed as malicious, this behavior could lead to unauthorized data transfer, resulting in data breaches and loss of sensitive information. Immedi",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

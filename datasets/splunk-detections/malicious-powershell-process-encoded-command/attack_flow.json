@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--513c25f7-6c9f-563d-bc72-b28309b22201",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--4027d0a8-2a00-555d-9db9-10edb607c988",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--4027d0a8-2a00-555d-9db9-10edb607c988",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--0c9442d6-201b-5121-9d32-024ac0dab099",
+      "created_by_ref": "identity--4027d0a8-2a00-555d-9db9-10edb607c988",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: malicious-powershell-process-encoded-command",
+      "description": "The following analytic detects the use of the EncodedCommand parameter in PowerShell processes. It leverages Endpoint Detection and Response (EDR) data to identify variations of the EncodedCommand parameter, including shortened forms and different command switch types. This activity is significant because adversaries often use encoded commands to obfuscate malicious scripts, making detection harder. If confirmed malicious, this behavior could allow attackers to execute hidden code, potentially l",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--e37c4ccc-015c-5669-9982-af555879bdaf"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--8eebe3cd-f50a-5977-89c0-acd50e876a27",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1027",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1027"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--e37c4ccc-015c-5669-9982-af555879bdaf",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1027",
+      "technique_id": "T1027",
+      "technique_ref": "attack-pattern--8eebe3cd-f50a-5977-89c0-acd50e876a27",
+      "description": "The following analytic detects the use of the EncodedCommand parameter in PowerShell processes. It leverages Endpoint Detection and Response (EDR) data to identify variations of the EncodedCommand parameter, including shortened forms and different command switch types. This activity is significant because adversaries often use encoded commands to obfuscate malicious scripts, making detection harder. If confirmed malicious, this behavior could allow attackers to execute hidden code, potentially l",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--71a47a6e-6b74-5ab3-b713-ca7ceba3dc46",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--c669f428-9204-5048-a223-631c012658b2",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--c669f428-9204-5048-a223-631c012658b2",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--6e276608-5416-512d-9305-2b65aef1ef6b",
+      "created_by_ref": "identity--c669f428-9204-5048-a223-631c012658b2",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: asl-aws-concurrent-sessions-from-different-ips",
+      "description": "The following analytic identifies an AWS IAM account with concurrent sessions originating from more than one unique IP address within a 5-minute span. This detection leverages AWS CloudTrail logs, specifically the `DescribeEventAggregates` API call, to identify multiple IP addresses associated with the same user session. This behavior is significant as it may indicate a session hijacking attack, where an adversary uses stolen session cookies to access AWS resources from a different location. If",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--28172a09-850a-565c-83a3-a81ccb236eb7"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--94e6bc8d-ed4b-5bb8-8411-ebea522e2725",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1185",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1185"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--28172a09-850a-565c-83a3-a81ccb236eb7",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1185",
+      "technique_id": "T1185",
+      "technique_ref": "attack-pattern--94e6bc8d-ed4b-5bb8-8411-ebea522e2725",
+      "description": "The following analytic identifies an AWS IAM account with concurrent sessions originating from more than one unique IP address within a 5-minute span. This detection leverages AWS CloudTrail logs, specifically the `DescribeEventAggregates` API call, to identify multiple IP addresses associated with the same user session. This behavior is significant as it may indicate a session hijacking attack, where an adversary uses stolen session cookies to access AWS resources from a different location. If",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--3ae16bd7-8208-50d6-98c0-022dbaf4360b",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--ed5688c6-974f-5732-812f-146c6503f65f",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--ed5688c6-974f-5732-812f-146c6503f65f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--e69d6e85-4e99-570f-a1fa-bd719fbaafff",
+      "created_by_ref": "identity--ed5688c6-974f-5732-812f-146c6503f65f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: auto-admin-logon-registry-entry",
+      "description": "The following analytic detects a suspicious registry modification that enables auto admin logon on a host. It leverages data from the Endpoint.Registry data model, specifically looking for changes to the \"AutoAdminLogon\" value within the \"SOFTWARE\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\Winlogon\" registry path. This activity is significant because it was observed in BlackMatter ransomware attacks to maintain access after a safe mode reboot, facilitating further encryption. If confirmed malicious",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--1a9c8e40-2c65-5e6d-8001-26e6cb31cf97"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--7737a3f0-f76d-5866-b795-d694ac64032f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1552.002",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1552.002"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--1a9c8e40-2c65-5e6d-8001-26e6cb31cf97",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1552.002",
+      "technique_id": "T1552.002",
+      "technique_ref": "attack-pattern--7737a3f0-f76d-5866-b795-d694ac64032f",
+      "description": "The following analytic detects a suspicious registry modification that enables auto admin logon on a host. It leverages data from the Endpoint.Registry data model, specifically looking for changes to the \"AutoAdminLogon\" value within the \"SOFTWARE\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\Winlogon\" registry path. This activity is significant because it was observed in BlackMatter ransomware attacks to maintain access after a safe mode reboot, facilitating further encryption. If confirmed malicious",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

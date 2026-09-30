@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--46fc74c9-7144-517c-8f8a-05c609e9ab84",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--e9ac1f2c-97e7-5b0f-ae0a-dacd69524f54",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--e9ac1f2c-97e7-5b0f-ae0a-dacd69524f54",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--5cc2cb88-0916-55c6-b000-789f3edb51d0",
+      "created_by_ref": "identity--e9ac1f2c-97e7-5b0f-ae0a-dacd69524f54",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: linux-auditd-auditd-daemon-abort",
+      "description": "The following analytic detects the abnormal termination of the Linux audit daemon (auditd) by identifying DAEMON_ABORT events in audit logs. These terminations suggest a serious failure of the auditing subsystem, potentially due to resource exhaustion, corruption, or malicious interference. Unlike a clean shutdown, DAEMON_ABORT implies that audit logging may have been disabled without system administrator intent. Alerts should be generated on detection and correlated with DAEMON_START, DAEMON_EN",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--0b3e6225-9498-5d44-81dd-15a60a7f8f21"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--50cf6d92-41cb-5593-98db-c17860cec5fb",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.012",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1562.012"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--0b3e6225-9498-5d44-81dd-15a60a7f8f21",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.012",
+      "technique_id": "T1562.012",
+      "technique_ref": "attack-pattern--50cf6d92-41cb-5593-98db-c17860cec5fb",
+      "description": "The following analytic detects the abnormal termination of the Linux audit daemon (auditd) by identifying DAEMON_ABORT events in audit logs. These terminations suggest a serious failure of the auditing subsystem, potentially due to resource exhaustion, corruption, or malicious interference. Unlike a clean shutdown, DAEMON_ABORT implies that audit logging may have been disabled without system administrator intent. Alerts should be generated on detection and correlated with DAEMON_START, DAEMON_EN",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

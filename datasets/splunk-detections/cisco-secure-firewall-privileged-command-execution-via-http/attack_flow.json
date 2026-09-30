@@ -1,0 +1,110 @@
+{
+  "type": "bundle",
+  "id": "bundle--702b496e-cfc0-5091-a00d-178f5159cfef",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--501e4ab2-7a7f-52c1-a747-cc096cbf04df",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--501e4ab2-7a7f-52c1-a747-cc096cbf04df",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--850b1efa-c96a-5228-a181-b0db52a01fa6",
+      "created_by_ref": "identity--501e4ab2-7a7f-52c1-a747-cc096cbf04df",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: cisco-secure-firewall-privileged-command-execution-via-http",
+      "description": "This analytic detects HTTP requests to privileged execution paths on Cisco routers, specifically targeting the `/level/15/exec/-/*` endpoint using Cisco Secure Firewall Intrusion Events.\nThis detection leverages Snort signature 65370 to identify requests to these sensitive endpoints, which when combined with other indicators may signal active exploitation or post-compromise activity.",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--bb23026b-01ab-5204-8e1e-93ce9cc8ed8f",
+        "attack-action--7815283a-b1c7-517b-8624-ef7b20e6cb23"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--e005df04-41b4-5378-955f-2798d5fe1ca2",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1059",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1059"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--04506e71-fd98-5441-bbf4-aa7aa61d102b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1505.003",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1505.003"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--bb23026b-01ab-5204-8e1e-93ce9cc8ed8f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1059",
+      "technique_id": "T1059",
+      "technique_ref": "attack-pattern--e005df04-41b4-5378-955f-2798d5fe1ca2",
+      "description": "This analytic detects HTTP requests to privileged execution paths on Cisco routers, specifically targeting the `/level/15/exec/-/*` endpoint using Cisco Secure Firewall Intrusion Events.\nThis detection leverages Snort signature 65370 to identify requests to these sensitive endpoints, which when combined with other indicators may signal active exploitation or post-compromise activity.",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--7815283a-b1c7-517b-8624-ef7b20e6cb23",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1505.003",
+      "technique_id": "T1505.003",
+      "technique_ref": "attack-pattern--04506e71-fd98-5441-bbf4-aa7aa61d102b",
+      "description": "This analytic detects HTTP requests to privileged execution paths on Cisco routers, specifically targeting the `/level/15/exec/-/*` endpoint using Cisco Secure Firewall Intrusion Events.\nThis detection leverages Snort signature 65370 to identify requests to these sensitive endpoints, which when combined with other indicators may signal active exploitation or post-compromise activity.",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

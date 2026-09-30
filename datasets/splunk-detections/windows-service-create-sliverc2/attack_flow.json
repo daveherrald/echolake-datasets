@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--18e2c528-4e2b-561d-abdc-35983f6eecfa",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--8e47616f-22bb-56ec-9ab3-bdeba2cbe67e",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--8e47616f-22bb-56ec-9ab3-bdeba2cbe67e",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--ca690b5f-f4f3-53c5-a465-5c0ae19729d9",
+      "created_by_ref": "identity--8e47616f-22bb-56ec-9ab3-bdeba2cbe67e",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-service-create-sliverc2",
+      "description": "The following analytic detects the creation of a Windows service named \"Sliver\" with the description \"Sliver Implant,\" indicative of SliverC2 lateral movement using the PsExec module. It leverages Windows EventCode 7045 from the System Event log to identify this activity. This behavior is significant as it may indicate an adversary's attempt to establish persistence or execute commands remotely. If confirmed malicious, this activity could allow attackers to maintain control over the compromised",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--b8495edc-8496-507a-b1be-061032db10d3"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--2db902ce-fc7c-58e9-94c0-45c4b2729479",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1569.002",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1569.002"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--b8495edc-8496-507a-b1be-061032db10d3",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1569.002",
+      "technique_id": "T1569.002",
+      "technique_ref": "attack-pattern--2db902ce-fc7c-58e9-94c0-45c4b2729479",
+      "description": "The following analytic detects the creation of a Windows service named \"Sliver\" with the description \"Sliver Implant,\" indicative of SliverC2 lateral movement using the PsExec module. It leverages Windows EventCode 7045 from the System Event log to identify this activity. This behavior is significant as it may indicate an adversary's attempt to establish persistence or execute commands remotely. If confirmed malicious, this activity could allow attackers to maintain control over the compromised",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

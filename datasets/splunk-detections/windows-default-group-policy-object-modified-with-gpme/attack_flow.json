@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--ee261ce1-ef8f-5436-9cca-945a4a86003a",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--eb94dd79-a392-5bc5-a59c-8d0177895553",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--eb94dd79-a392-5bc5-a59c-8d0177895553",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--abe6df62-8d38-5b9a-b222-ea98a8459b0e",
+      "created_by_ref": "identity--eb94dd79-a392-5bc5-a59c-8d0177895553",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-default-group-policy-object-modified-with-gpme",
+      "description": "The following analytic detects modifications to default Group Policy Objects (GPOs) using the Group Policy Management Editor (GPME). It leverages the Endpoint data model to identify processes where `mmc.exe` executes `gpme.msc` with specific GUIDs related to default GPOs. This activity is significant because default GPOs, such as the `Default Domain Controllers Policy` and `Default Domain Policy`, are critical for enforcing security policies across the domain. If malicious, such modifications co",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--e0de2a7b-7adb-54e8-ac51-adbcf1cbc62d"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--3e0b3167-95d3-5af9-92ab-a34b99c9c14f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1484.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1484.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--e0de2a7b-7adb-54e8-ac51-adbcf1cbc62d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1484.001",
+      "technique_id": "T1484.001",
+      "technique_ref": "attack-pattern--3e0b3167-95d3-5af9-92ab-a34b99c9c14f",
+      "description": "The following analytic detects modifications to default Group Policy Objects (GPOs) using the Group Policy Management Editor (GPME). It leverages the Endpoint data model to identify processes where `mmc.exe` executes `gpme.msc` with specific GUIDs related to default GPOs. This activity is significant because default GPOs, such as the `Default Domain Controllers Policy` and `Default Domain Policy`, are critical for enforcing security policies across the domain. If malicious, such modifications co",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

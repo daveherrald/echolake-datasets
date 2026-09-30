@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--2c56ee4a-c448-5234-88da-de389e8581d5",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--3eafa94e-14a3-5c99-9104-51f44eac03eb",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--3eafa94e-14a3-5c99-9104-51f44eac03eb",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--ae6dc5dc-1572-5976-bfea-1c84d08b7071",
+      "created_by_ref": "identity--3eafa94e-14a3-5c99-9104-51f44eac03eb",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: azure-ad-privileged-authentication-administrator-role-assigned",
+      "description": "The following analytic detects the assignment of the Privileged Authentication Administrator role to an Azure AD user. It leverages Azure Active Directory audit logs to identify when this specific role is assigned. This activity is significant because users in this role can set or reset authentication methods for any user, including those in privileged roles like Global Administrators. If confirmed malicious, an attacker could change credentials and assume the identity and permissions of high-pr",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--e270b3fe-9d3d-52c1-aa70-22fe56045148"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--b75f10a6-e611-5801-ae1d-5dd74715b5d9",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1003.002",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1003.002"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--e270b3fe-9d3d-52c1-aa70-22fe56045148",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1003.002",
+      "technique_id": "T1003.002",
+      "technique_ref": "attack-pattern--b75f10a6-e611-5801-ae1d-5dd74715b5d9",
+      "description": "The following analytic detects the assignment of the Privileged Authentication Administrator role to an Azure AD user. It leverages Azure Active Directory audit logs to identify when this specific role is assigned. This activity is significant because users in this role can set or reset authentication methods for any user, including those in privileged roles like Global Administrators. If confirmed malicious, an attacker could change credentials and assume the identity and permissions of high-pr",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--15cf0eb8-2caa-5e4b-9be3-abfd8c29363d",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--e19d8bd5-69c4-51c7-b704-373af6c597b9",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--e19d8bd5-69c4-51c7-b704-373af6c597b9",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--1a3a0856-ebd3-5d8f-93ab-040321b0bcdd",
+      "created_by_ref": "identity--e19d8bd5-69c4-51c7-b704-373af6c597b9",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-system-user-privilege-discovery",
+      "description": "The following analytic detects the execution of `whoami.exe` with the `/priv` parameter, which displays the privileges assigned to the current user account. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line executions. This activity is significant as it may indicate an adversary attempting to enumerate user privileges, a common step in the reconnaissance phase of an attack. If confirmed malicious, this could lead to privilege escalati",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--bbb5c623-b395-5bb4-9337-3b4bf6285aa6"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--6d00d687-7010-5cf1-9402-a15a79799e4b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1033",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1033"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--bbb5c623-b395-5bb4-9337-3b4bf6285aa6",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1033",
+      "technique_id": "T1033",
+      "technique_ref": "attack-pattern--6d00d687-7010-5cf1-9402-a15a79799e4b",
+      "description": "The following analytic detects the execution of `whoami.exe` with the `/priv` parameter, which displays the privileges assigned to the current user account. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line executions. This activity is significant as it may indicate an adversary attempting to enumerate user privileges, a common step in the reconnaissance phase of an attack. If confirmed malicious, this could lead to privilege escalati",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--d41027d0-6f11-55df-bf6e-14ccb5a0bb63",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--a8025d17-6281-55ac-a82e-3589b7943a76",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--a8025d17-6281-55ac-a82e-3589b7943a76",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--3098353d-d9ed-5ad2-80d9-accf7bf7202d",
+      "created_by_ref": "identity--a8025d17-6281-55ac-a82e-3589b7943a76",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: detect-remote-access-software-usage-file",
+      "description": "The following analytic detects the writing of files from known remote access software to disk within the environment.\nIt leverages data from Endpoint Detection and Response (EDR) agents, focusing on file path, file name, and user information.\nThis activity is significant as adversaries often use remote access tools like AnyDesk, GoToMyPC, LogMeIn, and TeamViewer to maintain unauthorized access.\nIf confirmed malicious, this could allow attackers to persist in the environment, potentially leading",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--43587a30-7da6-551f-84fe-42235dd54aa4"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--e1fd5381-7f8c-52be-b0ad-7455266253fa",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1219",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1219"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--43587a30-7da6-551f-84fe-42235dd54aa4",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1219",
+      "technique_id": "T1219",
+      "technique_ref": "attack-pattern--e1fd5381-7f8c-52be-b0ad-7455266253fa",
+      "description": "The following analytic detects the writing of files from known remote access software to disk within the environment.\nIt leverages data from Endpoint Detection and Response (EDR) agents, focusing on file path, file name, and user information.\nThis activity is significant as adversaries often use remote access tools like AnyDesk, GoToMyPC, LogMeIn, and TeamViewer to maintain unauthorized access.\nIf confirmed malicious, this could allow attackers to persist in the environment, potentially leading",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

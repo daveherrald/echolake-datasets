@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--8ae48658-267a-5e6c-98f7-bb95adbb844c",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--274d4376-e8be-5d95-a924-28dc4ad2d0ad",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--274d4376-e8be-5d95-a924-28dc4ad2d0ad",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--a0b3a8e2-9968-5a22-b0c7-107e946cd1ed",
+      "created_by_ref": "identity--274d4376-e8be-5d95-a924-28dc4ad2d0ad",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-credentials-from-password-stores-deletion",
+      "description": "The following analytic detects the execution of the Windows OS tool cmdkey.exe with the /delete parameter. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process execution logs and command-line arguments. The activity is significant because cmdkey.exe can be used by attackers to delete stored credentials, potentially leading to privilege escalation and persistence. If confirmed malicious, this behavior could allow attackers to remove stored user cred",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--1ca08ffa-eccd-5a1f-8c75-e44b5dd3c044"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--ca99d322-7ac2-5c9b-b349-0d867994a92c",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1555",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1555"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--1ca08ffa-eccd-5a1f-8c75-e44b5dd3c044",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1555",
+      "technique_id": "T1555",
+      "technique_ref": "attack-pattern--ca99d322-7ac2-5c9b-b349-0d867994a92c",
+      "description": "The following analytic detects the execution of the Windows OS tool cmdkey.exe with the /delete parameter. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process execution logs and command-line arguments. The activity is significant because cmdkey.exe can be used by attackers to delete stored credentials, potentially leading to privilege escalation and persistence. If confirmed malicious, this behavior could allow attackers to remove stored user cred",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

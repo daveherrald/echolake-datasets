@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--0dc794a9-303e-5864-90b6-0355713ab48c",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--5dd23313-fa5e-5464-91a6-323934ecde8b",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--5dd23313-fa5e-5464-91a6-323934ecde8b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--0dcf297a-d501-54de-aa17-57e7ea2ccd59",
+      "created_by_ref": "identity--5dd23313-fa5e-5464-91a6-323934ecde8b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: cisco-duo-policy-deny-access",
+      "description": "The following analytic identifies instances where a Duo administrator creates or updates a policy to explicitly deny user access within the Duo environment. It detects this behavior by searching Duo administrator activity logs for policy creation or update actions where the authentication status is set to \"Deny access.\" By correlating these events with user and admin details, the analytic highlights potential misuse or malicious changes to access policies. This behavior is critical for a SOC to",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--6e71bd37-a072-5e52-a331-4aff2b1e7624"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--24492121-e70b-5b30-b0cb-a9437a3aa51b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1556",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1556"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--6e71bd37-a072-5e52-a331-4aff2b1e7624",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1556",
+      "technique_id": "T1556",
+      "technique_ref": "attack-pattern--24492121-e70b-5b30-b0cb-a9437a3aa51b",
+      "description": "The following analytic identifies instances where a Duo administrator creates or updates a policy to explicitly deny user access within the Duo environment. It detects this behavior by searching Duo administrator activity logs for policy creation or update actions where the authentication status is set to \"Deny access.\" By correlating these events with user and admin details, the analytic highlights potential misuse or malicious changes to access policies. This behavior is critical for a SOC to",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--0ba87c10-5837-532d-9fe0-360ae5de3ab7",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--3a728196-2a79-5541-9c0f-9213c319b82c",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--3a728196-2a79-5541-9c0f-9213c319b82c",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--e0f31e12-4d6a-52fa-9751-e2039313365b",
+      "created_by_ref": "identity--3a728196-2a79-5541-9c0f-9213c319b82c",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: o365-multiple-failed-mfa-requests-for-user",
+      "description": "The following analytic identifies potential \"MFA fatigue\" attacks targeting Office 365 users by detecting more than nine Multi-Factor Authentication (MFA) prompts within a 10-minute timeframe. It leverages O365 management activity logs, focusing on Azure Active Directory events with the UserLoginFailed operation, a Success ResultStatus, and an ErrorNumber of 500121. This activity is significant as attackers may exploit MFA fatigue to gain unauthorized access by overwhelming users with repeated M",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--9157e5f5-a752-521f-933d-b617a6eb6d63"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--e53dbe60-b581-55cb-94a1-7bbc1c6b95c3",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1621",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1621"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--9157e5f5-a752-521f-933d-b617a6eb6d63",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1621",
+      "technique_id": "T1621",
+      "technique_ref": "attack-pattern--e53dbe60-b581-55cb-94a1-7bbc1c6b95c3",
+      "description": "The following analytic identifies potential \"MFA fatigue\" attacks targeting Office 365 users by detecting more than nine Multi-Factor Authentication (MFA) prompts within a 10-minute timeframe. It leverages O365 management activity logs, focusing on Azure Active Directory events with the UserLoginFailed operation, a Success ResultStatus, and an ErrorNumber of 500121. This activity is significant as attackers may exploit MFA fatigue to gain unauthorized access by overwhelming users with repeated M",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

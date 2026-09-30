@@ -1,0 +1,110 @@
+{
+  "type": "bundle",
+  "id": "bundle--3e1cd968-68f5-5a6a-85e1-f8817bebc866",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--aa4d9bfa-795b-582f-9b49-3125f0031671",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--aa4d9bfa-795b-582f-9b49-3125f0031671",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--b35d3dcd-48b0-5134-8547-7f1b2be50ff1",
+      "created_by_ref": "identity--aa4d9bfa-795b-582f-9b49-3125f0031671",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-powershell-msix-package-installation",
+      "description": "The following analytic detects the execution of PowerShell commands to install unsigned AppX packages using Add-AppxPackage or Add-AppPackage cmdlets with the -AllowUnsigned flag. This detection leverages PowerShell Script Block Logging (EventCode=4104) to capture the full command content. This activity is significant as adversaries may use unsigned AppX packages to install malicious applications, bypass security controls, or establish persistence. If confirmed malicious, this could allow attack",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--bd755c30-231a-5efa-b8f7-3e1d6d07d3d9",
+        "attack-action--a86382b9-4d22-55b0-90be-4ae9c9408ded"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--8d67ed59-12b6-50cb-93d5-b03799fc24c6",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1059.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1059.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--2476e372-51e5-5645-bb5b-78496a261a67",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1547.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1547.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--bd755c30-231a-5efa-b8f7-3e1d6d07d3d9",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1059.001",
+      "technique_id": "T1059.001",
+      "technique_ref": "attack-pattern--8d67ed59-12b6-50cb-93d5-b03799fc24c6",
+      "description": "The following analytic detects the execution of PowerShell commands to install unsigned AppX packages using Add-AppxPackage or Add-AppPackage cmdlets with the -AllowUnsigned flag. This detection leverages PowerShell Script Block Logging (EventCode=4104) to capture the full command content. This activity is significant as adversaries may use unsigned AppX packages to install malicious applications, bypass security controls, or establish persistence. If confirmed malicious, this could allow attack",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--a86382b9-4d22-55b0-90be-4ae9c9408ded",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1547.001",
+      "technique_id": "T1547.001",
+      "technique_ref": "attack-pattern--2476e372-51e5-5645-bb5b-78496a261a67",
+      "description": "The following analytic detects the execution of PowerShell commands to install unsigned AppX packages using Add-AppxPackage or Add-AppPackage cmdlets with the -AllowUnsigned flag. This detection leverages PowerShell Script Block Logging (EventCode=4104) to capture the full command content. This activity is significant as adversaries may use unsigned AppX packages to install malicious applications, bypass security controls, or establish persistence. If confirmed malicious, this could allow attack",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

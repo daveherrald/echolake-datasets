@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--d8e75887-6ef2-55d2-b49a-9f1a41d913a6",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--970dd27b-be79-58bf-9310-4d397d31acb3",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--970dd27b-be79-58bf-9310-4d397d31acb3",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--6c90c396-e54b-5395-9f22-072dd1da8870",
+      "created_by_ref": "identity--970dd27b-be79-58bf-9310-4d397d31acb3",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: fsutil-zeroing-file",
+      "description": "The following analytic detects the execution of the 'fsutil' command with the 'setzerodata' parameter, which zeros out a target file. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line arguments. This activity is significant because it is a technique used by ransomware, such as LockBit, to evade detection by erasing its malware path after encrypting the host. If confirmed malicious, this action could hinder forensic investi",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--98bab7f9-e669-5213-bb99-515d3ee3c018"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--b1e7ce7b-6014-5f46-ab9d-cf0756ecb471",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1070",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1070"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--98bab7f9-e669-5213-bb99-515d3ee3c018",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1070",
+      "technique_id": "T1070",
+      "technique_ref": "attack-pattern--b1e7ce7b-6014-5f46-ab9d-cf0756ecb471",
+      "description": "The following analytic detects the execution of the 'fsutil' command with the 'setzerodata' parameter, which zeros out a target file. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line arguments. This activity is significant because it is a technique used by ransomware, such as LockBit, to evade detection by erasing its malware path after encrypting the host. If confirmed malicious, this action could hinder forensic investi",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--026fb0ad-0705-5012-9841-d22e5b79d028",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--12ad123a-d557-563d-9f1b-2296c17292ed",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--12ad123a-d557-563d-9f1b-2296c17292ed",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--da0cd9f8-57d7-5d96-94a9-79273c06d6f6",
+      "created_by_ref": "identity--12ad123a-d557-563d-9f1b-2296c17292ed",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: linux-auditd-possible-access-or-modification-of-sshd-config-file",
+      "description": "The following analytic detects access, deletion or modification of the ssh_config file on Linux systems.\nIt leverages data from Linux Auditd, focusing on events of type PATH with a nametype of (\"NORMAL\", \"CREATE\", \"DELETE\").\nThis activity could be significant because unauthorized changes to ssh_config can allow threat actors to redirect port connections or use unauthorized keys, potentially compromising the system.\nCorrelate this with related EXECVE or PROCTITLE events to identify the process or",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--9b0e3fed-8b10-5ab6-8e20-6f251627de3b"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--852661b3-5165-53ff-85ef-8ad7175ebcb2",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1098.004",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1098.004"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--9b0e3fed-8b10-5ab6-8e20-6f251627de3b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1098.004",
+      "technique_id": "T1098.004",
+      "technique_ref": "attack-pattern--852661b3-5165-53ff-85ef-8ad7175ebcb2",
+      "description": "The following analytic detects access, deletion or modification of the ssh_config file on Linux systems.\nIt leverages data from Linux Auditd, focusing on events of type PATH with a nametype of (\"NORMAL\", \"CREATE\", \"DELETE\").\nThis activity could be significant because unauthorized changes to ssh_config can allow threat actors to redirect port connections or use unauthorized keys, potentially compromising the system.\nCorrelate this with related EXECVE or PROCTITLE events to identify the process or",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

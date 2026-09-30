@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--3534ad3a-2cbb-55ed-a605-5d4ecb5a7ecc",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--717d18cf-1ef9-5f22-87b1-6e068ac9ff71",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--717d18cf-1ef9-5f22-87b1-6e068ac9ff71",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--8d9a9b81-6fd9-54b0-9ad2-9d17eb1686dc",
+      "created_by_ref": "identity--717d18cf-1ef9-5f22-87b1-6e068ac9ff71",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: ollama-possible-model-exfiltration-data-leakage",
+      "description": "Detects data leakage and exfiltration attempts targeting Ollama model metadata and configuration endpoints. Adversaries repeatedly query /api/show, /api/tags, and /api/v1/models to systematically extract sensitive model information including architecture details, fine-tuning parameters, system paths, Modelfile configurations, and proprietary customizations. Multiple inspection attempts within a 15-minute window indicate automated exfiltration of valuable intellectual property such as custom mode",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--33269665-9c46-5c6c-b472-71863085ad5f"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--6469e217-7643-532b-ae78-3478ab3e8a53",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1048",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1048"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--33269665-9c46-5c6c-b472-71863085ad5f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1048",
+      "technique_id": "T1048",
+      "technique_ref": "attack-pattern--6469e217-7643-532b-ae78-3478ab3e8a53",
+      "description": "Detects data leakage and exfiltration attempts targeting Ollama model metadata and configuration endpoints. Adversaries repeatedly query /api/show, /api/tags, and /api/v1/models to systematically extract sensitive model information including architecture details, fine-tuning parameters, system paths, Modelfile configurations, and proprietary customizations. Multiple inspection attempts within a 15-minute window indicate automated exfiltration of valuable intellectual property such as custom mode",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

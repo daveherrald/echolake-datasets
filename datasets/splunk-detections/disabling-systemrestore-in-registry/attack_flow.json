@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--d3acb7b6-bb93-5a5a-a531-fa7930f3f502",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--5ba06b7c-7638-571e-a70d-93472fb8a2a9",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--5ba06b7c-7638-571e-a70d-93472fb8a2a9",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--43b6df06-7b2c-55a8-8d73-ac319a5a2813",
+      "created_by_ref": "identity--5ba06b7c-7638-571e-a70d-93472fb8a2a9",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: disabling-systemrestore-in-registry",
+      "description": "The following analytic detects the modification of registry keys to disable System Restore on a machine. It leverages data from the Endpoint.Registry data model, specifically monitoring changes to registry paths associated with System Restore settings. This activity is significant because disabling System Restore can hinder recovery efforts and is a tactic often used by Remote Access Trojans (RATs) to maintain persistence on an infected system. If confirmed malicious, this action could prevent s",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--931b3f3e-5cac-55e4-a0c0-e64d2109cfd4"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--a22f03de-82db-54f3-8cdb-65de4d4135cb",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1490",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1490"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--931b3f3e-5cac-55e4-a0c0-e64d2109cfd4",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1490",
+      "technique_id": "T1490",
+      "technique_ref": "attack-pattern--a22f03de-82db-54f3-8cdb-65de4d4135cb",
+      "description": "The following analytic detects the modification of registry keys to disable System Restore on a machine. It leverages data from the Endpoint.Registry data model, specifically monitoring changes to registry paths associated with System Restore settings. This activity is significant because disabling System Restore can hinder recovery efforts and is a tactic often used by Remote Access Trojans (RATs) to maintain persistence on an infected system. If confirmed malicious, this action could prevent s",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

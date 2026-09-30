@@ -1,8 +1,24 @@
 #!/usr/bin/env python3
-"""Generate MITRE Attack Flow v2.0.0 STIX 2.1 bundles for the scenario datasets.
+"""Generate MITRE Attack Flow v2.0.0 STIX 2.1 bundles for the datasets.
 
-Each scenario is defined below as an ordered list of stages (name, ATT&CK
-technique id, description). This emits, per scenario, a STIX 2.1 bundle with:
+Three paths:
+
+1. Curated SCENARIOS (below): narrative multi-stage intrusions, each defined as
+   an ordered list of stages (name, ATT&CK technique id, description). One flow
+   per scenario dataset.
+
+2. Auto-derived COLLECTION datasets (e.g. Atomic Red Team, Splunk detections): a
+   parent dir of many single-purpose subdirs, each with its own dataset.yaml
+   mitre_attack block. One flow per subdir, derived straight from that block.
+   Chains that are technique coverage rather than a sequence (splunk-detections)
+   are emitted unordered (chained=False). The script also inserts an attack_flow
+   pointer into each subdir's dataset.yaml.
+
+3. Curated BOTS multi-scenario flows: Boss of the SOC captures carry no
+   mitre_attack block, so their independent sub-scenarios are hand-authored
+   (BOTS_SCENARIOS) and emitted as separate connected chains within one flow.
+
+Each flow emits a STIX 2.1 bundle with:
 
   - the canonical Attack Flow extension-definition,
   - an identity (created_by_ref),
@@ -10,8 +26,8 @@ technique id, description). This emits, per scenario, a STIX 2.1 bundle with:
   - one attack-action per stage, chained via effect_refs,
   - one attack-pattern per distinct technique (external_references -> ATT&CK).
 
-Deterministic: object ids are uuid5 over a per-scenario namespace so re-running
-produces byte-stable output. Written to datasets/<name>/attack_flow.json.
+Deterministic: object ids are uuid5 over a per-flow namespace so re-running
+produces byte-stable output. Written to datasets/<...>/attack_flow.json.
 
 Grounded strictly in each dataset's own mitre_attack block plus the recorded
 kill-chain order; no techniques are invented here.
@@ -188,11 +204,201 @@ SCENARIOS = {
 }
 
 
+# Auto-derived collection datasets: parent dir -> config. Each subdir with a
+# dataset.yaml mitre_attack block becomes one flow, derived from that block.
+#   flow_label: fn(subdir_name, technique_name) -> STIX flow name
+#   pointer_desc: fn(subdir_name, technique_name) -> short dataset.yaml pointer
+#     description (must be a colon-free plain YAML scalar)
+COLLECTIONS = {
+    "art": {
+        "flow_label": lambda sub, tname: f"Atomic Red Team {sub[len('art-'):] if sub.startswith('art-') else sub}: {tname}",
+        "pointer_desc": lambda sub, tname: f"{tname} (Atomic Red Team {sub[len('art-'):] if sub.startswith('art-') else sub})",
+    },
+    # Splunk detections enumerate the techniques a rule covers, not an executed
+    # sequence. Emit an UNORDERED coverage flow: one attack-action per covered
+    # technique, no effect_refs, every action a start_ref. Names fall back to the
+    # technique id because the source blocks carry placeholder technique names.
+    "splunk-detections": {
+        "flow_label": lambda sub, tname: f"Detection technique coverage: {sub}",
+        "pointer_desc": lambda sub, tname: f"MITRE ATT&CK technique coverage for detection {sub}",
+        "chained": False,
+    },
+}
+
+
+# ---- Boss of the SOC (BOTS) curated multi-scenario flows -------------------
+# BOTS dataset.yaml files carry no mitre_attack block, so these chains are
+# hand-authored from the published scenario analysis. Each version's independent
+# sub-scenarios are emitted as separate connected chains within one flow (one
+# start_ref per sub-scenario). Grounded in the public scenario and its analyst-
+# derived ATT&CK mapping; Splunk publishes no official ATT&CK layer for BOTS.
+BOTS_NOTE = (
+    "Fictional Splunk Boss of the SOC CTF scenario. The ATT&CK mapping is derived "
+    "from the published scenario analysis; no official Splunk ATT&CK layer exists "
+    "for BOTS."
+)
+
+# canonical key -> (flow name, flow description, [sub-scenario chains]).
+# Each sub-scenario chain is an ordered list of (action_name, technique_id, desc).
+BOTS_SCENARIOS = {
+    "v1": (
+        "Boss of the SOC v1: Po1s0n1vy against Wayne Enterprises",
+        "Two 2016 campaigns against Wayne Enterprises (imreallynotbatman.com): a "
+        "Joomla web-application compromise ending in external defacement, and a "
+        "Cerber ransomware infection delivered by a planted USB. " + BOTS_NOTE,
+        [
+            [
+                ("Acquire actor and lookalike domains", "T1583.001",
+                 "The actor registers actor-owned and lookalike domains used across the campaign."),
+                ("Web vulnerability scanning of the Joomla site", "T1595",
+                 "Automated web vulnerability scanning enumerates the public Joomla CMS and its admin panel."),
+                ("Brute-force the Joomla administrator login", "T1110.001",
+                 "Password guessing against the Joomla admin account succeeds after hundreds of attempts."),
+                ("Abuse the public-facing Joomla admin panel", "T1190",
+                 "The actor authenticates to the public-facing Joomla admin with the guessed credential."),
+                ("Upload a malicious executable web component", "T1505.003",
+                 "A malicious executable is uploaded through the admin panel and served from the web server."),
+                ("HTTP command and control", "T1071.001",
+                 "The compromised server beacons to attacker infrastructure over HTTP."),
+                ("External website defacement", "T1491.002",
+                 "Site content is replaced with a defacement image pulled from attacker dynamic-DNS infrastructure."),
+            ],
+            [
+                ("Planted USB carrying a malicious document", "T1091",
+                 "A USB drive with a macro-enabled document is planted and inserted by an employee."),
+                ("User opens the malicious file", "T1204.002",
+                 "The employee opens the document, starting execution."),
+                ("VBScript launcher execution", "T1059.005",
+                 "A VBScript launcher runs via wscript.exe to stage the ransomware."),
+                ("Reach the file server over SMB", "T1021.002",
+                 "The ransomware reaches a file server over SMB and admin shares to widen impact."),
+                ("Cerber file encryption for impact", "T1486",
+                 "Cerber encrypts local and file-server documents, appending its extension."),
+            ],
+        ],
+    ),
+    "v2": (
+        "Boss of the SOC v2: Taedonggang APT and more against Frothly",
+        "Four 2017 scenarios against Frothly: a Taedonggang APT intrusion via "
+        "spearphishing and PowerShell Empire, macOS Patcher ransomware from a "
+        "planted USB, an insider-threat espionage case, and web-application SQL "
+        "injection and XSS. " + BOTS_NOTE,
+        [
+            [
+                ("Spearphishing attachment", "T1566.001",
+                 "A password-protected ZIP attachment is delivered by spearphishing email."),
+                ("User opens the malicious attachment", "T1204.002",
+                 "The recipient opens the attachment, executing the embedded payload."),
+                ("PowerShell Empire execution", "T1059.001",
+                 "A PowerShell Empire agent runs on the host."),
+                ("AMSI bypass to impair defenses", "T1562.001",
+                 "The agent bypasses AMSI to evade PowerShell security controls."),
+                ("Decode staged PowerShell", "T1140",
+                 "Base64-encoded PowerShell content is decoded on host."),
+                ("Registry Run-key persistence", "T1547.001",
+                 "Encoded PowerShell is stored under a registry Run key for persistence."),
+                ("Scheduled-task persistence", "T1053.005",
+                 "A daily scheduled task re-launches the C2 beacon."),
+                ("Web-protocol C2 callback", "T1071.001",
+                 "The agent beacons to a C2 endpoint over web protocols."),
+                ("Encrypted C2 channel", "T1573.002",
+                 "C2 traffic is protected by a self-signed SSL certificate."),
+                ("Dynamic-DNS C2 resolution", "T1568.002",
+                 "C2 domains resolve through dynamic-DNS providers for resilience."),
+                ("Exfiltration over the C2 channel", "T1041",
+                 "Collected data is exfiltrated over the C2 channel."),
+                ("Exfiltration over FTP and BitTorrent", "T1048.003",
+                 "Additional data moves over unencrypted FTP and BitTorrent."),
+            ],
+            [
+                ("Planted USB delivery", "T1091",
+                 "A USB drive carrying a malware archive is planted for a target user."),
+                ("User runs the disguised malware", "T1204.002",
+                 "The user opens the archive and runs the disguised ransomware."),
+                ("Timestomp for anti-forensics", "T1070.006",
+                 "File timestamps are set to a false past date to frustrate analysis."),
+                ("macOS file encryption for impact", "T1486",
+                 "The Patcher ransomware encrypts files, appending its extension."),
+            ],
+            [
+                ("Research a competitor's public site", "T1593",
+                 "The insider researches a competitor brewery through open web sources."),
+                ("Collect proprietary data from the workstation", "T1005",
+                 "Proprietary research documents are gathered from the local system."),
+                ("Exfiltrate over personal web-mail", "T1567",
+                 "Trade-secret files are sent out through a personal web-mail account."),
+            ],
+            [
+                ("Vulnerability scanning of the forum", "T1595.002",
+                 "The public forum application is scanned for vulnerabilities."),
+                ("SQL injection against the forum", "T1190",
+                 "SQL injection extracts forum user credentials and password hashes."),
+                ("Abuse a fraudulently created admin account", "T1078.001",
+                 "A stolen session and CSRF token yield a fraudulently created admin account."),
+            ],
+        ],
+    ),
+    "v3": (
+        "Boss of the SOC v3: cloud compromise against Frothly",
+        "Four 2018 scenarios against Frothly's cloud estate: an S3 "
+        "misconfiguration leading to browser cryptojacking, abuse of leaked AWS "
+        "credentials, a memcached-amplification DDoS, and a Microsoft 365 data "
+        "exfiltration. " + BOTS_NOTE,
+        [
+            [
+                ("Misconfigured public S3 bucket", "T1190",
+                 "A public-facing S3 bucket is left world-accessible via a permissive ACL."),
+                ("Place and serve content from cloud storage", "T1530",
+                 "Attacker-supplied content is placed in and served from the cloud storage bucket."),
+                ("Malicious link drives the browser to a miner", "T1204.001",
+                 "An employee's browser is redirected to browser-based mining infrastructure."),
+                ("Coinhive delivered via web service", "T1102",
+                 "The mining JavaScript is delivered through a third-party web service."),
+                ("Browser cryptomining resource hijacking", "T1496",
+                 "Monero mining runs in employee browsers, saturating CPU."),
+            ],
+            [
+                ("Reuse leaked cloud credentials", "T1078.004",
+                 "A valid AWS access key leaked in a public repository is reused."),
+                ("Cloud infrastructure discovery", "T1580",
+                 "The actor enumerates cloud resources and IAM through API calls."),
+                ("Add cloud credentials for persistence", "T1098.001",
+                 "The actor attempts to create IAM users and additional access keys."),
+                ("Mass EC2 launch for resource hijacking", "T1496",
+                 "Hundreds of RunInstances calls attempt to spin up EC2 compute for mining."),
+            ],
+            [
+                ("Memcached reflection-amplification DDoS", "T1498.002",
+                 "A memcached UDP amplification flood targets the forum, preceded by DNS subdomain enumeration."),
+            ],
+            [
+                ("Remote email and file collection in M365", "T1114.002",
+                 "OneDrive, SharePoint, and mailbox contents are accessed in Microsoft 365."),
+                ("Exfiltrate over web service by email BCC", "T1567",
+                 "Data is exfiltrated by BCC to an external web-mail address."),
+            ],
+        ],
+    ),
+}
+
+# bots subdir -> (canonical scenario key, variant label).
+BOTS_VARIANTS = {
+    "botsv1": ("v1", "full capture"),
+    "botsv1-2026": ("v1", "2026 time-shifted"),
+    "botsv2": ("v2", "full capture"),
+    "botsv2-2026": ("v2", "2026 time-shifted"),
+    "botsv2-attack-only": ("v2", "attack-only subset"),
+    "botsv2-attack-only-2026": ("v2", "attack-only subset, 2026 time-shifted"),
+    "botsv3": ("v3", "full capture"),
+    "botsv3-2026": ("v3", "2026 time-shifted"),
+}
+
+
 def det_id(ns: uuid.UUID, stix_type: str, key: str) -> str:
     return f"{stix_type}--{uuid.uuid5(ns, stix_type + ':' + key)}"
 
 
-def build_bundle(dir_name: str, flow_name: str, flow_desc: str, stages):
+def build_bundle(dir_name: str, flow_name: str, flow_desc: str, stages, chained: bool = True):
     ns = uuid.uuid5(BASE_NS, dir_name)
     identity_id = det_id(ns, "identity", "echolake")
     flow_id = det_id(ns, "attack-flow", dir_name)
@@ -227,9 +433,11 @@ def build_bundle(dir_name: str, flow_name: str, flow_desc: str, stages):
 
     # attack-pattern per distinct technique
     tech_ids = []
-    for _, tid, _ in stages:
+    tech_name = {}
+    for name, tid, _ in stages:
         if tid not in tech_ids:
             tech_ids.append(tid)
+            tech_name.setdefault(tid, name)
     ap_ref = {}
     for tid in tech_ids:
         apid = det_id(ns, "attack-pattern", tid)
@@ -261,7 +469,7 @@ def build_bundle(dir_name: str, flow_name: str, flow_desc: str, stages):
             "description": desc,
             "extensions": AF_EXT,
         }
-        if i + 1 < len(stages):
+        if chained and i + 1 < len(stages):
             action["effect_refs"] = [action_ids[i + 1]]
         objects.append(action)
 
@@ -276,7 +484,7 @@ def build_bundle(dir_name: str, flow_name: str, flow_desc: str, stages):
         "name": flow_name,
         "description": flow_desc,
         "scope": "incident",
-        "start_refs": [action_ids[0]],
+        "start_refs": [action_ids[0]] if chained else list(action_ids),
         "extensions": AF_EXT,
     }
     # attack-flow object goes at the front of the objects list per convention.
@@ -290,7 +498,162 @@ def build_bundle(dir_name: str, flow_name: str, flow_desc: str, stages):
     }
 
 
-def main():
+def build_multichain_bundle(dir_key: str, flow_name: str, flow_desc: str, subchains):
+    """Like build_bundle, but takes several independent sub-scenario chains. Each
+    chain is linked internally via effect_refs; the flow lists one start_ref per
+    chain. Kept separate from build_bundle so single-chain output stays byte-stable."""
+    ns = uuid.uuid5(BASE_NS, dir_key)
+    identity_id = det_id(ns, "identity", "echolake")
+    flow_id = det_id(ns, "attack-flow", dir_key)
+
+    objects = []
+    objects.append({
+        "type": "extension-definition",
+        "spec_version": "2.1",
+        "id": AF_EXT_ID,
+        "created_by_ref": identity_id,
+        "created": "2022-08-02T19:34:35.143Z",
+        "modified": "2022-08-02T19:34:35.143Z",
+        "name": "Attack Flow",
+        "description": "Extends STIX 2.1 with features to create Attack Flows.",
+        "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+        "version": "2.0.0",
+        "extension_types": ["new-sdo"],
+    })
+    objects.append({
+        "type": "identity",
+        "spec_version": "2.1",
+        "id": identity_id,
+        "created": CREATED,
+        "modified": CREATED,
+        "name": "EchoLake Project",
+        "identity_class": "organization",
+    })
+
+    # attack-pattern per distinct technique across all chains
+    tech_ids = []
+    for chain in subchains:
+        for _, tid, _ in chain:
+            if tid not in tech_ids:
+                tech_ids.append(tid)
+    ap_ref = {}
+    for tid in tech_ids:
+        apid = det_id(ns, "attack-pattern", tid)
+        ap_ref[tid] = apid
+        objects.append({
+            "type": "attack-pattern",
+            "spec_version": "2.1",
+            "id": apid,
+            "created": CREATED,
+            "modified": CREATED,
+            "name": tid,
+            "external_references": [
+                {"source_name": "mitre-attack", "external_id": tid}
+            ],
+        })
+
+    # actions per chain, chained within each chain
+    start_refs = []
+    for ci, chain in enumerate(subchains):
+        ids = [det_id(ns, "attack-action", f"{ci}:{si}:{name}") for si, (name, _, _) in enumerate(chain)]
+        start_refs.append(ids[0])
+        for si, (name, tid, desc) in enumerate(chain):
+            action = {
+                "type": "attack-action",
+                "spec_version": "2.1",
+                "id": ids[si],
+                "created": CREATED,
+                "modified": CREATED,
+                "name": name,
+                "technique_id": tid,
+                "technique_ref": ap_ref[tid],
+                "description": desc,
+                "extensions": AF_EXT,
+            }
+            if si + 1 < len(chain):
+                action["effect_refs"] = [ids[si + 1]]
+            objects.append(action)
+
+    flow = {
+        "type": "attack-flow",
+        "spec_version": "2.1",
+        "id": flow_id,
+        "created_by_ref": identity_id,
+        "created": CREATED,
+        "modified": CREATED,
+        "name": flow_name,
+        "description": flow_desc,
+        "scope": "incident",
+        "start_refs": start_refs,
+        "extensions": AF_EXT,
+    }
+    objects.insert(2, flow)
+
+    bundle_id = det_id(ns, "bundle", dir_key)
+    return {
+        "type": "bundle",
+        "id": bundle_id,
+        "objects": objects,
+    }
+
+
+def _write_bundle(out_path: Path, bundle) -> None:
+    with open(out_path, "w", encoding="utf-8") as f:
+        json.dump(bundle, f, indent=2)
+        f.write("\n")
+
+
+def _placeholder_name(name, tid: str) -> str:
+    """Splunk-content blocks carry placeholder names like 'Technique T1078.004';
+    fall back to the bare id so we never emit a fake technique name."""
+    if not name:
+        return tid
+    n = name.strip()
+    if n.lower() == f"technique {tid}".lower():
+        return tid
+    return n
+
+
+def stages_from_meta(meta: dict):
+    """Build ordered stages from a dataset.yaml metadata block's mitre_attack
+    techniques. One stage per listed technique, in listed order."""
+    ma = (meta or {}).get("mitre_attack", {}) or {}
+    techs = ma.get("techniques") or []
+    desc = (meta.get("description") or "").strip()
+    stages = []
+    for t in techs:
+        tid = t.get("id")
+        if not tid:
+            continue
+        name = _placeholder_name(t.get("name"), tid)
+        stages.append((name, tid, desc))
+    return stages
+
+
+def ensure_pointer(yaml_path: Path, short_desc: str) -> bool:
+    """Insert an attack_flow pointer block just after the top-level 'metadata:'
+    line, unless one is already present. Text insertion only, so YAML anchors and
+    field ordering in the file are left untouched. Returns True if it wrote."""
+    text = yaml_path.read_text(encoding="utf-8")
+    if "\n  attack_flow:\n" in text or text.startswith("metadata:\n  attack_flow:\n"):
+        return False
+    block = (
+        "  attack_flow:\n"
+        "    path: attack_flow.json\n"
+        "    format: stix-2.1\n"
+        '    schema_version: "2.0.0"\n'
+        f"    description: {short_desc}\n"
+    )
+    lines = text.splitlines(keepends=True)
+    for i, ln in enumerate(lines):
+        if ln.rstrip("\n") == "metadata:":
+            lines.insert(i + 1, block)
+            yaml_path.write_text("".join(lines), encoding="utf-8")
+            return True
+    return False  # no top-level metadata: block; leave the file alone
+
+
+def gen_scenarios() -> None:
     for dir_name, (name, desc, stages) in SCENARIOS.items():
         out_dir = DATASETS_DIR / dir_name
         if not out_dir.is_dir():
@@ -298,10 +661,69 @@ def main():
             continue
         bundle = build_bundle(dir_name, name, desc, stages)
         out_path = out_dir / "attack_flow.json"
-        with open(out_path, "w", encoding="utf-8") as f:
-            json.dump(bundle, f, indent=2)
-            f.write("\n")
+        _write_bundle(out_path, bundle)
         print(f"wrote {out_path}  ({len(stages)} actions, {len(bundle['objects'])} objects)")
+
+
+def gen_collection(parent: str, cfg: dict) -> None:
+    import yaml  # only collections need a YAML reader
+
+    base = DATASETS_DIR / parent
+    if not base.is_dir():
+        print(f"SKIP (collection dir missing): {parent}")
+        return
+    made = skipped = pointed = 0
+    for sub in sorted(p for p in base.iterdir() if p.is_dir()):
+        y = sub / "dataset.yaml"
+        if not y.is_file():
+            continue
+        meta = (yaml.safe_load(y.read_text(encoding="utf-8")) or {}).get("metadata", {}) or {}
+        stages = stages_from_meta(meta)
+        if not stages:
+            skipped += 1
+            continue
+        tname = stages[0][0]
+        rel = f"{parent}/{sub.name}"
+        flow_name = cfg["flow_label"](sub.name, tname)
+        flow_desc = (meta.get("description") or flow_name).strip()
+        bundle = build_bundle(rel, flow_name, flow_desc, stages, chained=cfg.get("chained", True))
+        _write_bundle(sub / "attack_flow.json", bundle)
+        made += 1
+        if ensure_pointer(y, cfg["pointer_desc"](sub.name, tname)):
+            pointed += 1
+    print(f"collection '{parent}': wrote {made} flows, {pointed} dataset.yaml pointers, {skipped} skipped (no techniques)")
+
+
+def gen_bots() -> None:
+    base = DATASETS_DIR / "bots"
+    if not base.is_dir():
+        print("SKIP (bots dir missing)")
+        return
+    made = pointed = 0
+    for sub, (key, variant) in BOTS_VARIANTS.items():
+        out_dir = base / sub
+        if not out_dir.is_dir():
+            print(f"SKIP (bots dir missing): {sub}")
+            continue
+        name, desc, subchains = BOTS_SCENARIOS[key]
+        flow_name = f"{name} ({variant})"
+        rel = f"bots/{sub}"
+        bundle = build_multichain_bundle(rel, flow_name, desc, subchains)
+        _write_bundle(out_dir / "attack_flow.json", bundle)
+        made += 1
+        n_actions = sum(len(c) for c in subchains)
+        print(f"wrote {out_dir / 'attack_flow.json'}  ({len(subchains)} chains, {n_actions} actions)")
+        y = out_dir / "dataset.yaml"
+        if y.is_file() and ensure_pointer(y, f"MITRE ATT&CK attack flow for Boss of the SOC {key} {variant}"):
+            pointed += 1
+    print(f"bots: wrote {made} flows, {pointed} dataset.yaml pointers")
+
+
+def main():
+    gen_scenarios()
+    for parent, cfg in COLLECTIONS.items():
+        gen_collection(parent, cfg)
+    gen_bots()
 
 
 if __name__ == "__main__":

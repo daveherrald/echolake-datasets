@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--b479f235-5088-5656-a17a-34c0ad613871",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--993ddd45-6e52-5d62-ab16-3328efc22a9a",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--993ddd45-6e52-5d62-ab16-3328efc22a9a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--a5fa3d05-1f07-5ab5-b533-64191b390cfe",
+      "created_by_ref": "identity--993ddd45-6e52-5d62-ab16-3328efc22a9a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-impair-defenses-disable-auto-logger-session",
+      "description": "The following analytic detects the disabling of an AutoLogger session or one of its providers, by identifying changes to the Registry values \"Start\" and \"Enabled\" part of the \"\\WMI\\Autologger\\\" key path. It leverages data from the Endpoint.Registry datamodel to monitor specific registry paths and values. This activity is significant as attackers and adversaries can leverage this in order to evade defense and blind EDRs and log ingest tooling. If confirmed malicious, this action could allow an at",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--ca380c83-fa80-5e7e-af23-4e21a9a1c615"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--b1473424-e336-5bbf-9031-39515330cfdc",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1562.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--ca380c83-fa80-5e7e-af23-4e21a9a1c615",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.001",
+      "technique_id": "T1562.001",
+      "technique_ref": "attack-pattern--b1473424-e336-5bbf-9031-39515330cfdc",
+      "description": "The following analytic detects the disabling of an AutoLogger session or one of its providers, by identifying changes to the Registry values \"Start\" and \"Enabled\" part of the \"\\WMI\\Autologger\\\" key path. It leverages data from the Endpoint.Registry datamodel to monitor specific registry paths and values. This activity is significant as attackers and adversaries can leverage this in order to evade defense and blind EDRs and log ingest tooling. If confirmed malicious, this action could allow an at",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

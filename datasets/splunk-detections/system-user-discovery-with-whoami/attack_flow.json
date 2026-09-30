@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--9bec9635-a985-5be4-9a1e-20fe2d17c2df",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--241d206f-3fb0-5ccf-beaa-310c294e378a",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--241d206f-3fb0-5ccf-beaa-310c294e378a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--91afae5d-6e60-5783-9bb3-4f6ab415dd53",
+      "created_by_ref": "identity--241d206f-3fb0-5ccf-beaa-310c294e378a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: system-user-discovery-with-whoami",
+      "description": "The following analytic detects the execution of `whoami.exe` without any arguments. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process execution logs. This activity is significant because both Red Teams and adversaries use `whoami.exe` to identify the current logged-in user, aiding in situational awareness and Active Directory discovery. If confirmed malicious, this behavior could indicate an attacker is gathering information to further compromise the system",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--57e5b3ad-0c75-5c26-aa8e-4dece0bbfc71"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--bee8f50a-e9c8-5c45-a76d-283842dac965",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1033",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1033"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--57e5b3ad-0c75-5c26-aa8e-4dece0bbfc71",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1033",
+      "technique_id": "T1033",
+      "technique_ref": "attack-pattern--bee8f50a-e9c8-5c45-a76d-283842dac965",
+      "description": "The following analytic detects the execution of `whoami.exe` without any arguments. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process execution logs. This activity is significant because both Red Teams and adversaries use `whoami.exe` to identify the current logged-in user, aiding in situational awareness and Active Directory discovery. If confirmed malicious, this behavior could indicate an attacker is gathering information to further compromise the system",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

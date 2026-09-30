@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--1b2f410b-4b49-5a78-9b12-ce5ef94a7bdd",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--7af2e3f9-5b91-5235-99ee-e269942ae4e8",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--7af2e3f9-5b91-5235-99ee-e269942ae4e8",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--fb8d2cc7-ccef-5fed-9f9c-864a21ac532c",
+      "created_by_ref": "identity--7af2e3f9-5b91-5235-99ee-e269942ae4e8",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: get-aduser-with-powershell",
+      "description": "The following analytic detects the execution of `powershell.exe` with command-line arguments used to enumerate domain users via the `Get-ADUser` cmdlet. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line executions. This activity is significant as it may indicate an attempt by adversaries to gather information about domain users for situational awareness and Active Directory discovery. If confirmed malicious, this behavior could lead t",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--2af231be-bd81-5543-a93b-d6b1ef424cfb"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--c49c7bcd-5f65-5a23-b6c0-10f027b9e97b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1087.002",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1087.002"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--2af231be-bd81-5543-a93b-d6b1ef424cfb",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1087.002",
+      "technique_id": "T1087.002",
+      "technique_ref": "attack-pattern--c49c7bcd-5f65-5a23-b6c0-10f027b9e97b",
+      "description": "The following analytic detects the execution of `powershell.exe` with command-line arguments used to enumerate domain users via the `Get-ADUser` cmdlet. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line executions. This activity is significant as it may indicate an attempt by adversaries to gather information about domain users for situational awareness and Active Directory discovery. If confirmed malicious, this behavior could lead t",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

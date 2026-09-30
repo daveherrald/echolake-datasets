@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--431ccc39-ef64-5ddc-9f8c-d045430c4ce1",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--c77484ae-8c0c-5d12-b49b-dd8ad608313e",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--c77484ae-8c0c-5d12-b49b-dd8ad608313e",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--fea0a44d-4532-527c-ba67-836ac014a1f7",
+      "created_by_ref": "identity--c77484ae-8c0c-5d12-b49b-dd8ad608313e",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: enable-rdp-in-other-port-number",
+      "description": "The following analytic detects modifications to the registry that enable RDP on a machine using a non-default port number. It leverages data from the Endpoint.Registry data model, specifically monitoring changes to the registry path \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-Tcp\" and the \"PortNumber\" value. This activity is significant as attackers often modify RDP settings to facilitate lateral movement and maintain remote access to compromised systems. If confirmed",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--e7f7e08e-f298-5fe2-ac1a-af13f24ba4d2"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--8eee330d-bb28-5dea-8b31-0c5719f616c6",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1021",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1021"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--e7f7e08e-f298-5fe2-ac1a-af13f24ba4d2",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1021",
+      "technique_id": "T1021",
+      "technique_ref": "attack-pattern--8eee330d-bb28-5dea-8b31-0c5719f616c6",
+      "description": "The following analytic detects modifications to the registry that enable RDP on a machine using a non-default port number. It leverages data from the Endpoint.Registry data model, specifically monitoring changes to the registry path \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-Tcp\" and the \"PortNumber\" value. This activity is significant as attackers often modify RDP settings to facilitate lateral movement and maintain remote access to compromised systems. If confirmed",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

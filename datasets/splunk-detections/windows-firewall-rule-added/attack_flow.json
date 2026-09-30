@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--c3a3497f-9e6a-5c95-9e29-8f1b5e306495",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--2fa34195-270b-5135-b3b4-f157d4917d2f",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--2fa34195-270b-5135-b3b4-f157d4917d2f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--13b1e543-fcd5-5b26-8c01-62b7bf94c255",
+      "created_by_ref": "identity--2fa34195-270b-5135-b3b4-f157d4917d2f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-firewall-rule-added",
+      "description": "This detection identifies instances where a Windows Firewall rule is added by monitoring Event ID 4946 in the Windows Security Event Log. Firewall rule modifications can indicate legitimate administrative actions, but they may also signal unauthorized changes, misconfigurations, or malicious activity such as attackers allowing traffic for backdoors or persistence mechanisms. By analyzing fields like RuleName, RuleId, Computer, and ProfileChanged, security teams can determine whether the change a",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--0d825c75-8e1d-58d0-bffd-992d2992f303"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--4c452778-cf7c-55d5-a877-be3c1d579d03",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.004",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1562.004"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--0d825c75-8e1d-58d0-bffd-992d2992f303",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.004",
+      "technique_id": "T1562.004",
+      "technique_ref": "attack-pattern--4c452778-cf7c-55d5-a877-be3c1d579d03",
+      "description": "This detection identifies instances where a Windows Firewall rule is added by monitoring Event ID 4946 in the Windows Security Event Log. Firewall rule modifications can indicate legitimate administrative actions, but they may also signal unauthorized changes, misconfigurations, or malicious activity such as attackers allowing traffic for backdoors or persistence mechanisms. By analyzing fields like RuleName, RuleId, Computer, and ProfileChanged, security teams can determine whether the change a",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

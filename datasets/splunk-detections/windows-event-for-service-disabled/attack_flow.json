@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--8ca89ec8-3303-5c8c-8dbf-cf09a8ee87cc",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--8ce0bcea-67d3-5e0c-b9a8-3c40136781f4",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--8ce0bcea-67d3-5e0c-b9a8-3c40136781f4",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--ef850ad9-a8bc-5d1c-9396-ddeac75f5441",
+      "created_by_ref": "identity--8ce0bcea-67d3-5e0c-b9a8-3c40136781f4",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-event-for-service-disabled",
+      "description": "The following analytic detects when a Windows service is modified from a start type to disabled. It leverages system event logs, specifically EventCode 7040, to identify this change. This activity is significant because adversaries often disable security or other critical services to evade detection and maintain control over a compromised host. If confirmed malicious, this action could allow attackers to bypass security defenses, leading to further exploitation and persistence within the environ",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--53145392-b971-51fd-9f64-5194b7dcfe2f"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--40d0e246-338d-5c31-a65b-fff86a86163b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1562.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--53145392-b971-51fd-9f64-5194b7dcfe2f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.001",
+      "technique_id": "T1562.001",
+      "technique_ref": "attack-pattern--40d0e246-338d-5c31-a65b-fff86a86163b",
+      "description": "The following analytic detects when a Windows service is modified from a start type to disabled. It leverages system event logs, specifically EventCode 7040, to identify this change. This activity is significant because adversaries often disable security or other critical services to evade detection and maintain control over a compromised host. If confirmed malicious, this action could allow attackers to bypass security defenses, leading to further exploitation and persistence within the environ",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

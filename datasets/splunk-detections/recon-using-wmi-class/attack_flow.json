@@ -1,0 +1,110 @@
+{
+  "type": "bundle",
+  "id": "bundle--4fabd443-5949-5f91-9f06-0bd78a582543",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--03ea5ee7-5b38-56a7-ad67-6444e5c8f1dc",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--03ea5ee7-5b38-56a7-ad67-6444e5c8f1dc",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--3baf6f7b-6cbc-52ad-8c8d-4c5f82104675",
+      "created_by_ref": "identity--03ea5ee7-5b38-56a7-ad67-6444e5c8f1dc",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: recon-using-wmi-class",
+      "description": "The following analytic detects suspicious PowerShell activity via EventCode 4104, where WMI performs event queries to gather information on running processes or services. This detection leverages PowerShell Script Block Logging to identify specific WMI queries targeting system information classes like Win32_Bios and Win32_OperatingSystem. This activity is significant as it often indicates reconnaissance efforts by an adversary to profile the compromised machine. If confirmed malicious, the attac",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--23bdceb5-8d02-5156-aad5-0394efacbdba",
+        "attack-action--c9e59a16-9fc6-5600-a472-fc42fb889e34"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--4a9207c1-932c-5cfe-9308-8b9945af1d3d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1592",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1592"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--44fc257f-f538-51f0-895e-b8de5dde57a4",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1059.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1059.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--23bdceb5-8d02-5156-aad5-0394efacbdba",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1592",
+      "technique_id": "T1592",
+      "technique_ref": "attack-pattern--4a9207c1-932c-5cfe-9308-8b9945af1d3d",
+      "description": "The following analytic detects suspicious PowerShell activity via EventCode 4104, where WMI performs event queries to gather information on running processes or services. This detection leverages PowerShell Script Block Logging to identify specific WMI queries targeting system information classes like Win32_Bios and Win32_OperatingSystem. This activity is significant as it often indicates reconnaissance efforts by an adversary to profile the compromised machine. If confirmed malicious, the attac",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--c9e59a16-9fc6-5600-a472-fc42fb889e34",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1059.001",
+      "technique_id": "T1059.001",
+      "technique_ref": "attack-pattern--44fc257f-f538-51f0-895e-b8de5dde57a4",
+      "description": "The following analytic detects suspicious PowerShell activity via EventCode 4104, where WMI performs event queries to gather information on running processes or services. This detection leverages PowerShell Script Block Logging to identify specific WMI queries targeting system information classes like Win32_Bios and Win32_OperatingSystem. This activity is significant as it often indicates reconnaissance efforts by an adversary to profile the compromised machine. If confirmed malicious, the attac",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

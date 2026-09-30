@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--ebf83291-e0e3-5679-ae55-4fc23288fa32",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--7d718084-a7f3-55e1-8801-3fe68a4b71b4",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--7d718084-a7f3-55e1-8801-3fe68a4b71b4",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--4b72e0da-81ce-59e7-bfc0-2b8ca049b982",
+      "created_by_ref": "identity--7d718084-a7f3-55e1-8801-3fe68a4b71b4",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-uac-bypass-suspicious-child-process",
+      "description": "The following analytic detects when an executable known for User Account Control (UAC) bypass exploitation spawns a child process in a user-controlled location or a command shell executable (e.g., cmd.exe, powershell.exe). This detection leverages Sysmon EventID 1 data, focusing on high or system integrity level processes with specific parent-child process relationships. This activity is significant as it may indicate an attacker has successfully used a UAC bypass exploit to escalate privileges.",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--94a564fb-a7fe-506b-b4a9-0334acdf7d6d"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--8af8e388-7e97-545d-9624-caa3a73ba356",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1548.002",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1548.002"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--94a564fb-a7fe-506b-b4a9-0334acdf7d6d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1548.002",
+      "technique_id": "T1548.002",
+      "technique_ref": "attack-pattern--8af8e388-7e97-545d-9624-caa3a73ba356",
+      "description": "The following analytic detects when an executable known for User Account Control (UAC) bypass exploitation spawns a child process in a user-controlled location or a command shell executable (e.g., cmd.exe, powershell.exe). This detection leverages Sysmon EventID 1 data, focusing on high or system integrity level processes with specific parent-child process relationships. This activity is significant as it may indicate an attacker has successfully used a UAC bypass exploit to escalate privileges.",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

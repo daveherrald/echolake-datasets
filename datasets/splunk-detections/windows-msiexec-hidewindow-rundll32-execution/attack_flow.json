@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--222e88f3-988a-5110-91e1-da020bdd6830",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--2c154155-e284-5e63-b4a2-055d5df92350",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--2c154155-e284-5e63-b4a2-055d5df92350",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--5e3a6d88-ae3f-56e8-a3b2-09c4c6ca9528",
+      "created_by_ref": "identity--2c154155-e284-5e63-b4a2-055d5df92350",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-msiexec-hidewindow-rundll32-execution",
+      "description": "The following analytic detects the execution of the msiexec.exe process with the /HideWindow and rundll32 command-line parameters. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process creation events and command-line arguments. This activity is significant because it is a known tactic used by malware like QakBot to mask malicious operations under legitimate system processes. If confirmed malicious, this behavior could allow an attacker to download additional p",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--038155ea-95d1-584d-90ad-039c258e8d57"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--ca6636de-b0d4-5545-be70-6437c49f729e",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1218.007",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1218.007"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--038155ea-95d1-584d-90ad-039c258e8d57",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1218.007",
+      "technique_id": "T1218.007",
+      "technique_ref": "attack-pattern--ca6636de-b0d4-5545-be70-6437c49f729e",
+      "description": "The following analytic detects the execution of the msiexec.exe process with the /HideWindow and rundll32 command-line parameters. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process creation events and command-line arguments. This activity is significant because it is a known tactic used by malware like QakBot to mask malicious operations under legitimate system processes. If confirmed malicious, this behavior could allow an attacker to download additional p",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

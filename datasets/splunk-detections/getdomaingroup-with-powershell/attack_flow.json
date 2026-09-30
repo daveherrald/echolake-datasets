@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--7b7aff05-0915-5435-a48b-ebe1be060f3f",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--7b94c509-de4e-5721-9bd5-cfdc4eb5dfe5",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--7b94c509-de4e-5721-9bd5-cfdc4eb5dfe5",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--9a66469f-c223-5b34-a5e0-c717ad2608c0",
+      "created_by_ref": "identity--7b94c509-de4e-5721-9bd5-cfdc4eb5dfe5",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: getdomaingroup-with-powershell",
+      "description": "The following analytic detects the execution of `powershell.exe` with command-line arguments that query for domain groups using `Get-DomainGroup`. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line executions mapped to the `Processes` node of the `Endpoint` data model. Monitoring this activity is crucial as `Get-DomainGroup` is part of PowerView, a tool often used by adversaries for domain enumeration and situational awaren",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--d26ba6f8-0f36-5717-9129-f8ec3c922077"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--61b0a7af-af8e-5eed-ab56-983b6465f73b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1069.002",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1069.002"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--d26ba6f8-0f36-5717-9129-f8ec3c922077",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1069.002",
+      "technique_id": "T1069.002",
+      "technique_ref": "attack-pattern--61b0a7af-af8e-5eed-ab56-983b6465f73b",
+      "description": "The following analytic detects the execution of `powershell.exe` with command-line arguments that query for domain groups using `Get-DomainGroup`. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line executions mapped to the `Processes` node of the `Endpoint` data model. Monitoring this activity is crucial as `Get-DomainGroup` is part of PowerView, a tool often used by adversaries for domain enumeration and situational awaren",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

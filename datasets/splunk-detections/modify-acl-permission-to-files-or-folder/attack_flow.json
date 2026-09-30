@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--6a15fb2e-afe9-5c39-8052-45690f82787d",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--431e92cd-c37c-5424-977d-5df958a08461",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--431e92cd-c37c-5424-977d-5df958a08461",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--bdc349b6-7966-5042-a3d3-2da525b547ad",
+      "created_by_ref": "identity--431e92cd-c37c-5424-977d-5df958a08461",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: modify-acl-permission-to-files-or-folder",
+      "description": "The following analytic detects the modification of ACL permissions to files or folders, making them accessible to everyone or to system account. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on processes like \"cacls.exe,\" \"icacls.exe,\" and \"xcacls.exe\" with specific command-line arguments. This activity is significant as it may indicate an adversary attempting to evade ACLs or access protected files. If confirmed malicious, this could allow unauthorized access to",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--153cedd2-3d2e-519c-9f15-69ab9978d1dc"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--4c6fdc2d-eee5-598d-b743-86992584342a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1222",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1222"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--153cedd2-3d2e-519c-9f15-69ab9978d1dc",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1222",
+      "technique_id": "T1222",
+      "technique_ref": "attack-pattern--4c6fdc2d-eee5-598d-b743-86992584342a",
+      "description": "The following analytic detects the modification of ACL permissions to files or folders, making them accessible to everyone or to system account. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on processes like \"cacls.exe,\" \"icacls.exe,\" and \"xcacls.exe\" with specific command-line arguments. This activity is significant as it may indicate an adversary attempting to evade ACLs or access protected files. If confirmed malicious, this could allow unauthorized access to",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

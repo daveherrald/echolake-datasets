@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--8c928d5d-e627-5136-ae85-033c7d78e5b2",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--3dff9361-329c-5a08-a846-b5382a5195ef",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--3dff9361-329c-5a08-a846-b5382a5195ef",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--bcb06f2b-aab5-571a-b391-a1927f751930",
+      "created_by_ref": "identity--3dff9361-329c-5a08-a846-b5382a5195ef",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-registry-modification-for-safe-mode-persistence",
+      "description": "The following analytic identifies modifications to the SafeBoot registry keys, specifically within the Minimal and Network paths. This detection leverages registry activity logs from endpoint data sources like Sysmon or EDR tools. Monitoring these keys is crucial as adversaries can use them to persist drivers or services in Safe Mode, with Network allowing network connections. If confirmed malicious, this activity could enable attackers to maintain persistence even in Safe Mode, potentially bypa",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--5052396f-58c3-5e6b-b61b-1f1f59cbb668"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--1bfc14a0-449a-5d1b-93c6-24301af33e05",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1547.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1547.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--5052396f-58c3-5e6b-b61b-1f1f59cbb668",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1547.001",
+      "technique_id": "T1547.001",
+      "technique_ref": "attack-pattern--1bfc14a0-449a-5d1b-93c6-24301af33e05",
+      "description": "The following analytic identifies modifications to the SafeBoot registry keys, specifically within the Minimal and Network paths. This detection leverages registry activity logs from endpoint data sources like Sysmon or EDR tools. Monitoring these keys is crucial as adversaries can use them to persist drivers or services in Safe Mode, with Network allowing network connections. If confirmed malicious, this activity could enable attackers to maintain persistence even in Safe Mode, potentially bypa",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

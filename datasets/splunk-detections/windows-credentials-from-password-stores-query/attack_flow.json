@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--990eb284-9816-56a2-a60d-4923bbb291be",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--ff8abf13-f2ed-57c8-b69f-cb7c47971acd",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--ff8abf13-f2ed-57c8-b69f-cb7c47971acd",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--d7e073dd-11fe-5338-bd7e-8dae25bad7ad",
+      "created_by_ref": "identity--ff8abf13-f2ed-57c8-b69f-cb7c47971acd",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-credentials-from-password-stores-query",
+      "description": "The following analytic detects the execution of the Windows OS tool cmdkey.exe, which is often abused by post-exploitation tools like winpeas, commonly used in ransomware attacks to list stored usernames, passwords, or credentials. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process execution logs. This activity is significant as it indicates potential credential harvesting, which can lead to privilege escalation and persistence. If confirmed mali",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--20dd7e98-2643-52cb-9a54-55d284b463fe"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--6f4ac5ba-0b69-5ff4-9362-c3828be0dcfd",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1555",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1555"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--20dd7e98-2643-52cb-9a54-55d284b463fe",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1555",
+      "technique_id": "T1555",
+      "technique_ref": "attack-pattern--6f4ac5ba-0b69-5ff4-9362-c3828be0dcfd",
+      "description": "The following analytic detects the execution of the Windows OS tool cmdkey.exe, which is often abused by post-exploitation tools like winpeas, commonly used in ransomware attacks to list stored usernames, passwords, or credentials. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process execution logs. This activity is significant as it indicates potential credential harvesting, which can lead to privilege escalation and persistence. If confirmed mali",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

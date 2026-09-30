@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--40283278-050c-5d92-82fc-e48ed1e075b8",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--02025e3b-c145-5ff6-97b5-08d4ac274428",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--02025e3b-c145-5ff6-97b5-08d4ac274428",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--32a35c46-1e49-5f58-bd48-eb63bf02ddb9",
+      "created_by_ref": "identity--02025e3b-c145-5ff6-97b5-08d4ac274428",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-archived-collected-data-in-temp-folder",
+      "description": "The following analytic detects the creation of archived files in a temporary folder, which may contain collected data. This behavior is often associated with malicious activity, where attackers compress sensitive information before exfiltration. The detection focuses on monitoring specific directories, such as temp folders, for the presence of newly created archive files (e.g., .zip, .rar, .tar). By identifying this pattern, security teams can quickly respond to potential data collection and exf",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--39c4664e-2ba9-5b49-8287-63a5d8b071af"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--1add7444-7c2f-5e92-b7f1-2dd4758568c6",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1560",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1560"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--39c4664e-2ba9-5b49-8287-63a5d8b071af",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1560",
+      "technique_id": "T1560",
+      "technique_ref": "attack-pattern--1add7444-7c2f-5e92-b7f1-2dd4758568c6",
+      "description": "The following analytic detects the creation of archived files in a temporary folder, which may contain collected data. This behavior is often associated with malicious activity, where attackers compress sensitive information before exfiltration. The detection focuses on monitoring specific directories, such as temp folders, for the presence of newly created archive files (e.g., .zip, .rar, .tar). By identifying this pattern, security teams can quickly respond to potential data collection and exf",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

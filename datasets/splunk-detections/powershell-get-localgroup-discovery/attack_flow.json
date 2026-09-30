@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--4583cc68-5179-5f44-a2ec-22789b7efddb",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--ada8bd4b-0558-5b3b-bde0-dfe7bfd922e8",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--ada8bd4b-0558-5b3b-bde0-dfe7bfd922e8",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--069a6145-f0b0-5bb4-9c6a-488d03a39a6a",
+      "created_by_ref": "identity--ada8bd4b-0558-5b3b-bde0-dfe7bfd922e8",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: powershell-get-localgroup-discovery",
+      "description": "The following analytic identifies the use of the `get-localgroup` command executed via PowerShell or cmd.exe to enumerate local groups on an endpoint. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line arguments. Monitoring this activity is significant as it may indicate an attacker attempting to gather information about local group memberships, which can be a precursor to privilege escalation. If confirmed malicious, this",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--df77fda6-d554-58e8-b9c0-7b1c2546cbf9"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--94217316-a251-5acd-bd12-eb92009674b7",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1069.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1069.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--df77fda6-d554-58e8-b9c0-7b1c2546cbf9",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1069.001",
+      "technique_id": "T1069.001",
+      "technique_ref": "attack-pattern--94217316-a251-5acd-bd12-eb92009674b7",
+      "description": "The following analytic identifies the use of the `get-localgroup` command executed via PowerShell or cmd.exe to enumerate local groups on an endpoint. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line arguments. Monitoring this activity is significant as it may indicate an attacker attempting to gather information about local group memberships, which can be a precursor to privilege escalation. If confirmed malicious, this",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--b384bd02-bf60-5dbc-8752-88a4f8646c64",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--0fadc880-7a0f-5f60-be24-fc7e81bc9244",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--0fadc880-7a0f-5f60-be24-fc7e81bc9244",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--e5223499-6094-53a7-8e3b-82619c51df62",
+      "created_by_ref": "identity--0fadc880-7a0f-5f60-be24-fc7e81bc9244",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-default-rdp-file-unhidden",
+      "description": "This detection identifies the use of attrib.exe to remove hidden (-h) or system (-s) attributes from the Default.rdp file, which is automatically created in a user's Documents folder when a Remote Desktop Protocol (RDP) session is initiated using mstsc.exe. The Default.rdp file stores session configuration details such as the remote host address and screen settings. Unhiding this file is uncommon in normal user behavior and may indicate that an attacker or red team operator is attempting to acce",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--36acb7cf-80e4-57ad-8eba-623155d8362d"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--81e1104c-99b0-5631-979d-c1de413b3643",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1021.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1021.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--36acb7cf-80e4-57ad-8eba-623155d8362d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1021.001",
+      "technique_id": "T1021.001",
+      "technique_ref": "attack-pattern--81e1104c-99b0-5631-979d-c1de413b3643",
+      "description": "This detection identifies the use of attrib.exe to remove hidden (-h) or system (-s) attributes from the Default.rdp file, which is automatically created in a user's Documents folder when a Remote Desktop Protocol (RDP) session is initiated using mstsc.exe. The Default.rdp file stores session configuration details such as the remote host address and screen settings. Unhiding this file is uncommon in normal user behavior and may indicate that an attacker or red team operator is attempting to acce",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

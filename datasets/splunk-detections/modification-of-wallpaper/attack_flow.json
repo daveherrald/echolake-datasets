@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--c79a416a-3207-5092-86ab-31ec0c204f6d",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--41909218-c83c-5aa5-86b0-2e77c8112376",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--41909218-c83c-5aa5-86b0-2e77c8112376",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--2cb8ae70-686a-5370-a712-0f60cd14bcab",
+      "created_by_ref": "identity--41909218-c83c-5aa5-86b0-2e77c8112376",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: modification-of-wallpaper",
+      "description": "The following analytic detects the modification of registry keys related to the desktop wallpaper settings. It leverages Sysmon EventCode 13 to identify changes to the \"Control Panel\\\\Desktop\\\\Wallpaper\" and \"Control Panel\\\\Desktop\\\\WallpaperStyle\" registry keys, especially when the modifying process is not explorer.exe or involves suspicious file paths like temp or public directories. This activity is significant as it can indicate ransomware behavior, such as the REVIL ransomware, which change",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--436571aa-d190-5db1-9a5e-e79b03cbe258"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--5f866fcc-59b0-54aa-83e7-86d98fd68974",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1491",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1491"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--436571aa-d190-5db1-9a5e-e79b03cbe258",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1491",
+      "technique_id": "T1491",
+      "technique_ref": "attack-pattern--5f866fcc-59b0-54aa-83e7-86d98fd68974",
+      "description": "The following analytic detects the modification of registry keys related to the desktop wallpaper settings. It leverages Sysmon EventCode 13 to identify changes to the \"Control Panel\\\\Desktop\\\\Wallpaper\" and \"Control Panel\\\\Desktop\\\\WallpaperStyle\" registry keys, especially when the modifying process is not explorer.exe or involves suspicious file paths like temp or public directories. This activity is significant as it can indicate ransomware behavior, such as the REVIL ransomware, which change",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

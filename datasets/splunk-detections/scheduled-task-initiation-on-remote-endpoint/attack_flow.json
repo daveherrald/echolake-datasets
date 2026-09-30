@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--ea7dd357-a6a3-5345-8a67-9c78532dd995",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--a16036e9-991f-56d6-84c6-3538b541139c",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--a16036e9-991f-56d6-84c6-3538b541139c",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--2bbbed3d-79b0-5769-b249-e7704607962a",
+      "created_by_ref": "identity--a16036e9-991f-56d6-84c6-3538b541139c",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: scheduled-task-initiation-on-remote-endpoint",
+      "description": "The following analytic detects the use of 'schtasks.exe' to start a Scheduled Task on a remote endpoint. This detection leverages Endpoint Detection and Response (EDR) data, focusing on process details such as process name, parent process, and command-line executions. This activity is significant as adversaries often abuse Task Scheduler for lateral movement and remote code execution. If confirmed malicious, this behavior could allow attackers to execute arbitrary code remotely, potentially lead",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--5de058ed-df76-51e9-9551-b29907ac00b1"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--49309c79-60e4-572e-a170-8f9e7604b915",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1053.005",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1053.005"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--5de058ed-df76-51e9-9551-b29907ac00b1",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1053.005",
+      "technique_id": "T1053.005",
+      "technique_ref": "attack-pattern--49309c79-60e4-572e-a170-8f9e7604b915",
+      "description": "The following analytic detects the use of 'schtasks.exe' to start a Scheduled Task on a remote endpoint. This detection leverages Endpoint Detection and Response (EDR) data, focusing on process details such as process name, parent process, and command-line executions. This activity is significant as adversaries often abuse Task Scheduler for lateral movement and remote code execution. If confirmed malicious, this behavior could allow attackers to execute arbitrary code remotely, potentially lead",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--d956d51f-99b0-57ff-9202-d9b9ee1f806c",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--ba192479-2a62-5860-b94e-71b21eda2ae7",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--ba192479-2a62-5860-b94e-71b21eda2ae7",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--aa8d1696-65b7-5ea6-a170-a771a4ed8d00",
+      "created_by_ref": "identity--ba192479-2a62-5860-b94e-71b21eda2ae7",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: linux-docker-privilege-escalation",
+      "description": "The following analytic detects attempts to escalate privileges on a Linux system using Docker. It identifies processes where Docker commands are used to mount the root directory or execute shell commands within a container. This detection leverages Endpoint Detection and Response (EDR) telemetry, focusing on process names, command-line arguments, and parent processes. This activity is significant because it can allow an attacker with Docker privileges to modify critical system files, such as /et",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--02373312-cdca-54ef-9e8a-ce7e9f9a30ab"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--12e5b0aa-dd78-50be-afdc-cca3be847a11",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1548.003",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1548.003"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--02373312-cdca-54ef-9e8a-ce7e9f9a30ab",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1548.003",
+      "technique_id": "T1548.003",
+      "technique_ref": "attack-pattern--12e5b0aa-dd78-50be-afdc-cca3be847a11",
+      "description": "The following analytic detects attempts to escalate privileges on a Linux system using Docker. It identifies processes where Docker commands are used to mount the root directory or execute shell commands within a container. This detection leverages Endpoint Detection and Response (EDR) telemetry, focusing on process names, command-line arguments, and parent processes. This activity is significant because it can allow an attacker with Docker privileges to modify critical system files, such as /et",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

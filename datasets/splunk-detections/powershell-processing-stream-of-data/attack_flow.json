@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--1349d48f-545e-5545-b831-f1be7e60da1a",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--cae693b8-aea5-5b39-bee4-1d3e5508690e",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--cae693b8-aea5-5b39-bee4-1d3e5508690e",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--fd64f8f4-fed6-5924-bc40-1cc70bf0cb4b",
+      "created_by_ref": "identity--cae693b8-aea5-5b39-bee4-1d3e5508690e",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: powershell-processing-stream-of-data",
+      "description": "The following analytic detects suspicious PowerShell script execution involving compressed stream data processing, identified via EventCode 4104. It leverages PowerShell Script Block Logging to flag scripts using `IO.Compression`, `IO.StreamReader`, or decompression methods. This activity is significant as it often indicates obfuscated PowerShell or embedded .NET/binary execution, which are common tactics for evading detection. If confirmed malicious, this behavior could allow attackers to execu",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--4e7b6ff0-8ff2-5fc4-9aa9-375a77e22ab1"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--6af4a61f-a037-51a8-961b-024255313c73",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1059.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1059.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--4e7b6ff0-8ff2-5fc4-9aa9-375a77e22ab1",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1059.001",
+      "technique_id": "T1059.001",
+      "technique_ref": "attack-pattern--6af4a61f-a037-51a8-961b-024255313c73",
+      "description": "The following analytic detects suspicious PowerShell script execution involving compressed stream data processing, identified via EventCode 4104. It leverages PowerShell Script Block Logging to flag scripts using `IO.Compression`, `IO.StreamReader`, or decompression methods. This activity is significant as it often indicates obfuscated PowerShell or embedded .NET/binary execution, which are common tactics for evading detection. If confirmed malicious, this behavior could allow attackers to execu",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

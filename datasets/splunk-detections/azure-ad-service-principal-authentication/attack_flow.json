@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--e751702e-c52c-5b1d-ab4a-663ab97dd9a4",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--19946782-6055-5194-8064-b1cddaacc6f1",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--19946782-6055-5194-8064-b1cddaacc6f1",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--9cbe0f48-3920-57b9-b969-a256922895e9",
+      "created_by_ref": "identity--19946782-6055-5194-8064-b1cddaacc6f1",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: azure-ad-service-principal-authentication",
+      "description": "The following analytic identifies authentication events of service principals in Azure Active Directory. It leverages the `azure_monitor_aad` data source, specifically targeting \"Sign-in activity\" within ServicePrincipalSignInLogs. This detection gathers details such as sign-in frequency, timing, source IPs, and accessed resources. Monitoring these events is significant for SOC teams to distinguish between normal application authentication and potential anomalies, which could indicate compromise",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--27441774-9e70-525d-a57b-9a7f2e3d2fe0"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--9dc97703-abb4-588b-ae25-c0f3106143e3",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1078.004",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1078.004"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--27441774-9e70-525d-a57b-9a7f2e3d2fe0",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1078.004",
+      "technique_id": "T1078.004",
+      "technique_ref": "attack-pattern--9dc97703-abb4-588b-ae25-c0f3106143e3",
+      "description": "The following analytic identifies authentication events of service principals in Azure Active Directory. It leverages the `azure_monitor_aad` data source, specifically targeting \"Sign-in activity\" within ServicePrincipalSignInLogs. This detection gathers details such as sign-in frequency, timing, source IPs, and accessed resources. Monitoring these events is significant for SOC teams to distinguish between normal application authentication and potential anomalies, which could indicate compromise",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

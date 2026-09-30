@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--d9842b83-e6ce-5894-b117-dda98eaad0c1",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--74dad4ca-03ed-5f9d-89de-29ef37e48d65",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--74dad4ca-03ed-5f9d-89de-29ef37e48d65",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--f6403436-49a1-5423-8aba-c37d65eb539a",
+      "created_by_ref": "identity--74dad4ca-03ed-5f9d-89de-29ef37e48d65",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-modify-registry-tamper-protection",
+      "description": "The following analytic detects a suspicious modification to the Windows Defender Tamper Protection registry setting. It leverages data from the Endpoint datamodel, specifically targeting changes where the registry path is set to disable Tamper Protection. This activity is significant because disabling Tamper Protection can allow adversaries to make further undetected changes to Windows Defender settings, potentially leading to reduced security on the system. If confirmed malicious, this could en",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--dffcd859-a7fc-5180-a8d5-2f442dd8b5a1"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--56b57310-6f1d-5538-b02a-08ffc653c6eb",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1112",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1112"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--dffcd859-a7fc-5180-a8d5-2f442dd8b5a1",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1112",
+      "technique_id": "T1112",
+      "technique_ref": "attack-pattern--56b57310-6f1d-5538-b02a-08ffc653c6eb",
+      "description": "The following analytic detects a suspicious modification to the Windows Defender Tamper Protection registry setting. It leverages data from the Endpoint datamodel, specifically targeting changes where the registry path is set to disable Tamper Protection. This activity is significant because disabling Tamper Protection can allow adversaries to make further undetected changes to Windows Defender settings, potentially leading to reduced security on the system. If confirmed malicious, this could en",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

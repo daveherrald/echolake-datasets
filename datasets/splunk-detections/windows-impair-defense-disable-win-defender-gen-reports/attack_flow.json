@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--ea82772a-1486-5ab8-8c64-215bca475ff9",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--a99b7dc8-533a-56c6-9622-5779ba49824e",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--a99b7dc8-533a-56c6-9622-5779ba49824e",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--a569eba9-dac0-507a-b183-771afeacd48a",
+      "created_by_ref": "identity--a99b7dc8-533a-56c6-9622-5779ba49824e",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-impair-defense-disable-win-defender-gen-reports",
+      "description": "The following analytic detects modifications in the Windows registry to disable Windows Defender generic reports. It leverages data from the Endpoint.Registry data model, specifically monitoring changes to the \"DisableGenericRePorts\" registry value. This activity is significant as it can prevent the transmission of error reports to Microsoft's Windows Error Reporting service, potentially hiding malicious activities. If confirmed malicious, this action could allow attackers to bypass Windows Defe",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--1b932292-f429-584f-b1cd-6f9bafa2ace6"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--53f3a1c3-48fa-5055-8766-0e5f56741e02",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1562.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--1b932292-f429-584f-b1cd-6f9bafa2ace6",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.001",
+      "technique_id": "T1562.001",
+      "technique_ref": "attack-pattern--53f3a1c3-48fa-5055-8766-0e5f56741e02",
+      "description": "The following analytic detects modifications in the Windows registry to disable Windows Defender generic reports. It leverages data from the Endpoint.Registry data model, specifically monitoring changes to the \"DisableGenericRePorts\" registry value. This activity is significant as it can prevent the transmission of error reports to Microsoft's Windows Error Reporting service, potentially hiding malicious activities. If confirmed malicious, this action could allow attackers to bypass Windows Defe",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--b9ff68b4-c67d-5bc2-9164-1bdac8349299",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--850608a4-c998-53bb-a6ad-e95aea1c8601",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--850608a4-c998-53bb-a6ad-e95aea1c8601",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--3e7889ec-4c71-5a3f-847a-a16cb376651e",
+      "created_by_ref": "identity--850608a4-c998-53bb-a6ad-e95aea1c8601",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-file-transfer-protocol-in-non-common-process-path",
+      "description": "The following analytic detects FTP connections initiated by processes located in non-standard installation paths on Windows systems. It leverages Sysmon EventCode 3 to identify network connections where the process image path does not match common directories like \"Program Files\" or \"Windows\\System32\". This activity is significant as FTP is often used by adversaries and malware, such as AgentTesla, for Command and Control (C2) communications to exfiltrate stolen data. If confirmed malicious, thi",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--ac953eeb-58ec-5144-a20a-343214f6c0d5"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--1c511e03-0185-586f-b788-d87c1d2e2d83",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1071.003",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1071.003"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--ac953eeb-58ec-5144-a20a-343214f6c0d5",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1071.003",
+      "technique_id": "T1071.003",
+      "technique_ref": "attack-pattern--1c511e03-0185-586f-b788-d87c1d2e2d83",
+      "description": "The following analytic detects FTP connections initiated by processes located in non-standard installation paths on Windows systems. It leverages Sysmon EventCode 3 to identify network connections where the process image path does not match common directories like \"Program Files\" or \"Windows\\System32\". This activity is significant as FTP is often used by adversaries and malware, such as AgentTesla, for Command and Control (C2) communications to exfiltrate stolen data. If confirmed malicious, thi",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

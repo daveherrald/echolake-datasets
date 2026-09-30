@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--45bfb739-e7e9-5d64-8a3c-44567d8a0232",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--e4f09835-cba6-5afa-8efe-48bd44655b7d",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--e4f09835-cba6-5afa-8efe-48bd44655b7d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--7e10e4df-1693-52fd-aca3-a8e3b9caf1a3",
+      "created_by_ref": "identity--e4f09835-cba6-5afa-8efe-48bd44655b7d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-impair-defense-disable-win-defender-compute-file-hashes",
+      "description": "The following analytic detects modifications to the Windows registry that disable Windows Defender's file hash computation by setting the EnableFileHashComputation value to 0. This detection leverages data from the Endpoint.Registry data model, focusing on changes to the specific registry path associated with Windows Defender. Disabling file hash computation can significantly impair Windows Defender's ability to detect and scan for malware, making it a critical behavior to monitor. If confirmed",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--3085aadf-e17f-557f-9d77-dfdc3cae204f"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--34b37c0f-879b-5ca3-ab93-818b0f8d5a29",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1562.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--3085aadf-e17f-557f-9d77-dfdc3cae204f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.001",
+      "technique_id": "T1562.001",
+      "technique_ref": "attack-pattern--34b37c0f-879b-5ca3-ab93-818b0f8d5a29",
+      "description": "The following analytic detects modifications to the Windows registry that disable Windows Defender's file hash computation by setting the EnableFileHashComputation value to 0. This detection leverages data from the Endpoint.Registry data model, focusing on changes to the specific registry path associated with Windows Defender. Disabling file hash computation can significantly impair Windows Defender's ability to detect and scan for malware, making it a critical behavior to monitor. If confirmed",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

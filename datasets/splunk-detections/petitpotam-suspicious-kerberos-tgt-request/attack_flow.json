@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--eef81f34-8186-5853-9ff6-4a3bc480f9e5",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--12db60e6-7d86-5b77-a977-3d3ef9eea6ea",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--12db60e6-7d86-5b77-a977-3d3ef9eea6ea",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--25856761-e9b8-5ae5-ba03-616e064c8b1c",
+      "created_by_ref": "identity--12db60e6-7d86-5b77-a977-3d3ef9eea6ea",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: petitpotam-suspicious-kerberos-tgt-request",
+      "description": "The following analytic detects a suspicious Kerberos Ticket Granting Ticket (TGT) request, identified by Event Code 4768. This detection leverages Windows Security Event Logs to identify TGT requests with unusual fields, which may indicate the use of tools like Rubeus following the exploitation of CVE-2021-36942 (PetitPotam). This activity is significant as it can signal an attacker leveraging a compromised certificate to request Kerberos tickets, potentially leading to unauthorized access. If c",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--ce676a7a-3a5a-53b8-b9f4-fd5ab4b6eccd"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--00078577-ed4f-5bdf-bef7-92e3fc70ea92",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1003",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1003"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--ce676a7a-3a5a-53b8-b9f4-fd5ab4b6eccd",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1003",
+      "technique_id": "T1003",
+      "technique_ref": "attack-pattern--00078577-ed4f-5bdf-bef7-92e3fc70ea92",
+      "description": "The following analytic detects a suspicious Kerberos Ticket Granting Ticket (TGT) request, identified by Event Code 4768. This detection leverages Windows Security Event Logs to identify TGT requests with unusual fields, which may indicate the use of tools like Rubeus following the exploitation of CVE-2021-36942 (PetitPotam). This activity is significant as it can signal an attacker leveraging a compromised certificate to request Kerberos tickets, potentially leading to unauthorized access. If c",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

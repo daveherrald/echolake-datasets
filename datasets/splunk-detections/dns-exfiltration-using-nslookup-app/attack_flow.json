@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--8bd3f819-c2c4-553a-8f8d-a628656e414a",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--5d4d8f2e-db9a-5611-8a25-c4d4a97d1330",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--5d4d8f2e-db9a-5611-8a25-c4d4a97d1330",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--b1f4b19a-49e1-5bb2-a43e-ae86f6746410",
+      "created_by_ref": "identity--5d4d8f2e-db9a-5611-8a25-c4d4a97d1330",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: dns-exfiltration-using-nslookup-app",
+      "description": "The following analytic identifies potential DNS exfiltration using the nslookup application. It detects specific command-line parameters such as query type (TXT, A, AAAA) and retry options, which are commonly used by attackers to exfiltrate data. The detection leverages Endpoint Detection and Response (EDR) telemetry, focusing on process execution logs. This activity is significant as it may indicate an attempt to communicate with a Command and Control (C2) server or exfiltrate sensitive data. I",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--8f380a40-1950-5bc6-af97-1a9a61a200bf"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--18f48226-4700-5708-984c-fbd1d9edb6b5",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1048",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1048"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--8f380a40-1950-5bc6-af97-1a9a61a200bf",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1048",
+      "technique_id": "T1048",
+      "technique_ref": "attack-pattern--18f48226-4700-5708-984c-fbd1d9edb6b5",
+      "description": "The following analytic identifies potential DNS exfiltration using the nslookup application. It detects specific command-line parameters such as query type (TXT, A, AAAA) and retry options, which are commonly used by attackers to exfiltrate data. The detection leverages Endpoint Detection and Response (EDR) telemetry, focusing on process execution logs. This activity is significant as it may indicate an attempt to communicate with a Command and Control (C2) server or exfiltrate sensitive data. I",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

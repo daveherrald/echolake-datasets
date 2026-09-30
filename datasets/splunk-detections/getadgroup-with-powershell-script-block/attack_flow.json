@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--c120e7bd-48f7-568c-bfd3-152e138eb3ac",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--d59e1b68-3742-5381-ba6f-e271390da238",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--d59e1b68-3742-5381-ba6f-e271390da238",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--d1716706-7627-58de-a4c9-644c4f9706fd",
+      "created_by_ref": "identity--d59e1b68-3742-5381-ba6f-e271390da238",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: getadgroup-with-powershell-script-block",
+      "description": "The following analytic detects the execution of the `Get-AdGroup` PowerShell cmdlet using PowerShell Script Block Logging (EventCode=4104). This cmdlet is used to enumerate all domain groups, which adversaries may exploit for situational awareness and Active Directory discovery. Monitoring this activity is crucial as it can indicate reconnaissance efforts within the network. If confirmed malicious, this behavior could lead to further exploitation, such as privilege escalation or lateral movement",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--47bbe749-7ab0-5e72-96b6-44879ed0bc5f"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--8873831d-e83f-5298-b26b-ec3f37ca72c8",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1069.002",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1069.002"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--47bbe749-7ab0-5e72-96b6-44879ed0bc5f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1069.002",
+      "technique_id": "T1069.002",
+      "technique_ref": "attack-pattern--8873831d-e83f-5298-b26b-ec3f37ca72c8",
+      "description": "The following analytic detects the execution of the `Get-AdGroup` PowerShell cmdlet using PowerShell Script Block Logging (EventCode=4104). This cmdlet is used to enumerate all domain groups, which adversaries may exploit for situational awareness and Active Directory discovery. Monitoring this activity is crucial as it can indicate reconnaissance efforts within the network. If confirmed malicious, this behavior could lead to further exploitation, such as privilege escalation or lateral movement",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--0dc1de64-bd4a-57e6-8b0e-a194cfba462c",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--fcddfc89-4f0c-54dc-b2e9-e1b784cc9450",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--fcddfc89-4f0c-54dc-b2e9-e1b784cc9450",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--437a2761-2aba-5631-b580-b2733fcb504f",
+      "created_by_ref": "identity--fcddfc89-4f0c-54dc-b2e9-e1b784cc9450",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-modify-registry-disable-win-defender-raw-write-notif",
+      "description": "The following analytic detects modifications to the Windows registry that disable the Windows Defender raw write notification feature. It leverages data from the Endpoint.Registry datamodel, specifically monitoring changes to the registry path associated with Windows Defender's real-time protection settings. This activity is significant because disabling raw write notifications can allow malware, such as Azorult, to bypass Windows Defender's behavior monitoring, potentially leading to undetected",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--b96876a9-4fe8-55fb-b7ac-80d25c9c3f59"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--486edfa1-b8f7-564e-a116-fc919f85f524",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1112",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1112"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--b96876a9-4fe8-55fb-b7ac-80d25c9c3f59",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1112",
+      "technique_id": "T1112",
+      "technique_ref": "attack-pattern--486edfa1-b8f7-564e-a116-fc919f85f524",
+      "description": "The following analytic detects modifications to the Windows registry that disable the Windows Defender raw write notification feature. It leverages data from the Endpoint.Registry datamodel, specifically monitoring changes to the registry path associated with Windows Defender's real-time protection settings. This activity is significant because disabling raw write notifications can allow malware, such as Azorult, to bypass Windows Defender's behavior monitoring, potentially leading to undetected",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

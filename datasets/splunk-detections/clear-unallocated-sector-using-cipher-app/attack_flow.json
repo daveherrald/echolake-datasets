@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--c87b6394-8719-5065-a40e-981841606d2d",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--3632b449-68c1-5e19-8b1b-885130d7621c",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--3632b449-68c1-5e19-8b1b-885130d7621c",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--aefb0c3f-3a0d-50ef-b776-8bc0d311ea27",
+      "created_by_ref": "identity--3632b449-68c1-5e19-8b1b-885130d7621c",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: clear-unallocated-sector-using-cipher-app",
+      "description": "The following analytic detects the execution of `cipher.exe` with the `/w` flag to clear unallocated sectors on a disk. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names, command-line arguments, and parent processes. This activity is significant because it is a technique used by ransomware to prevent forensic recovery of deleted files. If confirmed malicious, this action could hinder incident response efforts by making it impossible to recover critica",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--65acbf09-0329-50ae-8be1-987481df12d1"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--a815a391-c0c8-5960-8c43-efc5de7c68ec",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1070.004",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1070.004"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--65acbf09-0329-50ae-8be1-987481df12d1",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1070.004",
+      "technique_id": "T1070.004",
+      "technique_ref": "attack-pattern--a815a391-c0c8-5960-8c43-efc5de7c68ec",
+      "description": "The following analytic detects the execution of `cipher.exe` with the `/w` flag to clear unallocated sectors on a disk. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names, command-line arguments, and parent processes. This activity is significant because it is a technique used by ransomware to prevent forensic recovery of deleted files. If confirmed malicious, this action could hinder incident response efforts by making it impossible to recover critica",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

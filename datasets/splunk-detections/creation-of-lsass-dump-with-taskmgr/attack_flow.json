@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--b242f2e3-dd4c-56eb-a380-39d26d26a28d",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--aae13075-0fe4-5d50-ac67-1acd9837b7fd",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--aae13075-0fe4-5d50-ac67-1acd9837b7fd",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--0f8e4c3b-11e0-5267-a10a-7c0c20011bf0",
+      "created_by_ref": "identity--aae13075-0fe4-5d50-ac67-1acd9837b7fd",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: creation-of-lsass-dump-with-taskmgr",
+      "description": "The following analytic detects the creation of an lsass.exe process dump using Windows Task Manager. It leverages Sysmon EventID 11 to identify file creation events where the target filename matches *lsass*.dmp. This activity is significant because creating an lsass dump can be a precursor to credential theft, as the dump file contains sensitive information such as user passwords. If confirmed malicious, an attacker could use the lsass dump to extract credentials and escalate privileges, potenti",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--8dfaed0e-5ef5-5aa8-9126-3f67286b7674"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--824d20a2-4fd1-5a17-86bc-d85428bc0c5b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1003.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1003.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--8dfaed0e-5ef5-5aa8-9126-3f67286b7674",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1003.001",
+      "technique_id": "T1003.001",
+      "technique_ref": "attack-pattern--824d20a2-4fd1-5a17-86bc-d85428bc0c5b",
+      "description": "The following analytic detects the creation of an lsass.exe process dump using Windows Task Manager. It leverages Sysmon EventID 11 to identify file creation events where the target filename matches *lsass*.dmp. This activity is significant because creating an lsass dump can be a precursor to credential theft, as the dump file contains sensitive information such as user passwords. If confirmed malicious, an attacker could use the lsass dump to extract credentials and escalate privileges, potenti",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

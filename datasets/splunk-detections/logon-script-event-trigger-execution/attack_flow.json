@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--be073158-b6e0-5300-919c-4280b7f807ee",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--2c6e722a-0de4-5215-99d0-958f2070ce98",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--2c6e722a-0de4-5215-99d0-958f2070ce98",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--6d7551e6-4515-54b3-aa6d-b3dff675a56a",
+      "created_by_ref": "identity--2c6e722a-0de4-5215-99d0-958f2070ce98",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: logon-script-event-trigger-execution",
+      "description": "The following analytic detects the modification of the UserInitMprLogonScript registry entry, which is often used by attackers to establish persistence and gain privilege escalation upon system boot. It leverages data from the Endpoint.Registry data model, focusing on changes to the specified registry path. This activity is significant because it is a common technique used by APT groups and malware to ensure their payloads execute automatically when the system starts. If confirmed malicious, thi",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--998ca5d9-b5df-51a9-a5df-012e5d586446"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--37ab49fd-ee39-5b2e-9b9e-ce5794fb9b86",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1037.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1037.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--998ca5d9-b5df-51a9-a5df-012e5d586446",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1037.001",
+      "technique_id": "T1037.001",
+      "technique_ref": "attack-pattern--37ab49fd-ee39-5b2e-9b9e-ce5794fb9b86",
+      "description": "The following analytic detects the modification of the UserInitMprLogonScript registry entry, which is often used by attackers to establish persistence and gain privilege escalation upon system boot. It leverages data from the Endpoint.Registry data model, focusing on changes to the specified registry path. This activity is significant because it is a common technique used by APT groups and malware to ensure their payloads execute automatically when the system starts. If confirmed malicious, thi",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

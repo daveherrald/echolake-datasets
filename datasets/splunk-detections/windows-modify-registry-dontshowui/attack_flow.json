@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--9ce7e279-60fc-5016-8c10-fc17524cff42",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--7fddd88a-5942-5402-98ce-aa47ce651e6d",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--7fddd88a-5942-5402-98ce-aa47ce651e6d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--3b0ce4f1-53ed-56f1-84d2-bc87767bcb36",
+      "created_by_ref": "identity--7fddd88a-5942-5402-98ce-aa47ce651e6d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-modify-registry-dontshowui",
+      "description": "The following analytic detects modifications to the Windows Error Reporting registry key \"DontShowUI\" to suppress error reporting dialogs. It leverages data from the Endpoint datamodel's Registry node to identify changes where the registry value is set to 0x00000001. This activity is significant as it is commonly associated with DarkGate malware, which uses this modification to avoid detection during its installation. If confirmed malicious, this behavior could allow attackers to maintain a low",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--c144c862-4783-5337-96ff-5b8e094b4740"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--d24f3ef1-e91d-524d-8d00-4f25b2c4b5eb",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1112",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1112"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--c144c862-4783-5337-96ff-5b8e094b4740",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1112",
+      "technique_id": "T1112",
+      "technique_ref": "attack-pattern--d24f3ef1-e91d-524d-8d00-4f25b2c4b5eb",
+      "description": "The following analytic detects modifications to the Windows Error Reporting registry key \"DontShowUI\" to suppress error reporting dialogs. It leverages data from the Endpoint datamodel's Registry node to identify changes where the registry value is set to 0x00000001. This activity is significant as it is commonly associated with DarkGate malware, which uses this modification to avoid detection during its installation. If confirmed malicious, this behavior could allow attackers to maintain a low",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

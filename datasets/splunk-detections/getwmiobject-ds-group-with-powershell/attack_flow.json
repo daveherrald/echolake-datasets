@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--6f1f14b0-68d2-5a46-8ade-902af3ef467a",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--c9ef5d88-5022-598f-8820-801d87d0bdf2",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--c9ef5d88-5022-598f-8820-801d87d0bdf2",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--4fba075a-f2ac-53d3-ab8e-6810242480ab",
+      "created_by_ref": "identity--c9ef5d88-5022-598f-8820-801d87d0bdf2",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: getwmiobject-ds-group-with-powershell",
+      "description": "The following analytic identifies the execution of `powershell.exe` with command-line arguments used to query domain groups via the `Get-WmiObject` cmdlet and the `-class ds_group` parameter. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line executions. This activity is significant as it indicates potential reconnaissance efforts by adversaries to enumerate domain groups, which is a common step in Active Directory Discover",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--05be5e5f-e656-55ac-8dc5-e05403f5e7e9"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--a83f9b33-c011-5e51-9455-0e4d564a41f7",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1069.002",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1069.002"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--05be5e5f-e656-55ac-8dc5-e05403f5e7e9",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1069.002",
+      "technique_id": "T1069.002",
+      "technique_ref": "attack-pattern--a83f9b33-c011-5e51-9455-0e4d564a41f7",
+      "description": "The following analytic identifies the execution of `powershell.exe` with command-line arguments used to query domain groups via the `Get-WmiObject` cmdlet and the `-class ds_group` parameter. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line executions. This activity is significant as it indicates potential reconnaissance efforts by adversaries to enumerate domain groups, which is a common step in Active Directory Discover",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

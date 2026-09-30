@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--1ee7d408-f64b-5337-b3a3-1ae695041246",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--870b5fa3-2a1f-5b4e-9c7a-c7bcfd33ae62",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--870b5fa3-2a1f-5b4e-9c7a-c7bcfd33ae62",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--33a8672b-c1e4-51ba-8348-326d715b1b64",
+      "created_by_ref": "identity--870b5fa3-2a1f-5b4e-9c7a-c7bcfd33ae62",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-terminating-lsass-process",
+      "description": "The following analytic detects a suspicious process attempting to terminate the Lsass.exe process. It leverages Sysmon EventCode 10 logs to identify processes granted PROCESS_TERMINATE access to Lsass.exe. This activity is significant because Lsass.exe is a critical process responsible for enforcing security policies and handling user credentials. If confirmed malicious, this behavior could indicate an attempt to perform credential dumping, privilege escalation, or evasion of security policies,",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--f9983f5d-c203-58e4-af2a-0e631f17fc82"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--e75524ee-2ea2-5792-972f-d686adf956aa",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1562.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--f9983f5d-c203-58e4-af2a-0e631f17fc82",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.001",
+      "technique_id": "T1562.001",
+      "technique_ref": "attack-pattern--e75524ee-2ea2-5792-972f-d686adf956aa",
+      "description": "The following analytic detects a suspicious process attempting to terminate the Lsass.exe process. It leverages Sysmon EventCode 10 logs to identify processes granted PROCESS_TERMINATE access to Lsass.exe. This activity is significant because Lsass.exe is a critical process responsible for enforcing security policies and handling user credentials. If confirmed malicious, this behavior could indicate an attempt to perform credential dumping, privilege escalation, or evasion of security policies,",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--a5aaeceb-20b3-553d-89c9-32b31ad48b3b",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--1feed8e4-3ccd-5d8a-beb8-d8f5e4c0b5dd",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--1feed8e4-3ccd-5d8a-beb8-d8f5e4c0b5dd",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--c019a374-c039-5274-82a2-e6f72447e90c",
+      "created_by_ref": "identity--1feed8e4-3ccd-5d8a-beb8-d8f5e4c0b5dd",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: cisco-isovalent-late-process-execution",
+      "description": "Detects process executions that occur well after a container has initialized, which can indicate\nsuspicious activity (e.g., interactive shells, injected binaries, or post-compromise tooling).\nThe analytic compares the process start time to the container start time and flags processes\nlaunched more than 5 minutes (300 seconds) after initialization.",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--6187eb00-4341-5ae2-a328-00d09287b6c6"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--e262ec90-0fa9-5028-969c-7ea05850f1c0",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1543",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1543"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--6187eb00-4341-5ae2-a328-00d09287b6c6",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1543",
+      "technique_id": "T1543",
+      "technique_ref": "attack-pattern--e262ec90-0fa9-5028-969c-7ea05850f1c0",
+      "description": "Detects process executions that occur well after a container has initialized, which can indicate\nsuspicious activity (e.g., interactive shells, injected binaries, or post-compromise tooling).\nThe analytic compares the process start time to the container start time and flags processes\nlaunched more than 5 minutes (300 seconds) after initialization.",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

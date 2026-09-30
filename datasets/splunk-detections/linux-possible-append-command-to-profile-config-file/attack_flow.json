@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--9382e11f-bb89-544d-93bc-b6b3214d250a",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--bfa388ce-44f7-536d-b92e-52928320a337",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--bfa388ce-44f7-536d-b92e-52928320a337",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--abeba7b6-4c10-5913-93a7-8d7b04cd75fa",
+      "created_by_ref": "identity--bfa388ce-44f7-536d-b92e-52928320a337",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: linux-possible-append-command-to-profile-config-file",
+      "description": "The following analytic detects suspicious command-lines that modify user profile files to automatically execute scripts or executables upon system reboot. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on command-line executions involving profile files like ~/.bashrc and /etc/profile. This activity is significant as it indicates potential persistence mechanisms used by adversaries to maintain access to compromised hosts. If confirmed malicious, this could allow att",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--8c71eca8-9bb4-5f64-afe5-b5270ed03b06"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--d06d2422-fc9e-5409-94e2-35884e592b08",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1546.004",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1546.004"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--8c71eca8-9bb4-5f64-afe5-b5270ed03b06",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1546.004",
+      "technique_id": "T1546.004",
+      "technique_ref": "attack-pattern--d06d2422-fc9e-5409-94e2-35884e592b08",
+      "description": "The following analytic detects suspicious command-lines that modify user profile files to automatically execute scripts or executables upon system reboot. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on command-line executions involving profile files like ~/.bashrc and /etc/profile. This activity is significant as it indicates potential persistence mechanisms used by adversaries to maintain access to compromised hosts. If confirmed malicious, this could allow att",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

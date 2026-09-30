@@ -1,0 +1,110 @@
+{
+  "type": "bundle",
+  "id": "bundle--8048ba3c-13a0-5547-b6e9-f19c28339fda",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--1460b3f3-71b9-59ba-aa9c-d94afbbba3c8",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--1460b3f3-71b9-59ba-aa9c-d94afbbba3c8",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--87691d76-7239-5e4d-8f74-0d181442ce1a",
+      "created_by_ref": "identity--1460b3f3-71b9-59ba-aa9c-d94afbbba3c8",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: enable-wdigest-uselogoncredential-registry",
+      "description": "The following analytic detects a suspicious registry modification that enables the plain text credential feature in Windows by setting the \"UseLogonCredential\" value to 1 in the WDigest registry path. This detection leverages data from the Endpoint.Registry data model, focusing on specific registry paths and values. This activity is significant because it is commonly used by malware and tools like Mimikatz to dump plain text credentials, indicating a potential credential dumping attempt. If conf",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--ba77cfdf-ef38-5313-9253-c5498f067008",
+        "attack-action--3bcf07f6-e439-514e-ba89-ac52b604ea7b"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--6969a72f-675e-5cf8-85b5-993177c5c4d1",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1112",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1112"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--da821ba8-d594-5db8-8d95-8f12a052448b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1003",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1003"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--ba77cfdf-ef38-5313-9253-c5498f067008",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1112",
+      "technique_id": "T1112",
+      "technique_ref": "attack-pattern--6969a72f-675e-5cf8-85b5-993177c5c4d1",
+      "description": "The following analytic detects a suspicious registry modification that enables the plain text credential feature in Windows by setting the \"UseLogonCredential\" value to 1 in the WDigest registry path. This detection leverages data from the Endpoint.Registry data model, focusing on specific registry paths and values. This activity is significant because it is commonly used by malware and tools like Mimikatz to dump plain text credentials, indicating a potential credential dumping attempt. If conf",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--3bcf07f6-e439-514e-ba89-ac52b604ea7b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1003",
+      "technique_id": "T1003",
+      "technique_ref": "attack-pattern--da821ba8-d594-5db8-8d95-8f12a052448b",
+      "description": "The following analytic detects a suspicious registry modification that enables the plain text credential feature in Windows by setting the \"UseLogonCredential\" value to 1 in the WDigest registry path. This detection leverages data from the Endpoint.Registry data model, focusing on specific registry paths and values. This activity is significant because it is commonly used by malware and tools like Mimikatz to dump plain text credentials, indicating a potential credential dumping attempt. If conf",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

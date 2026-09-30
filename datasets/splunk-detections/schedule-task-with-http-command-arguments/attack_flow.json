@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--af43d512-285d-553d-91ea-5169a9cec359",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--5a7ab98b-16e6-55f6-a7fa-2b3ea0f3f3f5",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--5a7ab98b-16e6-55f6-a7fa-2b3ea0f3f3f5",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--c4b7b51d-5a2d-5b68-8ebb-ba5b1213b137",
+      "created_by_ref": "identity--5a7ab98b-16e6-55f6-a7fa-2b3ea0f3f3f5",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: schedule-task-with-http-command-arguments",
+      "description": "The following analytic detects the creation of scheduled tasks on Windows systems that include HTTP command arguments, using Windows Security EventCode 4698. It identifies tasks registered via schtasks.exe or TaskService with HTTP in their command arguments. This behavior is significant as it often indicates malware activity or the use of Living off the Land binaries (lolbins) to download additional payloads. If confirmed malicious, this activity could lead to data exfiltration, malware propagat",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--4e924d5e-5c01-5538-8e4a-8cb5923d815f"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--8ad4c90b-c6c5-562e-b8a9-e4e8618e8476",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1053",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1053"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--4e924d5e-5c01-5538-8e4a-8cb5923d815f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1053",
+      "technique_id": "T1053",
+      "technique_ref": "attack-pattern--8ad4c90b-c6c5-562e-b8a9-e4e8618e8476",
+      "description": "The following analytic detects the creation of scheduled tasks on Windows systems that include HTTP command arguments, using Windows Security EventCode 4698. It identifies tasks registered via schtasks.exe or TaskService with HTTP in their command arguments. This behavior is significant as it often indicates malware activity or the use of Living off the Land binaries (lolbins) to download additional payloads. If confirmed malicious, this activity could lead to data exfiltration, malware propagat",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

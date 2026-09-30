@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--a794640e-f2d3-52b8-bae1-051b893f0fee",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--7b7cc68a-4729-52f7-b926-095bc0688a7d",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--7b7cc68a-4729-52f7-b926-095bc0688a7d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--26f244c8-a913-529b-ae73-42384ec12e8c",
+      "created_by_ref": "identity--7b7cc68a-4729-52f7-b926-095bc0688a7d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-regsvr32-renamed-binary",
+      "description": "The following analytic identifies instances where the regsvr32.exe binary has been renamed and executed. This detection leverages Endpoint Detection and Response (EDR) data, specifically focusing on the original filename metadata. Renaming regsvr32.exe is significant as it can be an evasion technique used by attackers to bypass security controls. If confirmed malicious, this activity could allow an attacker to execute arbitrary DLLs, potentially leading to code execution, privilege escalation, o",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--b4278e05-3ec1-51a9-bccd-3186cd9d9db2"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--dffb8b08-1f5d-5a8d-9e3b-a738d83d6f01",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1218.010",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1218.010"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--b4278e05-3ec1-51a9-bccd-3186cd9d9db2",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1218.010",
+      "technique_id": "T1218.010",
+      "technique_ref": "attack-pattern--dffb8b08-1f5d-5a8d-9e3b-a738d83d6f01",
+      "description": "The following analytic identifies instances where the regsvr32.exe binary has been renamed and executed. This detection leverages Endpoint Detection and Response (EDR) data, specifically focusing on the original filename metadata. Renaming regsvr32.exe is significant as it can be an evasion technique used by attackers to bypass security controls. If confirmed malicious, this activity could allow an attacker to execute arbitrary DLLs, potentially leading to code execution, privilege escalation, o",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

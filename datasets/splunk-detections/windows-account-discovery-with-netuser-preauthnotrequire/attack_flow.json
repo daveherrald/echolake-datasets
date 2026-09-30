@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--76b5f1a0-38d4-5b8e-b12c-85cba71dfb8e",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--b125511c-c4c1-54bf-9630-b5e6c5ce817c",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--b125511c-c4c1-54bf-9630-b5e6c5ce817c",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--8f7b8e42-9874-5425-a827-e332eaec3db6",
+      "created_by_ref": "identity--b125511c-c4c1-54bf-9630-b5e6c5ce817c",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-account-discovery-with-netuser-preauthnotrequire",
+      "description": "The following analytic detects the execution of the PowerView PowerShell cmdlet Get-NetUser with the -PreauthNotRequire parameter, leveraging Event ID 4104. This method identifies attempts to query Active Directory user accounts that do not require Kerberos preauthentication. Monitoring this activity is crucial as it can indicate reconnaissance efforts by an attacker to identify potentially vulnerable accounts. If confirmed malicious, this behavior could lead to further exploitation, such as una",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--327414a7-55d9-5e09-9967-58f1a332f92d"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--cb51ecfd-ba45-5856-a9c2-24728ab9acc6",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1087",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1087"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--327414a7-55d9-5e09-9967-58f1a332f92d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1087",
+      "technique_id": "T1087",
+      "technique_ref": "attack-pattern--cb51ecfd-ba45-5856-a9c2-24728ab9acc6",
+      "description": "The following analytic detects the execution of the PowerView PowerShell cmdlet Get-NetUser with the -PreauthNotRequire parameter, leveraging Event ID 4104. This method identifies attempts to query Active Directory user accounts that do not require Kerberos preauthentication. Monitoring this activity is crucial as it can indicate reconnaissance efforts by an attacker to identify potentially vulnerable accounts. If confirmed malicious, this behavior could lead to further exploitation, such as una",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--76521717-2cc5-5659-8030-fbf982b18f96",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--63ddf190-bdb2-5aa5-ae18-ae555d82ea21",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--63ddf190-bdb2-5aa5-ae18-ae555d82ea21",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--995b140e-8294-53cf-9d17-e3a8b33acb5e",
+      "created_by_ref": "identity--63ddf190-bdb2-5aa5-ae18-ae555d82ea21",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-cisco-secure-endpoint-stop-immunet-service-via-sfc",
+      "description": "The following analytic detects the use of the `sfc.exe` utility, in order to stop the Immunet Protect service. The Sfc.exe utility is part of Cisco Secure Endpoint installation. This detection leverages telemetry from the endpoint, focusing on command-line executions involving the `-k` parameter. This activity is significant as it indicates potential tampering with defensive mechanisms. If confirmed malicious, attackers could partially blind the EDR, enabling further compromise and lateral movem",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--cf43365d-d657-563f-aa3c-daa85191f642"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--21f98c7c-3236-5fd0-aad1-c76d19a5500b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1562.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--cf43365d-d657-563f-aa3c-daa85191f642",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.001",
+      "technique_id": "T1562.001",
+      "technique_ref": "attack-pattern--21f98c7c-3236-5fd0-aad1-c76d19a5500b",
+      "description": "The following analytic detects the use of the `sfc.exe` utility, in order to stop the Immunet Protect service. The Sfc.exe utility is part of Cisco Secure Endpoint installation. This detection leverages telemetry from the endpoint, focusing on command-line executions involving the `-k` parameter. This activity is significant as it indicates potential tampering with defensive mechanisms. If confirmed malicious, attackers could partially blind the EDR, enabling further compromise and lateral movem",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

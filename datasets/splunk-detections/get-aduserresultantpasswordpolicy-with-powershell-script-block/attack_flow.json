@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--9ebf49f2-f6a3-5f4a-af29-75553f5a590f",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--ddba3c36-f1ca-53f0-b3f1-844d8d270a8b",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--ddba3c36-f1ca-53f0-b3f1-844d8d270a8b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--5bcfe226-b259-5d22-abc3-3874efb58e50",
+      "created_by_ref": "identity--ddba3c36-f1ca-53f0-b3f1-844d8d270a8b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: get-aduserresultantpasswordpolicy-with-powershell-script-block",
+      "description": "The following analytic detects the execution of the `Get-ADUserResultantPasswordPolicy` PowerShell cmdlet, which is used to obtain the password policy in a Windows domain. It leverages PowerShell Script Block Logging (EventCode=4104) to identify this activity. Monitoring this behavior is significant as it may indicate an attempt to enumerate domain policies, a common tactic used by adversaries for situational awareness and Active Directory discovery. If confirmed malicious, this activity could a",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--e0164d42-91a1-5758-b4ac-f831454fb88b"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--6e4364f8-2675-5bf9-920d-193e0c1408a6",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1201",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1201"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--e0164d42-91a1-5758-b4ac-f831454fb88b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1201",
+      "technique_id": "T1201",
+      "technique_ref": "attack-pattern--6e4364f8-2675-5bf9-920d-193e0c1408a6",
+      "description": "The following analytic detects the execution of the `Get-ADUserResultantPasswordPolicy` PowerShell cmdlet, which is used to obtain the password policy in a Windows domain. It leverages PowerShell Script Block Logging (EventCode=4104) to identify this activity. Monitoring this behavior is significant as it may indicate an attempt to enumerate domain policies, a common tactic used by adversaries for situational awareness and Active Directory discovery. If confirmed malicious, this activity could a",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--c2bd87d2-e18d-558e-9bd3-88021f4c902a",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--213ca245-4432-51b5-9199-5987afd441e1",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--213ca245-4432-51b5-9199-5987afd441e1",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--b16199ab-512b-5342-8f71-119be06e3eb6",
+      "created_by_ref": "identity--213ca245-4432-51b5-9199-5987afd441e1",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: local-llm-framework-dns-query",
+      "description": "Detects DNS queries related to local LLM models on endpoints by monitoring Sysmon DNS query events (Event ID 22) for known LLM model domains and services.\nLocal LLM frameworks like Ollama, LM Studio, and GPT4All make DNS calls to repositories such as huggingface.co and ollama.ai for model downloads, updates, and telemetry.\nThese queries can reveal unauthorized AI tool usage or data exfiltration risks on corporate networks.",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--de147685-86ae-5969-a29c-84972a586c00"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--399fdfb0-41b2-54ce-baa6-e7201d46c42e",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1590",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1590"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--de147685-86ae-5969-a29c-84972a586c00",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1590",
+      "technique_id": "T1590",
+      "technique_ref": "attack-pattern--399fdfb0-41b2-54ce-baa6-e7201d46c42e",
+      "description": "Detects DNS queries related to local LLM models on endpoints by monitoring Sysmon DNS query events (Event ID 22) for known LLM model domains and services.\nLocal LLM frameworks like Ollama, LM Studio, and GPT4All make DNS calls to repositories such as huggingface.co and ollama.ai for model downloads, updates, and telemetry.\nThese queries can reveal unauthorized AI tool usage or data exfiltration risks on corporate networks.",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--652efd77-14a1-5311-b569-f5339f1a50df",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--ae880dfd-15ca-5789-af5f-58e3a7be9bb6",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--ae880dfd-15ca-5789-af5f-58e3a7be9bb6",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--41e3e503-568a-5631-97f2-a3dbf37e8296",
+      "created_by_ref": "identity--ae880dfd-15ca-5789-af5f-58e3a7be9bb6",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: trickbot-named-pipe",
+      "description": "The following analytic detects the creation or connection to a named pipe associated with Trickbot malware. It leverages Sysmon EventCodes 17 and 18 to identify named pipes with the pattern \"\\\\pipe\\\\*lacesomepipe\". This activity is significant as Trickbot uses named pipes for communication with its command and control (C2) servers, facilitating data exfiltration and command execution. If confirmed malicious, this behavior could allow attackers to maintain persistence, execute arbitrary commands,",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--7adfc837-9c38-553f-a4d1-c1cf405d8492"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--e80b9746-301b-5a11-92d5-d4a8bde3dc0c",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1055",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1055"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--7adfc837-9c38-553f-a4d1-c1cf405d8492",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1055",
+      "technique_id": "T1055",
+      "technique_ref": "attack-pattern--e80b9746-301b-5a11-92d5-d4a8bde3dc0c",
+      "description": "The following analytic detects the creation or connection to a named pipe associated with Trickbot malware. It leverages Sysmon EventCodes 17 and 18 to identify named pipes with the pattern \"\\\\pipe\\\\*lacesomepipe\". This activity is significant as Trickbot uses named pipes for communication with its command and control (C2) servers, facilitating data exfiltration and command execution. If confirmed malicious, this behavior could allow attackers to maintain persistence, execute arbitrary commands,",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--02c95cae-e7c7-5e96-a8b7-2ff8256399e8",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--1355735f-f69a-53b7-9c58-4a7512eef6af",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--1355735f-f69a-53b7-9c58-4a7512eef6af",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--39514c49-0e13-5669-94f2-1de631b2bfbc",
+      "created_by_ref": "identity--1355735f-f69a-53b7-9c58-4a7512eef6af",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: o365-new-email-forwarding-rule-enabled",
+      "description": "The following analytic identifies the creation of new email forwarding rules in an Office 365 environment via the UpdateInboxRules operation. It leverages Office 365 management activity events to detect rules that forward emails to external recipients by examining the OperationProperties for specific forwarding actions. This activity is significant as it may indicate unauthorized email redirection, potentially leading to data exfiltration. If confirmed malicious, attackers could intercept sensit",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--da3d1fd6-d974-54d1-b738-8d5debe5a9d4"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--733be199-4197-527b-bd29-212a1568a91d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1114.003",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1114.003"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--da3d1fd6-d974-54d1-b738-8d5debe5a9d4",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1114.003",
+      "technique_id": "T1114.003",
+      "technique_ref": "attack-pattern--733be199-4197-527b-bd29-212a1568a91d",
+      "description": "The following analytic identifies the creation of new email forwarding rules in an Office 365 environment via the UpdateInboxRules operation. It leverages Office 365 management activity events to detect rules that forward emails to external recipients by examining the OperationProperties for specific forwarding actions. This activity is significant as it may indicate unauthorized email redirection, potentially leading to data exfiltration. If confirmed malicious, attackers could intercept sensit",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

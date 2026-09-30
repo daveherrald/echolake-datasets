@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--00e4b4f2-92ae-56d1-bd47-a6ad9a972d0e",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--299239bc-3310-5589-842b-8ba6d242d3c0",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--299239bc-3310-5589-842b-8ba6d242d3c0",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--65559b9b-eb01-5932-b9d3-334a4883d9ea",
+      "created_by_ref": "identity--299239bc-3310-5589-842b-8ba6d242d3c0",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-modify-registry-nochangingwallpaper",
+      "description": "The following analytic detects modifications to the Windows registry aimed at preventing wallpaper changes. It leverages data from the Endpoint.Registry datamodel, specifically monitoring changes to the \"NoChangingWallPaper\" registry value. This activity is significant as it is a known tactic used by Rhysida ransomware to enforce a malicious wallpaper, thereby limiting user control over system settings. If confirmed malicious, this registry change could indicate a ransomware infection, leading t",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--6423257d-0e07-529b-9934-a3f0f1806e02"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--a90e71d5-5bea-5308-a83b-e931afab0cbe",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1112",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1112"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--6423257d-0e07-529b-9934-a3f0f1806e02",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1112",
+      "technique_id": "T1112",
+      "technique_ref": "attack-pattern--a90e71d5-5bea-5308-a83b-e931afab0cbe",
+      "description": "The following analytic detects modifications to the Windows registry aimed at preventing wallpaper changes. It leverages data from the Endpoint.Registry datamodel, specifically monitoring changes to the \"NoChangingWallPaper\" registry value. This activity is significant as it is a known tactic used by Rhysida ransomware to enforce a malicious wallpaper, thereby limiting user control over system settings. If confirmed malicious, this registry change could indicate a ransomware infection, leading t",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

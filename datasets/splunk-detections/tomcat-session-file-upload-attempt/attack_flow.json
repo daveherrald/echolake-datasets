@@ -1,0 +1,110 @@
+{
+  "type": "bundle",
+  "id": "bundle--6d631706-5527-59b8-9279-93b832625c1e",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--7fb031ca-385c-5c2f-af8b-2eff24ba47b7",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--7fb031ca-385c-5c2f-af8b-2eff24ba47b7",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--0225d2c9-c0a9-5662-b272-4c812010926f",
+      "created_by_ref": "identity--7fb031ca-385c-5c2f-af8b-2eff24ba47b7",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: tomcat-session-file-upload-attempt",
+      "description": "This detection identifies potential exploitation of CVE-2025-24813 in Apache Tomcat through the initial stage of the attack. This first phase occurs when an attacker attempts to upload a malicious serialized Java object with a .session file extension via an HTTP PUT request. When successful, these uploads typically result in HTTP status codes 201 (Created) or 409 (Conflict) and create the foundation for subsequent deserialization attacks by placing malicious content in a location where Tomcat's",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--51041ea4-5c27-5a00-a9e4-450ed23da5dd",
+        "attack-action--a19ae566-c5b3-5aeb-a56e-31bb589fa786"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--f569fa06-81b3-5beb-89c5-2dcbe68f827f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1190",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1190"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--809080fd-f828-5d55-8933-29c10d6e5f5c",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1505.003",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1505.003"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--51041ea4-5c27-5a00-a9e4-450ed23da5dd",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1190",
+      "technique_id": "T1190",
+      "technique_ref": "attack-pattern--f569fa06-81b3-5beb-89c5-2dcbe68f827f",
+      "description": "This detection identifies potential exploitation of CVE-2025-24813 in Apache Tomcat through the initial stage of the attack. This first phase occurs when an attacker attempts to upload a malicious serialized Java object with a .session file extension via an HTTP PUT request. When successful, these uploads typically result in HTTP status codes 201 (Created) or 409 (Conflict) and create the foundation for subsequent deserialization attacks by placing malicious content in a location where Tomcat's",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--a19ae566-c5b3-5aeb-a56e-31bb589fa786",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1505.003",
+      "technique_id": "T1505.003",
+      "technique_ref": "attack-pattern--809080fd-f828-5d55-8933-29c10d6e5f5c",
+      "description": "This detection identifies potential exploitation of CVE-2025-24813 in Apache Tomcat through the initial stage of the attack. This first phase occurs when an attacker attempts to upload a malicious serialized Java object with a .session file extension via an HTTP PUT request. When successful, these uploads typically result in HTTP status codes 201 (Created) or 409 (Conflict) and create the foundation for subsequent deserialization attacks by placing malicious content in a location where Tomcat's",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

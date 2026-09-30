@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--1166cf5f-409a-5a18-b5ac-ebfb66c7029f",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--0d38f170-8a8e-557a-a684-b9ad618118fb",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--0d38f170-8a8e-557a-a684-b9ad618118fb",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--603fd1f2-8faf-529f-ba66-f83135cbfa1c",
+      "created_by_ref": "identity--0d38f170-8a8e-557a-a684-b9ad618118fb",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-sensitive-registry-hive-dump-via-commandline",
+      "description": "The following analytic detects the use of `reg.exe` to export Windows Registry hives, which may contain sensitive credentials. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on command-line executions involving `save` or `export` actions targeting the `sam`, `system`, or `security` hives. This activity is significant as it indicates potential offline credential access attacks, often executed from untrusted processes or scripts. If confirmed malicious, a",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--72c4d05d-be89-5724-9a64-f4989a8bf9ba"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--1ab7a2f8-7058-52f0-8963-5fa92adeee1f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1003.002",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1003.002"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--72c4d05d-be89-5724-9a64-f4989a8bf9ba",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1003.002",
+      "technique_id": "T1003.002",
+      "technique_ref": "attack-pattern--1ab7a2f8-7058-52f0-8963-5fa92adeee1f",
+      "description": "The following analytic detects the use of `reg.exe` to export Windows Registry hives, which may contain sensitive credentials. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on command-line executions involving `save` or `export` actions targeting the `sam`, `system`, or `security` hives. This activity is significant as it indicates potential offline credential access attacks, often executed from untrusted processes or scripts. If confirmed malicious, a",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

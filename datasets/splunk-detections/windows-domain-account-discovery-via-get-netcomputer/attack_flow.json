@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--12aba8f4-f5ec-568f-a1f6-b71e06401214",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--ae80b694-d04a-5c90-9d56-b56e591e8c3b",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--ae80b694-d04a-5c90-9d56-b56e591e8c3b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--e3038ec9-df14-5eb7-bdbe-0325035d67cf",
+      "created_by_ref": "identity--ae80b694-d04a-5c90-9d56-b56e591e8c3b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-domain-account-discovery-via-get-netcomputer",
+      "description": "The following analytic detects the execution of the PowerView PowerShell cmdlet Get-NetComputer, which is used to query Active Directory for user account details such as \"samaccountname,\" \"accountexpires,\" \"lastlogon,\" and more. It leverages Event ID 4104 from PowerShell Script Block Logging to identify this activity. This behavior is significant as it may indicate an attempt to gather user account information, which is often a precursor to further malicious actions. If confirmed malicious, this",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--42288659-ecec-5892-8b83-8d425282fdba"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--42af32c0-14f9-5e35-bfe8-d2b41eee4f0e",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1087.002",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1087.002"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--42288659-ecec-5892-8b83-8d425282fdba",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1087.002",
+      "technique_id": "T1087.002",
+      "technique_ref": "attack-pattern--42af32c0-14f9-5e35-bfe8-d2b41eee4f0e",
+      "description": "The following analytic detects the execution of the PowerView PowerShell cmdlet Get-NetComputer, which is used to query Active Directory for user account details such as \"samaccountname,\" \"accountexpires,\" \"lastlogon,\" and more. It leverages Event ID 4104 from PowerShell Script Block Logging to identify this activity. This behavior is significant as it may indicate an attempt to gather user account information, which is often a precursor to further malicious actions. If confirmed malicious, this",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

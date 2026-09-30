@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--0b68da1f-8f49-5ea7-9807-8cd185661ce4",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--d8f6275e-8584-5917-b824-bc217b71b037",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--d8f6275e-8584-5917-b824-bc217b71b037",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--e3b81531-4c05-5d3c-9337-d46f4237a5cc",
+      "created_by_ref": "identity--d8f6275e-8584-5917-b824-bc217b71b037",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-data-destruction-recursive-exec-files-deletion",
+      "description": "The following analytic identifies a suspicious process that is recursively deleting executable files on a compromised host. It leverages Sysmon Event Codes 23 and 26 to detect this activity by monitoring for a high volume of deletions or overwrites of files with extensions like .exe, .sys, and .dll. This behavior is significant as it is commonly associated with destructive malware such as CaddyWiper, DoubleZero, and SwiftSlicer, which aim to make file recovery impossible. If confirmed malicious,",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--09032f8b-4c89-5146-b4cb-f25db3381737"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--525f122e-f35a-53b5-bc89-08dc2fab0b7d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1485",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1485"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--09032f8b-4c89-5146-b4cb-f25db3381737",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1485",
+      "technique_id": "T1485",
+      "technique_ref": "attack-pattern--525f122e-f35a-53b5-bc89-08dc2fab0b7d",
+      "description": "The following analytic identifies a suspicious process that is recursively deleting executable files on a compromised host. It leverages Sysmon Event Codes 23 and 26 to detect this activity by monitoring for a high volume of deletions or overwrites of files with extensions like .exe, .sys, and .dll. This behavior is significant as it is commonly associated with destructive malware such as CaddyWiper, DoubleZero, and SwiftSlicer, which aim to make file recovery impossible. If confirmed malicious,",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

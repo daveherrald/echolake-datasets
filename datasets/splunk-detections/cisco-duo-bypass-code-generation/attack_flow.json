@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--43891f53-7758-5efc-ba9b-645d68b34616",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--501e5d92-c2f6-5a16-9c68-dd110cc2828f",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--501e5d92-c2f6-5a16-9c68-dd110cc2828f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--f5493921-34a5-5730-8318-8f1014ab256a",
+      "created_by_ref": "identity--501e5d92-c2f6-5a16-9c68-dd110cc2828f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: cisco-duo-bypass-code-generation",
+      "description": "The following analytic detects when a Duo user generates a bypass code, which allows them to circumvent multi-factor authentication (2FA) protections. \nIt works by monitoring Duo activity logs for the 'bypass_create' action, renaming the affected object as the user, and aggregating events to identify \ninstances where a bypass code is issued. This behavior is significant for a Security Operations Center (SOC) because generating a bypass code can enable \nattackers, malicious insiders, or unauthori",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--e346fb9c-d53c-569a-8dab-b7c26804f897"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--1d1af561-ed95-5aa2-87d7-1f9c3b71f2b4",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1556",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1556"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--e346fb9c-d53c-569a-8dab-b7c26804f897",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1556",
+      "technique_id": "T1556",
+      "technique_ref": "attack-pattern--1d1af561-ed95-5aa2-87d7-1f9c3b71f2b4",
+      "description": "The following analytic detects when a Duo user generates a bypass code, which allows them to circumvent multi-factor authentication (2FA) protections. \nIt works by monitoring Duo activity logs for the 'bypass_create' action, renaming the affected object as the user, and aggregating events to identify \ninstances where a bypass code is issued. This behavior is significant for a Security Operations Center (SOC) because generating a bypass code can enable \nattackers, malicious insiders, or unauthori",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

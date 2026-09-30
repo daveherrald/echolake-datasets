@@ -1,0 +1,110 @@
+{
+  "type": "bundle",
+  "id": "bundle--d46634b1-3f59-563e-9f2a-435a120c1fe8",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--f1fcf095-38e8-52dc-9365-8c57e5668022",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--f1fcf095-38e8-52dc-9365-8c57e5668022",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--4fb08023-499e-5ea1-b3e7-a240dae0d43c",
+      "created_by_ref": "identity--f1fcf095-38e8-52dc-9365-8c57e5668022",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: cisco-nvm-suspicious-network-connection-from-process-with-no-args",
+      "description": "This analytic detects system binaries that are commonly abused in process injection techniques but are observed without any command-line arguments.\nIt leverages Cisco Network Visibility Module (NVM) flow data and process arguments\nto identify outbound connections initiated by curl where TLS checks were explicitly disabled.\nBinaries such as `rundll32.exe`, `regsvr32.exe`, `dllhost.exe`, `svchost.exe`, and others are legitimate Windows processes that are often injected into by malware or post-expl",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--eb778246-c927-56e3-9775-f4be2fff0d9b",
+        "attack-action--3b5eb5ad-c389-5366-a96a-6c702bf18f18"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--3eaa795a-5d3b-57a9-a127-341f0bec2d71",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1055",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1055"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--fc21ce37-0739-5d51-a9bc-526a7b551ebd",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1218",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1218"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--eb778246-c927-56e3-9775-f4be2fff0d9b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1055",
+      "technique_id": "T1055",
+      "technique_ref": "attack-pattern--3eaa795a-5d3b-57a9-a127-341f0bec2d71",
+      "description": "This analytic detects system binaries that are commonly abused in process injection techniques but are observed without any command-line arguments.\nIt leverages Cisco Network Visibility Module (NVM) flow data and process arguments\nto identify outbound connections initiated by curl where TLS checks were explicitly disabled.\nBinaries such as `rundll32.exe`, `regsvr32.exe`, `dllhost.exe`, `svchost.exe`, and others are legitimate Windows processes that are often injected into by malware or post-expl",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--3b5eb5ad-c389-5366-a96a-6c702bf18f18",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1218",
+      "technique_id": "T1218",
+      "technique_ref": "attack-pattern--fc21ce37-0739-5d51-a9bc-526a7b551ebd",
+      "description": "This analytic detects system binaries that are commonly abused in process injection techniques but are observed without any command-line arguments.\nIt leverages Cisco Network Visibility Module (NVM) flow data and process arguments\nto identify outbound connections initiated by curl where TLS checks were explicitly disabled.\nBinaries such as `rundll32.exe`, `regsvr32.exe`, `dllhost.exe`, `svchost.exe`, and others are legitimate Windows processes that are often injected into by malware or post-expl",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

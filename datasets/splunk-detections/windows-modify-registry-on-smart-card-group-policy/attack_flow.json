@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--ada3bfcc-dcb6-5afb-9050-c57417df4353",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--c2a90ec2-cc82-59d5-a8ae-fc005cbaa10c",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--c2a90ec2-cc82-59d5-a8ae-fc005cbaa10c",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--c93a00d1-ccf2-598d-baea-9c9be71d9043",
+      "created_by_ref": "identity--c2a90ec2-cc82-59d5-a8ae-fc005cbaa10c",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-modify-registry-on-smart-card-group-policy",
+      "description": "This analytic is developed to detect suspicious registry modifications targeting the \"scforceoption\" key. Altering this key enforces smart card login for all users, potentially disrupting normal access methods. Unauthorized changes to this setting could indicate an attempt to restrict access or force a specific authentication method, possibly signifying malicious intent to manipulate system security protocols.",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--f59e96c7-61f4-556c-ae55-5c7a12502a46"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--4063b8c9-034e-5584-8a09-2325aaf3c8ca",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1112",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1112"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--f59e96c7-61f4-556c-ae55-5c7a12502a46",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1112",
+      "technique_id": "T1112",
+      "technique_ref": "attack-pattern--4063b8c9-034e-5584-8a09-2325aaf3c8ca",
+      "description": "This analytic is developed to detect suspicious registry modifications targeting the \"scforceoption\" key. Altering this key enforces smart card login for all users, potentially disrupting normal access methods. Unauthorized changes to this setting could indicate an attempt to restrict access or force a specific authentication method, possibly signifying malicious intent to manipulate system security protocols.",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

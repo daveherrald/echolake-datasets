@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--163a6819-ac7d-534c-93c5-fb9f5719502a",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--f03a0e2d-7a13-5ef2-a2cc-a8b11b6e6bfd",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--f03a0e2d-7a13-5ef2-a2cc-a8b11b6e6bfd",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--859d2307-4f35-5f43-a9bb-f707cff632e2",
+      "created_by_ref": "identity--f03a0e2d-7a13-5ef2-a2cc-a8b11b6e6bfd",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-debugger-tool-execution",
+      "description": "This analysis detects the use of debugger tools within a production environment. While these tools are legitimate for file analysis and debugging, they are abused by malware like PlugX and DarkGate for malicious DLL side-loading. The hunting query aids Security Operations Centers (SOCs) in identifying potentially suspicious tool executions, particularly for non-technical users in the production network.",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--335f5779-e278-5bb9-9c6e-759bc66c2f1c"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--99220315-784d-5816-a081-58ec90f9302c",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1036",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1036"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--335f5779-e278-5bb9-9c6e-759bc66c2f1c",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1036",
+      "technique_id": "T1036",
+      "technique_ref": "attack-pattern--99220315-784d-5816-a081-58ec90f9302c",
+      "description": "This analysis detects the use of debugger tools within a production environment. While these tools are legitimate for file analysis and debugging, they are abused by malware like PlugX and DarkGate for malicious DLL side-loading. The hunting query aids Security Operations Centers (SOCs) in identifying potentially suspicious tool executions, particularly for non-technical users in the production network.",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

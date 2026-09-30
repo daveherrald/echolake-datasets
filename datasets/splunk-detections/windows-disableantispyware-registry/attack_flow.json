@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--c7dfcd4f-ccbc-5ee9-9bbd-4daf5f3d12b9",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--7b298d22-3cbb-5438-b942-c2d5c3fff8ce",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--7b298d22-3cbb-5438-b942-c2d5c3fff8ce",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--75d88704-5e0e-5660-9ce2-af4087ff1c4c",
+      "created_by_ref": "identity--7b298d22-3cbb-5438-b942-c2d5c3fff8ce",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-disableantispyware-registry",
+      "description": "The following analytic detects the modification of the Windows Registry key \"DisableAntiSpyware\" being set to disable. This detection leverages data from the Endpoint.Registry datamodel, specifically looking for the registry value name \"DisableAntiSpyware\" with a value of \"0x00000001\". This activity is significant as it is commonly associated with Ryuk ransomware infections, indicating potential malicious intent to disable Windows Defender. If confirmed malicious, this action could allow attacke",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--32c884eb-3314-5019-a1f2-2fb138a719df"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--fa8298a5-1b72-5f10-a190-7cc44b53377e",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1562.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--32c884eb-3314-5019-a1f2-2fb138a719df",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.001",
+      "technique_id": "T1562.001",
+      "technique_ref": "attack-pattern--fa8298a5-1b72-5f10-a190-7cc44b53377e",
+      "description": "The following analytic detects the modification of the Windows Registry key \"DisableAntiSpyware\" being set to disable. This detection leverages data from the Endpoint.Registry datamodel, specifically looking for the registry value name \"DisableAntiSpyware\" with a value of \"0x00000001\". This activity is significant as it is commonly associated with Ryuk ransomware infections, indicating potential malicious intent to disable Windows Defender. If confirmed malicious, this action could allow attacke",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

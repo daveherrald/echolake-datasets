@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--3729b14d-8b34-592c-8684-62c9251ebde1",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--8d10f996-e886-5017-b119-c383c90888c5",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--8d10f996-e886-5017-b119-c383c90888c5",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--ff1561ac-ed74-5003-915c-2e92eb20362c",
+      "created_by_ref": "identity--8d10f996-e886-5017-b119-c383c90888c5",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: get-domainuser-with-powershell-script-block",
+      "description": "The following analytic detects the execution of the `Get-DomainUser` cmdlet using PowerShell Script Block Logging (EventCode=4104). This cmdlet is part of PowerView, a tool often used for domain enumeration. The detection leverages PowerShell operational logs to identify instances where this command is executed. Monitoring this activity is crucial as it may indicate an adversary's attempt to gather information about domain users, which is a common step in Active Directory Discovery. If confirmed",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--85881878-8434-5e3c-9fa9-10a05355cea5"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--14a81ed2-3de8-53f3-bc38-31724dbd935b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1087.002",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1087.002"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--85881878-8434-5e3c-9fa9-10a05355cea5",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1087.002",
+      "technique_id": "T1087.002",
+      "technique_ref": "attack-pattern--14a81ed2-3de8-53f3-bc38-31724dbd935b",
+      "description": "The following analytic detects the execution of the `Get-DomainUser` cmdlet using PowerShell Script Block Logging (EventCode=4104). This cmdlet is part of PowerView, a tool often used for domain enumeration. The detection leverages PowerShell operational logs to identify instances where this command is executed. Monitoring this activity is crucial as it may indicate an adversary's attempt to gather information about domain users, which is a common step in Active Directory Discovery. If confirmed",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

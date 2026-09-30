@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--3b091912-1819-566b-b06c-a638cb6c6b9a",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--896828e1-e730-54b2-a1bc-6483291f0f2c",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--896828e1-e730-54b2-a1bc-6483291f0f2c",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--27e68314-3f9b-55aa-be7c-7d5d11afb6cc",
+      "created_by_ref": "identity--896828e1-e730-54b2-a1bc-6483291f0f2c",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-rundll32-webdav-request",
+      "description": "The following analytic identifies the execution of rundll32.exe with command-line arguments loading davclnt.dll and the davsetcookie function to access a remote WebDAV instance. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line executions. This activity is significant as it may indicate an attempt to exploit CVE-2023-23397, a known vulnerability. If confirmed malicious, this could allow an attacker to execute remote code o",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--f2b1f110-004a-5f1b-bbb5-21cb1e8af014"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--0977d8bc-a963-5c63-a49e-858f2eec47a1",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1048.003",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1048.003"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--f2b1f110-004a-5f1b-bbb5-21cb1e8af014",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1048.003",
+      "technique_id": "T1048.003",
+      "technique_ref": "attack-pattern--0977d8bc-a963-5c63-a49e-858f2eec47a1",
+      "description": "The following analytic identifies the execution of rundll32.exe with command-line arguments loading davclnt.dll and the davsetcookie function to access a remote WebDAV instance. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line executions. This activity is significant as it may indicate an attempt to exploit CVE-2023-23397, a known vulnerability. If confirmed malicious, this could allow an attacker to execute remote code o",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

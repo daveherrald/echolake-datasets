@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--5474c65a-3e14-57f0-9b41-d14300fb8842",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--e793e19f-9204-50e8-b802-c4ee8fd6060b",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--e793e19f-9204-50e8-b802-c4ee8fd6060b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--d9bcbebe-1d4e-5039-be4b-05cdbe18f9de",
+      "created_by_ref": "identity--e793e19f-9204-50e8-b802-c4ee8fd6060b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-global-object-access-audit-list-cleared-via-auditpol",
+      "description": "The following analytic identifies the execution of `auditpol.exe` with the \"/resourceSACL\" flag, and either the \"/clear\" or \"/remove\" command-line arguments used to remove or clear the global object access audit policy. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line executions. This activity can be significant as it indicates potential defense evasion by adversaries or Red Teams, aiming to limit data that can be leveraged for detec",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--76b61571-5dd9-5e05-a306-4e6b3c60ed30"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--41900f10-7197-5d1a-943a-2ed08cab4b27",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.002",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1562.002"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--76b61571-5dd9-5e05-a306-4e6b3c60ed30",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.002",
+      "technique_id": "T1562.002",
+      "technique_ref": "attack-pattern--41900f10-7197-5d1a-943a-2ed08cab4b27",
+      "description": "The following analytic identifies the execution of `auditpol.exe` with the \"/resourceSACL\" flag, and either the \"/clear\" or \"/remove\" command-line arguments used to remove or clear the global object access audit policy. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line executions. This activity can be significant as it indicates potential defense evasion by adversaries or Red Teams, aiming to limit data that can be leveraged for detec",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

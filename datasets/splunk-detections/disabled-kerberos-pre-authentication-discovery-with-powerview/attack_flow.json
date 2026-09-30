@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--767b7e7e-223e-552d-b943-210b414bfd1b",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--ccaa01c9-42d0-56cb-9a35-3b9b0bb7e0f4",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--ccaa01c9-42d0-56cb-9a35-3b9b0bb7e0f4",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--5f1e106a-9904-5fbb-823c-59a01612ac3f",
+      "created_by_ref": "identity--ccaa01c9-42d0-56cb-9a35-3b9b0bb7e0f4",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: disabled-kerberos-pre-authentication-discovery-with-powerview",
+      "description": "The following analytic detects the execution of the `Get-DomainUser` commandlet with the `-PreauthNotRequired` parameter using PowerShell Script Block Logging (EventCode=4104). This command is part of PowerView, a tool used for enumerating Windows Active Directory networks. Identifying domain accounts with Kerberos Pre-Authentication disabled is significant because adversaries can leverage this information to attempt offline password cracking. If confirmed malicious, this activity could lead to",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--b41b968d-c609-5721-878f-b16200d3c262"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--003031db-e2d7-5c99-8807-f1876b8c6b30",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1558.004",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1558.004"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--b41b968d-c609-5721-878f-b16200d3c262",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1558.004",
+      "technique_id": "T1558.004",
+      "technique_ref": "attack-pattern--003031db-e2d7-5c99-8807-f1876b8c6b30",
+      "description": "The following analytic detects the execution of the `Get-DomainUser` commandlet with the `-PreauthNotRequired` parameter using PowerShell Script Block Logging (EventCode=4104). This command is part of PowerView, a tool used for enumerating Windows Active Directory networks. Identifying domain accounts with Kerberos Pre-Authentication disabled is significant because adversaries can leverage this information to attempt offline password cracking. If confirmed malicious, this activity could lead to",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

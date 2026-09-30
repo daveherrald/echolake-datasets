@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--1c074975-5ee2-5810-8e93-1c0226226fe8",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--fbab95fc-c430-5e85-a939-b2e16d4694b0",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--fbab95fc-c430-5e85-a939-b2e16d4694b0",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--5b5276f7-e5fc-52ec-bd79-c625e5cc420a",
+      "created_by_ref": "identity--fbab95fc-c430-5e85-a939-b2e16d4694b0",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: serviceprincipalnames-discovery-with-powershell",
+      "description": "The following analytic detects the use of `powershell.exe` to query the domain for Service Principal Names (SPNs) using Script Block Logging EventCode 4104. It identifies the use of the KerberosRequestorSecurityToken class within the script block, which is equivalent to using setspn.exe. This activity is significant as it often precedes kerberoasting or silver ticket attacks, which can lead to credential theft. If confirmed malicious, attackers could leverage this information to escalate privile",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--4a840b3c-e51a-5eb9-ad5b-a1e66008ba69"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--72e726fc-1a6b-5a48-ac42-09417f8246e2",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1558.003",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1558.003"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--4a840b3c-e51a-5eb9-ad5b-a1e66008ba69",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1558.003",
+      "technique_id": "T1558.003",
+      "technique_ref": "attack-pattern--72e726fc-1a6b-5a48-ac42-09417f8246e2",
+      "description": "The following analytic detects the use of `powershell.exe` to query the domain for Service Principal Names (SPNs) using Script Block Logging EventCode 4104. It identifies the use of the KerberosRequestorSecurityToken class within the script block, which is equivalent to using setspn.exe. This activity is significant as it often precedes kerberoasting or silver ticket attacks, which can lead to credential theft. If confirmed malicious, attackers could leverage this information to escalate privile",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

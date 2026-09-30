@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--bca3da6a-9382-54c2-a918-95fb2e19ef4f",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--6d44b302-dca8-5ffb-ae9a-9acc47aa5342",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--6d44b302-dca8-5ffb-ae9a-9acc47aa5342",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--cb78cbcc-1110-5747-acd4-1d3f2d8a7d2a",
+      "created_by_ref": "identity--6d44b302-dca8-5ffb-ae9a-9acc47aa5342",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-registry-entries-restored-via-reg",
+      "description": "The following analytic detects the execution of reg.exe with the \"restore\" parameter, indicating an attempt to restore registry backup data on a host. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process execution logs and command-line arguments. This activity is significant as it may indicate post-exploitation actions, such as those performed by tools like winpeas, which use \"reg save\" and \"reg restore\" to manipulate registry settings. If confirme",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--246121fe-b6b9-587f-b5e4-dbe72c39bf46"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--2da6a9e7-8fe8-5b5a-a7a8-07c970ff312a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1012",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1012"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--246121fe-b6b9-587f-b5e4-dbe72c39bf46",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1012",
+      "technique_id": "T1012",
+      "technique_ref": "attack-pattern--2da6a9e7-8fe8-5b5a-a7a8-07c970ff312a",
+      "description": "The following analytic detects the execution of reg.exe with the \"restore\" parameter, indicating an attempt to restore registry backup data on a host. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process execution logs and command-line arguments. This activity is significant as it may indicate post-exploitation actions, such as those performed by tools like winpeas, which use \"reg save\" and \"reg restore\" to manipulate registry settings. If confirme",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

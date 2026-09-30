@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--76b860b2-6188-5ce6-8040-ceadb191c4ad",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--4b05d253-b3a5-5c92-b0c1-3d6f5cf7f677",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--4b05d253-b3a5-5c92-b0c1-3d6f5cf7f677",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--76e201dd-6e53-52ed-b431-045ad91a9aca",
+      "created_by_ref": "identity--4b05d253-b3a5-5c92-b0c1-3d6f5cf7f677",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: wsmprovhost-lolbas-execution-process-spawn",
+      "description": "The following analytic identifies `Wsmprovhost.exe` spawning a LOLBAS execution process. It leverages Endpoint Detection and Response (EDR) data to detect when `Wsmprovhost.exe` spawns child processes that are known LOLBAS (Living Off the Land Binaries and Scripts) executables. This activity is significant because it may indicate an adversary using Windows Remote Management (WinRM) to execute code on remote endpoints, a common technique for lateral movement. If confirmed malicious, this could al",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--76e64abb-576d-59c4-8276-2a02a5029425"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--ac34da63-fbc1-5c07-b7eb-1bc4582cebd4",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1021.006",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1021.006"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--76e64abb-576d-59c4-8276-2a02a5029425",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1021.006",
+      "technique_id": "T1021.006",
+      "technique_ref": "attack-pattern--ac34da63-fbc1-5c07-b7eb-1bc4582cebd4",
+      "description": "The following analytic identifies `Wsmprovhost.exe` spawning a LOLBAS execution process. It leverages Endpoint Detection and Response (EDR) data to detect when `Wsmprovhost.exe` spawns child processes that are known LOLBAS (Living Off the Land Binaries and Scripts) executables. This activity is significant because it may indicate an adversary using Windows Remote Management (WinRM) to execute code on remote endpoints, a common technique for lateral movement. If confirmed malicious, this could al",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

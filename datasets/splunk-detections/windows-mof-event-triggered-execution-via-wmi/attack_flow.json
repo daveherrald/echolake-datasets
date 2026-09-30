@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--56f50188-a753-52e5-9000-c8475666918e",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--31ae7301-ddc4-5547-82c2-3f1bd31b6c00",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--31ae7301-ddc4-5547-82c2-3f1bd31b6c00",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--067f8718-6b20-580e-8c92-111672eefee3",
+      "created_by_ref": "identity--31ae7301-ddc4-5547-82c2-3f1bd31b6c00",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-mof-event-triggered-execution-via-wmi",
+      "description": "The following analytic detects the execution of MOFComp.exe loading a MOF file, often triggered by cmd.exe or powershell.exe, or from unusual paths like User Profile directories. It leverages Endpoint Detection and Response (EDR) data, focusing on process names, parent processes, and command-line executions. This activity is significant as it may indicate an attacker using WMI for persistence or lateral movement. If confirmed malicious, it could allow the attacker to execute arbitrary code, main",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--c8d3fc0e-e1ca-56ea-b6b3-eaad7979ede8"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--727d7d89-a50e-5be7-8112-2ff25f579bf0",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1546.003",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1546.003"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--c8d3fc0e-e1ca-56ea-b6b3-eaad7979ede8",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1546.003",
+      "technique_id": "T1546.003",
+      "technique_ref": "attack-pattern--727d7d89-a50e-5be7-8112-2ff25f579bf0",
+      "description": "The following analytic detects the execution of MOFComp.exe loading a MOF file, often triggered by cmd.exe or powershell.exe, or from unusual paths like User Profile directories. It leverages Endpoint Detection and Response (EDR) data, focusing on process names, parent processes, and command-line executions. This activity is significant as it may indicate an attacker using WMI for persistence or lateral movement. If confirmed malicious, it could allow the attacker to execute arbitrary code, main",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

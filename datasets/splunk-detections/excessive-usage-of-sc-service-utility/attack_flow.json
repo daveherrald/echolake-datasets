@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--28fdce1c-965f-5c4a-8ee5-e00f80f2cbc8",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--6347a923-dc20-5a80-87c8-db81fbc501e3",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--6347a923-dc20-5a80-87c8-db81fbc501e3",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--1b1f45fc-9ca7-5a95-8ae7-db4eaa6a65f4",
+      "created_by_ref": "identity--6347a923-dc20-5a80-87c8-db81fbc501e3",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: excessive-usage-of-sc-service-utility",
+      "description": "The following analytic detects excessive usage of the `sc.exe` service utility on a host machine. It leverages Sysmon EventCode 1 logs to identify instances where `sc.exe` is executed more frequently than normal within a 15-minute window. This behavior is significant as it is commonly associated with ransomware, cryptocurrency miners, and other malware attempting to create, modify, delete, or disable services, potentially related to security applications or for privilege escalation. If confirmed",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--c9dd42fd-859e-5001-bf3c-e07b15659986"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--18d5c1a1-7835-55dc-ab65-c55e6a2a1d35",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1569.002",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1569.002"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--c9dd42fd-859e-5001-bf3c-e07b15659986",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1569.002",
+      "technique_id": "T1569.002",
+      "technique_ref": "attack-pattern--18d5c1a1-7835-55dc-ab65-c55e6a2a1d35",
+      "description": "The following analytic detects excessive usage of the `sc.exe` service utility on a host machine. It leverages Sysmon EventCode 1 logs to identify instances where `sc.exe` is executed more frequently than normal within a 15-minute window. This behavior is significant as it is commonly associated with ransomware, cryptocurrency miners, and other malware attempting to create, modify, delete, or disable services, potentially related to security applications or for privilege escalation. If confirmed",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--629b96d5-edb2-51c6-8b2b-3d08302f47b5",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--3f2739ee-eb7d-5dcb-9b25-4152ad306ad7",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--3f2739ee-eb7d-5dcb-9b25-4152ad306ad7",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--b38ceb18-a4c3-58c6-b141-5720f76f61a3",
+      "created_by_ref": "identity--3f2739ee-eb7d-5dcb-9b25-4152ad306ad7",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: cisco-duo-policy-allow-devices-without-screen-lock",
+      "description": "The following analytic detects when a Duo policy is created or updated to allow devices without a screen lock requirement. It identifies this behavior \nby searching Duo administrator activity logs for policy creation or update events where the 'require_lock' setting is set to false. This action may indicate \na weakening of device security controls, potentially exposing the organization to unauthorized access if devices are lost or stolen. For a Security Operations \nCenter (SOC), identifying such",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--f371ec27-c6ce-568b-9342-b3b3dbcf0cee"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--9f05946b-16a6-5629-ae56-9a7e531199fd",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1556",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1556"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--f371ec27-c6ce-568b-9342-b3b3dbcf0cee",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1556",
+      "technique_id": "T1556",
+      "technique_ref": "attack-pattern--9f05946b-16a6-5629-ae56-9a7e531199fd",
+      "description": "The following analytic detects when a Duo policy is created or updated to allow devices without a screen lock requirement. It identifies this behavior \nby searching Duo administrator activity logs for policy creation or update events where the 'require_lock' setting is set to false. This action may indicate \na weakening of device security controls, potentially exposing the organization to unauthorized access if devices are lost or stolen. For a Security Operations \nCenter (SOC), identifying such",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

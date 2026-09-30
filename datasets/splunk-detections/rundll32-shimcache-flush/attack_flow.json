@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--658343d0-5cb2-5626-80db-6b19751a8527",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--31e7e125-1f05-5c46-bda9-c411a88ed20a",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--31e7e125-1f05-5c46-bda9-c411a88ed20a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--d9d75e24-2ae9-5aae-bae0-ed626cbfed8f",
+      "created_by_ref": "identity--31e7e125-1f05-5c46-bda9-c411a88ed20a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: rundll32-shimcache-flush",
+      "description": "The following analytic detects the execution of a suspicious rundll32 command line used to clear the shim cache. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process execution logs and command-line arguments. This activity is significant because clearing the shim cache is an anti-forensic technique aimed at evading detection and removing forensic artifacts. If confirmed malicious, this action could hinder incident response efforts, allowing an attacker to cove",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--a307ce24-e394-5a27-9f16-aca6ad51c9f1"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--4d5075e1-4112-5ca2-9026-f23af439a9aa",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1112",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1112"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--a307ce24-e394-5a27-9f16-aca6ad51c9f1",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1112",
+      "technique_id": "T1112",
+      "technique_ref": "attack-pattern--4d5075e1-4112-5ca2-9026-f23af439a9aa",
+      "description": "The following analytic detects the execution of a suspicious rundll32 command line used to clear the shim cache. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process execution logs and command-line arguments. This activity is significant because clearing the shim cache is an anti-forensic technique aimed at evading detection and removing forensic artifacts. If confirmed malicious, this action could hinder incident response efforts, allowing an attacker to cove",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

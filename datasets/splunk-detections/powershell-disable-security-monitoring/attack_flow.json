@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--87b12f52-1f11-5aab-9e7c-3bafdb72787c",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--3efead78-5480-5fa9-bf32-3f79752bd883",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--3efead78-5480-5fa9-bf32-3f79752bd883",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--6185da3f-b79b-5d36-a267-c2c100667973",
+      "created_by_ref": "identity--3efead78-5480-5fa9-bf32-3f79752bd883",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: powershell-disable-security-monitoring",
+      "description": "The following analytic identifies attempts to disable Windows Defender\nreal-time behavior monitoring via PowerShell commands. It detects the use of specific\n`Set-MpPreference` parameters that disable various security features. This activity\nis significant as it is commonly used by malware such as RATs, bots, or Trojans\nto evade detection by disabling antivirus protections. If confirmed malicious, this\naction could allow an attacker to operate undetected, leading to potential data\nexfiltration, f",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--cb7e6049-9881-5726-b793-6f1af882cca5"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--d671d29d-1aaf-5801-80c9-9bcad64b451d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1562.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--cb7e6049-9881-5726-b793-6f1af882cca5",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.001",
+      "technique_id": "T1562.001",
+      "technique_ref": "attack-pattern--d671d29d-1aaf-5801-80c9-9bcad64b451d",
+      "description": "The following analytic identifies attempts to disable Windows Defender\nreal-time behavior monitoring via PowerShell commands. It detects the use of specific\n`Set-MpPreference` parameters that disable various security features. This activity\nis significant as it is commonly used by malware such as RATs, bots, or Trojans\nto evade detection by disabling antivirus protections. If confirmed malicious, this\naction could allow an attacker to operate undetected, leading to potential data\nexfiltration, f",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

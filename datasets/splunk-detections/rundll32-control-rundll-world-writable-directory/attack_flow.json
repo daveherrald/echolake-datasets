@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--c6506d55-1ad1-5ce4-9e95-f45b3ff64056",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--b3b310cd-76ab-5b5d-9a47-5fb3edc915a6",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--b3b310cd-76ab-5b5d-9a47-5fb3edc915a6",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--d8e89058-ab62-56b9-b937-81dbdc50b8c7",
+      "created_by_ref": "identity--b3b310cd-76ab-5b5d-9a47-5fb3edc915a6",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: rundll32-control-rundll-world-writable-directory",
+      "description": "The following analytic detects the execution of rundll32.exe with the `Control_RunDLL` command, loading files from world-writable directories such as windows\\temp, programdata, or appdata. This detection leverages Endpoint Detection and Response (EDR) telemetry, focusing on process command-line data and specific directory paths. This activity is significant as it may indicate an attempt to exploit CVE-2021-40444 or similar vulnerabilities, allowing attackers to execute arbitrary code. If confirm",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--c7e19b7c-f230-590f-a106-fef1036eb0a8"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--1dd6e6b4-db52-5951-a924-dc8cc50c34d6",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1218.011",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1218.011"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--c7e19b7c-f230-590f-a106-fef1036eb0a8",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1218.011",
+      "technique_id": "T1218.011",
+      "technique_ref": "attack-pattern--1dd6e6b4-db52-5951-a924-dc8cc50c34d6",
+      "description": "The following analytic detects the execution of rundll32.exe with the `Control_RunDLL` command, loading files from world-writable directories such as windows\\temp, programdata, or appdata. This detection leverages Endpoint Detection and Response (EDR) telemetry, focusing on process command-line data and specific directory paths. This activity is significant as it may indicate an attempt to exploit CVE-2021-40444 or similar vulnerabilities, allowing attackers to execute arbitrary code. If confirm",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--3889816c-12d3-5210-9889-aafaaa3a5e31",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--5b71020b-23d0-5619-9bf9-ce030da99b25",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--5b71020b-23d0-5619-9bf9-ce030da99b25",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--77c95f90-300a-5bbd-93b9-a39543486a95",
+      "created_by_ref": "identity--5b71020b-23d0-5619-9bf9-ce030da99b25",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: disable-defender-blockatfirstseen-feature",
+      "description": "The following analytic detects the modification of the Windows registry to disable the Windows Defender BlockAtFirstSeen feature. It leverages data from the Endpoint.Registry data model, specifically monitoring changes to the registry path associated with Windows Defender SpyNet and the DisableBlockAtFirstSeen value. This activity is significant because disabling this feature can allow malicious files to bypass initial detection by Windows Defender, increasing the risk of malware infection. If c",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--d634c9cc-cb96-5ab8-815f-7c2c25395b09"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--880fc400-d617-5c1e-8fb3-28c9c2da1219",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1562.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--d634c9cc-cb96-5ab8-815f-7c2c25395b09",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.001",
+      "technique_id": "T1562.001",
+      "technique_ref": "attack-pattern--880fc400-d617-5c1e-8fb3-28c9c2da1219",
+      "description": "The following analytic detects the modification of the Windows registry to disable the Windows Defender BlockAtFirstSeen feature. It leverages data from the Endpoint.Registry data model, specifically monitoring changes to the registry path associated with Windows Defender SpyNet and the DisableBlockAtFirstSeen value. This activity is significant because disabling this feature can allow malicious files to bypass initial detection by Windows Defender, increasing the risk of malware infection. If c",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

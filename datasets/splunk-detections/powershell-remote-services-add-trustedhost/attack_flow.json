@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--d0371ba5-2769-525c-a171-a2b923ade191",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--62d75360-7622-5410-a65d-7ca291fa74a5",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--62d75360-7622-5410-a65d-7ca291fa74a5",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--0d28b7b7-cf74-5e30-8178-085d3f9b3d1e",
+      "created_by_ref": "identity--62d75360-7622-5410-a65d-7ca291fa74a5",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: powershell-remote-services-add-trustedhost",
+      "description": "The following analytic detects the execution of a PowerShell script that modifies the 'TrustedHosts' configuration via EventCode 4104. It leverages PowerShell Script Block Logging to identify commands targeting WSMan settings, specifically those altering or concatenating trusted hosts. This activity is significant as it can indicate attempts to manipulate remote connection settings, potentially allowing unauthorized remote access. If confirmed malicious, this could enable attackers to establish",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--c6ca9f47-c0c1-5b63-bfae-245a0eac47b7"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--3fa590c6-874a-5a67-a807-69efdfdcea1d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1021.006",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1021.006"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--c6ca9f47-c0c1-5b63-bfae-245a0eac47b7",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1021.006",
+      "technique_id": "T1021.006",
+      "technique_ref": "attack-pattern--3fa590c6-874a-5a67-a807-69efdfdcea1d",
+      "description": "The following analytic detects the execution of a PowerShell script that modifies the 'TrustedHosts' configuration via EventCode 4104. It leverages PowerShell Script Block Logging to identify commands targeting WSMan settings, specifically those altering or concatenating trusted hosts. This activity is significant as it can indicate attempts to manipulate remote connection settings, potentially allowing unauthorized remote access. If confirmed malicious, this could enable attackers to establish",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

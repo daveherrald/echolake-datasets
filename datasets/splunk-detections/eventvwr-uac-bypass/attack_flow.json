@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--d040debe-2d2b-57a9-9449-21625fd5381e",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--3b402711-5d5d-5295-84bd-5254f2b17ed2",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--3b402711-5d5d-5295-84bd-5254f2b17ed2",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--ced5f079-aca2-5c05-b045-98bd0ca2c051",
+      "created_by_ref": "identity--3b402711-5d5d-5295-84bd-5254f2b17ed2",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: eventvwr-uac-bypass",
+      "description": "The following analytic detects an Eventvwr UAC bypass by identifying suspicious registry modifications in the path that Eventvwr.msc references upon execution. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on registry changes and process execution details. This activity is significant because it indicates a potential privilege escalation attempt, allowing an attacker to execute arbitrary commands with elevated privileges. If confirmed malicious, this c",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--74531456-bd80-51eb-8647-465b0161cf6b"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--55dc25d5-5eb8-5227-bdc3-45471e43d6f9",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1548.002",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1548.002"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--74531456-bd80-51eb-8647-465b0161cf6b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1548.002",
+      "technique_id": "T1548.002",
+      "technique_ref": "attack-pattern--55dc25d5-5eb8-5227-bdc3-45471e43d6f9",
+      "description": "The following analytic detects an Eventvwr UAC bypass by identifying suspicious registry modifications in the path that Eventvwr.msc references upon execution. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on registry changes and process execution details. This activity is significant because it indicates a potential privilege escalation attempt, allowing an attacker to execute arbitrary commands with elevated privileges. If confirmed malicious, this c",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

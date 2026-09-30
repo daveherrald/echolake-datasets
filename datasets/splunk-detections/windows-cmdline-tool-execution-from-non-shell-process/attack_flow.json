@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--e54275a9-bf56-5039-96cd-0832ade30bc1",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--21e10805-a6eb-5f3a-9262-ec4bc2e4b5c2",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--21e10805-a6eb-5f3a-9262-ec4bc2e4b5c2",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--e3502b5f-f252-5429-9485-16ea44a31ac6",
+      "created_by_ref": "identity--21e10805-a6eb-5f3a-9262-ec4bc2e4b5c2",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-cmdline-tool-execution-from-non-shell-process",
+      "description": "The following analytic identifies instances where `ipconfig.exe`, `systeminfo.exe`, or similar tools are executed by a non-standard shell parent process, excluding CMD, PowerShell, or Explorer. This detection leverages Endpoint Detection and Response (EDR) telemetry to monitor process creation events. Such behavior is significant as it may indicate adversaries using injected processes to perform system discovery, a tactic observed in FIN7's JSSLoader. If confirmed malicious, this activity could",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--9677b309-5d04-543b-a04b-a7f63e52a3e9"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--5d6d17f2-e8df-5893-b321-aab71456b15b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1059.007",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1059.007"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--9677b309-5d04-543b-a04b-a7f63e52a3e9",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1059.007",
+      "technique_id": "T1059.007",
+      "technique_ref": "attack-pattern--5d6d17f2-e8df-5893-b321-aab71456b15b",
+      "description": "The following analytic identifies instances where `ipconfig.exe`, `systeminfo.exe`, or similar tools are executed by a non-standard shell parent process, excluding CMD, PowerShell, or Explorer. This detection leverages Endpoint Detection and Response (EDR) telemetry to monitor process creation events. Such behavior is significant as it may indicate adversaries using injected processes to perform system discovery, a tactic observed in FIN7's JSSLoader. If confirmed malicious, this activity could",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

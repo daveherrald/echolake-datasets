@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--cbc61993-7154-528e-b552-f48346fa4402",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--ad0f1ed8-37ce-58c8-b8be-c0cfd9bf0305",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--ad0f1ed8-37ce-58c8-b8be-c0cfd9bf0305",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--6ad9e4d0-b5be-5d84-b389-81930c837485",
+      "created_by_ref": "identity--ad0f1ed8-37ce-58c8-b8be-c0cfd9bf0305",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: suspicious-reg-exe-process",
+      "description": "The following analytic identifies instances of reg.exe being launched from a command prompt (cmd.exe) that was not initiated by the user, as indicated by a parent process other than explorer.exe. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process and parent process names. This activity is significant because reg.exe is often used in registry manipulation, which can be indicative of malicious behavior such as persistence mechanisms or system confi",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--4189a8f5-925e-5fae-ade4-f33000783b14"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--d43effb7-a0d4-5cbc-bf86-ec2608b07c73",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1112",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1112"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--4189a8f5-925e-5fae-ade4-f33000783b14",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1112",
+      "technique_id": "T1112",
+      "technique_ref": "attack-pattern--d43effb7-a0d4-5cbc-bf86-ec2608b07c73",
+      "description": "The following analytic identifies instances of reg.exe being launched from a command prompt (cmd.exe) that was not initiated by the user, as indicated by a parent process other than explorer.exe. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process and parent process names. This activity is significant because reg.exe is often used in registry manipulation, which can be indicative of malicious behavior such as persistence mechanisms or system confi",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

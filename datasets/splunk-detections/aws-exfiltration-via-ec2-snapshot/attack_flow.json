@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--ea36fa5c-d0d1-5f0c-ae93-1c9d567106f6",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--729fa356-2735-5ab0-82d5-244f1e517da2",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--729fa356-2735-5ab0-82d5-244f1e517da2",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--40e91d9e-90f5-5158-848e-e84156c0cd3b",
+      "created_by_ref": "identity--729fa356-2735-5ab0-82d5-244f1e517da2",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: aws-exfiltration-via-ec2-snapshot",
+      "description": "The following analytic detects a series of AWS API calls related to EC2 snapshots within a short time window, indicating potential exfiltration via EC2 Snapshot modifications. It leverages AWS CloudTrail logs to identify actions such as creating, describing, and modifying snapshot attributes. This activity is significant as it may indicate an attacker attempting to exfiltrate data by sharing EC2 snapshots externally. If confirmed malicious, the attacker could gain access to sensitive information",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--478814c6-af50-581e-911d-d3f2c90098f3"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--f7b926d8-92bd-591a-9e8e-9a12f022f321",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1537",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1537"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--478814c6-af50-581e-911d-d3f2c90098f3",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1537",
+      "technique_id": "T1537",
+      "technique_ref": "attack-pattern--f7b926d8-92bd-591a-9e8e-9a12f022f321",
+      "description": "The following analytic detects a series of AWS API calls related to EC2 snapshots within a short time window, indicating potential exfiltration via EC2 Snapshot modifications. It leverages AWS CloudTrail logs to identify actions such as creating, describing, and modifying snapshot attributes. This activity is significant as it may indicate an attacker attempting to exfiltrate data by sharing EC2 snapshots externally. If confirmed malicious, the attacker could gain access to sensitive information",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

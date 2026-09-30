@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--46114eb8-976d-50fe-acc2-5d124ad6fc22",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--71e360e6-1003-5526-a11b-e0bdf082530f",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--71e360e6-1003-5526-a11b-e0bdf082530f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--839e63a1-1882-5058-b4fa-55a037da999f",
+      "created_by_ref": "identity--71e360e6-1003-5526-a11b-e0bdf082530f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: uac-bypass-with-colorui-com-object",
+      "description": "The following analytic detects a potential UAC bypass using the colorui.dll COM Object. It leverages Sysmon EventCode 7 to identify instances where colorui.dll is loaded by a process other than colorcpl.exe, excluding common system directories. This activity is significant because UAC bypass techniques are often used by malware, such as LockBit ransomware, to gain elevated privileges without user consent. If confirmed malicious, this could allow an attacker to execute code with higher privileges",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--900654ee-e750-52e2-acf1-9addb57dc095"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--e3906469-7557-55f3-9172-4e9396e5fdc7",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1218.003",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1218.003"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--900654ee-e750-52e2-acf1-9addb57dc095",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1218.003",
+      "technique_id": "T1218.003",
+      "technique_ref": "attack-pattern--e3906469-7557-55f3-9172-4e9396e5fdc7",
+      "description": "The following analytic detects a potential UAC bypass using the colorui.dll COM Object. It leverages Sysmon EventCode 7 to identify instances where colorui.dll is loaded by a process other than colorcpl.exe, excluding common system directories. This activity is significant because UAC bypass techniques are often used by malware, such as LockBit ransomware, to gain elevated privileges without user consent. If confirmed malicious, this could allow an attacker to execute code with higher privileges",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

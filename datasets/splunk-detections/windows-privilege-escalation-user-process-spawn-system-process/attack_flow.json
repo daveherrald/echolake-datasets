@@ -1,0 +1,141 @@
+{
+  "type": "bundle",
+  "id": "bundle--dcf3f5e5-7532-5028-995e-45044782795b",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--201f610a-978e-5f4d-aecf-a519db927ed4",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--201f610a-978e-5f4d-aecf-a519db927ed4",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--be6ebeac-e229-5fa6-bb8e-e5baa27bccab",
+      "created_by_ref": "identity--201f610a-978e-5f4d-aecf-a519db927ed4",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-privilege-escalation-user-process-spawn-system-process",
+      "description": "The following analytic detects when a process with low, medium, or high integrity spawns a system integrity process from a user-controlled location. This behavior is indicative of privilege escalation attempts where attackers elevate their privileges to SYSTEM level from a user-controlled process or service. The detection leverages Sysmon data, specifically Event ID 15, to identify such transitions. Monitoring this activity is crucial as it can signify an attacker gaining SYSTEM-level access, po",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--f9f077f5-c4ba-5753-a11a-76b8336e6f43",
+        "attack-action--d6eda423-67ef-5b7b-9229-81e905538ce8",
+        "attack-action--aa1db205-906a-5fa3-b643-57e63cd1d127"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--9defc2cd-261d-5170-9840-dee4dad28a50",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1068",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1068"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--b1a4043b-da19-5af0-ba6d-4036642f0017",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1548",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1548"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--018d5dba-d23a-5fc6-9d51-9eb90b196e8f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1134",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1134"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--f9f077f5-c4ba-5753-a11a-76b8336e6f43",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1068",
+      "technique_id": "T1068",
+      "technique_ref": "attack-pattern--9defc2cd-261d-5170-9840-dee4dad28a50",
+      "description": "The following analytic detects when a process with low, medium, or high integrity spawns a system integrity process from a user-controlled location. This behavior is indicative of privilege escalation attempts where attackers elevate their privileges to SYSTEM level from a user-controlled process or service. The detection leverages Sysmon data, specifically Event ID 15, to identify such transitions. Monitoring this activity is crucial as it can signify an attacker gaining SYSTEM-level access, po",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--d6eda423-67ef-5b7b-9229-81e905538ce8",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1548",
+      "technique_id": "T1548",
+      "technique_ref": "attack-pattern--b1a4043b-da19-5af0-ba6d-4036642f0017",
+      "description": "The following analytic detects when a process with low, medium, or high integrity spawns a system integrity process from a user-controlled location. This behavior is indicative of privilege escalation attempts where attackers elevate their privileges to SYSTEM level from a user-controlled process or service. The detection leverages Sysmon data, specifically Event ID 15, to identify such transitions. Monitoring this activity is crucial as it can signify an attacker gaining SYSTEM-level access, po",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--aa1db205-906a-5fa3-b643-57e63cd1d127",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1134",
+      "technique_id": "T1134",
+      "technique_ref": "attack-pattern--018d5dba-d23a-5fc6-9d51-9eb90b196e8f",
+      "description": "The following analytic detects when a process with low, medium, or high integrity spawns a system integrity process from a user-controlled location. This behavior is indicative of privilege escalation attempts where attackers elevate their privileges to SYSTEM level from a user-controlled process or service. The detection leverages Sysmon data, specifically Event ID 15, to identify such transitions. Monitoring this activity is crucial as it can signify an attacker gaining SYSTEM-level access, po",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

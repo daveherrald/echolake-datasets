@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--3c3110b0-1caa-58b1-a9de-df984743d5b9",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--a2489d27-8398-5dc0-b29b-6ce6d543f54a",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--a2489d27-8398-5dc0-b29b-6ce6d543f54a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--4fd6f143-cc60-5fb6-ab59-518021f73ce8",
+      "created_by_ref": "identity--a2489d27-8398-5dc0-b29b-6ce6d543f54a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: spoolsv-spawning-rundll32",
+      "description": "The following analytic detects the spawning of `rundll32.exe` without command-line arguments by `spoolsv.exe`, which is unusual and potentially indicative of exploitation attempts like CVE-2021-34527 (PrintNightmare). This detection leverages Endpoint Detection and Response (EDR) telemetry, focusing on process creation events where `spoolsv.exe` is the parent process. This activity is significant as `spoolsv.exe` typically does not spawn other processes, and such behavior could indicate an activ",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--b2063f1d-fca2-5d6a-a587-7f6e6e5f18ca"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--2a2f7d0c-1b37-5de6-a51e-112e2de7c6bd",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1547.012",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1547.012"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--b2063f1d-fca2-5d6a-a587-7f6e6e5f18ca",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1547.012",
+      "technique_id": "T1547.012",
+      "technique_ref": "attack-pattern--2a2f7d0c-1b37-5de6-a51e-112e2de7c6bd",
+      "description": "The following analytic detects the spawning of `rundll32.exe` without command-line arguments by `spoolsv.exe`, which is unusual and potentially indicative of exploitation attempts like CVE-2021-34527 (PrintNightmare). This detection leverages Endpoint Detection and Response (EDR) telemetry, focusing on process creation events where `spoolsv.exe` is the parent process. This activity is significant as `spoolsv.exe` typically does not spawn other processes, and such behavior could indicate an activ",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

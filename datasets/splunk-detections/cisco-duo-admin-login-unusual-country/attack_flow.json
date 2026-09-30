@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--698d3456-636c-51bf-a02d-ce71c74de5d0",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--b8264bf2-7541-5cbd-babb-c882ba2c59ec",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--b8264bf2-7541-5cbd-babb-c882ba2c59ec",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--cfff5ae1-d31d-599e-8f9b-f5df47f6d183",
+      "created_by_ref": "identity--b8264bf2-7541-5cbd-babb-c882ba2c59ec",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: cisco-duo-admin-login-unusual-country",
+      "description": "The following analytic detects instances where a Duo admin login originates from a country outside of the United States, which may indicate suspicious or unauthorized access attempts. Please adjust as needed to your environment. It works by analyzing Duo activity logs for admin login actions and filtering out events where the access device's country is not within the expected region. By correlating user, device, browser, and location details, the analytic highlights anomalies in geographic login",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--167d8e57-27ff-539f-a559-6bdce8bc3b95"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--09c8d72d-e9f2-54e9-a2b2-a43801eca495",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1556",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1556"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--167d8e57-27ff-539f-a559-6bdce8bc3b95",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1556",
+      "technique_id": "T1556",
+      "technique_ref": "attack-pattern--09c8d72d-e9f2-54e9-a2b2-a43801eca495",
+      "description": "The following analytic detects instances where a Duo admin login originates from a country outside of the United States, which may indicate suspicious or unauthorized access attempts. Please adjust as needed to your environment. It works by analyzing Duo activity logs for admin login actions and filtering out events where the access device's country is not within the expected region. By correlating user, device, browser, and location details, the analytic highlights anomalies in geographic login",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--facf0c30-7c9f-5b15-abd0-2a9ad66a721c",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--6def4341-832d-5bc5-8ff7-5c498a575a98",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--6def4341-832d-5bc5-8ff7-5c498a575a98",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--8599da59-5d80-574d-a8e9-0a714e5698c0",
+      "created_by_ref": "identity--6def4341-832d-5bc5-8ff7-5c498a575a98",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: cisco-isovalent-access-to-cloud-metadata-service",
+      "description": "The following analytic detects workloads accessing the cloud instance metadata service at 169.254.169.254. This IP is used by AWS, GCP and Azure metadata endpoints and is frequently abused in SSRF or lateral movement scenarios to obtain credentials and sensitive environment details. Monitor unexpected access to this service from application pods or namespaces where such behavior is atypical.",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--a319fd24-16fc-5abd-b1c9-141da8fa37f9"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--74011a51-3b71-5a05-8900-3b93ae891a91",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1552.005",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1552.005"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--a319fd24-16fc-5abd-b1c9-141da8fa37f9",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1552.005",
+      "technique_id": "T1552.005",
+      "technique_ref": "attack-pattern--74011a51-3b71-5a05-8900-3b93ae891a91",
+      "description": "The following analytic detects workloads accessing the cloud instance metadata service at 169.254.169.254. This IP is used by AWS, GCP and Azure metadata endpoints and is frequently abused in SSRF or lateral movement scenarios to obtain credentials and sensitive environment details. Monitor unexpected access to this service from application pods or namespaces where such behavior is atypical.",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

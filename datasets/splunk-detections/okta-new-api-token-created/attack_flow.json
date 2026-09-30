@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--7e98fc72-60f0-5dcf-a189-7ea8fba8b097",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--982ff31a-6344-57c7-b142-1e8137c54381",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--982ff31a-6344-57c7-b142-1e8137c54381",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--4c910391-2623-5bec-a3b4-7a11210e7469",
+      "created_by_ref": "identity--982ff31a-6344-57c7-b142-1e8137c54381",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: okta-new-api-token-created",
+      "description": "The following analytic detects the creation of a new API token within an Okta tenant. It uses OktaIm2 logs ingested via the Splunk Add-on for Okta Identity Cloud to identify events where the `system.api_token.create` command is executed. This activity is significant because creating a new API token can indicate potential account takeover attempts or unauthorized access, allowing an adversary to maintain persistence. If confirmed malicious, this could enable attackers to execute API calls, access",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--38130670-a728-5043-81b5-9071807cdf52"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--e31b1a96-a271-587a-8ace-09d139c64121",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1078.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1078.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--38130670-a728-5043-81b5-9071807cdf52",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1078.001",
+      "technique_id": "T1078.001",
+      "technique_ref": "attack-pattern--e31b1a96-a271-587a-8ace-09d139c64121",
+      "description": "The following analytic detects the creation of a new API token within an Okta tenant. It uses OktaIm2 logs ingested via the Splunk Add-on for Okta Identity Cloud to identify events where the `system.api_token.create` command is executed. This activity is significant because creating a new API token can indicate potential account takeover attempts or unauthorized access, allowing an adversary to maintain persistence. If confirmed malicious, this could enable attackers to execute API calls, access",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

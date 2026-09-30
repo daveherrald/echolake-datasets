@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--d25a86d8-3656-53b1-afec-9c6914918d38",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--084d3d9c-0b07-59a3-90d6-40c63e271870",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--084d3d9c-0b07-59a3-90d6-40c63e271870",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--335aebf8-a2b7-5df3-864d-e2d4628e6d3b",
+      "created_by_ref": "identity--084d3d9c-0b07-59a3-90d6-40c63e271870",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: spoolsv-writing-a-dll",
+      "description": "The following analytic detects `spoolsv.exe` writing a `.dll` file, which is unusual behavior and may indicate exploitation of vulnerabilities like CVE-2021-34527 (PrintNightmare). This detection leverages the Endpoint datamodel, specifically monitoring process and filesystem events to identify `.dll` file creation within the `\\spool\\drivers\\x64\\` path. This activity is significant as it may signify an attacker attempting to execute malicious code via the Print Spooler service. If confirmed mali",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--60aa80a4-f6d3-55c8-98b2-4e18e8c575c1"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--482ae5b7-41f5-5f95-8c15-d15773b48207",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1547.012",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1547.012"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--60aa80a4-f6d3-55c8-98b2-4e18e8c575c1",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1547.012",
+      "technique_id": "T1547.012",
+      "technique_ref": "attack-pattern--482ae5b7-41f5-5f95-8c15-d15773b48207",
+      "description": "The following analytic detects `spoolsv.exe` writing a `.dll` file, which is unusual behavior and may indicate exploitation of vulnerabilities like CVE-2021-34527 (PrintNightmare). This detection leverages the Endpoint datamodel, specifically monitoring process and filesystem events to identify `.dll` file creation within the `\\spool\\drivers\\x64\\` path. This activity is significant as it may signify an attacker attempting to execute malicious code via the Print Spooler service. If confirmed mali",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

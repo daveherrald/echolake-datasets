@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--3f4b89ef-1cb0-549c-9124-ecb75830538b",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--5e2edf54-2d00-5a0b-88e8-d8af48e8b2b6",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--5e2edf54-2d00-5a0b-88e8-d8af48e8b2b6",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--1f5b4e52-41b5-5d9b-8e08-2bdfa34d98f3",
+      "created_by_ref": "identity--5e2edf54-2d00-5a0b-88e8-d8af48e8b2b6",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: ntdsutil-export-ntds",
+      "description": "The following analytic detects the use of Ntdsutil to export the Active Directory database (NTDS.dit). It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line arguments. This activity is significant because exporting NTDS.dit can be a precursor to offline password cracking, posing a severe security risk. If confirmed malicious, an attacker could gain access to sensitive credentials, potentially leading to unauthorized access and privilege e",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--f00665df-58d4-5267-abc6-66f85b53e009"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--3d9e49f0-e305-5b48-b8bd-e035195909ab",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1003.003",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1003.003"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--f00665df-58d4-5267-abc6-66f85b53e009",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1003.003",
+      "technique_id": "T1003.003",
+      "technique_ref": "attack-pattern--3d9e49f0-e305-5b48-b8bd-e035195909ab",
+      "description": "The following analytic detects the use of Ntdsutil to export the Active Directory database (NTDS.dit). It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line arguments. This activity is significant because exporting NTDS.dit can be a precursor to offline password cracking, posing a severe security risk. If confirmed malicious, an attacker could gain access to sensitive credentials, potentially leading to unauthorized access and privilege e",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

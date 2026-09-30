@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--7c17e771-4095-56db-8ad1-20e8586ebf97",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--ed97b4eb-7155-5c17-9ebe-8c8891d6260a",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--ed97b4eb-7155-5c17-9ebe-8c8891d6260a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--8841aaef-acf1-52c7-bf09-620097c44003",
+      "created_by_ref": "identity--ed97b4eb-7155-5c17-9ebe-8c8891d6260a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: winhlp32-spawning-a-process",
+      "description": "The following analytic detects winhlp32.exe spawning a child process that loads a file from appdata, programdata, or temp directories. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process creation events. This activity is significant because winhlp32.exe has known vulnerabilities and can be exploited to execute malicious code. If confirmed malicious, an attacker could use this technique to execute arbitrary scripts, escalate privileges, or maintain",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--9ea2a725-cd4a-5058-bffb-cfcf8aa4c23b"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--16786452-cf1b-5b00-ab15-5bb6e774d3e6",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1055",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1055"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--9ea2a725-cd4a-5058-bffb-cfcf8aa4c23b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1055",
+      "technique_id": "T1055",
+      "technique_ref": "attack-pattern--16786452-cf1b-5b00-ab15-5bb6e774d3e6",
+      "description": "The following analytic detects winhlp32.exe spawning a child process that loads a file from appdata, programdata, or temp directories. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process creation events. This activity is significant because winhlp32.exe has known vulnerabilities and can be exploited to execute malicious code. If confirmed malicious, an attacker could use this technique to execute arbitrary scripts, escalate privileges, or maintain",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

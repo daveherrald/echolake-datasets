@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--a7f79b26-2132-5814-89aa-0f4ef19f80d9",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--51cfda02-f713-579e-8159-c6f98fccef41",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--51cfda02-f713-579e-8159-c6f98fccef41",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--1ca9762d-1ef3-573f-9c85-23549e2b3951",
+      "created_by_ref": "identity--51cfda02-f713-579e-8159-c6f98fccef41",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-ad-domain-replication-acl-addition",
+      "description": "The following analytic detects the addition of permissions required for a DCSync attack, specifically DS-Replication-Get-Changes, DS-Replication-Get-Changes-All, and DS-Replication-Get-Changes-In-Filtered-Set. It leverages EventCode 5136 from the Windows Security Event Log to identify when these permissions are granted. This activity is significant because it indicates potential preparation for a DCSync attack, which can be used to replicate AD objects and exfiltrate sensitive data. If confirmed",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--eabf38cd-aa1f-54ca-b2c6-1904b81cf6be"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--c4bdf6b2-afec-5d45-bca0-ebcf5ec40b0e",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1484",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1484"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--eabf38cd-aa1f-54ca-b2c6-1904b81cf6be",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1484",
+      "technique_id": "T1484",
+      "technique_ref": "attack-pattern--c4bdf6b2-afec-5d45-bca0-ebcf5ec40b0e",
+      "description": "The following analytic detects the addition of permissions required for a DCSync attack, specifically DS-Replication-Get-Changes, DS-Replication-Get-Changes-All, and DS-Replication-Get-Changes-In-Filtered-Set. It leverages EventCode 5136 from the Windows Security Event Log to identify when these permissions are granted. This activity is significant because it indicates potential preparation for a DCSync attack, which can be used to replicate AD objects and exfiltrate sensitive data. If confirmed",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

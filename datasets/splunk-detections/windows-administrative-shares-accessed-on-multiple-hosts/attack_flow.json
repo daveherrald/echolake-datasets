@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--4f1a9b8e-3f4b-57c2-84a5-845cc76b40b8",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--de9397ff-4867-5ffd-a508-76a8211f1da3",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--de9397ff-4867-5ffd-a508-76a8211f1da3",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--5f12a255-4667-5be0-939b-bb2602a560d7",
+      "created_by_ref": "identity--de9397ff-4867-5ffd-a508-76a8211f1da3",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-administrative-shares-accessed-on-multiple-hosts",
+      "description": "The following analytic detects a source computer accessing Windows administrative shares (C$, Admin$, IPC$) on 30 or more remote endpoints within a 5-minute window. It leverages Event IDs 5140 and 5145 from file share events. This behavior is significant as it may indicate an adversary enumerating network shares to locate sensitive files, a common tactic used by threat actors. If confirmed malicious, this activity could lead to unauthorized access to critical data, lateral movement, and potentia",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--bcb8212d-e570-599b-9a28-98afd1ce6b37"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--73f2d338-ee34-56d6-be67-4aca5d9e0d18",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1135",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1135"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--bcb8212d-e570-599b-9a28-98afd1ce6b37",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1135",
+      "technique_id": "T1135",
+      "technique_ref": "attack-pattern--73f2d338-ee34-56d6-be67-4aca5d9e0d18",
+      "description": "The following analytic detects a source computer accessing Windows administrative shares (C$, Admin$, IPC$) on 30 or more remote endpoints within a 5-minute window. It leverages Event IDs 5140 and 5145 from file share events. This behavior is significant as it may indicate an adversary enumerating network shares to locate sensitive files, a common tactic used by threat actors. If confirmed malicious, this activity could lead to unauthorized access to critical data, lateral movement, and potentia",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--aa4ec393-0d3e-5099-9317-585b71b26d31",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--bdfeaa9a-da29-543c-b171-679614b16bd5",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--bdfeaa9a-da29-543c-b171-679614b16bd5",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--4f80724c-d84f-50a5-a2b7-150c09ac9261",
+      "created_by_ref": "identity--bdfeaa9a-da29-543c-b171-679614b16bd5",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: detect-credential-dumping-through-lsass-access",
+      "description": "The following analytic detects attempts to read LSASS memory, indicative of credential dumping. It leverages Sysmon EventCode 10, filtering for specific access permissions (0x1010 and 0x1410) on the lsass.exe process. This activity is significant because it suggests an attacker is trying to extract credentials from LSASS memory, potentially leading to unauthorized access, data breaches, and compromise of sensitive information. If confirmed malicious, this could enable attackers to escalate privi",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--3751df78-933d-5e49-9a08-863e979c010d"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--6d80f8bc-7449-508e-861e-49cd7fcc1d33",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1003.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1003.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--3751df78-933d-5e49-9a08-863e979c010d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1003.001",
+      "technique_id": "T1003.001",
+      "technique_ref": "attack-pattern--6d80f8bc-7449-508e-861e-49cd7fcc1d33",
+      "description": "The following analytic detects attempts to read LSASS memory, indicative of credential dumping. It leverages Sysmon EventCode 10, filtering for specific access permissions (0x1010 and 0x1410) on the lsass.exe process. This activity is significant because it suggests an attacker is trying to extract credentials from LSASS memory, potentially leading to unauthorized access, data breaches, and compromise of sensitive information. If confirmed malicious, this could enable attackers to escalate privi",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

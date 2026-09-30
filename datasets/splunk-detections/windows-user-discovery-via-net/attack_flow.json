@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--8bf86d0f-ca2c-5f5c-8150-ba5ae4bac117",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--368a3f58-85c1-5b39-be66-40f9ad6a78d9",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--368a3f58-85c1-5b39-be66-40f9ad6a78d9",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--353deb6d-7df4-5228-86d0-43c14c762635",
+      "created_by_ref": "identity--368a3f58-85c1-5b39-be66-40f9ad6a78d9",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-user-discovery-via-net",
+      "description": "The following analytic detects the execution of `net.exe` or `net1.exe` with command-line arguments `user` or `users` to query local user accounts. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line executions. This activity is significant as it indicates potential reconnaissance efforts by adversaries to enumerate local users, which is a common step in situational awareness and Active Directory discovery. If confirmed malicious, this",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--fb5573ef-edb8-5434-a672-0bbe3d31d572"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--03bdb8c8-cb77-5db2-a9db-a2aec178624f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1087.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1087.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--fb5573ef-edb8-5434-a672-0bbe3d31d572",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1087.001",
+      "technique_id": "T1087.001",
+      "technique_ref": "attack-pattern--03bdb8c8-cb77-5db2-a9db-a2aec178624f",
+      "description": "The following analytic detects the execution of `net.exe` or `net1.exe` with command-line arguments `user` or `users` to query local user accounts. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line executions. This activity is significant as it indicates potential reconnaissance efforts by adversaries to enumerate local users, which is a common step in situational awareness and Active Directory discovery. If confirmed malicious, this",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

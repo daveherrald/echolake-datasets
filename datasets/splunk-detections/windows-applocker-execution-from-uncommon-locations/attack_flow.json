@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--2faed508-cf55-5964-9a49-eaac5100ad3f",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--0e482029-75c1-55a5-9aa8-7b70a9214e5c",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--0e482029-75c1-55a5-9aa8-7b70a9214e5c",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--14429b89-e337-531d-856d-9aeff278ab11",
+      "created_by_ref": "identity--0e482029-75c1-55a5-9aa8-7b70a9214e5c",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-applocker-execution-from-uncommon-locations",
+      "description": "The following analytic identifies the execution of applications or scripts from uncommon or suspicious file paths, potentially indicating malware or unauthorized activity. It leverages Windows AppLocker event logs and uses statistical analysis to detect anomalies. By calculating the average and standard deviation of execution counts per file path, it flags paths with execution counts significantly higher than expected. This behavior is significant as it can uncover malicious activities or policy",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--7ae5fb02-69c8-582f-8b48-ba028e13054a"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--ef001003-2aec-582b-a3b6-2134b37993ad",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1218",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1218"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--7ae5fb02-69c8-582f-8b48-ba028e13054a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1218",
+      "technique_id": "T1218",
+      "technique_ref": "attack-pattern--ef001003-2aec-582b-a3b6-2134b37993ad",
+      "description": "The following analytic identifies the execution of applications or scripts from uncommon or suspicious file paths, potentially indicating malware or unauthorized activity. It leverages Windows AppLocker event logs and uses statistical analysis to detect anomalies. By calculating the average and standard deviation of execution counts per file path, it flags paths with execution counts significantly higher than expected. This behavior is significant as it can uncover malicious activities or policy",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

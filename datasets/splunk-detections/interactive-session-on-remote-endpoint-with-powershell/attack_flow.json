@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--e44126c7-18c6-5cd1-9470-04c82f9f986e",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--8349c911-dc9c-5def-a623-b73d29e1e2ff",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--8349c911-dc9c-5def-a623-b73d29e1e2ff",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--17a36467-69f9-5edc-8400-d8b9e6932819",
+      "created_by_ref": "identity--8349c911-dc9c-5def-a623-b73d29e1e2ff",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: interactive-session-on-remote-endpoint-with-powershell",
+      "description": "The following analytic detects the use of the `Enter-PSSession` cmdlet to establish an interactive session on a remote endpoint via the WinRM protocol. It leverages PowerShell Script Block Logging (EventCode=4104) to identify this activity by searching for specific script block text patterns. This behavior is significant as it may indicate lateral movement or remote code execution attempts by adversaries. If confirmed malicious, this activity could allow attackers to execute commands remotely, p",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--70cc59e2-ad7a-5bca-bfc7-1ef1b1dffdc1"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--d461383d-8976-5020-a213-76c08285fe14",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1021.006",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1021.006"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--70cc59e2-ad7a-5bca-bfc7-1ef1b1dffdc1",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1021.006",
+      "technique_id": "T1021.006",
+      "technique_ref": "attack-pattern--d461383d-8976-5020-a213-76c08285fe14",
+      "description": "The following analytic detects the use of the `Enter-PSSession` cmdlet to establish an interactive session on a remote endpoint via the WinRM protocol. It leverages PowerShell Script Block Logging (EventCode=4104) to identify this activity by searching for specific script block text patterns. This behavior is significant as it may indicate lateral movement or remote code execution attempts by adversaries. If confirmed malicious, this activity could allow attackers to execute commands remotely, p",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

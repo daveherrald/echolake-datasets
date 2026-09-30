@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--25de57ca-166f-5972-8d2d-cba4fc673950",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--e2ff8376-685f-5478-84b2-f14112260ed1",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--e2ff8376-685f-5478-84b2-f14112260ed1",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--39a4faaa-a5fb-597b-a7ad-492d59aef710",
+      "created_by_ref": "identity--e2ff8376-685f-5478-84b2-f14112260ed1",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: o365-file-permissioned-application-consent-granted-by-user",
+      "description": "The following analytic identifies instances where a user in the Office 365 environment grants consent to an application requesting file permissions for OneDrive or SharePoint. It leverages O365 audit logs, focusing on OAuth application consent events. This activity is significant because granting such permissions can allow applications to access, modify, or delete files, posing a risk if the application is malicious or overly permissive. If confirmed malicious, this could lead to data breaches,",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--8ed1ab76-6a6e-58af-9a4e-47b3fc6d11b6"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--b6ef4753-63e2-5156-a206-907597f34f48",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1528",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1528"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--8ed1ab76-6a6e-58af-9a4e-47b3fc6d11b6",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1528",
+      "technique_id": "T1528",
+      "technique_ref": "attack-pattern--b6ef4753-63e2-5156-a206-907597f34f48",
+      "description": "The following analytic identifies instances where a user in the Office 365 environment grants consent to an application requesting file permissions for OneDrive or SharePoint. It leverages O365 audit logs, focusing on OAuth application consent events. This activity is significant because granting such permissions can allow applications to access, modify, or delete files, posing a risk if the application is malicious or overly permissive. If confirmed malicious, this could lead to data breaches,",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

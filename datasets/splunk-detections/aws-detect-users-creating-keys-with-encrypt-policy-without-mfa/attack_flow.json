@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--902d42d1-ba34-5112-a909-d36799dff05f",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--1d8aabae-85ef-5cf9-b92b-67f21ef07412",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--1d8aabae-85ef-5cf9-b92b-67f21ef07412",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--8eff8bf1-1311-5167-b27f-7ac994977264",
+      "created_by_ref": "identity--1d8aabae-85ef-5cf9-b92b-67f21ef07412",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: aws-detect-users-creating-keys-with-encrypt-policy-without-mfa",
+      "description": "The following analytic detects the creation of AWS KMS keys with an encryption policy accessible to everyone, including external entities. It leverages AWS CloudTrail logs to identify `CreateKey` or `PutKeyPolicy` events where the `kms:Encrypt` action is granted to all principals. This activity is significant as it may indicate a compromised account, allowing an attacker to misuse the encryption key to target other organizations. If confirmed malicious, this could lead to unauthorized data encry",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--c3f0e8a1-e26b-559b-8cbe-8a17ac42f485"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--fee3ef44-5c21-50b9-96f0-8bfc4260dcd4",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1486",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1486"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--c3f0e8a1-e26b-559b-8cbe-8a17ac42f485",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1486",
+      "technique_id": "T1486",
+      "technique_ref": "attack-pattern--fee3ef44-5c21-50b9-96f0-8bfc4260dcd4",
+      "description": "The following analytic detects the creation of AWS KMS keys with an encryption policy accessible to everyone, including external entities. It leverages AWS CloudTrail logs to identify `CreateKey` or `PutKeyPolicy` events where the `kms:Encrypt` action is granted to all principals. This activity is significant as it may indicate a compromised account, allowing an attacker to misuse the encryption key to target other organizations. If confirmed malicious, this could lead to unauthorized data encry",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

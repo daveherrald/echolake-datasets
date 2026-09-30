@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--24495994-d688-5f5c-ba6f-e035be2670e0",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--bdd814e1-ec5e-5a6b-80e0-108cd6f5b981",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--bdd814e1-ec5e-5a6b-80e0-108cd6f5b981",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--db972e4c-2813-5a63-8802-23f3cf79aec4",
+      "created_by_ref": "identity--bdd814e1-ec5e-5a6b-80e0-108cd6f5b981",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-krbrelayup-service-creation",
+      "description": "The following analytic detects the creation of a service with the default name \"KrbSCM\" associated with the KrbRelayUp tool. It leverages Windows System Event Logs, specifically EventCode 7045, to identify this activity. This behavior is significant as KrbRelayUp is a known tool used for privilege escalation attacks. If confirmed malicious, this activity could allow an attacker to escalate privileges, potentially gaining unauthorized access to sensitive systems and data.",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--aad5eb1a-2b43-5ac6-9594-6cdb819dbe52"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--e5c571ba-3e6e-56a9-8d84-4f9f77382adb",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1543.003",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1543.003"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--aad5eb1a-2b43-5ac6-9594-6cdb819dbe52",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1543.003",
+      "technique_id": "T1543.003",
+      "technique_ref": "attack-pattern--e5c571ba-3e6e-56a9-8d84-4f9f77382adb",
+      "description": "The following analytic detects the creation of a service with the default name \"KrbSCM\" associated with the KrbRelayUp tool. It leverages Windows System Event Logs, specifically EventCode 7045, to identify this activity. This behavior is significant as KrbRelayUp is a known tool used for privilege escalation attacks. If confirmed malicious, this activity could allow an attacker to escalate privileges, potentially gaining unauthorized access to sensitive systems and data.",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

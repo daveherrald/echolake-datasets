@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--a4a719db-d786-5d3d-8cd7-76a1ad92025a",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--284d4130-6bb6-5885-a93b-8c061bd7e5b7",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--284d4130-6bb6-5885-a93b-8c061bd7e5b7",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--7ef67346-3b42-5b90-82d4-bc46ca860a1e",
+      "created_by_ref": "identity--284d4130-6bb6-5885-a93b-8c061bd7e5b7",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: getadgroup-with-powershell",
+      "description": "The following analytic detects the execution of `powershell.exe` with the `Get-AdGroup` commandlet, which is used to query domain groups in a Windows Domain. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line arguments. Monitoring this activity is crucial as it may indicate an adversary or Red Team enumerating domain groups for situational awareness and Active Directory discovery. If confirmed malicious, this activity could",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--ccf1343e-32f9-59d0-8051-2942c385ea95"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--27079da7-fd90-5d85-8031-f07e52ed8b58",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1069.002",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1069.002"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--ccf1343e-32f9-59d0-8051-2942c385ea95",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1069.002",
+      "technique_id": "T1069.002",
+      "technique_ref": "attack-pattern--27079da7-fd90-5d85-8031-f07e52ed8b58",
+      "description": "The following analytic detects the execution of `powershell.exe` with the `Get-AdGroup` commandlet, which is used to query domain groups in a Windows Domain. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line arguments. Monitoring this activity is crucial as it may indicate an adversary or Red Team enumerating domain groups for situational awareness and Active Directory discovery. If confirmed malicious, this activity could",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

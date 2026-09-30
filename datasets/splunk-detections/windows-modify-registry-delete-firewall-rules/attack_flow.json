@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--9be92377-f746-50ae-adb7-4c71690ecbe7",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--3d2e4cb1-c8ec-587a-b497-24adaf1ccd38",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--3d2e4cb1-c8ec-587a-b497-24adaf1ccd38",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--ae12006f-16f6-5071-9544-9c771947dd4d",
+      "created_by_ref": "identity--3d2e4cb1-c8ec-587a-b497-24adaf1ccd38",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-modify-registry-delete-firewall-rules",
+      "description": "The following analytic detects a potential deletion of firewall rules, indicating a possible security breach or unauthorized access attempt. It identifies actions where firewall rules are removed using commands like netsh advfirewall firewall delete rule, which can expose the network to external threats by disabling critical security measures. Monitoring these activities helps maintain network integrity and prevent malicious attacks.",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--48b9f93e-1259-5d5f-a758-bd11f5edb17a"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--23e0dd91-8468-56cc-b4ee-fc458530eac0",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1112",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1112"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--48b9f93e-1259-5d5f-a758-bd11f5edb17a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1112",
+      "technique_id": "T1112",
+      "technique_ref": "attack-pattern--23e0dd91-8468-56cc-b4ee-fc458530eac0",
+      "description": "The following analytic detects a potential deletion of firewall rules, indicating a possible security breach or unauthorized access attempt. It identifies actions where firewall rules are removed using commands like netsh advfirewall firewall delete rule, which can expose the network to external threats by disabling critical security measures. Monitoring these activities helps maintain network integrity and prevent malicious attacks.",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

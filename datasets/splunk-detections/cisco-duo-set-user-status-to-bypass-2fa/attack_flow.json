@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--84c62e0a-c0ad-5f48-953b-dc95a5ef908b",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--11cd190a-1f56-58d2-ac3b-537086af86ac",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--11cd190a-1f56-58d2-ac3b-537086af86ac",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--ceff9c7d-cf20-5a10-acc5-3a864c04913c",
+      "created_by_ref": "identity--11cd190a-1f56-58d2-ac3b-537086af86ac",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: cisco-duo-set-user-status-to-bypass-2fa",
+      "description": "The following analytic detects instances where a Duo user's status is changed to \"Bypass\" for 2FA, specifically when the \nprevious status was \"Active.\" This behavior is identified by analyzing Duo activity logs for user update actions, extracting \nthe status transitions, and filtering for cases where a user is set to bypass multi-factor authentication. This is a critical \nevent for a Security Operations Center (SOC) to monitor, as bypassing 2FA significantly weakens account security and may \nind",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--a3119376-6684-5f03-ab73-c8c297d773d5"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--94296e5e-6071-534d-8175-5a460d2645d2",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1556",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1556"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--a3119376-6684-5f03-ab73-c8c297d773d5",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1556",
+      "technique_id": "T1556",
+      "technique_ref": "attack-pattern--94296e5e-6071-534d-8175-5a460d2645d2",
+      "description": "The following analytic detects instances where a Duo user's status is changed to \"Bypass\" for 2FA, specifically when the \nprevious status was \"Active.\" This behavior is identified by analyzing Duo activity logs for user update actions, extracting \nthe status transitions, and filtering for cases where a user is set to bypass multi-factor authentication. This is a critical \nevent for a Security Operations Center (SOC) to monitor, as bypassing 2FA significantly weakens account security and may \nind",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

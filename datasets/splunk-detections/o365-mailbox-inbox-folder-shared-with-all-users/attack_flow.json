@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--df313fc3-0391-560d-b450-142a2c98e746",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--0f96206b-b032-53e1-b957-9b4fe61c661c",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--0f96206b-b032-53e1-b957-9b4fe61c661c",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--84f67601-08e1-55ec-b1c1-c6c817916e43",
+      "created_by_ref": "identity--0f96206b-b032-53e1-b957-9b4fe61c661c",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: o365-mailbox-inbox-folder-shared-with-all-users",
+      "description": "The following analytic detects instances where the inbox folder of an Office 365 mailbox is shared with all users within the tenant. It leverages Office 365 management activity events to identify when the 'Inbox' folder permissions are modified to include 'Everyone' with read rights. This activity is significant as it represents a potential security risk, allowing unauthorized access to sensitive emails. If confirmed malicious, this could lead to data breaches, exfiltration of confidential infor",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--792e51b7-9ea4-5c94-8bd3-50c29acf75b3"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--aec4f7ce-0a7a-5712-93ff-8284f6db5b53",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1114.002",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1114.002"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--792e51b7-9ea4-5c94-8bd3-50c29acf75b3",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1114.002",
+      "technique_id": "T1114.002",
+      "technique_ref": "attack-pattern--aec4f7ce-0a7a-5712-93ff-8284f6db5b53",
+      "description": "The following analytic detects instances where the inbox folder of an Office 365 mailbox is shared with all users within the tenant. It leverages Office 365 management activity events to identify when the 'Inbox' folder permissions are modified to include 'Everyone' with read rights. This activity is significant as it represents a potential security risk, allowing unauthorized access to sensitive emails. If confirmed malicious, this could lead to data breaches, exfiltration of confidential infor",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

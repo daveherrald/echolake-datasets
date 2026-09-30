@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--12e24c11-9c7d-5e54-9fe0-89b1c1ad53d9",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--75fd5eea-54e1-575b-a892-c4dc56132abf",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--75fd5eea-54e1-575b-a892-c4dc56132abf",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--e5664ed8-22cc-5e63-bd30-5a8806950919",
+      "created_by_ref": "identity--75fd5eea-54e1-575b-a892-c4dc56132abf",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: unknown-process-using-the-kerberos-protocol",
+      "description": "The following analytic identifies a non-lsass.exe process making an outbound connection on port 88, which is typically used by the Kerberos authentication protocol. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process and network traffic logs. This activity is significant because, under normal circumstances, only the lsass.exe process should interact with the Kerberos Distribution Center. If confirmed malicious, this behavior could indicate an adve",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--ee09e245-7b89-5b7b-ad4f-6aea6a3b7b5e"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--1fe2aa62-c51d-5ee9-b081-072967a204b4",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1550",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1550"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--ee09e245-7b89-5b7b-ad4f-6aea6a3b7b5e",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1550",
+      "technique_id": "T1550",
+      "technique_ref": "attack-pattern--1fe2aa62-c51d-5ee9-b081-072967a204b4",
+      "description": "The following analytic identifies a non-lsass.exe process making an outbound connection on port 88, which is typically used by the Kerberos authentication protocol. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process and network traffic logs. This activity is significant because, under normal circumstances, only the lsass.exe process should interact with the Kerberos Distribution Center. If confirmed malicious, this behavior could indicate an adve",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--029d53dc-4d2b-55ec-be32-6dab08ec8a01",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--27e7c287-f663-5a05-843d-0ced87f510bf",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--27e7c287-f663-5a05-843d-0ced87f510bf",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--4c45c042-c13d-5e63-8387-d2ac3112c82b",
+      "created_by_ref": "identity--27e7c287-f663-5a05-843d-0ced87f510bf",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: add-defaultuser-and-password-in-registry",
+      "description": "The following analytic detects suspicious registry modifications that implement auto admin logon by adding DefaultUserName and DefaultPassword values. It leverages data from the Endpoint.Registry data model, specifically monitoring changes to the \"SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\" registry path. This activity is significant because it is associated with BlackMatter ransomware, which uses this technique to automatically log on to compromised hosts and continue encryption afte",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--c6432795-95ab-5abd-871a-eb98bea45b31"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--ac09de75-134f-5f96-ab0c-cf1a81912dfb",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1552.002",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1552.002"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--c6432795-95ab-5abd-871a-eb98bea45b31",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1552.002",
+      "technique_id": "T1552.002",
+      "technique_ref": "attack-pattern--ac09de75-134f-5f96-ab0c-cf1a81912dfb",
+      "description": "The following analytic detects suspicious registry modifications that implement auto admin logon by adding DefaultUserName and DefaultPassword values. It leverages data from the Endpoint.Registry data model, specifically monitoring changes to the \"SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\" registry path. This activity is significant because it is associated with BlackMatter ransomware, which uses this technique to automatically log on to compromised hosts and continue encryption afte",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

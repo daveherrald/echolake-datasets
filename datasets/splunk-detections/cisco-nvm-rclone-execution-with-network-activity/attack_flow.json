@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--10460b5c-7790-5f47-ac5f-cb086cd324c0",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--d5b3664f-bd73-59d3-af52-c71c72908087",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--d5b3664f-bd73-59d3-af52-c71c72908087",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--1176020c-b38d-51d1-9a8f-c9bc146e0284",
+      "created_by_ref": "identity--d5b3664f-bd73-59d3-af52-c71c72908087",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: cisco-nvm-rclone-execution-with-network-activity",
+      "description": "This detection identifies execution of the file synchronization utility \"rclone\".\nIt leverages Cisco Network Visibility Module logs, specifically flow data in order to capture process executions\ninitiating network connections.\nWhile rclone is a legitimate command-line tool for syncing data to cloud storage providers, it has been widely abused by threat actors for data exfiltration.\nThis analytic inspects process name and arguments for rclone and flags usage of suspicious flags.\nIf matched, this",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--a762eb6d-34ad-518d-9a5a-76000db7cd8b"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--70da347e-dcda-5777-8f8c-f20b9e2dc3ff",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1567.002",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1567.002"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--a762eb6d-34ad-518d-9a5a-76000db7cd8b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1567.002",
+      "technique_id": "T1567.002",
+      "technique_ref": "attack-pattern--70da347e-dcda-5777-8f8c-f20b9e2dc3ff",
+      "description": "This detection identifies execution of the file synchronization utility \"rclone\".\nIt leverages Cisco Network Visibility Module logs, specifically flow data in order to capture process executions\ninitiating network connections.\nWhile rclone is a legitimate command-line tool for syncing data to cloud storage providers, it has been widely abused by threat actors for data exfiltration.\nThis analytic inspects process name and arguments for rclone and flags usage of suspicious flags.\nIf matched, this",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

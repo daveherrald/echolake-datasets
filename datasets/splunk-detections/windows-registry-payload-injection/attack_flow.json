@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--6e97b401-a8eb-5f65-a36c-a0e9b23b82b9",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--40bcc9e4-6eea-508b-af5e-9c2814e2aea7",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--40bcc9e4-6eea-508b-af5e-9c2814e2aea7",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--cef993b2-8376-5dae-ad31-7e673d6e7843",
+      "created_by_ref": "identity--40bcc9e4-6eea-508b-af5e-9c2814e2aea7",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-registry-payload-injection",
+      "description": "The following analytic detects suspiciously long data written to the Windows registry, a behavior often linked to fileless malware or persistence techniques. It leverages Endpoint Detection and Response (EDR) telemetry, focusing on registry events with data lengths exceeding 512 characters. This activity is significant as it can indicate an attempt to evade traditional file-based defenses, making it crucial for SOC monitoring. If confirmed malicious, this technique could allow attackers to maint",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--eab27fe5-00b8-513f-b258-9a9b9600b6ac"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--c4e036fe-9aaa-511b-a2ed-fa186647bc8b",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1027.011",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1027.011"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--eab27fe5-00b8-513f-b258-9a9b9600b6ac",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1027.011",
+      "technique_id": "T1027.011",
+      "technique_ref": "attack-pattern--c4e036fe-9aaa-511b-a2ed-fa186647bc8b",
+      "description": "The following analytic detects suspiciously long data written to the Windows registry, a behavior often linked to fileless malware or persistence techniques. It leverages Endpoint Detection and Response (EDR) telemetry, focusing on registry events with data lengths exceeding 512 characters. This activity is significant as it can indicate an attempt to evade traditional file-based defenses, making it crucial for SOC monitoring. If confirmed malicious, this technique could allow attackers to maint",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

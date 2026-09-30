@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--cf9c32ff-c59d-5260-a409-1bbb5dbb0fc1",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--852fd738-3156-5eae-bb41-486dc33beb39",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--852fd738-3156-5eae-bb41-486dc33beb39",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--85173501-f747-5dbe-985e-6a75e2290bfc",
+      "created_by_ref": "identity--852fd738-3156-5eae-bb41-486dc33beb39",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-service-stop-by-deletion",
+      "description": "The following analytic detects the use of `sc.exe` to delete a Windows service. It leverages Endpoint Detection and Response (EDR) data, focusing on process execution logs that capture command-line arguments. This activity is significant because adversaries often delete services to disable security mechanisms or critical system functions, aiding in evasion and persistence. If confirmed malicious, this action could lead to the termination of essential security services, allowing attackers to oper",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--20667325-9b1d-59ca-83c6-e97100c8aa7e"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--8b99e348-8f45-5c56-b199-15ecce457322",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1489",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1489"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--20667325-9b1d-59ca-83c6-e97100c8aa7e",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1489",
+      "technique_id": "T1489",
+      "technique_ref": "attack-pattern--8b99e348-8f45-5c56-b199-15ecce457322",
+      "description": "The following analytic detects the use of `sc.exe` to delete a Windows service. It leverages Endpoint Detection and Response (EDR) data, focusing on process execution logs that capture command-line arguments. This activity is significant because adversaries often delete services to disable security mechanisms or critical system functions, aiding in evasion and persistence. If confirmed malicious, this action could lead to the termination of essential security services, allowing attackers to oper",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

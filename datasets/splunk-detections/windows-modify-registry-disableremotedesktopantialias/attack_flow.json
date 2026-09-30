@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--fef52663-d3d1-504a-93e8-a87e2f610d12",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--8d34f06c-8526-5fea-9f1e-02f8d3586fef",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--8d34f06c-8526-5fea-9f1e-02f8d3586fef",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--fe37e28b-419b-552d-9928-9aedebe1f20f",
+      "created_by_ref": "identity--8d34f06c-8526-5fea-9f1e-02f8d3586fef",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-modify-registry-disableremotedesktopantialias",
+      "description": "The following analytic detects modifications to the Windows registry key \"DisableRemoteDesktopAntiAlias\" with a value set to 0x00000001. This detection leverages data from the Endpoint datamodel, specifically monitoring changes in the Registry node. This activity is significant as it may indicate the presence of DarkGate malware, which alters this registry setting to enhance its remote desktop capabilities. If confirmed malicious, this modification could allow an attacker to maintain persistence",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--778f7a0a-b648-518c-9e8b-291fdae82b34"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--8bddef59-8d5d-5d79-ab40-2e190a07df40",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1112",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1112"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--778f7a0a-b648-518c-9e8b-291fdae82b34",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1112",
+      "technique_id": "T1112",
+      "technique_ref": "attack-pattern--8bddef59-8d5d-5d79-ab40-2e190a07df40",
+      "description": "The following analytic detects modifications to the Windows registry key \"DisableRemoteDesktopAntiAlias\" with a value set to 0x00000001. This detection leverages data from the Endpoint datamodel, specifically monitoring changes in the Registry node. This activity is significant as it may indicate the presence of DarkGate malware, which alters this registry setting to enhance its remote desktop capabilities. If confirmed malicious, this modification could allow an attacker to maintain persistence",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

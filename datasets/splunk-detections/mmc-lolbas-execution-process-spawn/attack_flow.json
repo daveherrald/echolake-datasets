@@ -1,0 +1,110 @@
+{
+  "type": "bundle",
+  "id": "bundle--fd3c7f20-a71d-5250-8b09-ae914ce6d7c7",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--10635494-3f59-5943-ab9e-97ef3ed8b275",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--10635494-3f59-5943-ab9e-97ef3ed8b275",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--858c7f3f-3368-50b4-89d8-5b7dad47d729",
+      "created_by_ref": "identity--10635494-3f59-5943-ab9e-97ef3ed8b275",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: mmc-lolbas-execution-process-spawn",
+      "description": "The following analytic identifies `mmc.exe` spawning a LOLBAS execution process. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process creation events where `mmc.exe` is the parent process. This activity is significant because adversaries can abuse the DCOM protocol and MMC20 COM object to execute malicious code, using Windows native binaries documented by the LOLBAS project. If confirmed malicious, this behavior could indicate lateral movement, allowing attack",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--48d719e6-f8d0-5a3c-af54-398245f12710",
+        "attack-action--b7cc377c-9ee4-5502-8536-f7850c5555e8"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--5dd3faaa-cb59-5321-a8e4-5706348d133a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1021.003",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1021.003"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--ae89aa0e-b4ff-55f3-8b1a-9520f5f96664",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1218.014",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1218.014"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--48d719e6-f8d0-5a3c-af54-398245f12710",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1021.003",
+      "technique_id": "T1021.003",
+      "technique_ref": "attack-pattern--5dd3faaa-cb59-5321-a8e4-5706348d133a",
+      "description": "The following analytic identifies `mmc.exe` spawning a LOLBAS execution process. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process creation events where `mmc.exe` is the parent process. This activity is significant because adversaries can abuse the DCOM protocol and MMC20 COM object to execute malicious code, using Windows native binaries documented by the LOLBAS project. If confirmed malicious, this behavior could indicate lateral movement, allowing attack",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--b7cc377c-9ee4-5502-8536-f7850c5555e8",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1218.014",
+      "technique_id": "T1218.014",
+      "technique_ref": "attack-pattern--ae89aa0e-b4ff-55f3-8b1a-9520f5f96664",
+      "description": "The following analytic identifies `mmc.exe` spawning a LOLBAS execution process. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process creation events where `mmc.exe` is the parent process. This activity is significant because adversaries can abuse the DCOM protocol and MMC20 COM object to execute malicious code, using Windows native binaries documented by the LOLBAS project. If confirmed malicious, this behavior could indicate lateral movement, allowing attack",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

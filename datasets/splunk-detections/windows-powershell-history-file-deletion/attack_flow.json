@@ -1,0 +1,110 @@
+{
+  "type": "bundle",
+  "id": "bundle--a809c9f3-335d-56fd-87bb-3c202fbef021",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--02191ca8-66ce-5d6f-a070-0ce33316b3e7",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--02191ca8-66ce-5d6f-a070-0ce33316b3e7",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--8b3f7586-4978-53cd-adae-7c82fbe1f544",
+      "created_by_ref": "identity--02191ca8-66ce-5d6f-a070-0ce33316b3e7",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-powershell-history-file-deletion",
+      "description": "The following analytic detects the usage of PowerShell to delete its command history file, which may indicate an attempt to evade detection by removing evidence of executed commands. PowerShell stores command history in ConsoleHost_history.txt under the user\u2019s profile directory. Adversaries or malicious scripts may delete this file using Remove-Item, del, or similar commands. This detection focuses on file deletion events targeting the history file, correlating them with recent PowerShell activi",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--baabda2a-9862-5582-87ac-72fbb5880e5e",
+        "attack-action--94c5018c-3398-5e5c-9872-567f004f16c6"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--e8247c82-9ac5-5bbc-b688-e722bc770165",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1059.003",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1059.003"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--9c0aaf1c-6d67-5a77-9974-a441a1575873",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1070.003",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1070.003"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--baabda2a-9862-5582-87ac-72fbb5880e5e",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1059.003",
+      "technique_id": "T1059.003",
+      "technique_ref": "attack-pattern--e8247c82-9ac5-5bbc-b688-e722bc770165",
+      "description": "The following analytic detects the usage of PowerShell to delete its command history file, which may indicate an attempt to evade detection by removing evidence of executed commands. PowerShell stores command history in ConsoleHost_history.txt under the user\u2019s profile directory. Adversaries or malicious scripts may delete this file using Remove-Item, del, or similar commands. This detection focuses on file deletion events targeting the history file, correlating them with recent PowerShell activi",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--94c5018c-3398-5e5c-9872-567f004f16c6",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1070.003",
+      "technique_id": "T1070.003",
+      "technique_ref": "attack-pattern--9c0aaf1c-6d67-5a77-9974-a441a1575873",
+      "description": "The following analytic detects the usage of PowerShell to delete its command history file, which may indicate an attempt to evade detection by removing evidence of executed commands. PowerShell stores command history in ConsoleHost_history.txt under the user\u2019s profile directory. Adversaries or malicious scripts may delete this file using Remove-Item, del, or similar commands. This detection focuses on file deletion events targeting the history file, correlating them with recent PowerShell activi",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

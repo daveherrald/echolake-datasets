@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--0d001913-6b9f-54d9-8405-e3d50da26e30",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--96b25c4e-f2c9-52b7-928f-bf8efe9bcda9",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--96b25c4e-f2c9-52b7-928f-bf8efe9bcda9",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--3a87bcf1-5e7b-5001-8d01-9a53140c2851",
+      "created_by_ref": "identity--96b25c4e-f2c9-52b7-928f-bf8efe9bcda9",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-scmanager-security-descriptor-tampering-via-scexe",
+      "description": "The following analytic detects changes in the ScManager service security descriptor settings. It leverages data from Endpoint Detection and Response (EDR) agents, specifically searching for any process execution involving the \"sc.exe\" binary with the \"sdset\" flag targeting the \"scmanager\" service. If confirmed malicious, this could allow an attacker to escalate their privileges.",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--eec9a9c2-871d-58da-bcd7-9f79f3a0d250"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--1e0764df-b14e-546a-872a-a7f1e580aba3",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1569.002",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1569.002"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--eec9a9c2-871d-58da-bcd7-9f79f3a0d250",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1569.002",
+      "technique_id": "T1569.002",
+      "technique_ref": "attack-pattern--1e0764df-b14e-546a-872a-a7f1e580aba3",
+      "description": "The following analytic detects changes in the ScManager service security descriptor settings. It leverages data from Endpoint Detection and Response (EDR) agents, specifically searching for any process execution involving the \"sc.exe\" binary with the \"sdset\" flag targeting the \"scmanager\" service. If confirmed malicious, this could allow an attacker to escalate their privileges.",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

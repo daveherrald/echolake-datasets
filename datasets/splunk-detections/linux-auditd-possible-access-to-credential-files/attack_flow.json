@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--ba5b86ef-58bb-56f6-b3ef-3824a61da2ed",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--857bb9d3-5e6a-5dba-b62c-a9f25478eec2",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--857bb9d3-5e6a-5dba-b62c-a9f25478eec2",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--e5673951-f3f0-5d75-974d-223d5b9d4af9",
+      "created_by_ref": "identity--857bb9d3-5e6a-5dba-b62c-a9f25478eec2",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: linux-auditd-possible-access-to-credential-files",
+      "description": "The following analytic detects attempts to access or dump the contents of /etc/passwd and /etc/shadow files on Linux systems. It leverages data from Linux Auditd, focusing on processes like 'cat', 'nano', 'vim', and 'vi' accessing these files. This activity is significant as it may indicate credential dumping, a technique used by adversaries to gain persistence or escalate privileges. If confirmed malicious, privileges. If confirmed malicious, attackers could obtain hashed passwords for offline",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--e35f6200-1beb-56bb-8e68-578bfa019e07"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--5a6169c6-9a2a-57a9-8fe1-ded7e607dd4c",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1003.008",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1003.008"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--e35f6200-1beb-56bb-8e68-578bfa019e07",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1003.008",
+      "technique_id": "T1003.008",
+      "technique_ref": "attack-pattern--5a6169c6-9a2a-57a9-8fe1-ded7e607dd4c",
+      "description": "The following analytic detects attempts to access or dump the contents of /etc/passwd and /etc/shadow files on Linux systems. It leverages data from Linux Auditd, focusing on processes like 'cat', 'nano', 'vim', and 'vi' accessing these files. This activity is significant as it may indicate credential dumping, a technique used by adversaries to gain persistence or escalate privileges. If confirmed malicious, privileges. If confirmed malicious, attackers could obtain hashed passwords for offline",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--3996406e-35ae-5a95-9b8e-8bda9effbd9f",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--829a8fad-44b8-529f-a134-0f2e23fdd491",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--829a8fad-44b8-529f-a134-0f2e23fdd491",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--a09255a3-a16f-5dde-95d9-dd3e95b2ef54",
+      "created_by_ref": "identity--829a8fad-44b8-529f-a134-0f2e23fdd491",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: registry-keys-used-for-privilege-escalation",
+      "description": "The following analytic detects modifications to registry keys under \"Image File Execution Options\" that can be used for privilege escalation. It leverages data from the Endpoint.Registry data model, specifically monitoring changes to registry paths and values like GlobalFlag and Debugger. This activity is significant because attackers can use these modifications to intercept executable calls and attach malicious binaries to legitimate system binaries. If confirmed malicious, this could allow att",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--1b762453-9d9f-54f0-a287-0056a63299a5"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--28f24ca3-4780-5a8f-aefe-74b331278ee7",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1546.012",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1546.012"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--1b762453-9d9f-54f0-a287-0056a63299a5",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1546.012",
+      "technique_id": "T1546.012",
+      "technique_ref": "attack-pattern--28f24ca3-4780-5a8f-aefe-74b331278ee7",
+      "description": "The following analytic detects modifications to registry keys under \"Image File Execution Options\" that can be used for privilege escalation. It leverages data from the Endpoint.Registry data model, specifically monitoring changes to registry paths and values like GlobalFlag and Debugger. This activity is significant because attackers can use these modifications to intercept executable calls and attach malicious binaries to legitimate system binaries. If confirmed malicious, this could allow att",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

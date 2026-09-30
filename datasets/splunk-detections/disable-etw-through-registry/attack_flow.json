@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--52ffd906-5e89-5dca-8bb3-37d8134efc5e",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--b5394c05-3e61-5bef-baa7-0abdfd85d994",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--b5394c05-3e61-5bef-baa7-0abdfd85d994",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--b05872ab-f99c-5c3a-9305-dc96c514ae96",
+      "created_by_ref": "identity--b5394c05-3e61-5bef-baa7-0abdfd85d994",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: disable-etw-through-registry",
+      "description": "The following analytic detects modifications to the registry that disable the Event Tracing for Windows (ETW) feature. It leverages data from the Endpoint.Registry data model, specifically monitoring changes to the registry path \"*\\\\SOFTWARE\\\\Microsoft\\\\.NETFramework\\\\ETWEnabled\" with a value set to \"0x00000000\". This activity is significant because disabling ETW can allow attackers to evade detection mechanisms, making it harder for security tools to monitor malicious activities. If confirmed m",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--fe45a2a0-a957-5327-9195-878904d9b844"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--e48871ef-3235-5bb3-9082-5c5661bf6f29",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1562.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--fe45a2a0-a957-5327-9195-878904d9b844",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.001",
+      "technique_id": "T1562.001",
+      "technique_ref": "attack-pattern--e48871ef-3235-5bb3-9082-5c5661bf6f29",
+      "description": "The following analytic detects modifications to the registry that disable the Event Tracing for Windows (ETW) feature. It leverages data from the Endpoint.Registry data model, specifically monitoring changes to the registry path \"*\\\\SOFTWARE\\\\Microsoft\\\\.NETFramework\\\\ETWEnabled\" with a value set to \"0x00000000\". This activity is significant because disabling ETW can allow attackers to evade detection mechanisms, making it harder for security tools to monitor malicious activities. If confirmed m",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

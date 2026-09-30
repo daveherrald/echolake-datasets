@@ -1,0 +1,141 @@
+{
+  "type": "bundle",
+  "id": "bundle--ef110e6e-2e27-59f6-9e5a-4c6893b7169e",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--cb196bc0-315d-54af-81a7-4fc6fc8e2f7d",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--cb196bc0-315d-54af-81a7-4fc6fc8e2f7d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--20d6b20a-ee73-5440-9c42-81d4d6c90b6c",
+      "created_by_ref": "identity--cb196bc0-315d-54af-81a7-4fc6fc8e2f7d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-privilege-escalation-system-process-without-system-parent",
+      "description": "The following analytic detects any system integrity level process spawned by a non-system account. It leverages Sysmon EventID 1, focusing on process integrity and parent user data. This behavior is significant as it often indicates successful privilege escalation to SYSTEM from a user-controlled process or service. If confirmed malicious, this activity could allow an attacker to gain full control over the system, execute arbitrary code, and potentially compromise the entire environment.",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--afd5334c-c26f-52fe-8aac-dbf829770ed7",
+        "attack-action--993301fc-6cdd-52e9-9a75-96764a56a4f1",
+        "attack-action--0d81b55b-838d-59a1-84b2-5847ac0a6760"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--ae1d8482-1956-5ce0-a12e-56e0c108144a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1068",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1068"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--5b9bf05c-753e-5aa7-a3f9-7f64871d355f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1548",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1548"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--bfacf6b2-e4fb-5556-b395-3768081336fd",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1134",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1134"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--afd5334c-c26f-52fe-8aac-dbf829770ed7",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1068",
+      "technique_id": "T1068",
+      "technique_ref": "attack-pattern--ae1d8482-1956-5ce0-a12e-56e0c108144a",
+      "description": "The following analytic detects any system integrity level process spawned by a non-system account. It leverages Sysmon EventID 1, focusing on process integrity and parent user data. This behavior is significant as it often indicates successful privilege escalation to SYSTEM from a user-controlled process or service. If confirmed malicious, this activity could allow an attacker to gain full control over the system, execute arbitrary code, and potentially compromise the entire environment.",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--993301fc-6cdd-52e9-9a75-96764a56a4f1",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1548",
+      "technique_id": "T1548",
+      "technique_ref": "attack-pattern--5b9bf05c-753e-5aa7-a3f9-7f64871d355f",
+      "description": "The following analytic detects any system integrity level process spawned by a non-system account. It leverages Sysmon EventID 1, focusing on process integrity and parent user data. This behavior is significant as it often indicates successful privilege escalation to SYSTEM from a user-controlled process or service. If confirmed malicious, this activity could allow an attacker to gain full control over the system, execute arbitrary code, and potentially compromise the entire environment.",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--0d81b55b-838d-59a1-84b2-5847ac0a6760",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1134",
+      "technique_id": "T1134",
+      "technique_ref": "attack-pattern--bfacf6b2-e4fb-5556-b395-3768081336fd",
+      "description": "The following analytic detects any system integrity level process spawned by a non-system account. It leverages Sysmon EventID 1, focusing on process integrity and parent user data. This behavior is significant as it often indicates successful privilege escalation to SYSTEM from a user-controlled process or service. If confirmed malicious, this activity could allow an attacker to gain full control over the system, execute arbitrary code, and potentially compromise the entire environment.",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--8e22554b-4c87-5130-865f-2fcb5e23dd3d",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--f9e350a2-7495-5199-aeea-3dfe6835c56d",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--f9e350a2-7495-5199-aeea-3dfe6835c56d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--2279f680-f741-50fe-848e-0db148296dc7",
+      "created_by_ref": "identity--f9e350a2-7495-5199-aeea-3dfe6835c56d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-rdp-login-session-was-established",
+      "description": "The following analytic detects instances where a successful Remote Desktop Protocol (RDP) login session was established, as indicated by Windows Security Event ID 4624 with Logon Type 10. This event confirms that a user has not only provided valid credentials but has also initiated a full interactive RDP session. It is a key indicator of successful remote access to a Windows system. When correlated with Event ID 1149, which logs RDP authentication success, this analytic helps distinguish between",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--c007d2bb-5145-50a0-a66c-653aa060a45a"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--bb2a951b-ba0c-522e-a27f-588c70a6b8b6",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1021.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1021.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--c007d2bb-5145-50a0-a66c-653aa060a45a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1021.001",
+      "technique_id": "T1021.001",
+      "technique_ref": "attack-pattern--bb2a951b-ba0c-522e-a27f-588c70a6b8b6",
+      "description": "The following analytic detects instances where a successful Remote Desktop Protocol (RDP) login session was established, as indicated by Windows Security Event ID 4624 with Logon Type 10. This event confirms that a user has not only provided valid credentials but has also initiated a full interactive RDP session. It is a key indicator of successful remote access to a Windows system. When correlated with Event ID 1149, which logs RDP authentication success, this analytic helps distinguish between",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

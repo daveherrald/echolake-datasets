@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--4ed0e0b7-51a1-50b5-b6ae-b6cf38f61511",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--5476aa2f-ceef-5ec9-a9f8-c5f728a0439a",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--5476aa2f-ceef-5ec9-a9f8-c5f728a0439a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--dde04b9e-0b80-548b-9417-759955025e29",
+      "created_by_ref": "identity--5476aa2f-ceef-5ec9-a9f8-c5f728a0439a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: aws-exfiltration-via-batch-service",
+      "description": "The following analytic identifies the creation of AWS Batch jobs that could potentially abuse the AWS Bucket Replication feature on S3 buckets. It leverages AWS CloudTrail logs to detect the `JobCreated` event, analyzing job details and their status. This activity is significant because attackers can exploit this feature to exfiltrate data by creating malicious batch jobs. If confirmed malicious, this could lead to unauthorized data transfer between S3 buckets, resulting in data breaches and los",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--0a9eff6d-5c57-52d4-92bd-5abd2b8ae499"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--eb95722d-a3b4-5a3d-a39e-bb1a0cd49a9e",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1119",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1119"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--0a9eff6d-5c57-52d4-92bd-5abd2b8ae499",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1119",
+      "technique_id": "T1119",
+      "technique_ref": "attack-pattern--eb95722d-a3b4-5a3d-a39e-bb1a0cd49a9e",
+      "description": "The following analytic identifies the creation of AWS Batch jobs that could potentially abuse the AWS Bucket Replication feature on S3 buckets. It leverages AWS CloudTrail logs to detect the `JobCreated` event, analyzing job details and their status. This activity is significant because attackers can exploit this feature to exfiltrate data by creating malicious batch jobs. If confirmed malicious, this could lead to unauthorized data transfer between S3 buckets, resulting in data breaches and los",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

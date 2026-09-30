@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--e62edbdb-4edb-5265-8fdc-8c061e625fb2",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--f50f48c1-5183-5e67-8161-e84e2a4fd40f",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--f50f48c1-5183-5e67-8161-e84e2a4fd40f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--4c6fb278-c2d4-584c-9aae-d3fa020e157b",
+      "created_by_ref": "identity--f50f48c1-5183-5e67-8161-e84e2a4fd40f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: esxi-lockdown-mode-disabled",
+      "description": "This detection identifies when Lockdown Mode is disabled on an ESXi host, which can indicate that a threat actor is attempting to weaken host security controls. Disabling Lockdown Mode allows broader remote access via SSH or the host client and may precede further malicious actions such as data exfiltration, lateral movement, or VM tampering.",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--c1d23f97-c085-5ee3-a43d-1863165b39d8"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--d9d55155-62b9-53f6-9dbd-a3214ba9fc53",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1562"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--c1d23f97-c085-5ee3-a43d-1863165b39d8",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562",
+      "technique_id": "T1562",
+      "technique_ref": "attack-pattern--d9d55155-62b9-53f6-9dbd-a3214ba9fc53",
+      "description": "This detection identifies when Lockdown Mode is disabled on an ESXi host, which can indicate that a threat actor is attempting to weaken host security controls. Disabling Lockdown Mode allows broader remote access via SSH or the host client and may precede further malicious actions such as data exfiltration, lateral movement, or VM tampering.",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

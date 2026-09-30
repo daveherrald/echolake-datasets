@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--dc62d3e1-7f07-53f3-88a7-1339d0af15d3",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--4f85fcd9-79e2-597d-b10f-6b5476402159",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--4f85fcd9-79e2-597d-b10f-6b5476402159",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--02727a04-0fa9-5c62-a499-9f295cb824f0",
+      "created_by_ref": "identity--4f85fcd9-79e2-597d-b10f-6b5476402159",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-get-local-admin-with-findlocaladminaccess",
+      "description": "The following analytic detects the execution of the `Find-LocalAdminAccess` cmdlet using PowerShell Script Block Logging (EventCode=4104). This cmdlet is part of PowerView, a toolkit for Windows domain enumeration. Identifying the use of `Find-LocalAdminAccess` is crucial as adversaries may use it to find machines where the current user has local administrator access, facilitating lateral movement or privilege escalation. If confirmed malicious, this activity could allow attackers to target and",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--e7d3b668-0afd-5477-9ea7-86ff033c49c1"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--fa3d2f65-e22a-5ba0-bd5b-fc48885e5f18",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1087.002",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1087.002"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--e7d3b668-0afd-5477-9ea7-86ff033c49c1",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1087.002",
+      "technique_id": "T1087.002",
+      "technique_ref": "attack-pattern--fa3d2f65-e22a-5ba0-bd5b-fc48885e5f18",
+      "description": "The following analytic detects the execution of the `Find-LocalAdminAccess` cmdlet using PowerShell Script Block Logging (EventCode=4104). This cmdlet is part of PowerView, a toolkit for Windows domain enumeration. Identifying the use of `Find-LocalAdminAccess` is crucial as adversaries may use it to find machines where the current user has local administrator access, facilitating lateral movement or privilege escalation. If confirmed malicious, this activity could allow attackers to target and",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

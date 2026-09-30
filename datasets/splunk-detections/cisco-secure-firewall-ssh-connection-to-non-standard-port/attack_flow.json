@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--98119fac-1860-5fed-b73a-e3568beef2f5",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--70ea07ee-06a4-5c81-99bb-4e54b217a9f2",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--70ea07ee-06a4-5c81-99bb-4e54b217a9f2",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--3dd99df1-9cc9-587e-9ff5-48f44da36e43",
+      "created_by_ref": "identity--70ea07ee-06a4-5c81-99bb-4e54b217a9f2",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: cisco-secure-firewall-ssh-connection-to-non-standard-port",
+      "description": "This analytic detects inbound SSH connections to non-standard ports on network devices using Cisco Secure Firewall Intrusion Events. APT actors have been observed enabling SSH servers on high, non-default TCP ports to maintain encrypted remote access to compromised network infrastructure.\nThis detection leverages Snort signature 65369 to identify SSH protocol traffic on unusual ports, which may indicate persistence mechanisms or backdoor access established by threat actors.",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--03b51f0a-3d59-5400-973d-6d1fe204f19f"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--dc3a25cf-4839-5132-8b6d-17cdf7f6812c",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1021.004",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1021.004"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--03b51f0a-3d59-5400-973d-6d1fe204f19f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1021.004",
+      "technique_id": "T1021.004",
+      "technique_ref": "attack-pattern--dc3a25cf-4839-5132-8b6d-17cdf7f6812c",
+      "description": "This analytic detects inbound SSH connections to non-standard ports on network devices using Cisco Secure Firewall Intrusion Events. APT actors have been observed enabling SSH servers on high, non-default TCP ports to maintain encrypted remote access to compromised network infrastructure.\nThis detection leverages Snort signature 65369 to identify SSH protocol traffic on unusual ports, which may indicate persistence mechanisms or backdoor access established by threat actors.",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

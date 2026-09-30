@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--39ef69bf-c1ac-51dd-98b6-b644195a0534",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--8218658b-16cf-52ee-9ba2-9ac5e46f7030",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--8218658b-16cf-52ee-9ba2-9ac5e46f7030",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--98e2cfa1-2b2a-5e7e-a878-f3487d66eb77",
+      "created_by_ref": "identity--8218658b-16cf-52ee-9ba2-9ac5e46f7030",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: domain-account-discovery-with-wmic",
+      "description": "The following analytic detects the execution of `wmic.exe` with command-line arguments used to query for domain users. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on specific command-line patterns indicative of domain account discovery. This activity is significant as it often precedes lateral movement or privilege escalation attempts by adversaries. If confirmed malicious, this behavior could allow attackers to map out user accounts within the domain, facilitat",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--04c4aa7e-c47b-585d-8ce2-c3c0f5a36e82"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--a3a6d6d4-9af8-5acb-b666-0a4d0b2d58b7",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1087.002",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1087.002"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--04c4aa7e-c47b-585d-8ce2-c3c0f5a36e82",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1087.002",
+      "technique_id": "T1087.002",
+      "technique_ref": "attack-pattern--a3a6d6d4-9af8-5acb-b666-0a4d0b2d58b7",
+      "description": "The following analytic detects the execution of `wmic.exe` with command-line arguments used to query for domain users. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on specific command-line patterns indicative of domain account discovery. This activity is significant as it often precedes lateral movement or privilege escalation attempts by adversaries. If confirmed malicious, this behavior could allow attackers to map out user accounts within the domain, facilitat",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--395c58f6-6441-5927-8a26-40a2c1ac0eff",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--9e0dda00-bc92-5f33-a398-1166be809099",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--9e0dda00-bc92-5f33-a398-1166be809099",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--b49937f3-1915-5698-806e-077076be16d5",
+      "created_by_ref": "identity--9e0dda00-bc92-5f33-a398-1166be809099",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-credential-dumping-lsass-memory-createdump",
+      "description": "The following analytic detects the use of CreateDump.exe to perform a process dump. This binary is not native to Windows and is often introduced by third-party applications, including PowerShell 7. The detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names, GUIDs, and complete command-line executions. This activity is significant as it may indicate an attempt to dump LSASS memory, which can be used to extract credentials. If confirmed malicious, thi",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--3f327559-a9a5-5349-9aef-edb6bc68c067"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--66744578-802b-5f15-a1e5-fe1ba552389f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1003.001",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1003.001"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--3f327559-a9a5-5349-9aef-edb6bc68c067",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1003.001",
+      "technique_id": "T1003.001",
+      "technique_ref": "attack-pattern--66744578-802b-5f15-a1e5-fe1ba552389f",
+      "description": "The following analytic detects the use of CreateDump.exe to perform a process dump. This binary is not native to Windows and is often introduced by third-party applications, including PowerShell 7. The detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names, GUIDs, and complete command-line executions. This activity is significant as it may indicate an attempt to dump LSASS memory, which can be used to extract credentials. If confirmed malicious, thi",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

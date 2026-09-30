@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--c8cbb1db-3949-563d-bb50-0235baacd9f4",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--571776f5-7a24-5695-8c61-d4ea9615b5ce",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--571776f5-7a24-5695-8c61-d4ea9615b5ce",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--391831f9-a402-5ea6-922d-a24e4a054fb5",
+      "created_by_ref": "identity--571776f5-7a24-5695-8c61-d4ea9615b5ce",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-audit-policy-security-descriptor-tampering-via-auditpol",
+      "description": "The following analytic identifies the execution of `auditpol.exe` with the \"/set\" flag, and \"/sd\" command-line arguments used to modify the security descriptor of the audit policy. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line executions. This activity can be significant as it indicates potential defense evasion by adversaries or Red Teams, aiming to limit data that can be leveraged for detections and audits. An attacker, can disa",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--899cc810-11ed-54cb-99b5-e1d2f4d58f0f"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--186f6ef5-1cd3-5dbe-8afc-e3e8d8cdd0dd",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.002",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1562.002"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--899cc810-11ed-54cb-99b5-e1d2f4d58f0f",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1562.002",
+      "technique_id": "T1562.002",
+      "technique_ref": "attack-pattern--186f6ef5-1cd3-5dbe-8afc-e3e8d8cdd0dd",
+      "description": "The following analytic identifies the execution of `auditpol.exe` with the \"/set\" flag, and \"/sd\" command-line arguments used to modify the security descriptor of the audit policy. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line executions. This activity can be significant as it indicates potential defense evasion by adversaries or Red Teams, aiming to limit data that can be leveraged for detections and audits. An attacker, can disa",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}

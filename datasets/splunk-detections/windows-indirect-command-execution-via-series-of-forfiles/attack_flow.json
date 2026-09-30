@@ -1,0 +1,79 @@
+{
+  "type": "bundle",
+  "id": "bundle--af017221-e375-52c8-93ca-3df340988654",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "spec_version": "2.1",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "created_by_ref": "identity--ac85ba18-c649-55c1-b6db-052522198d0d",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--ac85ba18-c649-55c1-b6db-052522198d0d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--b946b9c7-9046-5c03-85a9-3b00a3b9a45e",
+      "created_by_ref": "identity--ac85ba18-c649-55c1-b6db-052522198d0d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Detection technique coverage: windows-indirect-command-execution-via-series-of-forfiles",
+      "description": "The following analytic detects excessive usage of the forfiles.exe process, which is often indicative of post-exploitation activities. The detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process execution logs that include process GUID, process name, and parent process. This activity is significant because forfiles.exe can be abused to execute commands on multiple files, a technique used by ransomware like Prestige. If confirmed malicious, this behavior co",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--25d145a9-a4ad-5f02-9754-c6aecfdbf2ae"
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--4e8c0e73-ce2a-58b2-a627-26840440cf0a",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1202",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1202"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--25d145a9-a4ad-5f02-9754-c6aecfdbf2ae",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "T1202",
+      "technique_id": "T1202",
+      "technique_ref": "attack-pattern--4e8c0e73-ce2a-58b2-a627-26840440cf0a",
+      "description": "The following analytic detects excessive usage of the forfiles.exe process, which is often indicative of post-exploitation activities. The detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process execution logs that include process GUID, process name, and parent process. This activity is significant because forfiles.exe can be abused to execute commands on multiple files, a technique used by ransomware like Prestige. If confirmed malicious, this behavior co",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    }
+  ]
+}
