@@ -1,6 +1,6 @@
 metadata:
   name: currentis-operation-black-start
-  version: 2.0.1
+  version: 2.1.0
   description: >-
     Operation Black Start - a fictional ICS/OT intrusion at the fictional utility "Currentis Energy"
     (domain currentis.local), built as replayable synthetic security telemetry for detection
@@ -85,7 +85,8 @@ files:
   - {path: data/microsoft_winevtlog.xml.gz, description: 'Windows Sysmon + Security + PowerShell across all Currentis hosts (attack + baseline)', format: xml, sourcetype: XmlWinEventLog, schema: windows_events_xml, event_count: 93104, log_source: {vendor: Microsoft, product: Windows, category: winevtlog}}
   - {path: data/zeek_dns.jsonl.gz, description: 'Zeek DNS logs (name-resolution baseline)', format: jsonl, sourcetype: "zeek:dns", schema: native, event_count: 45235, log_source: {vendor: Zeek, product: Zeek, category: dns}}
   - {path: data/zeek_conn.jsonl.gz, description: 'Zeek connection logs (incl. the C2 beacon and exfil to the documented indicator)', format: jsonl, sourcetype: "zeek:conn", schema: native, event_count: 30897, log_source: {vendor: Zeek, product: Zeek, category: conn}}
-  - {path: data/linux_syslog.log.gz, description: 'Linux syslog (proxy, Zeek sensors, baseline hosts)', format: text, sourcetype: "linux:syslog", schema: native, event_count: 1247, log_source: {vendor: Linux, product: syslog, category: syslog}}
+  - {path: data/squid_access.log.gz, description: 'Squid proxy access log (currentis-proxy web traffic)', format: text, sourcetype: "squid:access", schema: native, event_count: 979, log_source: {vendor: Squid, product: Squid, category: access}}
+  - {path: data/linux_syslog.log.gz, description: 'Linux syslog (currentis-proxy sshd and systemd session events)', format: text, sourcetype: "linux:syslog", schema: native, event_count: 268, log_source: {vendor: Linux, product: syslog, category: syslog}}
   - {path: data/zeek_http.jsonl.gz, description: 'Zeek HTTP logs (incl. the HTTP C2 beacon requests)', format: jsonl, sourcetype: "zeek:http", schema: native, event_count: 768, log_source: {vendor: Zeek, product: Zeek, category: http}}
   - {path: data/slack_messages.jsonl.gz, description: 'Slack persona chatter (human baseline / needle-in-haystack)', format: jsonl, sourcetype: slack, schema: native, event_count: 404, log_source: {vendor: Slack, product: Slack, category: messages}}
   - {path: data/exchange_message_tracking.log.gz, description: 'Exchange message tracking (incl. the poisoned NERC CIP-010 document to rchen + 2 others)', format: text, sourcetype: "MSExchange:MessageTracking", schema: native, event_count: 14, log_source: {vendor: Microsoft, product: Exchange, category: message_tracking}}
@@ -128,9 +129,10 @@ provenance:
       email). EDR alert telemetry is not included (the lab EDR covered only the domain controller and
       Exchange host). The final exfil (02:45) lands slightly after the log clear (02:30).
       v2.0.1 causal-window trim: removed 72 C2-indicator events (121.43.243.13) before the beacon launch (cutoff 2026-06-09T01:48:26Z) so the first beacon connection follows the prompt-injection initial access.
+      v2.1.0 file split: the former linux_syslog.log.gz mixed two log sources, so it was split into squid_access.log.gz (979 Squid proxy access lines, sourcetype squid:access) and linux_syslog.log.gz (268 BSD syslog lines, sourcetype linux:syslog). No events were added or removed.
   verification:
-    source_counts: {microsoft_winevtlog: 93104, zeek_conn: 30897, zeek_dns: 45235, zeek_http: 768, exchange_message_tracking: 14, slack_messages: 404, linux_syslog: 1247}
-    dest_counts: {microsoft_winevtlog: 93104, zeek_conn: 30897, zeek_dns: 45235, zeek_http: 768, exchange_message_tracking: 14, slack_messages: 404, linux_syslog: 1247}
+    source_counts: {microsoft_winevtlog: 93104, zeek_conn: 30897, zeek_dns: 45235, zeek_http: 768, exchange_message_tracking: 14, slack_messages: 404, squid_access: 979, linux_syslog: 268}
+    dest_counts: {microsoft_winevtlog: 93104, zeek_conn: 30897, zeek_dns: 45235, zeek_http: 768, exchange_message_tracking: 14, slack_messages: 404, squid_access: 979, linux_syslog: 268}
 defaults:
   echo:
     delta_factor: 1.0
