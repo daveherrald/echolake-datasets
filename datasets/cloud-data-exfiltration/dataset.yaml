@@ -1,0 +1,113 @@
+metadata:
+  attack_flow:
+    path: attack_flow.json
+    format: stix-2.1
+    schema_version: "2.0.0"
+    description: S1-S8 leaked SSH key to S3 training-data exfiltration chain
+  name: cloud-data-exfiltration
+  version: 1.0.0
+  description: >-
+    A leaked SSH private key leads to theft of ML training data from an AWS account. A developer
+    pushes a private key to a GitHub repository, and secret scanning raises an alert under three
+    minutes later. Five minutes after the push a new IP logs into an EC2 development host with the
+    key, steals the instance role's credentials from the IMDSv2 metadata service, enumerates IAM
+    roles and S3, syncs a training-data bucket (65 objects) to the host, and pulls about 507 MB
+    back over SFTP (526 MB of flow-log egress). The developer later resolves the alert and pushes a follow-up commit. Neither
+    step revokes the key or the role credentials. Five telemetry sources must be correlated: GitHub
+    organization audit, the host's auth.log, CrowdStrike Falcon Data Replicator events from the
+    host, AWS CloudTrail, and VPC flow logs. 348,963 events over 71 hours
+    (2026-10-11 01:00 to 2026-10-14 00:00 UTC), mostly account and internet background, with the
+    intrusion on 2026-10-13 between 18:50 and 19:47 UTC.
+  author: Dave Herrald
+  created: '2026-10-16'
+  license: CC0-1.0
+  tags:
+  - cloud
+  - aws
+  - cloudtrail
+  - vpc-flow-logs
+  - crowdstrike
+  - fdr
+  - edr
+  - github
+  - secret-scanning
+  - leaked-credentials
+  - ssh
+  - imds
+  - s3
+  - exfiltration
+  - echolake
+  mitre_attack:
+    techniques:
+    - {id: T1552.004, name: 'Unsecured Credentials: Private Keys', tactics: [credential-access]}
+    - {id: T1078, name: Valid Accounts, tactics: [defense-evasion, persistence, privilege-escalation, initial-access]}
+    - {id: T1021.004, name: 'Remote Services: SSH', tactics: [lateral-movement]}
+    - {id: T1082, name: System Information Discovery, tactics: [discovery]}
+    - {id: T1033, name: System Owner/User Discovery, tactics: [discovery]}
+    - {id: T1552.005, name: 'Unsecured Credentials: Cloud Instance Metadata API', tactics: [credential-access]}
+    - {id: T1078.004, name: 'Valid Accounts: Cloud Accounts', tactics: [defense-evasion, persistence, privilege-escalation, initial-access]}
+    - {id: T1087.004, name: 'Account Discovery: Cloud Account', tactics: [discovery]}
+    - {id: T1619, name: Cloud Storage Object Discovery, tactics: [discovery]}
+    - {id: T1530, name: Data from Cloud Storage, tactics: [collection]}
+    - {id: T1074.001, name: 'Data Staged: Local Data Staging', tactics: [collection]}
+    - {id: T1048.002, name: 'Exfiltration Over Alternative Protocol: Exfiltration Over Asymmetric Encrypted Non-C2 Protocol', tactics: [exfiltration]}
+    tactics: [initial-access, credential-access, discovery, lateral-movement, collection, exfiltration]
+  timestamp_range:
+    earliest: '2026-10-11T01:00:03Z'
+    latest: '2026-10-13T23:59:57Z'
+    field: event time per source (see files)
+files:
+  bundled:
+  - path: data/aws_cloudtrail.jsonl.gz
+    description: AWS CloudTrail management and S3 data events for the account. The instance-role recon and the 65-object GetObject burst are at 18:59 to 19:04 UTC on 2026-10-13. Time field eventTime.
+    format: jsonl
+    schema: raw
+    sourcetype: 'aws:cloudtrail'
+    event_count: 261801
+    log_source: {vendor: AWS, product: CloudTrail, category: cloudtrail}
+  - path: data/aws_vpc_flow.jsonl.gz
+    description: VPC flow logs for the victim instance's interface, one JSON object per flow record. Shows the S3 pull and the 526 MB SFTP egress. Time fields start and end (epoch seconds).
+    format: jsonl
+    schema: raw
+    sourcetype: 'aws:vpcflow:json'
+    event_count: 73752
+    log_source: {vendor: AWS, product: VPC Flow Logs, category: network}
+  - path: data/crowdstrike_fdr.jsonl.gz
+    description: CrowdStrike Falcon Data Replicator events from the victim host (process, file, network, sensor telemetry), plus Falcon API audit events. Time field timestamp (epoch-ms string for sensor events, ISO8601 for audit events).
+    format: jsonl
+    schema: raw
+    sourcetype: 'crowdstrike:fdr'
+    event_count: 12293
+    log_source: {vendor: CrowdStrike, product: Falcon Data Replicator, category: edr}
+  - path: data/github_audit.jsonl.gz
+    description: GitHub organization audit log. Contains the key leak push, the secret-scanning alert and its resolution, plus organization background. Time fields timestamp and created_at (epoch ms).
+    format: jsonl
+    schema: raw
+    sourcetype: 'github:audit'
+    event_count: 230
+    log_source: {vendor: GitHub, product: GitHub Enterprise Cloud, category: audit}
+  - path: data/linux_auth.jsonl.gz
+    description: /var/log/auth.log from the victim host, shipped by Fluent Bit (syslog line in message). Internet SSH brute force, the developer's five work sessions, and the attacker's two publickey logins and SFTP session. Time is the RFC3339 timestamp at the start of message.
+    format: jsonl
+    schema: raw
+    sourcetype: 'linux_secure:fluentbit'
+    event_count: 887
+    log_source: {vendor: Linux, product: OpenSSH, category: authentication}
+defaults:
+  echo:
+    delta_factor: 1.0
+    base_time: earliest
+    target_time: now
+    prevent_future: true
+  schema: raw
+provenance:
+  build:
+    notes: >-
+      Native log payloads exported one event per line, sorted by event time, from a lab
+      collection. Every line is the original JSON record with no envelope. Identifying names,
+      accounts and third-party secrets were removed or replaced with fictional values before
+      export.
+  verification:
+    source_counts: {aws_cloudtrail: 261801, aws_vpc_flow: 73752, crowdstrike_fdr: 12293, github_audit: 230, linux_auth: 887}
+    total_events: 348963
+    note: Every line parses as JSON, and EchoLake extracts a base timestamp from every line using the listed sourcetypes. The lead-in includes the developer's own benign SSH sessions and git/python work, correlated with his GitHub audit events.

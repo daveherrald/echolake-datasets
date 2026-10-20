@@ -9,6 +9,7 @@ Curated security datasets for detection engineering, threat hunting, and securit
 | [datasets/art/](datasets/art/) | 1,654 | Atomic Red Team telemetry — Windows security events from 250 MITRE ATT&CK techniques |
 | [datasets/paws-operation-yarn-ball/](datasets/paws-operation-yarn-ball/) | 1 | Multi-stage attack simulation with Sliver C2 on Active Directory (~820K events) |
 | [datasets/currentis-operation-black-start/](datasets/currentis-operation-black-start/) | 1 | Agentic-AI-to-OT intrusion at a fictional utility, with an IT-to-OT pivot and quiet SCADA pre-positioning (~172K events) |
+| [datasets/cloud-data-exfiltration/](datasets/cloud-data-exfiltration/) | 1 | Leaked SSH key to IMDS credential theft and S3 training-data exfiltration in AWS (~349K events) |
 | [datasets/bots/](datasets/bots/) | 7 | Splunk Boss of the SOC competition datasets (v1, v2, v3 + 2026 time-shifted variants) |
 | [datasets/splunk-detections/](datasets/splunk-detections/) | 1,866 | Splunk Security Content detection datasets with sample attack data |
 
@@ -27,6 +28,12 @@ Full multi-stage attack simulation on a Windows Active Directory environment wit
 A fictional ICS/OT intrusion at the fictional utility Currentis Energy, fusing a 2026-era agentic AI initial-access vector with a classic vendor-account IT-to-OT pivot. The 8-stage kill chain runs from a prompt injection against an AI coding assistant, through living-off-the-land recon, a Sliver HTTP C2 beacon, LSASS credential theft, an IT-to-OT pivot on a stolen turbine-vendor account, OT reconnaissance, and low-and-slow exfiltration, ending in quiet pre-positioning on a SCADA jump host rather than detonation. ~172K events across Windows (Sysmon, Security, PowerShell), Zeek, Exchange, Slack, and Linux syslog, with seven personas of office baseline as the haystack. The C2 address is a publicly documented Cobalt Strike indicator so a threat-intel detection fires on replay. GLACIER DRIFT is a fictional actor, modeled on but not attributed to public reporting.
 
 See [datasets/currentis-operation-black-start/README.md](datasets/currentis-operation-black-start/README.md) for full details.
+
+## Cloud Data Exfiltration
+
+A developer pushes an SSH private key to GitHub, and minutes later an outside IP uses it to log into an EC2 development host. The intruder steals the instance role's credentials from IMDSv2, enumerates IAM and S3, syncs an ML training-data bucket to the host and pulls about 526 MB out over SFTP, while the secret-scanning alert is resolved without revoking anything. ~349K native-format events across AWS CloudTrail, VPC flow logs, CrowdStrike Falcon Data Replicator, the host's auth.log and GitHub organization audit, captured in an isolated lab AWS account with fictional names. Ships with a MITRE Attack Flow file.
+
+See [datasets/cloud-data-exfiltration/README.md](datasets/cloud-data-exfiltration/README.md) for full details.
 
 ## Boss of the SOC (BOTS)
 
