@@ -5,6 +5,8 @@
 
 The CTID process_injection emulator creates a suspended svchost.exe, allocates and writes shellcode into it, and runs it via CreateRemoteThread; the injected shellcode performs in-memory discovery (whoami, netstat, qwinsta, tasklist), then cleans up.
 
+In this capture the suspended-process creation, the OpenProcess calls (Sysmon EID 10), and the CreateRemoteThread call (Sysmon EID 8) are present. The memory allocation and write steps and the injected discovery commands produced no telemetry, since Sysmon does not instrument those calls, so detections should key on the EID 8 and EID 10 signals rather than on discovery activity. The per-step attribution in `dataset.yaml` under `badactors_quality` records which steps were observed.
+
 ## Telemetry
 - **sysmon**: 63 events (EID: 1, 5, 7, 8, 10, 11, 13, 15, 17, 25)
 - **security**: 54 events (EID: 4624, 4672, 4688, 4702)

@@ -10,7 +10,8 @@ Curated security datasets for detection engineering, threat hunting, and securit
 | [datasets/paws-operation-yarn-ball/](datasets/paws-operation-yarn-ball/) | 1 | Multi-stage attack simulation with Sliver C2 on Active Directory (~820K events) |
 | [datasets/currentis-operation-black-start/](datasets/currentis-operation-black-start/) | 1 | Agentic-AI-to-OT intrusion at a fictional utility, with an IT-to-OT pivot and quiet SCADA pre-positioning (~172K events) |
 | [datasets/cloud-data-exfiltration/](datasets/cloud-data-exfiltration/) | 1 | Leaked SSH key to IMDS credential theft and S3 training-data exfiltration in AWS (~349K events) |
-| [datasets/bots/](datasets/bots/) | 7 | Splunk Boss of the SOC competition datasets (v1, v2, v3 + 2026 time-shifted variants) |
+| datasets/ctid-*/ | 4 | CTID micro-emulation datasets: single-technique Windows telemetry from MITRE CTID emulation plans, each published with a quality score (process injection, named pipes, two log-clearing variants) |
+| [datasets/bots/](datasets/bots/) | 8 | Splunk Boss of the SOC competition datasets (v1, v2, v3 + 2026 time-shifted variants) |
 | [datasets/splunk-detections/](datasets/splunk-detections/) | 1,866 | Splunk Security Content detection datasets with sample attack data |
 
 ## Atomic Red Team Telemetry
@@ -35,11 +36,17 @@ A developer pushes an SSH private key to GitHub, and minutes later an outside IP
 
 See [datasets/cloud-data-exfiltration/README.md](datasets/cloud-data-exfiltration/README.md) for full details.
 
+## CTID Micro-Emulation
+
+Four single-technique datasets captured by running MITRE Center for Threat-Informed Defense micro emulation plans on an instrumented Windows 11 workstation: [ctid-process_injection](datasets/ctid-process_injection/) (process injection, T1055), [ctid-named_pipes](datasets/ctid-named_pipes/) (named pipe creation and connection), [ctid-log_clearing](datasets/ctid-log_clearing/) (Security log clear, T1070.001), and [ctid-log_clearing_full](datasets/ctid-log_clearing_full/) (Security, System, and Application clears). Each ships a `badactors_quality` block and a `report.html` recording per-step attribution, so you can see which behavioral steps produced telemetry and which were blind to the sensors. A fifth plan, reflective loading, was withdrawn because the capture did not surface the technique's behavior.
+
 ## Boss of the SOC (BOTS)
 
 Security datasets from Splunk's Boss of the SOC competition series. Each version contains realistic attack scenarios with multi-source telemetry (Windows event logs, network traffic, IDS alerts, web server logs). Includes BOTSv1 (2016), BOTSv2 (2017), BOTSv3 (2018), a BOTSv2 attack-only subset, and 2026 time-shifted variants with timestamps moved forward to 2026 for use in environments that expect current-year data.
 
 See [datasets/bots/README.md](datasets/bots/README.md) for full details.
+
+These are third-party datasets created and published by Splunk, included here as-is. Per-dataset README files and MITRE ATT&CK annotations are authored only for the datasets originated in this project, not for data we did not create.
 
 ## Splunk Detection Datasets
 
@@ -49,6 +56,6 @@ See [datasets/splunk-detections/README.md](datasets/splunk-detections/README.md)
 
 ## License
 
-- **ART, PAWS, and Currentis datasets:** [CC0 1.0 Universal (Public Domain Dedication)](LICENSE)
+- **ART, PAWS, Currentis, Cloud Data Exfiltration, and CTID datasets:** [CC0 1.0 Universal (Public Domain Dedication)](LICENSE)
 - **BOTS datasets:** [CC0-1.0](https://creativecommons.org/publicdomain/zero/1.0/) by Splunk, Inc.
 - **Splunk detection datasets:** [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0) by Splunk, Inc.
