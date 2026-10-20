@@ -5,7 +5,7 @@ metadata:
     schema_version: "2.0.0"
     description: S1-S8 leaked SSH key to S3 training-data exfiltration chain
   name: cloud-data-exfiltration
-  version: 1.0.0
+  version: 1.1.0
   description: >-
     A leaked SSH private key leads to theft of ML training data from an AWS account. A developer
     pushes a private key to a GitHub repository, and secret scanning raises an alert under three
@@ -100,6 +100,328 @@ defaults:
     target_time: now
     prevent_future: true
   schema: raw
+entities:
+- id: dev-host
+  type: infrastructure
+  name: ip-172-31-24-50
+  role: victim-host
+  description: Ubuntu EC2 development host (instance i-0712927224ce899b4, us-west-1) with a CrowdStrike Falcon sensor
+    and auth.log shipped by Fluent Bit; its instance role can read the training-data bucket.
+  infrastructure_types:
+  - server
+  observables:
+  - dev-host-private-ip
+  - dev-host-public-ip
+  - dev-host-name
+- id: s-onarake
+  type: user-account
+  account_login: s.onarake
+  account_type: unix
+  role: victim
+  description: Developer whose SSH private key leaked through a committed test fixture; works from 75.125.237.59
+    and is also a GitHub actor across the acme orgs.
+  observables:
+  - dev-home-ip
+- id: model-dev-role
+  type: user-account
+  account_login: model-dev-05-readonly
+  account_type: aws-iam-role
+  is_service_account: true
+  role: compromised-service
+  description: The host's instance role, read-only on the training-data bucket; its credentials were pulled from
+    IMDSv2 and used for cloud discovery and the bucket sync.
+- id: acme-research
+  type: identity
+  name: Acme Research
+  identity_class: organization
+  sectors:
+  - technology
+  role: victim-organization
+  description: Fictional ML company keeping training data in S3, with GitHub organizations acme-research, acme-platform,
+    acme-quant, and acme-infra under the business acme-research-llc.
+- id: intruder
+  type: infrastructure
+  name: Intruder host 54.193.215.120
+  role: attacker
+  description: 'Unattributed outside host on an AWS EC2 address: the SSH login source for the intrusion and the
+    SFTP destination for the stolen data.'
+  infrastructure_types:
+  - exfiltration
+  observables:
+  - intruder-ip
+- id: imds
+  type: infrastructure
+  name: EC2 instance metadata service
+  role: abused-service
+  description: IMDSv2 endpoint the intruder queried for a token and then the instance role credentials.
+  infrastructure_types:
+  - unknown
+  observables:
+  - imds-ip
+observables:
+- id: dev-host-private-ip
+  type: ipv4-addr
+  value: 172.31.24.50
+- id: dev-host-public-ip
+  type: ipv4-addr
+  value: 13.57.16.209
+  indicator_types:
+  - anomalous-activity
+  kill_chain_phases:
+  - discovery
+  techniques:
+  - T1087.004
+  confidence: 60
+  description: 'Source of the stolen-role CloudTrail calls: the host''s own public IP, which is why role misuse
+    from the host looks like the host.'
+- id: dev-host-name
+  type: domain-name
+  value: ip-172-31-24-50
+- id: dev-home-ip
+  type: ipv4-addr
+  value: 75.125.237.59
+  indicator_types:
+  - benign
+  confidence: 90
+  description: The developer's legitimate address. Every genuine s.onarake session comes from here, which makes
+    the source IP, not the key, the investigation pivot.
+- id: intruder-ip
+  type: ipv4-addr
+  value: 54.193.215.120
+  indicator_types:
+  - malicious-activity
+  kill_chain_phases:
+  - initial-access
+  - exfiltration
+  techniques:
+  - T1021.004
+  - T1078
+  - T1048.002
+  confidence: 90
+  first_seen: '2026-10-13T18:55:44Z'
+  last_seen: '2026-10-13T19:07:46Z'
+  description: Never used by this account before. Logs in with the leaked key at 18:55:44 and receives 526,475,698
+    bytes over SFTP at 19:07:42 to 19:07:46.
+- id: imds-ip
+  type: ipv4-addr
+  value: 169.254.169.254
+  indicator_types:
+  - anomalous-activity
+  kill_chain_phases:
+  - credential-access
+  techniques:
+  - T1552.005
+  confidence: 70
+  first_seen: '2026-10-13T18:58:12Z'
+  description: curl to the metadata service for an IMDSv2 token and then the role credentials, from an interactive
+    SSH session.
+- id: leaked-key-fixture
+  type: file
+  name: sample.bin
+  indicator_types:
+  - malicious-activity
+  kill_chain_phases:
+  - credential-access
+  techniques:
+  - T1552.004
+  confidence: 85
+  first_seen: '2026-10-12T14:40:00Z'
+  description: The developer's ~/.ssh/id_rsa copied to training/fixtures/sample.bin on Oct 12 at 14:40 as a tokenizer
+    test fixture, then pushed to the datalake-utils repository.
+- id: gh-secret-alert
+  type: indicator
+  name: GitHub secret-scanning alert for an SSH private key
+  pattern_type: sigma
+  pattern: |
+    logsource:
+      product: github
+      service: audit
+    detection:
+      selection:
+        action: 'secret_scanning_alert.create'
+        alert.secret_type: 'ssh_private_key'
+      condition: selection
+  indicator_types:
+  - anomalous-activity
+  kill_chain_phases:
+  - credential-access
+  techniques:
+  - T1552.004
+  confidence: 80
+  first_seen: '2026-10-13T18:52:41Z'
+  description: Nine secret-scanning events fire across the orgs in the window; the scenario alert is the only ssh_private_key
+    alert on datalake-utils, resolved at 19:22:46 without the key being revoked.
+- id: training-bucket
+  type: url
+  value: s3://jn-model-training-data-5233
+  indicator_types:
+  - anomalous-activity
+  kill_chain_phases:
+  - collection
+  techniques:
+  - T1530
+  confidence: 75
+  first_seen: '2026-10-13T19:02:43Z'
+  last_seen: '2026-10-13T19:04:45Z'
+  description: 'Training-data bucket listed at 19:02:43 and synced to ~/data at 19:04:43 to 19:04:45: 65 GetObject
+    calls, about 514 MB of S3 ingress. The daily audit scanners also list it, so the sync, not the list, is the
+    signal.'
+- id: aws-cli-staging
+  type: directory
+  path: /var/tmp
+  indicator_types:
+  - anomalous-activity
+  kill_chain_phases:
+  - discovery
+  techniques:
+  - T1087.004
+  confidence: 50
+  description: An AWS CLI unpacked under /var/tmp ran the identity, IAM, and S3 discovery calls.
+- id: sftp-read
+  type: indicator
+  name: sftp-server bulk read from a non-home address
+  pattern_type: sigma
+  pattern: |
+    logsource:
+      product: linux
+      service: auth
+    detection:
+      selection:
+        program: 'sftp-server'
+        message|contains: 'open'
+      condition: selection
+  indicator_types:
+  - anomalous-activity
+  kill_chain_phases:
+  - exfiltration
+  techniques:
+  - T1048.002
+  confidence: 70
+  first_seen: '2026-10-13T19:07:43Z'
+  last_seen: '2026-10-13T19:07:46Z'
+  description: Seven files, about 507 MB per sftp-server, read in four seconds by the second key login.
+kill_chain:
+- id: S1
+  name: Leaked private key found in a public repository
+  tactic: credential-access
+  techniques:
+  - T1552.004
+  assets:
+  - s-onarake
+  - dev-host
+  - acme-research
+  observables:
+  - leaked-key-fixture
+  - gh-secret-alert
+  execution_start: '2026-10-13T18:50:14Z'
+  execution_end: '2026-10-13T18:52:41Z'
+  description: 'A developer pushes an SSH private key to the datalake-utils repository at 18:50:14 UTC. GitHub secret
+    scanning raises an ssh_private_key alert at 18:52:41. Evidence: github_audit git.push and secret_scanning_alert.create.'
+- id: S2
+  name: SSH login to the dev host with the leaked key
+  tactic: initial-access
+  techniques:
+  - T1021.004
+  - T1078
+  assets:
+  - intruder
+  - dev-host
+  - s-onarake
+  observables:
+  - intruder-ip
+  - dev-home-ip
+  execution_start: '2026-10-13T18:55:44Z'
+  description: 'At 18:55:44 a new IP (54.193.215.120) logs in as the developer with the leaked key (publickey authentication),
+    using the account as a valid account. Evidence: linux_auth Accepted publickey, VPC flows to port 22. The account''s
+    legitimate sessions, including one ending at 18:52 the same day, all come from 75.125.237.59.'
+- id: S3
+  name: Host discovery
+  tactic: discovery
+  techniques:
+  - T1082
+  - T1033
+  assets:
+  - dev-host
+  execution_start: '2026-10-13T18:56:42Z'
+  description: 'At 18:56:42 the intruder runs id, hostname, uname -a, reads os-release and lists the home directory.
+    Evidence: crowdstrike_fdr ProcessRollup2.'
+- id: S4
+  name: Instance role credentials stolen from IMDSv2
+  tactic: credential-access
+  techniques:
+  - T1552.005
+  assets:
+  - dev-host
+  - imds
+  - model-dev-role
+  observables:
+  - imds-ip
+  execution_start: '2026-10-13T18:58:12Z'
+  description: 'At 18:58:12 curl requests an IMDSv2 token and then the instance role credentials from 169.254.169.254.
+    Evidence: crowdstrike_fdr command lines.'
+- id: S5
+  name: Cloud identity, IAM and S3 discovery with the stolen role
+  tactic: discovery
+  techniques:
+  - T1087.004
+  assets:
+  - model-dev-role
+  - dev-host
+  observables:
+  - dev-host-public-ip
+  - aws-cli-staging
+  execution_start: '2026-10-13T18:59:23Z'
+  execution_end: '2026-10-13T19:00:48Z'
+  description: 'From 18:59:23 an aws cli unpacked under /var/tmp runs sts get-caller-identity, s3 ls, iam get-role,
+    list-attached-role-policies and list-roles, and is denied ec2 describe-instances. The calls come from the instance
+    public IP 13.57.16.209. Evidence: aws_cloudtrail under the model-dev-05-readonly role, plus matching crowdstrike_fdr
+    commands.'
+- id: S6
+  name: Training-data bucket listed and synced to the host
+  tactic: collection
+  techniques:
+  - T1530
+  assets:
+  - model-dev-role
+  - dev-host
+  observables:
+  - training-bucket
+  execution_start: '2026-10-13T19:02:43Z'
+  execution_end: '2026-10-13T19:04:45Z'
+  description: 'At 19:02:43 the intruder lists jn-model-training-data-5233, and at 19:04:43 to 19:04:45 runs aws
+    s3 sync into ~/data. That is 65 GetObject calls and about 514 MB of S3 ingress. Evidence: aws_cloudtrail ListObjects
+    and GetObject, aws_vpc_flow from S3 prefixes, crowdstrike_fdr.'
+- id: S7
+  name: Data exfiltrated over SFTP
+  tactic: exfiltration
+  techniques:
+  - T1048.002
+  assets:
+  - dev-host
+  - intruder
+  observables:
+  - intruder-ip
+  - sftp-read
+  execution_start: '2026-10-13T19:07:42Z'
+  execution_end: '2026-10-13T19:07:46Z'
+  description: 'At 19:07:42 a second key login opens an SFTP session that reads 7 files (about 507 MB per sftp-server)
+    at 19:07:43 to 19:07:46. VPC flow shows 526,475,698 bytes out to 54.193.215.120. Evidence: linux_auth sftp-server,
+    aws_vpc_flow.'
+- id: S8
+  name: Alert resolved without revoking access
+  tactic: persistence
+  techniques:
+  - T1078
+  assets:
+  - s-onarake
+  - acme-research
+  observables:
+  - gh-secret-alert
+  execution_start: '2026-10-13T19:22:46Z'
+  execution_end: '2026-10-13T19:46:27Z'
+  description: 'At 19:22:46 the developer resolves the secret-scanning alert, then pushes at 19:42:12 and fetches
+    at 19:46:27. Nothing in the data shows the key being removed from authorized_keys or the role credentials being
+    revoked. Evidence: github_audit.'
 provenance:
   build:
     notes: >-

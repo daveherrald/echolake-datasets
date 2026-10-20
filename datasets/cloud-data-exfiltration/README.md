@@ -108,6 +108,12 @@ Before release, identifying values were replaced: person, company, product and a
 
 `dataset.yaml` carries per-file event counts and sourcetypes, and was verified by replaying the full dataset: 348,963 events processed, zero errors, every time field moved by an identical delta with no type changes.
 
+## Scenario Metadata and Attack Flow
+
+`dataset.yaml` describes the scenario in STIX 2.1 vocabulary: an `entities` block (the dev host as `infrastructure`, `s.onarake` and the instance role as `user-account`, Acme Research as an `identity`, the intruder host and the metadata service as `infrastructure`), an `observables` block (the ground-truth indicators, each typed as a STIX observable with its ATT&CK phases, techniques, and a confidence, or as a Sigma `indicator` for the GitHub alert and the SFTP read), and a `kill_chain` block (the eight stages with their techniques, the entities and observables involved, and UTC timing).
+
+`attack_flow.json` is a MITRE Attack Flow (a STIX 2.1 bundle with the Attack Flow 2.0.0 extension) built from those blocks with `echolake build-attack-flow`, so it never drifts from the manifest. Identifiers are deterministic, so rebuilding yields the same file.
+
 ## Replay
 
 ```bash

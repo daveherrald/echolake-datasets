@@ -1,6 +1,6 @@
 metadata:
   name: currentis-operation-black-start
-  version: 2.1.0
+  version: 2.2.0
   description: >-
     Operation Black Start - a fictional ICS/OT intrusion at the fictional utility "Currentis Energy"
     (domain currentis.local), built as replayable synthetic security telemetry for detection
@@ -51,10 +51,7 @@ metadata:
     - {id: T1482, name: Domain Trust Discovery, tactics: [discovery]}
     - {id: T1069.002, name: 'Permission Groups Discovery: Domain Groups', tactics: [discovery]}
     - {id: T1018, name: Remote System Discovery, tactics: [discovery]}
-    - {id: T1016, name: System Network Configuration Discovery, tactics: [discovery]}
-    - {id: T1049, name: System Network Connections Discovery, tactics: [discovery]}
     - {id: T1033, name: System Owner/User Discovery, tactics: [discovery]}
-    - {id: T1057, name: Process Discovery, tactics: [discovery]}
     - {id: T1036, name: Masquerading, tactics: [defense-evasion]}
     - {id: T1036.005, name: 'Masquerading: Match Legitimate Name or Location', tactics: [defense-evasion]}
     - {id: T1071.001, name: 'Application Layer Protocol: Web Protocols', tactics: [command-and-control]}
@@ -80,6 +77,11 @@ metadata:
     earliest: '2026-06-09T01:20:00Z'
     latest: '2026-06-09T02:50:00Z'
     field: _event_time
+  attack_flow:
+    path: attack_flow.json
+    format: stix-2.1
+    schema_version: 2.0.0
+    description: Eight-stage kill chain with entities and observables, built from this manifest by echolake build-attack-flow
 files:
   bundled:
   - {path: data/microsoft_winevtlog.xml.gz, description: 'Windows Sysmon + Security + PowerShell across all Currentis hosts (attack + baseline)', format: xml, sourcetype: XmlWinEventLog, schema: windows_events_xml, event_count: 93104, log_source: {vendor: Microsoft, product: Windows, category: winevtlog}}
@@ -105,6 +107,876 @@ environment:
     collector: Cribl Edge
     sysmon: SwiftOnSecurity config
     audit_policy: 'Security 4624/4663/4768/4769/1102; SACL on C:\OT and C:\Program Files\Helix Grid Systems'
+entities:
+- id: ws-rachel
+  type: infrastructure
+  name: CURRENTIS-WS-RACHEL
+  role: patient-zero
+  description: Rachel Chen's machine-learning workstation, deliberately EDR-free (Falcon pulled because it quarantined
+    the OpenClaw runtime), where the OpenClaw AI coding assistant ran and where the intrusion started.
+  infrastructure_types:
+  - workstation
+  observables:
+  - ws-rachel-ip
+  - ws-rachel-fqdn
+- id: dc01
+  type: infrastructure
+  name: CURRENTIS-DC01
+  role: monitored-pivot-path
+  description: Instrumented domain controller; the only monitored hop, it authenticates the lateral movement between
+    the two blind spots (4768/4769 for helixgrid-svc).
+  infrastructure_types:
+  - domain-controller
+  observables:
+  - dc01-ip
+  - dc01-fqdn
+- id: scada-jh-02
+  type: infrastructure
+  name: CURRENTIS-SCADA-JH-02
+  role: ot-target
+  description: Unmonitored OT jump host carrying the Helix Grid Systems OptiCore engineering software and the Unit
+    3 turbine configuration and alarm profile.
+  infrastructure_types:
+  - workstation
+  - control-system
+  observables:
+  - scada-jh-02-ip
+  - scada-jh-02-fqdn
+- id: exch
+  type: infrastructure
+  name: CURRENTIS-EXCH
+  role: mail-server
+  description: Exchange server that received and delivered the poisoned compliance document to three recipients.
+  infrastructure_types:
+  - mail-server
+  observables:
+  - exch-ip
+  - exch-fqdn
+- id: proxy
+  type: infrastructure
+  name: currentis-proxy
+  role: egress-proxy
+  description: Squid proxy on tcp 3128, the hosts' web egress path and the source of the Linux syslog and Squid
+    access log.
+  infrastructure_types:
+  - proxy
+  observables:
+  - proxy-ip
+- id: rchen
+  type: user-account
+  name: Rachel Chen
+  account_login: rchen
+  user_id: S-1-5-21-2928221834-3438643503-1157344558-1162
+  account_type: windows-domain
+  is_privileged: true
+  role: victim
+  description: ML engineer granted local admin in Slack for her model runtime and the OpenClaw agent, which she
+    wired to auto-act on email from the trusted compliance sender. The stage-0 agent chain and the cmdkey/mstsc
+    pivot run as rchen; the implant and recon run as SYSTEM.
+- id: helixgrid-svc
+  type: user-account
+  account_login: helixgrid-svc
+  account_type: windows-domain
+  is_service_account: true
+  role: compromised-service
+  description: Helix Grid Systems remote-support account (per MSA-2024-117). Its cached credential was harvested
+    from LSASS on the workstation and used with cmdkey and mstsc for the IT-to-OT RDP pivot, then for the OT file
+    reads. The account, not the host, is the anomaly.
+- id: currentis-energy
+  type: identity
+  name: Currentis Energy
+  identity_class: organization
+  sectors:
+  - energy
+  - utilities
+  role: victim-organization
+  description: Fictional utility, Active Directory domain currentis.local on VLAN 192.168.4.0/24, with a wind-farm
+    SCADA segment.
+- id: glacier-drift
+  type: threat-actor
+  name: GLACIER DRIFT
+  threat_actor_types:
+  - nation-state
+  role: attacker
+  description: Fictional state-aligned actor, modeled on but not attributed to public reporting.
+- id: sliver-c2
+  type: infrastructure
+  name: Sliver HTTP C2
+  role: attacker
+  description: HTTP command-and-control on tcp 8080 (beacon) and 8080, 8443, and 9009 (exfil); the lab address was
+    rewritten to a publicly documented Cobalt Strike indicator so a threat-intel detection fires on replay.
+  infrastructure_types:
+  - command-and-control
+  - exfiltration
+  observables:
+  - c2-ip
+  - c2-beacon-uri
+  - c2-exfil-8080
+  - c2-exfil-8443
+  - c2-beacon-ua
+- id: phish-sender
+  type: infrastructure
+  name: nerc-cip-portal.org compliance sender
+  role: attacker
+  description: The trusted compliance sender whose identity carried the poisoned NERC CIP-010 document; the domain
+    is never resolved in Zeek DNS, it exists only in the mail path and the injected prompt.
+  infrastructure_types:
+  - phishing
+  observables:
+  - phish-domain
+  - phish-sender-addr
+  - poison-msg
+  - poison-eml
+- id: openclaw
+  type: tool
+  name: OpenClaw AI coding assistant
+  role: abused-tool
+  description: Agentic coding assistant (node.exe, local qwen2.5:7b via ollama) wired to auto-run the Unit 3 review
+    on any notice from the compliance sender with no human in the loop; the injected instruction executed through
+    its shell tool.
+  observables:
+  - openclaw-run-agent
+  - cip010-review
+- id: sliver
+  type: tool
+  name: Sliver
+  tool_types:
+  - remote-access
+  role: attacker
+  description: Implant framework behind the masqueraded beacon binary.
+  observables:
+  - implant-bin
+  - clientsync-ps1
+observables:
+- id: ws-rachel-ip
+  type: ipv4-addr
+  value: 192.168.4.233
+- id: ws-rachel-fqdn
+  type: domain-name
+  value: currentis-ws-rachel.currentis.local
+- id: dc01-ip
+  type: ipv4-addr
+  value: 192.168.4.242
+- id: dc01-fqdn
+  type: domain-name
+  value: currentis-dc01.currentis.local
+- id: scada-jh-02-ip
+  type: ipv4-addr
+  value: 192.168.4.244
+- id: scada-jh-02-fqdn
+  type: domain-name
+  value: currentis-scada-jh-02.currentis.local
+- id: exch-ip
+  type: ipv4-addr
+  value: 192.168.4.245
+- id: exch-fqdn
+  type: domain-name
+  value: currentis-exch.currentis.local
+- id: proxy-ip
+  type: ipv4-addr
+  value: 192.168.4.250
+- id: c2-ip
+  type: ipv4-addr
+  value: 121.43.243.13
+  indicator_types:
+  - malicious-activity
+  kill_chain_phases:
+  - command-and-control
+  - exfiltration
+  techniques:
+  - T1071.001
+  - T1041
+  confidence: 50
+  first_seen: '2026-06-09T01:48:26Z'
+  last_seen: '2026-06-09T02:45:15Z'
+  description: Beacon destination from the workstation (tcp 8080) and exfiltration destination from the jump host
+    (tcp 8080, 8443, 9009); the only non-RFC1918 address either attack host contacts, used as a literal IP with
+    no DNS lookup. A publicly documented Cobalt Strike indicator (HTTP beacon, /push URI in the public profile,
+    Aliyun ASN, first seen 2026-05-22), so a low-confidence threat-intel detection fires on replay.
+- id: c2-beacon-uri
+  type: url
+  value: http://121.43.243.13:8080/scripts/bundles/bundles
+  indicator_types:
+  - malicious-activity
+  kill_chain_phases:
+  - command-and-control
+  techniques:
+  - T1071.001
+  confidence: 60
+  first_seen: '2026-06-09T01:48:26Z'
+  description: First beacon POST; later check-ins use randomized jquery-style paths under /scripts/, /script/, /bundles/,
+    and /javascripts/ with a short numeric query key.
+- id: c2-exfil-8080
+  type: url
+  value: http://121.43.243.13:8080/api/v1/upload
+  indicator_types:
+  - malicious-activity
+  kill_chain_phases:
+  - exfiltration
+  techniques:
+  - T1041
+  confidence: 80
+  first_seen: '2026-06-09T02:31:28Z'
+  description: Exfiltration POST from the jump host at 02:31:28.
+- id: c2-exfil-8443
+  type: url
+  value: http://121.43.243.13:8443/upload
+  indicator_types:
+  - malicious-activity
+  kill_chain_phases:
+  - exfiltration
+  techniques:
+  - T1041
+  confidence: 80
+  first_seen: '2026-06-09T02:43:58Z'
+  description: Exfiltration POST from the jump host at 02:43:58; the 02:45:12 transfer on tcp 9009 is a raw socket
+    write with no HTTP record.
+- id: c2-beacon-ua
+  type: indicator
+  name: Beacon User-Agent
+  pattern_type: sigma
+  pattern: |
+    logsource:
+      product: zeek
+      service: http
+    detection:
+      selection:
+        user_agent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.8287.614 Safari/537.36'
+        id.resp_h: '121.43.243.13'
+      condition: selection
+  indicator_types:
+  - malicious-activity
+  kill_chain_phases:
+  - command-and-control
+  techniques:
+  - T1071.001
+  confidence: 60
+- id: phish-domain
+  type: domain-name
+  value: nerc-cip-portal.org
+  indicator_types:
+  - malicious-activity
+  kill_chain_phases:
+  - initial-access
+  techniques:
+  - T1566
+  confidence: 80
+  description: Sender domain of the poisoned compliance document, which OpenClaw was configured to trust.
+- id: phish-sender-addr
+  type: email-addr
+  value: compliance-noreply@nerc-cip-portal.org
+  indicator_types:
+  - malicious-activity
+  kill_chain_phases:
+  - initial-access
+  techniques:
+  - T1566
+  confidence: 80
+- id: poison-msg
+  type: email-message
+  name: Poisoned NERC CIP-010 compliance message
+  is_multipart: false
+  subject: 'ACTION REQUIRED: CIP-010-4 Configuration Baseline Verification (Unit 3 SCADA)'
+  message_id: <cip010-20260609-unit3-scada@nerc-cip-portal.org>
+  date: '2026-06-09T01:38:27.529Z'
+  indicator_types:
+  - malicious-activity
+  kill_chain_phases:
+  - initial-access
+  techniques:
+  - T1566
+  confidence: 85
+  first_seen: '2026-06-09T01:38:27Z'
+  description: Received 01:38:27.529 and delivered 01:38:40.546 to rchen, mreyes, and dokonkwo (4383 bytes, network-message-id
+    6cb73c8c-38ba-4601-d28a-08dec5c7cdcc). The embedded instruction tells the assistant to run an operator-identity
+    verification command with its shell tool.
+- id: poison-eml
+  type: file
+  name: poison_nerc_20260609.eml
+  size: 4383
+  indicator_types:
+  - malicious-activity
+  kill_chain_phases:
+  - initial-access
+  techniques:
+  - T1566
+  confidence: 85
+  first_seen: '2026-06-09T01:38:27Z'
+  description: Source file of the poisoned message in the Exchange transport replay directory.
+- id: openclaw-run-agent
+  type: file
+  name: run_agent.ps1
+  description: C:\openclaw-agent\run_agent.ps1, the OpenClaw launcher; parent of the node.exe chain that ran the
+    injected instruction.
+- id: cip010-review
+  type: file
+  name: cip010_review.txt
+  indicator_types:
+  - malicious-activity
+  kill_chain_phases:
+  - execution
+  techniques:
+  - T1059.001
+  confidence: 70
+  first_seen: '2026-06-09T01:40:00Z'
+  description: Proof file written to C:\Users\Public by the injected instruction, later removed with Remove-Item.
+- id: encoded-ps
+  type: indicator
+  name: Encoded PowerShell stager launched by the AI assistant
+  pattern_type: sigma
+  pattern: |
+    logsource:
+      category: process_creation
+      product: windows
+    detection:
+      selection:
+        ParentImage|endswith: '\\node.exe'
+        Image|endswith: '\\powershell.exe'
+        CommandLine|contains: '-enc'
+      condition: selection
+  indicator_types:
+  - malicious-activity
+  kill_chain_phases:
+  - execution
+  techniques:
+  - T1059.001
+  - T1027
+  - T1204
+  confidence: 85
+- id: recon-cmds
+  type: indicator
+  name: Living-off-the-land domain recon burst
+  pattern_type: sigma
+  pattern: |
+    logsource:
+      category: process_creation
+      product: windows
+    detection:
+      selection:
+        CommandLine|contains:
+          - 'whoami /all'
+          - 'net group /domain'
+          - 'net user /domain'
+          - 'nltest /dclist'
+          - 'net user helixgrid-svc /domain'
+      condition: selection
+  indicator_types:
+  - anomalous-activity
+  kill_chain_phases:
+  - discovery
+  techniques:
+  - T1087.002
+  - T1482
+  - T1069.002
+  - T1018
+  - T1033
+  confidence: 60
+  first_seen: '2026-06-09T01:40:41Z'
+  last_seen: '2026-06-09T01:52:54Z'
+  description: First from the agent chain as rchen (whoami, hostname), then the 01:52:53 burst spawned by the beacon
+    as SYSTEM, ending with net user helixgrid-svc /domain. ipconfig, netstat, and Get-Process were not used by the
+    attacker.
+- id: implant-bin
+  type: file
+  name: kb5041234-v3.exe
+  hashes:
+    SHA-256: A81B6408AEEC93DF8013044BF4B4AD749BCDA02D8AC6555D241CB78AB991A747
+    SHA-1: B7B53E5BDE804AEE646ED829E0F2EC0AD35B4523
+    MD5: C466C0DD389790CFD3613754EC929DA8
+  indicator_types:
+  - malicious-activity
+  kill_chain_phases:
+  - command-and-control
+  - defense-evasion
+  techniques:
+  - T1036.005
+  - T1071.001
+  confidence: 90
+  first_seen: '2026-06-09T01:48:26Z'
+  description: Masqueraded Sliver implant at C:\Users\Public\kb5041234-v3.exe posing as a Windows update; beacons
+    to the C2 on tcp 8080, is relaunched as SYSTEM by the WindowsUpdateAssistant scheduled task, and performs the
+    LSASS read.
+- id: run-key
+  type: windows-registry-key
+  name: Implant persistence Run key
+  key: HKEY_USERS\S-1-5-21-2928221834-3438643503-1157344558-1162\Software\Microsoft\Windows\CurrentVersion\Run
+  values:
+  - name: CLIENTSYNC
+    data: powershell -NoProfile -ExecutionPolicy Bypass -File C:\Users\Public\clientsync.ps1
+    data_type: REG_SZ
+  indicator_types:
+  - malicious-activity
+  kill_chain_phases:
+  - persistence
+  techniques:
+  - T1547.001
+  confidence: 80
+  first_seen: '2026-06-09T01:55:52Z'
+  last_seen: '2026-06-09T02:06:13Z'
+  description: Written at 01:55:52 (Sysmon EID 13) under rchen's hive and deleted at 02:06:12 (EID 12) once the
+    pivot launched.
+- id: clientsync-ps1
+  type: file
+  name: clientsync.ps1
+  indicator_types:
+  - malicious-activity
+  kill_chain_phases:
+  - persistence
+  - lateral-movement
+  techniques:
+  - T1547.001
+  - T1021.001
+  confidence: 80
+  first_seen: '2026-06-09T01:55:52Z'
+  description: Pivot launcher at C:\Users\Public\clientsync.ps1, started by the Run key; runs cmdkey and mstsc as
+    rchen.
+- id: sched-task-wua
+  type: indicator
+  name: WindowsUpdateAssistant scheduled task on the workstation
+  pattern_type: sigma
+  pattern: |
+    logsource:
+      product: windows
+      service: security
+    detection:
+      selection:
+        EventID: 4698
+        TaskName: '\\WindowsUpdateAssistant'
+      condition: selection
+  indicator_types:
+  - malicious-activity
+  kill_chain_phases:
+  - persistence
+  techniques:
+  - T1053.005
+  confidence: 80
+  description: Relaunches kb5041234-v3.exe as SYSTEM on CURRENTIS-WS-RACHEL.
+- id: lsass-access
+  type: indicator
+  name: LSASS memory access from the implant
+  pattern_type: sigma
+  pattern: |
+    logsource:
+      category: process_access
+      product: windows
+    detection:
+      selection:
+        TargetImage|endswith: '\\lsass.exe'
+        SourceImage|endswith: '\\kb5041234-v3.exe'
+        GrantedAccess: '0x1FFFFF'
+      condition: selection
+  indicator_types:
+  - malicious-activity
+  kill_chain_phases:
+  - credential-access
+  techniques:
+  - T1003.001
+  confidence: 85
+  first_seen: '2026-06-09T02:01:39Z'
+  last_seen: '2026-06-09T02:01:40Z'
+  description: Sysmon EID 10 with a CallTrace through dbgcore.dll, on the workstation only.
+- id: rdp-cmdkey
+  type: indicator
+  name: Stolen vendor credential staged with cmdkey for RDP
+  pattern_type: sigma
+  pattern: |
+    logsource:
+      category: process_creation
+      product: windows
+    detection:
+      selection:
+        Image|endswith: '\\cmdkey.exe'
+        CommandLine|contains|all:
+          - '/generic:TERMSRV/'
+          - 'helixgrid-svc'
+      condition: selection
+  indicator_types:
+  - malicious-activity
+  kill_chain_phases:
+  - lateral-movement
+  techniques:
+  - T1021.001
+  - T1078
+  confidence: 85
+  first_seen: '2026-06-09T02:06:12Z'
+  description: cmdkey targets TERMSRV/currentis-scada-jh-02.currentis.local as CURRENTIS\helixgrid-svc, then mstsc
+    opens the session.
+- id: rdp-pivot
+  type: indicator
+  name: Vendor service account RDP logon to the OT jump host
+  pattern_type: sigma
+  pattern: |
+    logsource:
+      product: windows
+      service: security
+    detection:
+      selection:
+        EventID: 4624
+        LogonType: 10
+        TargetUserName: 'helixgrid-svc'
+      condition: selection
+  indicator_types:
+  - anomalous-activity
+  kill_chain_phases:
+  - lateral-movement
+  techniques:
+  - T1021.001
+  - T1078
+  confidence: 75
+  first_seen: '2026-06-09T02:06:24Z'
+  description: 'The account is the anomaly: a vendor remote-access account interactively logging on to the SCADA
+    jump host, with 4768/4769 on CURRENTIS-DC01 on the way.'
+- id: ot-dir
+  type: directory
+  name: OT configuration directory
+  path: C:\OT
+  indicator_types:
+  - anomalous-activity
+  kill_chain_phases:
+  - collection
+  techniques:
+  - T1083
+  - T1005
+  confidence: 60
+  first_seen: '2026-06-09T02:10:51Z'
+  description: SACL-audited OT path (Security 4663) holding the Unit 3 alarm export and turbine setpoints.
+- id: ot-helix-dir
+  type: directory
+  name: Helix Grid Systems OptiCore directory
+  path: C:\Program Files\Helix Grid Systems
+  indicator_types:
+  - anomalous-activity
+  kill_chain_phases:
+  - collection
+  techniques:
+  - T1083
+  - T1005
+  confidence: 60
+  first_seen: '2026-06-09T02:10:51Z'
+  description: SACL-audited vendor path holding the OptiCore remote-support readme and the Unit 3 alarm profile.
+- id: ot-alarm-export
+  type: file
+  name: unit3_alarm_export.csv
+  indicator_types:
+  - anomalous-activity
+  kill_chain_phases:
+  - collection
+  techniques:
+  - T1005
+  confidence: 70
+  first_seen: '2026-06-09T02:10:51Z'
+  description: Read from C:\OT\Unit3 by helixgrid-svc.
+- id: ot-setpoints
+  type: file
+  name: unit3_turbine_setpoints.cfg
+  indicator_types:
+  - anomalous-activity
+  kill_chain_phases:
+  - collection
+  techniques:
+  - T1005
+  confidence: 70
+  first_seen: '2026-06-09T02:10:51Z'
+  description: Read from C:\OT\Unit3 by helixgrid-svc (controller HGS-OptiCore-U3, 185 MW, 3600 rpm, overspeed trip
+    3780 rpm). Read only; no setpoint is written.
+- id: ot-alarm-profile
+  type: file
+  name: alarm_profile.xml
+  indicator_types:
+  - anomalous-activity
+  kill_chain_phases:
+  - collection
+  techniques:
+  - T1005
+  confidence: 70
+  first_seen: '2026-06-09T02:10:51Z'
+  description: Read from the OptiCore Unit3 directory (HIGH_VIB 11.2 mm/s alarm, OVERSPEED 3780 rpm trip).
+- id: ot-readme
+  type: file
+  name: readme_remote_support.txt
+  indicator_types:
+  - anomalous-activity
+  kill_chain_phases:
+  - collection
+  techniques:
+  - T1083
+  confidence: 60
+  first_seen: '2026-06-09T02:10:51Z'
+  description: OptiCore remote-support toolkit note naming helixgrid-svc per MSA-2024-117.
+- id: read-ot-ps1
+  type: file
+  name: read_ot.ps1
+  indicator_types:
+  - malicious-activity
+  kill_chain_phases:
+  - collection
+  techniques:
+  - T1005
+  - T1059.001
+  confidence: 80
+  first_seen: '2026-06-09T02:11:22Z'
+  description: OT reader at C:\Users\Public\read_ot.ps1 run by the OTRead task as helixgrid-svc; writes ot_read_log.txt.
+- id: unit3-export
+  type: file
+  name: unit3_export.dat
+  size: 456204
+  indicator_types:
+  - malicious-activity
+  kill_chain_phases:
+  - exfiltration
+  techniques:
+  - T1041
+  confidence: 80
+  first_seen: '2026-06-09T02:15:51Z'
+  description: Staged exfiltration archive at C:\Users\Public (456,204 bytes).
+- id: sched-task-otread
+  type: indicator
+  name: OTRead scheduled task on the jump host
+  pattern_type: sigma
+  pattern: |
+    logsource:
+      product: windows
+      service: security
+    detection:
+      selection:
+        EventID: 4698
+        TaskName: '\\OTRead'
+      condition: selection
+  indicator_types:
+  - malicious-activity
+  kill_chain_phases:
+  - persistence
+  - defense-evasion
+  techniques:
+  - T1053.005
+  confidence: 85
+  first_seen: '2026-06-09T02:11:22Z'
+  description: Created 02:11:22 on CURRENTIS-SCADA-JH-02 to run read_ot.ps1 as CURRENTIS\helixgrid-svc; the staged
+    setpoint capability that is never fired.
+- id: log-clear-cmd
+  type: indicator
+  name: wevtutil clears the Security log
+  pattern_type: sigma
+  pattern: |
+    logsource:
+      category: process_creation
+      product: windows
+    detection:
+      selection:
+        Image|endswith: '\\wevtutil.exe'
+        CommandLine|contains|all:
+          - ' cl '
+          - 'Security'
+      condition: selection
+  indicator_types:
+  - malicious-activity
+  kill_chain_phases:
+  - defense-evasion
+  techniques:
+  - T1070.001
+  confidence: 90
+  first_seen: '2026-06-09T02:29:57Z'
+- id: security-log-clear
+  type: indicator
+  name: Security event log cleared on the OT jump host
+  pattern_type: sigma
+  pattern: |
+    logsource:
+      product: windows
+      service: security
+    detection:
+      selection:
+        EventID: 1102
+      condition: selection
+  indicator_types:
+  - malicious-activity
+  kill_chain_phases:
+  - defense-evasion
+  techniques:
+  - T1070.001
+  confidence: 90
+  first_seen: '2026-06-09T02:29:57Z'
+  description: Security 1102 on CURRENTIS-SCADA-JH-02 at 02:29:57.219 (SubjectUserName SYSTEM).
+kill_chain:
+- id: S0
+  name: Prompt-injection initial access
+  tactic: initial-access
+  techniques:
+  - T1566
+  - T1204
+  - T1059.001
+  - T1027
+  - T1140
+  assets:
+  - glacier-drift
+  - phish-sender
+  - exch
+  - ws-rachel
+  - rchen
+  - openclaw
+  observables:
+  - phish-domain
+  - phish-sender-addr
+  - poison-msg
+  - poison-eml
+  - openclaw-run-agent
+  - encoded-ps
+  - cip010-review
+  execution_start: '2026-06-09T01:38:27Z'
+  execution_end: '2026-06-09T01:40:43Z'
+  description: 'The poisoned NERC CIP-010 baseline diff from the trusted compliance sender is received at 01:38:27
+    and delivered at 01:38:40. OpenClaw, running as rchen and configured to act on that sender''s mail, follows
+    the embedded instruction through its shell tool: run_agent.ps1 to node.exe to an encoded PowerShell stager,
+    with whoami as the first command at 01:40:42. The rest of the on-host attack descends from the agent.'
+- id: S1
+  name: Living-off-the-land recon
+  tactic: discovery
+  techniques:
+  - T1087.002
+  - T1482
+  - T1069.002
+  - T1018
+  - T1033
+  assets:
+  - ws-rachel
+  - dc01
+  observables:
+  - recon-cmds
+  execution_start: '2026-06-09T01:40:41Z'
+  execution_end: '2026-06-09T01:52:54Z'
+  description: 'whoami and hostname from the agent chain as rchen, then at 01:52:53 a burst spawned by the beacon
+    as SYSTEM: whoami /all, net group /domain, net user /domain, nltest /dclist, and net user helixgrid-svc /domain,
+    hidden in normal troubleshooting habit. ipconfig, netstat, and Get-Process appear only in the baseline.'
+- id: S2
+  name: Beacon and persistence
+  tactic: command-and-control
+  techniques:
+  - T1071.001
+  - T1036
+  - T1036.005
+  - T1547.001
+  - T1053.005
+  assets:
+  - ws-rachel
+  - sliver
+  - sliver-c2
+  observables:
+  - implant-bin
+  - c2-ip
+  - c2-beacon-uri
+  - c2-beacon-ua
+  - run-key
+  - clientsync-ps1
+  - sched-task-wua
+  execution_start: '2026-06-09T01:48:26Z'
+  execution_end: '2026-06-09T02:04:45Z'
+  description: kb5041234-v3.exe starts at 01:48:26 and beacons to 121.43.243.13 on tcp 8080 within a second (Zeek
+    01:48:26.6, Sysmon EID 3 01:48:28.8), about every 60 seconds. Persistence is the CLIENTSYNC Run key written
+    at 01:55:52 under rchen's hive, which launches clientsync.ps1, and the WindowsUpdateAssistant scheduled task
+    that relaunches the implant as SYSTEM.
+- id: S3
+  name: Credential access
+  tactic: credential-access
+  techniques:
+  - T1003.001
+  - T1078
+  assets:
+  - ws-rachel
+  - helixgrid-svc
+  observables:
+  - lsass-access
+  execution_start: '2026-06-09T02:01:39Z'
+  execution_end: '2026-06-09T02:01:40Z'
+  description: At 02:01:39 the implant reads LSASS (Sysmon EID 10, GrantedAccess 0x1FFFFF, CallTrace through dbgcore.dll)
+    and harvests the cached helixgrid-svc credential. The narrative's second, dormant service account is not separately
+    evidenced; only helixgrid-svc acts in the data.
+- id: S4
+  name: IT-to-OT pivot
+  tactic: lateral-movement
+  techniques:
+  - T1021.001
+  - T1078
+  - T1133
+  - T0859
+  - T0822
+  assets:
+  - ws-rachel
+  - dc01
+  - scada-jh-02
+  - helixgrid-svc
+  observables:
+  - rdp-cmdkey
+  - rdp-pivot
+  - clientsync-ps1
+  execution_start: '2026-06-09T02:06:12Z'
+  execution_end: '2026-06-09T02:06:25Z'
+  description: clientsync.ps1 runs cmdkey to store the stolen helixgrid-svc credential for TERMSRV/currentis-scada-jh-02.currentis.local
+    and mstsc to open RDP to 192.168.4.244:3389. The hop authenticates through CURRENTIS-DC01 (4768/4769) and lands
+    as a type 10 logon on the jump host at 02:06:24.
+- id: S5
+  name: OT recon and control-loop mapping
+  tactic: collection
+  techniques:
+  - T1083
+  - T1005
+  - T0888
+  assets:
+  - scada-jh-02
+  - helixgrid-svc
+  observables:
+  - ot-dir
+  - ot-helix-dir
+  - ot-alarm-export
+  - ot-setpoints
+  - ot-alarm-profile
+  - ot-readme
+  - read-ot-ps1
+  execution_start: '2026-06-09T02:10:51Z'
+  execution_end: '2026-06-09T02:15:51Z'
+  description: As helixgrid-svc, enumerate the OptiCore engineering software and read the Unit 3 alarm export, turbine
+    setpoints, alarm profile, and the remote-support readme under the SACL-audited paths (Security 4663). Read only;
+    no change yet.
+- id: S6
+  name: Low-and-slow exfiltration
+  tactic: exfiltration
+  techniques:
+  - T1041
+  - T1567
+  - T0882
+  assets:
+  - scada-jh-02
+  - sliver-c2
+  observables:
+  - unit3-export
+  - c2-ip
+  - c2-exfil-8080
+  - c2-exfil-8443
+  execution_start: '2026-06-09T02:15:51Z'
+  execution_end: '2026-06-09T02:45:15Z'
+  description: 'The staged unit3_export.dat (456,204 bytes) trickles out over the C2 channel: a first curl POST
+    on tcp 8080 at 02:15:51, then transfers at 02:31:12 (8080, /api/v1/upload), 02:43:58 (8443, /upload), and 02:45:12
+    (9009, raw socket).'
+- id: S7
+  name: Staging, log clear, and dormancy
+  tactic: defense-evasion
+  techniques:
+  - T1053.005
+  - T1070.001
+  - T1070.004
+  - T0831
+  assets:
+  - scada-jh-02
+  - helixgrid-svc
+  observables:
+  - sched-task-otread
+  - log-clear-cmd
+  - security-log-clear
+  execution_start: '2026-06-09T02:11:22Z'
+  execution_end: '2026-06-09T02:29:58Z'
+  description: The OTRead task (02:11:22) and read_ot.ps1 stage a Unit 3 setpoint-read capability, but nothing writes
+    a setpoint or control profile, consistent with staged, not fired. wevtutil cl Security clears the Security log
+    at 02:29:57; the Run-key values are deleted and staging files removed with Remove-Item (no Sysmon FileDelete
+    events were captured), and the actor goes dormant.
 provenance:
   build:
     window_utc: {start: '2026-06-09T01:20:00Z', end: '2026-06-09T02:50:00Z'}
@@ -130,6 +1002,7 @@ provenance:
       Exchange host). The final exfil (02:45) lands slightly after the log clear (02:30).
       v2.0.1 causal-window trim: removed 72 C2-indicator events (121.43.243.13) before the beacon launch (cutoff 2026-06-09T01:48:26Z) so the first beacon connection follows the prompt-injection initial access.
       v2.1.0 file split: the former linux_syslog.log.gz mixed two log sources, so it was split into squid_access.log.gz (979 Squid proxy access lines, sourcetype squid:access) and linux_syslog.log.gz (268 BSD syslog lines, sourcetype linux:syslog). No events were added or removed.
+      v2.2.0 scenario metadata: added entities, observables, and kill_chain blocks in STIX 2.1 vocabulary with stage timing taken from the data, and attack_flow.json built from them. Dropped T1016, T1049, and T1057 from the mapping because the attacker never ran ipconfig, netstat, or Get-Process; the only harvested account acting in the data is helixgrid-svc.
   verification:
     source_counts: {microsoft_winevtlog: 93104, zeek_conn: 30897, zeek_dns: 45235, zeek_http: 768, exchange_message_tracking: 14, slack_messages: 404, squid_access: 979, linux_syslog: 268}
     dest_counts: {microsoft_winevtlog: 93104, zeek_conn: 30897, zeek_dns: 45235, zeek_http: 768, exchange_message_tracking: 14, slack_messages: 404, squid_access: 979, linux_syslog: 268}

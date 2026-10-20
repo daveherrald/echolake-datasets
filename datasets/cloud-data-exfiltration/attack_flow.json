@@ -4,18 +4,40 @@
   "objects": [
     {
       "type": "extension-definition",
-      "spec_version": "2.1",
       "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
-      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
-      "created": "2022-08-02T19:34:35.143Z",
-      "modified": "2022-08-02T19:34:35.143Z",
+      "spec_version": "2.1",
       "name": "Attack Flow",
       "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "created_by_ref": "identity--d673f8cb-c168-42da-8ed4-0cb26725f86c",
       "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
       "version": "2.0.0",
       "extension_types": [
         "new-sdo"
+      ],
+      "external_references": [
+        {
+          "source_name": "Documentation",
+          "description": "Documentation for Attack Flow",
+          "url": "https://center-for-threat-informed-defense.github.io/attack-flow"
+        },
+        {
+          "source_name": "GitHub",
+          "description": "Source code repository for Attack Flow",
+          "url": "https://github.com/center-for-threat-informed-defense/attack-flow"
+        }
       ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--d673f8cb-c168-42da-8ed4-0cb26725f86c",
+      "created_by_ref": "identity--d673f8cb-c168-42da-8ed4-0cb26725f86c",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "MITRE Center for Threat-Informed Defense",
+      "identity_class": "organization"
     },
     {
       "type": "identity",
@@ -27,17 +49,620 @@
       "identity_class": "organization"
     },
     {
+      "type": "ipv4-addr",
+      "spec_version": "2.1",
+      "id": "ipv4-addr--6f4e605d-e61f-57e4-88a4-c0e3366fc41b",
+      "value": "172.31.24.50"
+    },
+    {
+      "type": "ipv4-addr",
+      "spec_version": "2.1",
+      "id": "ipv4-addr--ed8d3e22-5bb2-51da-8724-cef7e1a84b2a",
+      "value": "13.57.16.209"
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--a70d77e1-d406-557a-b9d5-13080984cc80",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-16T00:00:00.000Z",
+      "modified": "2026-10-16T00:00:00.000Z",
+      "name": "13.57.16.209",
+      "description": "Source of the stolen-role CloudTrail calls: the host's own public IP, which is why role misuse from the host looks like the host.",
+      "indicator_types": [
+        "anomalous-activity"
+      ],
+      "pattern": "[ipv4-addr:value = '13.57.16.209']",
+      "pattern_type": "stix",
+      "pattern_version": "2.1",
+      "valid_from": "2026-10-11T01:00:03Z",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "mitre-attack",
+          "phase_name": "discovery"
+        }
+      ],
+      "labels": [
+        "T1087.004"
+      ],
+      "confidence": 60
+    },
+    {
+      "type": "domain-name",
+      "spec_version": "2.1",
+      "id": "domain-name--daeb8651-673d-55d3-95c6-6b09c1ea115e",
+      "value": "ip-172-31-24-50"
+    },
+    {
+      "type": "ipv4-addr",
+      "spec_version": "2.1",
+      "id": "ipv4-addr--820e255d-3c10-5e0d-a0aa-6f943358b248",
+      "value": "75.125.237.59"
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--9f6f9188-d5dd-522a-beae-c0fe3b48e6e1",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-16T00:00:00.000Z",
+      "modified": "2026-10-16T00:00:00.000Z",
+      "name": "75.125.237.59",
+      "description": "The developer's legitimate address. Every genuine s.onarake session comes from here, which makes the source IP, not the key, the investigation pivot.",
+      "indicator_types": [
+        "benign"
+      ],
+      "pattern": "[ipv4-addr:value = '75.125.237.59']",
+      "pattern_type": "stix",
+      "pattern_version": "2.1",
+      "valid_from": "2026-10-11T01:00:03Z",
+      "confidence": 90
+    },
+    {
+      "type": "ipv4-addr",
+      "spec_version": "2.1",
+      "id": "ipv4-addr--2f8de81e-4173-5d8d-abe1-6c98aab7353f",
+      "value": "54.193.215.120"
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--ecda01ce-17d9-5263-83de-06f494112b25",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-16T00:00:00.000Z",
+      "modified": "2026-10-16T00:00:00.000Z",
+      "name": "54.193.215.120",
+      "description": "Never used by this account before. Logs in with the leaked key at 18:55:44 and receives 526,475,698 bytes over SFTP at 19:07:42 to 19:07:46.",
+      "indicator_types": [
+        "malicious-activity"
+      ],
+      "pattern": "[ipv4-addr:value = '54.193.215.120']",
+      "pattern_type": "stix",
+      "pattern_version": "2.1",
+      "valid_from": "2026-10-13T18:55:44Z",
+      "valid_until": "2026-10-13T19:07:46Z",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "mitre-attack",
+          "phase_name": "initial-access"
+        },
+        {
+          "kill_chain_name": "mitre-attack",
+          "phase_name": "exfiltration"
+        }
+      ],
+      "labels": [
+        "T1021.004",
+        "T1078",
+        "T1048.002"
+      ],
+      "confidence": 90
+    },
+    {
+      "type": "ipv4-addr",
+      "spec_version": "2.1",
+      "id": "ipv4-addr--4b88f684-56e5-556f-ab14-fea96f61dfaf",
+      "value": "169.254.169.254"
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--6f72a186-1fda-5c9b-b2af-100d6edd010a",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-16T00:00:00.000Z",
+      "modified": "2026-10-16T00:00:00.000Z",
+      "name": "169.254.169.254",
+      "description": "curl to the metadata service for an IMDSv2 token and then the role credentials, from an interactive SSH session.",
+      "indicator_types": [
+        "anomalous-activity"
+      ],
+      "pattern": "[ipv4-addr:value = '169.254.169.254']",
+      "pattern_type": "stix",
+      "pattern_version": "2.1",
+      "valid_from": "2026-10-13T18:58:12Z",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "mitre-attack",
+          "phase_name": "credential-access"
+        }
+      ],
+      "labels": [
+        "T1552.005"
+      ],
+      "confidence": 70
+    },
+    {
+      "type": "file",
+      "spec_version": "2.1",
+      "id": "file--db789aeb-e7e9-5101-98ab-4996720e5d2d",
+      "name": "sample.bin"
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--6ec0869d-65db-5658-ba91-ee04d82b69c6",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-16T00:00:00.000Z",
+      "modified": "2026-10-16T00:00:00.000Z",
+      "name": "sample.bin",
+      "description": "The developer's ~/.ssh/id_rsa copied to training/fixtures/sample.bin on Oct 12 at 14:40 as a tokenizer test fixture, then pushed to the datalake-utils repository.",
+      "indicator_types": [
+        "malicious-activity"
+      ],
+      "pattern": "[file:name = 'sample.bin']",
+      "pattern_type": "stix",
+      "pattern_version": "2.1",
+      "valid_from": "2026-10-12T14:40:00Z",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "mitre-attack",
+          "phase_name": "credential-access"
+        }
+      ],
+      "labels": [
+        "T1552.004"
+      ],
+      "confidence": 85
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--eea95b58-e3ad-5310-b0d2-b188a36d416d",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-16T00:00:00.000Z",
+      "modified": "2026-10-16T00:00:00.000Z",
+      "name": "GitHub secret-scanning alert for an SSH private key",
+      "description": "Nine secret-scanning events fire across the orgs in the window; the scenario alert is the only ssh_private_key alert on datalake-utils, resolved at 19:22:46 without the key being revoked.",
+      "indicator_types": [
+        "anomalous-activity"
+      ],
+      "pattern": "logsource:\n  product: github\n  service: audit\ndetection:\n  selection:\n    action: 'secret_scanning_alert.create'\n    alert.secret_type: 'ssh_private_key'\n  condition: selection\n",
+      "pattern_type": "sigma",
+      "valid_from": "2026-10-13T18:52:41Z",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "mitre-attack",
+          "phase_name": "credential-access"
+        }
+      ],
+      "labels": [
+        "T1552.004"
+      ],
+      "confidence": 80
+    },
+    {
+      "type": "url",
+      "spec_version": "2.1",
+      "id": "url--c4179792-82f2-5d45-b5a1-ba0d1993bafe",
+      "value": "s3://jn-model-training-data-5233"
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--34d9e0be-51f3-5dfb-973d-37519469772c",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-16T00:00:00.000Z",
+      "modified": "2026-10-16T00:00:00.000Z",
+      "name": "s3://jn-model-training-data-5233",
+      "description": "Training-data bucket listed at 19:02:43 and synced to ~/data at 19:04:43 to 19:04:45: 65 GetObject calls, about 514 MB of S3 ingress. The daily audit scanners also list it, so the sync, not the list, is the signal.",
+      "indicator_types": [
+        "anomalous-activity"
+      ],
+      "pattern": "[url:value = 's3://jn-model-training-data-5233']",
+      "pattern_type": "stix",
+      "pattern_version": "2.1",
+      "valid_from": "2026-10-13T19:02:43Z",
+      "valid_until": "2026-10-13T19:04:45Z",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "mitre-attack",
+          "phase_name": "collection"
+        }
+      ],
+      "labels": [
+        "T1530"
+      ],
+      "confidence": 75
+    },
+    {
+      "type": "directory",
+      "spec_version": "2.1",
+      "id": "directory--4bc10abe-bfef-519f-b868-3c43b01a09ff",
+      "path": "/var/tmp"
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--bff7361f-f25a-55d4-9634-a042b3065a8a",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-16T00:00:00.000Z",
+      "modified": "2026-10-16T00:00:00.000Z",
+      "name": "aws-cli-staging",
+      "description": "An AWS CLI unpacked under /var/tmp ran the identity, IAM, and S3 discovery calls.",
+      "indicator_types": [
+        "anomalous-activity"
+      ],
+      "pattern": "[directory:path = '/var/tmp']",
+      "pattern_type": "stix",
+      "pattern_version": "2.1",
+      "valid_from": "2026-10-11T01:00:03Z",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "mitre-attack",
+          "phase_name": "discovery"
+        }
+      ],
+      "labels": [
+        "T1087.004"
+      ],
+      "confidence": 50
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--bb64297e-198f-5fb6-a8b5-7727d15b195b",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-16T00:00:00.000Z",
+      "modified": "2026-10-16T00:00:00.000Z",
+      "name": "sftp-server bulk read from a non-home address",
+      "description": "Seven files, about 507 MB per sftp-server, read in four seconds by the second key login.",
+      "indicator_types": [
+        "anomalous-activity"
+      ],
+      "pattern": "logsource:\n  product: linux\n  service: auth\ndetection:\n  selection:\n    program: 'sftp-server'\n    message|contains: 'open'\n  condition: selection\n",
+      "pattern_type": "sigma",
+      "valid_from": "2026-10-13T19:07:43Z",
+      "valid_until": "2026-10-13T19:07:46Z",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "mitre-attack",
+          "phase_name": "exfiltration"
+        }
+      ],
+      "labels": [
+        "T1048.002"
+      ],
+      "confidence": 70
+    },
+    {
+      "type": "infrastructure",
+      "spec_version": "2.1",
+      "id": "infrastructure--2cd918f4-d1a9-5fdc-b8e0-47e4597c84ad",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-16T00:00:00.000Z",
+      "modified": "2026-10-16T00:00:00.000Z",
+      "name": "ip-172-31-24-50",
+      "description": "Ubuntu EC2 development host (instance i-0712927224ce899b4, us-west-1) with a CrowdStrike Falcon sensor and auth.log shipped by Fluent Bit; its instance role can read the training-data bucket.",
+      "infrastructure_types": [
+        "server"
+      ]
+    },
+    {
+      "type": "attack-asset",
+      "spec_version": "2.1",
+      "id": "attack-asset--d64df5ba-8f64-5b29-86e2-9f54814e6ff0",
+      "created": "2026-10-16T00:00:00.000Z",
+      "modified": "2026-10-16T00:00:00.000Z",
+      "name": "ip-172-31-24-50",
+      "object_ref": "infrastructure--2cd918f4-d1a9-5fdc-b8e0-47e4597c84ad",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      },
+      "description": "victim-host. Ubuntu EC2 development host (instance i-0712927224ce899b4, us-west-1) with a CrowdStrike Falcon sensor and auth.log shipped by Fluent Bit; its instance role can read the training-data bucket"
+    },
+    {
+      "type": "user-account",
+      "spec_version": "2.1",
+      "id": "user-account--b659ab09-7b32-5a9c-b522-3ac29cc3dbce",
+      "account_login": "s.onarake",
+      "account_type": "unix"
+    },
+    {
+      "type": "attack-asset",
+      "spec_version": "2.1",
+      "id": "attack-asset--02b60bcb-e915-54fd-85f1-c18c0a882ce2",
+      "created": "2026-10-16T00:00:00.000Z",
+      "modified": "2026-10-16T00:00:00.000Z",
+      "name": "s.onarake",
+      "object_ref": "user-account--b659ab09-7b32-5a9c-b522-3ac29cc3dbce",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      },
+      "description": "victim. Developer whose SSH private key leaked through a committed test fixture; works from 75.125.237.59 and is also a GitHub actor across the acme orgs"
+    },
+    {
+      "type": "user-account",
+      "spec_version": "2.1",
+      "id": "user-account--385571b1-d52b-55d3-827a-b40a5a5a7534",
+      "account_login": "model-dev-05-readonly",
+      "account_type": "aws-iam-role",
+      "is_service_account": true
+    },
+    {
+      "type": "attack-asset",
+      "spec_version": "2.1",
+      "id": "attack-asset--c2075c39-0217-5ee8-bead-cf753c856ff7",
+      "created": "2026-10-16T00:00:00.000Z",
+      "modified": "2026-10-16T00:00:00.000Z",
+      "name": "model-dev-05-readonly",
+      "object_ref": "user-account--385571b1-d52b-55d3-827a-b40a5a5a7534",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      },
+      "description": "compromised-service. The host's instance role, read-only on the training-data bucket; its credentials were pulled from IMDSv2 and used for cloud discovery and the bucket sync"
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--36aad37c-3783-5df4-80ab-c21af1b24cb1",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-16T00:00:00.000Z",
+      "modified": "2026-10-16T00:00:00.000Z",
+      "name": "Acme Research",
+      "description": "Fictional ML company keeping training data in S3, with GitHub organizations acme-research, acme-platform, acme-quant, and acme-infra under the business acme-research-llc.",
+      "identity_class": "organization",
+      "sectors": [
+        "technology"
+      ]
+    },
+    {
+      "type": "attack-asset",
+      "spec_version": "2.1",
+      "id": "attack-asset--17afb411-3633-556f-9beb-625ca41b8a17",
+      "created": "2026-10-16T00:00:00.000Z",
+      "modified": "2026-10-16T00:00:00.000Z",
+      "name": "Acme Research",
+      "object_ref": "identity--36aad37c-3783-5df4-80ab-c21af1b24cb1",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      },
+      "description": "victim-organization. Fictional ML company keeping training data in S3, with GitHub organizations acme-research, acme-platform, acme-quant, and acme-infra under the business acme-research-llc"
+    },
+    {
+      "type": "infrastructure",
+      "spec_version": "2.1",
+      "id": "infrastructure--d1178eef-f223-5757-8add-ce95488be0e9",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-16T00:00:00.000Z",
+      "modified": "2026-10-16T00:00:00.000Z",
+      "name": "Intruder host 54.193.215.120",
+      "description": "Unattributed outside host on an AWS EC2 address: the SSH login source for the intrusion and the SFTP destination for the stolen data.",
+      "infrastructure_types": [
+        "exfiltration"
+      ]
+    },
+    {
+      "type": "attack-asset",
+      "spec_version": "2.1",
+      "id": "attack-asset--0be12d9f-8871-5f2b-8a3d-784b0a9310ff",
+      "created": "2026-10-16T00:00:00.000Z",
+      "modified": "2026-10-16T00:00:00.000Z",
+      "name": "Intruder host 54.193.215.120",
+      "object_ref": "infrastructure--d1178eef-f223-5757-8add-ce95488be0e9",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      },
+      "description": "attacker. Unattributed outside host on an AWS EC2 address: the SSH login source for the intrusion and the SFTP destination for the stolen data"
+    },
+    {
+      "type": "infrastructure",
+      "spec_version": "2.1",
+      "id": "infrastructure--b2b06171-de22-52a8-90e4-afc06c3db79d",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-16T00:00:00.000Z",
+      "modified": "2026-10-16T00:00:00.000Z",
+      "name": "EC2 instance metadata service",
+      "description": "IMDSv2 endpoint the intruder queried for a token and then the instance role credentials.",
+      "infrastructure_types": [
+        "unknown"
+      ]
+    },
+    {
+      "type": "attack-asset",
+      "spec_version": "2.1",
+      "id": "attack-asset--7620e450-750e-5cef-b430-6c4fadaaa6f0",
+      "created": "2026-10-16T00:00:00.000Z",
+      "modified": "2026-10-16T00:00:00.000Z",
+      "name": "EC2 instance metadata service",
+      "object_ref": "infrastructure--b2b06171-de22-52a8-90e4-afc06c3db79d",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      },
+      "description": "abused-service. IMDSv2 endpoint the intruder queried for a token and then the instance role credentials"
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--bd39d77e-49c8-5cc2-aad4-bb6078dede7e",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Unsecured Credentials: Private Keys",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1552.004",
+          "url": "https://attack.mitre.org/techniques/T1552/004/"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--bf60a583-9c97-569e-b3fe-da10055b5750",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Remote Services: SSH",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1021.004",
+          "url": "https://attack.mitre.org/techniques/T1021/004/"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--e82d1d02-b935-5476-9f69-858e50dba973",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Valid Accounts",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1078",
+          "url": "https://attack.mitre.org/techniques/T1078/"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--d71804a5-aa3f-531f-8bf3-b636958bd11e",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "System Information Discovery",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1082",
+          "url": "https://attack.mitre.org/techniques/T1082/"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--80fbce05-e5fd-50f6-a2d7-11f40297e7a5",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "System Owner/User Discovery",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1033",
+          "url": "https://attack.mitre.org/techniques/T1033/"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--75480d6e-d171-5166-831b-f6c2560ccc13",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Unsecured Credentials: Cloud Instance Metadata API",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1552.005",
+          "url": "https://attack.mitre.org/techniques/T1552/005/"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--aa34b4cc-2444-574c-97d7-bfd65af72e34",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Account Discovery: Cloud Account",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1087.004",
+          "url": "https://attack.mitre.org/techniques/T1087/004/"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--c4ff4d29-cf39-5299-9060-ae19f3cf5453",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Data from Cloud Storage",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1530",
+          "url": "https://attack.mitre.org/techniques/T1530/"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--f426b6f8-c38e-54ea-b4fa-02a62277d9ee",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Exfiltration Over Alternative Protocol: Exfiltration Over Asymmetric Encrypted Non-C2 Protocol",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1048.002",
+          "url": "https://attack.mitre.org/techniques/T1048/002/"
+        }
+      ]
+    },
+    {
       "type": "attack-flow",
       "spec_version": "2.1",
       "id": "attack-flow--b89d71cb-bd03-5056-a7cb-47fd45559304",
       "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
       "created": "2026-10-16T00:00:00.000Z",
       "modified": "2026-10-16T00:00:00.000Z",
-      "name": "Cloud data exfiltration: leaked SSH key to S3 training-data theft",
-      "description": "A private key pushed to GitHub is used to log into an EC2 dev host. The intruder steals the instance role credentials from IMDSv2, enumerates IAM and S3, syncs a training-data bucket to the host and exfiltrates it over SFTP. All times are original capture times on 2026-10-13 UTC and are shifted on replay. Correlates github_audit, linux_auth, crowdstrike_fdr, aws_cloudtrail and aws_vpc_flow.",
+      "name": "cloud-data-exfiltration",
+      "description": "A leaked SSH private key leads to theft of ML training data from an AWS account. A developer pushes a private key to a GitHub repository, and secret scanning raises an alert under three minutes later. Five minutes after the push a new IP logs into an EC2 development host with the key, steals the instance role's credentials from the IMDSv2 metadata service, enumerates IAM roles and S3, syncs a training-data bucket (65 objects) to the host, and pulls about 507 MB back over SFTP (526 MB of flow-log egress). The developer later resolves the alert and pushes a follow-up commit. Neither step revokes the key or the role credentials. Five telemetry sources must be correlated: GitHub organization audit, the host's auth.log, CrowdStrike Falcon Data Replicator events from the host, AWS CloudTrail, and VPC flow logs. 348,963 events over 71 hours (2026-10-11 01:00 to 2026-10-14 00:00 UTC), mostly account and internet background, with the intrusion on 2026-10-13 between 18:50 and 19:47 UTC.",
       "scope": "incident",
       "start_refs": [
-        "attack-action--e86d395e-f60a-5594-93c3-a66eb1353995"
+        "attack-action--7ab9c699-8d8e-5f67-90cd-bffba7668c98"
+      ],
+      "external_references": [
+        {
+          "source_name": "echolake-dataset",
+          "description": "cloud-data-exfiltration v1.1.0"
+        }
       ],
       "extensions": {
         "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
@@ -46,265 +671,555 @@
       }
     },
     {
-      "type": "attack-pattern",
-      "spec_version": "2.1",
-      "id": "attack-pattern--81cb9e9e-e841-5bbe-832c-de01becb99e2",
-      "created": "2026-10-16T00:00:00.000Z",
-      "modified": "2026-10-16T00:00:00.000Z",
-      "name": "T1552.004",
-      "external_references": [
-        {
-          "source_name": "mitre-attack",
-          "external_id": "T1552.004"
-        }
-      ]
-    },
-    {
-      "type": "attack-pattern",
-      "spec_version": "2.1",
-      "id": "attack-pattern--b32310c9-a3fd-5eb1-bf63-e1083c96f084",
-      "created": "2026-10-16T00:00:00.000Z",
-      "modified": "2026-10-16T00:00:00.000Z",
-      "name": "T1021.004",
-      "external_references": [
-        {
-          "source_name": "mitre-attack",
-          "external_id": "T1021.004"
-        }
-      ]
-    },
-    {
-      "type": "attack-pattern",
-      "spec_version": "2.1",
-      "id": "attack-pattern--c1a687db-aaca-5021-89ff-3cbfd7c6bcae",
-      "created": "2026-10-16T00:00:00.000Z",
-      "modified": "2026-10-16T00:00:00.000Z",
-      "name": "T1082",
-      "external_references": [
-        {
-          "source_name": "mitre-attack",
-          "external_id": "T1082"
-        }
-      ]
-    },
-    {
-      "type": "attack-pattern",
-      "spec_version": "2.1",
-      "id": "attack-pattern--7ea45e18-f7cb-5193-969c-adc2e6ced153",
-      "created": "2026-10-16T00:00:00.000Z",
-      "modified": "2026-10-16T00:00:00.000Z",
-      "name": "T1552.005",
-      "external_references": [
-        {
-          "source_name": "mitre-attack",
-          "external_id": "T1552.005"
-        }
-      ]
-    },
-    {
-      "type": "attack-pattern",
-      "spec_version": "2.1",
-      "id": "attack-pattern--e5bc713d-00e7-5794-8b91-ee6eca1582ad",
-      "created": "2026-10-16T00:00:00.000Z",
-      "modified": "2026-10-16T00:00:00.000Z",
-      "name": "T1087.004",
-      "external_references": [
-        {
-          "source_name": "mitre-attack",
-          "external_id": "T1087.004"
-        }
-      ]
-    },
-    {
-      "type": "attack-pattern",
-      "spec_version": "2.1",
-      "id": "attack-pattern--f638b7e9-f48f-59de-84a2-d79023afa089",
-      "created": "2026-10-16T00:00:00.000Z",
-      "modified": "2026-10-16T00:00:00.000Z",
-      "name": "T1530",
-      "external_references": [
-        {
-          "source_name": "mitre-attack",
-          "external_id": "T1530"
-        }
-      ]
-    },
-    {
-      "type": "attack-pattern",
-      "spec_version": "2.1",
-      "id": "attack-pattern--968d443c-a4c1-5e37-afc5-332e96f13ffb",
-      "created": "2026-10-16T00:00:00.000Z",
-      "modified": "2026-10-16T00:00:00.000Z",
-      "name": "T1048.002",
-      "external_references": [
-        {
-          "source_name": "mitre-attack",
-          "external_id": "T1048.002"
-        }
-      ]
-    },
-    {
-      "type": "attack-pattern",
-      "spec_version": "2.1",
-      "id": "attack-pattern--e9c51b09-87c0-5bf3-b577-4d650270ec7b",
-      "created": "2026-10-16T00:00:00.000Z",
-      "modified": "2026-10-16T00:00:00.000Z",
-      "name": "T1078",
-      "external_references": [
-        {
-          "source_name": "mitre-attack",
-          "external_id": "T1078"
-        }
-      ]
-    },
-    {
       "type": "attack-action",
       "spec_version": "2.1",
-      "id": "attack-action--e86d395e-f60a-5594-93c3-a66eb1353995",
+      "id": "attack-action--7ab9c699-8d8e-5f67-90cd-bffba7668c98",
       "created": "2026-10-16T00:00:00.000Z",
       "modified": "2026-10-16T00:00:00.000Z",
       "name": "S1 Leaked private key found in a public repository",
       "technique_id": "T1552.004",
-      "technique_ref": "attack-pattern--81cb9e9e-e841-5bbe-832c-de01becb99e2",
+      "technique_ref": "attack-pattern--bd39d77e-49c8-5cc2-aad4-bb6078dede7e",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      },
+      "tactic_id": "TA0006",
       "description": "A developer pushes an SSH private key to the datalake-utils repository at 18:50:14 UTC. GitHub secret scanning raises an ssh_private_key alert at 18:52:41. Evidence: github_audit git.push and secret_scanning_alert.create.",
-      "extensions": {
-        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
-          "extension_type": "new-sdo"
-        }
-      },
+      "execution_start": "2026-10-13T18:50:14Z",
+      "execution_end": "2026-10-13T18:52:41Z",
+      "asset_refs": [
+        "attack-asset--02b60bcb-e915-54fd-85f1-c18c0a882ce2",
+        "attack-asset--d64df5ba-8f64-5b29-86e2-9f54814e6ff0",
+        "attack-asset--17afb411-3633-556f-9beb-625ca41b8a17"
+      ],
       "effect_refs": [
-        "attack-action--cc768766-97a8-524a-8917-8f74ae5ce928"
+        "attack-action--fc83e4bb-be4a-59ce-b4d6-96883163f67e"
       ]
     },
     {
       "type": "attack-action",
       "spec_version": "2.1",
-      "id": "attack-action--cc768766-97a8-524a-8917-8f74ae5ce928",
+      "id": "attack-action--fc83e4bb-be4a-59ce-b4d6-96883163f67e",
       "created": "2026-10-16T00:00:00.000Z",
       "modified": "2026-10-16T00:00:00.000Z",
-      "name": "S2 SSH login to the dev host with the leaked key",
+      "name": "S2 SSH login to the dev host with the leaked key (T1021.004)",
       "technique_id": "T1021.004",
-      "technique_ref": "attack-pattern--b32310c9-a3fd-5eb1-bf63-e1083c96f084",
-      "description": "At 18:55:44 a new IP (54.193.215.120) logs in as the developer with the leaked key (publickey authentication), using the account as a valid account. Evidence: linux_auth Accepted publickey, VPC flows to port 22. The account's legitimate sessions, including one ending at 18:52 the same day, all come from 75.125.237.59.",
+      "technique_ref": "attack-pattern--bf60a583-9c97-569e-b3fe-da10055b5750",
       "extensions": {
         "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
           "extension_type": "new-sdo"
         }
       },
+      "tactic_id": "TA0001",
+      "description": "At 18:55:44 a new IP (54.193.215.120) logs in as the developer with the leaked key (publickey authentication), using the account as a valid account. Evidence: linux_auth Accepted publickey, VPC flows to port 22. The account's legitimate sessions, including one ending at 18:52 the same day, all come from 75.125.237.59.",
+      "execution_start": "2026-10-13T18:55:44Z",
+      "asset_refs": [
+        "attack-asset--0be12d9f-8871-5f2b-8a3d-784b0a9310ff",
+        "attack-asset--d64df5ba-8f64-5b29-86e2-9f54814e6ff0",
+        "attack-asset--02b60bcb-e915-54fd-85f1-c18c0a882ce2"
+      ],
       "effect_refs": [
-        "attack-action--abf29ccf-5e0d-5326-a4c9-1f2991976ce4"
+        "attack-action--afd552d8-ff89-5017-9c84-f0bfb6899e22"
       ]
     },
     {
       "type": "attack-action",
       "spec_version": "2.1",
-      "id": "attack-action--abf29ccf-5e0d-5326-a4c9-1f2991976ce4",
+      "id": "attack-action--afd552d8-ff89-5017-9c84-f0bfb6899e22",
       "created": "2026-10-16T00:00:00.000Z",
       "modified": "2026-10-16T00:00:00.000Z",
-      "name": "S3 Host discovery",
-      "technique_id": "T1082",
-      "technique_ref": "attack-pattern--c1a687db-aaca-5021-89ff-3cbfd7c6bcae",
-      "description": "At 18:56:42 the intruder runs id, hostname, uname -a, reads os-release and lists the home directory. Evidence: crowdstrike_fdr ProcessRollup2.",
+      "name": "S2 SSH login to the dev host with the leaked key (T1078)",
+      "technique_id": "T1078",
+      "technique_ref": "attack-pattern--e82d1d02-b935-5476-9f69-858e50dba973",
       "extensions": {
         "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
           "extension_type": "new-sdo"
         }
       },
+      "tactic_id": "TA0001",
+      "description": "Part of stage S2: SSH login to the dev host with the leaked key.",
+      "execution_start": "2026-10-13T18:55:44Z",
+      "asset_refs": [
+        "attack-asset--0be12d9f-8871-5f2b-8a3d-784b0a9310ff",
+        "attack-asset--d64df5ba-8f64-5b29-86e2-9f54814e6ff0",
+        "attack-asset--02b60bcb-e915-54fd-85f1-c18c0a882ce2"
+      ],
       "effect_refs": [
-        "attack-action--5db319b1-8735-5a44-a1a5-2eaacaf23070"
+        "attack-action--0f7428de-904b-59af-a0ca-8c76d3c3393c"
       ]
     },
     {
       "type": "attack-action",
       "spec_version": "2.1",
-      "id": "attack-action--5db319b1-8735-5a44-a1a5-2eaacaf23070",
+      "id": "attack-action--0f7428de-904b-59af-a0ca-8c76d3c3393c",
+      "created": "2026-10-16T00:00:00.000Z",
+      "modified": "2026-10-16T00:00:00.000Z",
+      "name": "S3 Host discovery (T1082)",
+      "technique_id": "T1082",
+      "technique_ref": "attack-pattern--d71804a5-aa3f-531f-8bf3-b636958bd11e",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      },
+      "tactic_id": "TA0007",
+      "description": "At 18:56:42 the intruder runs id, hostname, uname -a, reads os-release and lists the home directory. Evidence: crowdstrike_fdr ProcessRollup2.",
+      "execution_start": "2026-10-13T18:56:42Z",
+      "asset_refs": [
+        "attack-asset--d64df5ba-8f64-5b29-86e2-9f54814e6ff0"
+      ],
+      "effect_refs": [
+        "attack-action--15b55c27-4d0d-57db-bf29-0115f8bbcfa7"
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--15b55c27-4d0d-57db-bf29-0115f8bbcfa7",
+      "created": "2026-10-16T00:00:00.000Z",
+      "modified": "2026-10-16T00:00:00.000Z",
+      "name": "S3 Host discovery (T1033)",
+      "technique_id": "T1033",
+      "technique_ref": "attack-pattern--80fbce05-e5fd-50f6-a2d7-11f40297e7a5",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      },
+      "tactic_id": "TA0007",
+      "description": "Part of stage S3: Host discovery.",
+      "execution_start": "2026-10-13T18:56:42Z",
+      "asset_refs": [
+        "attack-asset--d64df5ba-8f64-5b29-86e2-9f54814e6ff0"
+      ],
+      "effect_refs": [
+        "attack-action--a7ad5ac0-b4f9-5a95-801a-cc028201f5a7"
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--a7ad5ac0-b4f9-5a95-801a-cc028201f5a7",
       "created": "2026-10-16T00:00:00.000Z",
       "modified": "2026-10-16T00:00:00.000Z",
       "name": "S4 Instance role credentials stolen from IMDSv2",
       "technique_id": "T1552.005",
-      "technique_ref": "attack-pattern--7ea45e18-f7cb-5193-969c-adc2e6ced153",
-      "description": "At 18:58:12 curl requests an IMDSv2 token and then the instance role credentials from 169.254.169.254. Evidence: crowdstrike_fdr command lines.",
+      "technique_ref": "attack-pattern--75480d6e-d171-5166-831b-f6c2560ccc13",
       "extensions": {
         "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
           "extension_type": "new-sdo"
         }
       },
+      "tactic_id": "TA0006",
+      "description": "At 18:58:12 curl requests an IMDSv2 token and then the instance role credentials from 169.254.169.254. Evidence: crowdstrike_fdr command lines.",
+      "execution_start": "2026-10-13T18:58:12Z",
+      "asset_refs": [
+        "attack-asset--d64df5ba-8f64-5b29-86e2-9f54814e6ff0",
+        "attack-asset--7620e450-750e-5cef-b430-6c4fadaaa6f0",
+        "attack-asset--c2075c39-0217-5ee8-bead-cf753c856ff7"
+      ],
       "effect_refs": [
-        "attack-action--a8c16edf-8a24-5b5e-8bfe-19e940bc6ed7"
+        "attack-action--5f93a367-0304-5b01-973a-303057610d8b"
       ]
     },
     {
       "type": "attack-action",
       "spec_version": "2.1",
-      "id": "attack-action--a8c16edf-8a24-5b5e-8bfe-19e940bc6ed7",
+      "id": "attack-action--5f93a367-0304-5b01-973a-303057610d8b",
       "created": "2026-10-16T00:00:00.000Z",
       "modified": "2026-10-16T00:00:00.000Z",
       "name": "S5 Cloud identity, IAM and S3 discovery with the stolen role",
       "technique_id": "T1087.004",
-      "technique_ref": "attack-pattern--e5bc713d-00e7-5794-8b91-ee6eca1582ad",
-      "description": "From 18:59:23 an aws cli unpacked under /var/tmp runs sts get-caller-identity, s3 ls, iam get-role, list-attached-role-policies and list-roles, and is denied ec2 describe-instances. The calls come from the instance public IP 13.57.16.209. Evidence: aws_cloudtrail under the model-dev-05-readonly role, plus matching crowdstrike_fdr commands.",
+      "technique_ref": "attack-pattern--aa34b4cc-2444-574c-97d7-bfd65af72e34",
       "extensions": {
         "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
           "extension_type": "new-sdo"
         }
       },
+      "tactic_id": "TA0007",
+      "description": "From 18:59:23 an aws cli unpacked under /var/tmp runs sts get-caller-identity, s3 ls, iam get-role, list-attached-role-policies and list-roles, and is denied ec2 describe-instances. The calls come from the instance public IP 13.57.16.209. Evidence: aws_cloudtrail under the model-dev-05-readonly role, plus matching crowdstrike_fdr commands.",
+      "execution_start": "2026-10-13T18:59:23Z",
+      "execution_end": "2026-10-13T19:00:48Z",
+      "asset_refs": [
+        "attack-asset--c2075c39-0217-5ee8-bead-cf753c856ff7",
+        "attack-asset--d64df5ba-8f64-5b29-86e2-9f54814e6ff0"
+      ],
       "effect_refs": [
-        "attack-action--9aca35bd-fe49-546d-b476-80386ac04d22"
+        "attack-action--b843d723-5040-5c69-a9a5-f81fd4cda9b4"
       ]
     },
     {
       "type": "attack-action",
       "spec_version": "2.1",
-      "id": "attack-action--9aca35bd-fe49-546d-b476-80386ac04d22",
+      "id": "attack-action--b843d723-5040-5c69-a9a5-f81fd4cda9b4",
       "created": "2026-10-16T00:00:00.000Z",
       "modified": "2026-10-16T00:00:00.000Z",
       "name": "S6 Training-data bucket listed and synced to the host",
       "technique_id": "T1530",
-      "technique_ref": "attack-pattern--f638b7e9-f48f-59de-84a2-d79023afa089",
-      "description": "At 19:02:43 the intruder lists jn-model-training-data-5233, and at 19:04:43 to 19:04:45 runs aws s3 sync into ~/data. That is 65 GetObject calls and about 514 MB of S3 ingress. Evidence: aws_cloudtrail ListObjects and GetObject, aws_vpc_flow from S3 prefixes, crowdstrike_fdr.",
+      "technique_ref": "attack-pattern--c4ff4d29-cf39-5299-9060-ae19f3cf5453",
       "extensions": {
         "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
           "extension_type": "new-sdo"
         }
       },
+      "tactic_id": "TA0009",
+      "description": "At 19:02:43 the intruder lists jn-model-training-data-5233, and at 19:04:43 to 19:04:45 runs aws s3 sync into ~/data. That is 65 GetObject calls and about 514 MB of S3 ingress. Evidence: aws_cloudtrail ListObjects and GetObject, aws_vpc_flow from S3 prefixes, crowdstrike_fdr.",
+      "execution_start": "2026-10-13T19:02:43Z",
+      "execution_end": "2026-10-13T19:04:45Z",
+      "asset_refs": [
+        "attack-asset--c2075c39-0217-5ee8-bead-cf753c856ff7",
+        "attack-asset--d64df5ba-8f64-5b29-86e2-9f54814e6ff0"
+      ],
       "effect_refs": [
-        "attack-action--d1cf6a28-4b84-5d3b-88a0-ba5245976fb7"
+        "attack-action--3641b039-e7de-55ed-a79e-5b18e55df43d"
       ]
     },
     {
       "type": "attack-action",
       "spec_version": "2.1",
-      "id": "attack-action--d1cf6a28-4b84-5d3b-88a0-ba5245976fb7",
+      "id": "attack-action--3641b039-e7de-55ed-a79e-5b18e55df43d",
       "created": "2026-10-16T00:00:00.000Z",
       "modified": "2026-10-16T00:00:00.000Z",
       "name": "S7 Data exfiltrated over SFTP",
       "technique_id": "T1048.002",
-      "technique_ref": "attack-pattern--968d443c-a4c1-5e37-afc5-332e96f13ffb",
-      "description": "At 19:07:42 a second key login opens an SFTP session that reads 7 files (about 507 MB per sftp-server) at 19:07:43 to 19:07:46. VPC flow shows 526,475,698 bytes out to 54.193.215.120. Evidence: linux_auth sftp-server, aws_vpc_flow.",
+      "technique_ref": "attack-pattern--f426b6f8-c38e-54ea-b4fa-02a62277d9ee",
       "extensions": {
         "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
           "extension_type": "new-sdo"
         }
       },
+      "tactic_id": "TA0010",
+      "description": "At 19:07:42 a second key login opens an SFTP session that reads 7 files (about 507 MB per sftp-server) at 19:07:43 to 19:07:46. VPC flow shows 526,475,698 bytes out to 54.193.215.120. Evidence: linux_auth sftp-server, aws_vpc_flow.",
+      "execution_start": "2026-10-13T19:07:42Z",
+      "execution_end": "2026-10-13T19:07:46Z",
+      "asset_refs": [
+        "attack-asset--d64df5ba-8f64-5b29-86e2-9f54814e6ff0",
+        "attack-asset--0be12d9f-8871-5f2b-8a3d-784b0a9310ff"
+      ],
       "effect_refs": [
-        "attack-action--cf709cf5-e8af-5643-b3e0-4abb6c5b3cc1"
+        "attack-action--aef557eb-9f07-5d2c-9782-6afa87e658f3"
       ]
     },
     {
       "type": "attack-action",
       "spec_version": "2.1",
-      "id": "attack-action--cf709cf5-e8af-5643-b3e0-4abb6c5b3cc1",
+      "id": "attack-action--aef557eb-9f07-5d2c-9782-6afa87e658f3",
       "created": "2026-10-16T00:00:00.000Z",
       "modified": "2026-10-16T00:00:00.000Z",
       "name": "S8 Alert resolved without revoking access",
       "technique_id": "T1078",
-      "technique_ref": "attack-pattern--e9c51b09-87c0-5bf3-b577-4d650270ec7b",
-      "description": "At 19:22:46 the developer resolves the secret-scanning alert, then pushes at 19:42:12 and fetches at 19:46:27. Nothing in the data shows the key being removed from authorized_keys or the role credentials being revoked. Evidence: github_audit.",
+      "technique_ref": "attack-pattern--e82d1d02-b935-5476-9f69-858e50dba973",
       "extensions": {
         "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
           "extension_type": "new-sdo"
         }
-      }
+      },
+      "tactic_id": "TA0003",
+      "description": "At 19:22:46 the developer resolves the secret-scanning alert, then pushes at 19:42:12 and fetches at 19:46:27. Nothing in the data shows the key being removed from authorized_keys or the role credentials being revoked. Evidence: github_audit.",
+      "execution_start": "2026-10-13T19:22:46Z",
+      "execution_end": "2026-10-13T19:46:27Z",
+      "asset_refs": [
+        "attack-asset--02b60bcb-e915-54fd-85f1-c18c0a882ce2",
+        "attack-asset--17afb411-3633-556f-9beb-625ca41b8a17"
+      ]
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--012e9645-6f3a-56d2-9456-ebc6e24de8dc",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-16T00:00:00.000Z",
+      "modified": "2026-10-16T00:00:00.000Z",
+      "relationship_type": "based-on",
+      "source_ref": "indicator--a70d77e1-d406-557a-b9d5-13080984cc80",
+      "target_ref": "ipv4-addr--ed8d3e22-5bb2-51da-8724-cef7e1a84b2a"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--b9c6abae-8e80-57aa-8faa-751dba3632c3",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-16T00:00:00.000Z",
+      "modified": "2026-10-16T00:00:00.000Z",
+      "relationship_type": "based-on",
+      "source_ref": "indicator--9f6f9188-d5dd-522a-beae-c0fe3b48e6e1",
+      "target_ref": "ipv4-addr--820e255d-3c10-5e0d-a0aa-6f943358b248"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--f142e208-4f0e-544d-bd09-3eb4b89f01c5",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-16T00:00:00.000Z",
+      "modified": "2026-10-16T00:00:00.000Z",
+      "relationship_type": "based-on",
+      "source_ref": "indicator--ecda01ce-17d9-5263-83de-06f494112b25",
+      "target_ref": "ipv4-addr--2f8de81e-4173-5d8d-abe1-6c98aab7353f"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--a55cc106-4563-5390-80a3-f7190ca0a0e4",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-16T00:00:00.000Z",
+      "modified": "2026-10-16T00:00:00.000Z",
+      "relationship_type": "based-on",
+      "source_ref": "indicator--6f72a186-1fda-5c9b-b2af-100d6edd010a",
+      "target_ref": "ipv4-addr--4b88f684-56e5-556f-ab14-fea96f61dfaf"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--edbab023-1f7b-55e9-9935-b62d96212432",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-16T00:00:00.000Z",
+      "modified": "2026-10-16T00:00:00.000Z",
+      "relationship_type": "based-on",
+      "source_ref": "indicator--6ec0869d-65db-5658-ba91-ee04d82b69c6",
+      "target_ref": "file--db789aeb-e7e9-5101-98ab-4996720e5d2d"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--edb49d32-0214-5fba-bd75-9b9487b40468",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-16T00:00:00.000Z",
+      "modified": "2026-10-16T00:00:00.000Z",
+      "relationship_type": "based-on",
+      "source_ref": "indicator--34d9e0be-51f3-5dfb-973d-37519469772c",
+      "target_ref": "url--c4179792-82f2-5d45-b5a1-ba0d1993bafe"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--c3b4deed-2cd2-59c4-83be-c4c463bc1f66",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-16T00:00:00.000Z",
+      "modified": "2026-10-16T00:00:00.000Z",
+      "relationship_type": "based-on",
+      "source_ref": "indicator--bff7361f-f25a-55d4-9634-a042b3065a8a",
+      "target_ref": "directory--4bc10abe-bfef-519f-b868-3c43b01a09ff"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--a531c08a-72b8-5d95-85ff-b7747fc5593e",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-16T00:00:00.000Z",
+      "modified": "2026-10-16T00:00:00.000Z",
+      "relationship_type": "consists-of",
+      "source_ref": "infrastructure--2cd918f4-d1a9-5fdc-b8e0-47e4597c84ad",
+      "target_ref": "ipv4-addr--6f4e605d-e61f-57e4-88a4-c0e3366fc41b"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--d6da22b9-6ca4-5f27-962b-99174be00f5c",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-16T00:00:00.000Z",
+      "modified": "2026-10-16T00:00:00.000Z",
+      "relationship_type": "consists-of",
+      "source_ref": "infrastructure--2cd918f4-d1a9-5fdc-b8e0-47e4597c84ad",
+      "target_ref": "ipv4-addr--ed8d3e22-5bb2-51da-8724-cef7e1a84b2a"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--e8c5a6d2-afa8-5b3a-b779-a6f58590b947",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-16T00:00:00.000Z",
+      "modified": "2026-10-16T00:00:00.000Z",
+      "relationship_type": "indicates",
+      "source_ref": "indicator--a70d77e1-d406-557a-b9d5-13080984cc80",
+      "target_ref": "infrastructure--2cd918f4-d1a9-5fdc-b8e0-47e4597c84ad"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--bfb63320-4613-5079-9d3b-4b6310f88c58",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-16T00:00:00.000Z",
+      "modified": "2026-10-16T00:00:00.000Z",
+      "relationship_type": "consists-of",
+      "source_ref": "infrastructure--2cd918f4-d1a9-5fdc-b8e0-47e4597c84ad",
+      "target_ref": "domain-name--daeb8651-673d-55d3-95c6-6b09c1ea115e"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--9e072362-e826-5163-9e98-f45dfd81e090",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-16T00:00:00.000Z",
+      "modified": "2026-10-16T00:00:00.000Z",
+      "relationship_type": "related-to",
+      "source_ref": "user-account--b659ab09-7b32-5a9c-b522-3ac29cc3dbce",
+      "target_ref": "ipv4-addr--820e255d-3c10-5e0d-a0aa-6f943358b248"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--be238e47-d2ad-5133-a799-ae59509dc835",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-16T00:00:00.000Z",
+      "modified": "2026-10-16T00:00:00.000Z",
+      "relationship_type": "consists-of",
+      "source_ref": "infrastructure--d1178eef-f223-5757-8add-ce95488be0e9",
+      "target_ref": "ipv4-addr--2f8de81e-4173-5d8d-abe1-6c98aab7353f"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--b9e49026-cab0-5fc8-acfa-5b74f693489e",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-16T00:00:00.000Z",
+      "modified": "2026-10-16T00:00:00.000Z",
+      "relationship_type": "indicates",
+      "source_ref": "indicator--ecda01ce-17d9-5263-83de-06f494112b25",
+      "target_ref": "infrastructure--d1178eef-f223-5757-8add-ce95488be0e9"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--75d027a1-bb56-53a6-9529-65722176e278",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-16T00:00:00.000Z",
+      "modified": "2026-10-16T00:00:00.000Z",
+      "relationship_type": "consists-of",
+      "source_ref": "infrastructure--b2b06171-de22-52a8-90e4-afc06c3db79d",
+      "target_ref": "ipv4-addr--4b88f684-56e5-556f-ab14-fea96f61dfaf"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--df30d4e6-32b1-51da-9654-989abf78ab88",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-16T00:00:00.000Z",
+      "modified": "2026-10-16T00:00:00.000Z",
+      "relationship_type": "indicates",
+      "source_ref": "indicator--6f72a186-1fda-5c9b-b2af-100d6edd010a",
+      "target_ref": "infrastructure--b2b06171-de22-52a8-90e4-afc06c3db79d"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--1e18249e-7cb4-55e1-bd46-2edcb524688e",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-16T00:00:00.000Z",
+      "modified": "2026-10-16T00:00:00.000Z",
+      "relationship_type": "related-to",
+      "source_ref": "indicator--6ec0869d-65db-5658-ba91-ee04d82b69c6",
+      "target_ref": "attack-action--7ab9c699-8d8e-5f67-90cd-bffba7668c98"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--228b7eda-e33f-5af9-8a60-aa9af231bb6b",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-16T00:00:00.000Z",
+      "modified": "2026-10-16T00:00:00.000Z",
+      "relationship_type": "related-to",
+      "source_ref": "indicator--eea95b58-e3ad-5310-b0d2-b188a36d416d",
+      "target_ref": "attack-action--7ab9c699-8d8e-5f67-90cd-bffba7668c98"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--1f0cc67a-9f46-5b6f-bda5-7b92c2f84d0f",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-16T00:00:00.000Z",
+      "modified": "2026-10-16T00:00:00.000Z",
+      "relationship_type": "related-to",
+      "source_ref": "indicator--ecda01ce-17d9-5263-83de-06f494112b25",
+      "target_ref": "attack-action--fc83e4bb-be4a-59ce-b4d6-96883163f67e"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--960468dc-01df-53d3-b484-df7c2eaf7cc6",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-16T00:00:00.000Z",
+      "modified": "2026-10-16T00:00:00.000Z",
+      "relationship_type": "related-to",
+      "source_ref": "indicator--9f6f9188-d5dd-522a-beae-c0fe3b48e6e1",
+      "target_ref": "attack-action--fc83e4bb-be4a-59ce-b4d6-96883163f67e"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--b3049516-0119-5acf-af14-a178cae993e3",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-16T00:00:00.000Z",
+      "modified": "2026-10-16T00:00:00.000Z",
+      "relationship_type": "related-to",
+      "source_ref": "indicator--6f72a186-1fda-5c9b-b2af-100d6edd010a",
+      "target_ref": "attack-action--a7ad5ac0-b4f9-5a95-801a-cc028201f5a7"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--c21c107c-2d6a-58ac-8690-66cfa144924e",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-16T00:00:00.000Z",
+      "modified": "2026-10-16T00:00:00.000Z",
+      "relationship_type": "related-to",
+      "source_ref": "indicator--a70d77e1-d406-557a-b9d5-13080984cc80",
+      "target_ref": "attack-action--5f93a367-0304-5b01-973a-303057610d8b"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--df6a9ee8-7e4f-5147-8ce7-bee1abbcb74b",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-16T00:00:00.000Z",
+      "modified": "2026-10-16T00:00:00.000Z",
+      "relationship_type": "related-to",
+      "source_ref": "indicator--bff7361f-f25a-55d4-9634-a042b3065a8a",
+      "target_ref": "attack-action--5f93a367-0304-5b01-973a-303057610d8b"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--3abafd41-37f5-5a95-9977-b76b67d56102",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-16T00:00:00.000Z",
+      "modified": "2026-10-16T00:00:00.000Z",
+      "relationship_type": "related-to",
+      "source_ref": "indicator--34d9e0be-51f3-5dfb-973d-37519469772c",
+      "target_ref": "attack-action--b843d723-5040-5c69-a9a5-f81fd4cda9b4"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--86789f4c-7b3a-58c3-87d6-082b37d035aa",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-16T00:00:00.000Z",
+      "modified": "2026-10-16T00:00:00.000Z",
+      "relationship_type": "related-to",
+      "source_ref": "indicator--ecda01ce-17d9-5263-83de-06f494112b25",
+      "target_ref": "attack-action--3641b039-e7de-55ed-a79e-5b18e55df43d"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--7415ce53-f6a2-5e5d-960f-b725e70132a9",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-16T00:00:00.000Z",
+      "modified": "2026-10-16T00:00:00.000Z",
+      "relationship_type": "related-to",
+      "source_ref": "indicator--bb64297e-198f-5fb6-a8b5-7727d15b195b",
+      "target_ref": "attack-action--3641b039-e7de-55ed-a79e-5b18e55df43d"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--2698d933-a56a-5ac9-a6ea-549e1d016969",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-16T00:00:00.000Z",
+      "modified": "2026-10-16T00:00:00.000Z",
+      "relationship_type": "related-to",
+      "source_ref": "indicator--eea95b58-e3ad-5310-b0d2-b188a36d416d",
+      "target_ref": "attack-action--aef557eb-9f07-5d2c-9782-6afa87e658f3"
     }
   ]
 }
