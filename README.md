@@ -11,7 +11,7 @@ Curated security datasets for detection engineering, threat hunting, and securit
 | [datasets/currentis-operation-black-start/](datasets/currentis-operation-black-start/) | 1 | Agentic-AI-to-OT intrusion at a fictional utility, with an IT-to-OT pivot and quiet SCADA pre-positioning (~172K events) |
 | [datasets/cloud-data-exfiltration/](datasets/cloud-data-exfiltration/) | 1 | Leaked SSH key to IMDS credential theft and S3 training-data exfiltration in AWS (~349K events) |
 | [datasets/php2shell/](datasets/php2shell/) | 1 | PHP pre-RINIT multipart exploitation: memory-exhaustion DoS, command execution, and an Apache worker hang (~277 events) |
-| datasets/ctid-*/ | 4 | CTID micro-emulation datasets: single-technique Windows telemetry from MITRE CTID emulation plans, each published with a quality score (process injection, named pipes, two log-clearing variants) |
+| [CTID micro-emulation](#ctid-micro-emulation) | 4 | CTID micro-emulation datasets: single-technique Windows telemetry from MITRE CTID emulation plans, each published with a quality score (process injection, named pipes, two log-clearing variants) |
 | [datasets/bots/](datasets/bots/) | 8 | Splunk Boss of the SOC competition datasets (v1, v2, v3 + 2026 time-shifted variants) |
 | [datasets/splunk-detections/](datasets/splunk-detections/) | 1,866 | Splunk Security Content detection datasets with sample attack data |
 
