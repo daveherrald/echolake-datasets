@@ -1,0 +1,32 @@
+title: PHP Pre-RINIT unserialize_callback_func Command Execution
+id: 1ed2ff3e-9c54-5593-a8fc-acdebe48e75d
+status: experimental
+description: |
+  Detects the PHP-FPM fingerprint left when the pre-request-startup session decode
+  invokes unserialize_callback_func, the vector the PHP2SHELL vulnerabilities
+  (CVE-2026-109618, CVE-2026-109619) use to reach command execution as the web
+  server account before application code runs. The warning
+  "<function>() hasn't defined the class it was called for" appears only when the
+  callback fired during request startup.
+references:
+  - https://nvd.nist.gov/vuln/detail/CVE-2026-109618
+  - https://nvd.nist.gov/vuln/detail/CVE-2026-109619
+  - https://github.com/daveherrald/echolake-datasets/tree/main/datasets/php2shell
+author: Dave Herrald
+date: 2026-10-22
+logsource:
+  product: php
+  service: php-fpm
+detection:
+  selection:
+    message|contains: "hasn't defined the class it was called for"
+  condition: selection
+falsepositives:
+  - Application code that legitimately configures unserialize_callback_func, which is
+    rare during web request startup
+level: high
+tags:
+  - attack.initial_access
+  - attack.t1190
+  - attack.execution
+  - attack.t1059.004

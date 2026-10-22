@@ -1,0 +1,27 @@
+title: Apache mod_php Worker Pool Exhaustion
+id: e92b85a9-be9f-598f-aec3-a76c82fd40c4
+status: experimental
+description: |
+  Detects Apache reporting that it reached MaxRequestWorkers. With the PHP2SHELL
+  vulnerabilities a two-request sequence can permanently hang mod_php workers so they
+  never recover, and the pool fills until the server stops answering. The hung request
+  itself produces no access-log line, so this error, combined with an access-log gap,
+  is the signal.
+references:
+  - https://nvd.nist.gov/vuln/detail/CVE-2026-109618
+  - https://nvd.nist.gov/vuln/detail/CVE-2026-109619
+  - https://github.com/daveherrald/echolake-datasets/tree/main/datasets/php2shell
+author: Dave Herrald
+date: 2026-10-22
+logsource:
+  product: apache
+detection:
+  selection:
+    message|contains: 'server reached MaxRequestWorkers'
+  condition: selection
+falsepositives:
+  - A genuine traffic spike against an undersized MaxRequestWorkers setting
+level: medium
+tags:
+  - attack.impact
+  - attack.t1499.004

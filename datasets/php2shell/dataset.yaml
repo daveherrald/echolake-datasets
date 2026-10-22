@@ -1,0 +1,366 @@
+metadata:
+  name: php2shell
+  version: 1.0.0
+  description: >-
+    Web-layer telemetry from a lab exploitation of two PHP runtime bugs,
+    CVE-2026-109618 and CVE-2026-109619, in the pre-RINIT multipart parser of PHP. A single vulnerable endpoint, upload.php, is attacked from one host
+    over about three hours on 2026-10-21. The barrage drives three observable outcomes.
+    First, memory-exhaustion POSTs make the multipart parser fatal before application code
+    runs, logged as "Allowed memory size ... exhausted ... in Unknown on line 0" with
+    FPM children exiting code 70. Second, a crafted session plus a session-upload-progress
+    multipart reaches remote command execution through unserialize_callback_func during the
+    pre-RINIT session decode, and the command output (uid=33(www-data)) returns inside a
+    200 response body, captured in full by an inline proxy. Third, a two-request sequence
+    permanently hangs the Apache mod_php workers, which shows up as "server reached
+    MaxRequestWorkers" with no further access-log lines. Four sample logs, correlated:
+    the nginx reverse-proxy access log, the Apache mod_php container log,
+    the vulnerable PHP-FPM pool log, and the inline proxy's full
+    request and response capture. 277 events over roughly three hours
+    (2026-10-21 20:33:46 to 23:22:07 UTC). In this run, the evidence that identified the attack was in the FPM log
+    and the proxy capture, which the default reverse-proxy pipeline we used did not ship.
+  author: Dave Herrald
+  created: '2026-10-22'
+  license: CC0-1.0
+  tags:
+  - php2shell
+  - php
+  - cve-2026-109618
+  - cve-2026-109619
+  - rce
+  - denial-of-service
+  - unserialize
+  - session-upload-progress
+  - multipart
+  - memory-exhaustion
+  - webshell
+  - nginx
+  - apache
+  - php-fpm
+  - mitmproxy
+  - web
+  - echolake
+  mitre_attack:
+    techniques:
+    - {id: T1190, name: Exploit Public-Facing Application, tactics: [initial-access]}
+    - {id: T1059.004, name: 'Command and Scripting Interpreter: Unix Shell', tactics: [execution]}
+    - {id: T1033, name: System Owner/User Discovery, tactics: [discovery]}
+    - {id: T1499.004, name: 'Endpoint Denial of Service: Application or System Exploitation', tactics: [impact]}
+    tactics: [initial-access, execution, discovery, impact]
+  timestamp_range:
+    earliest: '2026-10-21T20:33:46Z'
+    latest: '2026-10-21T23:22:07Z'
+    field: line (per-sourcetype regex; see files)
+  attack_flow:
+    path: attack_flow.json
+    format: stix-2.1
+    schema_version: '2.0.0'
+    description: Four-stage web exploitation chain (OOM probing, pre-RINIT RCE, recon over the RCE channel, mod_php worker hang), built from this manifest by echolake build-attack-flow
+files:
+  bundled:
+  - path: data/nginx_access.log.gz
+    description: 'nginx reverse-proxy combined access log. Every exploit request is a benign-looking POST /upload.php 200; the only in-log signal is response-byte size off the endpoint baseline. Client is 192.168.2.36 (UA p2s-trigger/1.0) and local curl from 127.0.0.1/172.17.0.1. Time is the CLF bracket [DD/Mon/YYYY:HH:MM:SS +ZZZZ].'
+    format: text
+    sourcetype: 'nginx:access'
+    schema: native
+    event_count: 53
+    log_source: {vendor: nginx, product: nginx, category: web}
+  - path: data/apache_mod_php_vulnerable.log.gz
+    description: 'Apache 2.4 mod_php container stdout for the vulnerable target (:8081). Interleaved error log and combined access log. Carries the memory-exhaustion fatals "in Unknown on line 0" and the mod_php worker-hang signature AH00161 "server reached MaxRequestWorkers". Error time is [Dow Mon DD HH:MM:SS.uuuuuu YYYY]; access time is the CLF bracket.'
+    format: text
+    sourcetype: 'php:apache'
+    schema: native
+    event_count: 33
+    log_source: {vendor: Apache, product: mod_php, category: web}
+  - path: data/php_fpm.log.gz
+    description: 'PHP-FPM pool log for the vulnerable FPM target behind nginx. The log with the most signal here: FPM access lines, the four Request Startup warnings, child exit code 70 and respawn notices, and the callback fingerprint "Function system() hasn''t defined the class it was called for", which appears only when unserialize_callback_func fired during the pre-RINIT decode. FPM error time is [DD-Mon-YYYY HH:MM:SS]; the access line carries a bracketless CLF time; the PHP fatal "NOTICE: PHP message:" lines have no time and sit beside their timestamped child-exit line.'
+    format: text
+    sourcetype: 'php:fpm'
+    schema: native
+    event_count: 160
+    log_source: {vendor: PHP, product: PHP-FPM, category: web}
+  - path: data/mitmproxy_capture.log.gz
+    description: 'Inline mitmproxy capture (:9090) in reverse mode, one line per event, "REQ|RESP <connid> <ISO8601> <method> <url> | headers=<base64> | body=<base64>". The only log in this dataset carrying full request and response bodies: the RCE transaction''s response body base64-decodes to the uid=33(www-data) command output, and request bodies carry the PHP_SESSION_UPLOAD_PROGRESS multipart. One line is about 8.6 MB (a 70 MB request base64). Time is the ISO8601 after the connection id.'
+    format: text
+    sourcetype: 'mitmproxy:capture'
+    schema: native
+    event_count: 31
+    log_source: {vendor: mitmproxy, product: mitmproxy, category: proxy}
+environment:
+  host:
+    hostname: php2shell-target
+    ip: 192.168.4.111
+    platform: Proxmox/QEMU, Ubuntu 22.04
+    network: VLAN4 192.168.4.0/24
+  execution:
+    actor: Single attacker host 192.168.2.36 (UA p2s-trigger/1.0), plus local curl from the Docker host; authorized lab exercise, not attributed
+    target_endpoint: upload.php on the nginx reverse proxy (:8080) in front of PHP-FPM
+    vulnerability: CVE-2026-109618 and CVE-2026-109619, pre-RINIT multipart parser in PHP
+    targets: 'p2s-fpm (FPM behind nginx); p2s-apache (mod_php, :8081)'
+    rce_principal: www-data (uid=33), command output returned in a 200 response body
+  collection:
+    collector: Fluent Bit 5.1.5 on the host, raw log lines (no JSON envelope)
+    capture_proxy: mitmproxy 12.2.3 inline, full request and response bodies base64-encoded
+    delivery: s3://zeeklogs-1337/php2shell/ (one prefix per log)
+entities:
+- id: attacker
+  type: infrastructure
+  name: php2shell attacker host
+  role: attacker
+  description: The host driving the exploit barrage against upload.php, 192.168.2.36 with user-agent p2s-trigger/1.0, plus local curl shots from the Docker host gateway 172.17.0.1 and loopback 127.0.0.1.
+  infrastructure_types:
+  - workstation
+  observables:
+  - attacker-ip
+  - dockerhost-ip
+  - localhost-ip
+- id: target-host
+  type: infrastructure
+  name: php2shell-target
+  role: target
+  description: The lab VM hosting the vulnerable application, the nginx reverse proxy, all three PHP targets as Docker containers, and the inline capture proxy.
+  infrastructure_types:
+  - server
+  observables:
+  - target-ip
+- id: fpm-vulnerable
+  type: infrastructure
+  name: p2s-fpm (FPM)
+  role: vulnerable-target
+  description: The vulnerable FPM container behind nginx, where the pre-RINIT RCE and the memory-exhaustion fatals were demonstrated.
+  infrastructure_types:
+  - server
+  observables:
+  - target-ip
+  - php-runtime
+- id: apache-vulnerable
+  type: infrastructure
+  name: p2s-apache (mod_php)
+  role: vulnerable-target
+  description: The vulnerable mod_php container on :8081, where the deterministic two-request worker hang was reproduced.
+  infrastructure_types:
+  - server
+  observables:
+  - target-ip
+  - php-runtime
+- id: capture-proxy
+  type: infrastructure
+  name: p2s-mitmproxy
+  role: instrumentation
+  description: The inline mitmproxy reverse proxy on :9090 that recorded full request and response bodies, the only log here with the decoded RCE command output.
+  infrastructure_types:
+  - server
+  observables:
+  - target-ip
+- id: www-data
+  type: user-account
+  name: www-data
+  account_login: www-data
+  user_id: '33'
+  account_type: unix
+  is_service_account: true
+  role: rce-principal
+  description: The web server service account (uid=33) under which the pre-RINIT command execution ran; its output returned in a 200 response body.
+observables:
+- id: attacker-ip
+  type: ipv4-addr
+  value: 192.168.2.36
+- id: dockerhost-ip
+  type: ipv4-addr
+  value: 172.17.0.1
+- id: localhost-ip
+  type: ipv4-addr
+  value: 127.0.0.1
+- id: target-ip
+  type: ipv4-addr
+  value: 192.168.4.111
+- id: php-runtime
+  type: software
+  name: PHP
+- id: upload-endpoint
+  type: url
+  value: http://192.168.4.111:8080/upload.php
+- id: oom-fatal
+  type: indicator
+  name: PHP multipart memory-exhaustion fatal
+  pattern_type: sigma
+  pattern: |
+    logsource:
+      category: web
+      product: php
+    detection:
+      selection:
+        message|contains:
+          - 'Allowed memory size of'
+          - 'in Unknown on line 0'
+      condition: selection
+  indicator_types:
+  - anomalous-activity
+  kill_chain_phases:
+  - impact
+  techniques:
+  - T1499.004
+  confidence: 70
+  first_seen: '2026-10-21T20:44:03Z'
+  description: The pre-RINIT multipart parser exhausts memory_limit and fatals before application code runs, so the error has no file or line ("in Unknown on line 0"). On FPM the child then exits code 70 and respawns.
+- id: rce-fingerprint
+  type: indicator
+  name: unserialize_callback_func pre-RINIT callback fingerprint
+  pattern_type: sigma
+  pattern: |
+    logsource:
+      product: php-fpm
+    detection:
+      selection:
+        message|contains: "hasn't defined the class it was called for"
+      condition: selection
+  indicator_types:
+  - malicious-activity
+  kill_chain_phases:
+  - execution
+  techniques:
+  - T1190
+  - T1059.004
+  confidence: 90
+  first_seen: '2026-10-21T20:48:46Z'
+  description: The FPM log line "Function system() hasn't defined the class it was called for" appears only when unserialize_callback_func fired during the pre-RINIT session decode, a direct fingerprint of the RCE path.
+- id: cmd-output-200
+  type: indicator
+  name: Command output in a 200 response body
+  pattern_type: sigma
+  pattern: |
+    logsource:
+      category: proxy
+    detection:
+      selection:
+        response_body|contains:
+          - 'uid='
+          - 'www-data'
+      condition: selection
+  indicator_types:
+  - malicious-activity
+  kill_chain_phases:
+  - execution
+  - discovery
+  techniques:
+  - T1059.004
+  - T1033
+  confidence: 90
+  first_seen: '2026-10-21T20:48:46Z'
+  description: Shell command output returned inside the 200 response body of a session-upload-progress multipart POST. In this capture, id returns uid=33(www-data) and whoami returns www-data. Only a response-body-capturing log shows it.
+- id: session-upload-progress
+  type: indicator
+  name: PHP_SESSION_UPLOAD_PROGRESS multipart
+  pattern_type: sigma
+  pattern: |
+    logsource:
+      category: proxy
+    detection:
+      selection:
+        request_body|contains: 'PHP_SESSION_UPLOAD_PROGRESS'
+      condition: selection
+  indicator_types:
+  - anomalous-activity
+  kill_chain_phases:
+  - execution
+  techniques:
+  - T1190
+  confidence: 60
+  first_seen: '2026-10-21T20:48:46Z'
+  description: The multipart form field that drives the session upload-progress decode path, present in the exploit request bodies captured by the inline proxy.
+- id: worker-hang-signature
+  type: indicator
+  name: mod_php worker hang (MaxRequestWorkers saturation)
+  pattern_type: sigma
+  pattern: |
+    logsource:
+      product: apache
+    detection:
+      selection:
+        message|contains: 'server reached MaxRequestWorkers'
+      condition: selection
+  indicator_types:
+  - anomalous-activity
+  kill_chain_phases:
+  - impact
+  techniques:
+  - T1499.004
+  confidence: 80
+  first_seen: '2026-10-21T20:45:22Z'
+  description: The two-request sequence permanently hangs Apache mod_php workers. The access log goes silent for the hung request while the error log shows AH00161 "server reached MaxRequestWorkers". FPM self-heals because OOM fatals exit and respawn the child.
+kill_chain:
+- id: S1
+  name: Multipart memory-exhaustion probing
+  tactic: impact
+  techniques:
+  - T1499.004
+  assets:
+  - attacker
+  - fpm-vulnerable
+  - apache-vulnerable
+  observables:
+  - oom-fatal
+  - upload-endpoint
+  execution_start: '2026-10-21T20:44:03Z'
+  execution_end: '2026-10-21T23:22:07Z'
+  description: 'The attacker POSTs oversized multipart bodies to upload.php, driving the pre-RINIT parser past memory_limit. Each shot fatals "in Unknown on line 0" with the FPM child exiting code 70 and respawning. Evidence: php_fpm NOTICE fatals and child exits, apache_mod_php_vulnerable "in Unknown on line 0", nginx_access POST 200 with off-baseline response bytes.'
+- id: S2
+  name: Pre-RINIT remote command execution
+  tactic: initial-access
+  techniques:
+  - T1190
+  - T1059.004
+  assets:
+  - attacker
+  - fpm-vulnerable
+  - www-data
+  observables:
+  - session-upload-progress
+  - rce-fingerprint
+  - cmd-output-200
+  execution_start: '2026-10-21T20:48:46Z'
+  description: 'A crafted session plus a session-upload-progress multipart reaches command execution through unserialize_callback_func during the pre-RINIT session decode. The command runs as www-data (uid=33) and its output returns in a 200 body. Evidence: mitmproxy_capture response body decodes to uid=33(www-data), php_fpm "Function system() hasn''t defined the class it was called for".'
+- id: S3
+  name: Recon over the RCE channel
+  tactic: discovery
+  techniques:
+  - T1033
+  assets:
+  - www-data
+  - fpm-vulnerable
+  observables:
+  - cmd-output-200
+  execution_start: '2026-10-21T20:48:46Z'
+  execution_end: '2026-10-21T20:59:28Z'
+  description: 'Through the same bare-token primitive the attacker runs id (returns uid=33(www-data) at 20:48:46) and whoami (returns www-data at 20:59:28), each in a 200 response body. The working directory at request startup is the docroot. Evidence: mitmproxy_capture response bodies.'
+- id: S4
+  name: Apache mod_php worker hang
+  tactic: impact
+  techniques:
+  - T1499.004
+  assets:
+  - attacker
+  - apache-vulnerable
+  observables:
+  - worker-hang-signature
+  execution_start: '2026-10-21T20:45:22Z'
+  execution_end: '2026-10-21T23:22:04Z'
+  description: 'A two-request sequence (aborted upload-progress request then a second upload-progress request) permanently hangs the mod_php workers with no respawn. Evidence: apache_mod_php_vulnerable AH00161 "server reached MaxRequestWorkers" with the hung request absent from the access log.'
+provenance:
+  build:
+    host:
+      vmid: 620
+      ip: 192.168.4.111
+    tool: Fluent Bit 5.1.5 (raw log lines) plus mitmproxy 12.2.3 capture addon
+    notes: >-
+      Raw log lines as shipped, no JSON envelope. Pulled from s3://zeeklogs-1337/php2shell/
+      (one prefix per log), scoped to the exercise window 2026-10-21 20:33 to 23:25 UTC,
+      sorted by event time with timestamp-less continuation lines kept beside their sibling,
+      and gzipped one file per log. No identifiers were altered; all addresses and hostnames are lab-internal.
+  verification:
+    source_counts: {nginx_access: 53, apache_mod_php_vulnerable: 33, php_fpm: 160, mitmproxy_capture: 31}
+    total_events: 277
+    note: >-
+      Every log shifts in place by its native-format timestamp regex (see the php2shell
+      block in the engine timestamp registry), preserving each log line byte for byte apart
+      from the shifted event time. Timestamp-less lines (PHP "NOTICE: PHP message:" fatals,
+      Apache AH00558 startup notices) carry no event time and ride along in file order.

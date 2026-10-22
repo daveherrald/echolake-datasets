@@ -1,0 +1,34 @@
+title: PHP Pre-RINIT Multipart Memory-Exhaustion Fatal
+id: f14fa05d-370f-5a42-a960-9408d4e07c00
+status: experimental
+description: |
+  Detects the PHP fatal left when an oversized multipart body exhausts memory_limit
+  during request startup, before application code runs ("in Unknown on line 0"). This
+  is the denial-of-service probe shape of the PHP2SHELL vulnerabilities
+  (CVE-2026-109618, CVE-2026-109619), but a startup out-of-memory fatal is not by
+  itself proof of exploitation: any PHP server under genuine memory pressure can
+  produce the same line. Treat it as a corroborating signal and correlate with the
+  PHP-FPM unserialize_callback_func fingerprint or the Apache worker-pool exhaustion.
+references:
+  - https://nvd.nist.gov/vuln/detail/CVE-2026-109618
+  - https://nvd.nist.gov/vuln/detail/CVE-2026-109619
+  - https://github.com/daveherrald/echolake-datasets/tree/main/datasets/php2shell
+author: Dave Herrald
+date: 2026-10-22
+logsource:
+  product: php
+  category: application
+detection:
+  # message holds the parsed PHP/Apache error line
+  selection:
+    message|contains|all:
+      - 'Allowed memory size of'
+      - 'in Unknown on line 0'
+  condition: selection
+falsepositives:
+  - Any PHP server that genuinely runs out of memory at request startup produces the
+    identical fatal, so correlate before alerting
+level: low
+tags:
+  - attack.impact
+  - attack.t1499.004

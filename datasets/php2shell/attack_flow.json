@@ -1,0 +1,782 @@
+{
+  "type": "bundle",
+  "id": "bundle--61cba6cc-f9bd-5dea-9ba3-0fb9d997c7c5",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "spec_version": "2.1",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "created_by_ref": "identity--d673f8cb-c168-42da-8ed4-0cb26725f86c",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ],
+      "external_references": [
+        {
+          "source_name": "Documentation",
+          "description": "Documentation for Attack Flow",
+          "url": "https://center-for-threat-informed-defense.github.io/attack-flow"
+        },
+        {
+          "source_name": "GitHub",
+          "description": "Source code repository for Attack Flow",
+          "url": "https://github.com/center-for-threat-informed-defense/attack-flow"
+        }
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--d673f8cb-c168-42da-8ed4-0cb26725f86c",
+      "created_by_ref": "identity--d673f8cb-c168-42da-8ed4-0cb26725f86c",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "MITRE Center for Threat-Informed Defense",
+      "identity_class": "organization"
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "ipv4-addr",
+      "spec_version": "2.1",
+      "id": "ipv4-addr--96ce3a90-dceb-523a-8120-860d38df6fab",
+      "value": "192.168.2.36"
+    },
+    {
+      "type": "ipv4-addr",
+      "spec_version": "2.1",
+      "id": "ipv4-addr--7078d4ce-d2f8-5eb6-8fe4-1ed2dcfa6cb3",
+      "value": "172.17.0.1"
+    },
+    {
+      "type": "ipv4-addr",
+      "spec_version": "2.1",
+      "id": "ipv4-addr--679c6c82-b4be-52e2-9c7a-198689f6f77b",
+      "value": "127.0.0.1"
+    },
+    {
+      "type": "ipv4-addr",
+      "spec_version": "2.1",
+      "id": "ipv4-addr--a102e52c-cbc8-5084-a515-98e06eccd47c",
+      "value": "192.168.4.111"
+    },
+    {
+      "type": "software",
+      "spec_version": "2.1",
+      "id": "software--218943f0-71b6-557a-87a7-fe431d685501",
+      "name": "PHP"
+    },
+    {
+      "type": "url",
+      "spec_version": "2.1",
+      "id": "url--4d10ce27-2d99-59d0-8999-af4092bffffa",
+      "value": "http://192.168.4.111:8080/upload.php"
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--78169deb-f779-510d-be1b-8da5eb0b4473",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-22T00:00:00.000Z",
+      "modified": "2026-10-22T00:00:00.000Z",
+      "name": "PHP multipart memory-exhaustion fatal",
+      "description": "The pre-RINIT multipart parser exhausts memory_limit and fatals before application code runs, so the error has no file or line (\"in Unknown on line 0\"). On FPM the child then exits code 70 and respawns.",
+      "indicator_types": [
+        "anomalous-activity"
+      ],
+      "pattern": "logsource:\n  category: web\n  product: php\ndetection:\n  selection:\n    message|contains:\n      - 'Allowed memory size of'\n      - 'in Unknown on line 0'\n  condition: selection\n",
+      "pattern_type": "sigma",
+      "valid_from": "2026-10-21T20:44:03Z",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "mitre-attack",
+          "phase_name": "impact"
+        }
+      ],
+      "labels": [
+        "T1499.004"
+      ],
+      "confidence": 70
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--a22cbc31-f70c-5666-8c6c-41ba0488d0ab",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-22T00:00:00.000Z",
+      "modified": "2026-10-22T00:00:00.000Z",
+      "name": "unserialize_callback_func pre-RINIT callback fingerprint",
+      "description": "The FPM log line \"Function system() hasn't defined the class it was called for\" appears only when unserialize_callback_func fired during the pre-RINIT session decode, a direct fingerprint of the RCE path.",
+      "indicator_types": [
+        "malicious-activity"
+      ],
+      "pattern": "logsource:\n  product: php-fpm\ndetection:\n  selection:\n    message|contains: \"hasn't defined the class it was called for\"\n  condition: selection\n",
+      "pattern_type": "sigma",
+      "valid_from": "2026-10-21T20:48:46Z",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "mitre-attack",
+          "phase_name": "execution"
+        }
+      ],
+      "labels": [
+        "T1190",
+        "T1059.004"
+      ],
+      "confidence": 90
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--86e84084-b5e0-51f8-9b29-4744323ea9c3",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-22T00:00:00.000Z",
+      "modified": "2026-10-22T00:00:00.000Z",
+      "name": "Command output in a 200 response body",
+      "description": "Shell command output returned inside the 200 response body of a session-upload-progress multipart POST. In this capture, id returns uid=33(www-data) and whoami returns www-data. Only a response-body-capturing log shows it.",
+      "indicator_types": [
+        "malicious-activity"
+      ],
+      "pattern": "logsource:\n  category: proxy\ndetection:\n  selection:\n    response_body|contains:\n      - 'uid='\n      - 'www-data'\n  condition: selection\n",
+      "pattern_type": "sigma",
+      "valid_from": "2026-10-21T20:48:46Z",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "mitre-attack",
+          "phase_name": "execution"
+        },
+        {
+          "kill_chain_name": "mitre-attack",
+          "phase_name": "discovery"
+        }
+      ],
+      "labels": [
+        "T1059.004",
+        "T1033"
+      ],
+      "confidence": 90
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--8bd132a3-65e2-5f6f-a405-78d81443b9e1",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-22T00:00:00.000Z",
+      "modified": "2026-10-22T00:00:00.000Z",
+      "name": "PHP_SESSION_UPLOAD_PROGRESS multipart",
+      "description": "The multipart form field that drives the session upload-progress decode path, present in the exploit request bodies captured by the inline proxy.",
+      "indicator_types": [
+        "anomalous-activity"
+      ],
+      "pattern": "logsource:\n  category: proxy\ndetection:\n  selection:\n    request_body|contains: 'PHP_SESSION_UPLOAD_PROGRESS'\n  condition: selection\n",
+      "pattern_type": "sigma",
+      "valid_from": "2026-10-21T20:48:46Z",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "mitre-attack",
+          "phase_name": "execution"
+        }
+      ],
+      "labels": [
+        "T1190"
+      ],
+      "confidence": 60
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--4c2afa17-fef6-5c41-8a9a-dfda07f43765",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-22T00:00:00.000Z",
+      "modified": "2026-10-22T00:00:00.000Z",
+      "name": "mod_php worker hang (MaxRequestWorkers saturation)",
+      "description": "The two-request sequence permanently hangs Apache mod_php workers. The access log goes silent for the hung request while the error log shows AH00161 \"server reached MaxRequestWorkers\". FPM self-heals because OOM fatals exit and respawn the child.",
+      "indicator_types": [
+        "anomalous-activity"
+      ],
+      "pattern": "logsource:\n  product: apache\ndetection:\n  selection:\n    message|contains: 'server reached MaxRequestWorkers'\n  condition: selection\n",
+      "pattern_type": "sigma",
+      "valid_from": "2026-10-21T20:45:22Z",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "mitre-attack",
+          "phase_name": "impact"
+        }
+      ],
+      "labels": [
+        "T1499.004"
+      ],
+      "confidence": 80
+    },
+    {
+      "type": "infrastructure",
+      "spec_version": "2.1",
+      "id": "infrastructure--d8e6bd05-6eba-5266-a29b-b7836379f2a7",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-22T00:00:00.000Z",
+      "modified": "2026-10-22T00:00:00.000Z",
+      "name": "php2shell attacker host",
+      "description": "The host driving the exploit barrage against upload.php, 192.168.2.36 with user-agent p2s-trigger/1.0, plus local curl shots from the Docker host gateway 172.17.0.1 and loopback 127.0.0.1.",
+      "infrastructure_types": [
+        "workstation"
+      ]
+    },
+    {
+      "type": "attack-asset",
+      "spec_version": "2.1",
+      "id": "attack-asset--02c28ade-3967-5a53-a8d9-039887a59878",
+      "created": "2026-10-22T00:00:00.000Z",
+      "modified": "2026-10-22T00:00:00.000Z",
+      "name": "php2shell attacker host",
+      "object_ref": "infrastructure--d8e6bd05-6eba-5266-a29b-b7836379f2a7",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      },
+      "description": "attacker. The host driving the exploit barrage against upload.php, 192.168.2.36 with user-agent p2s-trigger/1.0, plus local curl shots from the Docker host gateway 172.17.0.1 and loopback 127.0.0.1"
+    },
+    {
+      "type": "infrastructure",
+      "spec_version": "2.1",
+      "id": "infrastructure--ee892bc2-df6e-5136-b2c5-de9cbeb78f3f",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-22T00:00:00.000Z",
+      "modified": "2026-10-22T00:00:00.000Z",
+      "name": "php2shell-target",
+      "description": "The lab VM hosting the vulnerable application, the nginx reverse proxy, all three PHP targets as Docker containers, and the inline capture proxy.",
+      "infrastructure_types": [
+        "server"
+      ]
+    },
+    {
+      "type": "attack-asset",
+      "spec_version": "2.1",
+      "id": "attack-asset--ea055765-6e70-523f-98e8-07358232703d",
+      "created": "2026-10-22T00:00:00.000Z",
+      "modified": "2026-10-22T00:00:00.000Z",
+      "name": "php2shell-target",
+      "object_ref": "infrastructure--ee892bc2-df6e-5136-b2c5-de9cbeb78f3f",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      },
+      "description": "target. The lab VM hosting the vulnerable application, the nginx reverse proxy, all three PHP targets as Docker containers, and the inline capture proxy"
+    },
+    {
+      "type": "infrastructure",
+      "spec_version": "2.1",
+      "id": "infrastructure--f41289a1-aa09-5931-9793-6d6e0f02bf9d",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-22T00:00:00.000Z",
+      "modified": "2026-10-22T00:00:00.000Z",
+      "name": "p2s-fpm (FPM)",
+      "description": "The vulnerable FPM container behind nginx, where the pre-RINIT RCE and the memory-exhaustion fatals were demonstrated.",
+      "infrastructure_types": [
+        "server"
+      ]
+    },
+    {
+      "type": "attack-asset",
+      "spec_version": "2.1",
+      "id": "attack-asset--862614dd-128a-5792-b08e-3760f65f22b1",
+      "created": "2026-10-22T00:00:00.000Z",
+      "modified": "2026-10-22T00:00:00.000Z",
+      "name": "p2s-fpm (FPM)",
+      "object_ref": "infrastructure--f41289a1-aa09-5931-9793-6d6e0f02bf9d",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      },
+      "description": "vulnerable-target. The vulnerable FPM container behind nginx, where the pre-RINIT RCE and the memory-exhaustion fatals were demonstrated"
+    },
+    {
+      "type": "infrastructure",
+      "spec_version": "2.1",
+      "id": "infrastructure--459f5b02-32cf-5e36-a925-863ceabaca94",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-22T00:00:00.000Z",
+      "modified": "2026-10-22T00:00:00.000Z",
+      "name": "p2s-apache (mod_php)",
+      "description": "The vulnerable mod_php container on :8081, where the deterministic two-request worker hang was reproduced.",
+      "infrastructure_types": [
+        "server"
+      ]
+    },
+    {
+      "type": "attack-asset",
+      "spec_version": "2.1",
+      "id": "attack-asset--de8a5ea4-9395-5a88-bec5-aa3782c68dc8",
+      "created": "2026-10-22T00:00:00.000Z",
+      "modified": "2026-10-22T00:00:00.000Z",
+      "name": "p2s-apache (mod_php)",
+      "object_ref": "infrastructure--459f5b02-32cf-5e36-a925-863ceabaca94",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      },
+      "description": "vulnerable-target. The vulnerable mod_php container on :8081, where the deterministic two-request worker hang was reproduced"
+    },
+    {
+      "type": "infrastructure",
+      "spec_version": "2.1",
+      "id": "infrastructure--db7eba37-7e8d-5422-923c-23eb819707d1",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-22T00:00:00.000Z",
+      "modified": "2026-10-22T00:00:00.000Z",
+      "name": "p2s-mitmproxy",
+      "description": "The inline mitmproxy reverse proxy on :9090 that recorded full request and response bodies, the only log here with the decoded RCE command output.",
+      "infrastructure_types": [
+        "server"
+      ]
+    },
+    {
+      "type": "attack-asset",
+      "spec_version": "2.1",
+      "id": "attack-asset--4d5d04b0-17d2-57d7-8889-3e7d6990b49f",
+      "created": "2026-10-22T00:00:00.000Z",
+      "modified": "2026-10-22T00:00:00.000Z",
+      "name": "p2s-mitmproxy",
+      "object_ref": "infrastructure--db7eba37-7e8d-5422-923c-23eb819707d1",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      },
+      "description": "instrumentation. The inline mitmproxy reverse proxy on :9090 that recorded full request and response bodies, the only log here with the decoded RCE command output"
+    },
+    {
+      "type": "user-account",
+      "spec_version": "2.1",
+      "id": "user-account--a06538a5-1201-52f6-81e0-7126e6f5f745",
+      "user_id": "33",
+      "account_login": "www-data",
+      "account_type": "unix",
+      "display_name": "www-data",
+      "is_service_account": true
+    },
+    {
+      "type": "attack-asset",
+      "spec_version": "2.1",
+      "id": "attack-asset--0e5f0b36-a1c3-5904-8303-8e4425a2004a",
+      "created": "2026-10-22T00:00:00.000Z",
+      "modified": "2026-10-22T00:00:00.000Z",
+      "name": "www-data",
+      "object_ref": "user-account--a06538a5-1201-52f6-81e0-7126e6f5f745",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      },
+      "description": "rce-principal. The web server service account (uid=33) under which the pre-RINIT command execution ran; its output returned in a 200 response body"
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--1b0c7784-20e5-5272-a30a-d6f8e1a72463",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Endpoint Denial of Service: Application or System Exploitation",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1499.004",
+          "url": "https://attack.mitre.org/techniques/T1499/004/"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--75bda0d2-0f87-5c2f-a7cc-6e3d3da1484c",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Exploit Public-Facing Application",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1190",
+          "url": "https://attack.mitre.org/techniques/T1190/"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--85340f23-f3cc-581b-9894-2e8bc04b8404",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Command and Scripting Interpreter: Unix Shell",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1059.004",
+          "url": "https://attack.mitre.org/techniques/T1059/004/"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--80fbce05-e5fd-50f6-a2d7-11f40297e7a5",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "System Owner/User Discovery",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1033",
+          "url": "https://attack.mitre.org/techniques/T1033/"
+        }
+      ]
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--6feae5cc-e91c-525a-8f7f-acf1ab348320",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-22T00:00:00.000Z",
+      "modified": "2026-10-22T00:00:00.000Z",
+      "name": "php2shell",
+      "description": "Web-layer telemetry from a lab exploitation of two PHP runtime bugs, CVE-2026-109618 and CVE-2026-109619, in the pre-RINIT multipart parser of PHP. A single vulnerable endpoint, upload.php, is attacked from one host over about three hours on 2026-10-21. The barrage drives three observable outcomes. First, memory-exhaustion POSTs make the multipart parser fatal before application code runs, logged as \"Allowed memory size ... exhausted ... in Unknown on line 0\" with FPM children exiting code 70. Second, a crafted session plus a session-upload-progress multipart reaches remote command execution through unserialize_callback_func during the pre-RINIT session decode, and the command output (uid=33(www-data)) returns inside a 200 response body, captured in full by an inline proxy. Third, a two-request sequence permanently hangs the Apache mod_php workers, which shows up as \"server reached MaxRequestWorkers\" with no further access-log lines. Four sample logs, correlated: the nginx reverse-proxy access log, the Apache mod_php container log, the vulnerable PHP-FPM pool log, and the inline proxy's full request and response capture. 277 events over roughly three hours (2026-10-21 20:33:46 to 23:22:07 UTC). In this run, the evidence that identified the attack was in the FPM log and the proxy capture, which the default reverse-proxy pipeline we used did not ship.",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--df42ee79-f963-5db6-8abc-e535eb24f6bd"
+      ],
+      "external_references": [
+        {
+          "source_name": "echolake-dataset",
+          "description": "php2shell v1.0.0"
+        }
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--df42ee79-f963-5db6-8abc-e535eb24f6bd",
+      "created": "2026-10-22T00:00:00.000Z",
+      "modified": "2026-10-22T00:00:00.000Z",
+      "name": "S1 Multipart memory-exhaustion probing",
+      "technique_id": "T1499.004",
+      "technique_ref": "attack-pattern--1b0c7784-20e5-5272-a30a-d6f8e1a72463",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      },
+      "tactic_id": "TA0040",
+      "description": "The attacker POSTs oversized multipart bodies to upload.php, driving the pre-RINIT parser past memory_limit. Each shot fatals \"in Unknown on line 0\" with the FPM child exiting code 70 and respawning. Evidence: php_fpm NOTICE fatals and child exits, apache_mod_php_vulnerable \"in Unknown on line 0\", nginx_access POST 200 with off-baseline response bytes.",
+      "execution_start": "2026-10-21T20:44:03Z",
+      "execution_end": "2026-10-21T23:22:07Z",
+      "asset_refs": [
+        "attack-asset--02c28ade-3967-5a53-a8d9-039887a59878",
+        "attack-asset--862614dd-128a-5792-b08e-3760f65f22b1",
+        "attack-asset--de8a5ea4-9395-5a88-bec5-aa3782c68dc8"
+      ],
+      "effect_refs": [
+        "attack-action--e7b4d152-4da7-576f-9626-59928486db0a"
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--e7b4d152-4da7-576f-9626-59928486db0a",
+      "created": "2026-10-22T00:00:00.000Z",
+      "modified": "2026-10-22T00:00:00.000Z",
+      "name": "S2 Pre-RINIT remote command execution (T1190)",
+      "technique_id": "T1190",
+      "technique_ref": "attack-pattern--75bda0d2-0f87-5c2f-a7cc-6e3d3da1484c",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      },
+      "tactic_id": "TA0001",
+      "description": "A crafted session plus a session-upload-progress multipart reaches command execution through unserialize_callback_func during the pre-RINIT session decode. The command runs as www-data (uid=33) and its output returns in a 200 body. Evidence: mitmproxy_capture response body decodes to uid=33(www-data), php_fpm \"Function system() hasn't defined the class it was called for\".",
+      "execution_start": "2026-10-21T20:48:46Z",
+      "asset_refs": [
+        "attack-asset--02c28ade-3967-5a53-a8d9-039887a59878",
+        "attack-asset--862614dd-128a-5792-b08e-3760f65f22b1",
+        "attack-asset--0e5f0b36-a1c3-5904-8303-8e4425a2004a"
+      ],
+      "effect_refs": [
+        "attack-action--57eb9874-9507-5fb4-8eb2-c4c7c66f253c"
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--57eb9874-9507-5fb4-8eb2-c4c7c66f253c",
+      "created": "2026-10-22T00:00:00.000Z",
+      "modified": "2026-10-22T00:00:00.000Z",
+      "name": "S2 Pre-RINIT remote command execution (T1059.004)",
+      "technique_id": "T1059.004",
+      "technique_ref": "attack-pattern--85340f23-f3cc-581b-9894-2e8bc04b8404",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      },
+      "tactic_id": "TA0001",
+      "description": "Part of stage S2: Pre-RINIT remote command execution.",
+      "execution_start": "2026-10-21T20:48:46Z",
+      "asset_refs": [
+        "attack-asset--02c28ade-3967-5a53-a8d9-039887a59878",
+        "attack-asset--862614dd-128a-5792-b08e-3760f65f22b1",
+        "attack-asset--0e5f0b36-a1c3-5904-8303-8e4425a2004a"
+      ],
+      "effect_refs": [
+        "attack-action--01f3cc91-12a6-50bf-bc17-0053066f7006"
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--01f3cc91-12a6-50bf-bc17-0053066f7006",
+      "created": "2026-10-22T00:00:00.000Z",
+      "modified": "2026-10-22T00:00:00.000Z",
+      "name": "S3 Recon over the RCE channel",
+      "technique_id": "T1033",
+      "technique_ref": "attack-pattern--80fbce05-e5fd-50f6-a2d7-11f40297e7a5",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      },
+      "tactic_id": "TA0007",
+      "description": "Through the same bare-token primitive the attacker runs id (returns uid=33(www-data) at 20:48:46) and whoami (returns www-data at 20:59:28), each in a 200 response body. The working directory at request startup is the docroot. Evidence: mitmproxy_capture response bodies.",
+      "execution_start": "2026-10-21T20:48:46Z",
+      "execution_end": "2026-10-21T20:59:28Z",
+      "asset_refs": [
+        "attack-asset--0e5f0b36-a1c3-5904-8303-8e4425a2004a",
+        "attack-asset--862614dd-128a-5792-b08e-3760f65f22b1"
+      ],
+      "effect_refs": [
+        "attack-action--285242d6-3200-5a93-8550-f3a51eec5760"
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--285242d6-3200-5a93-8550-f3a51eec5760",
+      "created": "2026-10-22T00:00:00.000Z",
+      "modified": "2026-10-22T00:00:00.000Z",
+      "name": "S4 Apache mod_php worker hang",
+      "technique_id": "T1499.004",
+      "technique_ref": "attack-pattern--1b0c7784-20e5-5272-a30a-d6f8e1a72463",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      },
+      "tactic_id": "TA0040",
+      "description": "A two-request sequence (aborted upload-progress request then a second upload-progress request) permanently hangs the mod_php workers with no respawn. Evidence: apache_mod_php_vulnerable AH00161 \"server reached MaxRequestWorkers\" with the hung request absent from the access log.",
+      "execution_start": "2026-10-21T20:45:22Z",
+      "execution_end": "2026-10-21T23:22:04Z",
+      "asset_refs": [
+        "attack-asset--02c28ade-3967-5a53-a8d9-039887a59878",
+        "attack-asset--de8a5ea4-9395-5a88-bec5-aa3782c68dc8"
+      ]
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--8ae0e7a4-1ccc-58f5-8df7-06d8b4019250",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-22T00:00:00.000Z",
+      "modified": "2026-10-22T00:00:00.000Z",
+      "relationship_type": "consists-of",
+      "source_ref": "infrastructure--d8e6bd05-6eba-5266-a29b-b7836379f2a7",
+      "target_ref": "ipv4-addr--96ce3a90-dceb-523a-8120-860d38df6fab"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--1e407ff2-085b-572f-8d5d-757761af9b23",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-22T00:00:00.000Z",
+      "modified": "2026-10-22T00:00:00.000Z",
+      "relationship_type": "consists-of",
+      "source_ref": "infrastructure--d8e6bd05-6eba-5266-a29b-b7836379f2a7",
+      "target_ref": "ipv4-addr--7078d4ce-d2f8-5eb6-8fe4-1ed2dcfa6cb3"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--ae085ffd-5dfd-5941-9fca-359d96f36ea9",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-22T00:00:00.000Z",
+      "modified": "2026-10-22T00:00:00.000Z",
+      "relationship_type": "consists-of",
+      "source_ref": "infrastructure--d8e6bd05-6eba-5266-a29b-b7836379f2a7",
+      "target_ref": "ipv4-addr--679c6c82-b4be-52e2-9c7a-198689f6f77b"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--8849d4d0-196c-595a-b522-1012abe1525e",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-22T00:00:00.000Z",
+      "modified": "2026-10-22T00:00:00.000Z",
+      "relationship_type": "consists-of",
+      "source_ref": "infrastructure--ee892bc2-df6e-5136-b2c5-de9cbeb78f3f",
+      "target_ref": "ipv4-addr--a102e52c-cbc8-5084-a515-98e06eccd47c"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--4e6a1e15-c5b6-5fa0-adcd-6f5fe4be62f6",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-22T00:00:00.000Z",
+      "modified": "2026-10-22T00:00:00.000Z",
+      "relationship_type": "consists-of",
+      "source_ref": "infrastructure--f41289a1-aa09-5931-9793-6d6e0f02bf9d",
+      "target_ref": "ipv4-addr--a102e52c-cbc8-5084-a515-98e06eccd47c"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--2b109189-3680-556f-8020-a30acf843c1f",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-22T00:00:00.000Z",
+      "modified": "2026-10-22T00:00:00.000Z",
+      "relationship_type": "consists-of",
+      "source_ref": "infrastructure--f41289a1-aa09-5931-9793-6d6e0f02bf9d",
+      "target_ref": "software--218943f0-71b6-557a-87a7-fe431d685501"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--9ba0f4a7-aa45-586d-bcda-e4fd6ebe5cb5",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-22T00:00:00.000Z",
+      "modified": "2026-10-22T00:00:00.000Z",
+      "relationship_type": "consists-of",
+      "source_ref": "infrastructure--459f5b02-32cf-5e36-a925-863ceabaca94",
+      "target_ref": "ipv4-addr--a102e52c-cbc8-5084-a515-98e06eccd47c"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--20302bfc-5706-51e0-bec0-05586da8cb33",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-22T00:00:00.000Z",
+      "modified": "2026-10-22T00:00:00.000Z",
+      "relationship_type": "consists-of",
+      "source_ref": "infrastructure--459f5b02-32cf-5e36-a925-863ceabaca94",
+      "target_ref": "software--218943f0-71b6-557a-87a7-fe431d685501"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--1a1d6316-d798-578f-aeaf-57d83ed8c86a",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-22T00:00:00.000Z",
+      "modified": "2026-10-22T00:00:00.000Z",
+      "relationship_type": "consists-of",
+      "source_ref": "infrastructure--db7eba37-7e8d-5422-923c-23eb819707d1",
+      "target_ref": "ipv4-addr--a102e52c-cbc8-5084-a515-98e06eccd47c"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--fc2f2b4c-b194-5dd2-a70b-f4dcbef9b81b",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-22T00:00:00.000Z",
+      "modified": "2026-10-22T00:00:00.000Z",
+      "relationship_type": "related-to",
+      "source_ref": "indicator--78169deb-f779-510d-be1b-8da5eb0b4473",
+      "target_ref": "attack-action--df42ee79-f963-5db6-8abc-e535eb24f6bd"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--63ab1e35-9c13-5aa8-a956-82049aa687df",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-22T00:00:00.000Z",
+      "modified": "2026-10-22T00:00:00.000Z",
+      "relationship_type": "related-to",
+      "source_ref": "url--4d10ce27-2d99-59d0-8999-af4092bffffa",
+      "target_ref": "attack-action--df42ee79-f963-5db6-8abc-e535eb24f6bd"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--44645be4-875e-55df-8987-00946f79b7c0",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-22T00:00:00.000Z",
+      "modified": "2026-10-22T00:00:00.000Z",
+      "relationship_type": "related-to",
+      "source_ref": "indicator--8bd132a3-65e2-5f6f-a405-78d81443b9e1",
+      "target_ref": "attack-action--e7b4d152-4da7-576f-9626-59928486db0a"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--de647289-602a-5712-ae95-35c7249ba1bb",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-22T00:00:00.000Z",
+      "modified": "2026-10-22T00:00:00.000Z",
+      "relationship_type": "related-to",
+      "source_ref": "indicator--a22cbc31-f70c-5666-8c6c-41ba0488d0ab",
+      "target_ref": "attack-action--e7b4d152-4da7-576f-9626-59928486db0a"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--59007248-d30d-5c34-9b60-7ded7070b9df",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-22T00:00:00.000Z",
+      "modified": "2026-10-22T00:00:00.000Z",
+      "relationship_type": "related-to",
+      "source_ref": "indicator--86e84084-b5e0-51f8-9b29-4744323ea9c3",
+      "target_ref": "attack-action--e7b4d152-4da7-576f-9626-59928486db0a"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--069921af-0027-54c5-82b8-567efce85b0c",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-22T00:00:00.000Z",
+      "modified": "2026-10-22T00:00:00.000Z",
+      "relationship_type": "related-to",
+      "source_ref": "indicator--86e84084-b5e0-51f8-9b29-4744323ea9c3",
+      "target_ref": "attack-action--01f3cc91-12a6-50bf-bc17-0053066f7006"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--829dd296-3287-5dc1-b8fc-b7bac029ed2e",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-10-22T00:00:00.000Z",
+      "modified": "2026-10-22T00:00:00.000Z",
+      "relationship_type": "related-to",
+      "source_ref": "indicator--4c2afa17-fef6-5c41-8a9a-dfda07f43765",
+      "target_ref": "attack-action--285242d6-3200-5a93-8550-f3a51eec5760"
+    }
+  ]
+}
