@@ -1,0 +1,45 @@
+name: php2shell logsources (source mapping)
+priority: 20
+# Maps the non-standard php / apache / proxy logsources used by the php2shell
+# rules to Splunk/Lucene source filters. Replace the paths with your own
+# index/sourcetype. Loki needs no pipeline (it matches on the stream directly).
+transformations:
+  - id: php_fpm_source
+    type: add_condition
+    conditions:
+      source:
+        - '/var/log/php*-fpm.log'
+        - '/var/log/php-fpm/*.log'
+    rule_conditions:
+      - type: logsource
+        product: php
+        service: php-fpm
+  - id: php_error_source
+    type: add_condition
+    conditions:
+      source:
+        - '/var/log/php*-fpm.log'
+        - '/var/log/nginx/error.log'
+        - '/var/log/apache2/error.log'
+        - '/var/log/httpd/error_log'
+    rule_conditions:
+      - type: logsource
+        product: php
+        category: application
+  - id: apache_source
+    type: add_condition
+    conditions:
+      source:
+        - '/var/log/apache2/error.log'
+        - '/var/log/httpd/error_log'
+    rule_conditions:
+      - type: logsource
+        product: apache
+  - id: proxy_source
+    type: add_condition
+    conditions:
+      source:
+        - '/var/log/mitmproxy/capture.log'
+    rule_conditions:
+      - type: logsource
+        category: proxy

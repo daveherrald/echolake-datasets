@@ -63,7 +63,7 @@ These are the signals we saw in this run. A different stack, PHP build, or log c
 
 ## Detection rules
 
-Five sample [Sigma](https://sigmahq.io/) rules for the signals above live in [`detections/`](detections/), each matching a string present in these logs. The FPM callback-fingerprint rule is the most specific to the vulnerability, and the memory-exhaustion rule is a corroborating signal that also fires on any startup OOM; one rule (the upload-progress request) needs request body capture, such as the inline-proxy deployment here. See the [detections README](detections/README.md) for the full list and field-mapping caveats.
+Six sample [Sigma](https://sigmahq.io/) rules for the signals above live in [`detections/`](detections/), each matching a string present in these logs. Every rule passes `sigma check` and converts to Splunk, Loki, and Lucene. The FPM callback-fingerprint rule is the most specific to the vulnerability, and the memory-exhaustion rule is a corroborating signal that also fires on any startup OOM; one rule (the upload-progress request) needs request body capture, such as the inline-proxy deployment here. See the [detections README](detections/README.md) for the full list, the per-rule verification table, and field-mapping caveats.
 
 ## Caveats
 
@@ -78,6 +78,26 @@ echolake echo --dataset local:./datasets/php2shell --output ./echoed --target-ti
 ```
 
 Each log shifts in place by its native-format timestamp regex, so every line stays byte-for-byte identical apart from the shifted event time. The engine timestamp registry carries the `nginx:access`, `php:apache`, `php:fpm`, and `mitmproxy:capture` entries.
+
+## Environment
+
+Versions in this capture:
+
+| Component | Version |
+|-----------|---------|
+| OS (host VM) | Ubuntu 22.04 |
+| nginx (reverse proxy) | 1.18.0 |
+| Apache (mod_php) | 2.4.69 |
+| PHP (build under test) | 8.4.26 |
+| mitmproxy (inline capture) | 12.2.3 |
+| Fluent Bit (log shipper) | 5.1.5 |
+
+## References
+
+- CVE records: [CVE-2026-109618](https://nvd.nist.gov/vuln/detail/CVE-2026-109618), [CVE-2026-109619](https://nvd.nist.gov/vuln/detail/CVE-2026-109619)
+- Fixed in PHP 8.5.12, 8.4.27, 8.3.36, and 8.2.35 (2026-10-21); PHP 8.1 and earlier get source-only backports
+- Vendor analysis: [Wiz](https://www.wiz.io/blog/php2shell-php-rce), [Calif.io](https://calif.io/php2shell)
+- [PHP release announcements](https://www.php.net/ChangeLog-8.php)
 
 ## License
 

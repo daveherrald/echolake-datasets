@@ -21,6 +21,13 @@ metadata:
   author: Dave Herrald
   created: '2026-10-22'
   license: CC0-1.0
+  references:
+  - https://nvd.nist.gov/vuln/detail/CVE-2026-109618
+  - https://nvd.nist.gov/vuln/detail/CVE-2026-109619
+  - 'Fixed in PHP 8.5.12, 8.4.27, 8.3.36, 8.2.35 (2026-10-21); PHP 8.1 and earlier get source-only backports'
+  - https://www.wiz.io/blog/php2shell-php-rce
+  - https://calif.io/php2shell
+  - https://www.php.net/ChangeLog-8.php
   tags:
   - php2shell
   - php
@@ -101,6 +108,13 @@ environment:
     collector: Fluent Bit 5.1.5 on the host, raw log lines (no JSON envelope)
     capture_proxy: mitmproxy 12.2.3 inline, full request and response bodies base64-encoded
     delivery: s3://zeeklogs-1337/php2shell/ (one prefix per log)
+  versions:
+    os: Ubuntu 22.04
+    nginx: 1.18.0
+    apache: '2.4.69'
+    php: 8.4.26 (build under test)
+    mitmproxy: 12.2.3
+    fluent_bit: 5.1.5
 entities:
 - id: attacker
   type: infrastructure

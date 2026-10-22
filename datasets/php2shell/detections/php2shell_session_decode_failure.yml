@@ -1,0 +1,29 @@
+title: PHP Session Decode Failure After Memory-Exhaustion Arm
+id: 9bfda6ae-3257-5fcc-a87f-65c1f9a54ee1
+status: experimental
+description: |
+  Detects the "Failed to decode session object. Session has been destroyed"
+  warning PHP emits at request startup, which follows the pre-RINIT
+  memory-exhaustion fatal in the PHP2SHELL vulnerabilities
+  (CVE-2026-109618, CVE-2026-109619). It is a corroborating signal: pair it with
+  the memory-exhaustion fatal from the same source and request.
+references:
+  - https://nvd.nist.gov/vuln/detail/CVE-2026-109618
+  - https://nvd.nist.gov/vuln/detail/CVE-2026-109619
+  - https://github.com/daveherrald/echolake-datasets/tree/main/datasets/php2shell
+author: Dave Herrald
+date: 2026-10-22
+logsource:
+  product: php
+  service: php-fpm
+detection:
+  selection:
+    message|contains: 'Failed to decode session object'
+  condition: selection
+falsepositives:
+  - Storage-level session corruption unrelated to the attack; correlate with a
+    multipart POST and the memory-exhaustion fatal
+level: medium
+tags:
+  - attack.initial-access
+  - attack.t1190
