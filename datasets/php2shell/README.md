@@ -10,8 +10,6 @@ This dataset provides replayable logs for detection engineering and SOC-investig
 
 It includes the logs a PHP web deployment produces: the [nginx](https://nginx.org/) reverse-proxy access log, the [Apache](https://httpd.apache.org/) and [PHP-FPM](https://www.php.net/manual/en/install.fpm.php) server logs. It also includes a second deployment model, an inline [mitmproxy](https://mitmproxy.org/) reverse proxy in front of the app, which records full request and response bodies that the other logs do not. That is one possible way to run the service, not a requirement of the attack, and it makes the POST bodies and the command output in the response directly visible.
 
-This is an authorized, isolatesd lab exercise.
-
 ## What it is
 
 - **277 events** across four sample log files, 2026-10-21 20:33:46 to 23:22:07 UTC (about 3 hours)
@@ -64,12 +62,6 @@ These are the signals we saw in this run. A different stack, PHP build, or log c
 ## Detection rules
 
 Six sample [Sigma](https://sigmahq.io/) rules for the signals above live in [`detections/`](detections/), each matching a string present in these logs. Every rule passes `sigma check` and converts to Splunk, Loki, and Lucene. The FPM callback-fingerprint rule is the most specific to the vulnerability, and the memory-exhaustion rule is a corroborating signal that also fires on any startup OOM; one rule (the upload-progress request) needs request body capture, such as the inline-proxy deployment here. See the [detections README](detections/README.md) for the full list, the per-rule verification table, and field-mapping caveats.
-
-## Caveats
-
-- **Only web-layer logs.** The post-exploitation network assessment from the broader exercise (the foothold's reach into the lab domain) is network telemetry and is not in this dataset.
-- **The shipped window is the evening barrage.** Log shipping started at 20:33 UTC, so the earlier afternoon exploitation rounds were not captured; this dataset is the barrage-and-capture phase.
-- **Payload timestamps are not shifted by default.** Only each line's event timestamp shifts on replay. Timestamps inside the base64 bodies in the capture, and the embedded time in a wrapped FPM `NOTICE` line, keep their original values unless `--shift-payload` is set.
 
 ## Replay
 
