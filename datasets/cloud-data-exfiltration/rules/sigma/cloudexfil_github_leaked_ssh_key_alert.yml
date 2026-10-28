@@ -1,0 +1,25 @@
+title: GitHub Secret-Scanning Alert for a Leaked SSH Private Key
+id: 9d58ef0d-f920-5575-9949-bb607b556076
+status: experimental
+description: |
+  Detects GitHub secret scanning raising an alert for an SSH private key pushed
+  to a repository. In this dataset it is the first signal of the leaked key that
+  an outside address then uses to log into the development host.
+references:
+  - https://github.com/daveherrald/echolake-datasets/tree/main/datasets/cloud-data-exfiltration
+author: Dave Herrald
+date: 2026-10-27
+logsource:
+  product: github
+  service: audit
+detection:
+  selection:
+    action: 'secret_scanning_alert.create'
+    secret_type: 'ssh_private_key'
+  condition: selection
+falsepositives:
+  - A test or example key intentionally committed to a repository.
+level: high
+tags:
+  - attack.credential-access
+  - attack.t1552.004

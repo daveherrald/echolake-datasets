@@ -83,6 +83,18 @@ The haystack the needle sits in:
 | Collection | T1530, T1074.001 |
 | Exfiltration | T1048.002 |
 
+## Detection Rules
+
+Seven sample [Sigma](https://sigmahq.io/) rules for the signals above live in
+[`rules/sigma/`](rules/sigma/), spanning the kill chain across all five log sources
+(GitHub audit, Linux OpenSSH, CrowdStrike FDR, CloudTrail, and VPC flow). Every rule
+passes `sigma check` and converts to Splunk, Loki, and Lucene. The highest-fidelity
+signals are the leaked-SSH-key secret-scanning alert, the IMDS credential access from a
+shell, and the mass read of the named training-data bucket; the intruder-address rules
+are low-confidence threat-intel seeds. See the [Sigma rules README](rules/sigma/README.md)
+for the full list, the per-rule verification table with dataset match counts, and the
+field-mapping caveats.
+
 ## Investigation Notes
 
 - **The IP is the pivot, not the key.** The account's legitimate sessions, including one that ends at 18:52 on 2026-10-13, all come from 75.125.237.59 with the same key fingerprint the intruder uses at 18:55. Same credential, new source address.

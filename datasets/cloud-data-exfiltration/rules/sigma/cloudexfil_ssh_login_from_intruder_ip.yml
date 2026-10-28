@@ -1,0 +1,26 @@
+title: SSH Activity From the Intruder Source Address
+id: 5152b6cc-63a5-5322-bd94-7cf478455677
+status: experimental
+description: |
+  Matches any OpenSSH auth record that references the documented intruder
+  address 54.193.215.120, the address that logged into the development host with
+  the leaked key and later pulled data over SFTP. This is the low-confidence
+  threat-intel seed; replace the address with your own indicator.
+references:
+  - https://github.com/daveherrald/echolake-datasets/tree/main/datasets/cloud-data-exfiltration
+author: Dave Herrald
+date: 2026-10-27
+logsource:
+  product: linux
+  service: auth
+detection:
+  selection:
+    message|contains: '54.193.215.120'
+  condition: selection
+falsepositives:
+  - Later benign reuse of the address; it is a point-in-time indicator.
+level: medium
+tags:
+  - attack.initial-access
+  - attack.t1078
+  - attack.t1021.004

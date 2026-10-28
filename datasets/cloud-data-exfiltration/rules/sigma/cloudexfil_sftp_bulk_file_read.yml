@@ -1,0 +1,29 @@
+title: SFTP Server Bulk File Read
+id: d0d97b11-21b8-562d-98e5-dd69306e5ffd
+status: experimental
+description: |
+  Detects the OpenSSH sftp-server subsystem opening files for reading, the
+  channel that pulls the ML training data off the host. Pairs the sftp-server
+  process tag with the READ open flag so it fires on file reads rather than on
+  directory listings or session setup.
+references:
+  - https://github.com/daveherrald/echolake-datasets/tree/main/datasets/cloud-data-exfiltration
+author: Dave Herrald
+date: 2026-10-27
+logsource:
+  product: linux
+  service: auth
+detection:
+  selection:
+    message|contains|all:
+      - 'sftp-server['
+      - 'flags READ'
+  condition: selection
+falsepositives:
+  - Legitimate SFTP transfers by an administrator or a backup job.
+level: high
+tags:
+  - attack.exfiltration
+  - attack.t1048.002
+  - attack.collection
+  - attack.t1005

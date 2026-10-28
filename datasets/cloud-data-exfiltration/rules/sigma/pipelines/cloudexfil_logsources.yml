@@ -1,0 +1,46 @@
+name: cloud-data-exfiltration logsources (source mapping)
+priority: 20
+# Maps the cloud and host logsources used by the cloud-data-exfiltration rules
+# to Splunk/Lucene source filters. Replace the sources with your own index or
+# sourcetype. Loki needs no pipeline (it matches on the stream directly).
+transformations:
+  - id: github_audit_source
+    type: add_condition
+    conditions:
+      source: 'github:audit'
+    rule_conditions:
+      - type: logsource
+        product: github
+        service: audit
+  - id: linux_auth_source
+    type: add_condition
+    conditions:
+      source: 'linux_secure:fluentbit'
+    rule_conditions:
+      - type: logsource
+        product: linux
+        service: auth
+  - id: crowdstrike_fdr_source
+    type: add_condition
+    conditions:
+      source: 'crowdstrike:fdr'
+    rule_conditions:
+      - type: logsource
+        product: crowdstrike
+        service: fdr
+  - id: aws_cloudtrail_source
+    type: add_condition
+    conditions:
+      source: 'aws:cloudtrail'
+    rule_conditions:
+      - type: logsource
+        product: aws
+        service: cloudtrail
+  - id: aws_vpcflow_source
+    type: add_condition
+    conditions:
+      source: 'aws:vpcflow:json'
+    rule_conditions:
+      - type: logsource
+        product: aws
+        service: vpcflow

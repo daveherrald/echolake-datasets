@@ -1,0 +1,30 @@
+title: Mass Read of the ML Training-Data S3 Bucket
+id: 265fd93d-572f-5160-871a-50f464226c24
+status: experimental
+description: |
+  Detects read access (GetObject, ListObjects, HeadObject) to the sensitive ML
+  training-data bucket jn-model-training-data-5233 in CloudTrail. In this
+  dataset the stolen instance role pulls the whole bucket, so a burst of
+  GetObject on this bucket is the collection signal.
+references:
+  - https://github.com/daveherrald/echolake-datasets/tree/main/datasets/cloud-data-exfiltration
+author: Dave Herrald
+date: 2026-10-27
+logsource:
+  product: aws
+  service: cloudtrail
+detection:
+  selection:
+    eventName:
+      - 'GetObject'
+      - 'ListObjects'
+      - 'HeadObject'
+    requestParameters.bucketName: 'jn-model-training-data-5233'
+  condition: selection
+falsepositives:
+  - Legitimate training jobs or data-engineering access to the bucket; scope by
+    principal.
+level: high
+tags:
+  - attack.collection
+  - attack.t1530

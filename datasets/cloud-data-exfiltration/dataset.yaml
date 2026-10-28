@@ -231,16 +231,7 @@ observables:
 - id: gh-secret-alert
   type: indicator
   name: GitHub secret-scanning alert for an SSH private key
-  pattern_type: sigma
-  pattern: |
-    logsource:
-      product: github
-      service: audit
-    detection:
-      selection:
-        action: 'secret_scanning_alert.create'
-        alert.secret_type: 'ssh_private_key'
-      condition: selection
+  rule: https://github.com/daveherrald/echolake-datasets/blob/main/datasets/cloud-data-exfiltration/rules/sigma/cloudexfil_github_leaked_ssh_key_alert.yml
   indicator_types:
   - anomalous-activity
   kill_chain_phases:
@@ -280,16 +271,7 @@ observables:
 - id: sftp-read
   type: indicator
   name: sftp-server bulk read from a non-home address
-  pattern_type: sigma
-  pattern: |
-    logsource:
-      product: linux
-      service: auth
-    detection:
-      selection:
-        program: 'sftp-server'
-        message|contains: 'open'
-      condition: selection
+  rule: https://github.com/daveherrald/echolake-datasets/blob/main/datasets/cloud-data-exfiltration/rules/sigma/cloudexfil_sftp_bulk_file_read.yml
   indicator_types:
   - anomalous-activity
   kill_chain_phases:
