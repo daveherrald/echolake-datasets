@@ -241,31 +241,6 @@
       "confidence": 80
     },
     {
-      "type": "indicator",
-      "spec_version": "2.1",
-      "id": "indicator--dbe29ed6-f8a5-5731-a05d-93f8d2f0ff00",
-      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
-      "created": "2026-06-09T00:00:00.000Z",
-      "modified": "2026-06-09T00:00:00.000Z",
-      "name": "Beacon User-Agent",
-      "indicator_types": [
-        "malicious-activity"
-      ],
-      "pattern": "logsource:\n  product: zeek\n  service: http\ndetection:\n  selection:\n    user_agent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.8287.614 Safari/537.36'\n    id.resp_h: '121.43.243.13'\n  condition: selection\n",
-      "pattern_type": "sigma",
-      "valid_from": "2026-06-09T01:20:00Z",
-      "kill_chain_phases": [
-        {
-          "kill_chain_name": "mitre-attack",
-          "phase_name": "command-and-control"
-        }
-      ],
-      "labels": [
-        "T1071.001"
-      ],
-      "confidence": 60
-    },
-    {
       "type": "domain-name",
       "spec_version": "2.1",
       "id": "domain-name--b2ab2954-d4cc-569f-ba63-bc17112266c3",
@@ -440,64 +415,6 @@
       "confidence": 70
     },
     {
-      "type": "indicator",
-      "spec_version": "2.1",
-      "id": "indicator--fe76c44d-8b6a-5986-8141-ae4ddd461461",
-      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
-      "created": "2026-06-09T00:00:00.000Z",
-      "modified": "2026-06-09T00:00:00.000Z",
-      "name": "Encoded PowerShell stager launched by the AI assistant",
-      "indicator_types": [
-        "malicious-activity"
-      ],
-      "pattern": "logsource:\n  category: process_creation\n  product: windows\ndetection:\n  selection:\n    ParentImage|endswith: '\\\\node.exe'\n    Image|endswith: '\\\\powershell.exe'\n    CommandLine|contains: '-enc'\n  condition: selection\n",
-      "pattern_type": "sigma",
-      "valid_from": "2026-06-09T01:20:00Z",
-      "kill_chain_phases": [
-        {
-          "kill_chain_name": "mitre-attack",
-          "phase_name": "execution"
-        }
-      ],
-      "labels": [
-        "T1059.001",
-        "T1027",
-        "T1204"
-      ],
-      "confidence": 85
-    },
-    {
-      "type": "indicator",
-      "spec_version": "2.1",
-      "id": "indicator--2beb4b0f-d617-5b99-a2b8-014af9e6ecfc",
-      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
-      "created": "2026-06-09T00:00:00.000Z",
-      "modified": "2026-06-09T00:00:00.000Z",
-      "name": "Living-off-the-land domain recon burst",
-      "description": "First from the agent chain as rchen (whoami, hostname), then the 01:52:53 burst spawned by the beacon as SYSTEM, ending with net user helixgrid-svc /domain. ipconfig, netstat, and Get-Process were not used by the attacker.",
-      "indicator_types": [
-        "anomalous-activity"
-      ],
-      "pattern": "logsource:\n  category: process_creation\n  product: windows\ndetection:\n  selection:\n    CommandLine|contains:\n      - 'whoami /all'\n      - 'net group /domain'\n      - 'net user /domain'\n      - 'nltest /dclist'\n      - 'net user helixgrid-svc /domain'\n  condition: selection\n",
-      "pattern_type": "sigma",
-      "valid_from": "2026-06-09T01:40:41Z",
-      "valid_until": "2026-06-09T01:52:54Z",
-      "kill_chain_phases": [
-        {
-          "kill_chain_name": "mitre-attack",
-          "phase_name": "discovery"
-        }
-      ],
-      "labels": [
-        "T1087.002",
-        "T1482",
-        "T1069.002",
-        "T1018",
-        "T1033"
-      ],
-      "confidence": 60
-    },
-    {
       "type": "file",
       "spec_version": "2.1",
       "id": "file--0ac1e850-c7a7-5bc5-b38c-e8b4d7364407",
@@ -618,113 +535,6 @@
         "T1021.001"
       ],
       "confidence": 80
-    },
-    {
-      "type": "indicator",
-      "spec_version": "2.1",
-      "id": "indicator--d0db40f4-5a07-5a57-b068-dce16b69056b",
-      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
-      "created": "2026-06-09T00:00:00.000Z",
-      "modified": "2026-06-09T00:00:00.000Z",
-      "name": "WindowsUpdateAssistant scheduled task on the workstation",
-      "description": "Relaunches kb5041234-v3.exe as SYSTEM on CURRENTIS-WS-RACHEL.",
-      "indicator_types": [
-        "malicious-activity"
-      ],
-      "pattern": "logsource:\n  product: windows\n  service: security\ndetection:\n  selection:\n    EventID: 4698\n    TaskName: '\\\\WindowsUpdateAssistant'\n  condition: selection\n",
-      "pattern_type": "sigma",
-      "valid_from": "2026-06-09T01:20:00Z",
-      "kill_chain_phases": [
-        {
-          "kill_chain_name": "mitre-attack",
-          "phase_name": "persistence"
-        }
-      ],
-      "labels": [
-        "T1053.005"
-      ],
-      "confidence": 80
-    },
-    {
-      "type": "indicator",
-      "spec_version": "2.1",
-      "id": "indicator--6cd3464e-da10-5232-846b-658c1f7bc58b",
-      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
-      "created": "2026-06-09T00:00:00.000Z",
-      "modified": "2026-06-09T00:00:00.000Z",
-      "name": "LSASS memory access from the implant",
-      "description": "Sysmon EID 10 with a CallTrace through dbgcore.dll, on the workstation only.",
-      "indicator_types": [
-        "malicious-activity"
-      ],
-      "pattern": "logsource:\n  category: process_access\n  product: windows\ndetection:\n  selection:\n    TargetImage|endswith: '\\\\lsass.exe'\n    SourceImage|endswith: '\\\\kb5041234-v3.exe'\n    GrantedAccess: '0x1FFFFF'\n  condition: selection\n",
-      "pattern_type": "sigma",
-      "valid_from": "2026-06-09T02:01:39Z",
-      "valid_until": "2026-06-09T02:01:40Z",
-      "kill_chain_phases": [
-        {
-          "kill_chain_name": "mitre-attack",
-          "phase_name": "credential-access"
-        }
-      ],
-      "labels": [
-        "T1003.001"
-      ],
-      "confidence": 85
-    },
-    {
-      "type": "indicator",
-      "spec_version": "2.1",
-      "id": "indicator--09b1e0a6-59a5-5675-b26c-65c28b3e6789",
-      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
-      "created": "2026-06-09T00:00:00.000Z",
-      "modified": "2026-06-09T00:00:00.000Z",
-      "name": "Stolen vendor credential staged with cmdkey for RDP",
-      "description": "cmdkey targets TERMSRV/currentis-scada-jh-02.currentis.local as CURRENTIS\\helixgrid-svc, then mstsc opens the session.",
-      "indicator_types": [
-        "malicious-activity"
-      ],
-      "pattern": "logsource:\n  category: process_creation\n  product: windows\ndetection:\n  selection:\n    Image|endswith: '\\\\cmdkey.exe'\n    CommandLine|contains|all:\n      - '/generic:TERMSRV/'\n      - 'helixgrid-svc'\n  condition: selection\n",
-      "pattern_type": "sigma",
-      "valid_from": "2026-06-09T02:06:12Z",
-      "kill_chain_phases": [
-        {
-          "kill_chain_name": "mitre-attack",
-          "phase_name": "lateral-movement"
-        }
-      ],
-      "labels": [
-        "T1021.001",
-        "T1078"
-      ],
-      "confidence": 85
-    },
-    {
-      "type": "indicator",
-      "spec_version": "2.1",
-      "id": "indicator--24796ed8-a610-5c58-a7d0-74454ce0a8a7",
-      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
-      "created": "2026-06-09T00:00:00.000Z",
-      "modified": "2026-06-09T00:00:00.000Z",
-      "name": "Vendor service account RDP logon to the OT jump host",
-      "description": "The account is the anomaly: a vendor remote-access account interactively logging on to the SCADA jump host, with 4768/4769 on CURRENTIS-DC01 on the way.",
-      "indicator_types": [
-        "anomalous-activity"
-      ],
-      "pattern": "logsource:\n  product: windows\n  service: security\ndetection:\n  selection:\n    EventID: 4624\n    LogonType: 10\n    TargetUserName: 'helixgrid-svc'\n  condition: selection\n",
-      "pattern_type": "sigma",
-      "valid_from": "2026-06-09T02:06:24Z",
-      "kill_chain_phases": [
-        {
-          "kill_chain_name": "mitre-attack",
-          "phase_name": "lateral-movement"
-        }
-      ],
-      "labels": [
-        "T1021.001",
-        "T1078"
-      ],
-      "confidence": 75
     },
     {
       "type": "directory",
@@ -993,87 +803,6 @@
         "T1041"
       ],
       "confidence": 80
-    },
-    {
-      "type": "indicator",
-      "spec_version": "2.1",
-      "id": "indicator--d018c64c-ed2d-5b82-9758-61042ddb561d",
-      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
-      "created": "2026-06-09T00:00:00.000Z",
-      "modified": "2026-06-09T00:00:00.000Z",
-      "name": "OTRead scheduled task on the jump host",
-      "description": "Created 02:11:22 on CURRENTIS-SCADA-JH-02 to run read_ot.ps1 as CURRENTIS\\helixgrid-svc; the staged setpoint capability that is never fired.",
-      "indicator_types": [
-        "malicious-activity"
-      ],
-      "pattern": "logsource:\n  product: windows\n  service: security\ndetection:\n  selection:\n    EventID: 4698\n    TaskName: '\\\\OTRead'\n  condition: selection\n",
-      "pattern_type": "sigma",
-      "valid_from": "2026-06-09T02:11:22Z",
-      "kill_chain_phases": [
-        {
-          "kill_chain_name": "mitre-attack",
-          "phase_name": "persistence"
-        },
-        {
-          "kill_chain_name": "mitre-attack",
-          "phase_name": "defense-evasion"
-        }
-      ],
-      "labels": [
-        "T1053.005"
-      ],
-      "confidence": 85
-    },
-    {
-      "type": "indicator",
-      "spec_version": "2.1",
-      "id": "indicator--76108949-f512-5e3c-9698-17240818eec7",
-      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
-      "created": "2026-06-09T00:00:00.000Z",
-      "modified": "2026-06-09T00:00:00.000Z",
-      "name": "wevtutil clears the Security log",
-      "indicator_types": [
-        "malicious-activity"
-      ],
-      "pattern": "logsource:\n  category: process_creation\n  product: windows\ndetection:\n  selection:\n    Image|endswith: '\\\\wevtutil.exe'\n    CommandLine|contains|all:\n      - ' cl '\n      - 'Security'\n  condition: selection\n",
-      "pattern_type": "sigma",
-      "valid_from": "2026-06-09T02:29:57Z",
-      "kill_chain_phases": [
-        {
-          "kill_chain_name": "mitre-attack",
-          "phase_name": "defense-evasion"
-        }
-      ],
-      "labels": [
-        "T1070.001"
-      ],
-      "confidence": 90
-    },
-    {
-      "type": "indicator",
-      "spec_version": "2.1",
-      "id": "indicator--941fa96a-91b8-5abf-94b9-7e0ac9c2bdc8",
-      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
-      "created": "2026-06-09T00:00:00.000Z",
-      "modified": "2026-06-09T00:00:00.000Z",
-      "name": "Security event log cleared on the OT jump host",
-      "description": "Security 1102 on CURRENTIS-SCADA-JH-02 at 02:29:57.219 (SubjectUserName SYSTEM).",
-      "indicator_types": [
-        "malicious-activity"
-      ],
-      "pattern": "logsource:\n  product: windows\n  service: security\ndetection:\n  selection:\n    EventID: 1102\n  condition: selection\n",
-      "pattern_type": "sigma",
-      "valid_from": "2026-06-09T02:29:57Z",
-      "kill_chain_phases": [
-        {
-          "kill_chain_name": "mitre-attack",
-          "phase_name": "defense-evasion"
-        }
-      ],
-      "labels": [
-        "T1070.001"
-      ],
-      "confidence": 90
     },
     {
       "type": "infrastructure",
@@ -2025,6 +1754,13 @@
       ],
       "effect_refs": [
         "attack-action--11354add-3ef7-597e-8360-73962f7c4d56"
+      ],
+      "external_references": [
+        {
+          "source_name": "sigma-rule",
+          "external_id": "currentis_agentic_ai_shell_spawn",
+          "url": "https://github.com/daveherrald/echolake-datasets/blob/main/datasets/currentis-operation-black-start/rules/sigma/currentis_agentic_ai_shell_spawn.yml"
+        }
       ]
     },
     {
@@ -2111,6 +1847,13 @@
       ],
       "effect_refs": [
         "attack-action--755f7420-50f5-5ce8-bd52-87cee2852569"
+      ],
+      "external_references": [
+        {
+          "source_name": "sigma-rule",
+          "external_id": "currentis_lotl_domain_recon",
+          "url": "https://github.com/daveherrald/echolake-datasets/blob/main/datasets/currentis-operation-black-start/rules/sigma/currentis_lotl_domain_recon.yml"
+        }
       ]
     },
     {
@@ -2242,6 +1985,13 @@
       ],
       "effect_refs": [
         "attack-action--b2f4bc1d-fe6f-5bbc-9ca2-23995728f7d1"
+      ],
+      "external_references": [
+        {
+          "source_name": "sigma-rule",
+          "external_id": "currentis_c2_beacon_user_agent",
+          "url": "https://github.com/daveherrald/echolake-datasets/blob/main/datasets/currentis-operation-black-start/rules/sigma/currentis_c2_beacon_user_agent.yml"
+        }
       ]
     },
     {
@@ -2376,6 +2126,13 @@
       ],
       "effect_refs": [
         "attack-action--2ad6d387-3bc1-5f09-8637-ef6c7d3b520c"
+      ],
+      "external_references": [
+        {
+          "source_name": "sigma-rule",
+          "external_id": "currentis_lsass_access_masqueraded_binary",
+          "url": "https://github.com/daveherrald/echolake-datasets/blob/main/datasets/currentis-operation-black-start/rules/sigma/currentis_lsass_access_masqueraded_binary.yml"
+        }
       ]
     },
     {
@@ -2430,6 +2187,18 @@
       ],
       "effect_refs": [
         "attack-action--5d8e929e-9277-58f3-b511-3f44a113b7de"
+      ],
+      "external_references": [
+        {
+          "source_name": "sigma-rule",
+          "external_id": "currentis_vendor_credential_cmdkey_rdp",
+          "url": "https://github.com/daveherrald/echolake-datasets/blob/main/datasets/currentis-operation-black-start/rules/sigma/currentis_vendor_credential_cmdkey_rdp.yml"
+        },
+        {
+          "source_name": "sigma-rule",
+          "external_id": "currentis_vendor_account_rdp_logon_ot",
+          "url": "https://github.com/daveherrald/echolake-datasets/blob/main/datasets/currentis-operation-black-start/rules/sigma/currentis_vendor_account_rdp_logon_ot.yml"
+        }
       ]
     },
     {
@@ -2724,6 +2493,13 @@
       ],
       "effect_refs": [
         "attack-action--a33aff6a-6b80-5420-aabd-7f8d77d03f88"
+      ],
+      "external_references": [
+        {
+          "source_name": "sigma-rule",
+          "external_id": "currentis_otread_scheduled_task",
+          "url": "https://github.com/daveherrald/echolake-datasets/blob/main/datasets/currentis-operation-black-start/rules/sigma/currentis_otread_scheduled_task.yml"
+        }
       ]
     },
     {
@@ -2750,6 +2526,18 @@
       ],
       "effect_refs": [
         "attack-action--a4b1d120-20c9-58f5-ba87-fedff1dbf771"
+      ],
+      "external_references": [
+        {
+          "source_name": "sigma-rule",
+          "external_id": "currentis_wevtutil_security_log_clear",
+          "url": "https://github.com/daveherrald/echolake-datasets/blob/main/datasets/currentis-operation-black-start/rules/sigma/currentis_wevtutil_security_log_clear.yml"
+        },
+        {
+          "source_name": "sigma-rule",
+          "external_id": "currentis_security_eventlog_cleared",
+          "url": "https://github.com/daveherrald/echolake-datasets/blob/main/datasets/currentis-operation-black-start/rules/sigma/currentis_security_eventlog_cleared.yml"
+        }
       ]
     },
     {
@@ -3211,17 +2999,6 @@
     {
       "type": "relationship",
       "spec_version": "2.1",
-      "id": "relationship--f7462d3e-5f50-52db-826c-5429aa75b823",
-      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
-      "created": "2026-06-09T00:00:00.000Z",
-      "modified": "2026-06-09T00:00:00.000Z",
-      "relationship_type": "consists-of",
-      "source_ref": "infrastructure--6ce20236-c0b5-518a-944c-b60c7e5c42d0",
-      "target_ref": "indicator--dbe29ed6-f8a5-5731-a05d-93f8d2f0ff00"
-    },
-    {
-      "type": "relationship",
-      "spec_version": "2.1",
       "id": "relationship--ec0f0e70-a924-5d8e-bcb4-9847e7946338",
       "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
       "created": "2026-06-09T00:00:00.000Z",
@@ -3442,17 +3219,6 @@
     {
       "type": "relationship",
       "spec_version": "2.1",
-      "id": "relationship--693e7a92-8c1c-5c0a-9dd0-04ffb21a8734",
-      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
-      "created": "2026-06-09T00:00:00.000Z",
-      "modified": "2026-06-09T00:00:00.000Z",
-      "relationship_type": "related-to",
-      "source_ref": "indicator--fe76c44d-8b6a-5986-8141-ae4ddd461461",
-      "target_ref": "attack-action--e08a1846-b874-5adb-975a-869cfc04724c"
-    },
-    {
-      "type": "relationship",
-      "spec_version": "2.1",
       "id": "relationship--b1cad970-723a-54e1-9d0b-c90d2ab2d9bc",
       "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
       "created": "2026-06-09T00:00:00.000Z",
@@ -3460,17 +3226,6 @@
       "relationship_type": "related-to",
       "source_ref": "indicator--917dfac0-fe3d-5f21-a29d-76088ecc661a",
       "target_ref": "attack-action--e08a1846-b874-5adb-975a-869cfc04724c"
-    },
-    {
-      "type": "relationship",
-      "spec_version": "2.1",
-      "id": "relationship--5813de57-581e-50ab-b3c1-add17a65e5a2",
-      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
-      "created": "2026-06-09T00:00:00.000Z",
-      "modified": "2026-06-09T00:00:00.000Z",
-      "relationship_type": "related-to",
-      "source_ref": "indicator--2beb4b0f-d617-5b99-a2b8-014af9e6ecfc",
-      "target_ref": "attack-action--86f45528-0dc5-5005-93ce-684812297821"
     },
     {
       "type": "relationship",
@@ -3508,17 +3263,6 @@
     {
       "type": "relationship",
       "spec_version": "2.1",
-      "id": "relationship--ea25f430-29df-5ad8-a456-b67878b4a7c6",
-      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
-      "created": "2026-06-09T00:00:00.000Z",
-      "modified": "2026-06-09T00:00:00.000Z",
-      "relationship_type": "related-to",
-      "source_ref": "indicator--dbe29ed6-f8a5-5731-a05d-93f8d2f0ff00",
-      "target_ref": "attack-action--ff67567b-389c-58e0-a1db-6dbad129808e"
-    },
-    {
-      "type": "relationship",
-      "spec_version": "2.1",
       "id": "relationship--dfa70eca-ca8f-5dc8-96b2-88535d9ba591",
       "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
       "created": "2026-06-09T00:00:00.000Z",
@@ -3537,50 +3281,6 @@
       "relationship_type": "related-to",
       "source_ref": "indicator--0fe87717-7c0d-5356-be53-0b11142398e8",
       "target_ref": "attack-action--ff67567b-389c-58e0-a1db-6dbad129808e"
-    },
-    {
-      "type": "relationship",
-      "spec_version": "2.1",
-      "id": "relationship--bfeee570-23be-55e2-90ab-4ebde06228bf",
-      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
-      "created": "2026-06-09T00:00:00.000Z",
-      "modified": "2026-06-09T00:00:00.000Z",
-      "relationship_type": "related-to",
-      "source_ref": "indicator--d0db40f4-5a07-5a57-b068-dce16b69056b",
-      "target_ref": "attack-action--ff67567b-389c-58e0-a1db-6dbad129808e"
-    },
-    {
-      "type": "relationship",
-      "spec_version": "2.1",
-      "id": "relationship--79850e74-ec30-5d7e-97f1-f438ec5d9221",
-      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
-      "created": "2026-06-09T00:00:00.000Z",
-      "modified": "2026-06-09T00:00:00.000Z",
-      "relationship_type": "related-to",
-      "source_ref": "indicator--6cd3464e-da10-5232-846b-658c1f7bc58b",
-      "target_ref": "attack-action--f18add27-bf49-53ef-8c7c-ef15409bd27b"
-    },
-    {
-      "type": "relationship",
-      "spec_version": "2.1",
-      "id": "relationship--869557b0-aefa-5766-a961-3042d2f7a0b7",
-      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
-      "created": "2026-06-09T00:00:00.000Z",
-      "modified": "2026-06-09T00:00:00.000Z",
-      "relationship_type": "related-to",
-      "source_ref": "indicator--09b1e0a6-59a5-5675-b26c-65c28b3e6789",
-      "target_ref": "attack-action--a56abc2a-4d4e-5235-8a7f-d256e296775c"
-    },
-    {
-      "type": "relationship",
-      "spec_version": "2.1",
-      "id": "relationship--f79fb093-43ae-5cc1-83b1-c83cb5bba808",
-      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
-      "created": "2026-06-09T00:00:00.000Z",
-      "modified": "2026-06-09T00:00:00.000Z",
-      "relationship_type": "related-to",
-      "source_ref": "indicator--24796ed8-a610-5c58-a7d0-74454ce0a8a7",
-      "target_ref": "attack-action--a56abc2a-4d4e-5235-8a7f-d256e296775c"
     },
     {
       "type": "relationship",
@@ -3713,39 +3413,6 @@
       "relationship_type": "related-to",
       "source_ref": "indicator--a8cf35e5-c0a0-5685-87e7-5a0c621a86ad",
       "target_ref": "attack-action--dc5a8981-b0c8-5729-ae40-a26127107e63"
-    },
-    {
-      "type": "relationship",
-      "spec_version": "2.1",
-      "id": "relationship--1b06050a-36e0-56ba-9184-988c6e8dc4f1",
-      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
-      "created": "2026-06-09T00:00:00.000Z",
-      "modified": "2026-06-09T00:00:00.000Z",
-      "relationship_type": "related-to",
-      "source_ref": "indicator--d018c64c-ed2d-5b82-9758-61042ddb561d",
-      "target_ref": "attack-action--4cdd070b-5d66-5d93-8523-9391260068e3"
-    },
-    {
-      "type": "relationship",
-      "spec_version": "2.1",
-      "id": "relationship--ec733db7-38d7-5368-9b7c-7910a8d7eee8",
-      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
-      "created": "2026-06-09T00:00:00.000Z",
-      "modified": "2026-06-09T00:00:00.000Z",
-      "relationship_type": "related-to",
-      "source_ref": "indicator--76108949-f512-5e3c-9698-17240818eec7",
-      "target_ref": "attack-action--4cdd070b-5d66-5d93-8523-9391260068e3"
-    },
-    {
-      "type": "relationship",
-      "spec_version": "2.1",
-      "id": "relationship--4abbcf3a-7a8c-56b4-ab4e-7ddaeb13d48d",
-      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
-      "created": "2026-06-09T00:00:00.000Z",
-      "modified": "2026-06-09T00:00:00.000Z",
-      "relationship_type": "related-to",
-      "source_ref": "indicator--941fa96a-91b8-5abf-94b9-7e0ac9c2bdc8",
-      "target_ref": "attack-action--4cdd070b-5d66-5d93-8523-9391260068e3"
     }
   ]
 }

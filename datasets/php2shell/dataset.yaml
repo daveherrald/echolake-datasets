@@ -196,17 +196,7 @@ observables:
 - id: oom-fatal
   type: indicator
   name: PHP multipart memory-exhaustion fatal
-  pattern_type: sigma
-  pattern: |
-    logsource:
-      category: web
-      product: php
-    detection:
-      selection:
-        message|contains:
-          - 'Allowed memory size of'
-          - 'in Unknown on line 0'
-      condition: selection
+  rule: https://github.com/daveherrald/echolake-datasets/blob/main/datasets/php2shell/rules/sigma/php2shell_memory_exhaustion_fatal.yml
   indicator_types:
   - anomalous-activity
   kill_chain_phases:
@@ -219,14 +209,7 @@ observables:
 - id: rce-fingerprint
   type: indicator
   name: unserialize_callback_func pre-RINIT callback fingerprint
-  pattern_type: sigma
-  pattern: |
-    logsource:
-      product: php-fpm
-    detection:
-      selection:
-        message|contains: "hasn't defined the class it was called for"
-      condition: selection
+  rule: https://github.com/daveherrald/echolake-datasets/blob/main/datasets/php2shell/rules/sigma/php2shell_rce_unserialize_callback.yml
   indicator_types:
   - malicious-activity
   kill_chain_phases:
@@ -264,14 +247,7 @@ observables:
 - id: session-upload-progress
   type: indicator
   name: PHP_SESSION_UPLOAD_PROGRESS multipart
-  pattern_type: sigma
-  pattern: |
-    logsource:
-      category: proxy
-    detection:
-      selection:
-        request_body|contains: 'PHP_SESSION_UPLOAD_PROGRESS'
-      condition: selection
+  rule: https://github.com/daveherrald/echolake-datasets/blob/main/datasets/php2shell/rules/sigma/php2shell_session_upload_progress_exploit.yml
   indicator_types:
   - anomalous-activity
   kill_chain_phases:
@@ -284,14 +260,7 @@ observables:
 - id: worker-hang-signature
   type: indicator
   name: mod_php worker hang (MaxRequestWorkers saturation)
-  pattern_type: sigma
-  pattern: |
-    logsource:
-      product: apache
-    detection:
-      selection:
-        message|contains: 'server reached MaxRequestWorkers'
-      condition: selection
+  rule: https://github.com/daveherrald/echolake-datasets/blob/main/datasets/php2shell/rules/sigma/php2shell_apache_worker_exhaustion.yml
   indicator_types:
   - anomalous-activity
   kill_chain_phases:

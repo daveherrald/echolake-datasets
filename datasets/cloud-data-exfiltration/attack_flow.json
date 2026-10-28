@@ -224,32 +224,6 @@
       "confidence": 85
     },
     {
-      "type": "indicator",
-      "spec_version": "2.1",
-      "id": "indicator--eea95b58-e3ad-5310-b0d2-b188a36d416d",
-      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
-      "created": "2026-10-16T00:00:00.000Z",
-      "modified": "2026-10-16T00:00:00.000Z",
-      "name": "GitHub secret-scanning alert for an SSH private key",
-      "description": "Nine secret-scanning events fire across the orgs in the window; the scenario alert is the only ssh_private_key alert on datalake-utils, resolved at 19:22:46 without the key being revoked.",
-      "indicator_types": [
-        "anomalous-activity"
-      ],
-      "pattern": "logsource:\n  product: github\n  service: audit\ndetection:\n  selection:\n    action: 'secret_scanning_alert.create'\n    alert.secret_type: 'ssh_private_key'\n  condition: selection\n",
-      "pattern_type": "sigma",
-      "valid_from": "2026-10-13T18:52:41Z",
-      "kill_chain_phases": [
-        {
-          "kill_chain_name": "mitre-attack",
-          "phase_name": "credential-access"
-        }
-      ],
-      "labels": [
-        "T1552.004"
-      ],
-      "confidence": 80
-    },
-    {
       "type": "url",
       "spec_version": "2.1",
       "id": "url--c4179792-82f2-5d45-b5a1-ba0d1993bafe",
@@ -315,33 +289,6 @@
         "T1087.004"
       ],
       "confidence": 50
-    },
-    {
-      "type": "indicator",
-      "spec_version": "2.1",
-      "id": "indicator--bb64297e-198f-5fb6-a8b5-7727d15b195b",
-      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
-      "created": "2026-10-16T00:00:00.000Z",
-      "modified": "2026-10-16T00:00:00.000Z",
-      "name": "sftp-server bulk read from a non-home address",
-      "description": "Seven files, about 507 MB per sftp-server, read in four seconds by the second key login.",
-      "indicator_types": [
-        "anomalous-activity"
-      ],
-      "pattern": "logsource:\n  product: linux\n  service: auth\ndetection:\n  selection:\n    program: 'sftp-server'\n    message|contains: 'open'\n  condition: selection\n",
-      "pattern_type": "sigma",
-      "valid_from": "2026-10-13T19:07:43Z",
-      "valid_until": "2026-10-13T19:07:46Z",
-      "kill_chain_phases": [
-        {
-          "kill_chain_name": "mitre-attack",
-          "phase_name": "exfiltration"
-        }
-      ],
-      "labels": [
-        "T1048.002"
-      ],
-      "confidence": 70
     },
     {
       "type": "infrastructure",
@@ -1114,17 +1061,6 @@
     {
       "type": "relationship",
       "spec_version": "2.1",
-      "id": "relationship--228b7eda-e33f-5af9-8a60-aa9af231bb6b",
-      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
-      "created": "2026-10-16T00:00:00.000Z",
-      "modified": "2026-10-16T00:00:00.000Z",
-      "relationship_type": "related-to",
-      "source_ref": "indicator--eea95b58-e3ad-5310-b0d2-b188a36d416d",
-      "target_ref": "attack-action--7ab9c699-8d8e-5f67-90cd-bffba7668c98"
-    },
-    {
-      "type": "relationship",
-      "spec_version": "2.1",
       "id": "relationship--1f0cc67a-9f46-5b6f-bda5-7b92c2f84d0f",
       "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
       "created": "2026-10-16T00:00:00.000Z",
@@ -1198,28 +1134,6 @@
       "relationship_type": "related-to",
       "source_ref": "indicator--ecda01ce-17d9-5263-83de-06f494112b25",
       "target_ref": "attack-action--3641b039-e7de-55ed-a79e-5b18e55df43d"
-    },
-    {
-      "type": "relationship",
-      "spec_version": "2.1",
-      "id": "relationship--7415ce53-f6a2-5e5d-960f-b725e70132a9",
-      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
-      "created": "2026-10-16T00:00:00.000Z",
-      "modified": "2026-10-16T00:00:00.000Z",
-      "relationship_type": "related-to",
-      "source_ref": "indicator--bb64297e-198f-5fb6-a8b5-7727d15b195b",
-      "target_ref": "attack-action--3641b039-e7de-55ed-a79e-5b18e55df43d"
-    },
-    {
-      "type": "relationship",
-      "spec_version": "2.1",
-      "id": "relationship--2698d933-a56a-5ac9-a6ea-549e1d016969",
-      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
-      "created": "2026-10-16T00:00:00.000Z",
-      "modified": "2026-10-16T00:00:00.000Z",
-      "relationship_type": "related-to",
-      "source_ref": "indicator--eea95b58-e3ad-5310-b0d2-b188a36d416d",
-      "target_ref": "attack-action--aef557eb-9f07-5d2c-9782-6afa87e658f3"
     }
   ]
 }

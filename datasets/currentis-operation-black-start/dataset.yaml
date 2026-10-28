@@ -334,16 +334,7 @@ observables:
 - id: c2-beacon-ua
   type: indicator
   name: Beacon User-Agent
-  pattern_type: sigma
-  pattern: |
-    logsource:
-      product: zeek
-      service: http
-    detection:
-      selection:
-        user_agent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.8287.614 Safari/537.36'
-        id.resp_h: '121.43.243.13'
-      condition: selection
+  rule: https://github.com/daveherrald/echolake-datasets/blob/main/datasets/currentis-operation-black-start/rules/sigma/currentis_c2_beacon_user_agent.yml
   indicator_types:
   - malicious-activity
   kill_chain_phases:
@@ -423,17 +414,7 @@ observables:
 - id: encoded-ps
   type: indicator
   name: Encoded PowerShell stager launched by the AI assistant
-  pattern_type: sigma
-  pattern: |
-    logsource:
-      category: process_creation
-      product: windows
-    detection:
-      selection:
-        ParentImage|endswith: '\\node.exe'
-        Image|endswith: '\\powershell.exe'
-        CommandLine|contains: '-enc'
-      condition: selection
+  rule: https://github.com/daveherrald/echolake-datasets/blob/main/datasets/currentis-operation-black-start/rules/sigma/currentis_agentic_ai_shell_spawn.yml
   indicator_types:
   - malicious-activity
   kill_chain_phases:
@@ -446,20 +427,7 @@ observables:
 - id: recon-cmds
   type: indicator
   name: Living-off-the-land domain recon burst
-  pattern_type: sigma
-  pattern: |
-    logsource:
-      category: process_creation
-      product: windows
-    detection:
-      selection:
-        CommandLine|contains:
-          - 'whoami /all'
-          - 'net group /domain'
-          - 'net user /domain'
-          - 'nltest /dclist'
-          - 'net user helixgrid-svc /domain'
-      condition: selection
+  rule: https://github.com/daveherrald/echolake-datasets/blob/main/datasets/currentis-operation-black-start/rules/sigma/currentis_lotl_domain_recon.yml
   indicator_types:
   - anomalous-activity
   kill_chain_phases:
@@ -554,17 +522,7 @@ observables:
 - id: lsass-access
   type: indicator
   name: LSASS memory access from the implant
-  pattern_type: sigma
-  pattern: |
-    logsource:
-      category: process_access
-      product: windows
-    detection:
-      selection:
-        TargetImage|endswith: '\\lsass.exe'
-        SourceImage|endswith: '\\kb5041234-v3.exe'
-        GrantedAccess: '0x1FFFFF'
-      condition: selection
+  rule: https://github.com/daveherrald/echolake-datasets/blob/main/datasets/currentis-operation-black-start/rules/sigma/currentis_lsass_access_masqueraded_binary.yml
   indicator_types:
   - malicious-activity
   kill_chain_phases:
@@ -578,18 +536,7 @@ observables:
 - id: rdp-cmdkey
   type: indicator
   name: Stolen vendor credential staged with cmdkey for RDP
-  pattern_type: sigma
-  pattern: |
-    logsource:
-      category: process_creation
-      product: windows
-    detection:
-      selection:
-        Image|endswith: '\\cmdkey.exe'
-        CommandLine|contains|all:
-          - '/generic:TERMSRV/'
-          - 'helixgrid-svc'
-      condition: selection
+  rule: https://github.com/daveherrald/echolake-datasets/blob/main/datasets/currentis-operation-black-start/rules/sigma/currentis_vendor_credential_cmdkey_rdp.yml
   indicator_types:
   - malicious-activity
   kill_chain_phases:
@@ -604,17 +551,7 @@ observables:
 - id: rdp-pivot
   type: indicator
   name: Vendor service account RDP logon to the OT jump host
-  pattern_type: sigma
-  pattern: |
-    logsource:
-      product: windows
-      service: security
-    detection:
-      selection:
-        EventID: 4624
-        LogonType: 10
-        TargetUserName: 'helixgrid-svc'
-      condition: selection
+  rule: https://github.com/daveherrald/echolake-datasets/blob/main/datasets/currentis-operation-black-start/rules/sigma/currentis_vendor_account_rdp_logon_ot.yml
   indicator_types:
   - anomalous-activity
   kill_chain_phases:
@@ -732,16 +669,7 @@ observables:
 - id: sched-task-otread
   type: indicator
   name: OTRead scheduled task on the jump host
-  pattern_type: sigma
-  pattern: |
-    logsource:
-      product: windows
-      service: security
-    detection:
-      selection:
-        EventID: 4698
-        TaskName: '\\OTRead'
-      condition: selection
+  rule: https://github.com/daveherrald/echolake-datasets/blob/main/datasets/currentis-operation-black-start/rules/sigma/currentis_otread_scheduled_task.yml
   indicator_types:
   - malicious-activity
   kill_chain_phases:
@@ -756,18 +684,7 @@ observables:
 - id: log-clear-cmd
   type: indicator
   name: wevtutil clears the Security log
-  pattern_type: sigma
-  pattern: |
-    logsource:
-      category: process_creation
-      product: windows
-    detection:
-      selection:
-        Image|endswith: '\\wevtutil.exe'
-        CommandLine|contains|all:
-          - ' cl '
-          - 'Security'
-      condition: selection
+  rule: https://github.com/daveherrald/echolake-datasets/blob/main/datasets/currentis-operation-black-start/rules/sigma/currentis_wevtutil_security_log_clear.yml
   indicator_types:
   - malicious-activity
   kill_chain_phases:
@@ -779,15 +696,7 @@ observables:
 - id: security-log-clear
   type: indicator
   name: Security event log cleared on the OT jump host
-  pattern_type: sigma
-  pattern: |
-    logsource:
-      product: windows
-      service: security
-    detection:
-      selection:
-        EventID: 1102
-      condition: selection
+  rule: https://github.com/daveherrald/echolake-datasets/blob/main/datasets/currentis-operation-black-start/rules/sigma/currentis_security_eventlog_cleared.yml
   indicator_types:
   - malicious-activity
   kill_chain_phases:
