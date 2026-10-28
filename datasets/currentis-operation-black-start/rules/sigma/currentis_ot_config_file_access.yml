@@ -1,0 +1,33 @@
+title: OT Turbine Configuration File Access by Vendor Account
+id: f09fc787-6551-46e2-b608-8b324948ec5d
+status: experimental
+description: |
+  Detects SACL-audited file access (Security 4663) to the Unit 3 turbine
+  configuration and the Helix Grid Systems OptiCore engineering paths on the SCADA
+  jump host in Operation Black Start. As helixgrid-svc, the actor reads the alarm
+  export, turbine setpoints, and alarm profile. Reads only; no setpoint is written.
+  Requires an audit SACL on the OT paths.
+references:
+  - https://github.com/daveherrald/echolake-datasets/tree/main/datasets/currentis-operation-black-start
+author: Dave Herrald
+date: 2026-10-22
+logsource:
+  product: windows
+  service: security
+detection:
+  selection:
+    EventID: 4663
+  ot_paths:
+    ObjectName|contains:
+      - '\OT\'
+      - 'Helix Grid Systems'
+  condition: selection and ot_paths
+falsepositives:
+  - Legitimate engineering and vendor maintenance. Alert on access by
+    non-engineering accounts, or outside change windows.
+level: medium
+tags:
+  - attack.collection
+  - attack.t1005
+  - attack.discovery
+  - attack.t1083

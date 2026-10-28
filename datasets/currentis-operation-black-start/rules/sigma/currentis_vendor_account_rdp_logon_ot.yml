@@ -1,0 +1,30 @@
+title: Vendor Service Account RDP Logon to OT Jump Host
+id: 6c285d96-0070-4860-9927-46542c834f38
+status: experimental
+description: |
+  Detects an interactive (type 10) RDP logon by the helixgrid-svc turbine-vendor
+  remote-access account, the IT-to-OT pivot landing on the SCADA jump host in
+  Operation Black Start. The account is the anomaly: a vendor remote-access account
+  should not interactively log on to an OT host. Kerberos 4768/4769 for the account
+  appear on the domain controller on the way.
+references:
+  - https://github.com/daveherrald/echolake-datasets/tree/main/datasets/currentis-operation-black-start
+author: Dave Herrald
+date: 2026-10-22
+logsource:
+  product: windows
+  service: security
+detection:
+  selection:
+    EventID: 4624
+    LogonType: 10
+    TargetUserName: 'helixgrid-svc'
+  condition: selection
+falsepositives:
+  - Legitimate vendor remote-support sessions. Scope to the OT hosts and alert on the
+    service account logging on interactively.
+level: high
+tags:
+  - attack.lateral-movement
+  - attack.t1021.001
+  - attack.t1078

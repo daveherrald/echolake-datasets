@@ -1,0 +1,31 @@
+title: Outbound Connection to Known C2 Indicator
+id: 3f6ce063-5de4-4fb7-8047-b0f98bfa0f9a
+status: experimental
+description: |
+  Flags any outbound connection to 121.43.243.13, a publicly documented Cobalt
+  Strike C2 indicator and the only non-RFC1918 address the attack hosts contact in
+  Operation Black Start. The workstation beacons to tcp 8080; the OT jump host
+  exfiltrates to tcp 8080, 8443, and 9009. The address is reached as a literal IP
+  with no DNS lookup. This is the dataset's low-confidence threat-intel seed; treat a
+  match as a pivot, not a verdict.
+references:
+  - https://github.com/daveherrald/echolake-datasets/tree/main/datasets/currentis-operation-black-start
+author: Dave Herrald
+date: 2026-10-22
+logsource:
+  product: zeek
+  service: conn
+detection:
+  selection:
+    id.resp_h: '121.43.243.13'
+  condition: selection
+falsepositives:
+  - Threat-intel indicators age out. Confirm the address is still listed before
+    alerting in production, and corroborate with the beacon User-Agent and exfil
+    volume.
+level: medium
+tags:
+  - attack.command-and-control
+  - attack.t1071.001
+  - attack.exfiltration
+  - attack.t1041

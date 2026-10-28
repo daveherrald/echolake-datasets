@@ -8,12 +8,12 @@ Loki, and Lucene (see [`conversions.md`](conversions.md)).
 
 | Rule | Detects | Log | Level | ATT&CK |
 |------|---------|-----|-------|--------|
-| [memory_exhaustion_fatal](php2shell_memory_exhaustion_fatal.yml) | Pre-RINIT OOM fatal from an oversized multipart body (`in Unknown on line 0`); corroborating, fires on any startup OOM | [`apache_mod_php_vulnerable`](../data/apache_mod_php_vulnerable.log.gz), [`php_fpm`](../data/php_fpm.log.gz) | low | T1499.004 |
-| [rce_unserialize_callback](php2shell_rce_unserialize_callback.yml) | FPM fingerprint of the `unserialize_callback_func` command-execution path | [`php_fpm`](../data/php_fpm.log.gz) | high | T1190, T1059.004 |
-| [session_decode_failure](php2shell_session_decode_failure.yml) | `Failed to decode session object` after the memory-exhaustion arm | [`php_fpm`](../data/php_fpm.log.gz) | medium | T1190 |
-| [apache_worker_exhaustion](php2shell_apache_worker_exhaustion.yml) | Apache `MaxRequestWorkers` saturation from the hung-worker sequence | [`apache_mod_php_vulnerable`](../data/apache_mod_php_vulnerable.log.gz) | medium | T1499.004 |
-| [fpm_child_abnormal_exit](php2shell_fpm_child_abnormal_exit.yml) | PHP-FPM children exiting code 70 (corroborates the probes) | [`php_fpm`](../data/php_fpm.log.gz) | low | T1499.004 |
-| [session_upload_progress_exploit](php2shell_session_upload_progress_exploit.yml) | `PHP_SESSION_UPLOAD_PROGRESS` in a POST body to the endpoint | [`mitmproxy_capture`](../data/mitmproxy_capture.log.gz) | high | T1190 |
+| [memory_exhaustion_fatal](php2shell_memory_exhaustion_fatal.yml) | Pre-RINIT OOM fatal from an oversized multipart body (`in Unknown on line 0`); corroborating, fires on any startup OOM | [`apache_mod_php_vulnerable`](../../data/apache_mod_php_vulnerable.log.gz), [`php_fpm`](../../data/php_fpm.log.gz) | low | T1499.004 |
+| [rce_unserialize_callback](php2shell_rce_unserialize_callback.yml) | FPM fingerprint of the `unserialize_callback_func` command-execution path | [`php_fpm`](../../data/php_fpm.log.gz) | high | T1190, T1059.004 |
+| [session_decode_failure](php2shell_session_decode_failure.yml) | `Failed to decode session object` after the memory-exhaustion arm | [`php_fpm`](../../data/php_fpm.log.gz) | medium | T1190 |
+| [apache_worker_exhaustion](php2shell_apache_worker_exhaustion.yml) | Apache `MaxRequestWorkers` saturation from the hung-worker sequence | [`apache_mod_php_vulnerable`](../../data/apache_mod_php_vulnerable.log.gz) | medium | T1499.004 |
+| [fpm_child_abnormal_exit](php2shell_fpm_child_abnormal_exit.yml) | PHP-FPM children exiting code 70 (corroborates the probes) | [`php_fpm`](../../data/php_fpm.log.gz) | low | T1499.004 |
+| [session_upload_progress_exploit](php2shell_session_upload_progress_exploit.yml) | `PHP_SESSION_UPLOAD_PROGRESS` in a POST body to the endpoint | [`mitmproxy_capture`](../../data/mitmproxy_capture.log.gz) | high | T1190 |
 
 ## Verification
 

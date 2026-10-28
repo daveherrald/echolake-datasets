@@ -1,0 +1,26 @@
+title: Security Event Log Cleared with wevtutil
+id: c7ff7750-f963-4ea9-99cd-961dbc41f00b
+status: experimental
+description: |
+  Detects wevtutil clearing the Security event log on the OT jump host in Operation
+  Black Start, the anti-forensic step before the actor goes dormant.
+references:
+  - https://github.com/daveherrald/echolake-datasets/tree/main/datasets/currentis-operation-black-start
+author: Dave Herrald
+date: 2026-10-22
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection:
+    Image|endswith: '\wevtutil.exe'
+    CommandLine|contains|all:
+      - ' cl '
+      - 'Security'
+  condition: selection
+falsepositives:
+  - Rare. Administrators seldom clear the Security log by hand.
+level: high
+tags:
+  - attack.defense-impairment
+  - attack.t1070

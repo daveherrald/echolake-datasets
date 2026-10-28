@@ -61,6 +61,17 @@ Every file is in its source's native format, gzipped. Each file's `sourcetype` i
 
 **ATT&CK for ICS:** T0859 (Valid Accounts), T0822 (External Remote Services), T0888 (Remote System Information Discovery), T0882 (Theft of Operational Information), T0831 (Manipulation of Control, staged but not fired).
 
+## Detection Rules
+
+Thirteen sample [Sigma](https://sigmahq.io/) rules for the signals above live in
+[`rules/sigma/`](rules/sigma/), following the kill chain, each matching records present
+in these logs. Every rule passes `sigma check` and converts to Splunk, Loki, and
+Lucene. The highest-fidelity signals are the LSASS read from the masqueraded implant,
+the `cmdkey` staging of the stolen vendor account, and the Security log clear; the
+outbound-to-C2-indicator rule is the low-confidence threat-intel seed. See the
+[Sigma rules README](rules/sigma/README.md) for the full list, the per-rule
+verification table with dataset match counts, and the field-mapping caveats.
+
 ## AI and Compliance Framing
 
 - **OWASP LLM01 (Prompt Injection)** and **OWASP MAESTRO Layer 4 (agentic tool abuse)** for the stage-0 initial access through the AI coding assistant.

@@ -1,0 +1,35 @@
+title: AI Coding Assistant Spawns a Windows Shell
+id: a823402f-813a-43cf-8d37-1cf5921c207d
+status: experimental
+description: |
+  Detects the OpenClaw AI coding assistant (node.exe) spawning powershell.exe or
+  cmd.exe on an engineer workstation. In Operation Black Start this is the stage-0
+  agentic prompt-injection foothold: a poisoned compliance email the assistant was
+  configured to auto-process drives it to run an injected instruction through its
+  shell tool, which writes cip010_review.txt to C:\Users\Public. Maps to OWASP LLM01
+  (Prompt Injection) and OWASP MAESTRO Layer 4 (agentic tool abuse).
+references:
+  - https://github.com/daveherrald/echolake-datasets/tree/main/datasets/currentis-operation-black-start
+  - https://genai.owasp.org/llmrisk/llm01-prompt-injection/
+author: Dave Herrald
+date: 2026-10-22
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection:
+    ParentImage|endswith: '\node.exe'
+    Image|endswith:
+      - '\powershell.exe'
+      - '\cmd.exe'
+  condition: selection
+falsepositives:
+  - Developers who legitimately shell out from Node.js tooling. Baseline the agent
+    hosts and watch for shells that write to world-writable paths such as
+    C:\Users\Public.
+level: high
+tags:
+  - attack.initial-access
+  - attack.t1566
+  - attack.execution
+  - attack.t1059.001

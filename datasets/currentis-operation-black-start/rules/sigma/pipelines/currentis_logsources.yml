@@ -1,0 +1,56 @@
+name: currentis logsources (source mapping)
+priority: 20
+# Maps the Windows and Zeek logsources used by the Operation Black Start rules to
+# Splunk/Lucene source filters. Replace the sources with your own index or
+# sourcetype. Loki needs no pipeline (it matches on the stream directly). The
+# standard pysigma windows/sysmon pipelines can be used instead of this one.
+transformations:
+  - id: win_process_creation_source
+    type: add_condition
+    conditions:
+      source:
+        - 'WinEventLog:Microsoft-Windows-Sysmon/Operational'
+        - 'WinEventLog:Security'
+    rule_conditions:
+      - type: logsource
+        category: process_creation
+        product: windows
+  - id: win_sysmon_source
+    type: add_condition
+    conditions:
+      source: 'WinEventLog:Microsoft-Windows-Sysmon/Operational'
+    rule_conditions:
+      - type: logsource
+        category: registry_set
+        product: windows
+      - type: logsource
+        category: process_access
+        product: windows
+  - id: win_security_source
+    type: add_condition
+    conditions:
+      source: 'WinEventLog:Security'
+    rule_conditions:
+      - type: logsource
+        product: windows
+        service: security
+  - id: zeek_http_source
+    type: add_condition
+    conditions:
+      source:
+        - 'zeek_http'
+        - '/opt/zeek/logs/current/http.log'
+    rule_conditions:
+      - type: logsource
+        product: zeek
+        service: http
+  - id: zeek_conn_source
+    type: add_condition
+    conditions:
+      source:
+        - 'zeek_conn'
+        - '/opt/zeek/logs/current/conn.log'
+    rule_conditions:
+      - type: logsource
+        product: zeek
+        service: conn

@@ -61,7 +61,7 @@ These are the signals we saw in this run. A different stack, PHP build, or log c
 
 ## Detection rules
 
-Six sample [Sigma](https://sigmahq.io/) rules for the signals above live in [`detections/`](detections/), each matching a string present in these logs. Every rule passes `sigma check` and converts to Splunk, Loki, and Lucene. The FPM callback-fingerprint rule is the most specific to the vulnerability, and the memory-exhaustion rule is a corroborating signal that also fires on any startup OOM; one rule (the upload-progress request) needs request body capture, such as the inline-proxy deployment here. See the [detections README](detections/README.md) for the full list, the per-rule verification table, and field-mapping caveats.
+Six sample [Sigma](https://sigmahq.io/) rules for the signals above live in [`rules/sigma/`](rules/sigma/), each matching a string present in these logs. Every rule passes `sigma check` and converts to Splunk, Loki, and Lucene. The FPM callback-fingerprint rule is the most specific to the vulnerability, and the memory-exhaustion rule is a corroborating signal that also fires on any startup OOM; one rule (the upload-progress request) needs request body capture, such as the inline-proxy deployment here. See the [Sigma rules README](rules/sigma/README.md) for the full list, the per-rule verification table, and field-mapping caveats.
 
 ## Replay
 

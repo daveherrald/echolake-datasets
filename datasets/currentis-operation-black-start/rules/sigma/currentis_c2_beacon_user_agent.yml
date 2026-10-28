@@ -1,0 +1,27 @@
+title: Sliver HTTP Beacon User-Agent to C2
+id: a6dd3f47-32e2-4d9c-90ec-b7439ec0ec97
+status: experimental
+description: |
+  Detects the Operation Black Start HTTP beacon by its hardcoded Chrome 106
+  User-Agent going to the command-and-control address. The request paths rotate
+  through jquery-style /scripts/, /bundles/, and /javascripts/ names, but the
+  User-Agent and the destination are stable across check-ins.
+references:
+  - https://github.com/daveherrald/echolake-datasets/tree/main/datasets/currentis-operation-black-start
+author: Dave Herrald
+date: 2026-10-22
+logsource:
+  product: zeek
+  service: http
+detection:
+  selection:
+    user_agent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.8287.614 Safari/537.36'
+    id.resp_h: '121.43.243.13'
+  condition: selection
+falsepositives:
+  - A real Chrome 106 client talking to the same host, unlikely for an internal
+    workstation reaching a hardcoded external IP with no DNS lookup.
+level: high
+tags:
+  - attack.command-and-control
+  - attack.t1071.001

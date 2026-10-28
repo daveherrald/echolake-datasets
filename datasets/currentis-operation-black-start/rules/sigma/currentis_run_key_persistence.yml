@@ -1,0 +1,26 @@
+title: Implant Run-Key Persistence (CLIENTSYNC)
+id: 05e1d9b5-94fb-4157-9040-ec06e6c2361d
+status: experimental
+description: |
+  Detects the CLIENTSYNC Registry Run key written under the rchen user hive in
+  Operation Black Start, which launches C:\Users\Public\clientsync.ps1 at logon. The
+  pivot launcher it points at runs cmdkey and mstsc for the IT-to-OT RDP hop.
+references:
+  - https://github.com/daveherrald/echolake-datasets/tree/main/datasets/currentis-operation-black-start
+author: Dave Herrald
+date: 2026-10-22
+logsource:
+  category: registry_set
+  product: windows
+detection:
+  selection:
+    TargetObject|contains: '\CurrentVersion\Run\'
+    Details|contains: 'clientsync.ps1'
+  condition: selection
+falsepositives:
+  - Legitimate software registering Run keys. The C:\Users\Public script path is the
+    discriminator here.
+level: medium
+tags:
+  - attack.persistence
+  - attack.t1547.001

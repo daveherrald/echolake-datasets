@@ -1,0 +1,33 @@
+title: Scheduled Task Launching a Script from a World-Writable Path
+id: 3e6cc4fd-0a37-4502-97bf-ffd9338182df
+status: experimental
+description: |
+  Detects creation of the OTRead scheduled task in Operation Black Start via
+  schtasks.exe, which runs C:\Users\Public\read_ot.ps1 as the stolen
+  CURRENTIS\helixgrid-svc account on the SCADA jump host. This is the staged OT-read
+  capability that is registered but whose setpoint-write arm is never fired.
+references:
+  - https://github.com/daveherrald/echolake-datasets/tree/main/datasets/currentis-operation-black-start
+author: Dave Herrald
+date: 2026-10-22
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection:
+    Image|endswith: '\schtasks.exe'
+    CommandLine|contains: '/create'
+  payload:
+    CommandLine|contains:
+      - '\Users\Public\'
+      - 'read_ot.ps1'
+      - 'helixgrid-svc'
+  condition: selection and payload
+falsepositives:
+  - Administrative task creation. A task that runs a script from C:\Users\Public as a
+    vendor service account is the anomaly.
+level: medium
+tags:
+  - attack.persistence
+  - attack.t1053.005
+  - attack.execution

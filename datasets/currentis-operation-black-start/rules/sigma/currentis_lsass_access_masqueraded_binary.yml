@@ -1,0 +1,26 @@
+title: LSASS Memory Access from Masqueraded Update Binary
+id: afe678bc-99c4-4add-b576-8744bfcc4ab0
+status: experimental
+description: |
+  Detects the credential-theft read of LSASS by kb5041234-v3.exe in Operation Black
+  Start, which harvests the cached helixgrid-svc turbine-vendor credential. Sysmon
+  process-access from the masqueraded implant to lsass.exe. The source image name is
+  the discriminator; in this dataset the read is granted full rights (0x1fffff).
+references:
+  - https://github.com/daveherrald/echolake-datasets/tree/main/datasets/currentis-operation-black-start
+author: Dave Herrald
+date: 2026-10-22
+logsource:
+  category: process_access
+  product: windows
+detection:
+  selection:
+    TargetImage|endswith: '\lsass.exe'
+    SourceImage|endswith: '\kb5041234-v3.exe'
+  condition: selection
+falsepositives:
+  - None expected. No legitimate process by this name should read LSASS.
+level: high
+tags:
+  - attack.credential-access
+  - attack.t1003.001

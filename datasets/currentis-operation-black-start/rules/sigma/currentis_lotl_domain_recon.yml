@@ -1,0 +1,36 @@
+title: Living-off-the-Land Active Directory Recon Burst
+id: d499dda0-a909-4d27-8144-87fd6384ea6a
+status: experimental
+description: |
+  Detects the built-in domain reconnaissance commands run in a short burst in
+  Operation Black Start: whoami /all, net group /domain, net user /domain,
+  nltest /dclist, and the account-specific net user helixgrid-svc /domain that
+  enumerates the vendor service account before it is stolen. The commands run both
+  from the agent chain as rchen and from a SYSTEM burst spawned by the beacon.
+references:
+  - https://github.com/daveherrald/echolake-datasets/tree/main/datasets/currentis-operation-black-start
+author: Dave Herrald
+date: 2026-10-22
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection:
+    CommandLine|contains:
+      - 'whoami /all'
+      - 'group /domain'
+      - 'user /domain'
+      - 'nltest /dclist'
+      - 'helixgrid-svc /domain'
+  condition: selection
+falsepositives:
+  - Help-desk and administrator troubleshooting. The account-specific
+    "helixgrid-svc /domain" enumeration is the strongest single discriminator.
+level: medium
+tags:
+  - attack.discovery
+  - attack.t1087.002
+  - attack.t1482
+  - attack.t1069.002
+  - attack.t1018
+  - attack.t1033

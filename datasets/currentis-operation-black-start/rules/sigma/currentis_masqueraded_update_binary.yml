@@ -1,0 +1,25 @@
+title: Masqueraded Windows Update Binary in Public Folder
+id: 20312cfe-38c3-4ef4-8ef9-deb29ac7831a
+status: experimental
+description: |
+  Detects execution of kb5041234-v3.exe from C:\Users\Public, the Sliver implant in
+  Operation Black Start masquerading as a Windows update package. Legitimate Windows
+  updates do not execute from a world-writable user directory.
+references:
+  - https://github.com/daveherrald/echolake-datasets/tree/main/datasets/currentis-operation-black-start
+author: Dave Herrald
+date: 2026-10-22
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection:
+    Image|endswith: '\kb5041234-v3.exe'
+    Image|contains: '\Users\Public\'
+  condition: selection
+falsepositives:
+  - None expected. Real update packages do not run from C:\Users\Public.
+level: high
+tags:
+  - attack.stealth
+  - attack.t1036.005

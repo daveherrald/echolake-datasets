@@ -1,0 +1,25 @@
+title: Windows Security Audit Log Cleared (Event 1102)
+id: 1ad31635-7345-49e3-acfb-eb67cbf722fc
+status: experimental
+description: |
+  Detects the authoritative Windows signal that the Security audit log was cleared
+  (Event 1102) on the OT jump host in Operation Black Start. The event is written by
+  the system itself regardless of how the clear was performed, so it corroborates the
+  wevtutil command and catches clears that do not use it.
+references:
+  - https://github.com/daveherrald/echolake-datasets/tree/main/datasets/currentis-operation-black-start
+author: Dave Herrald
+date: 2026-10-22
+logsource:
+  product: windows
+  service: security
+detection:
+  selection:
+    EventID: 1102
+  condition: selection
+falsepositives:
+  - Planned log maintenance. Correlate with the account and host.
+level: high
+tags:
+  - attack.defense-impairment
+  - attack.t1070
