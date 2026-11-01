@@ -1,0 +1,50 @@
+name: Validate datasets
+
+on:
+  pull_request:
+    paths:
+      - "datasets/**"
+      - "scripts/validate_datasets.py"
+      - ".github/workflows/validate-datasets.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "datasets/**"
+      - "scripts/validate_datasets.py"
+      - ".github/workflows/validate-datasets.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      PYTHONDONTWRITEBYTECODE: "1"
+    steps:
+      - name: Check out datasets
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+
+      - name: Check out EchoLake runtime
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          repository: daveherrald/echolake
+          ref: dd44b21f40db4d7d31d28bdccf2b3f77ee7bedd6
+          path: .ci/echolake
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38
+        with:
+          python-version: "3.12"
+
+      - name: Install EchoLake
+        run: python -m pip install ./.ci/echolake
+
+      - name: Validate all datasets offline
+        run: python scripts/validate_datasets.py
