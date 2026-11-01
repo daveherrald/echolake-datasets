@@ -7,7 +7,7 @@ Curated security datasets for detection engineering, threat hunting, and securit
 | Path | Count | Description |
 |------|-------|-------------|
 | [datasets/art/](datasets/art/) | 1,654 | Atomic Red Team telemetry — Windows security events from 250 MITRE ATT&CK techniques |
-| [datasets/paws-operation-yarn-ball/](datasets/paws-operation-yarn-ball/) | 1 | Multi-stage attack simulation with Sliver C2 on Active Directory (~820K events) |
+| [datasets/paws-operation-yarn-ball/](datasets/paws-operation-yarn-ball/) | 1 | Windows Active Directory lab capture with background activity and an evidenced scripted intrusion prelude (1,295,883 events) |
 | [datasets/currentis-operation-black-start/](datasets/currentis-operation-black-start/) | 1 | Agentic-AI-to-OT intrusion at a fictional utility, with an IT-to-OT pivot and quiet SCADA pre-positioning (~172K events) |
 | [datasets/cloud-data-exfiltration/](datasets/cloud-data-exfiltration/) | 1 | Leaked SSH key to IMDS credential theft and S3 training-data exfiltration in AWS (~349K events) |
 | [datasets/php2shell/](datasets/php2shell/) | 1 | PHP pre-RINIT multipart exploitation: memory-exhaustion DoS, command execution, and an Apache worker hang (~277 events) |
@@ -23,7 +23,7 @@ See [datasets/art/README.md](datasets/art/README.md) for full details on instrum
 
 ## PAWS Operation Yarn Ball
 
-Full multi-stage attack simulation on a Windows Active Directory environment with 7 VMs. Includes agentic persona simulation (6 employees generating realistic background activity) plus a 10-stage Sliver C2 attack chain covering recon, beacon deployment, credential harvesting, lateral movement, data exfiltration, ransomware, and log clearing. ~820K events across Windows (Sysmon, Security, PowerShell), Squid proxy, and Zeek network logs.
+Windows Active Directory lab capture with background activity across seven PAWS systems and a short scripted intrusion prelude on PAWS-WS02. The evidenced sequence covers PowerShell staging, Defender exclusion changes, host and domain discovery, scheduled-task registration, staged-binary execution, and one outbound connection to a lab host. The capture does not evidence the intended later stages of credential dumping, lateral movement, exfiltration, ransomware, or event-log clearing. It contains 1,295,883 replayable events across Windows, Squid, and Zeek sources.
 
 ## Currentis Operation Black Start
 

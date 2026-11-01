@@ -1,62 +1,69 @@
-# PAWS Operation Yarn Ball
+# PAWS Operation Yarn Ball: Scripted Intrusion Prelude
 
-Full multi-stage attack simulation on a Windows Active Directory environment (pawsitivevibes.local) with 7 VMs. Combines AI-driven persona simulation with a realistic Sliver C2 attack chain.
+This package is a March 18, 2026 capture from the Pawsitive Vibes Windows Active Directory lab. It contains background host and network activity across seven PAWS systems plus a short scripted intrusion prelude on PAWS-WS02.
 
-## Overview
+The stable dataset identifier remains `paws-operation-yarn-ball`. Version 1.1.0 narrows the public description and ATT&CK coverage to behavior supported by the bundled telemetry.
 
-- **~820K events** across 12 data sources
-- **7 hosts**: 1 domain controller (Server 2022), 1 executive workstation, 1 IT admin workstation, 4 employee workstations (Windows 11)
-- **Background activity**: 6 employee personas generating realistic daily work patterns (browsing, email, file access) via LLM-driven planning
-- **Attack**: 10-stage Sliver C2 operation from initial access through ransomware deployment and log clearing
+## What the telemetry supports
 
-## Attack Stages
+The scripted sequence runs from 00:17:51 through 00:20:29 UTC on PAWS-WS02. The capture contains:
 
-1. Reconnaissance — system, network, user, and group enumeration
-2. Beacon deployment — Sliver implant via scheduled task and registry persistence
-3. Credential harvesting — LSASS access, unsecured credential discovery
-4. Lateral movement — WinRM to IT admin workstation, PsExec to domain controller
-5. Data exfiltration — sensitive files exfiltrated over C2 channel
-6. Ransomware — file encryption across multiple hosts
-7. Log clearing — Windows event log destruction
+- QEMU guest-agent process trees launching repeated PowerShell sessions that write scenario files to `C:\Windows\Temp`.
+- PowerShell script block logging for Defender exclusions targeting `C:\Windows\Temp` and `patch-kb5041234.exe`.
+- Two `node.exe` launches of `openclaw_sim.js`, followed by `whoami`, `hostname`, `ipconfig`, `systeminfo`, `net user`, `net group`, and `net view` discovery commands.
+- Command lines that attempt an HTTPS diagnostic upload and binary retrieval.
+- Registration of the `SecurityPatchRecovery` scheduled task and execution of the staged `patch-kb5041234.exe` binary.
+- One outbound `powershell.exe` TCP connection to the lab host on port 9090.
+
+Six scripts named for later scenario stages are evidenced as file writes only. The package has no execution evidence for those scripts. It also has no supporting process, service, file, or event-log records for credential dumping, WinRM or PsExec lateral movement, bulk file encryption, or Windows event-log clearing.
+
+Recurring proxy and HTTP records to the lab host on port 8080 are also present. Endpoint telemetry attributes the direct connections to a Python service on PAWS-DC01, so this package does not label them as a Sliver beacon from PAWS-WS02.
+
+No Attack Flow is attached. A formal flow for the intended full operation would overstate the evidence in this capture.
+
+## Capture summary
+
+- **1,295,883 replayable events** across 12 bundled sources.
+- **Capture window:** 2026-03-18 00:00:00 through 14:48:57 UTC.
+- **Windows hosts:** PAWS-DC01, PAWS-EXEC01, PAWS-IT01, and PAWS-WS01 through PAWS-WS04.
+- **Windows telemetry:** Sysmon, Security, PowerShell, WMI, Task Scheduler, System, and Application logs.
+- **Network telemetry:** Squid proxy plus Zeek connection, DNS, and HTTP logs. The network files include PAWS and neighboring lab-segment traffic selected by the extraction filter.
 
 ## Data Sources
 
 | File | Events | Description |
 |------|--------|-------------|
-| sysmon.jsonl.gz | 566,793 | Sysmon operational events (all 7 hosts) |
-| zeek_conn.jsonl.gz | 129,341 | Zeek connection logs |
-| zeek_http.jsonl.gz | 39,399 | Zeek HTTP logs (includes C2 beacon traffic) |
-| security.jsonl.gz | 32,414 | Windows Security events (logon, process creation) |
-| wmi.jsonl.gz | 20,421 | WMI activity events |
-| proxylog.jsonl.gz | 17,848 | Squid proxy access logs (includes C2 traffic) |
-| taskscheduler.jsonl.gz | 4,872 | Task Scheduler events |
-| powershell.jsonl.gz | 2,582 | PowerShell script block and module logging |
-| system.jsonl.gz | 2,224 | Windows System event log |
-| application.jsonl.gz | 2,162 | Windows Application event log |
-| zeek_dns.jsonl.gz | 1,845 | Zeek DNS logs (includes C2 domain lookups) |
-| wineventlog_other.jsonl.gz | 7 | Directory Service, DNS Server Audit |
+| `sysmon.xml.gz` | 685,735 | Sysmon operational events from all seven PAWS hosts |
+| `security.xml.gz` | 66,986 | Windows Security logon, process, and audit events |
+| `powershell.xml.gz` | 2,582 | PowerShell operational events, including script block logging |
+| `wmi.xml.gz` | 20,351 | WMI activity events |
+| `taskscheduler.xml.gz` | 4,904 | Task Scheduler operational events |
+| `system.xml.gz` | 2,208 | Windows System events |
+| `application.xml.gz` | 2,148 | Windows Application events |
+| `wineventlog_other.xml.gz` | 6 | Other Windows event channels |
+| `proxylog.log.gz` | 63,320 | Squid proxy access records |
+| `zeek_conn.jsonl.gz` | 326,812 | Zeek connection records |
+| `zeek_dns.jsonl.gz` | 80,972 | Zeek DNS records |
+| `zeek_http.jsonl.gz` | 39,859 | Zeek HTTP records |
 
-## MITRE ATT&CK Coverage
+## Evidenced MITRE ATT&CK coverage
 
 | Tactic | Techniques |
 |--------|------------|
-| Discovery | T1082, T1016, T1033, T1069, T1018 |
-| Command and Control | T1071, T1071.004 |
-| Defense Evasion | T1218, T1070.001 |
-| Execution | T1053, T1569.002 |
-| Persistence | T1053, T1547.001 |
-| Privilege Escalation | T1053, T1547.001 |
-| Credential Access | T1552 |
-| Lateral Movement | T1021.006, T1021.002 |
-| Exfiltration | T1041 |
-| Impact | T1486 |
+| Execution | T1059.001 PowerShell, T1059.003 Windows Command Shell, T1059.007 JavaScript/JScript, T1053.005 Scheduled Task |
+| Persistence | T1053.005 Scheduled Task |
+| Privilege Escalation | T1053.005 Scheduled Task |
+| Defense Evasion | T1562.001 Disable or Modify Tools |
+| Discovery | T1082 System Information Discovery, T1016 System Network Configuration Discovery, T1033 System Owner/User Discovery, T1087.001 Local Account Discovery, T1069.002 Domain Groups Discovery, T1018 Remote System Discovery |
+
+Use this package to evaluate scripted staging, defense impairment, discovery, scheduled-task persistence, and mixed background-activity analytics. It is not a full-chain ransomware, lateral-movement, or log-clearing evaluation dataset.
 
 ## Environment
 
 - **Domain**: pawsitivevibes.local
-- **Hosts**: PAWS-DC01, PAWS-EXEC01, PAWS-IT01, PAWS-WS01–WS04
-- **Instrumentation**: Sysmon v15.15 (sysmon-modular config), Windows audit policy with command-line logging, PowerShell script block and module logging
-- **Network monitoring**: Zeek (conn, dns, http) on VLAN span port, Squid proxy on DC01
+- **Hosts**: PAWS-DC01, PAWS-EXEC01, PAWS-IT01, and PAWS-WS01 through PAWS-WS04
+- **Instrumentation**: Sysmon 15.15, Windows process and logon auditing, and PowerShell script block and module logging
+- **Network monitoring**: Zeek and a Squid-format proxy service
 - **Collection**: Cribl Edge
 
 ## License

@@ -6,12 +6,14 @@
 
 | Field | Value |
 |---|---|
-| Description | Atomic Red Team T1559-5: Inter-Process Communication (Cobalt Strike post-exploitation pipe (before 4.2)) on Windows 11 Enterprise domain workstation. |
+| Description | Atomic Red Team T1559 package keyed as test 5. Recovered telemetry records tests 1 through 4 and no test 5 invocation. |
+| Package status | `capture-mismatch` |
+| Status note | Package is keyed as T1559 test 5, but recovered telemetry records tests 1 through 4 and no test 5 invocation. |
 | MITRE ATT&CK | [T1559](https://attack.mitre.org/techniques/T1559/) |
 | Tactics | execution |
-| ART command | `Invoke-AtomicTest T1559 -TestNumbers 5` |
+| Expected ART command | `Invoke-AtomicTest T1559 -TestNumbers 5` |
 | Collection host | ACME-WS02 |
-| Dataset version | 3.0.0 |
+| Dataset version | 3.0.1 |
 
 ## Packaged telemetry
 

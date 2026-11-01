@@ -1,33 +1,34 @@
-# T1546-6: Event Triggered Execution — Load Custom DLL on mstsc Execution
+# T1546-6: Load Custom DLL on mstsc Execution
 
 ## Technique Context
 
-This test targets a persistence mechanism where a custom DLL is placed so that it is loaded when the Remote Desktop client (`mstsc.exe`) executes. This is a DLL search order or AppInit-style hijack targeting a specific application. The attacker plants a DLL that will be loaded by `mstsc.exe` on startup, enabling code execution whenever a user launches Remote Desktop. This technique is noteworthy in enterprise environments where IT staff frequently use RDP tools. Detection focuses on unexpected DLL loads by `mstsc.exe`, new DLL files in paths that precede system directories in the search order, and registry modifications that redirect DLL loading.
+Atomic Red Team T1546 test 6 attempts to set `ClxDllPath` under `HKLM\SOFTWARE\Microsoft\Terminal Server Client`. The configured DLL is intended to load when `mstsc.exe` runs.
 
-## What This Dataset Contains
+## Packaged Telemetry
 
-This dataset contains no bundled data files. The `files.bundled` list is empty and the provenance `source_counts` and `dest_counts` are both empty objects. No events were collected for this test.
+The four bundled files contain 1,724 events from `2026-03-13T23:34:26.216000Z` through `2026-03-13T23:34:32.997000Z`.
 
-The collection window ran for approximately 7 seconds (epoch 1773444866–1773444873) and nothing was captured from any of the monitored channels (Sysmon, Security, PowerShell).
+| Channel | Events |
+|---|---:|
+| Security | 69 |
+| Application | 12 |
+| PowerShell | 1,593 |
+| Sysmon | 50 |
 
-## What This Dataset Does Not Contain
+PowerShell EID 4104 records `Invoke-AtomicTest T1546 -TestNumbers 6` at `2026-03-13T23:34:29.924000Z`.
 
-The absence of data most likely reflects one of the following scenarios:
+Security EID 4688 at `2026-03-13T23:34:30.753000Z` and Sysmon EID 1 at `2026-03-13T23:34:30.758000Z` record this command attempt:
 
-1. **Windows Defender blocked the test before any telemetry-generating activity occurred.** With real-time protection and behavior monitoring enabled, Defender may have intercepted the DLL write or the mstsc.exe launch, preventing even process creation events from appearing. Defender blocks that occur before the process creates do not generate 0xC0000022 exit codes in Security 4688 — they simply prevent the activity entirely.
+```text
+"cmd.exe" /c reg add "HKLM\SOFTWARE\Microsoft\Terminal Server Client" /v ClxDllPath /t REG_SZ /d "C:\Windows\System32\amsi.dll" /f
+```
 
-2. **The Cribl Edge collection window did not overlap with the test execution.** The test ran for 7 seconds; if the test framework completed before Cribl Edge flushed its buffer, events may have been missed in the transport pipeline. The provenance verification confirms zero events reached the destination table.
+Sysmon EID 1 at `2026-03-13T23:34:30.782000Z` records the child `reg.exe` process with the same registry arguments.
 
-3. **The mstsc.exe DLL hijack required an interactive session or display driver context** not available in the QEMU guest agent execution environment (Session 0, no desktop). mstsc.exe may have failed silently or immediately without generating Windows Event Log entries.
+## Scope Limitations
 
-## Assessment
+The payload contains no process-creation event for `mstsc.exe` and no image-load event that shows `mstsc.exe` loading `amsi.dll`. Its Sysmon event set has no EID 12 or 13 registry event. The command lines establish an attempted registry change, but the package does not prove that the value was written or that a DLL later loaded.
 
-This dataset has no detection engineering value in its current form — it contains no events. It is documented here to represent a test execution that produced no telemetry, which is itself informative: it indicates that either the technique was blocked before generating observable evidence, or the execution environment was unsuitable for the technique's prerequisites. If you need telemetry for DLL-based persistence on mstsc.exe, re-run the test with Defender disabled (or with the DLL pre-signed/allowlisted), using an interactive desktop session rather than a headless SYSTEM context, and confirm the DLL is actually loaded via Sysmon EID=7 in the collection output.
+## Detection Use
 
-## Detection Opportunities Present in This Data
-
-No detection opportunities can be demonstrated from this dataset. For the technique in general:
-
-1. **Sysmon EID=7 — unsigned or unexpected DLL loaded by `mstsc.exe`**: Any DLL loaded by the Remote Desktop client from outside `System32` or `SysWOW64` is suspicious.
-2. **Sysmon EID=11 — DLL file creation in `mstsc.exe` search path directories**: A new `.dll` file written to a directory that precedes system paths in `mstsc.exe`'s DLL search order.
-3. **Registry changes to `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags`** or similar AppShim entries for mstsc.exe.
+The strongest evidence in this package is the `reg add` command line targeting `Terminal Server Client\ClxDllPath`. Detection logic can match that registry path and value name in Security EID 4688, Sysmon EID 1, or PowerShell logging. A claim of successful persistence requires separate registry-change or `mstsc.exe` image-load evidence.

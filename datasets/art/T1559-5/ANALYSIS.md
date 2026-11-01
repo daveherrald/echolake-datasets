@@ -1,31 +1,35 @@
-# T1559-5: Inter-Process Communication — Before 4.2
+# T1559-5: Capture Mismatch
 
-## Technique Context
+## Package Status
 
-T1559 covers Inter-Process Communication as an execution channel. Test 5 emulates the named pipe pattern used by Cobalt Strike versions prior to 4.2 for post-exploitation modules. Pre-4.2, CS used more predictable pipe names — often static or partially static strings like `\mojo.*`, `\MSCryptHashProvider`, or short fixed identifiers — making them detectable by pipe name signature. Version 4.2 introduced randomization to evade these signatures, covered in test 4.
+This package is keyed as Atomic Red Team T1559 test 5, Cobalt Strike post-exploitation pipe before version 4.2. The recovered payload does not contain a test 5 invocation. It contains tests 1 through 4 in sequence, so this package must not be treated as test 5 ground truth.
 
-## What This Dataset Contains
+The four bundled files contain 10,141 events from `2026-03-14T01:14:49.176000Z` through `2026-03-14T01:15:54.584000Z`. The manifest timestamp range is derived from those events and is ordered correctly.
 
-This dataset contains no events. The `data/` directory is empty and `files.bundled` is an empty list in `dataset.yaml`. The provenance block records `source_counts: {}` and `dest_counts: {}`.
+| Channel | Events |
+|---|---:|
+| Security | 495 |
+| Application | 92 |
+| PowerShell | 9,203 |
+| Sysmon | 351 |
 
-The timestamp range in `dataset.yaml` shows `earliest: 2026-03-14T01:15:56Z` and `latest: 2026-03-14T01:14:49Z` — a range where the latest timestamp is *before* the earliest, which is an artifact of the empty dataset state rather than a real time window.
+## Payload Evidence
 
-## What This Dataset Does Not Contain (and Why)
+PowerShell EID 4104 records these ART invocations and cleanup commands:
 
-No telemetry was collected for test 5. This outcome has two likely explanations consistent with the environment:
+| Test | Invocation | Cleanup |
+|---:|---|---|
+| 1 | `2026-03-14T01:14:56.070000Z` | `2026-03-14T01:15:05.614000Z` |
+| 2 | `2026-03-14T01:15:12.025000Z` | `2026-03-14T01:15:21.603000Z` |
+| 3 | `2026-03-14T01:15:27.881000Z` | `2026-03-14T01:15:37.543000Z` |
+| 4 | `2026-03-14T01:15:44.153000Z` | `2026-03-14T01:15:53.618000Z` |
 
-First, Windows Defender (v4.18.26010.5, real-time protection enabled, AMSI enabled) may have blocked the test framework entirely before any process creation events were generated. For tests 1–4, Defender blocked `namedpipes_executor.exe` but still allowed the `cmd.exe` wrapper to be created and logged. If Defender blocked the ART invocation at the PowerShell layer (e.g., via AMSI detecting the script or the process being denied before launch), no Security 4688 or Sysmon EID 1 events would be generated.
+Security EID 4688 and Sysmon EID 1 record `cmd.exe` command lines that call `namedpipes_executor.exe --pipe 1`, `--pipe 2`, `--pipe 3`, and `--pipe 4`. There is no corresponding process-creation record for `--pipe 5`.
 
-Second, the ART framework may have failed to locate or execute the pre-4.2 variant of the pipe executor. The pre-4.2 CS pipe patterns require a different build of `namedpipes_executor.exe` or a distinct pipe name configuration that may not have been present in the `ExternalPayloads/build/` directory at test time.
-
-The absence of *any* telemetry distinguishes this from tests 1–4, where at least the `cmd.exe` wrapper and the ART test framework infrastructure were captured even though the pipe operation was blocked.
+The PowerShell events include ART module and YAML parsing text that defines all available tests, including test 5. Definition text is not execution evidence. The Sysmon EID 17 records in this payload identify PowerShell host pipes and do not confirm creation of the expected technique pipe.
 
 ## Assessment
 
-This is a null-result dataset. Its value lies in documenting a complete block at the test framework level: no process was created, no pipe was attempted, and no telemetry was generated. In a training context, this dataset establishes a baseline for what a fully suppressed execution looks like — useful for detection coverage analysis (confirming no false negatives against a zero-event ground truth) and for building data pipelines that handle empty datasets gracefully.
+The payload supports analysis of the command attempts for T1559 tests 1 through 4. It does not establish execution of test 5, successful startup of `namedpipes_executor.exe`, or creation of a target named pipe. Detection work can use the observed `cmd.exe` command lines as attempt telemetry, with the package mismatch stated wherever results are reported.
 
-## Detection Opportunities Present in This Data
-
-There are no events in this dataset and therefore no detection opportunities derived from the data itself. The null result is the signal: complete suppression by Defender or test framework failure before any OS-level instrumentation could capture execution.
-
-For detection engineering purposes, the contrast between tests 1–4 (partial execution, cmd.exe wrapper captured) and test 5 (zero events) illustrates the difference between a technique being blocked mid-execution versus being blocked before execution begins.
+T1559 test 5 requires a new capture with an explicit test 5 invocation and technique-specific pipe evidence before this package can serve as test 5 ground truth.
