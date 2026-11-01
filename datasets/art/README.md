@@ -4,6 +4,33 @@
 
 Each dataset captures the telemetry from a single ART test execution — process creation, registry modification, network connections, script execution, and other system activity as recorded by Sysmon, Windows Security audit logging, and PowerShell logging.
 
+
+<!-- BEGIN GENERATED ART FACTS -->
+## Current package facts
+
+- Datasets: 1,654
+- Bundled Windows Event XML files: 6,953
+- Packaged events: 3,983,202
+- EchoLake schema: `raw`
+- EchoLake sourcetype: `XmlWinEventLog`
+
+These values are generated from the manifests and packaged payloads by `scripts/generate_art_metadata.py`.
+
+## Metadata maintenance
+
+Check the manifests and READMEs for drift:
+
+```bash
+python3 scripts/generate_art_metadata.py --check
+```
+
+Regenerate them after changing a packaged payload:
+
+```bash
+python3 scripts/generate_art_metadata.py --write
+```
+<!-- END GENERATED ART FACTS -->
+
 ## Structure
 
 ```
@@ -12,9 +39,9 @@ T1003.001-2/           # Technique T1003.001, ART test 2
   ANALYSIS.md          # What the dataset contains and detection opportunities
   README.md            # Quick summary
   data/
-    sysmon.jsonl       # Sysmon operational events
-    security.jsonl     # Windows Security events
-    powershell.jsonl   # PowerShell operational events
+    sysmon.xml.gz      # Native Sysmon Windows Event XML
+    security.xml.gz    # Native Windows Security Event XML
+    powershell.xml.gz  # Native PowerShell Windows Event XML
     ...                # Other channels as applicable
 ```
 
@@ -131,7 +158,7 @@ When AMSI blocks a script before execution, ScriptBlock Logging captures only Po
 
 - **250 unique MITRE ATT&CK techniques** across 1,654 test executions
 - Channels: Sysmon, Security, PowerShell, Application, System, WMI, Task Scheduler
-- Event format: JSONL (one JSON object per Windows event)
+- Event format: gzip-compressed native Windows Event XML
 
 ## License
 

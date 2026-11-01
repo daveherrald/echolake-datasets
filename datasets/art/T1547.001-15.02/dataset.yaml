@@ -24,58 +24,72 @@ metadata:
       - privilege-escalation
     tactics: *id001
   timestamp_range:
-    earliest: '2026-03-17T17:09:47Z'
-    latest: '2026-03-17T17:09:52Z'
-    field: _time
+    earliest: '2026-03-17T17:09:49.115000Z'
+    latest: '2026-03-17T17:09:50.945000Z'
+    field: System/TimeCreated/@SystemTime
 files:
   bundled:
   - path: data/powershell.xml.gz
     description: Microsoft-Windows-PowerShell/Operational events
     format: xml
-    schema: windows_events_xml
+    sourcetype: XmlWinEventLog
+    schema: raw
     event_count: 0
     log_source:
       vendor: Microsoft
       product: Windows
-      category: Powershell
-      event_ids:
-      - 4103
-      - 4104
+      category: PowerShell
+      event_ids: []
   - path: data/security.xml.gz
-    description: Security events
+    description: Windows Security events
     format: xml
-    schema: windows_events_xml
+    sourcetype: XmlWinEventLog
+    schema: raw
     event_count: 38
     log_source:
       vendor: Microsoft
       product: Windows
       category: Security
       event_ids:
-      - 4688
+      - 4689
+      - 4703
   - path: data/sysmon.xml.gz
     description: Microsoft-Windows-Sysmon/Operational events
     format: xml
-    schema: windows_events_xml
+    sourcetype: XmlWinEventLog
+    schema: raw
     event_count: 2
     log_source:
       vendor: Microsoft
       product: Windows
       category: Sysmon
       event_ids:
-      - 1
       - 7
-      - 10
-      - 11
       - 13
-      - 17
   - path: data/application.xml.gz
-    event_count: 1
+    description: Windows Application events
     format: xml
-    schema: windows_events_xml
+    sourcetype: XmlWinEventLog
+    schema: raw
+    event_count: 1
+    log_source:
+      vendor: Microsoft
+      product: Windows
+      category: Application
+      event_ids:
+      - 16384
   - path: data/taskscheduler.xml.gz
-    event_count: 1
+    description: Microsoft-Windows-TaskScheduler/Operational events
     format: xml
-    schema: windows_events_xml
+    sourcetype: XmlWinEventLog
+    schema: raw
+    event_count: 1
+    log_source:
+      vendor: Microsoft
+      product: Windows
+      category: Task Scheduler
+      event_ids:
+      - 140
 environment:
   host:
     hostname: ACME-WS06
@@ -152,11 +166,11 @@ provenance:
       powershell: 99
   regenerated:
     from: source winevtlog (+ zeek_*/proxy for paws)
-    reason: original .xml.gz were UTF-8-corrupted in git; rebuilt from bronze
+    reason: original JSONL gzip files were corrupted; rebuilt from bronze, then converted to native Windows Event XML
     total_events: 42
 defaults:
   echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h
-  schema: windows_events_xml
+  schema: raw

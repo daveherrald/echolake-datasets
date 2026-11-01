@@ -1,0 +1,67 @@
+name: Validate ART datasets
+
+on:
+  pull_request:
+    paths:
+      - "datasets/art/**"
+      - "scripts/generate_art_metadata.py"
+      - "scripts/smoke_art_replay.py"
+      - ".github/workflows/validate-art.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "datasets/art/**"
+      - "scripts/generate_art_metadata.py"
+      - "scripts/smoke_art_replay.py"
+      - ".github/workflows/validate-art.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      PYTHONDONTWRITEBYTECODE: "1"
+    steps:
+      - name: Check out datasets
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+
+      - name: Check out EchoLake runtime
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          repository: daveherrald/echolake
+          ref: 506f51548aaa84209399df25d595ba59e97ad26b
+          path: .ci/echolake
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38
+        with:
+          python-version: "3.12"
+
+      - name: Install EchoLake
+        run: python -m pip install ./.ci/echolake
+
+      - name: Check generated ART metadata
+        run: python scripts/generate_art_metadata.py --check
+
+      - name: Validate ART manifests with EchoLake
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from echolake.datasets.models import DatasetManifest
+
+          manifests = sorted(Path("datasets/art").glob("*/dataset.yaml"))
+          for path in manifests:
+              DatasetManifest.from_file(path)
+          print(f"Validated {len(manifests)} ART manifests")
+          PY
+
+      - name: Replay all Windows event channels
+        run: python scripts/smoke_art_replay.py

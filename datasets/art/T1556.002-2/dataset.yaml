@@ -27,15 +27,16 @@ metadata:
       - persistence
     tactics: *id001
   timestamp_range:
-    earliest: '2026-03-14T00:46:51Z'
-    latest: '2026-03-14T00:48:56Z'
-    field: _time
+    earliest: '2026-03-14T00:46:51.537000Z'
+    latest: '2026-03-14T00:48:56.912000Z'
+    field: System/TimeCreated/@SystemTime
 files:
   bundled:
   - path: data/sysmon.xml.gz
     description: Microsoft-Windows-Sysmon/Operational events
     format: xml
-    schema: windows_events_xml
+    sourcetype: XmlWinEventLog
+    schema: raw
     event_count: 66
     log_source:
       vendor: Microsoft
@@ -50,9 +51,10 @@ files:
       - 13
       - 17
   - path: data/security.xml.gz
-    description: Security events
+    description: Windows Security events
     format: xml
-    schema: windows_events_xml
+    sourcetype: XmlWinEventLog
+    schema: raw
     event_count: 623
     log_source:
       vendor: Microsoft
@@ -68,19 +70,27 @@ files:
   - path: data/powershell.xml.gz
     description: Microsoft-Windows-PowerShell/Operational events
     format: xml
-    schema: windows_events_xml
+    sourcetype: XmlWinEventLog
+    schema: raw
     event_count: 2024
     log_source:
       vendor: Microsoft
       product: Windows
-      category: Powershell
+      category: PowerShell
       event_ids:
+      - 4100
       - 4103
       - 4104
+      - 4105
+      - 4106
+      - 40961
+      - 40962
+      - 53504
   - path: data/system.xml.gz
-    description: System events
+    description: Windows System events
     format: xml
-    schema: windows_events_xml
+    sourcetype: XmlWinEventLog
+    schema: raw
     event_count: 1
     log_source:
       vendor: Microsoft
@@ -91,18 +101,35 @@ files:
   - path: data/wmi.xml.gz
     description: Microsoft-Windows-WMI-Activity/Operational events
     format: xml
-    schema: windows_events_xml
+    sourcetype: XmlWinEventLog
+    schema: raw
     event_count: 8
     log_source:
       vendor: Microsoft
       product: Windows
-      category: Wmi
+      category: WMI
       event_ids:
+      - 5857
       - 5860
   - path: data/application.xml.gz
-    event_count: 97
+    description: Windows Application events
     format: xml
-    schema: windows_events_xml
+    sourcetype: XmlWinEventLog
+    schema: raw
+    event_count: 97
+    log_source:
+      vendor: Microsoft
+      product: Windows
+      category: Application
+      event_ids:
+      - 1
+      - 1008
+      - 1013
+      - 1014
+      - 1023
+      - 1027
+      - 1034
+      - 1077
 environment:
   host:
     hostname: ACME-WS02
@@ -189,11 +216,11 @@ provenance:
       wmi: 8
   regenerated:
     from: source winevtlog (+ zeek_*/proxy for paws)
-    reason: original .xml.gz were UTF-8-corrupted in git; rebuilt from bronze
+    reason: original JSONL gzip files were corrupted; rebuilt from bronze, then converted to native Windows Event XML
     total_events: 2819
 defaults:
   echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h
-  schema: windows_events_xml
+  schema: raw

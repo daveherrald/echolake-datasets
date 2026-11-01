@@ -23,15 +23,16 @@ metadata:
       - credential-access
     tactics: *id001
   timestamp_range:
-    earliest: '2026-03-14T00:30:45Z'
-    latest: '2026-03-14T00:30:54Z'
-    field: _time
+    earliest: '2026-03-14T00:30:45.476000Z'
+    latest: '2026-03-14T00:30:54.989000Z'
+    field: System/TimeCreated/@SystemTime
 files:
   bundled:
   - path: data/sysmon.xml.gz
     description: Microsoft-Windows-Sysmon/Operational events
     format: xml
-    schema: windows_events_xml
+    sourcetype: XmlWinEventLog
+    schema: raw
     event_count: 72
     log_source:
       vendor: Microsoft
@@ -47,9 +48,10 @@ files:
       - 17
       - 22
   - path: data/security.xml.gz
-    description: Security events
+    description: Windows Security events
     format: xml
-    schema: windows_events_xml
+    sourcetype: XmlWinEventLog
+    schema: raw
     event_count: 290
     log_source:
       vendor: Microsoft
@@ -67,35 +69,46 @@ files:
   - path: data/powershell.xml.gz
     description: Microsoft-Windows-PowerShell/Operational events
     format: xml
-    schema: windows_events_xml
+    sourcetype: XmlWinEventLog
+    schema: raw
     event_count: 2550
     log_source:
       vendor: Microsoft
       product: Windows
-      category: Powershell
+      category: PowerShell
       event_ids:
+      - 4100
       - 4103
       - 4104
+      - 4105
+      - 4106
+      - 40961
+      - 40962
+      - 53504
   - path: data/application.xml.gz
-    description: Application events
+    description: Windows Application events
     format: xml
-    schema: windows_events_xml
+    sourcetype: XmlWinEventLog
+    schema: raw
     event_count: 15
     log_source:
       vendor: Microsoft
       product: Windows
       category: Application
       event_ids:
+      - 1
+      - 1077
       - 16394
   - path: data/taskscheduler.xml.gz
     description: Microsoft-Windows-TaskScheduler/Operational events
     format: xml
-    schema: windows_events_xml
+    sourcetype: XmlWinEventLog
+    schema: raw
     event_count: 8
     log_source:
       vendor: Microsoft
       product: Windows
-      category: TaskScheduler
+      category: Task Scheduler
       event_ids:
       - 100
       - 102
@@ -104,9 +117,17 @@ files:
       - 200
       - 201
   - path: data/wmi.xml.gz
-    event_count: 3
+    description: Microsoft-Windows-WMI-Activity/Operational events
     format: xml
-    schema: windows_events_xml
+    sourcetype: XmlWinEventLog
+    schema: raw
+    event_count: 3
+    log_source:
+      vendor: Microsoft
+      product: Windows
+      category: WMI
+      event_ids:
+      - 5857
 environment:
   host:
     hostname: ACME-WS02
@@ -193,11 +214,11 @@ provenance:
       taskscheduler: 8
   regenerated:
     from: source winevtlog (+ zeek_*/proxy for paws)
-    reason: original .xml.gz were UTF-8-corrupted in git; rebuilt from bronze
+    reason: original JSONL gzip files were corrupted; rebuilt from bronze, then converted to native Windows Event XML
     total_events: 2938
 defaults:
   echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h
-  schema: windows_events_xml
+  schema: raw
