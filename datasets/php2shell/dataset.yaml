@@ -68,28 +68,28 @@ files:
     description: 'nginx reverse-proxy combined access log. Every exploit request is a benign-looking POST /upload.php 200; the only in-log signal is response-byte size off the endpoint baseline. Client is 192.168.2.36 (UA p2s-trigger/1.0) and local curl from 127.0.0.1/172.17.0.1. Time is the CLF bracket [DD/Mon/YYYY:HH:MM:SS +ZZZZ].'
     format: text
     sourcetype: 'nginx:access'
-    schema: native
+    schema: raw
     event_count: 53
     log_source: {vendor: nginx, product: nginx, category: web}
   - path: data/apache_mod_php_vulnerable.log.gz
     description: 'Apache 2.4 mod_php container stdout for the vulnerable target (:8081). Interleaved error log and combined access log. Carries the memory-exhaustion fatals "in Unknown on line 0" and the mod_php worker-hang signature AH00161 "server reached MaxRequestWorkers". Error time is [Dow Mon DD HH:MM:SS.uuuuuu YYYY]; access time is the CLF bracket.'
     format: text
     sourcetype: 'php:apache'
-    schema: native
+    schema: raw
     event_count: 33
     log_source: {vendor: Apache, product: mod_php, category: web}
   - path: data/php_fpm.log.gz
     description: 'PHP-FPM pool log for the vulnerable FPM target behind nginx. The log with the most signal here: FPM access lines, the four Request Startup warnings, child exit code 70 and respawn notices, and the callback fingerprint "Function system() hasn''t defined the class it was called for", which appears only when unserialize_callback_func fired during the pre-RINIT decode. FPM error time is [DD-Mon-YYYY HH:MM:SS]; the access line carries a bracketless CLF time; the PHP fatal "NOTICE: PHP message:" lines have no time and sit beside their timestamped child-exit line.'
     format: text
     sourcetype: 'php:fpm'
-    schema: native
+    schema: raw
     event_count: 160
     log_source: {vendor: PHP, product: PHP-FPM, category: web}
   - path: data/mitmproxy_capture.log.gz
     description: 'Inline mitmproxy capture (:9090) in reverse mode, one line per event, "REQ|RESP <connid> <ISO8601> <method> <url> | headers=<base64> | body=<base64>". The only log in this dataset carrying full request and response bodies: the RCE transaction''s response body base64-decodes to the uid=33(www-data) command output, and request bodies carry the PHP_SESSION_UPLOAD_PROGRESS multipart. One line is about 8.6 MB (a 70 MB request base64). Time is the ISO8601 after the connection id.'
     format: text
     sourcetype: 'mitmproxy:capture'
-    schema: native
+    schema: raw
     event_count: 31
     log_source: {vendor: mitmproxy, product: mitmproxy, category: proxy}
 environment:
