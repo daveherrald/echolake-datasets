@@ -24,27 +24,34 @@ metadata:
       - privilege-escalation
     tactics: *id001
   timestamp_range:
-    earliest: '2026-03-17T17:12:27Z'
-    latest: '2026-03-17T17:12:29Z'
-    field: _time
+    earliest: '2026-03-17T17:12:27.002000Z'
+    latest: '2026-03-17T17:12:28.993000Z'
+    field: System/TimeCreated/@SystemTime
 files:
   bundled:
   - path: data/powershell.xml.gz
     description: Microsoft-Windows-PowerShell/Operational events
     format: xml
-    schema: windows_events_xml
+    sourcetype: XmlWinEventLog
+    schema: raw
     event_count: 643
     log_source:
       vendor: Microsoft
       product: Windows
-      category: Powershell
+      category: PowerShell
       event_ids:
       - 4103
       - 4104
+      - 4105
+      - 4106
+      - 40961
+      - 40962
+      - 53504
   - path: data/security.xml.gz
-    description: Security events
+    description: Windows Security events
     format: xml
-    schema: windows_events_xml
+    sourcetype: XmlWinEventLog
+    schema: raw
     event_count: 6
     log_source:
       vendor: Microsoft
@@ -55,7 +62,8 @@ files:
   - path: data/sysmon.xml.gz
     description: Microsoft-Windows-Sysmon/Operational events
     format: xml
-    schema: windows_events_xml
+    sourcetype: XmlWinEventLog
+    schema: raw
     event_count: 24
     log_source:
       vendor: Microsoft
@@ -68,6 +76,7 @@ files:
       - 11
       - 13
       - 17
+      - 22
 environment:
   host:
     hostname: ACME-WS06
@@ -144,11 +153,11 @@ provenance:
       powershell: 110
   regenerated:
     from: source winevtlog (+ zeek_*/proxy for paws)
-    reason: original .xml.gz were UTF-8-corrupted in git; rebuilt from bronze
+    reason: original JSONL gzip files were corrupted; rebuilt from bronze, then converted to native Windows Event XML
     total_events: 673
 defaults:
   echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h
-  schema: windows_events_xml
+  schema: raw

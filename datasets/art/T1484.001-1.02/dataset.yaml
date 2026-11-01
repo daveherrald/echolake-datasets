@@ -24,38 +24,44 @@ metadata:
       - privilege-escalation
     tactics: *id001
   timestamp_range:
-    earliest: '2026-03-17T17:01:33Z'
-    latest: '2026-03-17T17:01:36Z'
-    field: _time
+    earliest: '2026-03-17T17:01:33.007000Z'
+    latest: '2026-03-17T17:01:35.991000Z'
+    field: System/TimeCreated/@SystemTime
 files:
   bundled:
   - path: data/application.xml.gz
-    description: Application events
+    description: Windows Application events
     format: xml
-    schema: windows_events_xml
+    sourcetype: XmlWinEventLog
+    schema: raw
     event_count: 3
     log_source:
       vendor: Microsoft
       product: Windows
       category: Application
       event_ids:
+      - 1
       - 15
   - path: data/powershell.xml.gz
     description: Microsoft-Windows-PowerShell/Operational events
     format: xml
-    schema: windows_events_xml
+    sourcetype: XmlWinEventLog
+    schema: raw
     event_count: 937
     log_source:
       vendor: Microsoft
       product: Windows
-      category: Powershell
+      category: PowerShell
       event_ids:
       - 4103
       - 4104
+      - 4105
+      - 4106
   - path: data/security.xml.gz
-    description: Security events
+    description: Windows Security events
     format: xml
-    schema: windows_events_xml
+    sourcetype: XmlWinEventLog
+    schema: raw
     event_count: 13
     log_source:
       vendor: Microsoft
@@ -66,7 +72,8 @@ files:
   - path: data/sysmon.xml.gz
     description: Microsoft-Windows-Sysmon/Operational events
     format: xml
-    schema: windows_events_xml
+    sourcetype: XmlWinEventLog
+    schema: raw
     event_count: 18
     log_source:
       vendor: Microsoft
@@ -77,7 +84,7 @@ files:
       - 7
       - 10
       - 11
-      - 17
+      - 22
 environment:
   host:
     hostname: ACME-WS06
@@ -156,11 +163,11 @@ provenance:
       application: 2
   regenerated:
     from: source winevtlog (+ zeek_*/proxy for paws)
-    reason: original .xml.gz were UTF-8-corrupted in git; rebuilt from bronze
+    reason: original JSONL gzip files were corrupted; rebuilt from bronze, then converted to native Windows Event XML
     total_events: 971
 defaults:
   echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h
-  schema: windows_events_xml
+  schema: raw

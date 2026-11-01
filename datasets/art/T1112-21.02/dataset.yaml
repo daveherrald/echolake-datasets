@@ -23,61 +23,57 @@ metadata:
       - persistence
     tactics: *id001
   timestamp_range:
-    earliest: '2026-03-14T23:49:05Z'
-    latest: '2026-03-14T23:49:10Z'
-    field: _time
+    earliest: '2026-03-14T23:49:05.551000Z'
+    latest: '2026-03-14T23:49:06.536000Z'
+    field: System/TimeCreated/@SystemTime
 files:
   bundled:
   - path: data/powershell.xml.gz
     description: Microsoft-Windows-PowerShell/Operational events
     format: xml
-    schema: windows_events_xml
+    sourcetype: XmlWinEventLog
+    schema: raw
     event_count: 0
     log_source:
       vendor: Microsoft
       product: Windows
-      category: Powershell
-      event_ids:
-      - 4104
+      category: PowerShell
+      event_ids: []
   - path: data/security.xml.gz
-    description: Security events
+    description: Windows Security events
     format: xml
-    schema: windows_events_xml
+    sourcetype: XmlWinEventLog
+    schema: raw
     event_count: 2
     log_source:
       vendor: Microsoft
       product: Windows
       category: Security
       event_ids:
-      - 4688
+      - 4689
+      - 4703
   - path: data/sysmon.xml.gz
     description: Microsoft-Windows-Sysmon/Operational events
     format: xml
-    schema: windows_events_xml
+    sourcetype: XmlWinEventLog
+    schema: raw
     event_count: 0
     log_source:
       vendor: Microsoft
       product: Windows
       category: Sysmon
-      event_ids:
-      - 1
-      - 7
-      - 10
-      - 17
+      event_ids: []
   - path: data/taskscheduler.xml.gz
     description: Microsoft-Windows-TaskScheduler/Operational events
     format: xml
-    schema: windows_events_xml
+    sourcetype: XmlWinEventLog
+    schema: raw
     event_count: 0
     log_source:
       vendor: Microsoft
       product: Windows
-      category: TaskScheduler
-      event_ids:
-      - 100
-      - 107
-      - 129
-      - 200
+      category: Task Scheduler
+      event_ids: []
 environment:
   host:
     hostname: ACME-WS06
@@ -156,11 +152,11 @@ provenance:
       taskscheduler: 4
   regenerated:
     from: source winevtlog (+ zeek_*/proxy for paws)
-    reason: original .xml.gz were UTF-8-corrupted in git; rebuilt from bronze
+    reason: original JSONL gzip files were corrupted; rebuilt from bronze, then converted to native Windows Event XML
     total_events: 2
 defaults:
   echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h
-  schema: windows_events_xml
+  schema: raw

@@ -22,27 +22,73 @@ metadata:
       - discovery
     tactics: *id001
   timestamp_range:
-    earliest: '2026-03-13T22:48:36Z'
-    latest: '2026-03-13T22:48:46Z'
-    field: _time
+    earliest: '2026-03-13T22:48:36.505000Z'
+    latest: '2026-03-13T22:48:45.986000Z'
+    field: System/TimeCreated/@SystemTime
 files:
   bundled:
   - path: data/security.xml.gz
+    description: Windows Security events
+    format: xml
+    sourcetype: XmlWinEventLog
+    schema: raw
     event_count: 69
-    format: xml
-    schema: windows_events_xml
+    log_source:
+      vendor: Microsoft
+      product: Windows
+      category: Security
+      event_ids:
+      - 4688
+      - 4689
+      - 4703
   - path: data/application.xml.gz
+    description: Windows Application events
+    format: xml
+    sourcetype: XmlWinEventLog
+    schema: raw
     event_count: 14
-    format: xml
-    schema: windows_events_xml
+    log_source:
+      vendor: Microsoft
+      product: Windows
+      category: Application
+      event_ids:
+      - 1
   - path: data/powershell.xml.gz
+    description: Microsoft-Windows-PowerShell/Operational events
+    format: xml
+    sourcetype: XmlWinEventLog
+    schema: raw
     event_count: 1248
-    format: xml
-    schema: windows_events_xml
+    log_source:
+      vendor: Microsoft
+      product: Windows
+      category: PowerShell
+      event_ids:
+      - 4100
+      - 4103
+      - 4104
+      - 4105
+      - 4106
+      - 40961
+      - 40962
+      - 53504
   - path: data/sysmon.xml.gz
-    event_count: 60
+    description: Microsoft-Windows-Sysmon/Operational events
     format: xml
-    schema: windows_events_xml
+    sourcetype: XmlWinEventLog
+    schema: raw
+    event_count: 60
+    log_source:
+      vendor: Microsoft
+      product: Windows
+      category: Sysmon
+      event_ids:
+      - 1
+      - 7
+      - 10
+      - 11
+      - 17
+      - 22
 environment:
   host:
     hostname: ACME-WS02
@@ -117,11 +163,11 @@ provenance:
     dest_counts: {}
   regenerated:
     from: source winevtlog (+ zeek_*/proxy for paws)
-    reason: original .xml.gz were UTF-8-corrupted in git; rebuilt from bronze
+    reason: original JSONL gzip files were corrupted; rebuilt from bronze, then converted to native Windows Event XML
     total_events: 1391
 defaults:
   echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h
-  schema: windows_events_xml
+  schema: raw
