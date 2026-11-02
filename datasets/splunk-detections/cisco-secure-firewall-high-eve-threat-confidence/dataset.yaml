@@ -1,14 +1,10 @@
 metadata:
   name: cisco-secure-firewall-high-eve-threat-confidence
   version: 3.0.0
-  description: The following analytic detects connections with a high Encrypted Visibility
-    Engine (EVE) threat confidence score, indicating potentially malicious behavior
-    within encrypted traffic. It leverages Cisco Secure Firewall Threat Defense logs
-    and evaluates the EVE_ThreatConfidencePct field, which reflects the system's confidence
-    in classifying encrypted sessions as threats based on machine learning models
-    and behavioral analysis. A score equal to or greater than 80 suggests the connection
-    is highly li
+  description: The following analytic detects connections with a high Encrypted Visibility Engine (EVE) threat confidence score, indicating potentially malicious behavior within encrypted traffic. It leverages Cisco Secure Firewall Threat Defense logs and evaluates the EVE_ThreatConfidencePct field, which reflects the system's confidence in classifying encrypted sessions as threats based on machine learning models and behavioral analysis. A score equal to or greater than 80 suggests the connection is highly likely to be associated with malware command and control (C2), remote access tools, or suspicious tunneling behavior. If confirmed malicious, this may indicate covert communication over TLS from compromised hosts.
   author: Nasreddine Bencherchali, Splunk
+  updated: '2026-06-01'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,24 +12,53 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1041
-      name: Technique T1041
+      name: Exfiltration Over C2 Channel
+      tactics:
+      - exfiltration
     - id: T1071.001
-      name: Technique T1071.001
+      name: Web Protocols
+      tactics:
+      - command-and-control
     - id: T1105
-      name: Technique T1105
+      name: Ingress Tool Transfer
+      tactics:
+      - command-and-control
     - id: T1573.002
-      name: Technique T1573.002
-    tactics: []
+      name: Asymmetric Cryptography
+      tactics:
+      - command-and-control
+    tactics:
+    - command-and-control
+    - exfiltration
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/network/cisco_secure_firewall___high_eve_threat_confidence.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/network/cisco_secure_firewall___high_eve_threat_confidence.yml
+      rule_sha256: sha256:0dfec704f23f87515120261be4e1cd549ee6e67ca4e0f2c9e2117d3cd9c1495b
+      detection_id: 8c15183e-2e70-4db4-86c3-88f8d9129b66
+      source_version: 3
+      source_date: '2026-06-01'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_secure_firewall_threat_defense/connection_event/connection_events.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/cisco_secure_firewall_threat_defense/connection_event/connection_events.log
     description: not_applicable - cisco:sfw:estreamer
     format: auto
     schema: raw
     sourcetype: cisco:sfw:estreamer
+    checksum: sha256:37e737d87c4e8396396f3a69621c127bd943eb733036deb7abaa5a5a7276371d
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

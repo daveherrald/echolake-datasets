@@ -1,14 +1,10 @@
 metadata:
   name: detect-regsvcs-spawning-a-process
   version: 11.0.0
-  description: The following analytic identifies regsvcs.exe spawning a child process.
-    This behavior is detected using Endpoint Detection and Response (EDR) telemetry,
-    focusing on process creation events where the parent process is regsvcs.exe. This
-    activity is significant because regsvcs.exe rarely spawns child processes, and
-    such behavior can indicate an attempt to bypass application control mechanisms.
-    If confirmed malicious, this could allow an attacker to execute arbitrary code,
-    potentially leading to pri
+  description: The following analytic identifies regsvcs.exe spawning a child process. This behavior is detected using Endpoint Detection and Response (EDR) telemetry, focusing on process creation events where the parent process is regsvcs.exe. This activity is significant because regsvcs.exe rarely spawns child processes, and such behavior can indicate an attempt to bypass application control mechanisms. If confirmed malicious, this could allow an attacker to execute arbitrary code, potentially leading to privilege escalation or persistent access within the environment. Immediate investigation is recommended to determine the legitimacy of the spawned process and any associated suspicious activities.
   author: Michael Haag, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1218.009
-      name: Technique T1218.009
-    tactics: []
+      name: Regsvcs/Regasm
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/detect_regsvcs_spawning_a_process.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/detect_regsvcs_spawning_a_process.yml
+      rule_sha256: sha256:ae3ba92d27ed8156e725bee31c0967987289d00dee988cdfa1f9826b93cc50eb
+      detection_id: bc477b57-5c21-4ab6-9c33-668772e7f114
+      source_version: 11
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218.009/atomic_red_team/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1218.009/atomic_red_team/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:6e30cfc58deee5ee2df382f790711b8e2e67410bcfbf0cf8cb9169a1760f7e43
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

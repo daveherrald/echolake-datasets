@@ -1,14 +1,24 @@
 metadata:
   name: cisco-duo-set-user-status-to-bypass-2fa
   version: 1.0.0
-  description: "The following analytic detects instances where a Duo user's status\
-    \ is changed to \"Bypass\" for 2FA, specifically when the \nprevious status was\
-    \ \"Active.\" This behavior is identified by analyzing Duo activity logs for user\
-    \ update actions, extracting \nthe status transitions, and filtering for cases\
-    \ where a user is set to bypass multi-factor authentication. This is a critical\
-    \ \nevent for a Security Operations Center (SOC) to monitor, as bypassing 2FA\
-    \ significantly weakens account security and may \nind"
+  description: 'The following analytic detects instances where a Duo user''s status is changed to "Bypass" for 2FA, specifically when the
+
+    previous status was "Active." This behavior is identified by analyzing Duo activity logs for user update actions, extracting
+
+    the status transitions, and filtering for cases where a user is set to bypass multi-factor authentication. This is a critical
+
+    event for a Security Operations Center (SOC) to monitor, as bypassing 2FA significantly weakens account security and may
+
+    indicate malicious insider activity or account compromise. Attackers or unauthorized administrators may exploit this change to
+
+    disable strong authentication controls, increasing the risk of unauthorized access to sensitive systems and data. Early detection
+
+    of such changes enables rapid investigation and response, helping to prevent potential breaches and limit the impact of
+
+    credential-based attacks.'
   author: Patrick Bareiss, Splunk
+  updated: '2025-07-08'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +26,44 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1556
-      name: Technique T1556
-    tactics: []
+      name: Modify Authentication Process
+      tactics:
+      - persistence
+      - defense-evasion
+      - credential-access
+    tactics:
+    - persistence
+    - defense-evasion
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/application/cisco_duo_set_user_status_to_bypass_2fa.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/application/cisco_duo_set_user_status_to_bypass_2fa.yml
+      rule_sha256: sha256:70a2ee759603b257ca64a5a84e1d783dbf572fc7d99f23423de1c6d2626f969f
+      detection_id: 8728d224-9cd5-4aa7-b75f-f8520a569979
+      source_version: 1
+      source_date: '2025-07-08'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1556/cisco_duo_bypass_2FA/cisco_duo_activity.json
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1556/cisco_duo_bypass_2FA/cisco_duo_activity.json
     description: duo - cisco:duo:activity
     format: auto
     schema: raw
     sourcetype: cisco:duo:activity
+    checksum: sha256:8701e9be8bef7d2802e1d82899c51c9de4feda793bbbd8f54480ebbc92adf1d6
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

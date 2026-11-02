@@ -1,14 +1,10 @@
 metadata:
   name: petitpotam-suspicious-kerberos-tgt-request
   version: 6.0.0
-  description: The following analytic detects a suspicious Kerberos Ticket Granting
-    Ticket (TGT) request, identified by Event Code 4768. This detection leverages
-    Windows Security Event Logs to identify TGT requests with unusual fields, which
-    may indicate the use of tools like Rubeus following the exploitation of CVE-2021-36942
-    (PetitPotam). This activity is significant as it can signal an attacker leveraging
-    a compromised certificate to request Kerberos tickets, potentially leading to
-    unauthorized access. If c
+  description: The following analytic detects a suspicious Kerberos Ticket Granting Ticket (TGT) request, identified by Event Code 4768. This detection leverages Windows Security Event Logs to identify TGT requests with unusual fields, which may indicate the use of tools like Rubeus following the exploitation of CVE-2021-36942 (PetitPotam). This activity is significant as it can signal an attacker leveraging a compromised certificate to request Kerberos tickets, potentially leading to unauthorized access. If confirmed malicious, this could allow attackers to escalate privileges and persist within the environment, posing a severe security risk.
   author: Michael Haag, Mauricio Velazco, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1003
-      name: Technique T1003
-    tactics: []
+      name: OS Credential Dumping
+      tactics:
+      - credential-access
+    tactics:
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/petitpotam_suspicious_kerberos_tgt_request.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/petitpotam_suspicious_kerberos_tgt_request.yml
+      rule_sha256: sha256:948a7bfdf271336d9ccc13495dacc084d9218b0705b5517cc249862a0f14f95a
+      detection_id: e3ef244e-0a67-11ec-abf2-acde48001122
+      source_version: 6
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1187/petitpotam/windows-xml-1.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1187/petitpotam/windows-xml-1.log
     description: XmlWinEventLog:Security - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:d4a6406499d7921ae8b6abab5d82cd1542f7ff3bd9e494d64c6be9b8b88cbb6d
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,14 +1,10 @@
 metadata:
   name: ransomware-notes-bulk-creation
   version: 11.0.0
-  description: The following analytic identifies the bulk creation of ransomware notes
-    (e.g., .txt, .html, .hta files) on an infected machine. It leverages Sysmon EventCode
-    11 to detect multiple instances of these file types being created within a short
-    time frame. This activity is significant as it often indicates an active ransomware
-    attack, where the attacker is notifying the victim of the encryption. If confirmed
-    malicious, this behavior could lead to widespread data encryption, rendering critical
-    files in
+  description: The following analytic identifies the bulk creation of ransomware notes (e.g., .txt, .html, .hta files) on an infected machine. It leverages Sysmon EventCode 11 to detect multiple instances of these file types being created within a short time frame. This activity is significant as it often indicates an active ransomware attack, where the attacker is notifying the victim of the encryption. If confirmed malicious, this behavior could lead to widespread data encryption, rendering critical files inaccessible and potentially causing significant operational disruption.
   author: Teoderick Contreras, Splunk
+  updated: '2025-10-14'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1486
-      name: Technique T1486
-    tactics: []
+      name: Data Encrypted for Impact
+      tactics:
+      - impact
+    tactics:
+    - impact
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/ransomware_notes_bulk_creation.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/ransomware_notes_bulk_creation.yml
+      rule_sha256: sha256:a57f84ac246d8158a2eea0972effac07272f2782323f6631af9f5d7c41ba3a6e
+      detection_id: eff7919a-8330-11eb-83f8-acde48001122
+      source_version: 11
+      source_date: '2025-10-14'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/clop/clop_a/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/clop/clop_a/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:b765f9864bd642603dc8a7a4bd3c23e5b036e4ebed9d2f0ac0716f69870996d3
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

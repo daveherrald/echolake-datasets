@@ -1,14 +1,10 @@
 metadata:
   name: clop-common-exec-parameter
   version: 10.0.0
-  description: The following analytic identifies the execution of CLOP ransomware
-    variants using specific arguments ("runrun" or "temp.dat") to trigger their malicious
-    activities. This detection leverages data from Endpoint Detection and Response
-    (EDR) agents, focusing on process names and command-line arguments. Monitoring
-    this activity is crucial as it indicates potential ransomware behavior, which
-    can lead to file encryption on network shares or local machines. If confirmed
-    malicious, this activity could re
+  description: The following analytic identifies the execution of CLOP ransomware variants using specific arguments ("runrun" or "temp.dat") to trigger their malicious activities. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line arguments. Monitoring this activity is crucial as it indicates potential ransomware behavior, which can lead to file encryption on network shares or local machines. If confirmed malicious, this activity could result in significant data loss and operational disruption due to encrypted files, highlighting the need for immediate investigation and response.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1204
-      name: Technique T1204
-    tactics: []
+      name: User Execution
+      tactics:
+      - execution
+    tactics:
+    - execution
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/clop_common_exec_parameter.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/clop_common_exec_parameter.yml
+      rule_sha256: sha256:36c95d011ae5e9d2bd9f414ec2a0a78d7188e4088c23d9982f9bd8f2171a6bf3
+      detection_id: 5a8a2a72-8322-11eb-9ee9-acde48001122
+      source_version: 10
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/clop/clop_b/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/clop/clop_b/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:7ef86290f329f8c82a60462332988100987c1affb027a00ed180ef00c2a59bf2
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

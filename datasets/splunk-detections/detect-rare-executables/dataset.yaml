@@ -1,19 +1,20 @@
 metadata:
   name: detect-rare-executables
   version: 11.0.0
-  description: 'The following analytic detects the execution of rare processes that
-    appear only once across the network within a specified timeframe.
+  description: 'The following analytic detects the execution of rare processes that appear only once across the network within a specified timeframe.
 
-    It leverages data from Endpoint Detection and Response (EDR) agents, focusing
-    on process execution logs.
+    It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process execution logs.
 
-    This activity is significant for a SOC as it helps identify potentially malicious
-    activities or unauthorized software, which could indicate a security breach or
-    ongoing attack.
+    This activity is significant for a SOC as it helps identify potentially malicious activities or unauthorized software, which could indicate a security breach or ongoing attack.
 
-    If confirmed malicious, such rare processes could lead to data theft, privilege
-    esca'
+    If confirmed malicious, such rare processes could lead to data theft, privilege escalation, or complete system compromise, making early detection crucial for minimizing impact.
+
+    The search currently identifies processes executed on fewer than 10 hosts, but this threshold can be adjusted based on the organization''s environment and risk tolerance.
+
+    The search groups results by process name which can lead to blind spots if a malicious process uses a common name. To mitigate this, consider enhancing the detection logic to group by additional attributes such as process hash.'
   author: Bhavin Patel, Splunk
+  updated: '2026-01-15'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -23,18 +24,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1204
-      name: Technique T1204
-    tactics: []
+      name: User Execution
+      tactics:
+      - execution
+    tactics:
+    - execution
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/detect_rare_executables.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/detect_rare_executables.yml
+      rule_sha256: sha256:22ba6166ee8f6471ce083a0b8a79a0cd735e8f78d84ebbc2c8a4ca4a3a124ce1
+      detection_id: 44fddcb2-8d3b-454c-874e-7c6de5a4f7ac
+      source_version: 11
+      source_date: '2026-01-15'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1204/rare_executables/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1204/rare_executables/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:47ca47dca91fe047e979f5b3981caca4a5c735d1840de2f5b99dcf6c98e574ad
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

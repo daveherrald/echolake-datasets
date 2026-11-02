@@ -1,14 +1,10 @@
 metadata:
   name: azure-ad-successful-powershell-authentication
   version: 9.0.0
-  description: The following analytic identifies a successful authentication event
-    against an Azure AD tenant using PowerShell cmdlets. This detection leverages
-    Azure AD SignInLogs to identify successful logins where the appDisplayName is
-    "Microsoft Azure PowerShell." This activity is significant because it is uncommon
-    for regular, non-administrative users to authenticate using PowerShell, and it
-    may indicate enumeration and discovery techniques by an attacker. If confirmed
-    malicious, this activity could allow
+  description: The following analytic identifies a successful authentication event against an Azure AD tenant using PowerShell cmdlets. This detection leverages Azure AD SignInLogs to identify successful logins where the appDisplayName is "Microsoft Azure PowerShell." This activity is significant because it is uncommon for regular, non-administrative users to authenticate using PowerShell, and it may indicate enumeration and discovery techniques by an attacker. If confirmed malicious, this activity could allow attackers to perform extensive reconnaissance, potentially leading to privilege escalation or further exploitation within the Azure environment.
   author: Mauricio Velazco, Gowthamaraj Rajendran, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,20 +12,51 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1078.004
-      name: Technique T1078.004
+      name: Cloud Accounts
+      tactics:
+      - initial-access
+      - persistence
+      - privilege-escalation
+      - defense-evasion
     - id: T1586.003
-      name: Technique T1586.003
-    tactics: []
+      name: Cloud Accounts
+      tactics:
+      - resource-development
+    tactics:
+    - resource-development
+    - initial-access
+    - persistence
+    - privilege-escalation
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/azure_ad_successful_powershell_authentication.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/azure_ad_successful_powershell_authentication.yml
+      rule_sha256: sha256:7acfcc832d71f24f318ad019eafe54e649b8c391facea6ea404fadf9b9f223ed
+      detection_id: 62f10052-d7b3-4e48-b57b-56f8e3ac7ceb
+      source_version: 9
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1078.004/azuread_pws/azure-audit.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1078.004/azuread_pws/azure-audit.log
     description: Azure AD - azure:monitor:aad
     format: auto
     schema: raw
     sourcetype: azure:monitor:aad
+    checksum: sha256:43598377a83fb710074244d14b1d8af9d11eee55484b23822a86046025ef7efd
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

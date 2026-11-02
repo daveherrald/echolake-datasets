@@ -1,14 +1,10 @@
 metadata:
   name: overwriting-accessibility-binaries
   version: 10.0.0
-  description: The following analytic detects modifications to Windows accessibility
-    binaries such as sethc.exe, utilman.exe, osk.exe, Magnify.exe, Narrator.exe, DisplaySwitch.exe,
-    and AtBroker.exe. It leverages filesystem activity data from the Endpoint.Filesystem
-    data model to identify changes to these specific files. This activity is significant
-    because adversaries can exploit these binaries to gain unauthorized access or
-    execute commands without logging in. If confirmed malicious, this could allow
-    attacker
+  description: The following analytic detects modifications to Windows accessibility binaries such as sethc.exe, utilman.exe, osk.exe, Magnify.exe, Narrator.exe, DisplaySwitch.exe, and AtBroker.exe. It leverages filesystem activity data from the Endpoint.Filesystem data model to identify changes to these specific files. This activity is significant because adversaries can exploit these binaries to gain unauthorized access or execute commands without logging in. If confirmed malicious, this could allow attackers to bypass authentication mechanisms, potentially leading to unauthorized system access and further compromise of the environment.
   author: David Dorsey, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1546.008
-      name: Technique T1546.008
-    tactics: []
+      name: Accessibility Features
+      tactics:
+      - persistence
+      - privilege-escalation
+    tactics:
+    - persistence
+    - privilege-escalation
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/overwriting_accessibility_binaries.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/overwriting_accessibility_binaries.yml
+      rule_sha256: sha256:5d4c86a23826d85bbc7315560ce555256bf9005cff42bfae4b72e65172bdd1d6
+      detection_id: 13c2f6c3-10c5-4deb-9ba1-7c4460ebe4ae
+      source_version: 10
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1546.008/atomic_red_team/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1546.008/atomic_red_team/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:6d60fc0ee30c2722588849952f594170747132ed6916f90514310ef3a0284c4f
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

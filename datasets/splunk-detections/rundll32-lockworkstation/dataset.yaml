@@ -1,14 +1,10 @@
 metadata:
   name: rundll32-lockworkstation
   version: 8.0.0
-  description: The following analytic detects the execution of the rundll32.exe command
-    with the user32.dll,LockWorkStation parameter, which is used to lock the workstation
-    via command line. This detection leverages data from Endpoint Detection and Response
-    (EDR) agents, focusing on process names and command-line executions. This activity
-    is significant as it is an uncommon method to lock a screen and has been observed
-    in CONTI ransomware tooling for defense evasion. If confirmed malicious, this
-    technique coul
+  description: The following analytic detects the execution of the rundll32.exe command with the user32.dll,LockWorkStation parameter, which is used to lock the workstation via command line. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line executions. This activity is significant as it is an uncommon method to lock a screen and has been observed in CONTI ransomware tooling for defense evasion. If confirmed malicious, this technique could indicate an attempt to evade detection and hinder incident response efforts.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1218.011
-      name: Technique T1218.011
-    tactics: []
+      name: Rundll32
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/rundll32_lockworkstation.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/rundll32_lockworkstation.yml
+      rule_sha256: sha256:1d78cf9216b29763d16fe246d5d09bdd842303f631ad4d9f45a4030e3fa0e7e1
+      detection_id: fa90f372-f91d-11eb-816c-acde48001122
+      source_version: 8
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/conti/conti_leak/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/conti/conti_leak/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:d7e5b728083f9f42cd7bc66a09073d9862dcac8addebd904c06d4dd77310f087
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

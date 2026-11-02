@@ -1,14 +1,10 @@
 metadata:
   name: windows-query-registry-uninstall-program-list
   version: 7.0.0
-  description: The following analytic detects an access request on the uninstall registry
-    key. It leverages Windows Security Event logs, specifically event code 4663. This
-    activity is significant because adversaries or malware can exploit this key to
-    gather information about installed applications, aiding in further attacks. If
-    confirmed malicious, this behavior could allow attackers to map out installed
-    software, potentially identifying vulnerabilities or software to exploit, leading
-    to further system comprom
+  description: The following analytic detects an access request on the uninstall registry key. It leverages Windows Security Event logs, specifically event code 4663. This activity is significant because adversaries or malware can exploit this key to gather information about installed applications, aiding in further attacks. If confirmed malicious, this behavior could allow attackers to map out installed software, potentially identifying vulnerabilities or software to exploit, leading to further system compromise.
   author: Teoderick Contreras, Splunk
+  updated: '2025-12-16'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1012
-      name: Technique T1012
-    tactics: []
+      name: Query Registry
+      tactics:
+      - discovery
+    tactics:
+    - discovery
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_query_registry_uninstall_program_list.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_query_registry_uninstall_program_list.yml
+      rule_sha256: sha256:ba3e670b41745a6f404fc91465a822d39c70b569c3bf2e0b3c296974629e2664
+      detection_id: 535fd4fc-7151-4062-9d7e-e896bea77bf6
+      source_version: 7
+      source_date: '2025-12-16'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/redline/recon_registry/recon-reg-redline-security-xml.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/redline/recon_registry/recon-reg-redline-security-xml.log
     description: XmlWinEventLog:Security - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:81e16e2994ba2f9b20e5a1b925626d7d30fbdfa1b045b1253725c7e53b0ab649
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

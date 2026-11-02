@@ -1,28 +1,48 @@
 metadata:
   name: f5-tmui-authentication-bypass
   version: 5.0.0
-  description: The following analytic detects attempts to exploit the CVE-2023-46747
-    vulnerability, an authentication bypass flaw in F5 BIG-IP's Configuration utility
-    (TMUI). It identifies this activity by monitoring for specific URI paths such
-    as "*/mgmt/tm/auth/user/*" with the PATCH method and a 200 status code. This behavior
-    is significant for a SOC as it indicates potential unauthorized access attempts,
-    leading to remote code execution. If confirmed malicious, an attacker could gain
-    unauthorized access, e
+  description: The following analytic detects attempts to exploit the CVE-2023-46747 vulnerability, an authentication bypass flaw in F5 BIG-IP's Configuration utility (TMUI). It identifies this activity by monitoring for specific URI paths such as "*/mgmt/tm/auth/user/*" with the PATCH method and a 200 status code. This behavior is significant for a SOC as it indicates potential unauthorized access attempts, leading to remote code execution. If confirmed malicious, an attacker could gain unauthorized access, execute arbitrary code, steal data, disrupt systems, or conduct further malicious activities within the network.
   author: Michael Haag, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
   - f5-authentication-bypass-with-tmui
+  mitre_attack:
+    techniques: []
+    tactics: []
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/web/f5_tmui_authentication_bypass.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/web/f5_tmui_authentication_bypass.yml
+      rule_sha256: sha256:83d3f1348bf747af8cdfa6f0dfbe6f1931d6b40d520e52e509999ce730216cf7
+      detection_id: 88bf127c-613e-4579-99e4-c4d4b02f3840
+      source_version: 5
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: upstream-unmapped
+        reviewed: '2026-11-02'
+        rationale: The pinned upstream rule has no ATT&CK ID, and the sample-data directory name is not sufficient evidence for one.
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/f5/f5_tmui.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1190/f5/f5_tmui.log
     description: suricata - suricata
     format: auto
     schema: raw
     sourcetype: suricata
+    checksum: sha256:96ff0ed68e564a87594d64586bfe300c9501ecea441bd197fdce734a39a93401
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

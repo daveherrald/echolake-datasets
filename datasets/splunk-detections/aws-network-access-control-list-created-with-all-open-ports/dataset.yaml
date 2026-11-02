@@ -1,14 +1,10 @@
 metadata:
   name: aws-network-access-control-list-created-with-all-open-ports
   version: 8.0.0
-  description: The following analytic detects the creation of AWS Network Access Control
-    Lists (ACLs) with all ports open to a specified CIDR. It leverages AWS CloudTrail
-    events, specifically monitoring for `CreateNetworkAclEntry` or `ReplaceNetworkAclEntry`
-    actions with rules allowing all traffic. This activity is significant because
-    it can expose the network to unauthorized access, increasing the risk of data
-    breaches and other malicious activities. If confirmed malicious, an attacker could
-    exploit this misc
+  description: The following analytic detects the creation of AWS Network Access Control Lists (ACLs) with all ports open to a specified CIDR. It leverages AWS CloudTrail events, specifically monitoring for `CreateNetworkAclEntry` or `ReplaceNetworkAclEntry` actions with rules allowing all traffic. This activity is significant because it can expose the network to unauthorized access, increasing the risk of data breaches and other malicious activities. If confirmed malicious, an attacker could exploit this misconfiguration to gain unrestricted access to the network, potentially leading to data exfiltration, service disruption, or further compromise of the AWS environment.
   author: Bhavin Patel, Patrick Bareiss, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1562.007
-      name: Technique T1562.007
-    tactics: []
+      name: Disable or Modify Cloud Firewall
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/aws_network_access_control_list_created_with_all_open_ports.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/aws_network_access_control_list_created_with_all_open_ports.yml
+      rule_sha256: sha256:647b2c5e1615d8c229b60ee61034054531068fb0ce291c5635f2568b48ad0f8c
+      detection_id: ada0f478-84a8-4641-a3f1-d82362d6bd75
+      source_version: 8
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.007/aws_create_acl/aws_cloudtrail_events.json
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1562.007/aws_create_acl/aws_cloudtrail_events.json
     description: aws_cloudtrail - aws:cloudtrail
     format: auto
     schema: raw
     sourcetype: aws:cloudtrail
+    checksum: sha256:d31cf164315d63a20b92558852d11d2b00a43a31cd091b745c16e7f0c1cc306d
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

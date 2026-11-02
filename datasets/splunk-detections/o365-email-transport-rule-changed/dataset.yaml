@@ -1,12 +1,10 @@
 metadata:
   name: o365-email-transport-rule-changed
   version: 3.0.0
-  description: The following analytic identifies when a user with sufficient access
-    to Exchange Online alters the mail flow/transport rule configuration of the organization.
-    Transport rules are a set of rules that can be used by attackers to modify or
-    delete emails based on specific conditions, this activity could indicate an attacker
-    hiding or exfiltrated data.
+  description: The following analytic identifies when a user with sufficient access to Exchange Online alters the mail flow/transport rule configuration of the organization. Transport rules are a set of rules that can be used by attackers to modify or delete emails based on specific conditions, this activity could indicate an attacker hiding or exfiltrated data.
   author: Steven Dick
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -15,20 +13,45 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1114.003
-      name: Technique T1114.003
+      name: Email Forwarding Rule
+      tactics:
+      - collection
     - id: T1564.008
-      name: Technique T1564.008
-    tactics: []
+      name: Email Hiding Rules
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+    - collection
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/o365_email_transport_rule_changed.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/o365_email_transport_rule_changed.yml
+      rule_sha256: sha256:ca09825621f4093f1a4b0174aa0c102c6c577e871b187a983000851340e5a39a
+      detection_id: 11ebb7c2-46bd-41c9-81e1-d0b4b34583a2
+      source_version: 3
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1114.003/transport_rule_change/transport_rule_change.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1114.003/transport_rule_change/transport_rule_change.log
     description: o365 - o365:management:activity
     format: auto
     schema: raw
     sourcetype: o365:management:activity
+    checksum: sha256:1520bac551d6b6d79dc2326e444f7414166d3706fdf6dc2a4ab8c701c317d292
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

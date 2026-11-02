@@ -1,17 +1,16 @@
 metadata:
   name: cisco-secure-firewall-oracle-e-business-suite-correlation
   version: 2.0.0
-  description: 'This correlation rule identifies potential exploitation attempts of
-    Oracle E-Business Suite vulnerabilities (CVE-2025-61882 and CVE-2025-61884) by
-    correlating multiple intrusion signatures from Cisco Secure Firewall Threat Defense
-    logs.
+  description: 'This correlation rule identifies potential exploitation attempts of Oracle E-Business Suite vulnerabilities (CVE-2025-61882 and CVE-2025-61884) by correlating multiple intrusion signatures from Cisco Secure Firewall Threat Defense logs.
 
-    The detection looks for specific signatures that indicate attempts to exploit
-    the TemplatePreview functionality and vulnerable SyncServlet endpoints as well
-    as post compromise activity involving Cl0p.
+    The detection looks for specific signatures that indicate attempts to exploit the TemplatePreview functionality and vulnerable SyncServlet endpoints as well as post compromise activity involving Cl0p.
 
-    By correlating these signatures, the analytic aims to identify'
+    By correlating these signatures, the analytic aims to identify coordinated exploitation attempts that may indicate an attacker is targeting Oracle E-Business Suite installations.
+
+    Security teams should investigate any instances of these correlated signatures, especially if they are found in conjunction with other suspicious network activity or on systems that should not be exposed to such threats.'
   author: Nasreddine Bencherchali, Splunk, Talos NTDR
+  updated: '2026-06-01'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -20,18 +19,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1190
-      name: Technique T1190
-    tactics: []
+      name: Exploit Public-Facing Application
+      tactics:
+      - initial-access
+    tactics:
+    - initial-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/network/cisco_secure_firewall___oracle_e_business_suite_correlation.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/network/cisco_secure_firewall___oracle_e_business_suite_correlation.yml
+      rule_sha256: sha256:361231882ab4358aafbe12d4ef056bf6f09cca39aaa229106d2c3d2ef87e6827
+      detection_id: 9e995d21-6870-43de-acd9-76f372bcf323
+      source_version: 2
+      source_date: '2026-06-01'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_secure_firewall_threat_defense/oracle_e_business_suite/oracle_e_business_suite.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/cisco_secure_firewall_threat_defense/oracle_e_business_suite/oracle_e_business_suite.log
     description: not_applicable - cisco:sfw:estreamer
     format: auto
     schema: raw
     sourcetype: cisco:sfw:estreamer
+    checksum: sha256:a9613ad58cdd000f352ea5caa7277095a8c12f6563e287e231105c65c16178f6
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

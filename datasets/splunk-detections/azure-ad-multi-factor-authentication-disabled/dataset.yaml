@@ -1,14 +1,10 @@
 metadata:
   name: azure-ad-multi-factor-authentication-disabled
   version: 10.0.0
-  description: The following analytic detects attempts to disable multi-factor authentication
-    (MFA) for an Azure AD user. It leverages Azure Active Directory AuditLogs to identify
-    the "Disable Strong Authentication" operation. This activity is significant because
-    disabling MFA can allow adversaries to maintain persistence using compromised
-    accounts without raising suspicion. If confirmed malicious, this action could
-    enable attackers to bypass an essential security control, potentially leading
-    to unauthorized a
+  description: The following analytic detects attempts to disable multi-factor authentication (MFA) for an Azure AD user. It leverages Azure Active Directory AuditLogs to identify the "Disable Strong Authentication" operation. This activity is significant because disabling MFA can allow adversaries to maintain persistence using compromised accounts without raising suspicion. If confirmed malicious, this action could enable attackers to bypass an essential security control, potentially leading to unauthorized access and prolonged undetected presence in the environment.
   author: Mauricio Velazco, Gowthamaraj Rajendran, Splunk
+  updated: '2025-10-14'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,20 +13,49 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1556.006
-      name: Technique T1556.006
+      name: Multi-Factor Authentication
+      tactics:
+      - persistence
+      - defense-evasion
+      - credential-access
     - id: T1586.003
-      name: Technique T1586.003
-    tactics: []
+      name: Cloud Accounts
+      tactics:
+      - resource-development
+    tactics:
+    - resource-development
+    - persistence
+    - defense-evasion
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/azure_ad_multi_factor_authentication_disabled.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/azure_ad_multi_factor_authentication_disabled.yml
+      rule_sha256: sha256:611facc9aea8d83db5e10c27dad62ef12f52889d4fb1452df44e072a40e0cc7e
+      detection_id: 482dd42a-acfa-486b-a0bb-d6fcda27318e
+      source_version: 10
+      source_date: '2025-10-14'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1556/azuread/azure-audit.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1556/azuread/azure-audit.log
     description: Azure AD - azure:monitor:aad
     format: auto
     schema: raw
     sourcetype: azure:monitor:aad
+    checksum: sha256:ba48107ae4f511aa080ed73fa0279c773ccbfd45c12397aa73e8abe63222c6a2
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

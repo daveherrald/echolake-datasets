@@ -1,14 +1,10 @@
 metadata:
   name: malicious-powershell-process-with-obfuscation-techniques
   version: 14.0.0
-  description: The following analytic detects PowerShell processes launched with command-line
-    arguments indicative of obfuscation techniques. It leverages data from Endpoint
-    Detection and Response (EDR) agents, focusing on process names, parent processes,
-    and complete command-line executions. This activity is significant because obfuscated
-    PowerShell commands are often used by attackers to evade detection and execute
-    malicious scripts. If confirmed malicious, this activity could lead to unauthorized
-    code execu
+  description: The following analytic detects PowerShell processes launched with command-line arguments indicative of obfuscation techniques. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names, parent processes, and complete command-line executions. This activity is significant because obfuscated PowerShell commands are often used by attackers to evade detection and execute malicious scripts. If confirmed malicious, this activity could lead to unauthorized code execution, privilege escalation, or persistent access within the environment, posing a significant security risk.
   author: David Dorsey, Splunk
+  updated: '2025-10-14'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1059.001
-      name: Technique T1059.001
-    tactics: []
+      name: PowerShell
+      tactics:
+      - execution
+    tactics:
+    - execution
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/malicious_powershell_process_with_obfuscation_techniques.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/malicious_powershell_process_with_obfuscation_techniques.yml
+      rule_sha256: sha256:daeeeb8cd17b79f9fb5f23aadde74cf5408930833887b63c9e7b3eb1547dde8c
+      detection_id: cde75cf6-3c7a-4dd6-af01-27cdb4511fd4
+      source_version: 14
+      source_date: '2025-10-14'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/obfuscated_powershell/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1059.001/obfuscated_powershell/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:70d3c6982eb05a2897b9e4adcba25da2a5f1fbfbf07eca373cf4ca0c063f56a3
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

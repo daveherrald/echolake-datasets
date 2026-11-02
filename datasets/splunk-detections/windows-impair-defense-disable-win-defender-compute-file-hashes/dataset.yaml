@@ -1,13 +1,10 @@
 metadata:
   name: windows-impair-defense-disable-win-defender-compute-file-hashes
   version: 7.0.0
-  description: 'The following analytic detects modifications to the Windows registry
-    that disable Windows Defender''s file hash computation by setting the EnableFileHashComputation
-    value to 0. This detection leverages data from the Endpoint.Registry data model,
-    focusing on changes to the specific registry path associated with Windows Defender.
-    Disabling file hash computation can significantly impair Windows Defender''s ability
-    to detect and scan for malware, making it a critical behavior to monitor. If confirmed '
+  description: The following analytic detects modifications to the Windows registry that disable Windows Defender's file hash computation by setting the EnableFileHashComputation value to 0. This detection leverages data from the Endpoint.Registry data model, focusing on changes to the specific registry path associated with Windows Defender. Disabling file hash computation can significantly impair Windows Defender's ability to detect and scan for malware, making it a critical behavior to monitor. If confirmed malicious, this activity could allow attackers to bypass Windows Defender, facilitating undetected malware execution and persistence in the environment.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1562.001
-      name: Technique T1562.001
-    tactics: []
+      name: Disable or Modify Tools
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_impair_defense_disable_win_defender_compute_file_hashes.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_impair_defense_disable_win_defender_compute_file_hashes.yml
+      rule_sha256: sha256:b2bf2d6664df3b19c917d98af0b41ee17b4fde42b2a5c618a68ffa28b36223da
+      detection_id: fe52c280-98bd-4596-b6f6-a13bbf8ac7c6
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.001/disable-windows-security-defender-features/windefender-bypas-2-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1562.001/disable-windows-security-defender-features/windefender-bypas-2-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:18281db53af013649ebf55d7a600be05b20c3cbedb21d72ae91902d21c6cbac8
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

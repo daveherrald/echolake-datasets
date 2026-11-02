@@ -1,14 +1,10 @@
 metadata:
   name: windows-system-shutdown-commandline
   version: 10.0.0
-  description: The following analytic identifies the execution of the Windows shutdown
-    command via the command line interface. It leverages data from Endpoint Detection
-    and Response (EDR) agents, focusing on process names and command-line arguments.
-    This activity is significant because attackers may use the shutdown command to
-    erase tracks, cause disruption, or ensure changes take effect after installing
-    backdoors. If confirmed malicious, this activity could lead to system downtime,
-    denial of service, or evasi
+  description: The following analytic identifies the execution of the Windows shutdown command via the command line interface. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line arguments. This activity is significant because attackers may use the shutdown command to erase tracks, cause disruption, or ensure changes take effect after installing backdoors. If confirmed malicious, this activity could lead to system downtime, denial of service, or evasion of security tools, impacting the overall security posture of the network.
   author: Teoderick Contreras, Splunk
+  updated: '2025-10-14'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1529
-      name: Technique T1529
-    tactics: []
+      name: System Shutdown/Reboot
+      tactics:
+      - impact
+    tactics:
+    - impact
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_system_shutdown_commandline.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_system_shutdown_commandline.yml
+      rule_sha256: sha256:174202793578a93cfece34f92f684aa5d6467d6c1d0405fc7743e8a6e919c1ea
+      detection_id: 4fee57b8-d825-4bf3-9ea8-bf405cdb614c
+      source_version: 10
+      source_date: '2025-10-14'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/dcrat/shutdown_commandline/sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/dcrat/shutdown_commandline/sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:0b32f27661d9b1a972c60a4fe82a5b4a041f49c2a8ac4219e06c9af759d4ce6b
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

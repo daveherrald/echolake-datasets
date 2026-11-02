@@ -1,14 +1,10 @@
 metadata:
   name: o365-excessive-authentication-failures-alert
   version: 7.0.0
-  description: 'The following analytic identifies an excessive number of authentication
-    failures, including failed attempts against MFA prompt codes. It uses data from
-    the `o365_management_activity` dataset, focusing on events where the authentication
-    status is marked as failure. This behavior is significant as it may indicate a
-    brute force attack or an attempt to compromise user accounts. If confirmed malicious,
-    this activity could lead to unauthorized access, data breaches, or further exploitation
-    within the '
+  description: The following analytic identifies an excessive number of authentication failures, including failed attempts against MFA prompt codes. It uses data from the `o365_management_activity` dataset, focusing on events where the authentication status is marked as failure. This behavior is significant as it may indicate a brute force attack or an attempt to compromise user accounts. If confirmed malicious, this activity could lead to unauthorized access, data breaches, or further exploitation within the environment.
   author: Rod Soto, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1110
-      name: Technique T1110
-    tactics: []
+      name: Brute Force
+      tactics:
+      - credential-access
+    tactics:
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/o365_excessive_authentication_failures_alert.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/o365_excessive_authentication_failures_alert.yml
+      rule_sha256: sha256:88849786c68ac24ebb797073daf5f9d81cea0723b4e15cff8fd4b67ab0db118a
+      detection_id: d441364c-349c-453b-b55f-12eccab67cf9
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1110/o365_brute_force_login/o365_brute_force_login.json
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1110/o365_brute_force_login/o365_brute_force_login.json
     description: o365 - o365:management:activity
     format: auto
     schema: raw
     sourcetype: o365:management:activity
+    checksum: sha256:922f890f21279e6dcec8ec0f765e3451cb0715ba0640f014267c5d582998a16b
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

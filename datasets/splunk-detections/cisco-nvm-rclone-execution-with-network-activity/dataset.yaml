@@ -1,22 +1,20 @@
 metadata:
   name: cisco-nvm-rclone-execution-with-network-activity
   version: 3.0.0
-  description: 'This detection identifies execution of the file synchronization utility
-    "rclone".
+  description: 'This detection identifies execution of the file synchronization utility "rclone".
 
-    It leverages Cisco Network Visibility Module logs, specifically flow data in order
-    to capture process executions
+    It leverages Cisco Network Visibility Module logs, specifically flow data in order to capture process executions
 
     initiating network connections.
 
-    While rclone is a legitimate command-line tool for syncing data to cloud storage
-    providers, it has been widely abused by threat actors for data exfiltration.
+    While rclone is a legitimate command-line tool for syncing data to cloud storage providers, it has been widely abused by threat actors for data exfiltration.
 
-    This analytic inspects process name and arguments for rclone and flags usage of
-    suspicious flags.
+    This analytic inspects process name and arguments for rclone and flags usage of suspicious flags.
 
-    If matched, this '
+    If matched, this could indicate malicious usage for stealthy data exfiltration or cloud abuse.'
   author: Nasreddine Bencherchali, Splunk
+  updated: '2025-10-14'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -25,18 +23,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1567.002
-      name: Technique T1567.002
-    tactics: []
+      name: Exfiltration to Cloud Storage
+      tactics:
+      - exfiltration
+    tactics:
+    - exfiltration
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/cisco_nvm___rclone_execution_with_network_activity.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/cisco_nvm___rclone_execution_with_network_activity.yml
+      rule_sha256: sha256:beb68c7b60bd0123f2251b2a56fe58b217119a214d6bd58a5a13b5a73cb56cad
+      detection_id: 719f8c78-b20d-4bb9-8c33-6d1a762e7a9a
+      source_version: 3
+      source_date: '2025-10-14'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_network_visibility_module/cisco_nvm_flowdata/nvm_flowdata.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/cisco_network_visibility_module/cisco_nvm_flowdata/nvm_flowdata.log
     description: not_applicable - cisco:nvm:flowdata
     format: auto
     schema: raw
     sourcetype: cisco:nvm:flowdata
+    checksum: sha256:f427b5cc3a60bb3b41ae1c679bda85c1bb9aba78cc9468b94d3eec36adedfaaa
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

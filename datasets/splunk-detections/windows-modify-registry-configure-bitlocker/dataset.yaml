@@ -1,14 +1,10 @@
 metadata:
   name: windows-modify-registry-configure-bitlocker
   version: 6.0.0
-  description: This analytic is developed to detect suspicious registry modifications
-    targeting BitLocker settings. The malware ShrinkLocker alters various registry
-    keys to change how BitLocker handles encryption, potentially bypassing TPM requirements,
-    enabling BitLocker without TPM, and enforcing specific startup key and PIN configurations.
-    Such modifications can weaken system security, making it easier for unauthorized
-    access and data breaches. Detecting these changes is crucial for maintaining robust
-    encry
+  description: This analytic is developed to detect suspicious registry modifications targeting BitLocker settings. The malware ShrinkLocker alters various registry keys to change how BitLocker handles encryption, potentially bypassing TPM requirements, enabling BitLocker without TPM, and enforcing specific startup key and PIN configurations. Such modifications can weaken system security, making it easier for unauthorized access and data breaches. Detecting these changes is crucial for maintaining robust encryption and data protection.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +12,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1112
-      name: Technique T1112
-    tactics: []
+      name: Modify Registry
+      tactics:
+      - persistence
+      - defense-evasion
+    tactics:
+    - persistence
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_modify_registry_configure_bitlocker.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_modify_registry_configure_bitlocker.yml
+      rule_sha256: sha256:a913d82c4acc476f09594fb3efaae0f746ba7e87fa2f2711a0fcbd9cb573f387
+      detection_id: bd1c770f-1b55-411e-b49e-20d07bcac5f8
+      source_version: 6
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1112/bitlocker_registry_setting//fve-reg.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1112/bitlocker_registry_setting/fve-reg.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:2798be4b152c5ae2daf820ad783bed4dd48b59567bb4c7ddb6e41516c26fd288
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

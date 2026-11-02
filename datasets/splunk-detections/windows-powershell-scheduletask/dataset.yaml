@@ -1,14 +1,10 @@
 metadata:
   name: windows-powershell-scheduletask
   version: 9.0.0
-  description: The following analytic detects potential malicious activities involving
-    PowerShell's task scheduling cmdlets. It leverages PowerShell Script Block Logging
-    (EventCode 4104) to identify unusual or suspicious use of cmdlets like 'New-ScheduledTask'
-    and 'Set-ScheduledTask'. This activity is significant as attackers often use these
-    cmdlets for persistence and remote execution of malicious code. If confirmed malicious,
-    this could allow attackers to maintain access, deliver additional payloads, or
-    exec
+  description: The following analytic detects potential malicious activities involving PowerShell's task scheduling cmdlets. It leverages PowerShell Script Block Logging (EventCode 4104) to identify unusual or suspicious use of cmdlets like 'New-ScheduledTask' and 'Set-ScheduledTask'. This activity is significant as attackers often use these cmdlets for persistence and remote execution of malicious code. If confirmed malicious, this could allow attackers to maintain access, deliver additional payloads, or execute ransomware, leading to data theft or other severe impacts. Immediate investigation and mitigation are crucial to prevent further compromise.
   author: Michael Haag, Splunk
+  updated: '2025-07-29'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -17,20 +13,48 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1053.005
-      name: Technique T1053.005
+      name: Scheduled Task
+      tactics:
+      - execution
+      - persistence
+      - privilege-escalation
     - id: T1059.001
-      name: Technique T1059.001
-    tactics: []
+      name: PowerShell
+      tactics:
+      - execution
+    tactics:
+    - execution
+    - persistence
+    - privilege-escalation
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_powershell_scheduletask.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_powershell_scheduletask.yml
+      rule_sha256: sha256:910001dc7475423bb33815050e1b6cbf3ec36ff85ec1807b3a8c13f750e172f0
+      detection_id: ddf82fcb-e9ee-40e3-8712-a50b5bf323fc
+      source_version: 9
+      source_date: '2025-07-29'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053.005/atomic_red_team/pwsh_scheduledtask.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1053.005/atomic_red_team/pwsh_scheduledtask.log
     description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:77e39e356222ed89d13222137a0582af8194aedc247ccdc1f39f3068c1d1a56c
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

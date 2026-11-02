@@ -1,14 +1,26 @@
 metadata:
   name: cisco-duo-policy-skip-2fa-for-other-countries
   version: 1.0.0
-  description: "The following analytic detects when a Duo policy is created or updated\
-    \ to allow access without two-factor authentication (2FA) \nfor users in countries\
-    \ other than the default. It identifies this behavior by searching Duo administrator\
-    \ activity logs for policy \ncreation or update actions where the policy description\
-    \ indicates that access is permitted without 2FA for certain user locations. \n\
-    This is achieved by parsing the relevant fields in the logs and filtering for\
-    \ the specific condition of 'All"
+  description: 'The following analytic detects when a Duo policy is created or updated to allow access without two-factor authentication (2FA)
+
+    for users in countries other than the default. It identifies this behavior by searching Duo administrator activity logs for policy
+
+    creation or update actions where the policy description indicates that access is permitted without 2FA for certain user locations.
+
+    This is achieved by parsing the relevant fields in the logs and filtering for the specific condition of ''Allow access without 2FA.''
+
+    This behavior is significant for a Security Operations Center (SOC) because bypassing 2FA for any user group or location weakens
+
+    the organization''s security posture and increases the risk of unauthorized access. Attackers or malicious insiders may exploit
+
+    such policy changes to circumvent strong authentication controls, potentially leading to account compromise, data breaches, or
+
+    lateral movement within the environment. Early detection of these policy modifications enables the SOC to investigate and respond
+
+    before attackers can leverage the weakened controls, thereby reducing the risk and impact of a successful attack.'
   author: Patrick Bareiss, Splunk
+  updated: '2025-07-08'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +28,44 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1556
-      name: Technique T1556
-    tactics: []
+      name: Modify Authentication Process
+      tactics:
+      - persistence
+      - defense-evasion
+      - credential-access
+    tactics:
+    - persistence
+    - defense-evasion
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/application/cisco_duo_policy_skip_2fa_for_other_countries.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/application/cisco_duo_policy_skip_2fa_for_other_countries.yml
+      rule_sha256: sha256:77d99d93b5172846f16a9d357784618c754de6ff93984cf54598698f3e501e24
+      detection_id: ab59d5ee-8694-4832-a332-cefcf66a9057
+      source_version: 1
+      source_date: '2025-07-08'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1556/cisco_duo_policy_bypass_2FA_other_countries/cisco_duo_administrator.json
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1556/cisco_duo_policy_bypass_2FA_other_countries/cisco_duo_administrator.json
     description: duo - cisco:duo:administrator
     format: auto
     schema: raw
     sourcetype: cisco:duo:administrator
+    checksum: sha256:b0ab0169e776928afa361de5d4132ef22d7f576d34282ba4e7b2f50d04e5e6ce
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

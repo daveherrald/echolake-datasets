@@ -1,14 +1,10 @@
 metadata:
   name: windows-sqlcmd-execution
   version: 4.0.0
-  description: This detection identifies potentially suspicious usage of sqlcmd.exe,
-    focusing on command patterns that may indicate data exfiltration, reconnaissance,
-    or malicious database operations. The detection looks for both short-form (-X)
-    and long-form (--flag) suspicious parameter combinations, which have been observed
-    in APT campaigns targeting high-value organizations. For example, threat actors
-    like CL-STA-0048 have been known to abuse sqlcmd.exe for data theft and exfiltration
-    from compromised MSSQ
+  description: This detection identifies potentially suspicious usage of sqlcmd.exe, focusing on command patterns that may indicate data exfiltration, reconnaissance, or malicious database operations. The detection looks for both short-form (-X) and long-form (--flag) suspicious parameter combinations, which have been observed in APT campaigns targeting high-value organizations. For example, threat actors like CL-STA-0048 have been known to abuse sqlcmd.exe for data theft and exfiltration from compromised MSSQL servers. The detection monitors for suspicious authentication attempts, output redirection, and potentially malicious query patterns that could indicate unauthorized database access or data theft.
   author: Michael Haag, Splunk
+  updated: '2025-12-15'
+  license: Apache-2.0
   tags:
   - hunting
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1059.003
-      name: Technique T1059.003
-    tactics: []
+      name: Windows Command Shell
+      tactics:
+      - execution
+    tactics:
+    - execution
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_sqlcmd_execution.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_sqlcmd_execution.yml
+      rule_sha256: sha256:b1dbd709b4826d2f564df7571e94859fb40c4ac9352712e35863c117143e63df
+      detection_id: 4e7c2f85-8f02-4bd2-a48b-5ec98a2c5f72
+      source_version: 4
+      source_date: '2025-12-15'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.003/atomic_red_team/sqlcmd_windows_sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1059.003/atomic_red_team/sqlcmd_windows_sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:e6f50e00a97eab28fe6d3d0f2ee99b5979a7214797d4380784d1bafaddb77d25
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

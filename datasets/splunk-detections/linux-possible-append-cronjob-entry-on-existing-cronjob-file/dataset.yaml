@@ -1,14 +1,10 @@
 metadata:
   name: linux-possible-append-cronjob-entry-on-existing-cronjob-file
   version: 8.0.0
-  description: The following analytic detects potential tampering with cronjob files
-    on a Linux system by identifying 'echo' commands that append code to existing
-    cronjob files. It leverages logs from Endpoint Detection and Response (EDR) agents,
-    focusing on process names, parent processes, and command-line executions. This
-    activity is significant because adversaries often use it for persistence or privilege
-    escalation. If confirmed malicious, this could allow attackers to execute unauthorized
-    code automatical
+  description: The following analytic detects potential tampering with cronjob files on a Linux system by identifying 'echo' commands that append code to existing cronjob files. It leverages logs from Endpoint Detection and Response (EDR) agents, focusing on process names, parent processes, and command-line executions. This activity is significant because adversaries often use it for persistence or privilege escalation. If confirmed malicious, this could allow attackers to execute unauthorized code automatically, leading to system compromises and unauthorized data access, thereby impacting business operations and data integrity.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - hunting
   - splunk-security-content
@@ -18,18 +14,44 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1053.003
-      name: Technique T1053.003
-    tactics: []
+      name: Cron
+      tactics:
+      - execution
+      - persistence
+      - privilege-escalation
+    tactics:
+    - execution
+    - persistence
+    - privilege-escalation
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/linux_possible_append_cronjob_entry_on_existing_cronjob_file.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/linux_possible_append_cronjob_entry_on_existing_cronjob_file.yml
+      rule_sha256: sha256:49f019578ffef2efefed440a76643fd3bebbabb7e2d5a24c807775962208a50d
+      detection_id: b5b91200-5f27-11ec-bb4e-acde48001122
+      source_version: 8
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053.003/cronjobs_entry/sysmon_linux.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1053.003/cronjobs_entry/sysmon_linux.log
     description: Syslog:Linux-Sysmon/Operational - sysmon:linux
     format: auto
     schema: raw
     sourcetype: sysmon:linux
+    checksum: sha256:2dbdc98578403d1636bcdab4d4214377779c17ae0ab94fab2508e30815634a7b
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,14 +1,10 @@
 metadata:
   name: winhlp32-spawning-a-process
   version: 9.0.0
-  description: The following analytic detects winhlp32.exe spawning a child process
-    that loads a file from appdata, programdata, or temp directories. This detection
-    leverages data from Endpoint Detection and Response (EDR) agents, focusing on
-    process creation events. This activity is significant because winhlp32.exe has
-    known vulnerabilities and can be exploited to execute malicious code. If confirmed
-    malicious, an attacker could use this technique to execute arbitrary scripts,
-    escalate privileges, or maintain
+  description: The following analytic detects winhlp32.exe spawning a child process that loads a file from appdata, programdata, or temp directories. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process creation events. This activity is significant because winhlp32.exe has known vulnerabilities and can be exploited to execute malicious code. If confirmed malicious, an attacker could use this technique to execute arbitrary scripts, escalate privileges, or maintain persistence within the environment. Analysts should review parallel processes, module loads, and file modifications for further suspicious behavior.
   author: Michael Haag, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1055
-      name: Technique T1055
-    tactics: []
+      name: Process Injection
+      tactics:
+      - privilege-escalation
+      - defense-evasion
+    tactics:
+    - privilege-escalation
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/winhlp32_spawning_a_process.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/winhlp32_spawning_a_process.yml
+      rule_sha256: sha256:a06cf3795fa2cac2e42fea3d283eae54264ed7eb04c84825b91c94616c7de4a2
+      detection_id: d17dae9e-2618-11ec-b9f5-acde48001122
+      source_version: 9
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/remcos/remcos/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/remcos/remcos/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:89cdffee4d988a574e15af98bcbb36f5c099c71ea6be536b6cab9d54616e6982
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

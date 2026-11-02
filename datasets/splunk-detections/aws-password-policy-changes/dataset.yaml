@@ -1,14 +1,10 @@
 metadata:
   name: aws-password-policy-changes
   version: 6.0.0
-  description: The following analytic detects successful API calls to view, update,
-    or delete the password policy in an AWS organization. It leverages AWS CloudTrail
-    logs to identify events such as "UpdateAccountPasswordPolicy," "GetAccountPasswordPolicy,"
-    and "DeleteAccountPasswordPolicy." This activity is significant because it is
-    uncommon for regular users to perform these actions, and such changes can indicate
-    an adversary attempting to understand or weaken password defenses. If confirmed
-    malicious, this c
+  description: The following analytic detects successful API calls to view, update, or delete the password policy in an AWS organization. It leverages AWS CloudTrail logs to identify events such as "UpdateAccountPasswordPolicy," "GetAccountPasswordPolicy," and "DeleteAccountPasswordPolicy." This activity is significant because it is uncommon for regular users to perform these actions, and such changes can indicate an adversary attempting to understand or weaken password defenses. If confirmed malicious, this could lead to compromised accounts and increased attack surface, potentially allowing unauthorized access and control over AWS resources.
   author: Bhavin Patel, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - hunting
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1201
-      name: Technique T1201
-    tactics: []
+      name: Password Policy Discovery
+      tactics:
+      - discovery
+    tactics:
+    - discovery
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/aws_password_policy_changes.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/aws_password_policy_changes.yml
+      rule_sha256: sha256:a777b5052028a0ceca98cd979fba98a0e7929f27fa96b6dab380662769914d5e
+      detection_id: aee4a575-7064-4e60-b511-246f9baf9895
+      source_version: 6
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1201/aws_password_policy/cloudtrail.json
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1201/aws_password_policy/cloudtrail.json
     description: aws_cloudtrail - aws:cloudtrail
     format: auto
     schema: raw
     sourcetype: aws:cloudtrail
+    checksum: sha256:cbd662c0a3a1f45d19c6bcc2d94dfde621111507bec87328aab8e6fdae3e10d6
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

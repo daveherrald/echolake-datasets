@@ -1,14 +1,10 @@
 metadata:
   name: windows-computerdefaults-spawning-a-process
   version: 1.0.0
-  description: 'The following analytic detects the spawning of ComputerDefaults.exe,
-    a Windows system process used to manage default application associations. While
-    normally legitimate, this process can be exploited by attackers to bypass User
-    Account Control (UAC) and execute unauthorized code with elevated privileges.
-    Detection focuses on abnormal execution patterns, unusual parent-child process
-    relationships, or deviations from standard paths. Such behavior may indicate attempts
-    to modify system defaults or '
+  description: The following analytic detects the spawning of ComputerDefaults.exe, a Windows system process used to manage default application associations. While normally legitimate, this process can be exploited by attackers to bypass User Account Control (UAC) and execute unauthorized code with elevated privileges. Detection focuses on abnormal execution patterns, unusual parent-child process relationships, or deviations from standard paths. Such behavior may indicate attempts to modify system defaults or run malicious scripts undetected. Monitoring ComputerDefaults.exe is critical to identify potential security threats, prevent privilege escalation, and maintain system integrity by distinguishing normal operations from suspicious activity.
   author: Teoderick Contreras, Splunk
+  updated: '2025-10-31'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +12,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1548.002
-      name: Technique T1548.002
-    tactics: []
+      name: Bypass User Account Control
+      tactics:
+      - privilege-escalation
+      - defense-evasion
+    tactics:
+    - privilege-escalation
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_computerdefaults_spawning_a_process.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_computerdefaults_spawning_a_process.yml
+      rule_sha256: sha256:1d524388ccf31a24e72f5f63f4efd1747de4995c665a1600954ae671c759063a
+      detection_id: 697eb4c0-1008-4c3c-b5ae-7bd9b39adbd6
+      source_version: 1
+      source_date: '2025-10-31'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1548.002/computerdefaults_spawn_proc/computerdefaults_process.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1548.002/computerdefaults_spawn_proc/computerdefaults_process.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:e9a868a2f9599263413d32b01b848d4b86cbd80eaa4c5287256ee6af14080b90
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

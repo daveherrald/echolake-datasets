@@ -1,14 +1,10 @@
 metadata:
   name: linux-doas-conf-file-creation
   version: 7.0.0
-  description: The following analytic detects the creation of the doas.conf file on
-    a Linux host. This file is used by the doas utility to allow standard users to
-    perform tasks as root, similar to sudo. The detection leverages filesystem data
-    from the Endpoint data model, focusing on the creation of the doas.conf file.
-    This activity is significant because it can indicate an attempt to gain elevated
-    privileges, potentially by an adversary. If confirmed malicious, this could allow
-    an attacker to execute commands
+  description: The following analytic detects the creation of the doas.conf file on a Linux host. This file is used by the doas utility to allow standard users to perform tasks as root, similar to sudo. The detection leverages filesystem data from the Endpoint data model, focusing on the creation of the doas.conf file. This activity is significant because it can indicate an attempt to gain elevated privileges, potentially by an adversary. If confirmed malicious, this could allow an attacker to execute commands with root privileges, leading to full system compromise.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -17,18 +13,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1548.003
-      name: Technique T1548.003
-    tactics: []
+      name: Sudo and Sudo Caching
+      tactics:
+      - privilege-escalation
+      - defense-evasion
+    tactics:
+    - privilege-escalation
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/linux_doas_conf_file_creation.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/linux_doas_conf_file_creation.yml
+      rule_sha256: sha256:888603b488816a84525757ab352b8ed78584165c3d65e5f7f850c11238b28178
+      detection_id: f6343e86-6e09-11ec-9376-acde48001122
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1548.003/doas/sysmon_linux.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1548.003/doas/sysmon_linux.log
     description: Syslog:Linux-Sysmon/Operational - sysmon:linux
     format: auto
     schema: raw
     sourcetype: sysmon:linux
+    checksum: sha256:f868bd7956a7484ea2ee66e9b3045cdfd1cfd5f9c8a30412e10c586ff1e60d91
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

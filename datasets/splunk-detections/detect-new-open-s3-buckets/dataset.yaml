@@ -1,14 +1,10 @@
 metadata:
   name: detect-new-open-s3-buckets
   version: 7.0.0
-  description: The following analytic identifies the creation of open/public S3 buckets
-    in AWS. It detects this activity by analyzing AWS CloudTrail events for `PutBucketAcl`
-    actions where the access control list (ACL) grants permissions to all users or
-    authenticated users. This activity is significant because open S3 buckets can
-    expose sensitive data to unauthorized access, leading to data breaches. If confirmed
-    malicious, an attacker could read, write, or fully control the contents of the
-    bucket, potentially
+  description: The following analytic identifies the creation of open/public S3 buckets in AWS. It detects this activity by analyzing AWS CloudTrail events for `PutBucketAcl` actions where the access control list (ACL) grants permissions to all users or authenticated users. This activity is significant because open S3 buckets can expose sensitive data to unauthorized access, leading to data breaches. If confirmed malicious, an attacker could read, write, or fully control the contents of the bucket, potentially leading to data exfiltration or tampering.
   author: Bhavin Patel, Patrick Bareiss, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1530
-      name: Technique T1530
-    tactics: []
+      name: Data from Cloud Storage
+      tactics:
+      - collection
+    tactics:
+    - collection
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/detect_new_open_s3_buckets.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/detect_new_open_s3_buckets.yml
+      rule_sha256: sha256:8899d5c0c58df51652f829054c5949fc2c96240ea9f679e156d7f006457c0882
+      detection_id: 2a9b80d3-6340-4345-b5ad-290bf3d0dac4
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1530/aws_s3_public_bucket/aws_cloudtrail_events.json
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1530/aws_s3_public_bucket/aws_cloudtrail_events.json
     description: aws_cloudtrail - aws:cloudtrail
     format: auto
     schema: raw
     sourcetype: aws:cloudtrail
+    checksum: sha256:a7812406c446a6a2c9864f2fe3b07e6b177c18b893dbd2ed0b11b649ddfc7eda
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

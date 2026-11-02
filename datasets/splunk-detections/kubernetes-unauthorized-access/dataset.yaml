@@ -1,14 +1,10 @@
 metadata:
   name: kubernetes-unauthorized-access
   version: 5.0.0
-  description: The following analytic detects unauthorized access attempts to Kubernetes
-    by analyzing Kubernetes audit logs. It identifies anomalies in access patterns
-    by examining the source of requests and their response statuses. This activity
-    is significant for a SOC as it may indicate an attacker attempting to infiltrate
-    the Kubernetes environment. If confirmed malicious, such access could lead to
-    unauthorized control over Kubernetes resources, potentially compromising sensitive
-    systems or data within the
+  description: The following analytic detects unauthorized access attempts to Kubernetes by analyzing Kubernetes audit logs. It identifies anomalies in access patterns by examining the source of requests and their response statuses. This activity is significant for a SOC as it may indicate an attacker attempting to infiltrate the Kubernetes environment. If confirmed malicious, such access could lead to unauthorized control over Kubernetes resources, potentially compromising sensitive systems or data within the cluster.
   author: Patrick Bareiss, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1204
-      name: Technique T1204
-    tactics: []
+      name: User Execution
+      tactics:
+      - execution
+    tactics:
+    - execution
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/kubernetes_unauthorized_access.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/kubernetes_unauthorized_access.yml
+      rule_sha256: sha256:afe1c28cd423e7f2875bc5919433846cca05e6d8b38b8bef3e8bb12703d0816b
+      detection_id: 9b5f1832-e8b9-453f-93df-07a3d6a72a45
+      source_version: 5
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1204/kubernetes_unauthorized_access/kubernetes_unauthorized_access.json
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1204/kubernetes_unauthorized_access/kubernetes_unauthorized_access.json
     description: kubernetes - _json
     format: auto
     schema: raw
     sourcetype: _json
+    checksum: sha256:dff87213032a06345d98bac6b26f7486080e17b9e744f38b2bf6553bc0bae65f
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,14 +1,10 @@
 metadata:
   name: windows-renamed-powershell-execution
   version: 3.0.0
-  description: 'The following analytic identifies instances where the PowerShell executable
-    has been renamed and executed under an alternate filename. This behavior is commonly
-    associated with attempts to evade security controls or bypass logging mechanisms
-    that monitor standard PowerShell usage. While rare in legitimate environments,
-    renamed PowerShell binaries are frequently observed in malicious campaigns leveraging
-    Living-off-the-Land Binaries (LOLBins) and fileless malware techniques. This detection
-    flags '
+  description: The following analytic identifies instances where the PowerShell executable has been renamed and executed under an alternate filename. This behavior is commonly associated with attempts to evade security controls or bypass logging mechanisms that monitor standard PowerShell usage. While rare in legitimate environments, renamed PowerShell binaries are frequently observed in malicious campaigns leveraging Living-off-the-Land Binaries (LOLBins) and fileless malware techniques. This detection flags executions of PowerShell where the process name does not match the default powershell.exe or pwsh.exe, especially when invoked from unusual paths or accompanied by suspicious command-line arguments.
   author: Teoderick Contreras, Nasreddine Bencherchali, Splunk
+  updated: '2025-10-14'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1036.003
-      name: Technique T1036.003
-    tactics: []
+      name: Rename Legitimate Utilities
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_renamed_powershell_execution.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_renamed_powershell_execution.yml
+      rule_sha256: sha256:56a72047e0686a6190ff7b0fbecb02397cdaffec96e1792d19d9e2c6956dde25
+      detection_id: c08014de-cc5a-42de-9775-76ecd5b37bbd
+      source_version: 3
+      source_date: '2025-10-14'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1036.003/renamed_powershell/renamed_powershell.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1036.003/renamed_powershell/renamed_powershell.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:3f8e9196494a0d2d114c8f87efc6a43e2470ea00fffd748bdc671eef29afd1f8
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

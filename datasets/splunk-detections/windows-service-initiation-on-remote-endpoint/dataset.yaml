@@ -1,14 +1,10 @@
 metadata:
   name: windows-service-initiation-on-remote-endpoint
   version: 8.0.0
-  description: The following analytic detects the execution of `sc.exe` with command-line
-    arguments used to start a Windows Service on a remote endpoint. It leverages data
-    from Endpoint Detection and Response (EDR) agents, focusing on process names and
-    command-line executions. This activity is significant because adversaries may
-    exploit the Service Control Manager for lateral movement and remote code execution.
-    If confirmed malicious, this could allow attackers to execute arbitrary code on
-    remote systems, pote
+  description: The following analytic detects the execution of `sc.exe` with command-line arguments used to start a Windows Service on a remote endpoint. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line executions. This activity is significant because adversaries may exploit the Service Control Manager for lateral movement and remote code execution. If confirmed malicious, this could allow attackers to execute arbitrary code on remote systems, potentially leading to further compromise and persistence within the network.
   author: Mauricio Velazco, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1543.003
-      name: Technique T1543.003
-    tactics: []
+      name: Windows Service
+      tactics:
+      - persistence
+      - privilege-escalation
+    tactics:
+    - persistence
+    - privilege-escalation
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_service_initiation_on_remote_endpoint.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_service_initiation_on_remote_endpoint.yml
+      rule_sha256: sha256:6a5f946ed09dad5a48cd4b406ca1e6db8cfe2e8cd24a42ed77106b5f9685da88
+      detection_id: 3f519894-4276-11ec-ab02-3e22fbd008af
+      source_version: 8
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1543.003/lateral_movement/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1543.003/lateral_movement/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:8fbc5cc13241b190d25e9978d36be23b56a2e44fd8c6da0caf49546a1e32dd74
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,14 +1,10 @@
 metadata:
   name: recursive-delete-of-directory-in-batch-cmd
   version: 10.0.0
-  description: The following analytic detects the execution of a batch command designed
-    to recursively delete files or directories, a technique often used by ransomware
-    like Reddot to delete files in the recycle bin and prevent recovery. It leverages
-    data from Endpoint Detection and Response (EDR) agents, focusing on command-line
-    executions that include specific flags for recursive and quiet deletions. This
-    activity is significant as it indicates potential ransomware behavior aimed at
-    data destruction. If conf
+  description: The following analytic detects the execution of a batch command designed to recursively delete files or directories, a technique often used by ransomware like Reddot to delete files in the recycle bin and prevent recovery. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on command-line executions that include specific flags for recursive and quiet deletions. This activity is significant as it indicates potential ransomware behavior aimed at data destruction. If confirmed malicious, it could lead to significant data loss and hinder recovery efforts, severely impacting business operations.
   author: Teoderick Contreras, Splunk
+  updated: '2025-09-18'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1070.004
-      name: Technique T1070.004
-    tactics: []
+      name: File Deletion
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/recursive_delete_of_directory_in_batch_cmd.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/recursive_delete_of_directory_in_batch_cmd.yml
+      rule_sha256: sha256:9b85f90a6199b29183ea972eba0eb8c2f1ed20ed7b9efc293f2abfd2ebef9875
+      detection_id: ba570b3a-d356-11eb-8358-acde48001122
+      source_version: 10
+      source_date: '2025-09-18'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/ransomware_ttp/data2/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/ransomware_ttp/data2/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:b719f8681acc246580b2bfc27e7d4fde91adffbdc42cf91d08a0731c5d879ba4
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

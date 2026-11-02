@@ -1,14 +1,10 @@
 metadata:
   name: o365-elevated-mailbox-permission-assigned
   version: 9.0.0
-  description: The following analytic identifies the assignment of elevated mailbox
-    permissions in an Office 365 environment via the Add-MailboxPermission operation.
-    It leverages logs from the Exchange workload in the o365_management_activity data
-    source, focusing on permissions such as FullAccess, ChangePermission, or ChangeOwner.
-    This activity is significant as it indicates potential unauthorized access or
-    control over mailboxes, which could lead to data exfiltration or privilege escalation.
-    If confirmed mal
+  description: The following analytic identifies the assignment of elevated mailbox permissions in an Office 365 environment via the Add-MailboxPermission operation. It leverages logs from the Exchange workload in the o365_management_activity data source, focusing on permissions such as FullAccess, ChangePermission, or ChangeOwner. This activity is significant as it indicates potential unauthorized access or control over mailboxes, which could lead to data exfiltration or privilege escalation. If confirmed malicious, attackers could gain extensive access to sensitive email data and potentially manipulate mailbox settings, posing a severe security risk.
   author: Patrick Bareiss, Mauricio Velazco, Splunk
+  updated: '2025-10-21'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +12,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1098.002
-      name: Technique T1098.002
-    tactics: []
+      name: Additional Email Delegate Permissions
+      tactics:
+      - persistence
+      - privilege-escalation
+    tactics:
+    - persistence
+    - privilege-escalation
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/o365_elevated_mailbox_permission_assigned.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/o365_elevated_mailbox_permission_assigned.yml
+      rule_sha256: sha256:3829343a8f240ca87b58035f116e82b4102b97df3060ffba09c66e0ae0645aa7
+      detection_id: 2246c142-a678-45f8-8546-aaed7e0efd30
+      source_version: 9
+      source_date: '2025-10-21'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1114.002/suspicious_rights_delegation/suspicious_rights_delegation.json
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1114.002/suspicious_rights_delegation/suspicious_rights_delegation.json
     description: o365:management:activity - o365:management:activity
     format: auto
     schema: raw
     sourcetype: o365:management:activity
+    checksum: sha256:e95af16205a3d5448ba47676490a82e32c3bf5eacffb6fb72047b1b3f1c9667f
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

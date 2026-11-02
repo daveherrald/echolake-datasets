@@ -1,14 +1,10 @@
 metadata:
   name: linux-auditd-add-user-account
   version: 6.0.0
-  description: The following analytic detects the creation of new user accounts on
-    Linux systems using commands like "useradd" or "adduser." It leverages data from
-    Endpoint Detection and Response (EDR) agents, focusing on process names and command-line
-    executions. This activity is significant as adversaries often create new user
-    accounts to establish persistence on compromised hosts. If confirmed malicious,
-    this could allow attackers to maintain access, escalate privileges, and further
-    compromise the system, p
+  description: The following analytic detects the creation of new user accounts on Linux systems using commands like "useradd" or "adduser." It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line executions. This activity is significant as adversaries often create new user accounts to establish persistence on compromised hosts. If confirmed malicious, this could allow attackers to maintain access, escalate privileges, and further compromise the system, posing a severe security risk.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1136.001
-      name: Technique T1136.001
-    tactics: []
+      name: Local Account
+      tactics:
+      - persistence
+    tactics:
+    - persistence
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/linux_auditd_add_user_account.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/linux_auditd_add_user_account.yml
+      rule_sha256: sha256:fa2b80d4f496fecfc7b10e2cd1f6d7d44b1f74912891c37d611f41405def1df1
+      detection_id: aae66dc0-74b4-4807-b480-b35f8027abb4
+      source_version: 6
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1136.001/linux_auditd_add_user/auditd_proctitle_user_add.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1136.001/linux_auditd_add_user/auditd_proctitle_user_add.log
     description: auditd - auditd
     format: auto
     schema: raw
     sourcetype: auditd
+    checksum: sha256:2c8aa9b3b97046d45ef98ff93b569ab7aa7337f28965a2b08c47ab3850b663a1
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

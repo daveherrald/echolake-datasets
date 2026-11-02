@@ -1,14 +1,10 @@
 metadata:
   name: linux-auditd-hidden-files-and-directories-creation
   version: 7.0.0
-  description: 'The following analytic detects suspicious creation of hidden files
-    and directories, which may indicate an attacker''s attempt to conceal malicious
-    activities or unauthorized data. Hidden files and directories are often used to
-    evade detection by security tools and administrators, providing a stealthy means
-    for storing malware, logs, or sensitive information. By monitoring for unusual
-    or unauthorized creation of hidden files and directories, this analytic helps
-    identify potential attempts to hide '
+  description: The following analytic detects suspicious creation of hidden files and directories, which may indicate an attacker's attempt to conceal malicious activities or unauthorized data. Hidden files and directories are often used to evade detection by security tools and administrators, providing a stealthy means for storing malware, logs, or sensitive information. By monitoring for unusual or unauthorized creation of hidden files and directories, this analytic helps identify potential attempts to hide or unauthorized creation of hidden files and directories, this analytic helps identify potential attempts to hide malicious operations, enabling security teams to uncover and address hidden threats effectively.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1083
-      name: Technique T1083
-    tactics: []
+      name: File and Directory Discovery
+      tactics:
+      - discovery
+    tactics:
+    - discovery
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/linux_auditd_hidden_files_and_directories_creation.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/linux_auditd_hidden_files_and_directories_creation.yml
+      rule_sha256: sha256:ff0b0f860dc41f1067389df770551454ee90fcf44877d8dd2b578b117fd5fdb7
+      detection_id: 555cc358-bf16-4e05-9b3a-0f89c73b7261
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1083/linux_auditd_hidden_file/auditd_execve_hidden_file.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1083/linux_auditd_hidden_file/auditd_execve_hidden_file.log
     description: auditd - auditd
     format: auto
     schema: raw
     sourcetype: auditd
+    checksum: sha256:382e50e2763bd1f80e539f9fce3ebc11a25574c6aeb0e93cf5b4e12807debc90
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

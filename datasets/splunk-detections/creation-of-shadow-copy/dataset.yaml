@@ -1,14 +1,10 @@
 metadata:
   name: creation-of-shadow-copy
   version: 9.0.0
-  description: 'The following analytic detects the creation of shadow copies using
-    Vssadmin or Wmic. It leverages data from Endpoint Detection and Response (EDR)
-    agents, focusing on process execution logs that include command-line details.
-    This activity is significant because creating shadow copies can be a precursor
-    to ransomware attacks or data exfiltration, allowing attackers to bypass file
-    locks and access sensitive data. If confirmed malicious, this behavior could enable
-    attackers to maintain persistence, '
+  description: The following analytic detects the creation of shadow copies using Vssadmin or Wmic. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process execution logs that include command-line details. This activity is significant because creating shadow copies can be a precursor to ransomware attacks or data exfiltration, allowing attackers to bypass file locks and access sensitive data. If confirmed malicious, this behavior could enable attackers to maintain persistence, recover deleted files, or prepare for further malicious activities, posing a significant risk to the integrity and confidentiality of the system.
   author: Patrick Bareiss, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,23 +14,46 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1003.003
-      name: Technique T1003.003
-    tactics: []
+      name: NTDS
+      tactics:
+      - credential-access
+    tactics:
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/creation_of_shadow_copy.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/creation_of_shadow_copy.yml
+      rule_sha256: sha256:e2c8dd85f8de439cc4a92a2a52100afa642825e8d9d64f4bcdbff39606c76e49
+      detection_id: eb120f5f-b879-4a63-97c1-93352b5df844
+      source_version: 9
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1003.003/atomic_red_team/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1003.003/atomic_red_team/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1003.003/atomic_red_team/crowdstrike_falcon.log
+    checksum: sha256:ee1c7cd9fa20013c82da17f8cb1998197c117ab4c209ab56203290bc90739fda
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1003.003/atomic_red_team/crowdstrike_falcon.log
     description: crowdstrike - crowdstrike:events:sensor
     format: auto
     schema: raw
     sourcetype: crowdstrike:events:sensor
+    checksum: sha256:c4275ab0ef976b0d00ba7840031a06d9f47d1beeaf4c3056d2fc7bb8fe08b38a
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

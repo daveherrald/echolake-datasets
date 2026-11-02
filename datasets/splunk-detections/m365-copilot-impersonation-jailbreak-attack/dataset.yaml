@@ -1,14 +1,10 @@
 metadata:
   name: m365-copilot-impersonation-jailbreak-attack
   version: 1.0.0
-  description: Detects M365 Copilot impersonation and roleplay jailbreak attempts
-    where users try to manipulate the AI into adopting alternate personas, behaving
-    as unrestricted entities, or impersonating malicious AI systems to bypass safety
-    controls. The detection searches exported eDiscovery prompt logs for roleplay
-    keywords like "pretend you are," "act as," "you are now," "amoral," and "roleplay
-    as" in the Subject_Title field. Prompts are categorized into specific impersonation
-    types (AI_Impersonation, Mal
+  description: Detects M365 Copilot impersonation and roleplay jailbreak attempts where users try to manipulate the AI into adopting alternate personas, behaving as unrestricted entities, or impersonating malicious AI systems to bypass safety controls. The detection searches exported eDiscovery prompt logs for roleplay keywords like "pretend you are," "act as," "you are now," "amoral," and "roleplay as" in the Subject_Title field. Prompts are categorized into specific impersonation types (AI_Impersonation, Malicious_AI_Persona, Unrestricted_AI_Persona, etc.) to identify attempts to override the AI's safety guardrails through persona injection attacks.
   author: Rod Soto
+  updated: '2025-09-25'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1562
-      name: Technique T1562
-    tactics: []
+      name: Impair Defenses
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/application/m365_copilot_impersonation_jailbreak_attack.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/application/m365_copilot_impersonation_jailbreak_attack.yml
+      rule_sha256: sha256:7e8c567a9acb61c77098582c017fcd31cc09ff103f36837d0d854a4ce81ee716
+      detection_id: cc26aba8-7f4a-4078-b91a-052d6a53cb13
+      source_version: 1
+      source_date: '2025-09-25'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://raw.githubusercontent.com/splunk/attack_data/master/datasets/m365_copilot/copilot_prompt_logs.csv
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/m365_copilot/copilot_prompt_logs.csv
     description: csv - csv
     format: csv
     schema: raw
     sourcetype: csv
+    checksum: sha256:40cd34109cba4d1d117b7a56d33c13a9035253f254e20cbc8eba85c8549fec38
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,14 +1,10 @@
 metadata:
   name: windows-indirect-command-execution-via-pcalua
   version: 7.0.0
-  description: The following analytic detects programs initiated by pcalua.exe, the
-    Microsoft Windows Program Compatibility Assistant. This detection leverages data
-    from Endpoint Detection and Response (EDR) agents, focusing on process and parent
-    process information. While pcalua.exe can start legitimate programs, it is significant
-    because attackers may use it to bypass command line execution protections. If
-    confirmed malicious, this activity could allow attackers to execute arbitrary
-    commands, potentially lea
+  description: The following analytic detects programs initiated by pcalua.exe, the Microsoft Windows Program Compatibility Assistant. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process and parent process information. While pcalua.exe can start legitimate programs, it is significant because attackers may use it to bypass command line execution protections. If confirmed malicious, this activity could allow attackers to execute arbitrary commands, potentially leading to unauthorized actions, privilege escalation, or persistence within the environment.
   author: Eric McGinnis, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1202
-      name: Technique T1202
-    tactics: []
+      name: Indirect Command Execution
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_indirect_command_execution_via_pcalua.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_indirect_command_execution_via_pcalua.yml
+      rule_sha256: sha256:5c9681bd6479120cf8b7d38e3a8c28de11a98790eaf2cbb84c318f92088383de
+      detection_id: 3428ac18-a410-4823-816c-ce697d26f7a8
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1202/atomic_red_team/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1202/atomic_red_team/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:9ed7202f32564e679dd6de5af8c8d34ec118abd1a29c5c0532edfa843bc2cb47
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

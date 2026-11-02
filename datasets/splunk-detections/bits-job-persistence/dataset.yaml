@@ -1,14 +1,10 @@
 metadata:
   name: bits-job-persistence
   version: 9.0.0
-  description: 'The following analytic detects the use of `bitsadmin.exe` to schedule
-    a BITS job for persistence on an endpoint. It leverages data from Endpoint Detection
-    and Response (EDR) agents, focusing on specific command-line parameters such as
-    `create`, `addfile`, and `resume`. This activity is significant because BITS jobs
-    can be used by attackers to maintain persistence, download malicious payloads,
-    or exfiltrate data. If confirmed malicious, this could allow an attacker to persist
-    in the environment, '
+  description: The following analytic detects the use of `bitsadmin.exe` to schedule a BITS job for persistence on an endpoint. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on specific command-line parameters such as `create`, `addfile`, and `resume`. This activity is significant because BITS jobs can be used by attackers to maintain persistence, download malicious payloads, or exfiltrate data. If confirmed malicious, this could allow an attacker to persist in the environment, execute arbitrary code, or transfer sensitive information, necessitating further investigation and potential remediation.
   author: Michael Haag, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,23 +13,48 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1197
-      name: Technique T1197
-    tactics: []
+      name: BITS Jobs
+      tactics:
+      - persistence
+      - defense-evasion
+    tactics:
+    - persistence
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/bits_job_persistence.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/bits_job_persistence.yml
+      rule_sha256: sha256:ab072dd40cd139b2634e71fb96949af5d5807922c7b14fe8d5573d257811451d
+      detection_id: e97a5ffe-90bf-11eb-928a-acde48001122
+      source_version: 9
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1197/atomic_red_team/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1197/atomic_red_team/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1197/atomic_red_team/crowdstrike_falcon.log
+    checksum: sha256:e1e8d4b4cbb87c0fbc37509e7d2330f59335fb3583009c03b2e5d8684581e05b
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1197/atomic_red_team/crowdstrike_falcon.log
     description: crowdstrike - crowdstrike:events:sensor
     format: auto
     schema: raw
     sourcetype: crowdstrike:events:sensor
+    checksum: sha256:3390c5c563047be0b069ad8ef84b3a229e30c8f319a0e1eec5c51ca1346e9619
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

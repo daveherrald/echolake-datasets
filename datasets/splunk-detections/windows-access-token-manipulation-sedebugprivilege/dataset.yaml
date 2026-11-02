@@ -1,14 +1,10 @@
 metadata:
   name: windows-access-token-manipulation-sedebugprivilege
   version: 18.0.0
-  description: The following analytic detects a process enabling the "SeDebugPrivilege"
-    privilege token. It leverages Windows Security Event Logs with EventCode 4703,
-    filtering out common legitimate processes. This activity is significant because
-    SeDebugPrivilege allows a process to inspect and modify the memory of other processes,
-    potentially leading to credential dumping or code injection. If confirmed malicious,
-    an attacker could gain extensive control over system processes, enabling them
-    to escalate privil
+  description: The following analytic detects a process enabling the "SeDebugPrivilege" privilege token. It leverages Windows Security Event Logs with EventCode 4703, filtering out common legitimate processes. This activity is significant because SeDebugPrivilege allows a process to inspect and modify the memory of other processes, potentially leading to credential dumping or code injection. If confirmed malicious, an attacker could gain extensive control over system processes, enabling them to escalate privileges, persist in the environment, or access sensitive information.
   author: Teoderick Contreras, Splunk
+  updated: '2025-12-04'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,18 +14,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1134.002
-      name: Technique T1134.002
-    tactics: []
+      name: Create Process with Token
+      tactics:
+      - privilege-escalation
+      - defense-evasion
+    tactics:
+    - privilege-escalation
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_access_token_manipulation_sedebugprivilege.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_access_token_manipulation_sedebugprivilege.yml
+      rule_sha256: sha256:10ac0a8bdc5974fd0380b73eb5b102850e131e9a5a49c603ed248529836ed8c1
+      detection_id: 6ece9ed0-5f92-4315-889d-48560472b188
+      source_version: 18
+      source_date: '2025-12-04'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/brute_ratel/sedebugprivilege_token/security-xml.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/brute_ratel/sedebugprivilege_token/security-xml.log
     description: XmlWinEventLog:Security - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:0240dfa757167378cee3c3630c66fab48ef52defa25b0bad0f4fea6d391b5c5a
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

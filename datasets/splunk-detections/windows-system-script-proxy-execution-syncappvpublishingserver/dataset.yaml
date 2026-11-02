@@ -1,14 +1,10 @@
 metadata:
   name: windows-system-script-proxy-execution-syncappvpublishingserver
   version: 8.0.0
-  description: The following analytic detects the execution of Syncappvpublishingserver.vbs
-    via wscript.exe or cscript.exe, which may indicate an attempt to download remote
-    files or perform privilege escalation. This detection leverages data from Endpoint
-    Detection and Response (EDR) agents, focusing on process names and command-line
-    executions. Monitoring this activity is crucial as it can signify malicious use
-    of a native Windows script for unauthorized actions. If confirmed malicious, this
-    behavior could le
+  description: The following analytic detects the execution of Syncappvpublishingserver.vbs via wscript.exe or cscript.exe, which may indicate an attempt to download remote files or perform privilege escalation. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line executions. Monitoring this activity is crucial as it can signify malicious use of a native Windows script for unauthorized actions. If confirmed malicious, this behavior could lead to unauthorized file downloads or elevated privileges, posing a significant security risk.
   author: Michael Haag, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,20 +12,44 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1216
-      name: Technique T1216
+      name: System Script Proxy Execution
+      tactics:
+      - defense-evasion
     - id: T1218
-      name: Technique T1218
-    tactics: []
+      name: System Binary Proxy Execution
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_system_script_proxy_execution_syncappvpublishingserver.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_system_script_proxy_execution_syncappvpublishingserver.yml
+      rule_sha256: sha256:e4104dd4dc414638bb313c07a6cf3b8c088632214712c7f7b6885e2365c50977
+      detection_id: 8dd73f89-682d-444c-8b41-8e679966ad3c
+      source_version: 8
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1216/atomic_red_team/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1216/atomic_red_team/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:44e89e8167714629e3ce8fea9b27964f354a8bc095297884bcb4c6586640e5df
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

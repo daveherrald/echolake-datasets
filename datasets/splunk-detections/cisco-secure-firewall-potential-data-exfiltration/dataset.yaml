@@ -1,14 +1,10 @@
 metadata:
   name: cisco-secure-firewall-potential-data-exfiltration
   version: 3.0.0
-  description: The following analytic detects potentially suspicious large outbound
-    data transfers from internal to external networks. It leverages Cisco Secure Firewall
-    Threat Defense logs and calculates the total volume of data exchanged per connection
-    by summing InitiatorBytes and ResponderBytes. Connections exceeding 100 MB are
-    flagged, as these may indicate unauthorized data exfiltration, especially if initiated
-    by unusual users, hosts, or processes. This analytic is scoped to inside-to-outside
-    flows usin
+  description: The following analytic detects potentially suspicious large outbound data transfers from internal to external networks. It leverages Cisco Secure Firewall Threat Defense logs and calculates the total volume of data exchanged per connection by summing InitiatorBytes and ResponderBytes. Connections exceeding 100 MB are flagged, as these may indicate unauthorized data exfiltration, especially if initiated by unusual users, hosts, or processes. This analytic is scoped to inside-to-outside flows using a macro (cisco_secure_firewall_inside_to_outside) to abstract environment-specific zone definitions. If confirmed malicious, this behavior may reflect data staging and exfiltration over an encrypted or stealthy transport.
   author: Nasreddine Bencherchali, Splunk
+  updated: '2026-06-01'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,22 +12,48 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1041
-      name: Technique T1041
+      name: Exfiltration Over C2 Channel
+      tactics:
+      - exfiltration
     - id: T1567.002
-      name: Technique T1567.002
+      name: Exfiltration to Cloud Storage
+      tactics:
+      - exfiltration
     - id: T1048.003
-      name: Technique T1048.003
-    tactics: []
+      name: Exfiltration Over Unencrypted Non-C2 Protocol
+      tactics:
+      - exfiltration
+    tactics:
+    - exfiltration
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/network/cisco_secure_firewall___potential_data_exfiltration.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/network/cisco_secure_firewall___potential_data_exfiltration.yml
+      rule_sha256: sha256:2fcaf68e68172daeb083945bb4921736c2faae45937578e452647326216b7219
+      detection_id: 3d8536b6-52b4-4c3e-b695-3f2e90bb22be
+      source_version: 3
+      source_date: '2026-06-01'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_secure_firewall_threat_defense/connection_event/connection_events.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/cisco_secure_firewall_threat_defense/connection_event/connection_events.log
     description: not_applicable - cisco:sfw:estreamer
     format: auto
     schema: raw
     sourcetype: cisco:sfw:estreamer
+    checksum: sha256:37e737d87c4e8396396f3a69621c127bd943eb733036deb7abaa5a5a7276371d
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

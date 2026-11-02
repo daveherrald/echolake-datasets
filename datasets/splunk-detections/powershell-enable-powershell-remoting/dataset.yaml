@@ -1,14 +1,10 @@
 metadata:
   name: powershell-enable-powershell-remoting
   version: 8.0.0
-  description: The following analytic detects the use of the Enable-PSRemoting cmdlet,
-    which allows PowerShell remoting on a local or remote computer. This detection
-    leverages PowerShell Script Block Logging (EventCode 4104) to identify when this
-    cmdlet is executed. Monitoring this activity is crucial as it can indicate an
-    attacker enabling remote command execution capabilities on a compromised system.
-    If confirmed malicious, this activity could allow an attacker to take control
-    of the system remotely, execute
+  description: The following analytic detects the use of the Enable-PSRemoting cmdlet, which allows PowerShell remoting on a local or remote computer. This detection leverages PowerShell Script Block Logging (EventCode 4104) to identify when this cmdlet is executed. Monitoring this activity is crucial as it can indicate an attacker enabling remote command execution capabilities on a compromised system. If confirmed malicious, this activity could allow an attacker to take control of the system remotely, execute commands, and potentially pivot to other systems within the network, leading to further compromise and lateral movement.
   author: Michael Haag, Splunk
+  updated: '2025-06-24'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1059.001
-      name: Technique T1059.001
-    tactics: []
+      name: PowerShell
+      tactics:
+      - execution
+    tactics:
+    - execution
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/powershell_enable_powershell_remoting.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/powershell_enable_powershell_remoting.yml
+      rule_sha256: sha256:abf45287c19d8fb9ebad6ae359325c9e9a930b3c16670b2f72bfd0b096be2a80
+      detection_id: 40e3b299-19a5-4460-96e9-e1467f714f8e
+      source_version: 8
+      source_date: '2025-06-24'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/atomic_red_team/4104-psremoting-windows-powershell.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1059.001/atomic_red_team/4104-psremoting-windows-powershell.log
     description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:23c1d16765c25038d76b718b978fca80c850078cc40a71856d7e4a337b21ad7d
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,14 +1,10 @@
 metadata:
   name: linux-ingress-tool-transfer-hunting
   version: 9.0.0
-  description: The following analytic detects the use of 'curl' and 'wget' commands
-    within a Linux environment. It leverages data from Endpoint Detection and Response
-    (EDR) agents, focusing on process names, user information, and command-line executions.
-    This activity is significant as 'curl' and 'wget' are commonly used for downloading
-    files, which can indicate potential ingress of malicious tools. If confirmed malicious,
-    this activity could lead to unauthorized code execution, data exfiltration, or
-    further c
+  description: The following analytic detects the use of 'curl' and 'wget' commands within a Linux environment. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names, user information, and command-line executions. This activity is significant as 'curl' and 'wget' are commonly used for downloading files, which can indicate potential ingress of malicious tools. If confirmed malicious, this activity could lead to unauthorized code execution, data exfiltration, or further compromise of the system. Monitoring and tuning this detection helps identify and differentiate between normal and potentially harmful usage.
   author: Michael Haag, Splunk
+  updated: '2025-10-27'
+  license: Apache-2.0
   tags:
   - hunting
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1105
-      name: Technique T1105
-    tactics: []
+      name: Ingress Tool Transfer
+      tactics:
+      - command-and-control
+    tactics:
+    - command-and-control
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/linux_ingress_tool_transfer_hunting.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/linux_ingress_tool_transfer_hunting.yml
+      rule_sha256: sha256:337f7d4f17c3f6406bffa601ea39026bc27537d5ae01ed3f579eebf95a3139b3
+      detection_id: 52fd468b-cb6d-48f5-b16a-92f1c9bb10cf
+      source_version: 9
+      source_date: '2025-10-27'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1105/atomic_red_team/curl-linux-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1105/atomic_red_team/curl-linux-sysmon.log
     description: Syslog:Linux-Sysmon/Operational - sysmon:linux
     format: auto
     schema: raw
     sourcetype: sysmon:linux
+    checksum: sha256:0ccb0e70a2ba8fcc3e3cb225e9cfe2e3e25edac0f75070641179c84432256160
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

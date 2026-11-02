@@ -1,14 +1,10 @@
 metadata:
   name: azure-ad-global-administrator-role-assigned
   version: 11.0.0
-  description: The following analytic detects the assignment of the Azure AD Global
-    Administrator role to a user. It leverages Azure Active Directory AuditLogs to
-    identify when the "Add member to role" operation includes the "Global Administrator"
-    role. This activity is significant because the Global Administrator role grants
-    extensive access to data, resources, and settings, similar to a Domain Administrator
-    in traditional AD environments. If confirmed malicious, this could allow an attacker
-    to establish pers
+  description: The following analytic detects the assignment of the Azure AD Global Administrator role to a user. It leverages Azure Active Directory AuditLogs to identify when the "Add member to role" operation includes the "Global Administrator" role. This activity is significant because the Global Administrator role grants extensive access to data, resources, and settings, similar to a Domain Administrator in traditional AD environments. If confirmed malicious, this could allow an attacker to establish persistence, escalate privileges, and potentially gain control over Azure resources, posing a severe security risk.
   author: Gowthamaraj Rajendran, Mauricio Velazco, Splunk
+  updated: '2025-10-14'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1098.003
-      name: Technique T1098.003
-    tactics: []
+      name: Additional Cloud Roles
+      tactics:
+      - persistence
+      - privilege-escalation
+    tactics:
+    - persistence
+    - privilege-escalation
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/azure_ad_global_administrator_role_assigned.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/azure_ad_global_administrator_role_assigned.yml
+      rule_sha256: sha256:ed4592c584d36190e477d3ac230b9770e418e62ddeff6c807c2252930b8eaf18
+      detection_id: 825fed20-309d-4fd1-8aaf-cd49c1bb093c
+      source_version: 11
+      source_date: '2025-10-14'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1098.003/azure_ad_assign_global_administrator/azure-audit.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1098.003/azure_ad_assign_global_administrator/azure-audit.log
     description: Azure AD - azure:monitor:aad
     format: auto
     schema: raw
     sourcetype: azure:monitor:aad
+    checksum: sha256:ac21b7bdf60d28cbbd9237a399985b7cf7e2b351bacff026b4f9a8a28e135912
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,22 +1,18 @@
 metadata:
   name: cisco-smart-install-oversized-packet-detection
   version: 2.0.0
-  description: 'This analytic detects oversized Cisco Smart Install (SMI) protocol
-    messages by inspecting traffic to TCP port 4786
+  description: 'This analytic detects oversized Cisco Smart Install (SMI) protocol messages by inspecting traffic to TCP port 4786
 
-    within the Network_Traffic data model. Abnormally large SMI payloads have been
-    associated with exploitation and
+    within the Network_Traffic data model. Abnormally large SMI payloads have been associated with exploitation and
 
-    protocol abuse (e.g., CVE-2018-0171; activity reported by the "Static Tundra"
-    threat actor). Monitoring message
+    protocol abuse (e.g., CVE-2018-0171; activity reported by the "Static Tundra" threat actor). Monitoring message
 
-    sizes over time can help identify possible attempts at remote code execution,
-    denial of service, or reconnaissance
+    sizes over time can help identify possible attempts at remote code execution, denial of service, or reconnaissance
 
-    against Cisco devices exposing Smart Install.
-
-    '
+    against Cisco devices exposing Smart Install.'
   author: Bhavin Patel, Michael Haag, Splunk
+  updated: '2025-09-09'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -24,18 +20,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1190
-      name: Technique T1190
-    tactics: []
+      name: Exploit Public-Facing Application
+      tactics:
+      - initial-access
+    tactics:
+    - initial-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/network/cisco_smart_install_oversized_packet_detection.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/network/cisco_smart_install_oversized_packet_detection.yml
+      rule_sha256: sha256:145522bb8d64614bc42c490d547c34797f85b78e07663ff6d2c2f98d02f81dbc
+      detection_id: 3b8d2b4f-4e1e-4a9e-9b43-8a7a3a9c7e21
+      source_version: 2
+      source_date: '2025-09-09'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/cisco/cisco_smart_install/stream_tcp.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1190/cisco/cisco_smart_install/stream_tcp.log
     description: stream:tcp - stream:tcp
     format: auto
     schema: raw
     sourcetype: stream:tcp
+    checksum: sha256:7f6455cfe9d2ae34714f6540e19fa79f9dae20b2c7690fc6049024c299e6c7e6
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

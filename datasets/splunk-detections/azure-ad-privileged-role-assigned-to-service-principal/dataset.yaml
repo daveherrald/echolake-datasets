@@ -1,14 +1,10 @@
 metadata:
   name: azure-ad-privileged-role-assigned-to-service-principal
   version: 10.0.0
-  description: The following analytic detects the assignment of privileged roles to
-    service principals in Azure Active Directory (AD). It leverages the AuditLogs
-    log category from ingested Azure AD events. This activity is significant because
-    assigning elevated permissions to non-human entities can lead to unauthorized
-    access or malicious activities. If confirmed malicious, attackers could exploit
-    these service principals to gain elevated access to Azure resources, potentially
-    compromising sensitive data and c
+  description: The following analytic detects the assignment of privileged roles to service principals in Azure Active Directory (AD). It leverages the AuditLogs log category from ingested Azure AD events. This activity is significant because assigning elevated permissions to non-human entities can lead to unauthorized access or malicious activities. If confirmed malicious, attackers could exploit these service principals to gain elevated access to Azure resources, potentially compromising sensitive data and critical infrastructure. Monitoring this behavior helps prevent privilege escalation and ensures the security of Azure environments.
   author: Mauricio Velazco, Splunk
+  updated: '2025-10-14'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1098.003
-      name: Technique T1098.003
-    tactics: []
+      name: Additional Cloud Roles
+      tactics:
+      - persistence
+      - privilege-escalation
+    tactics:
+    - persistence
+    - privilege-escalation
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/azure_ad_privileged_role_assigned_to_service_principal.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/azure_ad_privileged_role_assigned_to_service_principal.yml
+      rule_sha256: sha256:f0cc354a7bc144b4916b7975686a119f4ab02b5ff08a2e2fa62d192135ba6ff2
+      detection_id: 5dfaa3d3-e2e4-4053-8252-16d9ee528c41
+      source_version: 10
+      source_date: '2025-10-14'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1098.003/azure_ad_privileged_role_serviceprincipal/azure-audit.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1098.003/azure_ad_privileged_role_serviceprincipal/azure-audit.log
     description: Azure AD - azure:monitor:aad
     format: auto
     schema: raw
     sourcetype: azure:monitor:aad
+    checksum: sha256:6adc41923c5206e35a9640ba0df8922def2914e2d952dc95774f1fe45362849b
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

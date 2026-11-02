@@ -1,14 +1,10 @@
 metadata:
   name: windows-powershell-process-with-malicious-string
   version: 4.0.0
-  description: The following analytic detects the execution of multiple offensive
-    toolkits and commands through the process execution datamodel. This method captures
-    commands given directly to powershell.exe, allowing for the identification of
-    suspicious activities including several well-known tools used for credential theft,
-    lateral movement, and persistence. If confirmed malicious, this could lead to
-    unauthorized access, privilege escalation, and potential compromise of sensitive
-    information within the envir
+  description: The following analytic detects the execution of multiple offensive toolkits and commands through the process execution datamodel. This method captures commands given directly to powershell.exe, allowing for the identification of suspicious activities including several well-known tools used for credential theft, lateral movement, and persistence. If confirmed malicious, this could lead to unauthorized access, privilege escalation, and potential compromise of sensitive information within the environment.
   author: Steven Dick
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1059.001
-      name: Technique T1059.001
-    tactics: []
+      name: PowerShell
+      tactics:
+      - execution
+    tactics:
+    - execution
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_powershell_process_with_malicious_string.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_powershell_process_with_malicious_string.yml
+      rule_sha256: sha256:5230a1ebe0a0a030f121ff451cd61ab574fe301fabe33fbd489ada1b4217f23c
+      detection_id: 5df35d50-e1a3-4a52-a337-92e69d9b1b8a
+      source_version: 4
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1087.002/AD_discovery/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1087.002/AD_discovery/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:1b78f515120a7e5ac532444fd7fd322c8dc1abf8efebe0295abad3939972db0d
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

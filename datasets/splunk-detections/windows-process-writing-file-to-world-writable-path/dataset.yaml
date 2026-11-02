@@ -1,14 +1,10 @@
 metadata:
   name: windows-process-writing-file-to-world-writable-path
   version: 8.0.0
-  description: 'The following analytic identifies a process writing a .txt file to
-    a world writable path. This detection leverages data from Endpoint Detection and
-    Response (EDR) agents, focusing on file creation events within specific directories.
-    This activity is significant as adversaries often use such techniques to deliver
-    payloads to a system, which is uncommon for legitimate processes. If confirmed
-    malicious, this behavior could allow attackers to execute arbitrary code, escalate
-    privileges, or maintain '
+  description: The following analytic identifies a process writing a .txt file to a world writable path. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on file creation events within specific directories. This activity is significant as adversaries often use such techniques to deliver payloads to a system, which is uncommon for legitimate processes. If confirmed malicious, this behavior could allow attackers to execute arbitrary code, escalate privileges, or maintain persistence within the environment, posing a significant security risk.
   author: Michael Haag, Splunk
+  updated: '2025-10-21'
+  license: Apache-2.0
   tags:
   - hunting
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1218.005
-      name: Technique T1218.005
-    tactics: []
+      name: Mshta
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_process_writing_file_to_world_writable_path.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_process_writing_file_to_world_writable_path.yml
+      rule_sha256: sha256:10d5ac4c4dc31ee549b087c3bd5a3a034c0bf23f1ba15eedeb4c2ef49ab3a6a2
+      detection_id: c051b68c-60f7-4022-b3ad-773bec7a225b
+      source_version: 8
+      source_date: '2025-10-21'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218.005/atomic_red_team/mshta_tasks_windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1218.005/atomic_red_team/mshta_tasks_windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:a8f64b9d6ebb3e5d46be1c3cff44a820edc1ce65df5fbf0e75da22d157cbe243
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

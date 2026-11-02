@@ -1,10 +1,10 @@
 metadata:
   name: esxi-ssh-enabled
   version: 2.0.0
-  description: This detection identifies SSH being enabled on ESXi hosts, which can
-    be an early indicator of malicious activity. Threat actors often use SSH to gain
-    persistent remote access after compromising credentials or exploiting vulnerabilities.
+  description: This detection identifies SSH being enabled on ESXi hosts, which can be an early indicator of malicious activity. Threat actors often use SSH to gain persistent remote access after compromising credentials or exploiting vulnerabilities.
   author: Raven Tait, Splunk
+  updated: '2025-10-14'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -14,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1021.004
-      name: Technique T1021.004
-    tactics: []
+      name: SSH
+      tactics:
+      - lateral-movement
+    tactics:
+    - lateral-movement
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/application/esxi_ssh_enabled.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/application/esxi_ssh_enabled.yml
+      rule_sha256: sha256:e7f112ca4a2dcde67881f8104f38c1ffb494d505c9fc7aeb27bbb6e23c37a4c9
+      detection_id: b8003567-c5b6-445b-8966-ecdacc81c24d
+      source_version: 2
+      source_date: '2025-10-14'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1021.004/esxi_ssh_enabled/esxi_ssh_enabled.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1021.004/esxi_ssh_enabled/esxi_ssh_enabled.log
     description: vmware:esxlog - vmw-syslog
     format: auto
     schema: raw
     sourcetype: vmw-syslog
+    checksum: sha256:f29c867799a0c3156dbc2722410be7e42b989cf3ce6fa13dfeeb26375a3d24e5
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

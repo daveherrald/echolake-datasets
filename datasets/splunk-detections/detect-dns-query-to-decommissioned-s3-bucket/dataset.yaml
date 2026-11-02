@@ -1,13 +1,10 @@
 metadata:
   name: detect-dns-query-to-decommissioned-s3-bucket
   version: 3.0.0
-  description: This detection identifies DNS queries to domains that match previously
-    decommissioned S3 buckets. This activity is significant because attackers may
-    attempt to recreate deleted S3 buckets that were previously public to hijack them
-    for malicious purposes. If successful, this could allow attackers to host malicious
-    content or exfiltrate data through compromised bucket names that may still be
-    referenced by legitimate applications.
+  description: This detection identifies DNS queries to domains that match previously decommissioned S3 buckets. This activity is significant because attackers may attempt to recreate deleted S3 buckets that were previously public to hijack them for malicious purposes. If successful, this could allow attackers to host malicious content or exfiltrate data through compromised bucket names that may still be referenced by legitimate applications.
   author: Jose Hernandez, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,23 +13,46 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1485
-      name: Technique T1485
-    tactics: []
+      name: Data Destruction
+      tactics:
+      - impact
+    tactics:
+    - impact
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/network/detect_dns_query_to_decommissioned_s3_bucket.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/network/detect_dns_query_to_decommissioned_s3_bucket.yml
+      rule_sha256: sha256:5b0d79f42de92d1b632aa9852d0141d90dca88c8469a75d320207117484953d0
+      detection_id: 2f1c5fd1-4b8a-4f5d-a0e9-7d6a8e2f5e1e
+      source_version: 3
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1485/decommissioned_buckets/cloudtrail.json
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1485/decommissioned_buckets/cloudtrail.json
     description: cloudtrail - aws:cloudtrail
     format: auto
     schema: raw
     sourcetype: aws:cloudtrail
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1485/decommissioned_buckets/dns.log
+    checksum: sha256:ef07feb9a4350482e319a4bda9724fd36c452b0e7a19ef8c8dc7dfbf7e5fc38f
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1485/decommissioned_buckets/dns.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:f34fa6bcce97ede8a1a65b3f134799b5b850bc1790353e5b19898868b0d29e51
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

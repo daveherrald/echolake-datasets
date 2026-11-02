@@ -1,12 +1,10 @@
 metadata:
   name: ollama-abnormal-service-crash-availability-attack
   version: 1.0.0
-  description: Detects critical service crashes, fatal errors, and abnormal process
-    terminations in Ollama that may indicate exploitation attempts, resource exhaustion
-    attacks, malicious input triggering unhandled exceptions, or deliberate denial
-    of service attacks designed to disrupt AI model availability and degrade system
-    stability.
+  description: Detects critical service crashes, fatal errors, and abnormal process terminations in Ollama that may indicate exploitation attempts, resource exhaustion attacks, malicious input triggering unhandled exceptions, or deliberate denial of service attacks designed to disrupt AI model availability and degrade system stability.
   author: Rod Soto
+  updated: '2025-10-05'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -14,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1489
-      name: Technique T1489
-    tactics: []
+      name: Service Stop
+      tactics:
+      - impact
+    tactics:
+    - impact
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/application/ollama_abnormal_service_crash_availability_attack.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/application/ollama_abnormal_service_crash_availability_attack.yml
+      rule_sha256: sha256:e3b085cee7cfb79efe7d8601ed43d21c3fb5a4127ab24ac3b7663908b0eac7e6
+      detection_id: 327fa152-9b56-4e4e-bc0b-2795d4068afa
+      source_version: 1
+      source_date: '2025-10-05'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/ollama/app.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/ollama/app.log
     description: app.log - ollama:server
     format: auto
     schema: raw
     sourcetype: ollama:server
+    checksum: sha256:235644816f41c36d3b4106de98581f60510932db90e8e1efa26198942feb8007
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

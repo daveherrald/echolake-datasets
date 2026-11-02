@@ -1,14 +1,10 @@
 metadata:
   name: linux-obfuscated-files-or-information-base64-decode
   version: 9.0.0
-  description: The following analytic detects the use of the base64 decode command
-    on Linux systems, which is often used to deobfuscate files. It leverages data
-    from Endpoint Detection and Response (EDR) agents, focusing on command-line executions
-    that include "base64 -d" or "base64 --decode". This activity is significant as
-    it may indicate an attempt to hide malicious payloads or scripts. If confirmed
-    malicious, an attacker could use this technique to execute hidden code, potentially
-    leading to unauthorized a
+  description: The following analytic detects the use of the base64 decode command on Linux systems, which is often used to deobfuscate files. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on command-line executions that include "base64 -d" or "base64 --decode". This activity is significant as it may indicate an attempt to hide malicious payloads or scripts. If confirmed malicious, an attacker could use this technique to execute hidden code, potentially leading to unauthorized access, data exfiltration, or further system compromise.
   author: Michael Haag, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1027
-      name: Technique T1027
-    tactics: []
+      name: Obfuscated Files or Information
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/linux_obfuscated_files_or_information_base64_decode.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/linux_obfuscated_files_or_information_base64_decode.yml
+      rule_sha256: sha256:e3e2ac6ce16b1d770dbf128870ed5750bd3aeeb65c128a42344bd80054ec451c
+      detection_id: 303b38b2-c03f-44e2-8f41-4594606fcfc7
+      source_version: 9
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1027/atomic_red_team/linux-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1027/atomic_red_team/linux-sysmon.log
     description: Syslog:Linux-Sysmon/Operational - sysmon:linux
     format: auto
     schema: raw
     sourcetype: sysmon:linux
+    checksum: sha256:2a82e3fb0c04c8a1b0ce6ec19f399f0ac96977ab273bec97e6496da3c7880d79
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

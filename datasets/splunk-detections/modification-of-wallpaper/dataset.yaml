@@ -1,13 +1,10 @@
 metadata:
   name: modification-of-wallpaper
   version: 7.0.0
-  description: The following analytic detects the modification of registry keys related
-    to the desktop wallpaper settings. It leverages Sysmon EventCode 13 to identify
-    changes to the "Control Panel\\Desktop\\Wallpaper" and "Control Panel\\Desktop\\WallpaperStyle"
-    registry keys, especially when the modifying process is not explorer.exe or involves
-    suspicious file paths like temp or public directories. This activity is significant
-    as it can indicate ransomware behavior, such as the REVIL ransomware, which change
+  description: The following analytic detects the modification of registry keys related to the desktop wallpaper settings. It leverages Sysmon EventCode 13 to identify changes to the "Control Panel\\Desktop\\Wallpaper" and "Control Panel\\Desktop\\WallpaperStyle" registry keys, especially when the modifying process is not explorer.exe or involves suspicious file paths like temp or public directories. This activity is significant as it can indicate ransomware behavior, such as the REVIL ransomware, which changes the wallpaper to display a ransom note. If confirmed malicious, this could signify a compromised machine and the presence of ransomware, leading to potential data encryption and extortion.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1491
-      name: Technique T1491
-    tactics: []
+      name: Defacement
+      tactics:
+      - impact
+    tactics:
+    - impact
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/modification_of_wallpaper.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/modification_of_wallpaper.yml
+      rule_sha256: sha256:2f4730df9306d44402d5e9cbf17413f3d9a26655587dd7e93afc3fd252791dd4
+      detection_id: accb0712-c381-11eb-8e5b-acde48001122
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/revil/inf1/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/revil/inf1/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:4723cb5456dc4ab9bc279a96b512d7dd0b2d7a9d8556852a80550ed8a162ac74
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

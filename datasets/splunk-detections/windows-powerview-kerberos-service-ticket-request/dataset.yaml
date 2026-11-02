@@ -1,14 +1,10 @@
 metadata:
   name: windows-powerview-kerberos-service-ticket-request
   version: 7.0.0
-  description: The following analytic detects the execution of the `Get-DomainSPNTicket`
-    commandlet, part of the PowerView tool, by leveraging PowerShell Script Block
-    Logging (EventCode=4104). This commandlet requests Kerberos service tickets for
-    specified service principal names (SPNs). Monitoring this activity is crucial
-    as it can indicate attempts to perform Kerberoasting, a technique used to extract
-    SPN account passwords via cracking tools like hashcat. If confirmed malicious,
-    this activity could allow att
+  description: The following analytic detects the execution of the `Get-DomainSPNTicket` commandlet, part of the PowerView tool, by leveraging PowerShell Script Block Logging (EventCode=4104). This commandlet requests Kerberos service tickets for specified service principal names (SPNs). Monitoring this activity is crucial as it can indicate attempts to perform Kerberoasting, a technique used to extract SPN account passwords via cracking tools like hashcat. If confirmed malicious, this activity could allow attackers to gain unauthorized access to sensitive accounts, potentially leading to privilege escalation and further network compromise.
   author: Gowthamaraj Rajendran, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1558.003
-      name: Technique T1558.003
-    tactics: []
+      name: Kerberoasting
+      tactics:
+      - credential-access
+    tactics:
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_powerview_kerberos_service_ticket_request.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_powerview_kerberos_service_ticket_request.yml
+      rule_sha256: sha256:4b022613e88625eb00fd5f993b6d3981ae54fa29adedf03eff6add11dc008061
+      detection_id: 970455a1-4ac2-47e1-a9a5-9e75443ddcb9
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1558.003/powerview/windows-powershell-xml.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1558.003/powerview/windows-powershell-xml.log
     description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:40f5f2255332640239fb6731ffe516c232d150919c153bab7215c819b0efb5f2
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

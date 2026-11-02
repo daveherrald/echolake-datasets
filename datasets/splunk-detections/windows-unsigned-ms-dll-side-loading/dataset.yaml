@@ -1,14 +1,10 @@
 metadata:
   name: windows-unsigned-ms-dll-side-loading
   version: 12.0.0
-  description: 'The following analytic identifies potential DLL side-loading instances
-    involving unsigned DLLs mimicking Microsoft signatures. It detects this activity
-    by analyzing Sysmon logs for Event Code 7, where both the `Image` and `ImageLoaded`
-    paths do not match system directories like `system32`, `syswow64`, and `programfiles`.
-    This behavior is significant as adversaries often exploit DLL side-loading to
-    execute malicious code via legitimate processes. If confirmed malicious, this
-    activity could allow '
+  description: The following analytic identifies potential DLL side-loading instances involving unsigned DLLs mimicking Microsoft signatures. It detects this activity by analyzing Sysmon logs for Event Code 7, where both the `Image` and `ImageLoaded` paths do not match system directories like `system32`, `syswow64`, and `programfiles`. This behavior is significant as adversaries often exploit DLL side-loading to execute malicious code via legitimate processes. If confirmed malicious, this activity could allow attackers to execute arbitrary code, potentially leading to privilege escalation, persistence, and unauthorized access to sensitive information.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-06'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,20 +14,49 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1574.001
-      name: Technique T1574.001
+      name: DLL
+      tactics:
+      - persistence
+      - privilege-escalation
+      - defense-evasion
     - id: T1547
-      name: Technique T1547
-    tactics: []
+      name: Boot or Logon Autostart Execution
+      tactics:
+      - persistence
+      - privilege-escalation
+    tactics:
+    - persistence
+    - privilege-escalation
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_unsigned_ms_dll_side_loading.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_unsigned_ms_dll_side_loading.yml
+      rule_sha256: sha256:68cd3b52f74b216b368c4a6adc09620900a3f8a212cc8b225fd65247ba9883fe
+      detection_id: 8d9e0e06-ba71-4dc5-be16-c1a46d58728c
+      source_version: 12
+      source_date: '2025-05-06'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1574.002/unsigned_dll_load//wineloader_dll_sideload.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1574.002/unsigned_dll_load/wineloader_dll_sideload.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:7671e2061d0568b0c7942429548232bc9433da9006f0b91cd189c41c320fa94e
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

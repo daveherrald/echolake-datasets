@@ -1,14 +1,10 @@
 metadata:
   name: azure-ad-new-federated-domain-added
   version: 11.0.0
-  description: The following analytic detects the addition of a new federated domain
-    within an Azure Active Directory tenant. It leverages Azure AD AuditLogs to identify
-    successful "Set domain authentication" operations. This activity is significant
-    as it may indicate the use of the Azure AD identity federation backdoor technique,
-    allowing an adversary to establish persistence. If confirmed malicious, the attacker
-    could impersonate any user, bypassing password and MFA requirements, potentially
-    leading to unaut
+  description: The following analytic detects the addition of a new federated domain within an Azure Active Directory tenant. It leverages Azure AD AuditLogs to identify successful "Set domain authentication" operations. This activity is significant as it may indicate the use of the Azure AD identity federation backdoor technique, allowing an adversary to establish persistence. If confirmed malicious, the attacker could impersonate any user, bypassing password and MFA requirements, potentially leading to unauthorized access and control over the Azure AD environment.
   author: Mauricio Velazco, Gowthamaraj Rajendran, Splunk
+  updated: '2026-01-20'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1484.002
-      name: Technique T1484.002
-    tactics: []
+      name: Trust Modification
+      tactics:
+      - privilege-escalation
+      - defense-evasion
+    tactics:
+    - privilege-escalation
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/azure_ad_new_federated_domain_added.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/azure_ad_new_federated_domain_added.yml
+      rule_sha256: sha256:625f81cab6b8391cb5dc17d39b7f9f8ed5675c45bc02fa412ff59a47daffef92
+      detection_id: a87cd633-076d-4ab2-9047-977751a3c1a0
+      source_version: 11
+      source_date: '2026-01-20'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1484.002/new_federated_domain/azure-audit.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1484.002/new_federated_domain/azure-audit.log
     description: Azure AD - azure:monitor:aad
     format: auto
     schema: raw
     sourcetype: azure:monitor:aad
+    checksum: sha256:9fa58c9a97146f00c4ca51d24128336f46d0b3ff11528d89fd03a232b4e0e378
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

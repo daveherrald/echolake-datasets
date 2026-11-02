@@ -1,14 +1,10 @@
 metadata:
   name: windows-rdpclient-connection-sequence-events
   version: 5.0.0
-  description: This analytic monitors Windows RDP client connection sequence events
-    (EventCode 1024) from the Microsoft-Windows-TerminalServices-RDPClient/Operational
-    log. These events track when RDP ClientActiveX initiates connection attempts to
-    remote servers. The connection sequence is a critical phase of RDP where the client
-    and server exchange settings and establish common parameters for the session.
-    Monitoring these events can help identify unusual RDP connection patterns, potential
-    lateral movement atte
+  description: This analytic monitors Windows RDP client connection sequence events (EventCode 1024) from the Microsoft-Windows-TerminalServices-RDPClient/Operational log. These events track when RDP ClientActiveX initiates connection attempts to remote servers. The connection sequence is a critical phase of RDP where the client and server exchange settings and establish common parameters for the session. Monitoring these events can help identify unusual RDP connection patterns, potential lateral movement attempts, unauthorized remote access activity, and RDP connection chains that may indicate compromised systems. NOTE the analytic was written for Multi-Line as XML was not properly parsed out.
   author: Michael Haag, Splunk
+  updated: '2025-08-07'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -17,19 +13,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1133
-      name: Technique T1133
-    tactics: []
+      name: External Remote Services
+      tactics:
+      - initial-access
+      - persistence
+    tactics:
+    - initial-access
+    - persistence
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_rdpclient_connection_sequence_events.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_rdpclient_connection_sequence_events.yml
+      rule_sha256: sha256:71f45ecf3104832537f45c087c0cbbee08a89e96df2a38b204b7d29f8ee0ab16
+      detection_id: 67340df1-3f1d-4470-93c8-9ac7249d11b0
+      source_version: 5
+      source_date: '2025-08-07'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1133/rdp/terminalservices-rdpclient.log
-    description: WinEventLog:Microsoft-Windows-TerminalServices-RDPClient/Operational
-      - WinEventLog
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1133/rdp/terminalservices-rdpclient.log
+    description: WinEventLog:Microsoft-Windows-TerminalServices-RDPClient/Operational - WinEventLog
     format: auto
     schema: raw
     sourcetype: WinEventLog
+    checksum: sha256:1bd473de063470604eab282070e7d8099cd9f862c87ce037e4aeac91a123c445
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

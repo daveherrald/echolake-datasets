@@ -1,14 +1,10 @@
 metadata:
   name: remcos-client-registry-install-entry
   version: 10.0.0
-  description: The following analytic detects the presence of a registry key associated
-    with the Remcos RAT agent on a host. It leverages data from the Endpoint.Processes
-    and Endpoint.Registry data models in Splunk, focusing on instances where the "license"
-    key is found in the "Software\Remcos" path. This behavior is significant as it
-    indicates potential compromise by the Remcos RAT, a remote access Trojan used
-    for unauthorized access and data exfiltration. If confirmed malicious, the attacker
-    could gain contr
+  description: The following analytic detects the presence of a registry key associated with the Remcos RAT agent on a host. It leverages data from the Endpoint.Processes and Endpoint.Registry data models in Splunk, focusing on instances where the "license" key is found in the "Software\Remcos" path. This behavior is significant as it indicates potential compromise by the Remcos RAT, a remote access Trojan used for unauthorized access and data exfiltration. If confirmed malicious, the attacker could gain control over the system, steal sensitive information, or use the compromised host for further attacks. Immediate investigation and remediation are required.
   author: Steven Dick, Bhavin Patel, Rod Soto, Teoderick Contreras, Splunk
+  updated: '2025-07-30'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1112
-      name: Technique T1112
-    tactics: []
+      name: Modify Registry
+      tactics:
+      - persistence
+      - defense-evasion
+    tactics:
+    - persistence
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/remcos_client_registry_install_entry.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/remcos_client_registry_install_entry.yml
+      rule_sha256: sha256:21afdd59c2a220910d0046e2c62d608fffee6af292313f098487350260ebdf70
+      detection_id: f2a1615a-1d63-11ec-97d2-acde48001122
+      source_version: 10
+      source_date: '2025-07-30'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/remcos/remcos_registry/sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/remcos/remcos_registry/sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:4f53878e127ff41f2a5eaff512eeaf3ccfd5baf377a4e9ca861abe6668a01b31
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,18 +1,16 @@
 metadata:
   name: detect-outlook-exe-writing-a-zip-file
   version: 15.0.0
-  description: 'The following analytic identifies the execution of `outlook.exe` writing
-    a `.zip` file to the disk.
+  description: 'The following analytic identifies the execution of `outlook.exe` writing a `.zip` file to the disk.
 
-    It leverages data from the Endpoint data model, specifically monitoring process
-    and filesystem activities.
+    It leverages data from the Endpoint data model, specifically monitoring process and filesystem activities.
 
-    This behavior can be significant as it may indicate the use of Outlook to deliver
-    malicious payloads or exfiltrate data via compressed files.
+    This behavior can be significant as it may indicate the use of Outlook to deliver malicious payloads or exfiltrate data via compressed files.
 
-    If confirmed malicious, this activity could lead to unauthorized data access,
-    data exfiltration, or the delivery of malware, potentially compromising t'
+    If confirmed malicious, this activity could lead to unauthorized data access, data exfiltration, or the delivery of malware, potentially compromising the security of the affected system and network.'
   author: Bhavin Patel, Splunk
+  updated: '2026-01-23'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -22,18 +20,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1566.001
-      name: Technique T1566.001
-    tactics: []
+      name: Spearphishing Attachment
+      tactics:
+      - initial-access
+    tactics:
+    - initial-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/detect_outlook_exe_writing_a_zip_file.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/detect_outlook_exe_writing_a_zip_file.yml
+      rule_sha256: sha256:cc4bfb53b0178437e2c26cd72ff940bb0f1ca2f6f4321ee8749639f5b2945ee8
+      detection_id: a51bfe1a-94f0-4822-b1e4-16ae10145893
+      source_version: 15
+      source_date: '2026-01-23'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566.001/outlook_writing_zip/outlook_writing_zip.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1566.001/outlook_writing_zip/outlook_writing_zip.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:d21ade422ba72b90477c6ee42fcdd2a14ac61078074ecf0f3cec8b34d69d2265
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,14 +1,10 @@
 metadata:
   name: cmlua-or-cmstplua-uac-bypass
   version: 8.0.0
-  description: The following analytic detects the use of COM objects like CMLUA or
-    CMSTPLUA to bypass User Account Control (UAC). It leverages Sysmon EventCode 7
-    to identify the loading of specific DLLs (CMLUA.dll, CMSTPLUA.dll, CMLUAUTIL.dll)
-    by processes not typically associated with these libraries. This activity is significant
-    as it indicates an attempt to gain elevated privileges, a common tactic used by
-    ransomware adversaries. If confirmed malicious, this could allow attackers to
-    execute code with admini
+  description: The following analytic detects the use of COM objects like CMLUA or CMSTPLUA to bypass User Account Control (UAC). It leverages Sysmon EventCode 7 to identify the loading of specific DLLs (CMLUA.dll, CMSTPLUA.dll, CMLUAUTIL.dll) by processes not typically associated with these libraries. This activity is significant as it indicates an attempt to gain elevated privileges, a common tactic used by ransomware adversaries. If confirmed malicious, this could allow attackers to execute code with administrative rights, leading to potential system compromise and further malicious activities.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1218.003
-      name: Technique T1218.003
-    tactics: []
+      name: CMSTP
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/cmlua_or_cmstplua_uac_bypass.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/cmlua_or_cmstplua_uac_bypass.yml
+      rule_sha256: sha256:91e035c4eb5492ebbcf6e64bf3173f6fb3298d60f86d1222d1424ecc8270c294
+      detection_id: f87b5062-b405-11eb-a889-acde48001122
+      source_version: 8
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1548/darkside_cmstp_com/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1548/darkside_cmstp_com/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:6e7865bf5bb2b273883374900eebcdd51ca15b8b5f25218864597e64381afc5c
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

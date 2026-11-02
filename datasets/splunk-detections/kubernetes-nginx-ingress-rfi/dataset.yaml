@@ -1,14 +1,10 @@
 metadata:
   name: kubernetes-nginx-ingress-rfi
   version: 7.0.0
-  description: The following analytic detects remote file inclusion (RFI) attacks
-    targeting Kubernetes Nginx ingress controllers. It leverages Kubernetes logs from
-    the Nginx ingress controller, parsing fields such as `remote_addr`, `request`,
-    and `url` to identify suspicious activity. This activity is significant because
-    RFI attacks can allow attackers to execute arbitrary code or access sensitive
-    files on the server. If confirmed malicious, this could lead to unauthorized access,
-    data exfiltration, or further
+  description: The following analytic detects remote file inclusion (RFI) attacks targeting Kubernetes Nginx ingress controllers. It leverages Kubernetes logs from the Nginx ingress controller, parsing fields such as `remote_addr`, `request`, and `url` to identify suspicious activity. This activity is significant because RFI attacks can allow attackers to execute arbitrary code or access sensitive files on the server. If confirmed malicious, this could lead to unauthorized access, data exfiltration, or further compromise of the Kubernetes environment.
   author: Patrick Bareiss, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1212
-      name: Technique T1212
-    tactics: []
+      name: Exploitation for Credential Access
+      tactics:
+      - credential-access
+    tactics:
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/kubernetes_nginx_ingress_rfi.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/kubernetes_nginx_ingress_rfi.yml
+      rule_sha256: sha256:662b241fc45f9ca7bc3e3b53b26ae83721995315d7e7f34b54a9d4a584cdf324
+      detection_id: fc5531ae-62fd-4de6-9c36-b4afdae8ca95
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1212/kuberntest_nginx_rfi_attack/kubernetes_nginx_rfi_attack.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1212/kuberntest_nginx_rfi_attack/kubernetes_nginx_rfi_attack.log
     description: kubernetes - kube:container:controller
     format: auto
     schema: raw
     sourcetype: kube:container:controller
+    checksum: sha256:4d113b58de9e6fbe2afd04dc89060247bdf797920dc973945f420cefafafb16d
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

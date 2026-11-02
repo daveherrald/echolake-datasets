@@ -1,14 +1,10 @@
 metadata:
   name: windows-wmic-cpu-discovery
   version: 1.0.0
-  description: The following analytic detects the use of WMIC (Windows Management
-    Instrumentation Command-line) for CPU discovery, often executed with commands
-    such as “wmic cpu get name” This behavior is commonly associated with reconnaissance,
-    where adversaries seek to gather details about system hardware, assess processing
-    power, or determine if the environment is virtualized. While WMIC is a legitimate
-    administrative tool, its use for CPU queries outside of normal inventory or management
-    scripts can indica
+  description: "The following analytic detects the use of WMIC (Windows Management Instrumentation Command-line) for CPU discovery, often executed with commands such as \u201Cwmic cpu get name\u201D This behavior is commonly associated with reconnaissance, where adversaries seek to gather details about system hardware, assess processing power, or determine if the environment is virtualized. While WMIC is a legitimate administrative tool, its use for CPU queries outside of normal inventory or management scripts can indicate malicious intent. Monitoring command-line executions of WMIC with CPU-related arguments and correlating with other discovery activity can help identify attacker reconnaissance."
   author: Teoderick Contreras, Splunk
+  updated: '2025-08-25'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1082
-      name: Technique T1082
-    tactics: []
+      name: System Information Discovery
+      tactics:
+      - discovery
+    tactics:
+    - discovery
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_wmic_cpu_discovery.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_wmic_cpu_discovery.yml
+      rule_sha256: sha256:5c2957885cfdf6808aca9f1d66901e8e811ffc7244e46a5746717fa3bbaf81d5
+      detection_id: 6fc46cae-a8c0-4296-b07a-8e52d4322587
+      source_version: 1
+      source_date: '2025-08-25'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/lamehug/T1082/wmic_cmd/wmic_cmd.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/lamehug/T1082/wmic_cmd/wmic_cmd.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:7285d5187d1168b0c6f3422360510162beef0bfa4d070dc0e5abf3655ceab91a
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

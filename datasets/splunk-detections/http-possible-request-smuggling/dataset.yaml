@@ -1,14 +1,10 @@
 metadata:
   name: http-possible-request-smuggling
   version: 1.0.0
-  description: HTTP request smuggling is a technique for interfering with the way
-    a web site processes sequences of HTTP requests that are received from one or
-    more users. Request smuggling vulnerabilities are often critical in nature, allowing
-    an attacker to bypass security controls, gain unauthorized access to sensitive
-    data, and directly compromise other application users. This detection identifies
-    a common request smuggling technique of using both Content-Length and Transfer-Encoding
-    headers to cause a par
+  description: HTTP request smuggling is a technique for interfering with the way a web site processes sequences of HTTP requests that are received from one or more users. Request smuggling vulnerabilities are often critical in nature, allowing an attacker to bypass security controls, gain unauthorized access to sensitive data, and directly compromise other application users. This detection identifies a common request smuggling technique of using both Content-Length and Transfer-Encoding headers to cause a parsing confusion between the frontend and backend.
   author: Raven Tait, Splunk
+  updated: '2025-10-06'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1071.001
-      name: Technique T1071.001
-    tactics: []
+      name: Web Protocols
+      tactics:
+      - command-and-control
+    tactics:
+    - command-and-control
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/web/http_possible_request_smuggling.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/web/http_possible_request_smuggling.yml
+      rule_sha256: sha256:6d2cea369ad473ca1ff40500b87ec42d3cf8b322d7527722fe1b7464006a1d7c
+      detection_id: 97d85f98-9d15-41a0-8682-7030454875e7
+      source_version: 1
+      source_date: '2025-10-06'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/request_smuggling/suricata_request_smuggling.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1190/request_smuggling/suricata_request_smuggling.log
     description: suricata - suricata
     format: auto
     schema: raw
     sourcetype: suricata
+    checksum: sha256:067aeec8987bcd6cd7dd1c02e2aeb9ef335d078a760c5313dcb46e8d78c928a3
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

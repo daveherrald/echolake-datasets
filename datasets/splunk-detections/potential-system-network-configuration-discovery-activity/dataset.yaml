@@ -1,14 +1,10 @@
 metadata:
   name: potential-system-network-configuration-discovery-activity
   version: 5.0.0
-  description: The following analytic identifies the rapid execution of processes
-    used for system network configuration discovery on an endpoint. It leverages data
-    from Endpoint Detection and Response (EDR) agents, focusing on process GUIDs,
-    names, parent processes, and command-line executions. This activity can be significant
-    as it may indicate an attacker attempting to map the network, which is a common
-    precursor to lateral movement or further exploitation. If confirmed malicious,
-    this behavior could allow a
+  description: The following analytic identifies the rapid execution of processes used for system network configuration discovery on an endpoint. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process GUIDs, names, parent processes, and command-line executions. This activity can be significant as it may indicate an attacker attempting to map the network, which is a common precursor to lateral movement or further exploitation. If confirmed malicious, this behavior could allow an attacker to gain insights into the network topology, identify critical systems, and plan subsequent attacks, potentially leading to data exfiltration or system compromise.
   author: Bhavin Patel, Splunk
+  updated: '2025-12-17'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1016
-      name: Technique T1016
-    tactics: []
+      name: System Network Configuration Discovery
+      tactics:
+      - discovery
+    tactics:
+    - discovery
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/potential_system_network_configuration_discovery_activity.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/potential_system_network_configuration_discovery_activity.yml
+      rule_sha256: sha256:94ea0aae963baa79b76ab9248008c4729b406b96cfe78b1d416c4b2bb7dc7988
+      detection_id: 3f0b95e3-3195-46ac-bea3-84fb59e7fac5
+      source_version: 5
+      source_date: '2025-12-17'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1016/discovery_commands/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1016/discovery_commands/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:90330baf06554a542d188162782c68140d3aa250f1e50f38b925ba26094507db
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,14 +1,10 @@
 metadata:
   name: windows-multi-hop-proxy-tor-website-query
   version: 8.0.0
-  description: The following analytic identifies DNS queries to known TOR proxy websites,
-    such as "*.torproject.org" and "www.theonionrouter.com". It leverages Sysmon EventCode
-    22 to detect these queries by monitoring DNS query events from endpoints. This
-    activity is significant because adversaries often use TOR proxies to disguise
-    the source of their malicious traffic, making it harder to trace their actions.
-    If confirmed malicious, this behavior could indicate an attempt to obfuscate network
-    traffic, potenti
+  description: The following analytic identifies DNS queries to known TOR proxy websites, such as "*.torproject.org" and "www.theonionrouter.com". It leverages Sysmon EventCode 22 to detect these queries by monitoring DNS query events from endpoints. This activity is significant because adversaries often use TOR proxies to disguise the source of their malicious traffic, making it harder to trace their actions. If confirmed malicious, this behavior could indicate an attempt to obfuscate network traffic, potentially allowing attackers to exfiltrate data or communicate with command and control servers undetected.
   author: Teoderick Contreras, Splunk
+  updated: '2025-07-28'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1071.003
-      name: Technique T1071.003
-    tactics: []
+      name: Mail Protocols
+      tactics:
+      - command-and-control
+    tactics:
+    - command-and-control
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/network/windows_multi_hop_proxy_tor_website_query.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/network/windows_multi_hop_proxy_tor_website_query.yml
+      rule_sha256: sha256:50c2d37465146e061aeada4802fd96401c23aeea6f0f4fea6b9930202e7e0447
+      detection_id: 4c2d198b-da58-48d7-ba27-9368732d0054
+      source_version: 8
+      source_date: '2025-07-28'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/agent_tesla/agent_tesla_tor_dns_query/sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/agent_tesla/agent_tesla_tor_dns_query/sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:3e8d05ee3bfd620dc1e869b01b64c5891610b3eda276cee2ccf063ad39b58e65
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

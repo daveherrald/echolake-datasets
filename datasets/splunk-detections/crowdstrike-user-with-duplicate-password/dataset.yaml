@@ -1,13 +1,10 @@
 metadata:
   name: crowdstrike-user-with-duplicate-password
   version: 4.0.0
-  description: The following analytic detects CrowdStrike alerts for non-admin accounts
-    with duplicate password risk, identifying instances where multiple non-admin users
-    share the same password. This practice weakens security and increases the potential
-    for unauthorized access. Addressing these alerts is essential to ensure each user
-    account has a unique, strong password, thereby enhancing overall security and
-    protecting sensitive information.
+  description: The following analytic detects CrowdStrike alerts for non-admin accounts with duplicate password risk, identifying instances where multiple non-admin users share the same password. This practice weakens security and increases the potential for unauthorized access. Addressing these alerts is essential to ensure each user account has a unique, strong password, thereby enhancing overall security and protecting sensitive information.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -15,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1110
-      name: Technique T1110
-    tactics: []
+      name: Brute Force
+      tactics:
+      - credential-access
+    tactics:
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/crowdstrike_user_with_duplicate_password.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/crowdstrike_user_with_duplicate_password.yml
+      rule_sha256: sha256:a71d617bb5968d2c650d8a53b1ae499da7bfb972b2f4d8de7ce31614b8c75cb4
+      detection_id: 386dd914-16e5-400b-9bf6-25572cc4415a
+      source_version: 4
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/suspicious_behaviour/crowdstrike_stream/user_duplicate_password/crowdstrike_user_dup_pwd_cleaned.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/suspicious_behaviour/crowdstrike_stream/user_duplicate_password/crowdstrike_user_dup_pwd_cleaned.log
     description: crowdstrike:identities - crowdstrike:identities
     format: auto
     schema: raw
     sourcetype: crowdstrike:identities
+    checksum: sha256:c311054d83d50958e2da48b6d5939f77bcdd064b119359f675400d96d0d8da16
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

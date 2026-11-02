@@ -1,14 +1,10 @@
 metadata:
   name: script-execution-via-wmi
   version: 10.0.0
-  description: The following analytic detects the execution of scripts via Windows
-    Management Instrumentation (WMI) by monitoring the process 'scrcons.exe'. This
-    detection leverages data from Endpoint Detection and Response (EDR) agents, focusing
-    on process creation events. WMI-based script execution is significant because
-    adversaries often use it to perform malicious activities stealthily, such as system
-    compromise, data exfiltration, or establishing persistence. If confirmed malicious,
-    this activity could al
+  description: The following analytic detects the execution of scripts via Windows Management Instrumentation (WMI) by monitoring the process 'scrcons.exe'. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process creation events. WMI-based script execution is significant because adversaries often use it to perform malicious activities stealthily, such as system compromise, data exfiltration, or establishing persistence. If confirmed malicious, this activity could allow attackers to execute arbitrary code, escalate privileges, or maintain long-term access to the environment. Analysts should differentiate between legitimate administrative use and potential threats.
   author: Rico Valdez, Michael Haag, Splunk
+  updated: '2025-07-29'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1047
-      name: Technique T1047
-    tactics: []
+      name: Windows Management Instrumentation
+      tactics:
+      - execution
+    tactics:
+    - execution
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/script_execution_via_wmi.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/script_execution_via_wmi.yml
+      rule_sha256: sha256:158871a4d265b838948c58b5e5004f93dd7de09edddba5989196ebc6e712ebec
+      detection_id: aa73f80d-d728-4077-b226-81ea0c8be589
+      source_version: 10
+      source_date: '2025-07-29'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1047/execution_scrcons/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1047/execution_scrcons/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:6181de032b63ca66cbbd61e43dffd9ea5acc41713b8ccb0a163dfb4afd1d86f9
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,14 +1,10 @@
 metadata:
   name: confluence-data-center-and-server-privilege-escalation
   version: 7.0.0
-  description: The following analytic identifies potential exploitation attempts on
-    a known vulnerability in Atlassian Confluence, specifically targeting the /setup/*.action*
-    URL pattern. It leverages web logs within the Splunk 'Web' Data Model, filtering
-    for successful accesses (HTTP status 200) to these endpoints. This activity is
-    significant as it suggests attackers might be exploiting a privilege escalation
-    flaw in Confluence. If confirmed malicious, it could result in unauthorized access
-    or account creati
+  description: The following analytic identifies potential exploitation attempts on a known vulnerability in Atlassian Confluence, specifically targeting the /setup/*.action* URL pattern. It leverages web logs within the Splunk 'Web' Data Model, filtering for successful accesses (HTTP status 200) to these endpoints. This activity is significant as it suggests attackers might be exploiting a privilege escalation flaw in Confluence. If confirmed malicious, it could result in unauthorized access or account creation with escalated privileges, leading to potential data breaches or further exploitation within the environment.
   author: Michael Haag, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1190
-      name: Technique T1190
-    tactics: []
+      name: Exploit Public-Facing Application
+      tactics:
+      - initial-access
+    tactics:
+    - initial-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/web/confluence_data_center_and_server_privilege_escalation.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/web/confluence_data_center_and_server_privilege_escalation.yml
+      rule_sha256: sha256:25b7dc1859f929a4c52bd57dc7d63fe4c03fd8ec8b3ab97f789d6039aa44fa0a
+      detection_id: 115bebac-0976-4f7d-a3ec-d1fb45a39a11
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/confluence/nginx_plus_kv_confluence.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1190/confluence/nginx_plus_kv_confluence.log
     description: nginx:plus:kv - nginx:plus:kv
     format: auto
     schema: raw
     sourcetype: nginx:plus:kv
+    checksum: sha256:937955232a1de0c5f39419c28e5706c19006baa3a2c24255f1ed311e82492cbf
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

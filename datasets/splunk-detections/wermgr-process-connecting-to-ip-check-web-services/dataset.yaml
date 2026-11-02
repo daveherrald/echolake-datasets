@@ -1,14 +1,10 @@
 metadata:
   name: wermgr-process-connecting-to-ip-check-web-services
   version: 9.0.0
-  description: 'The following analytic detects the wermgr.exe process attempting to
-    connect to known IP check web services. It leverages Sysmon EventCode 22 to identify
-    DNS queries made by wermgr.exe to specific IP check services. This activity is
-    significant because wermgr.exe is typically used for Windows error reporting,
-    and its connection to these services may indicate malicious code injection, often
-    associated with malware like Trickbot. If confirmed malicious, this behavior could
-    allow attackers to recon '
+  description: The following analytic detects the wermgr.exe process attempting to connect to known IP check web services. It leverages Sysmon EventCode 22 to identify DNS queries made by wermgr.exe to specific IP check services. This activity is significant because wermgr.exe is typically used for Windows error reporting, and its connection to these services may indicate malicious code injection, often associated with malware like Trickbot. If confirmed malicious, this behavior could allow attackers to recon the infected machine's IP address, aiding in further exploitation and evasion tactics.
   author: Teoderick Contreras, Mauricio Velazco, Splunk
+  updated: '2025-07-16'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1590.005
-      name: Technique T1590.005
-    tactics: []
+      name: IP Addresses
+      tactics:
+      - reconnaissance
+    tactics:
+    - reconnaissance
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/network/wermgr_process_connecting_to_ip_check_web_services.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/network/wermgr_process_connecting_to_ip_check_web_services.yml
+      rule_sha256: sha256:8fd6e582bb210832ac30fafe59a68b85378b2576126b5999e27aad35f492412c
+      detection_id: ed313326-a0f9-11eb-a89c-acde48001122
+      source_version: 9
+      source_date: '2025-07-16'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/trickbot/infection/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/trickbot/infection/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:94438dd32541ebd0150f782ba6dcce8fbd12d7c592013d3426c8bb0bb24ae24d
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

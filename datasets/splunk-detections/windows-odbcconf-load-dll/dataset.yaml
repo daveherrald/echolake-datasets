@@ -1,14 +1,10 @@
 metadata:
   name: windows-odbcconf-load-dll
   version: 8.0.0
-  description: The following analytic detects the execution of odbcconf.exe with the
-    regsvr action to load a DLL. This is identified by monitoring command-line arguments
-    in process creation logs from Endpoint Detection and Response (EDR) agents. This
-    activity is significant as it may indicate an attempt to execute arbitrary code
-    via DLL loading, a common technique used in various attack vectors. If confirmed
-    malicious, this could allow an attacker to execute code with the privileges of
-    the odbcconf.exe process
+  description: The following analytic detects the execution of odbcconf.exe with the regsvr action to load a DLL. This is identified by monitoring command-line arguments in process creation logs from Endpoint Detection and Response (EDR) agents. This activity is significant as it may indicate an attempt to execute arbitrary code via DLL loading, a common technique used in various attack vectors. If confirmed malicious, this could allow an attacker to execute code with the privileges of the odbcconf.exe process, potentially leading to system compromise or further lateral movement.
   author: Michael Haag, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1218.008
-      name: Technique T1218.008
-    tactics: []
+      name: Odbcconf
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_odbcconf_load_dll.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_odbcconf_load_dll.yml
+      rule_sha256: sha256:e9e8ca2a079978b08814fe5f56266e52a23241c3507f60d2b2200b3a4441f103
+      detection_id: 141e7fca-a9f0-40fd-a539-9aac8be41f1b
+      source_version: 8
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218.008/atomic_red_team/windows-sysmon-odbc-regsvr.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1218.008/atomic_red_team/windows-sysmon-odbc-regsvr.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:3a6308c6ac99b548bc751ecf6a20edefd0e85779d03dbf27bc7ef56706752ac2
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

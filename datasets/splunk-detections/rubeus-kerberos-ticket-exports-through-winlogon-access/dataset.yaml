@@ -1,14 +1,10 @@
 metadata:
   name: rubeus-kerberos-ticket-exports-through-winlogon-access
   version: 10.0.0
-  description: The following analytic detects a process accessing the winlogon.exe
-    system process, indicative of the Rubeus tool attempting to export Kerberos tickets
-    from memory. This detection leverages Sysmon EventCode 10 logs, focusing on processes
-    obtaining a handle to winlogon.exe with specific access rights. This activity
-    is significant as it often precedes pass-the-ticket attacks, where adversaries
-    use stolen Kerberos tickets to move laterally within an environment. If confirmed
-    malicious, this could a
+  description: The following analytic detects a process accessing the winlogon.exe system process, indicative of the Rubeus tool attempting to export Kerberos tickets from memory. This detection leverages Sysmon EventCode 10 logs, focusing on processes obtaining a handle to winlogon.exe with specific access rights. This activity is significant as it often precedes pass-the-ticket attacks, where adversaries use stolen Kerberos tickets to move laterally within an environment. If confirmed malicious, this could allow attackers to bypass normal access controls, escalate privileges, and persist within the network, posing a severe security risk.
   author: Mauricio Velazco, Splunk
+  updated: '2025-10-14'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1550.003
-      name: Technique T1550.003
-    tactics: []
+      name: Pass the Ticket
+      tactics:
+      - defense-evasion
+      - lateral-movement
+    tactics:
+    - defense-evasion
+    - lateral-movement
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/rubeus_kerberos_ticket_exports_through_winlogon_access.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/rubeus_kerberos_ticket_exports_through_winlogon_access.yml
+      rule_sha256: sha256:8a5c55bc8c948a80918cd6efbec394b7465f850eb120b798512b0bd64e53f2b0
+      detection_id: 5ed8c50a-8869-11ec-876f-acde48001122
+      source_version: 10
+      source_date: '2025-10-14'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1550.003/rubeus/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1550.003/rubeus/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:b5400fc0ea31ff26397efdd8760b264492e4d49854646b6a0ec173fa0f98a5d1
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

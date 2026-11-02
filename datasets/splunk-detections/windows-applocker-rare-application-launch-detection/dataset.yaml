@@ -1,14 +1,10 @@
 metadata:
   name: windows-applocker-rare-application-launch-detection
   version: 5.0.0
-  description: The following analytic detects the launch of rarely used applications
-    within the environment, which may indicate the use of potentially malicious software
-    or tools by attackers. It leverages Windows AppLocker event logs, aggregating
-    application launch counts over time and flagging those that significantly deviate
-    from the norm. This behavior is significant as it helps identify unusual application
-    activity that could signal a security threat. If confirmed malicious, this activity
-    could allow atta
+  description: The following analytic detects the launch of rarely used applications within the environment, which may indicate the use of potentially malicious software or tools by attackers. It leverages Windows AppLocker event logs, aggregating application launch counts over time and flagging those that significantly deviate from the norm. This behavior is significant as it helps identify unusual application activity that could signal a security threat. If confirmed malicious, this activity could allow attackers to execute unauthorized code, potentially leading to further compromise of the system.
   author: Michael Haag, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - hunting
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1218
-      name: Technique T1218
-    tactics: []
+      name: System Binary Proxy Execution
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_applocker_rare_application_launch_detection.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_applocker_rare_application_launch_detection.yml
+      rule_sha256: sha256:c58c463129d74431b3d772abce9f457d9fc5274d340e21ee661c797202ecf644
+      detection_id: 9556f7b7-285f-4f18-8eeb-963d989f9d27
+      source_version: 5
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562/applocker/applocker.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1562/applocker/applocker.log
     description: XmlWinEventLog:Microsoft-Windows-AppLocker/MSI and Script - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:5e494fdf4a51102aaee474dc39b94671970d57349b25d4d3fa606822a79407f4
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

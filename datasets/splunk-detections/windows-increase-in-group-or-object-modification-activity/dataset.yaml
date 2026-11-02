@@ -1,13 +1,10 @@
 metadata:
   name: windows-increase-in-group-or-object-modification-activity
   version: 4.0.0
-  description: This analytic detects an increase in modifications to AD groups or
-    objects. Frequent changes to AD groups or objects can indicate potential security
-    risks, such as unauthorized access attempts, impairing defences or establishing
-    persistence. By monitoring AD logs for unusual modification patterns, this detection
-    helps identify suspicious behavior that could compromise the integrity and security
-    of the AD environment.
+  description: This analytic detects an increase in modifications to AD groups or objects. Frequent changes to AD groups or objects can indicate potential security risks, such as unauthorized access attempts, impairing defences or establishing persistence. By monitoring AD logs for unusual modification patterns, this detection helps identify suspicious behavior that could compromise the integrity and security of the AD environment.
   author: Dean Luxton
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -15,20 +12,47 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1098
-      name: Technique T1098
+      name: Account Manipulation
+      tactics:
+      - persistence
+      - privilege-escalation
     - id: T1562
-      name: Technique T1562
-    tactics: []
+      name: Impair Defenses
+      tactics:
+      - defense-evasion
+    tactics:
+    - persistence
+    - privilege-escalation
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_increase_in_group_or_object_modification_activity.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_increase_in_group_or_object_modification_activity.yml
+      rule_sha256: sha256:0775e859648c9e90927932116c8ced3440431f2b9c5aa827fc316632694de4fc
+      detection_id: 4f9564dd-a204-4f22-b375-4dfca3a68731
+      source_version: 4
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1098/account_manipulation/xml-windows-security.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1098/account_manipulation/xml-windows-security.log
     description: XmlWinEventLog:Security - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:d989f2eea18d026813b3123a57cd625d3066fdd5b9f2ed0c93dfc596dc4f1fa1
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

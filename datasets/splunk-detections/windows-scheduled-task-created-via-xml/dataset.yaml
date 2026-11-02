@@ -1,16 +1,14 @@
 metadata:
   name: windows-scheduled-task-created-via-xml
   version: 11.0.0
-  description: 'The following analytic detects the creation of scheduled tasks in
-    Windows using schtasks.exe with the "XML" parameter.
+  description: 'The following analytic detects the creation of scheduled tasks in Windows using schtasks.exe with the "XML" parameter.
 
-    This detection leverages data from Endpoint Detection and Response (EDR) agents,
-    focusing on command-line executions and process details.
+    This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on command-line executions and process details.
 
-    This activity is significant as it is a common technique for establishing persistence
-    or achieving privilege escalation, often used by malware like Trickbot and Winter-Vivern.
-    While creating a scheduled task via XML may be legitimate, it can a'
+    This activity is significant as it is a common technique for establishing persistence or achieving privilege escalation, often used by malware like Trickbot and Winter-Vivern. While creating a scheduled task via XML may be legitimate, it can also be abused by attackers. If confirmed malicious, this could allow attackers to maintain access, execute additional payloads, and potentially lead to data theft or ransomware deployment.'
   author: Teoderick Contreras, Nasreddine Bencherchali, Splunk
+  updated: '2025-12-18'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -20,18 +18,44 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1053.005
-      name: Technique T1053.005
-    tactics: []
+      name: Scheduled Task
+      tactics:
+      - execution
+      - persistence
+      - privilege-escalation
+    tactics:
+    - execution
+    - persistence
+    - privilege-escalation
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_scheduled_task_created_via_xml.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_scheduled_task_created_via_xml.yml
+      rule_sha256: sha256:2c7b2bea9b6199f6ee4b102e353a76344a06ad9b0f182b999810379d8a3d15e5
+      detection_id: 7e03b682-3965-4598-8e91-a60a40a3f7e4
+      source_version: 11
+      source_date: '2025-12-18'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/winter-vivern/scheduledtask/sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/winter-vivern/scheduledtask/sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:06df0ee0273af3cb01cc84c550b95a62260d5eb82820554a16d6efc9619cca95
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

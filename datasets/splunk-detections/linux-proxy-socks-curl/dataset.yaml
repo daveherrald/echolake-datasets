@@ -1,14 +1,10 @@
 metadata:
   name: linux-proxy-socks-curl
   version: 9.0.0
-  description: The following analytic detects the use of the `curl` command with proxy-related
-    arguments such as `-x`, `socks`, `--preproxy`, and `--proxy`. This detection leverages
-    data from Endpoint Detection and Response (EDR) agents, focusing on command-line
-    executions and process details. This activity is significant as it may indicate
-    an adversary attempting to use a proxy to evade network monitoring and obscure
-    their actions. If confirmed malicious, this behavior could allow attackers to
-    bypass security
+  description: The following analytic detects the use of the `curl` command with proxy-related arguments such as `-x`, `socks`, `--preproxy`, and `--proxy`. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on command-line executions and process details. This activity is significant as it may indicate an adversary attempting to use a proxy to evade network monitoring and obscure their actions. If confirmed malicious, this behavior could allow attackers to bypass security controls, making it difficult to track their activities and potentially leading to unauthorized data access or exfiltration.
   author: Michael Haag, Splunk, 0xC0FFEEEE, Github Community
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,20 +13,44 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1090
-      name: Technique T1090
+      name: Proxy
+      tactics:
+      - command-and-control
     - id: T1095
-      name: Technique T1095
-    tactics: []
+      name: Non-Application Layer Protocol
+      tactics:
+      - command-and-control
+    tactics:
+    - command-and-control
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/linux_proxy_socks_curl.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/linux_proxy_socks_curl.yml
+      rule_sha256: sha256:b27425c4d2aed766bd9e3da766b68d009b6eafdade899370e787da84de9fea90
+      detection_id: bd596c22-ad1e-44fc-b242-817253ce8b08
+      source_version: 9
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1105/atomic_red_team/curl-linux-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1105/atomic_red_team/curl-linux-sysmon.log
     description: Syslog:Linux-Sysmon/Operational - sysmon:linux
     format: auto
     schema: raw
     sourcetype: sysmon:linux
+    checksum: sha256:0ccb0e70a2ba8fcc3e3cb225e9cfe2e3e25edac0f75070641179c84432256160
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

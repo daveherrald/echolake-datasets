@@ -1,14 +1,10 @@
 metadata:
   name: windows-defacement-modify-transcodedwallpaper-file
   version: 7.0.0
-  description: The following analytic identifies modifications to the TranscodedWallpaper
-    file in the wallpaper theme directory, excluding changes made by explorer.exe.
-    This detection leverages the Endpoint.Processes and Endpoint.Filesystem data models
-    to correlate process activity with file modifications. This activity is significant
-    as it may indicate an adversary attempting to deface or change the desktop wallpaper
-    of a targeted host, a tactic often used to signal compromise or deliver a message.
-    If confirm
+  description: The following analytic identifies modifications to the TranscodedWallpaper file in the wallpaper theme directory, excluding changes made by explorer.exe. This detection leverages the Endpoint.Processes and Endpoint.Filesystem data models to correlate process activity with file modifications. This activity is significant as it may indicate an adversary attempting to deface or change the desktop wallpaper of a targeted host, a tactic often used to signal compromise or deliver a message. If confirmed malicious, this could be a sign of unauthorized access and tampering, potentially leading to further system compromise or data exfiltration.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1491
-      name: Technique T1491
-    tactics: []
+      name: Defacement
+      tactics:
+      - impact
+    tactics:
+    - impact
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_defacement_modify_transcodedwallpaper_file.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_defacement_modify_transcodedwallpaper_file.yml
+      rule_sha256: sha256:66691b49f21e7d64d6f039418cbdadfcbf870a3d2d68cb1e24513181612bfe48
+      detection_id: e11c3d90-5bc7-42ad-94cd-ba75db10d897
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/brute_ratel/wallpaper_via_transcodedwallpaper/sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/brute_ratel/wallpaper_via_transcodedwallpaper/sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:b902788fd08575d4fb10797c987f80291b9ecb3d9386cd4b80206a5d9f9eb8de
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,16 +1,16 @@
 metadata:
   name: cisco-nvm-suspicious-file-download-via-headless-browser
   version: 2.0.0
-  description: 'This analytic identifies the use of Chromium-based browsers (like
-    Microsoft Edge) running in headless mode with the `--dump-dom` argument.
+  description: 'This analytic identifies the use of Chromium-based browsers (like Microsoft Edge) running in headless mode with the `--dump-dom` argument.
 
-    This behavior has been observed in attack campaigns such as DUCKTAIL, where browsers
-    are automated to stealthily download content from the internet using direct URLs
-    or suspicious hosting platforms.
+    This behavior has been observed in attack campaigns such as DUCKTAIL, where browsers are automated to stealthily download content from the internet using direct URLs or suspicious hosting platforms.
 
-    The detection focuses on identifying connections to known file-sharing domains
-    or direct IPs extracted from command-line arguments and cross-checks those against '
+    The detection focuses on identifying connections to known file-sharing domains or direct IPs extracted from command-line arguments and cross-checks those against the destination of the flow.
+
+    Since it leverages Cisco Network Visibility Module telemetry, the rule triggers only if a network connection is made.'
   author: Nasreddine Bencherchali, Splunk
+  updated: '2025-09-09'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,20 +18,45 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1105
-      name: Technique T1105
+      name: Ingress Tool Transfer
+      tactics:
+      - command-and-control
     - id: T1059
-      name: Technique T1059
-    tactics: []
+      name: Command and Scripting Interpreter
+      tactics:
+      - execution
+    tactics:
+    - execution
+    - command-and-control
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/cisco_nvm___suspicious_file_download_via_headless_browser.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/cisco_nvm___suspicious_file_download_via_headless_browser.yml
+      rule_sha256: sha256:6d337e23cafe665ffd342f3c0b932832cbedce89b46d08c95dc62c0f44c03ce4
+      detection_id: cd0e816f-f67d-4dbe-a153-480b546e867e
+      source_version: 2
+      source_date: '2025-09-09'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_network_visibility_module/cisco_nvm_flowdata/nvm_flowdata.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/cisco_network_visibility_module/cisco_nvm_flowdata/nvm_flowdata.log
     description: not_applicable - cisco:nvm:flowdata
     format: auto
     schema: raw
     sourcetype: cisco:nvm:flowdata
+    checksum: sha256:f427b5cc3a60bb3b41ae1c679bda85c1bb9aba78cc9468b94d3eec36adedfaaa
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

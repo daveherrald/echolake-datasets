@@ -1,14 +1,10 @@
 metadata:
   name: azure-ad-tenant-wide-admin-consent-granted
   version: 8.0.0
-  description: The following analytic identifies instances where admin consent is
-    granted to an application within an Azure AD tenant. It leverages Azure AD audit
-    logs, specifically events related to the admin consent action within the ApplicationManagement
-    category. This activity is significant because admin consent allows applications
-    to access data across the entire tenant, potentially exposing vast amounts of
-    organizational data. If confirmed malicious, an attacker could gain extensive
-    and persistent acces
+  description: The following analytic identifies instances where admin consent is granted to an application within an Azure AD tenant. It leverages Azure AD audit logs, specifically events related to the admin consent action within the ApplicationManagement category. This activity is significant because admin consent allows applications to access data across the entire tenant, potentially exposing vast amounts of organizational data. If confirmed malicious, an attacker could gain extensive and persistent access to sensitive data, leading to data exfiltration, espionage, further malicious activities, and potential compliance violations.
   author: Mauricio Velazco, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1098.003
-      name: Technique T1098.003
-    tactics: []
+      name: Additional Cloud Roles
+      tactics:
+      - persistence
+      - privilege-escalation
+    tactics:
+    - persistence
+    - privilege-escalation
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/azure_ad_tenant_wide_admin_consent_granted.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/azure_ad_tenant_wide_admin_consent_granted.yml
+      rule_sha256: sha256:29cd74f4aa7c4e319252ec170b2aee71c4e8447e1037814656cea748590f6ac2
+      detection_id: dc02c0ee-6ac0-4c7f-87ba-8ce43a4e4418
+      source_version: 8
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1098.003/azure_ad_admin_consent/azure_ad_admin_consent.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1098.003/azure_ad_admin_consent/azure_ad_admin_consent.log
     description: Azure AD - azure:monitor:aad
     format: auto
     schema: raw
     sourcetype: azure:monitor:aad
+    checksum: sha256:c111f6a37f01782328cb71bc944394c161733978b9eff68a99b72cdf63cad324
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

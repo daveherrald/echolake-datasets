@@ -1,13 +1,10 @@
 metadata:
   name: windows-sql-server-extended-procedure-dll-loading-hunt
   version: 2.0.0
-  description: This analytic detects when SQL Server loads DLLs to execute extended
-    stored procedures. This is particularly important for security monitoring as it
-    indicates the first-time use or version changes of potentially dangerous procedures
-    like xp_cmdshell, sp_OACreate, and others. While this is a legitimate operation,
-    adversaries may abuse these procedures for execution, discovery, or privilege
-    escalation.
+  description: This analytic detects when SQL Server loads DLLs to execute extended stored procedures. This is particularly important for security monitoring as it indicates the first-time use or version changes of potentially dangerous procedures like xp_cmdshell, sp_OACreate, and others. While this is a legitimate operation, adversaries may abuse these procedures for execution, discovery, or privilege escalation.
   author: Michael Haag, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - hunting
   - splunk-security-content
@@ -15,20 +12,45 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1505.001
-      name: Technique T1505.001
+      name: SQL Stored Procedures
+      tactics:
+      - persistence
     - id: T1059.009
-      name: Technique T1059.009
-    tactics: []
+      name: Cloud API
+      tactics:
+      - execution
+    tactics:
+    - execution
+    - persistence
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_sql_server_extended_procedure_dll_loading_hunt.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_sql_server_extended_procedure_dll_loading_hunt.yml
+      rule_sha256: sha256:5787d2310bd73db8b7c36acbee1ea2e8cb61c3ac01c619030465160643e45f16
+      detection_id: 182ba99f-2dde-4cdb-8e5c-e3b1e251cb10
+      source_version: 2
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1505.001/simulation/dllprocedureload_windows-application.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1505.001/simulation/dllprocedureload_windows-application.log
     description: XmlWinEventLog:Application - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:739c02b4459b224fb1c49e4c126c8f1b746391df40d42de49ff52f5929630fb2
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

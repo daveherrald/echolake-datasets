@@ -1,14 +1,10 @@
 metadata:
   name: windows-wmi-process-and-service-list
   version: 7.0.0
-  description: The following analytic identifies suspicious WMI command lines querying
-    for running processes or services. It leverages data from Endpoint Detection and
-    Response (EDR) agents, focusing on specific process and command-line events. This
-    activity is significant as adversaries often use WMI to gather system information
-    and identify services on compromised machines. If confirmed malicious, this behavior
-    could allow attackers to map out the system, identify critical services, and plan
-    further attacks,
+  description: The following analytic identifies suspicious WMI command lines querying for running processes or services. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on specific process and command-line events. This activity is significant as adversaries often use WMI to gather system information and identify services on compromised machines. If confirmed malicious, this behavior could allow attackers to map out the system, identify critical services, and plan further attacks, potentially leading to privilege escalation or persistence within the environment.
   author: Teoderick Contreras, Splunk
+  updated: '2025-08-25'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1047
-      name: Technique T1047
-    tactics: []
+      name: Windows Management Instrumentation
+      tactics:
+      - execution
+    tactics:
+    - execution
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_wmi_process_and_service_list.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_wmi_process_and_service_list.yml
+      rule_sha256: sha256:3709e3ede00386bee163072af4a6378704d323662e647447de013a19e63b3064
+      detection_id: ef3c5ef2-3f6d-4087-aa75-49bf746dc907
+      source_version: 7
+      source_date: '2025-08-25'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/winpeas/sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/winpeas/sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:3d884edd04405659a53f85e3570d96056c01bd58081f175fd9aa9362259872a4
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

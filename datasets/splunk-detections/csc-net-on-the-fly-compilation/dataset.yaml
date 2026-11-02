@@ -1,14 +1,10 @@
 metadata:
   name: csc-net-on-the-fly-compilation
   version: 8.0.0
-  description: The following analytic detects the use of the .NET compiler csc.exe
-    for on-the-fly compilation of potentially malicious .NET code. It leverages data
-    from Endpoint Detection and Response (EDR) agents, focusing on specific command-line
-    patterns associated with csc.exe. This activity is significant because adversaries
-    and malware often use this technique to evade detection by compiling malicious
-    code at runtime. If confirmed malicious, this could allow attackers to execute
-    arbitrary code, potential
+  description: The following analytic detects the use of the .NET compiler csc.exe for on-the-fly compilation of potentially malicious .NET code. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on specific command-line patterns associated with csc.exe. This activity is significant because adversaries and malware often use this technique to evade detection by compiling malicious code at runtime. If confirmed malicious, this could allow attackers to execute arbitrary code, potentially leading to system compromise, data exfiltration, or further lateral movement within the network.
   author: Teoderick Contreras, Splunk
+  updated: '2025-12-15'
+  license: Apache-2.0
   tags:
   - hunting
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1027.004
-      name: Technique T1027.004
-    tactics: []
+      name: Compile After Delivery
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/csc_net_on_the_fly_compilation.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/csc_net_on_the_fly_compilation.yml
+      rule_sha256: sha256:35aeee42b12793e79e8fc02493ece534475b5fca2fb016ff6503c94c96be6523
+      detection_id: ea73128a-43ab-11ec-9753-acde48001122
+      source_version: 8
+      source_date: '2025-12-15'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/vilsel/sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/vilsel/sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:29f318a716934ee6fbf71f4970652a282f8fc00c2a3fc8c3f5c315206e333e79
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

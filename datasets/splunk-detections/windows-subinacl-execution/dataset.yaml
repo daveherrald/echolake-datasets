@@ -1,14 +1,10 @@
 metadata:
   name: windows-subinacl-execution
   version: 4.0.0
-  description: The following analytic detects the execution of the SubInAcl utility.
-    SubInAcl is a legacy Windows Resource Kit tool from the Windows 2003 era, used
-    to manipulate security descriptors of securable objects. It leverages data from
-    Endpoint Detection and Response (EDR) agents, specifically searching for any process
-    execution involving "SubInAcl.exe" binary. This activity can be significant because
-    the utility should be rarely found on modern Windows machines, which mean any
-    execution could potentia
+  description: The following analytic detects the execution of the SubInAcl utility. SubInAcl is a legacy Windows Resource Kit tool from the Windows 2003 era, used to manipulate security descriptors of securable objects. It leverages data from Endpoint Detection and Response (EDR) agents, specifically searching for any process execution involving "SubInAcl.exe" binary. This activity can be significant because the utility should be rarely found on modern Windows machines, which mean any execution could potentially be considered suspicious. If confirmed malicious, this could allow an attacker to blind defenses by tampering with EventLog ACLs or modifying the access to a previously denied resource.
   author: Nasreddine Bencherchali, Michael Haag, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1222.001
-      name: Technique T1222.001
-    tactics: []
+      name: Windows File and Directory Permissions Modification
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_subinacl_execution.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_subinacl_execution.yml
+      rule_sha256: sha256:805b0ce13a7afd796fa833bd6826563319c8050cd2ed0e297adb555de8e90e56
+      detection_id: 12491419-1a6f-4af4-afc3-4e2052f0610e
+      source_version: 4
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1222.001/subinacl/subinacl_sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1222.001/subinacl/subinacl_sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:f526d5dade465339be6efba299dbfd398b7b8a7c593cb60c324f3da9a5746823
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

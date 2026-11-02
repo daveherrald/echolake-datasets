@@ -1,14 +1,10 @@
 metadata:
   name: impacket-lateral-movement-wmiexec-commandline-parameters
   version: 9.0.0
-  description: The following analytic detects the use of Impacket's `wmiexec.py` tool
-    for lateral movement by identifying specific command-line parameters. It leverages
-    data from Endpoint Detection and Response (EDR) agents, focusing on processes
-    spawned by `wmiprvse.exe` with command-line patterns indicative of Impacket usage.
-    This activity is significant as Impacket tools are commonly used by adversaries
-    for remote code execution and lateral movement within a network. If confirmed
-    malicious, this could allow
+  description: The following analytic detects the use of Impacket's `wmiexec.py` tool for lateral movement by identifying specific command-line parameters. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on processes spawned by `wmiprvse.exe` with command-line patterns indicative of Impacket usage. This activity is significant as Impacket tools are commonly used by adversaries for remote code execution and lateral movement within a network. If confirmed malicious, this could allow attackers to execute arbitrary commands on remote systems, potentially leading to further compromise and data exfiltration.
   author: Michael Haag, Splunk
+  updated: '2026-01-20'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,24 +14,56 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1021.002
-      name: Technique T1021.002
+      name: SMB/Windows Admin Shares
+      tactics:
+      - lateral-movement
     - id: T1021.003
-      name: Technique T1021.003
+      name: Distributed Component Object Model
+      tactics:
+      - lateral-movement
     - id: T1047
-      name: Technique T1047
+      name: Windows Management Instrumentation
+      tactics:
+      - execution
     - id: T1543.003
-      name: Technique T1543.003
-    tactics: []
+      name: Windows Service
+      tactics:
+      - persistence
+      - privilege-escalation
+    tactics:
+    - execution
+    - persistence
+    - privilege-escalation
+    - lateral-movement
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/impacket_lateral_movement_wmiexec_commandline_parameters.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/impacket_lateral_movement_wmiexec_commandline_parameters.yml
+      rule_sha256: sha256:e89ed78251fad4afc72539ebdf31e031bd8655771877e104abc63a6c88508d81
+      detection_id: d6e464e4-5c6a-474e-82d2-aed616a3a492
+      source_version: 9
+      source_date: '2026-01-20'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1021.002/atomic_red_team/wmiexec_windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1021.002/atomic_red_team/wmiexec_windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:09584b182588aaba8b5cabe6330d71decf7d0f6b3c8e541e9f606616d1d90817
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,9 +1,10 @@
 metadata:
   name: windows-ad-gpo-new-cse-addition
   version: 6.0.0
-  description: This detection identifies when a a new client side extension is added
-    to an Active Directory Group Policy using the Group Policy Management Console.
+  description: This detection identifies when a a new client side extension is added to an Active Directory Group Policy using the Group Policy Management Console.
   author: Dean Luxton
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -11,25 +12,52 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1222.001
-      name: Technique T1222.001
+      name: Windows File and Directory Permissions Modification
+      tactics:
+      - defense-evasion
     - id: T1484.001
-      name: Technique T1484.001
-    tactics: []
+      name: Group Policy Modification
+      tactics:
+      - privilege-escalation
+      - defense-evasion
+    tactics:
+    - privilege-escalation
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_ad_gpo_new_cse_addition.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_ad_gpo_new_cse_addition.yml
+      rule_sha256: sha256:6d161badb98604646a35589370611a5071d6e8ddb9e88c16b18e6df70f4d465a
+      detection_id: 700c11d1-da09-47b2-81aa-358c143c7986
+      source_version: 6
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1484.001/group_policy_new_cse/windows-security.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1484.001/group_policy_new_cse/windows-security.log
     description: XmlWinEventLog:Security - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1484.001/group_policy_new_cse/windows-admon.log
+    checksum: sha256:871146857c0bcf2e68262d7b31c21a8fda4a828d79f0c3c58b4f8ad313f8bd88
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1484.001/group_policy_new_cse/windows-admon.log
     description: ActiveDirectory - ActiveDirectory
     format: auto
     schema: raw
     sourcetype: ActiveDirectory
+    checksum: sha256:2e6a95b12f7cf520acc039c756e5370eb1a82a87539a7854a8020da2bda80a89
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

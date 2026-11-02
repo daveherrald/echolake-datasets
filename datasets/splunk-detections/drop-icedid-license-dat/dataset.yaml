@@ -1,14 +1,10 @@
 metadata:
   name: drop-icedid-license-dat
   version: 6.0.0
-  description: The following analytic detects the dropping of a suspicious file named
-    "license.dat" in %appdata% or %programdata%. This behavior is associated with
-    the IcedID malware, which uses this file to inject its core bot into other processes
-    for banking credential theft. The detection leverages Sysmon EventCode 11 to monitor
-    file creation events in these directories. This activity is significant as it
-    indicates a potential malware infection aiming to steal sensitive banking information.
-    If confirmed mal
+  description: The following analytic detects the dropping of a suspicious file named "license.dat" in %appdata% or %programdata%. This behavior is associated with the IcedID malware, which uses this file to inject its core bot into other processes for banking credential theft. The detection leverages Sysmon EventCode 11 to monitor file creation events in these directories. This activity is significant as it indicates a potential malware infection aiming to steal sensitive banking information. If confirmed malicious, the attacker could gain unauthorized access to financial data, leading to significant financial loss and data breaches.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - hunting
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1204.002
-      name: Technique T1204.002
-    tactics: []
+      name: Malicious File
+      tactics:
+      - execution
+    tactics:
+    - execution
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/drop_icedid_license_dat.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/drop_icedid_license_dat.yml
+      rule_sha256: sha256:cb1ec0ea43bc70b5473029d2970d09aa214a4c8bd6d108b97046bc7646f40459
+      detection_id: b7a045fc-f14a-11eb-8e79-acde48001122
+      source_version: 6
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/icedid/simulated_icedid/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/icedid/simulated_icedid/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:0f29018707ad867df89e05b871f53f69c4c6a397c90e8efbf890953b484babdb
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

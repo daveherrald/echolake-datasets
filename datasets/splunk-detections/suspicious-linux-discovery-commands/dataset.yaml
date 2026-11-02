@@ -1,14 +1,10 @@
 metadata:
   name: suspicious-linux-discovery-commands
   version: 7.0.0
-  description: 'The following analytic detects the execution of suspicious bash commands
-    commonly used in scripts like AutoSUID, LinEnum, and LinPeas for system discovery
-    on a Linux host. It leverages Endpoint Detection and Response (EDR) data, specifically
-    looking for a high number of distinct commands executed within a short time frame.
-    This activity is significant as it often precedes privilege escalation or other
-    malicious actions. If confirmed malicious, an attacker could gain detailed system
-    information, '
+  description: The following analytic detects the execution of suspicious bash commands commonly used in scripts like AutoSUID, LinEnum, and LinPeas for system discovery on a Linux host. It leverages Endpoint Detection and Response (EDR) data, specifically looking for a high number of distinct commands executed within a short time frame. This activity is significant as it often precedes privilege escalation or other malicious actions. If confirmed malicious, an attacker could gain detailed system information, identify vulnerabilities, and potentially escalate privileges, posing a severe threat to the environment.
   author: Bhavin Patel, Splunk
+  updated: '2026-01-20'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1059.004
-      name: Technique T1059.004
-    tactics: []
+      name: Unix Shell
+      tactics:
+      - execution
+    tactics:
+    - execution
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/suspicious_linux_discovery_commands.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/suspicious_linux_discovery_commands.yml
+      rule_sha256: sha256:cd8b6d392f1b52b1f1a7fec3c44fce05c963df8f32164c9dc0b37f2dbfb56e23
+      detection_id: 0edd5112-56c9-11ec-b990-acde48001122
+      source_version: 7
+      source_date: '2026-01-20'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.004/linux_discovery_tools/sysmon_linux.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1059.004/linux_discovery_tools/sysmon_linux.log
     description: Syslog:Linux-Sysmon/Operational - sysmon:linux
     format: auto
     schema: raw
     sourcetype: sysmon:linux
+    checksum: sha256:045e49f0528173351671de2e12817670d5be95485c6fc1c4a8aad80c620215f7
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

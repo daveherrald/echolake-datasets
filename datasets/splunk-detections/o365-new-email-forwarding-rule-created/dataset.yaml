@@ -1,14 +1,10 @@
 metadata:
   name: o365-new-email-forwarding-rule-created
   version: 7.0.0
-  description: 'The following analytic identifies the creation of new email forwarding
-    rules in an Office 365 environment. It detects events logged under New-InboxRule
-    and Set-InboxRule operations within the o365_management_activity data source,
-    focusing on parameters like ForwardTo, ForwardAsAttachmentTo, and RedirectTo.
-    This activity is significant as unauthorized email forwarding can lead to data
-    exfiltration and unauthorized access to sensitive information. If confirmed malicious,
-    attackers could intercept '
+  description: The following analytic identifies the creation of new email forwarding rules in an Office 365 environment. It detects events logged under New-InboxRule and Set-InboxRule operations within the o365_management_activity data source, focusing on parameters like ForwardTo, ForwardAsAttachmentTo, and RedirectTo. This activity is significant as unauthorized email forwarding can lead to data exfiltration and unauthorized access to sensitive information. If confirmed malicious, attackers could intercept and redirect emails, potentially compromising confidential communications and leading to data breaches.
   author: Mauricio Velazco, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1114.003
-      name: Technique T1114.003
-    tactics: []
+      name: Email Forwarding Rule
+      tactics:
+      - collection
+    tactics:
+    - collection
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/o365_new_email_forwarding_rule_created.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/o365_new_email_forwarding_rule_created.yml
+      rule_sha256: sha256:b457b4775763b2092516646c6368ac79b4759735afed6d623d558e2f302b5d4c
+      detection_id: 68469fd0-1315-44ba-b7e4-e92847bb76d6
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1114.003/o365_email_forwarding_rule_created/o365_email_forwarding_rule_created.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1114.003/o365_email_forwarding_rule_created/o365_email_forwarding_rule_created.log
     description: o365 - o365:management:activity
     format: auto
     schema: raw
     sourcetype: o365:management:activity
+    checksum: sha256:c21fa4251644f131001ac50b39401afaa3d128f39f9fc7f3c657ccd8b0641cdf
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

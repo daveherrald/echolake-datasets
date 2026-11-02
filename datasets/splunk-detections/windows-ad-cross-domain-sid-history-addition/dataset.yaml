@@ -1,14 +1,10 @@
 metadata:
   name: windows-ad-cross-domain-sid-history-addition
   version: 9.0.0
-  description: The following analytic detects changes to the sIDHistory attribute
-    of user or computer objects across different domains. It leverages Windows Security
-    Event Codes 4738 and 4742 to identify when the sIDHistory attribute is modified.
-    This activity is significant because the sIDHistory attribute allows users to
-    inherit permissions from other AD accounts, which can be exploited by adversaries
-    for inter-domain privilege escalation and persistence. If confirmed malicious,
-    this could enable attackers t
+  description: The following analytic detects changes to the sIDHistory attribute of user or computer objects across different domains. It leverages Windows Security Event Codes 4738 and 4742 to identify when the sIDHistory attribute is modified. This activity is significant because the sIDHistory attribute allows users to inherit permissions from other AD accounts, which can be exploited by adversaries for inter-domain privilege escalation and persistence. If confirmed malicious, this could enable attackers to gain unauthorized access to resources, maintain persistence, and escalate privileges across domain boundaries.
   author: Dean Luxton
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1134.005
-      name: Technique T1134.005
-    tactics: []
+      name: SID-History Injection
+      tactics:
+      - privilege-escalation
+      - defense-evasion
+    tactics:
+    - privilege-escalation
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_ad_cross_domain_sid_history_addition.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_ad_cross_domain_sid_history_addition.yml
+      rule_sha256: sha256:2f9f390bab6a1155665c19b3c33b9f8d1c40f9b8bc154bcd1ccddd60852fb829
+      detection_id: 41bbb371-28ba-439c-bb5c-d9930c28365d
+      source_version: 9
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1134.005/mimikatz/windows-security-xml.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1134.005/mimikatz/windows-security-xml.log
     description: XmlWinEventLog:Security - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:df8ed3327aa5f3f673775a308adc146fda1dd087e6545cae72db72dd0e4959d4
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

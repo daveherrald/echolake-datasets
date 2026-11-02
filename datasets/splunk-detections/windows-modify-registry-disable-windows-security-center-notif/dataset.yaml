@@ -1,14 +1,10 @@
 metadata:
   name: windows-modify-registry-disable-windows-security-center-notif
   version: 8.0.0
-  description: The following analytic detects modifications to the Windows registry
-    aimed at disabling Windows Security Center notifications. It leverages data from
-    the Endpoint.Registry datamodel, specifically monitoring changes to the registry
-    path "*\\Windows\\CurrentVersion\\ImmersiveShell\\UseActionCenterExperience*"
-    with a value of "0x00000000". This activity is significant as it can indicate
-    an attempt by adversaries or malware, such as Azorult, to evade defenses by suppressing
-    critical update notificat
+  description: The following analytic detects modifications to the Windows registry aimed at disabling Windows Security Center notifications. It leverages data from the Endpoint.Registry datamodel, specifically monitoring changes to the registry path "*\\Windows\\CurrentVersion\\ImmersiveShell\\UseActionCenterExperience*" with a value of "0x00000000". This activity is significant as it can indicate an attempt by adversaries or malware, such as Azorult, to evade defenses by suppressing critical update notifications. If confirmed malicious, this could allow attackers to persist undetected, potentially leading to further exploitation and compromise of the host system.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -17,18 +13,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1112
-      name: Technique T1112
-    tactics: []
+      name: Modify Registry
+      tactics:
+      - persistence
+      - defense-evasion
+    tactics:
+    - persistence
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_modify_registry_disable_windows_security_center_notif.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_modify_registry_disable_windows_security_center_notif.yml
+      rule_sha256: sha256:0cc08619f255e72ea3a34267fbd11ff52de7484329e5ad4dcfdeee20c25f2908
+      detection_id: 27ed3e79-6d86-44dd-b9ab-524451c97a7b
+      source_version: 8
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/azorult/sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/azorult/sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:00b51f8b994ee390d7305f35b43fd2a92570d41261576ebd548d5e9c5b187429
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

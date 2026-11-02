@@ -1,14 +1,10 @@
 metadata:
   name: windows-get-adcomputer-unconstrained-delegation-discovery
   version: 8.0.0
-  description: The following analytic detects the use of the Get-ADComputer cmdlet
-    with parameters indicating a search for Windows endpoints with Kerberos Unconstrained
-    Delegation. It leverages PowerShell Script Block Logging (EventCode=4104) to identify
-    this specific activity. This behavior is significant as it may indicate an attempt
-    by adversaries or Red Teams to gain situational awareness and perform Active Directory
-    discovery. If confirmed malicious, this activity could allow attackers to identify
-    high-va
+  description: The following analytic detects the use of the Get-ADComputer cmdlet with parameters indicating a search for Windows endpoints with Kerberos Unconstrained Delegation. It leverages PowerShell Script Block Logging (EventCode=4104) to identify this specific activity. This behavior is significant as it may indicate an attempt by adversaries or Red Teams to gain situational awareness and perform Active Directory discovery. If confirmed malicious, this activity could allow attackers to identify high-value targets for further exploitation, potentially leading to privilege escalation or lateral movement within the network.
   author: Mauricio Velazco, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1018
-      name: Technique T1018
-    tactics: []
+      name: Remote System Discovery
+      tactics:
+      - discovery
+    tactics:
+    - discovery
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_get_adcomputer_unconstrained_delegation_discovery.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_get_adcomputer_unconstrained_delegation_discovery.yml
+      rule_sha256: sha256:19a5eae70713e565d381c4a66b4d31f9adb8cb280f9a4f06df0e440e943af9e4
+      detection_id: c8640777-469f-4638-ab44-c34a3233ffac
+      source_version: 8
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1018/windows_get_adcomputer_unconstrained_delegation_discovery/windows-xml.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1018/windows_get_adcomputer_unconstrained_delegation_discovery/windows-xml.log
     description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:9f2ab5c2ceb0644ad46c00e88b8748cf821d60adc9c4b18e14541939fc51c9ab
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

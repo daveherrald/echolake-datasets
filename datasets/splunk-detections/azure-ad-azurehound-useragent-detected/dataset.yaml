@@ -1,14 +1,10 @@
 metadata:
   name: azure-ad-azurehound-useragent-detected
   version: 4.0.0
-  description: This detection identifies the presence of the default AzureHound user-agent
-    string within Microsoft Graph Activity logs and NonInteractive SignIn Logs. AzureHound
-    is a tool used for gathering information about Azure Active Directory environments,
-    often employed by security professionals for legitimate auditing purposes. However,
-    it can also be leveraged by malicious actors to perform reconnaissance activities,
-    mapping out the Azure AD infrastructure to identify potential vulnerabilities
-    and targ
+  description: This detection identifies the presence of the default AzureHound user-agent string within Microsoft Graph Activity logs and NonInteractive SignIn Logs. AzureHound is a tool used for gathering information about Azure Active Directory environments, often employed by security professionals for legitimate auditing purposes. However, it can also be leveraged by malicious actors to perform reconnaissance activities, mapping out the Azure AD infrastructure to identify potential vulnerabilities and targets for further exploitation. Detecting its usage can help in identifying unauthorized access attempts and preemptively mitigating potential security threats to your Azure environment.
   author: Dean Luxton
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,20 +13,44 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1087.004
-      name: Technique T1087.004
+      name: Cloud Account
+      tactics:
+      - discovery
     - id: T1526
-      name: Technique T1526
-    tactics: []
+      name: Cloud Service Discovery
+      tactics:
+      - discovery
+    tactics:
+    - discovery
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/azure_ad_azurehound_useragent_detected.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/azure_ad_azurehound_useragent_detected.yml
+      rule_sha256: sha256:3cb75eb104c7bec0a20aac52b2a87da71cd3beca6aa2f064f565389629403eac
+      detection_id: d62852db-a1f1-40db-a7fc-c3d56fa8bda3
+      source_version: 4
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1087.004/azurehound/azurehound.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1087.004/azurehound/azurehound.log
     description: Azure AD - azure:monitor:aad
     format: auto
     schema: raw
     sourcetype: azure:monitor:aad
+    checksum: sha256:cc58d8a45683f320416be78da095d3328df18d6285b1698ad055b293031c38c6
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

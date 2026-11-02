@@ -1,12 +1,10 @@
 metadata:
   name: esxi-sensitive-files-accessed
   version: 2.0.0
-  description: This detection identifies access to sensitive system and configuration
-    files on an ESXi host, including authentication data, service configurations,
-    and VMware-specific management settings. Interaction with these files may indicate
-    adversary reconnaissance, credential harvesting, or preparation for privilege
-    escalation, lateral movement, or persistence.
+  description: This detection identifies access to sensitive system and configuration files on an ESXi host, including authentication data, service configurations, and VMware-specific management settings. Interaction with these files may indicate adversary reconnaissance, credential harvesting, or preparation for privilege escalation, lateral movement, or persistence.
   author: Raven Tait, Splunk
+  updated: '2025-08-06'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,20 +14,45 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1003.008
-      name: Technique T1003.008
+      name: /etc/passwd and /etc/shadow
+      tactics:
+      - credential-access
     - id: T1005
-      name: Technique T1005
-    tactics: []
+      name: Data from Local System
+      tactics:
+      - collection
+    tactics:
+    - credential-access
+    - collection
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/application/esxi_sensitive_files_accessed.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/application/esxi_sensitive_files_accessed.yml
+      rule_sha256: sha256:d025925da57d0f86a463dd3319a663fd119341fbe24c9279677b6a2b37969504
+      detection_id: 6fa0073d-6ca0-4f93-913d-fb420c9de15b
+      source_version: 2
+      source_date: '2025-08-06'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1003.008/esxi_sensitive_files/esxi_sensitive_files.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1003.008/esxi_sensitive_files/esxi_sensitive_files.log
     description: vmware:esxlog - vmw-syslog
     format: auto
     schema: raw
     sourcetype: vmw-syslog
+    checksum: sha256:880d7e97db26dbccde3101f25416bf70b743238de17fe1c409c951a58baf2229
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,14 +1,10 @@
 metadata:
   name: asl-aws-concurrent-sessions-from-different-ips
   version: 9.0.0
-  description: 'The following analytic identifies an AWS IAM account with concurrent
-    sessions originating from more than one unique IP address within a 5-minute span.
-    This detection leverages AWS CloudTrail logs, specifically the `DescribeEventAggregates`
-    API call, to identify multiple IP addresses associated with the same user session.
-    This behavior is significant as it may indicate a session hijacking attack, where
-    an adversary uses stolen session cookies to access AWS resources from a different
-    location. If '
+  description: The following analytic identifies an AWS IAM account with concurrent sessions originating from more than one unique IP address within a 5-minute span. This detection leverages AWS CloudTrail logs, specifically the `DescribeEventAggregates` API call, to identify multiple IP addresses associated with the same user session. This behavior is significant as it may indicate a session hijacking attack, where an adversary uses stolen session cookies to access AWS resources from a different location. If confirmed malicious, this activity could allow unauthorized access to sensitive corporate resources, leading to potential data breaches or further exploitation.
   author: Patrick Bareiss, Splunk
+  updated: '2025-10-14'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1185
-      name: Technique T1185
-    tactics: []
+      name: Browser Session Hijacking
+      tactics:
+      - collection
+    tactics:
+    - collection
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/asl_aws_concurrent_sessions_from_different_ips.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/asl_aws_concurrent_sessions_from_different_ips.yml
+      rule_sha256: sha256:ebd75a55d8be2abb0492482fa7e0631356df875d4aedd94cf5c02e0d95de2b1e
+      detection_id: b3424bbe-3204-4469-887b-ec144483a336
+      source_version: 9
+      source_date: '2025-10-14'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1185/aws_concurrent_sessions_from_different_ips/asl_ocsf_cloudtrail.json
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1185/aws_concurrent_sessions_from_different_ips/asl_ocsf_cloudtrail.json
     description: aws_asl - aws:asl
     format: auto
     schema: raw
     sourcetype: aws:asl
+    checksum: sha256:cce17f1109f21e8c15fd5d271af4c2503c16bfc7ce954d104bd380a379a41181
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

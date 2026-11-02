@@ -1,18 +1,20 @@
 metadata:
   name: cisco-nvm-suspicious-network-connection-from-process-with-no-args
   version: 2.0.0
-  description: 'This analytic detects system binaries that are commonly abused in
-    process injection techniques but are observed without any command-line arguments.
+  description: 'This analytic detects system binaries that are commonly abused in process injection techniques but are observed without any command-line arguments.
 
     It leverages Cisco Network Visibility Module (NVM) flow data and process arguments
 
-    to identify outbound connections initiated by curl where TLS checks were explicitly
-    disabled.
+    to identify outbound connections initiated by curl where TLS checks were explicitly disabled.
 
-    Binaries such as `rundll32.exe`, `regsvr32.exe`, `dllhost.exe`, `svchost.exe`,
-    and others are legitimate Windows processes that are often injected into by malware
-    or post-expl'
+    Binaries such as `rundll32.exe`, `regsvr32.exe`, `dllhost.exe`, `svchost.exe`, and others are legitimate Windows processes that are often injected into by malware or post-exploitation frameworks (e.g., Cobalt Strike) to hide execution.
+
+    When these processes are seen initiating a network connection with an empty or missing command line, it can indicate
+
+    potential injection and communication with a command and control server.'
   author: Nasreddine Bencherchali, Splunk
+  updated: '2025-09-09'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -20,20 +22,46 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1055
-      name: Technique T1055
+      name: Process Injection
+      tactics:
+      - privilege-escalation
+      - defense-evasion
     - id: T1218
-      name: Technique T1218
-    tactics: []
+      name: System Binary Proxy Execution
+      tactics:
+      - defense-evasion
+    tactics:
+    - privilege-escalation
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/cisco_nvm___suspicious_network_connection_from_process_with_no_args.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/cisco_nvm___suspicious_network_connection_from_process_with_no_args.yml
+      rule_sha256: sha256:03825fabb8bc809559c25bc828619e0a90b272de64fc8f2c95832fcd01f183fa
+      detection_id: 54fa06c5-96a2-4406-a4a7-44d93ddbd173
+      source_version: 2
+      source_date: '2025-09-09'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_network_visibility_module/cisco_nvm_flowdata/nvm_flowdata.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/cisco_network_visibility_module/cisco_nvm_flowdata/nvm_flowdata.log
     description: not_applicable - cisco:nvm:flowdata
     format: auto
     schema: raw
     sourcetype: cisco:nvm:flowdata
+    checksum: sha256:f427b5cc3a60bb3b41ae1c679bda85c1bb9aba78cc9468b94d3eec36adedfaaa
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

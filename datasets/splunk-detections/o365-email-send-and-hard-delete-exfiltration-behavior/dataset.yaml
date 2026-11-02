@@ -1,13 +1,10 @@
 metadata:
   name: o365-email-send-and-hard-delete-exfiltration-behavior
   version: 2.0.0
-  description: The following analytic identifies when an O365 email account sends
-    and then hard deletes an email to an external recipient within a short period
-    (within 1 hour). This behavior may indicate a compromised account where the threat
-    actor is attempting to remove forensic artifacts or evidence of exfiltration activity.
-    This behavior is often seen when threat actors want to reduce the probability
-    of detection by the compromised account owner.
+  description: The following analytic identifies when an O365 email account sends and then hard deletes an email to an external recipient within a short period (within 1 hour). This behavior may indicate a compromised account where the threat actor is attempting to remove forensic artifacts or evidence of exfiltration activity. This behavior is often seen when threat actors want to reduce the probability of detection by the compromised account owner.
   author: Steven Dick
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -17,27 +14,56 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1114.001
-      name: Technique T1114.001
+      name: Local Email Collection
+      tactics:
+      - collection
     - id: T1070.008
-      name: Technique T1070.008
+      name: Clear Mailbox Data
+      tactics:
+      - defense-evasion
     - id: T1485
-      name: Technique T1485
-    tactics: []
+      name: Data Destruction
+      tactics:
+      - impact
+    tactics:
+    - defense-evasion
+    - collection
+    - impact
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/o365_email_send_and_hard_delete_exfiltration_behavior.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/o365_email_send_and_hard_delete_exfiltration_behavior.yml
+      rule_sha256: sha256:21732486775b056445b1668f9238341b2a3c7bfd3cc47761eae2d2cfa79743b9
+      detection_id: dd7798cf-c4f5-4114-ad0f-beacd9a33708
+      source_version: 2
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1114/o365_suspect_email_actions/o365_exchange_suspect_events.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1114/o365_suspect_email_actions/o365_exchange_suspect_events.log
     description: o365 - o365:management:activity
     format: auto
     schema: raw
     sourcetype: o365:management:activity
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1114/o365_suspect_email_actions/o365_messagetrace_suspect_events.log
+    checksum: sha256:34a11765788b8f38d9a7d499eeeac5f5ea8acd6e5a81af7cf3ebf8bd4a3e01c9
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1114/o365_suspect_email_actions/o365_messagetrace_suspect_events.log
     description: o365_messagetrace - o365:reporting:messagetrace
     format: auto
     schema: raw
     sourcetype: o365:reporting:messagetrace
+    checksum: sha256:33dd77a4ea6bf85eaab9a244085f0e6f3fc79a191dfaa3b50357d9e229ab46e9
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

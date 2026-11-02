@@ -1,14 +1,10 @@
 metadata:
   name: connectwise-screenconnect-path-traversal
   version: 6.0.0
-  description: The following analytic detects attempts to exploit the ConnectWise
-    ScreenConnect CVE-2024-1708 vulnerability, which allows path traversal attacks
-    by manipulating file_path and file_name parameters in the URL. It leverages the
-    Endpoint datamodel Filesystem node to identify suspicious file system events,
-    specifically targeting paths and filenames associated with ScreenConnect. This
-    activity is significant as it can lead to unauthorized access to sensitive files
-    and directories, potentially resulti
+  description: The following analytic detects attempts to exploit the ConnectWise ScreenConnect CVE-2024-1708 vulnerability, which allows path traversal attacks by manipulating file_path and file_name parameters in the URL. It leverages the Endpoint datamodel Filesystem node to identify suspicious file system events, specifically targeting paths and filenames associated with ScreenConnect. This activity is significant as it can lead to unauthorized access to sensitive files and directories, potentially resulting in data exfiltration or arbitrary code execution. If confirmed malicious, attackers could gain unauthorized access and control over the host system, posing a severe security risk.
   author: Michael Haag, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1190
-      name: Technique T1190
-    tactics: []
+      name: Exploit Public-Facing Application
+      tactics:
+      - initial-access
+    tactics:
+    - initial-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/connectwise_screenconnect_path_traversal.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/connectwise_screenconnect_path_traversal.yml
+      rule_sha256: sha256:6ce308d5f7ff8a4826764df11b9faca62e44eb6aadec2b957b00c7b0b46a3a91
+      detection_id: 56a3ac65-e747-41f7-b014-dff7423c1dda
+      source_version: 6
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/screenconnect/sysmon_app_extensions.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1190/screenconnect/sysmon_app_extensions.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:29ec567a1492996969c3fa4afe3251d460edbe3173849f2f7ce203887ab3831d
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

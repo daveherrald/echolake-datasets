@@ -1,14 +1,10 @@
 metadata:
   name: windows-remote-access-software-brc4-loaded-dll
   version: 6.0.0
-  description: The following analytic identifies the loading of four specific Windows
-    DLLs (credui.dll, dbghelp.dll, samcli.dll, winhttp.dll) by a non-standard process.
-    This detection leverages Sysmon EventCode 7 to monitor DLL load events and flags
-    when all four DLLs are loaded within a short time frame. This activity is significant
-    as it may indicate the presence of Brute Ratel C4, a sophisticated remote access
-    tool used for credential dumping and other malicious activities. If confirmed
-    malicious, this beha
+  description: The following analytic identifies the loading of four specific Windows DLLs (credui.dll, dbghelp.dll, samcli.dll, winhttp.dll) by a non-standard process. This detection leverages Sysmon EventCode 7 to monitor DLL load events and flags when all four DLLs are loaded within a short time frame. This activity is significant as it may indicate the presence of Brute Ratel C4, a sophisticated remote access tool used for credential dumping and other malicious activities. If confirmed malicious, this behavior could lead to unauthorized access, credential theft, and further compromise of the affected system.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,20 +12,45 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1219
-      name: Technique T1219
+      name: Remote Access Tools
+      tactics:
+      - command-and-control
     - id: T1003
-      name: Technique T1003
-    tactics: []
+      name: OS Credential Dumping
+      tactics:
+      - credential-access
+    tactics:
+    - credential-access
+    - command-and-control
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_remote_access_software_brc4_loaded_dll.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_remote_access_software_brc4_loaded_dll.yml
+      rule_sha256: sha256:11dbb11140af3baa6a67f8526e202c5599b62505012e3f2a39c4f407f205731f
+      detection_id: 73cf5dcb-cf36-4167-8bbe-384fe5384d05
+      source_version: 6
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/brute_ratel/iso_version_dll_campaign/sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/brute_ratel/iso_version_dll_campaign/sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:aababed8e915afbf9096a289a219eae99a93512c67a7f79b1fe8cc0f26036774
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,14 +1,10 @@
 metadata:
   name: windows-get-local-admin-with-findlocaladminaccess
   version: 7.0.0
-  description: 'The following analytic detects the execution of the `Find-LocalAdminAccess`
-    cmdlet using PowerShell Script Block Logging (EventCode=4104). This cmdlet is
-    part of PowerView, a toolkit for Windows domain enumeration. Identifying the use
-    of `Find-LocalAdminAccess` is crucial as adversaries may use it to find machines
-    where the current user has local administrator access, facilitating lateral movement
-    or privilege escalation. If confirmed malicious, this activity could allow attackers
-    to target and '
+  description: The following analytic detects the execution of the `Find-LocalAdminAccess` cmdlet using PowerShell Script Block Logging (EventCode=4104). This cmdlet is part of PowerView, a toolkit for Windows domain enumeration. Identifying the use of `Find-LocalAdminAccess` is crucial as adversaries may use it to find machines where the current user has local administrator access, facilitating lateral movement or privilege escalation. If confirmed malicious, this activity could allow attackers to target and compromise additional systems within the network, significantly increasing their control and access to sensitive information.
   author: Gowthamaraj Rajendran, Mauricio Velazco, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1087.002
-      name: Technique T1087.002
-    tactics: []
+      name: Domain Account
+      tactics:
+      - discovery
+    tactics:
+    - discovery
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_get_local_admin_with_findlocaladminaccess.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_get_local_admin_with_findlocaladminaccess.yml
+      rule_sha256: sha256:e152f928f84746c985c662268a6095aa4540f890d28f23522a5a675ccbe78d32
+      detection_id: d2988160-3ce9-4310-b59d-905334920cdd
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1087.002/AD_discovery/windows-powershell-LocalAdminAccess-xml.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1087.002/AD_discovery/windows-powershell-LocalAdminAccess-xml.log
     description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:7e291d2eba71ca411ba126ef6c9924f2f310d709524963b20d196f583fc8067c
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

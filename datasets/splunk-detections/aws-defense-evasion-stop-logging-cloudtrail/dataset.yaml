@@ -1,14 +1,10 @@
 metadata:
   name: aws-defense-evasion-stop-logging-cloudtrail
   version: 7.0.0
-  description: The following analytic detects `StopLogging` events in AWS CloudTrail
-    logs. It leverages CloudTrail event data to identify when logging is intentionally
-    stopped, excluding console-based actions and focusing on successful attempts.
-    This activity is significant because adversaries may stop logging to evade detection
-    and operate stealthily within the compromised environment. If confirmed malicious,
-    this action could allow attackers to perform further activities without being
-    logged, hindering incid
+  description: The following analytic detects `StopLogging` events in AWS CloudTrail logs. It leverages CloudTrail event data to identify when logging is intentionally stopped, excluding console-based actions and focusing on successful attempts. This activity is significant because adversaries may stop logging to evade detection and operate stealthily within the compromised environment. If confirmed malicious, this action could allow attackers to perform further activities without being logged, hindering incident response and forensic investigations, and potentially leading to unauthorized access or data exfiltration.
   author: Bhavin Patel, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1562.008
-      name: Technique T1562.008
-    tactics: []
+      name: Disable or Modify Cloud Logs
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/aws_defense_evasion_stop_logging_cloudtrail.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/aws_defense_evasion_stop_logging_cloudtrail.yml
+      rule_sha256: sha256:00bb5c9771c69e4dcdc8f962b40c075b209e06cb6ca6f52731f125cca0c923fb
+      detection_id: 8a2f3ca2-4eb5-4389-a549-14063882e537
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.008/stop_delete_cloudtrail/aws_cloudtrail_events.json
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1562.008/stop_delete_cloudtrail/aws_cloudtrail_events.json
     description: aws_cloudtrail - aws:cloudtrail
     format: auto
     schema: raw
     sourcetype: aws:cloudtrail
+    checksum: sha256:d5e6f187918ca7f668249c33e86a2dba91f37777bdb6195600512caa428d012b
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

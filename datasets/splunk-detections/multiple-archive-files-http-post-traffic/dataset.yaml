@@ -1,14 +1,10 @@
 metadata:
   name: multiple-archive-files-http-post-traffic
   version: 9.0.0
-  description: The following analytic detects the high-frequency exfiltration of archive
-    files via HTTP POST requests. It leverages HTTP stream logs to identify specific
-    archive file headers within the request body. This activity is significant as
-    it often indicates data exfiltration by APTs or trojan spyware after data collection.
-    If confirmed malicious, this behavior could lead to the unauthorized transfer
-    of sensitive data to an attacker’s command and control server, potentially resulting
-    in severe data bre
+  description: "The following analytic detects the high-frequency exfiltration of archive files via HTTP POST requests. It leverages HTTP stream logs to identify specific archive file headers within the request body. This activity is significant as it often indicates data exfiltration by APTs or trojan spyware after data collection. If confirmed malicious, this behavior could lead to the unauthorized transfer of sensitive data to an attacker\u2019s command and control server, potentially resulting in severe data breaches and loss of confidential information."
   author: Teoderick Contreras, Splunk
+  updated: '2025-10-14'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1048.003
-      name: Technique T1048.003
-    tactics: []
+      name: Exfiltration Over Unencrypted Non-C2 Protocol
+      tactics:
+      - exfiltration
+    tactics:
+    - exfiltration
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/web/multiple_archive_files_http_post_traffic.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/web/multiple_archive_files_http_post_traffic.yml
+      rule_sha256: sha256:721c482f41e64af81679a42f0c2744c417c8f4f50a2c40d172bc5f6032d3bcf3
+      detection_id: 4477f3ea-a28f-11eb-b762-acde48001122
+      source_version: 9
+      source_date: '2025-10-14'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1048.003/archive_http_post/stream_http_events.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1048.003/archive_http_post/stream_http_events.log
     description: stream - stream:http
     format: auto
     schema: raw
     sourcetype: stream:http
+    checksum: sha256:e839d6c2688a5872e2bcf2515eba627aeb83c841db8439f076b6897c4e851ea5
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

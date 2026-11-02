@@ -1,14 +1,10 @@
 metadata:
   name: zscaler-potentially-abused-file-download
   version: 6.0.0
-  description: The following analytic identifies the download of potentially malicious
-    file types, such as .scr, .dll, .bat, and .lnk, within a network. It leverages
-    web proxy logs from Zscaler, focusing on blocked actions and analyzing fields
-    like deviceowner, user, urlcategory, url, dest, and filename. This activity is
-    significant as these file types are often used to spread malware, posing a threat
-    to network security. If confirmed malicious, this activity could lead to malware
-    execution, data compromise, o
+  description: The following analytic identifies the download of potentially malicious file types, such as .scr, .dll, .bat, and .lnk, within a network. It leverages web proxy logs from Zscaler, focusing on blocked actions and analyzing fields like deviceowner, user, urlcategory, url, dest, and filename. This activity is significant as these file types are often used to spread malware, posing a threat to network security. If confirmed malicious, this activity could lead to malware execution, data compromise, or further network infiltration.
   author: Gowthamaraj Rajendran, Rod Soto, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1566
-      name: Technique T1566
-    tactics: []
+      name: Phishing
+      tactics:
+      - initial-access
+    tactics:
+    - initial-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/web/zscaler_potentially_abused_file_download.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/web/zscaler_potentially_abused_file_download.yml
+      rule_sha256: sha256:c4474a9a935a908e5c94d2c4dd3e2613cb741830bf6303733d5d8102330208ce
+      detection_id: b0c21379-f4ba-4bac-a958-897e260f964a
+      source_version: 6
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566/zscalar_web_proxy/zscalar_web_proxy.json
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1566/zscalar_web_proxy/zscalar_web_proxy.json
     description: zscaler - zscalernss-web
     format: auto
     schema: raw
     sourcetype: zscalernss-web
+    checksum: sha256:b8632cf219976d25cf72293f80dd3929e10ec22b5fdda37028dd0f818551c386
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,13 +1,10 @@
 metadata:
   name: excessive-usage-of-sc-service-utility
   version: 7.0.0
-  description: The following analytic detects excessive usage of the `sc.exe` service
-    utility on a host machine. It leverages Sysmon EventCode 1 logs to identify instances
-    where `sc.exe` is executed more frequently than normal within a 15-minute window.
-    This behavior is significant as it is commonly associated with ransomware, cryptocurrency
-    miners, and other malware attempting to create, modify, delete, or disable services,
-    potentially related to security applications or for privilege escalation. If confirmed
+  description: The following analytic detects excessive usage of the `sc.exe` service utility on a host machine. It leverages Sysmon EventCode 1 logs to identify instances where `sc.exe` is executed more frequently than normal within a 15-minute window. This behavior is significant as it is commonly associated with ransomware, cryptocurrency miners, and other malware attempting to create, modify, delete, or disable services, potentially related to security applications or for privilege escalation. If confirmed malicious, this activity could allow attackers to manipulate critical services, leading to system compromise or disruption of security defenses.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -17,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1569.002
-      name: Technique T1569.002
-    tactics: []
+      name: Service Execution
+      tactics:
+      - execution
+    tactics:
+    - execution
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/excessive_usage_of_sc_service_utility.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/excessive_usage_of_sc_service_utility.yml
+      rule_sha256: sha256:92eefee8e3735a4f964d887915db2e40c755dcee30faae4e003f784d500a68aa
+      detection_id: cb6b339e-d4c6-11eb-a026-acde48001122
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/ransomware_ttp/data2/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/ransomware_ttp/data2/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:b719f8681acc246580b2bfc27e7d4fde91adffbdc42cf91d08a0731c5d879ba4
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

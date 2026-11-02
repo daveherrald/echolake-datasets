@@ -1,13 +1,10 @@
 metadata:
   name: powershell-invoke-cimmethod-cimsession
   version: 8.0.0
-  description: The following analytic detects the creation of a New-CIMSession cmdlet
-    followed by the use of the Invoke-CIMMethod cmdlet within PowerShell. It leverages
-    PowerShell Script Block Logging to identify these specific cmdlets in the ScriptBlockText
-    field. This activity is significant because it mirrors the behavior of the Invoke-WMIMethod
-    cmdlet, often used for remote code execution via NTLMv2 pass-the-hash authentication.
-    If confirmed malicious, this could allow an attacker to execute commands remot
+  description: The following analytic detects the creation of a New-CIMSession cmdlet followed by the use of the Invoke-CIMMethod cmdlet within PowerShell. It leverages PowerShell Script Block Logging to identify these specific cmdlets in the ScriptBlockText field. This activity is significant because it mirrors the behavior of the Invoke-WMIMethod cmdlet, often used for remote code execution via NTLMv2 pass-the-hash authentication. If confirmed malicious, this could allow an attacker to execute commands remotely, potentially leading to unauthorized access and control over targeted systems.
   author: Michael Haag, Splunk
+  updated: '2025-10-14'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -17,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1047
-      name: Technique T1047
-    tactics: []
+      name: Windows Management Instrumentation
+      tactics:
+      - execution
+    tactics:
+    - execution
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/powershell_invoke_cimmethod_cimsession.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/powershell_invoke_cimmethod_cimsession.yml
+      rule_sha256: sha256:416d4df25c590b36cd04757e7468baf4aff0fdc90a8648ecfbb8a5e41b7fb75b
+      detection_id: 651ee958-a433-471c-b264-39725b788b83
+      source_version: 8
+      source_date: '2025-10-14'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1047/atomic_red_team/4104-cimmethod-windows-powershell.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1047/atomic_red_team/4104-cimmethod-windows-powershell.log
     description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:d03c549897ace7f2c4d45c1fc91cd10fb29128137389aadef6a9932ec554b018
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

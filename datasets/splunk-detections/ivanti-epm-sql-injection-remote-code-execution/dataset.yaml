@@ -1,14 +1,10 @@
 metadata:
   name: ivanti-epm-sql-injection-remote-code-execution
   version: 6.0.0
-  description: This detection identifies potential exploitation of a critical SQL
-    injection vulnerability in Ivanti Endpoint Manager (EPM), identified as CVE-2024-29824.
-    The vulnerability, which has a CVSS score of 9.8, allows for remote code execution
-    through the `RecordGoodApp` function in the `PatchBiz.dll` file. An attacker can
-    exploit this vulnerability by manipulating the `goodApp.md5` value in an HTTP
-    POST request to the `/WSStatusEvents/EventHandler.asmx` endpoint, leading to unauthorized
-    command execu
+  description: This detection identifies potential exploitation of a critical SQL injection vulnerability in Ivanti Endpoint Manager (EPM), identified as CVE-2024-29824. The vulnerability, which has a CVSS score of 9.8, allows for remote code execution through the `RecordGoodApp` function in the `PatchBiz.dll` file. An attacker can exploit this vulnerability by manipulating the `goodApp.md5` value in an HTTP POST request to the `/WSStatusEvents/EventHandler.asmx` endpoint, leading to unauthorized command execution on the server. Monitoring for unusual SQL commands and HTTP requests to this endpoint can help identify exploitation attempts. Note that, the detection is focused on the URI path, HTTP method and status code of 200, indicating potential exploitation. To properly identify if this was successful, TLS inspection and additional network traffic analysis is required as the xp_cmdshell comes in via the request body.
   author: Michael Haag
+  updated: '2025-10-14'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1190
-      name: Technique T1190
-    tactics: []
+      name: Exploit Public-Facing Application
+      tactics:
+      - initial-access
+    tactics:
+    - initial-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/web/ivanti_epm_sql_injection_remote_code_execution.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/web/ivanti_epm_sql_injection_remote_code_execution.yml
+      rule_sha256: sha256:d08eb5198725502a6d6f37ca3a9425cc7660fc71d3543896a8116cbaef1ba78f
+      detection_id: e20564ca-c86c-4e30-acdb-a8486673426f
+      source_version: 6
+      source_date: '2025-10-14'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/ivanti/suricata_ivanti_epm.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1190/ivanti/suricata_ivanti_epm.log
     description: suricata - suricata
     format: auto
     schema: raw
     sourcetype: suricata
+    checksum: sha256:1a73c2d3c4870399995ca4050026e9e5bd27c254d6a07cf8b711cd5821188c44
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

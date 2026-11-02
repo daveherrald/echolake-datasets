@@ -1,14 +1,10 @@
 metadata:
   name: windows-disable-memory-crash-dump
   version: 8.0.0
-  description: The following analytic detects attempts to disable the memory crash
-    dump feature on Windows systems by setting the registry value to 0. It leverages
-    data from the Endpoint.Registry datamodel, specifically monitoring changes to
-    the CrashDumpEnabled registry key. This activity is significant because disabling
-    crash dumps can hinder forensic analysis and incident response efforts. If confirmed
-    malicious, this action could be part of a broader attack strategy, such as data
-    destruction or system dest
+  description: The following analytic detects attempts to disable the memory crash dump feature on Windows systems by setting the registry value to 0. It leverages data from the Endpoint.Registry datamodel, specifically monitoring changes to the CrashDumpEnabled registry key. This activity is significant because disabling crash dumps can hinder forensic analysis and incident response efforts. If confirmed malicious, this action could be part of a broader attack strategy, such as data destruction or system destabilization, as seen with HermeticWiper, potentially leading to significant operational disruptions and data loss.
   author: Michael Haag, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1485
-      name: Technique T1485
-    tactics: []
+      name: Data Destruction
+      tactics:
+      - impact
+    tactics:
+    - impact
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_disable_memory_crash_dump.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_disable_memory_crash_dump.yml
+      rule_sha256: sha256:5a02db065b690290cab80e2cc0340f5c0eaded507c61d35519f40eb6d23b75a6
+      detection_id: 59e54602-9680-11ec-a8a6-acde48001122
+      source_version: 8
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/hermetic_wiper/sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/hermetic_wiper/sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:62a4738f74ea60f7cb427434f3abb936a69b91e4f9ab527daeee109ce0c76c7b
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

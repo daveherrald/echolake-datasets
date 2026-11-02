@@ -1,14 +1,10 @@
 metadata:
   name: windows-phishing-recent-iso-exec-registry
   version: 9.0.0
-  description: The following analytic detects the creation of registry artifacts when
-    an ISO container is opened, clicked, or mounted on a Windows operating system.
-    It leverages data from the Endpoint.Registry data model, specifically monitoring
-    registry keys related to recent ISO or IMG file executions. This activity is significant
-    as adversaries increasingly use container-based phishing campaigns to bypass macro-based
-    document execution controls. If confirmed malicious, this behavior could indicate
-    an initia
+  description: The following analytic detects the creation of registry artifacts when an ISO container is opened, clicked, or mounted on a Windows operating system. It leverages data from the Endpoint.Registry data model, specifically monitoring registry keys related to recent ISO or IMG file executions. This activity is significant as adversaries increasingly use container-based phishing campaigns to bypass macro-based document execution controls. If confirmed malicious, this behavior could indicate an initial access attempt, potentially leading to further exploitation, persistence, or data exfiltration within the environment.
   author: Teoderick Contreras, Bhavin Patel, Splunk
+  updated: '2025-07-30'
+  license: Apache-2.0
   tags:
   - hunting
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1566.001
-      name: Technique T1566.001
-    tactics: []
+      name: Spearphishing Attachment
+      tactics:
+      - initial-access
+    tactics:
+    - initial-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_phishing_recent_iso_exec_registry.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_phishing_recent_iso_exec_registry.yml
+      rule_sha256: sha256:b021b9699692b82dcabf12b3933370317da81739aa3855a21ae5c3281924454c
+      detection_id: cb38ee66-8ae5-47de-bd66-231c7bbc0b2c
+      source_version: 9
+      source_date: '2025-07-30'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/brute_ratel/iso_version_dll_campaign/sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/brute_ratel/iso_version_dll_campaign/sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:aababed8e915afbf9096a289a219eae99a93512c67a7f79b1fe8cc0f26036774
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

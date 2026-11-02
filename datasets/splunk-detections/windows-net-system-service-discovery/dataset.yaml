@@ -1,14 +1,10 @@
 metadata:
   name: windows-net-system-service-discovery
   version: 1.0.0
-  description: The following analytic detects the enumeration of Windows services
-    using the net start command, which is a built-in utility that lists all running
-    services on a system. Adversaries, system administrators, or automated tools may
-    use this command to gain situational awareness of what services are active, identify
-    potential security software, or discover opportunities for privilege escalation
-    and lateral movement. The execution of net start is often associated with reconnaissance
-    activity during th
+  description: "The following analytic detects the enumeration of Windows services using the net start command, which is a built-in utility that lists all running services on a system. Adversaries, system administrators, or automated tools may use this command to gain situational awareness of what services are active, identify potential security software, or discover opportunities for privilege escalation and lateral movement. The execution of net start is often associated with reconnaissance activity during the early stages of an intrusion, as attackers attempt to map out the system\u2019s defense mechanisms and operational services. By monitoring process execution for instances of cmd.exe /c net start or similar command-line usage, defenders can detect potentially suspicious activity. Correlating this behavior with other reconnaissance commands, such as tasklist or sc query, strengthens detection fidelity. While net start is not inherently malicious, unusual or repeated use in non-administrative contexts should be flagged for further investigation."
   author: Teoderick Contreras, Splunk
+  updated: '2025-08-25'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1007
-      name: Technique T1007
-    tactics: []
+      name: System Service Discovery
+      tactics:
+      - discovery
+    tactics:
+    - discovery
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_net_system_service_discovery.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_net_system_service_discovery.yml
+      rule_sha256: sha256:1d3c5579d6ce931db96a5711d28e49c48177d966d57a5c953ba6c1f6a49fd25f
+      detection_id: dd7da098-83b8-4c48-b09d-e51aeb621e81
+      source_version: 1
+      source_date: '2025-08-25'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/lamehug/T1007/net_start/net_start.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/lamehug/T1007/net_start/net_start.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:55d10507ea151734ad7235529e67c81a8b1f8dd9f33f2232f6949e63209db28e
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

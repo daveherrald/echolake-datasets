@@ -1,14 +1,10 @@
 metadata:
   name: crushftp-server-side-template-injection
   version: 5.0.0
-  description: This analytic is designed to identify attempts to exploit a server-side
-    template injection vulnerability in CrushFTP, designated as CVE-2024-4040. This
-    severe vulnerability enables unauthenticated remote attackers to access and read
-    files beyond the VFS Sandbox, circumvent authentication protocols, and execute
-    arbitrary commands on the affected server. The issue impacts all versions of CrushFTP
-    up to 10.7.1 and 11.1.0 on all supported platforms. It is highly recommended to
-    apply patches immediat
+  description: This analytic is designed to identify attempts to exploit a server-side template injection vulnerability in CrushFTP, designated as CVE-2024-4040. This severe vulnerability enables unauthenticated remote attackers to access and read files beyond the VFS Sandbox, circumvent authentication protocols, and execute arbitrary commands on the affected server. The issue impacts all versions of CrushFTP up to 10.7.1 and 11.1.0 on all supported platforms. It is highly recommended to apply patches immediately to prevent unauthorized access to the system and avoid potential data compromises. The search specifically looks for patterns in the raw log data that match the exploitation attempts, including READ or WRITE actions, and extracts relevant information such as the protocol, session ID, user, IP address, HTTP method, and the URI queried. It then evaluates these logs to confirm traces of exploitation based on the presence of specific keywords and the originating IP address, counting and sorting these events for further analysis.
   author: Michael Haag, Splunk
+  updated: '2025-10-14'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1190
-      name: Technique T1190
-    tactics: []
+      name: Exploit Public-Facing Application
+      tactics:
+      - initial-access
+    tactics:
+    - initial-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/application/crushftp_server_side_template_injection.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/application/crushftp_server_side_template_injection.yml
+      rule_sha256: sha256:0cb90b3df9edc060e6512a31181db2190f41015e8db704bbaccafb8873199562
+      detection_id: ccf6b7a3-bd39-4bc9-a949-143a8d640dbc
+      source_version: 5
+      source_date: '2025-10-14'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/crushftp/crushftp.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1190/crushftp/crushftp.log
     description: crushftp - crushftp:sessionlogs
     format: auto
     schema: raw
     sourcetype: crushftp:sessionlogs
+    checksum: sha256:92410bcbef672a8141a4cc4d33f338ba1a46784a75ac8811bf9b366ada374d63
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

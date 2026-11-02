@@ -1,12 +1,10 @@
 metadata:
   name: o365-zap-activity-detection
   version: 7.0.0
-  description: The following analytic detects when the Microsoft Zero-hour Automatic
-    Purge (ZAP) capability takes action against a user's mailbox. This capability
-    is an enhanced protection feature that retro-actively removes email with known
-    malicious content for user inboxes. Since this is a retroactive capability, there
-    is still a window in which the user may fall victim to the malicious content.
+  description: The following analytic detects when the Microsoft Zero-hour Automatic Purge (ZAP) capability takes action against a user's mailbox. This capability is an enhanced protection feature that retro-actively removes email with known malicious content for user inboxes. Since this is a retroactive capability, there is still a window in which the user may fall victim to the malicious content.
   author: Steven Dick
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -15,20 +13,44 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1566.001
-      name: Technique T1566.001
+      name: Spearphishing Attachment
+      tactics:
+      - initial-access
     - id: T1566.002
-      name: Technique T1566.002
-    tactics: []
+      name: Spearphishing Link
+      tactics:
+      - initial-access
+    tactics:
+    - initial-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/o365_zap_activity_detection.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/o365_zap_activity_detection.yml
+      rule_sha256: sha256:2dbe422d424dd8207e4c3a914805d167c6a7f035a3fbb23ab7ccb7c4f8969673
+      detection_id: 4df275fd-a0e5-4246-8b92-d3201edaef7a
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566/o365_various_alerts/o365_various_alerts.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1566/o365_various_alerts/o365_various_alerts.log
     description: o365 - o365:management:activity
     format: auto
     schema: raw
     sourcetype: o365:management:activity
+    checksum: sha256:e669b123a43b1ca7f707e7ac69e3edb32fe0f7631ced09e5a55e1e93d2aea57a
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

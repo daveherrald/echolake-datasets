@@ -1,14 +1,10 @@
 metadata:
   name: prevent-automatic-repair-mode-using-bcdedit
   version: 7.0.0
-  description: The following analytic detects the execution of "bcdedit.exe" with
-    parameters to set the boot status policy to ignore all failures. It leverages
-    data from Endpoint Detection and Response (EDR) agents, focusing on process names
-    and command-line arguments. This activity is significant because it can indicate
-    an attempt by ransomware to prevent a compromised machine from booting into automatic
-    repair mode, thereby hindering recovery efforts. If confirmed malicious, this
-    action could allow attackers
+  description: The following analytic detects the execution of "bcdedit.exe" with parameters to set the boot status policy to ignore all failures. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line arguments. This activity is significant because it can indicate an attempt by ransomware to prevent a compromised machine from booting into automatic repair mode, thereby hindering recovery efforts. If confirmed malicious, this action could allow attackers to maintain control over the infected system, complicating remediation and potentially leading to further damage.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1490
-      name: Technique T1490
-    tactics: []
+      name: Inhibit System Recovery
+      tactics:
+      - impact
+    tactics:
+    - impact
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/prevent_automatic_repair_mode_using_bcdedit.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/prevent_automatic_repair_mode_using_bcdedit.yml
+      rule_sha256: sha256:67cddcf810a161b61ebf1b3dd9961c9e350d7e009a582be9833bdd263c8a2dbe
+      detection_id: 7742aa92-c9d9-11eb-bbfc-acde48001122
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/ransomware_ttp/data1/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/ransomware_ttp/data1/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:548f05534f85969127ed4c3cb8aed82f0a87a97cac841f4ffb248c530b29c638
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

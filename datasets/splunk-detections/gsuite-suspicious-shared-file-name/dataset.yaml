@@ -1,14 +1,10 @@
 metadata:
   name: gsuite-suspicious-shared-file-name
   version: 8.0.0
-  description: The following analytic detects shared files in Google Drive with suspicious
-    filenames commonly used in spear phishing campaigns. It leverages GSuite Drive
-    logs to identify documents with titles that include keywords like "dhl," "ups,"
-    "invoice," and "shipment." This activity is significant because such filenames
-    are often used to lure users into opening malicious documents or clicking harmful
-    links. If confirmed malicious, this activity could lead to unauthorized access,
-    data theft, or further c
+  description: The following analytic detects shared files in Google Drive with suspicious filenames commonly used in spear phishing campaigns. It leverages GSuite Drive logs to identify documents with titles that include keywords like "dhl," "ups," "invoice," and "shipment." This activity is significant because such filenames are often used to lure users into opening malicious documents or clicking harmful links. If confirmed malicious, this activity could lead to unauthorized access, data theft, or further compromise of the user's system.
   author: Teoderick Contreras, Splunk
+  updated: '2025-06-17'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1566.001
-      name: Technique T1566.001
-    tactics: []
+      name: Spearphishing Attachment
+      tactics:
+      - initial-access
+    tactics:
+    - initial-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/gsuite_suspicious_shared_file_name.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/gsuite_suspicious_shared_file_name.yml
+      rule_sha256: sha256:1370518137b713403ba56ab3518ee85aac710356b6a7d19d5314ace3e1f645b0
+      detection_id: 07eed200-03f5-11ec-98fb-acde48001122
+      source_version: 8
+      source_date: '2025-06-17'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566.001/gdrive_susp_file_share/gdrive_susp_attach.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1566.001/gdrive_susp_file_share/gdrive_susp_attach.log
     description: http:gsuite - gws:reports:drive
     format: auto
     schema: raw
     sourcetype: gws:reports:drive
+    checksum: sha256:58dea46dbbb36e06bb3b5af7a928609d64be1d109625214ea1175f806787101f
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

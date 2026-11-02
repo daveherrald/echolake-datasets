@@ -1,14 +1,10 @@
 metadata:
   name: windows-advanced-installer-msix-with-ai_stubs-execution
   version: 1.0.0
-  description: The following analytic identifies the execution of Advanced Installer
-    MSIX Package Support Framework (PSF) components, specifically the AI_STUBS executables
-    with the original filename 'popupwrapper.exe'. This detection leverages data from
-    Endpoint Detection and Response (EDR) agents, focusing on process paths and original
-    filenames. This activity is significant as adversaries have been observed packaging
-    malicious content within MSIX files built with Advanced Installer to bypass security
-    control
+  description: The following analytic identifies the execution of Advanced Installer MSIX Package Support Framework (PSF) components, specifically the AI_STUBS executables with the original filename 'popupwrapper.exe'. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process paths and original filenames. This activity is significant as adversaries have been observed packaging malicious content within MSIX files built with Advanced Installer to bypass security controls. These AI_STUBS executables (with original filename 'popupwrapper.exe') are hallmark artifacts of potentially malicious MSIX packages. If confirmed malicious, this could allow attackers to execute arbitrary code, establish persistence, or deliver malware while evading traditional detection mechanisms.
   author: Michael Haag, Splunk
+  updated: '2025-08-05'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,22 +12,49 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1218
-      name: Technique T1218
+      name: System Binary Proxy Execution
+      tactics:
+      - defense-evasion
     - id: T1553.005
-      name: Technique T1553.005
+      name: Mark-of-the-Web Bypass
+      tactics:
+      - defense-evasion
     - id: T1204.002
-      name: Technique T1204.002
-    tactics: []
+      name: Malicious File
+      tactics:
+      - execution
+    tactics:
+    - execution
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_advanced_installer_msix_with_ai_stubs_execution.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_advanced_installer_msix_with_ai_stubs_execution.yml
+      rule_sha256: sha256:d25b455f55bda81a5adf7fa9376dc8a96275890c931b4f8d6a76ff53dcd4387f
+      detection_id: 56b2e58c-5909-49a3-998e-1f4815186ec2
+      source_version: 1
+      source_date: '2025-08-05'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218/msix_ai_stubs/windows_sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1218/msix_ai_stubs/windows_sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:55988e50871f111751e7c3b8f7f22014802f1008386f7b944e054b8ac9f1278e
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

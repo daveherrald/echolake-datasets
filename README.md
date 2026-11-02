@@ -53,11 +53,11 @@ Security datasets from Splunk's Boss of the SOC competition series. Each version
 
 See [datasets/bots/README.md](datasets/bots/README.md) for full details.
 
-These are third-party datasets created and published by Splunk, included here as-is. Per-dataset README files and MITRE ATT&CK annotations are authored only for the datasets originated in this project, not for data we did not create.
+These are third-party datasets created and published by Splunk. EchoLake adds manifests and integrity metadata for replay. The directories whose names end in `-2026` contain documented time-shifted variants.
 
 ## Splunk Detection Datasets
 
-1,866 datasets of sample attack data paired with detection logic from Splunk's [Security Content](https://github.com/splunk/security_content) project. Each dataset provides the telemetry needed to validate a specific detection rule, with references to source data in Splunk's [attack_data](https://github.com/splunk/attack_data) repository.
+1,866 datasets of sample attack data paired with detection logic from Splunk's [Security Content](https://github.com/splunk/security_content) project. Rule and sample-data links are pinned to immutable revisions, and each sample reference includes a SHA-256 integrity value.
 
 See [datasets/splunk-detections/README.md](datasets/splunk-detections/README.md) for full details.
 
@@ -65,4 +65,5 @@ See [datasets/splunk-detections/README.md](datasets/splunk-detections/README.md)
 
 - **ART, PAWS, Currentis, Cloud Data Exfiltration, php2shell, and CTID datasets:** [CC0 1.0 Universal (Public Domain Dedication)](LICENSE)
 - **BOTS datasets:** [CC0-1.0](https://creativecommons.org/publicdomain/zero/1.0/) by Splunk, Inc.
-- **Splunk detection datasets:** [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0) by Splunk, Inc.
+- **Splunk detection datasets:** [Apache License 2.0](datasets/splunk-detections/LICENSE) by Splunk, Inc. See [attribution and modifications](datasets/splunk-detections/ATTRIBUTION.md).
+- **MITRE ATT&CK metadata:** [MITRE ATT&CK license](datasets/splunk-detections/MITRE-ATTACK-LICENSE.txt) and required copyright designation.

@@ -1,14 +1,10 @@
 metadata:
   name: windows-speechruntime-suspicious-child-process
   version: 1.0.0
-  description: SpeechRuntime is vulnerable to an attack that allows a user to run
-    code on another user's session remotely and stealthily by exploiting a Windows
-    COM class. When this class is invoked, it launches SpeechRuntime.exe in the context
-    of the currently logged-on user. Because this COM class is susceptible to COM
-    Hijacking, the attacker can alter the registry remotely to point to a malicious
-    DLL. By dropping that DLL on the target system (e.g., via SMB) and triggering
-    the COM object, the attacker cause
+  description: SpeechRuntime is vulnerable to an attack that allows a user to run code on another user's session remotely and stealthily by exploiting a Windows COM class. When this class is invoked, it launches SpeechRuntime.exe in the context of the currently logged-on user. Because this COM class is susceptible to COM Hijacking, the attacker can alter the registry remotely to point to a malicious DLL. By dropping that DLL on the target system (e.g., via SMB) and triggering the COM object, the attacker causes the malicious DLL to load into SpeechRuntime.exe and executing under the user's context. This detection identifies suspicious child processes of SpeechRuntime.exe that could indicate abuse of this vulnerability.
   author: Raven Tait, Splunk
+  updated: '2025-08-22'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1021.003
-      name: Technique T1021.003
-    tactics: []
+      name: Distributed Component Object Model
+      tactics:
+      - lateral-movement
+    tactics:
+    - lateral-movement
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_speechruntime_suspicious_child_process.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_speechruntime_suspicious_child_process.yml
+      rule_sha256: sha256:dfac35567d3cb24c2b1dd932445ee0e040a3190c346e6068283b302f7ea473ff
+      detection_id: f7bb956f-b956-42a5-8c2c-ff9cdbbf7526
+      source_version: 1
+      source_date: '2025-08-22'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1021.003/lateral_movement_speechruntime/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1021.003/lateral_movement_speechruntime/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:cf3358ff725498d5371cc79967539a435aaf46b2c6fb4c944ebab61fccdf63ef
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

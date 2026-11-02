@@ -1,14 +1,10 @@
 metadata:
   name: windows-steal-authentication-certificates-certutil-backup
   version: 9.0.0
-  description: The following analytic detects CertUtil.exe performing a backup of
-    the Certificate Store. It leverages data from Endpoint Detection and Response
-    (EDR) agents, focusing on specific command-line executions involving CertUtil
-    with backup parameters. This activity is significant because it may indicate an
-    attempt to steal authentication certificates, which are critical for secure communications.
-    If confirmed malicious, an attacker could use the stolen certificates to impersonate
-    users, decrypt sensi
+  description: The following analytic detects CertUtil.exe performing a backup of the Certificate Store. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on specific command-line executions involving CertUtil with backup parameters. This activity is significant because it may indicate an attempt to steal authentication certificates, which are critical for secure communications. If confirmed malicious, an attacker could use the stolen certificates to impersonate users, decrypt sensitive data, or gain unauthorized access to systems, leading to severe security breaches.
   author: Michael Haag, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1649
-      name: Technique T1649
-    tactics: []
+      name: Steal or Forge Authentication Certificates
+      tactics:
+      - credential-access
+    tactics:
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_steal_authentication_certificates_certutil_backup.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_steal_authentication_certificates_certutil_backup.yml
+      rule_sha256: sha256:c1dd90771b1f598dc8bcc37e3ee09ca9a62c92b1eeffcfbf72fd7002a6bdf0b4
+      detection_id: bac85b56-0b65-4ce5-aad5-d94880df0967
+      source_version: 9
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1649/atomic_red_team/backupdb_certutil_windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1649/atomic_red_team/backupdb_certutil_windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:91e7f54ade428ec3c845774fe7ca2c8a7d9c479d2c8cb80bd50236c91ba4335c
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

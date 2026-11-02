@@ -1,14 +1,10 @@
 metadata:
   name: windows-service-deletion-in-registry
   version: 7.0.0
-  description: The following analytic detects the deletion of a service from the Windows
-    Registry under CurrentControlSet\Services. It leverages data from the Endpoint.Registry
-    datamodel, specifically monitoring registry paths and actions related to service
-    deletion. This activity is significant as adversaries may delete services to evade
-    detection and hinder incident response efforts. If confirmed malicious, this action
-    could disrupt legitimate services, impair system functionality, and potentially
-    allow atta
+  description: The following analytic detects the deletion of a service from the Windows Registry under CurrentControlSet\Services. It leverages data from the Endpoint.Registry datamodel, specifically monitoring registry paths and actions related to service deletion. This activity is significant as adversaries may delete services to evade detection and hinder incident response efforts. If confirmed malicious, this action could disrupt legitimate services, impair system functionality, and potentially allow attackers to maintain a lower profile within the environment, complicating detection and remediation efforts.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1489
-      name: Technique T1489
-    tactics: []
+      name: Service Stop
+      tactics:
+      - impact
+    tactics:
+    - impact
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_service_deletion_in_registry.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_service_deletion_in_registry.yml
+      rule_sha256: sha256:74af221baf7f470ca548c4089af75bfae27fab9edc570123231682d5c37a482c
+      detection_id: daed6823-b51c-4843-a6ad-169708f1323e
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/brute_ratel/service_deletion/sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/brute_ratel/service_deletion/sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:fc347ede68b78146b004acc3a57ecfadd5c39c734e46f21084a57e6658fcb4a5
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

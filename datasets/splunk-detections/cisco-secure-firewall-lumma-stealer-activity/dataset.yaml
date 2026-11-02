@@ -1,14 +1,14 @@
 metadata:
   name: cisco-secure-firewall-lumma-stealer-activity
   version: 2.0.0
-  description: "This analytic detects Lumma Stealer activity using Cisco Secure Firewall\
-    \ Intrusion Events. \nIt leverages Cisco Secure Firewall Threat Defense IntrusionEvent\
-    \ logs to identify cases where four of the following Snort signature IDs 64793,\
-    \ 64794, 64797, 64798, 64799, 64800, 64801, 62709, 64167, 64168, 64169, 64796,\
-    \ 62710, 62711, 62712, 62713, 62714, 62715, 62716, 62717, 64812, 64810, 64811\
-    \ occurs in the span of 15 minutes from the same host.\nIf confirmed malicious,\
-    \ this behavior is highly indicative "
+  description: 'This analytic detects Lumma Stealer activity using Cisco Secure Firewall Intrusion Events.
+
+    It leverages Cisco Secure Firewall Threat Defense IntrusionEvent logs to identify cases where four of the following Snort signature IDs 64793, 64794, 64797, 64798, 64799, 64800, 64801, 62709, 64167, 64168, 64169, 64796, 62710, 62711, 62712, 62713, 62714, 62715, 62716, 62717, 64812, 64810, 64811 occurs in the span of 15 minutes from the same host.
+
+    If confirmed malicious, this behavior is highly indicative of a successful infection of Lumma Stealer.'
   author: Nasreddine Bencherchali, Splunk, Talos NTDR
+  updated: '2026-06-01'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,24 +17,55 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1190
-      name: Technique T1190
+      name: Exploit Public-Facing Application
+      tactics:
+      - initial-access
     - id: T1210
-      name: Technique T1210
+      name: Exploitation of Remote Services
+      tactics:
+      - lateral-movement
     - id: T1027
-      name: Technique T1027
+      name: Obfuscated Files or Information
+      tactics:
+      - defense-evasion
     - id: T1204
-      name: Technique T1204
-    tactics: []
+      name: User Execution
+      tactics:
+      - execution
+    tactics:
+    - initial-access
+    - execution
+    - defense-evasion
+    - lateral-movement
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/network/cisco_secure_firewall___lumma_stealer_activity.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/network/cisco_secure_firewall___lumma_stealer_activity.yml
+      rule_sha256: sha256:dd62f9335f99e9b12af39a117bca2dcf4d61673cdfe3d22bd11ab47deca51899
+      detection_id: 96bce783-c22e-4e48-8cf1-3eb2794c5083
+      source_version: 2
+      source_date: '2026-06-01'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_secure_firewall_threat_defense/lumma_stealer/lumma_stealer_events.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/cisco_secure_firewall_threat_defense/lumma_stealer/lumma_stealer_events.log
     description: not_applicable - cisco:sfw:estreamer
     format: auto
     schema: raw
     sourcetype: cisco:sfw:estreamer
+    checksum: sha256:94f3acbdeb98527184106eb4546cfeebfca3e9f807932faade314181ad16ff0a
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,14 +1,10 @@
 metadata:
   name: linux-auditd-possible-access-to-credential-files
   version: 9.0.0
-  description: 'The following analytic detects attempts to access or dump the contents
-    of /etc/passwd and /etc/shadow files on Linux systems. It leverages data from
-    Linux Auditd, focusing on processes like ''cat'', ''nano'', ''vim'', and ''vi''
-    accessing these files. This activity is significant as it may indicate credential
-    dumping, a technique used by adversaries to gain persistence or escalate privileges.
-    If confirmed malicious, privileges. If confirmed malicious, attackers could obtain
-    hashed passwords for offline '
+  description: The following analytic detects attempts to access or dump the contents of /etc/passwd and /etc/shadow files on Linux systems. It leverages data from Linux Auditd, focusing on processes like 'cat', 'nano', 'vim', and 'vi' accessing these files. This activity is significant as it may indicate credential dumping, a technique used by adversaries to gain persistence or escalate privileges. If confirmed malicious, privileges. If confirmed malicious, attackers could obtain hashed passwords for offline cracking, leading to unauthorized access and potential system compromise.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1003.008
-      name: Technique T1003.008
-    tactics: []
+      name: /etc/passwd and /etc/shadow
+      tactics:
+      - credential-access
+    tactics:
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/linux_auditd_possible_access_to_credential_files.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/linux_auditd_possible_access_to_credential_files.yml
+      rule_sha256: sha256:a2a79cfe9a90640158826b4bd483c91281ff186451cb35862f7823e124e8e00f
+      detection_id: 0419cb7a-57ea-467b-974f-77c303dfe2a3
+      source_version: 9
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1003.008/linux_auditd_access_credential/auditd_proctitle_access_cred.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1003.008/linux_auditd_access_credential/auditd_proctitle_access_cred.log
     description: auditd - auditd
     format: auto
     schema: raw
     sourcetype: auditd
+    checksum: sha256:28f04ee54387630994d5c5be34ae44f31bf161dd8648242b7bdcd356a3664ff4
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

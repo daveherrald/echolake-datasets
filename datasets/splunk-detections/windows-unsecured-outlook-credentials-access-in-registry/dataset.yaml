@@ -1,14 +1,10 @@
 metadata:
   name: windows-unsecured-outlook-credentials-access-in-registry
   version: 9.0.0
-  description: The following analytic detects unauthorized access to Outlook credentials
-    stored in the Windows registry. It leverages Windows Security Event logs, specifically
-    EventCode 4663, to identify access attempts to registry paths associated with
-    Outlook profiles. This activity is significant as it may indicate attempts to
-    steal sensitive email credentials, which could lead to unauthorized access to
-    email accounts. If confirmed malicious, this could allow attackers to exfiltrate
-    sensitive information, i
+  description: The following analytic detects unauthorized access to Outlook credentials stored in the Windows registry. It leverages Windows Security Event logs, specifically EventCode 4663, to identify access attempts to registry paths associated with Outlook profiles. This activity is significant as it may indicate attempts to steal sensitive email credentials, which could lead to unauthorized access to email accounts. If confirmed malicious, this could allow attackers to exfiltrate sensitive information, impersonate users, or execute further unauthorized actions within Outlook, posing a significant security risk.
   author: Teoderick Contreras, Splunk
+  updated: '2025-12-16'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1552
-      name: Technique T1552
-    tactics: []
+      name: Unsecured Credentials
+      tactics:
+      - credential-access
+    tactics:
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_unsecured_outlook_credentials_access_in_registry.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_unsecured_outlook_credentials_access_in_registry.yml
+      rule_sha256: sha256:d4752cbb59b52fd92f9420828a5b163eee16b4f69fc593d002bcdf7b53e1bbd1
+      detection_id: 36334123-077d-47a2-b70c-6c7b3cc85049
+      source_version: 9
+      source_date: '2025-12-16'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1552/snakey_keylogger_outlook_reg_access/snakekeylogger_4663.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1552/snakey_keylogger_outlook_reg_access/snakekeylogger_4663.log
     description: XmlWinEventLog:Security - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:fa6b01bb3eabd856783f64274f12abf89709f62f043fdc0cbd6009a6221dd436
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

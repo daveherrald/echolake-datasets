@@ -1,14 +1,10 @@
 metadata:
   name: detect-remote-access-software-usage-dns
   version: 11.0.0
-  description: The following analytic detects DNS queries to domains associated with
-    known remote access software such as AnyDesk, GoToMyPC, LogMeIn, and TeamViewer.
-    This detection is crucial as adversaries often use these tools to maintain access
-    and control over compromised environments. Identifying such behavior is vital
-    for a Security Operations Center (SOC) because unauthorized remote access can
-    lead to data breaches, ransomware attacks, and other severe impacts if these threats
-    are not mitigated promptly
+  description: The following analytic detects DNS queries to domains associated with known remote access software such as AnyDesk, GoToMyPC, LogMeIn, and TeamViewer. This detection is crucial as adversaries often use these tools to maintain access and control over compromised environments. Identifying such behavior is vital for a Security Operations Center (SOC) because unauthorized remote access can lead to data breaches, ransomware attacks, and other severe impacts if these threats are not mitigated promptly.
   author: Steven Dick
+  updated: '2026-01-19'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1219
-      name: Technique T1219
-    tactics: []
+      name: Remote Access Tools
+      tactics:
+      - command-and-control
+    tactics:
+    - command-and-control
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/network/detect_remote_access_software_usage_dns.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/network/detect_remote_access_software_usage_dns.yml
+      rule_sha256: sha256:c6eeb9e485b21f8c0aee8fa0fd1c60915ecb640f13bb7f69072236fe560af203
+      detection_id: a16b797d-e309-41bd-8ba0-5067dae2e4be
+      source_version: 11
+      source_date: '2026-01-19'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1219/screenconnect/screenconnect_sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1219/screenconnect/screenconnect_sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:c8fee2c4b23d85a2312d95b64dbbe91d5de431fde8ec0d27ba00c7121ac77a94
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

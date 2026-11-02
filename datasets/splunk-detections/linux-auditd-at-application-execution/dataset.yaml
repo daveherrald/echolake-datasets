@@ -1,14 +1,10 @@
 metadata:
   name: linux-auditd-at-application-execution
   version: 6.0.0
-  description: The following analytic detects the execution of the "At" application
-    in Linux, which can be used by attackers to create persistence entries on a compromised
-    host. This detection leverages data from Endpoint Detection and Response (EDR)
-    agents, focusing on process names and parent process names associated with "at"
-    or "atd". This activity is significant because the "At" application can be exploited
-    to maintain unauthorized access or deliver additional malicious payloads. If confirmed
-    malicious, t
+  description: The following analytic detects the execution of the "At" application in Linux, which can be used by attackers to create persistence entries on a compromised host. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and parent process names associated with "at" or "atd". This activity is significant because the "At" application can be exploited to maintain unauthorized access or deliver additional malicious payloads. If confirmed malicious, this behavior could lead to data theft, ransomware attacks, or other severe consequences. Immediate investigation is required to determine the legitimacy of the execution and mitigate potential risks.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,18 +14,44 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1053.002
-      name: Technique T1053.002
-    tactics: []
+      name: At
+      tactics:
+      - execution
+      - persistence
+      - privilege-escalation
+    tactics:
+    - execution
+    - persistence
+    - privilege-escalation
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/linux_auditd_at_application_execution.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/linux_auditd_at_application_execution.yml
+      rule_sha256: sha256:23c8efeaf87dcea417b379b622e48244dc195bdfae2a5b66b53bcf5732967ece
+      detection_id: 9f306e0a-1c36-469e-8892-968ca12470dd
+      source_version: 6
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053.002/linux_new_auditd_at/linux_auditd_new_at.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1053.002/linux_new_auditd_at/linux_auditd_new_at.log
     description: auditd - auditd
     format: auto
     schema: raw
     sourcetype: auditd
+    checksum: sha256:8f8a8fcd8664f1b2179686e42069bb1e6c0a11e69f0483d95ceec1f5185ba616
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

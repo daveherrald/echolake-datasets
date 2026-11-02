@@ -1,14 +1,10 @@
 metadata:
   name: o365-user-consent-denied-for-oauth-application
   version: 7.0.0
-  description: The following analytic identifies instances where a user has denied
-    consent to an OAuth application seeking permissions within the Office 365 environment.
-    This detection leverages O365 audit logs, focusing on events related to user consent
-    actions. By filtering for denied consent actions associated with OAuth applications,
-    it captures instances where users have actively rejected permission requests.
-    This activity is significant as it may indicate users spotting potentially suspicious
-    or unfamili
+  description: The following analytic identifies instances where a user has denied consent to an OAuth application seeking permissions within the Office 365 environment. This detection leverages O365 audit logs, focusing on events related to user consent actions. By filtering for denied consent actions associated with OAuth applications, it captures instances where users have actively rejected permission requests. This activity is significant as it may indicate users spotting potentially suspicious or unfamiliar applications. If confirmed malicious, it suggests an attempt by a potentially harmful application to gain unauthorized access, which was proactively blocked by the user.
   author: Mauricio Velazco, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1528
-      name: Technique T1528
-    tactics: []
+      name: Steal Application Access Token
+      tactics:
+      - credential-access
+    tactics:
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/o365_user_consent_denied_for_oauth_application.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/o365_user_consent_denied_for_oauth_application.yml
+      rule_sha256: sha256:358a11de5720f82b4b2ed573a981e7eb9a5012439c5fcff38270299e8196b62c
+      detection_id: 2d8679ef-b075-46be-8059-c25116cb1072
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1528/o365_user_consent_declined/o365_user_consent_declined.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1528/o365_user_consent_declined/o365_user_consent_declined.log
     description: o365 - o365:graph:api
     format: auto
     schema: raw
     sourcetype: o365:graph:api
+    checksum: sha256:337ce22fc7c6f4d6af3d95fa5654e8573952eaf7b40ca7b521df609ba44fd161
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

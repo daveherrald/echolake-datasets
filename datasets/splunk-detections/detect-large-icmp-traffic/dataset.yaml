@@ -1,14 +1,10 @@
 metadata:
   name: detect-large-icmp-traffic
   version: 2.0.0
-  description: The following analytic identifies ICMP traffic to external IP addresses
-    with total bytes (sum of bytes in and bytes out) greater than 1,000 bytes. It
-    leverages the Network_Traffic data model to detect large ICMP packet that aren't
-    blocked and are directed toward external networks. We use  All_Traffic.bytes in
-    the detection to capture variations in inbound versus outbound traffic sizes,
-    as significant discrepancies or unusually large ICMP exchanges can indicate information
-    smuggling, covert commu
+  description: The following analytic identifies ICMP traffic to external IP addresses with total bytes (sum of bytes in and bytes out) greater than 1,000 bytes. It leverages the Network_Traffic data model to detect large ICMP packet that aren't blocked and are directed toward external networks. We use  All_Traffic.bytes in the detection to capture variations in inbound versus outbound traffic sizes, as significant discrepancies or unusually large ICMP exchanges can indicate information smuggling, covert communication, or command-and-control (C2) activities. If validated as malicious, this could signal ICMP tunneling, unauthorized data transfer, or compromised endpoints requiring immediate investigation.
   author: Rico Valdez, Dean Luxton, Bhavin Patel, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1095
-      name: Technique T1095
-    tactics: []
+      name: Non-Application Layer Protocol
+      tactics:
+      - command-and-control
+    tactics:
+    - command-and-control
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/network/detect_large_icmp_traffic.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/network/detect_large_icmp_traffic.yml
+      rule_sha256: sha256:8b86cc9bacddf071fd35045d0632852275cafa86246f771b7e176cd2dd50f17d
+      detection_id: 9cd6d066-94d5-4ccd-a8b9-28c03ca91be8
+      source_version: 2
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1095/palologs/large_icmp.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1095/palologs/large_icmp.log
     description: pan:traffic - pan:traffic
     format: auto
     schema: raw
     sourcetype: pan:traffic
+    checksum: sha256:79b4c41305fd2cedc9f50656885aafcd85efb2e9d09abe715b774299640f7c18
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

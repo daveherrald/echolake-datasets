@@ -1,14 +1,10 @@
 metadata:
   name: linux-auditd-auditd-service-stop
   version: 6.0.0
-  description: The following analytic detects the suspicious auditd service stop.
-    This behavior is critical for a SOC to monitor because it may indicate attempts
-    to gain unauthorized access or maintain control over a system. Such actions could
-    be signs of malicious activity. If confirmed, this could lead to serious consequences,
-    including a compromised system, unauthorized access to sensitive data, or even
-    a wider breach affecting the entire network. Detecting and responding to these
-    signs early is essential t
+  description: The following analytic detects the suspicious auditd service stop. This behavior is critical for a SOC to monitor because it may indicate attempts to gain unauthorized access or maintain control over a system. Such actions could be signs of malicious activity. If confirmed, this could lead to serious consequences, including a compromised system, unauthorized access to sensitive data, or even a wider breach affecting the entire network. Detecting and responding to these signs early is essential to prevent potential security incidents.
   author: Teoderick Contreras, Splunk
+  updated: '2025-06-10'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1489
-      name: Technique T1489
-    tactics: []
+      name: Service Stop
+      tactics:
+      - impact
+    tactics:
+    - impact
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/linux_auditd_auditd_service_stop.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/linux_auditd_auditd_service_stop.yml
+      rule_sha256: sha256:95b87d7c5a499db3f6e7ac721e0b31e11e6ff49c094856b204a4de93b0d7f780
+      detection_id: 6cb9d0e1-eabe-41de-a11a-5efade354e9d
+      source_version: 6
+      source_date: '2025-06-10'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1489/linux_auditd_auditd_service_stop/linux_auditd_auditd_service_stop.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1489/linux_auditd_auditd_service_stop/linux_auditd_auditd_service_stop.log
     description: auditd - auditd
     format: auto
     schema: raw
     sourcetype: auditd
+    checksum: sha256:7ee1d10da00560c5e1055f10b1869d6abafd83ad8d0e7bb794c203fff931968c
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

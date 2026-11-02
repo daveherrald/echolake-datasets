@@ -1,25 +1,28 @@
 metadata:
   name: windows-file-download-via-powershell
   version: 6.0.0
-  description: 'The following analytic detects the use of PowerShell''s download methods
-    such as
+  description: 'The following analytic detects the use of PowerShell''s download methods such as
 
     "DownloadString" and "DownloadData" from the WebClient class or Invoke-WebRequest
 
     and it''s aliases "IWR" or "Curl".
 
-    It leverages data from Endpoint Detection and Response (EDR) agents, focusing
-    on
+    It leverages data from Endpoint Detection and Response (EDR) agents, focusing on
 
     process execution logs that include command-line details.
 
-    This activity can be significant such methods and functions are commonly used
-    in malicious
+    This activity can be significant such methods and functions are commonly used in malicious
 
     PowerShell scripts to fetch and execute remote code.
 
-    If confirmed maliciou'
+    If confirmed malicious, this behavior could allow an attacker to download and run
+
+    arbitrary code, potentially leading to unauthorized access, data exfiltration,
+
+    or further compromise of the affected system.'
   author: Michael Haag, Nasreddine Bencherchali, Splunk
+  updated: '2025-12-16'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -29,25 +32,51 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1059.001
-      name: Technique T1059.001
+      name: PowerShell
+      tactics:
+      - execution
     - id: T1105
-      name: Technique T1105
-    tactics: []
+      name: Ingress Tool Transfer
+      tactics:
+      - command-and-control
+    tactics:
+    - execution
+    - command-and-control
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_file_download_via_powershell.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_file_download_via_powershell.yml
+      rule_sha256: sha256:6aa927584795b3e2cf09fa116fe6c25b1e33791fefe953096ccf7b7fc6e6b2b3
+      detection_id: 58c4e56c-b5b8-46a3-b5fb-6537dca3c6de
+      source_version: 6
+      source_date: '2025-12-16'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/atomic_red_team/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1059.001/atomic_red_team/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_network_visibility_module/cisco_nvm_flowdata/nvm_flowdata.log
+    checksum: sha256:8f71b2a0ef81892551cd6a9ad115b8ec5c42d9f2071547b064c496511898c4e9
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/cisco_network_visibility_module/cisco_nvm_flowdata/nvm_flowdata.log
     description: not_applicable - cisco:nvm:flowdata
     format: auto
     schema: raw
     sourcetype: cisco:nvm:flowdata
+    checksum: sha256:f427b5cc3a60bb3b41ae1c679bda85c1bb9aba78cc9468b94d3eec36adedfaaa
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

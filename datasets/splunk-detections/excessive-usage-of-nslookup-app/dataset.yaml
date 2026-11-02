@@ -1,14 +1,10 @@
 metadata:
   name: excessive-usage-of-nslookup-app
   version: 7.0.0
-  description: The following analytic detects excessive usage of the nslookup application,
-    which may indicate potential DNS exfiltration attempts. It leverages Sysmon EventCode
-    1 to monitor process executions, specifically focusing on nslookup.exe. The detection
-    identifies outliers by comparing the frequency of nslookup executions against
-    a calculated threshold. This activity is significant as it can reveal attempts
-    by malware or APT groups to exfiltrate data via DNS queries. If confirmed malicious,
-    this behav
+  description: The following analytic detects excessive usage of the nslookup application, which may indicate potential DNS exfiltration attempts. It leverages Sysmon EventCode 1 to monitor process executions, specifically focusing on nslookup.exe. The detection identifies outliers by comparing the frequency of nslookup executions against a calculated threshold. This activity is significant as it can reveal attempts by malware or APT groups to exfiltrate data via DNS queries. If confirmed malicious, this behavior could allow attackers to stealthily transfer sensitive information out of the network, bypassing traditional data exfiltration defenses.
   author: Teoderick Contreras, Stanislav Miskovic, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1048
-      name: Technique T1048
-    tactics: []
+      name: Exfiltration Over Alternative Protocol
+      tactics:
+      - exfiltration
+    tactics:
+    - exfiltration
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/excessive_usage_of_nslookup_app.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/excessive_usage_of_nslookup_app.yml
+      rule_sha256: sha256:45010646d6bbcb239937c74ccf252b2cce237bea43b060ef363f7125111bc7b1
+      detection_id: 0a69fdaa-a2b8-11eb-b16d-acde48001122
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1048.003/nslookup_exfil/sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1048.003/nslookup_exfil/sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:85fb42529bce83d0788a792a6b511cd84e70682fc531401a93d86174601c3a50
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

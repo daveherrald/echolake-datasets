@@ -1,14 +1,10 @@
 metadata:
   name: windows-set-account-password-policy-to-unlimited-via-net
   version: 3.0.0
-  description: The following analytic detects the use of net.exe to update user account
-    policies to set passwords as non-expiring. It leverages data from Endpoint Detection
-    and Response (EDR) agents, focusing on command-line executions involving "/maxpwage:unlimited"
-    or "/maxpwage:49710", which achieve a similar outcome theoretically. This activity
-    is significant as it can indicate an attempt to maintain persistence, escalate
-    privileges, evade defenses, or facilitate lateral movement. If confirmed malicious,
-    t
+  description: The following analytic detects the use of net.exe to update user account policies to set passwords as non-expiring. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on command-line executions involving "/maxpwage:unlimited" or "/maxpwage:49710", which achieve a similar outcome theoretically. This activity is significant as it can indicate an attempt to maintain persistence, escalate privileges, evade defenses, or facilitate lateral movement. If confirmed malicious, this behavior could allow an attacker to maintain long-term access to compromised accounts, potentially leading to further exploitation and unauthorized access to sensitive information.
   author: Teoderick Contreras, Nasreddine Bencherchali, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1489
-      name: Technique T1489
-    tactics: []
+      name: Service Stop
+      tactics:
+      - impact
+    tactics:
+    - impact
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_set_account_password_policy_to_unlimited_via_net.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_set_account_password_policy_to_unlimited_via_net.yml
+      rule_sha256: sha256:90469413eced65aeb2dba4e214eb8bae29a851c1ed30876c89e5f44da10c11f1
+      detection_id: 11f93009-8083-43fd-82a7-821fcbdc8342
+      source_version: 3
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/azorult/sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/azorult/sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:00b51f8b994ee390d7305f35b43fd2a92570d41261576ebd548d5e9c5b187429
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

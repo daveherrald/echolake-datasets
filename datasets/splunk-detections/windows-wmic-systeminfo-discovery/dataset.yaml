@@ -1,14 +1,10 @@
 metadata:
   name: windows-wmic-systeminfo-discovery
   version: 1.0.0
-  description: The following analytic detects the execution of Windows Management
-    Instrumentation Command-line (WMIC) commands used for computer system discovery
-    on a Windows system. Specifically, it monitors for commands such as “wmic computersystem”
-    that retrieve detailed information about the computer’s model, manufacturer, name,
-    domain, and other system attributes. While these commands are commonly used by
-    administrators for inventory and troubleshooting, they may also be exploited by
-    adversaries to gain i
+  description: "The following analytic detects the execution of Windows Management Instrumentation Command-line (WMIC) commands used for computer system discovery on a Windows system. Specifically, it monitors for commands such as \u201Cwmic computersystem\u201D that retrieve detailed information about the computer\u2019s model, manufacturer, name, domain, and other system attributes. While these commands are commonly used by administrators for inventory and troubleshooting, they may also be exploited by adversaries to gain insight into the target environment during the reconnaissance phase of an attack. Identifying and alerting on WMIC computer system queries helps security teams recognize unauthorized information gathering and take steps to mitigate potential threats."
   author: Teoderick Contreras, Splunk
+  updated: '2025-08-25'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1082
-      name: Technique T1082
-    tactics: []
+      name: System Information Discovery
+      tactics:
+      - discovery
+    tactics:
+    - discovery
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_wmic_systeminfo_discovery.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_wmic_systeminfo_discovery.yml
+      rule_sha256: sha256:c761e5cdeba74ce6807828873ec15bcd4f35c8f10dc8996583ac1d0aba1809e2
+      detection_id: 97937ece-cb13-4dbc-9684-c0dc3afd400a
+      source_version: 1
+      source_date: '2025-08-25'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/lamehug/T1082/wmic_cmd/wmic_cmd.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/lamehug/T1082/wmic_cmd/wmic_cmd.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:7285d5187d1168b0c6f3422360510162beef0bfa4d070dc0e5abf3655ceab91a
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,16 +1,18 @@
 metadata:
   name: cisco-asa-aaa-policy-tampering
   version: 1.0.0
-  description: 'This analytic detects modifications to authentication and authorization
-    (AAA) security policies on Cisco ASA devices via CLI or ASDM.
+  description: 'This analytic detects modifications to authentication and authorization (AAA) security policies on Cisco ASA devices via CLI or ASDM.
 
-    AAA policies control critical security mechanisms including authentication attempts,
-    lockout thresholds, password policies, and access control settings that protect
-    administrative access to network infrastructure.
+    AAA policies control critical security mechanisms including authentication attempts, lockout thresholds, password policies, and access control settings that protect administrative access to network infrastructure.
 
-    Adversaries or malicious insiders may weaken authentication policies to facilitate
-    brute force attacks, disable account lockouts to enable unlimited pas'
+    Adversaries or malicious insiders may weaken authentication policies to facilitate brute force attacks, disable account lockouts to enable unlimited password attempts, reduce password complexity requirements, or modify authorization settings to elevate privileges and maintain persistent access.
+
+    The detection monitors for command execution events containing AAA-related commands such as `aaa authentication`, `aaa authorization`, or `aaa local authentication`, focusing on changes to authentication attempts, lockout policies, and access control configurations.
+
+    Investigate any unauthorized modifications to AAA policies, especially changes that weaken security posture (increasing max-fail attempts, disabling lockouts, reducing password requirements), and verify these changes against approved change management processes and security policies.'
   author: Nasreddine Bencherchali, Splunk
+  updated: '2025-11-18'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,18 +20,44 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1556.004
-      name: Technique T1556.004
-    tactics: []
+      name: Network Device Authentication
+      tactics:
+      - persistence
+      - defense-evasion
+      - credential-access
+    tactics:
+    - persistence
+    - defense-evasion
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/application/cisco_asa___aaa_policy_tampering.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/application/cisco_asa___aaa_policy_tampering.yml
+      rule_sha256: sha256:d7ca61d01708b188088260dcdec050d7a4d02fe5388896020b3d09e6fd522a15
+      detection_id: 8f2c4e9a-5d3b-4c7e-9a1f-6e8d5b2c3a9f
+      source_version: 1
+      source_date: '2025-11-18'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_asa/generic/cisco_asa_generic_logs.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/cisco_asa/generic/cisco_asa_generic_logs.log
     description: not_applicable - cisco:asa
     format: auto
     schema: raw
     sourcetype: cisco:asa
+    checksum: sha256:b42d51b1f09c7d447ebf3ca1c1a594a886bbf529b06a4300c9a5a58d191a2385
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

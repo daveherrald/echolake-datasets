@@ -1,17 +1,16 @@
 metadata:
   name: cisco-nvm-webserver-download-from-file-sharing-website
   version: 3.0.0
-  description: 'This analytic detects unexpected outbound network connections initiated
-    by known webserver processes such as `httpd.exe`, `nginx.exe`, or `tomcat.exe`
-    to common file sharing or public content hosting services like GitHub, Discord
-    CDN, Transfer.sh, or Pastebin.
+  description: 'This analytic detects unexpected outbound network connections initiated by known webserver processes such as `httpd.exe`, `nginx.exe`, or `tomcat.exe` to common file sharing or public content hosting services like GitHub, Discord CDN, Transfer.sh, or Pastebin.
 
-    Webservers are rarely expected to perform outbound downloads, especially to dynamic
-    or anonymous file hosting domains. This behavior is often associated with server
-    compromise,
+    Webservers are rarely expected to perform outbound downloads, especially to dynamic or anonymous file hosting domains. This behavior is often associated with server compromise,
 
-    where an attacker uses a reverse shell, webshell, or injected '
+    where an attacker uses a reverse shell, webshell, or injected task to fetch malware or tools post-exploitation.
+
+    The detection leverages Cisco Network Visibility Module flow data, enriched with process context, to identify this highly suspicious behavior.'
   author: Nasreddine Bencherchali, Splunk
+  updated: '2025-09-16'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -20,20 +19,45 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1105
-      name: Technique T1105
+      name: Ingress Tool Transfer
+      tactics:
+      - command-and-control
     - id: T1190
-      name: Technique T1190
-    tactics: []
+      name: Exploit Public-Facing Application
+      tactics:
+      - initial-access
+    tactics:
+    - initial-access
+    - command-and-control
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/cisco_nvm___webserver_download_from_file_sharing_website.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/cisco_nvm___webserver_download_from_file_sharing_website.yml
+      rule_sha256: sha256:3f487b9abfc1214d76bfd97e38280b1e0efed64bf285cb777805dc53ded97d11
+      detection_id: 1984f997-3b49-4d4b-a7e9-dc5dbf88370e
+      source_version: 3
+      source_date: '2025-09-16'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_network_visibility_module/cisco_nvm_flowdata/nvm_flowdata.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/cisco_network_visibility_module/cisco_nvm_flowdata/nvm_flowdata.log
     description: not_applicable - cisco:nvm:flowdata
     format: auto
     schema: raw
     sourcetype: cisco:nvm:flowdata
+    checksum: sha256:f427b5cc3a60bb3b41ae1c679bda85c1bb9aba78cc9468b94d3eec36adedfaaa
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

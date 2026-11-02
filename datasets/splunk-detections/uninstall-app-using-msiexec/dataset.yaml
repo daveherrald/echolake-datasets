@@ -1,14 +1,10 @@
 metadata:
   name: uninstall-app-using-msiexec
   version: 7.0.0
-  description: The following analytic detects the uninstallation of applications using
-    msiexec with specific command-line arguments. It leverages data from Endpoint
-    Detection and Response (EDR) agents, focusing on process execution logs that include
-    command-line details. This activity is significant because it is an uncommon practice
-    in enterprise environments and has been associated with malicious behavior, such
-    as disabling antivirus software. If confirmed malicious, this could allow an attacker
-    to remove se
+  description: The following analytic detects the uninstallation of applications using msiexec with specific command-line arguments. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process execution logs that include command-line details. This activity is significant because it is an uncommon practice in enterprise environments and has been associated with malicious behavior, such as disabling antivirus software. If confirmed malicious, this could allow an attacker to remove security software, potentially leading to further compromise and persistence within the network.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1218.007
-      name: Technique T1218.007
-    tactics: []
+      name: Msiexec
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/uninstall_app_using_msiexec.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/uninstall_app_using_msiexec.yml
+      rule_sha256: sha256:93b11f2a757e2c994584c2fc5d355d14f99737ba4cce532a72303303eee32327
+      detection_id: 1fca2b28-f922-11eb-b2dd-acde48001122
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/conti/conti_leak/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/conti/conti_leak/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:d7e5b728083f9f42cd7bc66a09073d9862dcac8addebd904c06d4dd77310f087
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

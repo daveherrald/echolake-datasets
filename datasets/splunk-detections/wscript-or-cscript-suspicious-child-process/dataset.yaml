@@ -1,14 +1,10 @@
 metadata:
   name: wscript-or-cscript-suspicious-child-process
   version: 10.0.0
-  description: This analytic identifies a suspicious spawned process by WScript or
-    CScript process. This technique was a common technique used by adversaries and
-    malware to execute different LOLBIN, other scripts like PowerShell or spawn a
-    suspended process to inject its code as a defense evasion. This TTP may detect
-    some normal script that uses several application tools that are in the list of
-    the child process it detects but a good pivot and indicator that a script may
-    execute suspicious code.
+  description: This analytic identifies a suspicious spawned process by WScript or CScript process. This technique was a common technique used by adversaries and malware to execute different LOLBIN, other scripts like PowerShell or spawn a suspended process to inject its code as a defense evasion. This TTP may detect some normal script that uses several application tools that are in the list of the child process it detects but a good pivot and indicator that a script may execute suspicious code.
   author: Teoderick Contreras, Splunk
+  updated: '2025-08-22'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,22 +14,53 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1055
-      name: Technique T1055
+      name: Process Injection
+      tactics:
+      - privilege-escalation
+      - defense-evasion
     - id: T1134.004
-      name: Technique T1134.004
+      name: Parent PID Spoofing
+      tactics:
+      - privilege-escalation
+      - defense-evasion
     - id: T1543
-      name: Technique T1543
-    tactics: []
+      name: Create or Modify System Process
+      tactics:
+      - persistence
+      - privilege-escalation
+    tactics:
+    - persistence
+    - privilege-escalation
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/wscript_or_cscript_suspicious_child_process.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/wscript_or_cscript_suspicious_child_process.yml
+      rule_sha256: sha256:7516248023941fe45149bb4c3cdf0c2b091cbdd7fca5d9ecae8919cf804e3b44
+      detection_id: 1f35e1da-267b-11ec-90a9-acde48001122
+      source_version: 10
+      source_date: '2025-08-22'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.005/vbs_wscript/sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1059.005/vbs_wscript/sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:86ddf5d473d2be5d780dc171da8e00e33d572c9f387bb3d17aa3fc3e5b5ac2fc
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

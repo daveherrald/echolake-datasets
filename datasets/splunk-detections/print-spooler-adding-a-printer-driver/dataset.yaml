@@ -1,14 +1,10 @@
 metadata:
   name: print-spooler-adding-a-printer-driver
   version: 7.0.0
-  description: The following analytic detects the addition of new printer drivers
-    by monitoring Windows PrintService operational logs, specifically EventCode 316.
-    This detection leverages log data to identify messages indicating the addition
-    or update of printer drivers, such as "kernelbase.dll" and "UNIDRV.DLL." This
-    activity is significant as it may indicate exploitation attempts related to vulnerabilities
-    like CVE-2021-34527 (PrintNightmare). If confirmed malicious, attackers could
-    gain code execution or es
+  description: The following analytic detects the addition of new printer drivers by monitoring Windows PrintService operational logs, specifically EventCode 316. This detection leverages log data to identify messages indicating the addition or update of printer drivers, such as "kernelbase.dll" and "UNIDRV.DLL." This activity is significant as it may indicate exploitation attempts related to vulnerabilities like CVE-2021-34527 (PrintNightmare). If confirmed malicious, attackers could gain code execution or escalate privileges, potentially compromising the affected system. Immediate isolation and investigation of the endpoint are recommended.
   author: Mauricio Velazco, Michael Haag, Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1547.012
-      name: Technique T1547.012
-    tactics: []
+      name: Print Processors
+      tactics:
+      - persistence
+      - privilege-escalation
+    tactics:
+    - persistence
+    - privilege-escalation
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/print_spooler_adding_a_printer_driver.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/print_spooler_adding_a_printer_driver.yml
+      rule_sha256: sha256:25135e99aa9a1ee328b16c67a6e4a71c6154ae9037662c943a3205fdc130bfc6
+      detection_id: 313681a2-da8e-11eb-adad-acde48001122
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1547.012/printnightmare/windows-printservice_operational.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1547.012/printnightmare/windows-printservice_operational.log
     description: WinEventLog:Microsoft-Windows-PrintService/Operational - WinEventLog
     format: auto
     schema: raw
     sourcetype: WinEventLog
+    checksum: sha256:b12a10215b2034ab1bd7e5d0d8ec1a15325fcec531cadab8d4d88f89b02462b7
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

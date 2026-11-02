@@ -1,14 +1,10 @@
 metadata:
   name: windows-default-rdp-file-deletion
   version: 1.0.0
-  description: This detection identifies the deletion of the Default.rdp file from
-    a user’s Documents folder. This file is automatically created or updated by the
-    Remote Desktop Connection client (mstsc.exe) whenever a user initiates an RDP
-    session. It contains session configuration data, such as the remote hostname and
-    display settings. While the presence of this file is normal during legitimate
-    RDP usage, its deletion may indicate an attempt to conceal evidence of remote
-    access activity. Threat actors and re
+  description: "This detection identifies the deletion of the Default.rdp file from a user\u2019s Documents folder. This file is automatically created or updated by the Remote Desktop Connection client (mstsc.exe) whenever a user initiates an RDP session. It contains session configuration data, such as the remote hostname and display settings. While the presence of this file is normal during legitimate RDP usage, its deletion may indicate an attempt to conceal evidence of remote access activity. Threat actors and red team operators often remove Default.rdp as part of post-access cleanup to evade forensic detection. Detecting this action\u2014especially when correlated with recent RDP activity\u2014can help identify defense evasion techniques and uncover potentially malicious use of remote desktop connections. Monitoring for this file's deletion adds an important layer of visibility into user behavior and can serve as an early indicator of interactive attacker presence."
   author: Teoderick Contreras, Splunk
+  updated: '2025-07-30'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1070.004
-      name: Technique T1070.004
-    tactics: []
+      name: File Deletion
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_default_rdp_file_deletion.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_default_rdp_file_deletion.yml
+      rule_sha256: sha256:36fe93ac340de571d68bc5ab81903669baf5a6700701909a369882264bf00cfa
+      detection_id: 30a334c1-f9a5-4fbd-8958-5b65a8435cb2
+      source_version: 1
+      source_date: '2025-07-30'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1070.004/rdp_deletion/rdp_file_deleted.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1070.004/rdp_deletion/rdp_file_deleted.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:25af6d9241545d5923e6153b0b12bb52ca0b590abdfa3623ca3e9036572ad4d9
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,14 +1,10 @@
 metadata:
   name: macos-lolbin
   version: 8.0.0
-  description: 'The following analytic detects multiple executions of Living off the
-    Land (LOLbin) binaries on macOS within a short period. It leverages osquery to
-    monitor process events and identifies commands such as "find", "crontab", "screencapture",
-    "openssl", "curl", "wget", "killall", and "funzip". This activity is significant
-    as LOLbins are often used by attackers to perform malicious actions while evading
-    detection. If confirmed malicious, this behavior could allow attackers to execute
-    arbitrary code, '
+  description: The following analytic detects multiple executions of Living off the Land (LOLbin) binaries on macOS within a short period. It leverages osquery to monitor process events and identifies commands such as "find", "crontab", "screencapture", "openssl", "curl", "wget", "killall", and "funzip". This activity is significant as LOLbins are often used by attackers to perform malicious actions while evading detection. If confirmed malicious, this behavior could allow attackers to execute arbitrary code, escalate privileges, or persist within the environment, posing a significant security risk.
   author: Patrick Bareiss, Splunk
+  updated: '2025-10-14'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1059.004
-      name: Technique T1059.004
-    tactics: []
+      name: Unix Shell
+      tactics:
+      - execution
+    tactics:
+    - execution
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/macos_lolbin.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/macos_lolbin.yml
+      rule_sha256: sha256:33da7a73cc4320aff1a8bb5eede49bc6bfb208430bfa32fc2f80e547d14d0301
+      detection_id: 58d270fb-5b39-418e-a855-4b8ac046805e
+      source_version: 8
+      source_date: '2025-10-14'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.004/macos_lolbin/osquery.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1059.004/macos_lolbin/osquery.log
     description: osquery - osquery:results
     format: auto
     schema: raw
     sourcetype: osquery:results
+    checksum: sha256:d6efc8b61126b78a677a64b16bac217770ee705e57a3fc0bd640b0b5e292b068
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

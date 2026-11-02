@@ -1,14 +1,10 @@
 metadata:
   name: detect-aws-console-login-by-user-from-new-region
   version: 7.0.0
-  description: The following analytic identifies AWS console login attempts by users
-    from a new region. It leverages AWS CloudTrail events and compares current login
-    regions against a baseline of previously seen regions for each user. This activity
-    is significant as it may indicate unauthorized access attempts or compromised
-    credentials. If confirmed malicious, an attacker could gain unauthorized access
-    to AWS resources, potentially leading to data breaches, resource manipulation,
-    or further lateral movement w
+  description: The following analytic identifies AWS console login attempts by users from a new region. It leverages AWS CloudTrail events and compares current login regions against a baseline of previously seen regions for each user. This activity is significant as it may indicate unauthorized access attempts or compromised credentials. If confirmed malicious, an attacker could gain unauthorized access to AWS resources, potentially leading to data breaches, resource manipulation, or further lateral movement within the cloud environment.
   author: Bhavin Patel, Eric McGinnis Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - hunting
   - splunk-security-content
@@ -18,20 +14,45 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1535
-      name: Technique T1535
+      name: Unused/Unsupported Cloud Regions
+      tactics:
+      - defense-evasion
     - id: T1586.003
-      name: Technique T1586.003
-    tactics: []
+      name: Cloud Accounts
+      tactics:
+      - resource-development
+    tactics:
+    - resource-development
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/detect_aws_console_login_by_user_from_new_region.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/detect_aws_console_login_by_user_from_new_region.yml
+      rule_sha256: sha256:f4f6e8a2c76fa29b5de85fa30937b466f2d07d98ef21f7b5e3cc59bb2a8c709e
+      detection_id: 9f31aa8e-e37c-46bc-bce1-8b3be646d026
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/suspicious_behaviour/abnormally_high_cloud_instances_launched/cloudtrail_behavioural_detections.json
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/suspicious_behaviour/abnormally_high_cloud_instances_launched/cloudtrail_behavioural_detections.json
     description: aws_cloudtrail - aws:cloudtrail
     format: auto
     schema: raw
     sourcetype: aws:cloudtrail
+    checksum: sha256:8b50b35094902fd94bd7c86b6c48d7e226ee5a63a98436b5da8b9ee716f63d43
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

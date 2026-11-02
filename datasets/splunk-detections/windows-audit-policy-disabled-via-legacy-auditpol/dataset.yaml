@@ -1,14 +1,10 @@
 metadata:
   name: windows-audit-policy-disabled-via-legacy-auditpol
   version: 3.0.0
-  description: 'The following analytic identifies the execution of the legacy `auditpol.exe`
-    included with the Windows 2000 Resource Kit Tools, with the "/disable" command-line
-    argument or one of the allowed category flags and the "none" option, in order
-    to disable a specific logging category from the audit policy. It leverages data
-    from Endpoint Detection and Response (EDR) agents, focusing on process names and
-    command-line executions. This activity can be significant as it indicates potential
-    defense evasion '
+  description: The following analytic identifies the execution of the legacy `auditpol.exe` included with the Windows 2000 Resource Kit Tools, with the "/disable" command-line argument or one of the allowed category flags and the "none" option, in order to disable a specific logging category from the audit policy. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line executions. This activity can be significant as it indicates potential defense evasion by adversaries or Red Teams, aiming to limit data that can be leveraged for detections and audits. If confirmed malicious, this behavior could allow attackers to bypass defenses, and plan further attacks, potentially leading to full machine compromise or lateral movement.
   author: Nasreddine Bencherchali, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1562.002
-      name: Technique T1562.002
-    tactics: []
+      name: Disable Windows Event Logging
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_audit_policy_disabled_via_legacy_auditpol.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_audit_policy_disabled_via_legacy_auditpol.yml
+      rule_sha256: sha256:de319c21bdee7c9a20973d94f1109318fed05034b1f6368b7d1dd89484746b83
+      detection_id: d2cef287-c2b7-4496-a609-7a548c1e27f9
+      source_version: 3
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.002/auditpol_tampering/auditpol_tampering_sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1562.002/auditpol_tampering/auditpol_tampering_sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:a417ec3d8d48c9cdcf4d5bcfc834fe100ba8a03105bcf08305f5af40a830b363
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

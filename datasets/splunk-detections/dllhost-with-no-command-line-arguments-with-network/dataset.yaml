@@ -13,8 +13,12 @@ metadata:
 
     and its absence can indicate malicious activity, such as Cobalt Strike usage.
 
-    If confirmed malicious, this activity could allow attackers to execu'
+    If confirmed malicious, this activity could allow attackers to execute code,
+
+    move laterally, or exfiltrate data, posing a severe threat to the network''s security.'
   author: Steven Dick, Michael Haag, Splunk
+  updated: '2026-01-01'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -24,18 +28,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1055
-      name: Technique T1055
-    tactics: []
+      name: Process Injection
+      tactics:
+      - privilege-escalation
+      - defense-evasion
+    tactics:
+    - privilege-escalation
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/dllhost_with_no_command_line_arguments_with_network.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/dllhost_with_no_command_line_arguments_with_network.yml
+      rule_sha256: sha256:c13c3525645e29e09c9799c1054879b61058611f202580752aa579db49ee638d
+      detection_id: f1c07594-a141-11eb-8407-acde48001122
+      source_version: 14
+      source_date: '2026-01-01'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1055/cobalt_strike/windows-sysmon_dllhost.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1055/cobalt_strike/windows-sysmon_dllhost.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:5403695c743517b297d5efcec9c609c1a77bb8ac12632df549f0b7bffd2c4959
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

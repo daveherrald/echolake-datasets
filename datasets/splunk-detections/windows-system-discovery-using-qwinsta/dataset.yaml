@@ -1,14 +1,10 @@
 metadata:
   name: windows-system-discovery-using-qwinsta
   version: 6.0.0
-  description: The following analytic detects the execution of "qwinsta.exe" on a
-    Windows operating system. This detection leverages data from Endpoint Detection
-    and Response (EDR) agents, focusing on process execution logs. The "qwinsta.exe"
-    tool is significant because it can display detailed session information on a remote
-    desktop session host server. This behavior is noteworthy as it is commonly abused
-    by Qakbot malware to gather system information and send it back to its Command
-    and Control (C2) server. If
+  description: The following analytic detects the execution of "qwinsta.exe" on a Windows operating system. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process execution logs. The "qwinsta.exe" tool is significant because it can display detailed session information on a remote desktop session host server. This behavior is noteworthy as it is commonly abused by Qakbot malware to gather system information and send it back to its Command and Control (C2) server. If confirmed malicious, this activity could lead to unauthorized data exfiltration and further compromise of the host.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - hunting
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1033
-      name: Technique T1033
-    tactics: []
+      name: System Owner/User Discovery
+      tactics:
+      - discovery
+    tactics:
+    - discovery
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_system_discovery_using_qwinsta.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_system_discovery_using_qwinsta.yml
+      rule_sha256: sha256:7f3ef803396499bafdabf4f303064b3d8e25ff086b66ac8b04d405b332dcc673
+      detection_id: 2e765c1b-144a-49f0-93d0-1df4287cca04
+      source_version: 6
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1033/qakbot_discovery_cmdline/sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1033/qakbot_discovery_cmdline/sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:7be091ede7f81f0ea38b87a74050ab8754de4143a773298851fab27d00c2a6cf
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

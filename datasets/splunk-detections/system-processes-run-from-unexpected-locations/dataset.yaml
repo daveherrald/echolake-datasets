@@ -1,14 +1,10 @@
 metadata:
   name: system-processes-run-from-unexpected-locations
   version: 13.0.0
-  description: The following analytic identifies system processes running from unexpected
-    locations outside of paths such as `C:\Windows\System32\` or `C:\Windows\SysWOW64`.
-    It leverages data from Endpoint Detection and Response (EDR) agents, focusing
-    on process paths, names, and hashes. This activity is significant as it may indicate
-    a malicious process attempting to masquerade as a legitimate system process. If
-    confirmed malicious, this behavior could allow an attacker to execute code, escalate
-    privileges, o
+  description: The following analytic identifies system processes running from unexpected locations outside of paths such as `C:\Windows\System32\` or `C:\Windows\SysWOW64`. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process paths, names, and hashes. This activity is significant as it may indicate a malicious process attempting to masquerade as a legitimate system process. If confirmed malicious, this behavior could allow an attacker to execute code, escalate privileges, or maintain persistence within the environment, posing a significant security risk.
   author: David Dorsey, Michael Haag, Nasreddine Bencherchali, Splunk
+  updated: '2025-12-31'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1036.003
-      name: Technique T1036.003
-    tactics: []
+      name: Rename Legitimate Utilities
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/system_processes_run_from_unexpected_locations.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/system_processes_run_from_unexpected_locations.yml
+      rule_sha256: sha256:1292f39a660b2e6e5417051ab135096138078eaa4e170812fc44223e6c4d329e
+      detection_id: a34aae96-ccf8-4aef-952c-3ea21444444d
+      source_version: 13
+      source_date: '2025-12-31'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1036.003/atomic_red_team/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1036.003/atomic_red_team/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:c9e2c2d4c29fa0e6054617b0743cb2574b28aa03a6560d80e4a66a4ee607aa75
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

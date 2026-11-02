@@ -1,13 +1,10 @@
 metadata:
   name: windows-modify-registry-to-add-or-modify-firewall-rule
   version: 9.0.0
-  description: The following analytic detects a potential addition or modification
-    of firewall rules, signaling possible configuration changes or security policy
-    adjustments. It tracks commands such as netsh advfirewall firewall add rule and
-    netsh advfirewall firewall set rule, which may indicate attempts to alter network
-    access controls. Monitoring these actions ensures the integrity of firewall settings
-    and helps prevent unauthorized network access.
+  description: The following analytic detects a potential addition or modification of firewall rules, signaling possible configuration changes or security policy adjustments. It tracks commands such as netsh advfirewall firewall add rule and netsh advfirewall firewall set rule, which may indicate attempts to alter network access controls. Monitoring these actions ensures the integrity of firewall settings and helps prevent unauthorized network access.
   author: Teoderick Contreras, Splunk
+  updated: '2025-11-20'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -17,18 +14,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1112
-      name: Technique T1112
-    tactics: []
+      name: Modify Registry
+      tactics:
+      - persistence
+      - defense-evasion
+    tactics:
+    - persistence
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_modify_registry_to_add_or_modify_firewall_rule.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_modify_registry_to_add_or_modify_firewall_rule.yml
+      rule_sha256: sha256:ec2b5374258e374d0ffaf7630c828c61821fe74b97fd0e3815780c6dea0f48d6
+      detection_id: 43254751-e2ce-409a-b6b4-4f851e8dcc26
+      source_version: 9
+      source_date: '2025-11-20'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1112/firewall_modify_delete/firewall_mod_delete.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1112/firewall_modify_delete/firewall_mod_delete.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:ac2b4ab4628203e0fe7ee7a52d77bc9451f094c94e09f21e3add1e0cf406c7da
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

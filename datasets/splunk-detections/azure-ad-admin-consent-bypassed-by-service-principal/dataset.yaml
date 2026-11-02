@@ -1,14 +1,10 @@
 metadata:
   name: azure-ad-admin-consent-bypassed-by-service-principal
   version: 9.0.0
-  description: The following analytic identifies instances where a service principal
-    in Azure Active Directory assigns app roles without standard admin consent. It
-    uses Entra ID logs from the `azure_monitor_aad` data source, focusing on the "Add
-    app role assignment to service principal" operation. This detection is significant
-    as it highlights potential bypasses of critical administrative consent processes,
-    which could lead to unauthorized privileges being granted. If confirmed malicious,
-    this activity could a
+  description: The following analytic identifies instances where a service principal in Azure Active Directory assigns app roles without standard admin consent. It uses Entra ID logs from the `azure_monitor_aad` data source, focusing on the "Add app role assignment to service principal" operation. This detection is significant as it highlights potential bypasses of critical administrative consent processes, which could lead to unauthorized privileges being granted. If confirmed malicious, this activity could allow attackers to exploit automation to assign sensitive permissions without proper oversight, potentially compromising the security of the Azure AD environment.
   author: Mauricio Velazco, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1098.003
-      name: Technique T1098.003
-    tactics: []
+      name: Additional Cloud Roles
+      tactics:
+      - persistence
+      - privilege-escalation
+    tactics:
+    - persistence
+    - privilege-escalation
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/azure_ad_admin_consent_bypassed_by_service_principal.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/azure_ad_admin_consent_bypassed_by_service_principal.yml
+      rule_sha256: sha256:b8a4923017c951440425a4d903995aa1b759c644293d66972e33b47d23c9a4b0
+      detection_id: 9d4fea43-9182-4c5a-ada8-13701fd5615d
+      source_version: 9
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1098.003/azure_ad_bypass_admin_consent/azure_ad_bypass_admin_consent.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1098.003/azure_ad_bypass_admin_consent/azure_ad_bypass_admin_consent.log
     description: Azure AD - azure:monitor:aad
     format: auto
     schema: raw
     sourcetype: azure:monitor:aad
+    checksum: sha256:54aef4bfbfc7cd837952edd2cae4addb6e5f790522f397e033a5801dbe2d58b1
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

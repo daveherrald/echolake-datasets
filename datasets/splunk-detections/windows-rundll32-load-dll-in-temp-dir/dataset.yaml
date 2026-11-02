@@ -1,14 +1,10 @@
 metadata:
   name: windows-rundll32-load-dll-in-temp-dir
   version: 2.0.0
-  description: This detection identifies instances where rundll32.exe is used to load
-    a DLL from a temporary directory, such as C:\Users\<User>\AppData\Local\Temp\
-    or C:\Windows\Temp\. While rundll32.exe is a legitimate Windows utility used to
-    execute functions exported from DLLs, its use to load libraries from temporary
-    locations is highly suspicious. These directories are commonly used by malware
-    and red team tools to stage payloads or execute code in-memory without writing
-    it to more persistent locations. T
+  description: This detection identifies instances where rundll32.exe is used to load a DLL from a temporary directory, such as C:\Users\<User>\AppData\Local\Temp\ or C:\Windows\Temp\. While rundll32.exe is a legitimate Windows utility used to execute functions exported from DLLs, its use to load libraries from temporary locations is highly suspicious. These directories are commonly used by malware and red team tools to stage payloads or execute code in-memory without writing it to more persistent locations. This behavior often indicates defense evasion, initial access, or privilege escalation, especially when the DLL is unsigned, recently written, or executed shortly after download. In normal user workflows, DLLs are not typically loaded from Temp paths, making this a high-fidelity indicator of potentially malicious activity. Monitoring this pattern is essential for detecting threats that attempt to blend in with native system processes while bypassing traditional application controls.
   author: Teoderick Contreras, Splunk
+  updated: '2025-08-22'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1218.011
-      name: Technique T1218.011
-    tactics: []
+      name: Rundll32
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_rundll32_load_dll_in_temp_dir.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_rundll32_load_dll_in_temp_dir.yml
+      rule_sha256: sha256:b2bb08710c071d5989223ec719a56b585c50ff2e5bbd7db8e3fb2474d33bc03a
+      detection_id: 520da6fa-7d5d-4a3b-9c61-1087517b8d0f
+      source_version: 2
+      source_date: '2025-08-22'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218.011/rundll32_dll_in_temp/rundll32_tmp.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1218.011/rundll32_dll_in_temp/rundll32_tmp.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:5ac4747551f733d673cd6828a55732b7b542d3552698325cbdac2df2a69aa62f
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

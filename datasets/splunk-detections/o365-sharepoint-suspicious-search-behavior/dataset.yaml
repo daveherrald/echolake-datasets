@@ -1,12 +1,10 @@
 metadata:
   name: o365-sharepoint-suspicious-search-behavior
   version: 3.0.0
-  description: The following analytic identifies when Office 365 users search for
-    suspicious keywords or have an excessive number of queries to a SharePoint site
-    within a limited timeframe. This behavior may indicate that a malicious actor
-    has gained control of a user account and is conducting discovery or enumeration
-    activities.
+  description: The following analytic identifies when Office 365 users search for suspicious keywords or have an excessive number of queries to a SharePoint site within a limited timeframe. This behavior may indicate that a malicious actor has gained control of a user account and is conducting discovery or enumeration activities.
   author: Steven Dick
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,20 +14,45 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1213.002
-      name: Technique T1213.002
+      name: Sharepoint
+      tactics:
+      - collection
     - id: T1552
-      name: Technique T1552
-    tactics: []
+      name: Unsecured Credentials
+      tactics:
+      - credential-access
+    tactics:
+    - credential-access
+    - collection
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/o365_sharepoint_suspicious_search_behavior.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/o365_sharepoint_suspicious_search_behavior.yml
+      rule_sha256: sha256:363e2419221c8b59ef846ad61f68a503c883c6c07cb9340a6139a6c098700e8a
+      detection_id: 6ca919db-52f3-4c95-a4e9-7b189e8a043d
+      source_version: 3
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1213.002/o365_sus_sharepoint_search/o365_sus_sharepoint_search.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1213.002/o365_sus_sharepoint_search/o365_sus_sharepoint_search.log
     description: o365 - o365:management:activity
     format: auto
     schema: raw
     sourcetype: o365:management:activity
+    checksum: sha256:1b55de42ceedaf4f7849337db406a7bfffeaa2d723f88b1f601e5e9278b97e4b
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

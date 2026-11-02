@@ -1,14 +1,10 @@
 metadata:
   name: o365-threat-intelligence-suspicious-file-detected
   version: 7.0.0
-  description: The following analytic identifies when a malicious file is detected
-    within the Microsoft Office 365 ecosystem through the Advanced Threat Protection
-    engine. Attackers may stage and execute malicious files from within the Microsoft
-    Office 365 ecosystem. Any detections from built-in Office 365 capabilities should
-    be monitored and responded to appropriately. Certain premium Office 365 capabilities
-    such as Safe Attachment and Safe Links further enhance these detection and response
-    functions.
+  description: The following analytic identifies when a malicious file is detected within the Microsoft Office 365 ecosystem through the Advanced Threat Protection engine. Attackers may stage and execute malicious files from within the Microsoft Office 365 ecosystem. Any detections from built-in Office 365 capabilities should be monitored and responded to appropriately. Certain premium Office 365 capabilities such as Safe Attachment and Safe Links further enhance these detection and response functions.
   author: Steven Dick
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1204.002
-      name: Technique T1204.002
-    tactics: []
+      name: Malicious File
+      tactics:
+      - execution
+    tactics:
+    - execution
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/o365_threat_intelligence_suspicious_file_detected.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/o365_threat_intelligence_suspicious_file_detected.yml
+      rule_sha256: sha256:ece5de243870e492b0f1b3b4c947acdb88d5755409e88e22f59ea594e12c8652
+      detection_id: 00958c7b-35db-4e7a-ad13-31550a7a7c64
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566/o365_various_alerts/o365_various_alerts.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1566/o365_various_alerts/o365_various_alerts.log
     description: o365 - o365:management:activity
     format: auto
     schema: raw
     sourcetype: o365:management:activity
+    checksum: sha256:e669b123a43b1ca7f707e7ac69e3edb32fe0f7631ced09e5a55e1e93d2aea57a
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

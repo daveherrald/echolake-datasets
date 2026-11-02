@@ -1,14 +1,10 @@
 metadata:
   name: aws-successful-console-authentication-from-multiple-ips
   version: 8.0.0
-  description: The following analytic detects an AWS account successfully authenticating
-    from multiple unique IP addresses within a 5-minute window. It leverages AWS CloudTrail
-    logs, specifically monitoring `ConsoleLogin` events and counting distinct source
-    IPs. This behavior is significant as it may indicate compromised credentials,
-    potentially from a phishing attack, being used concurrently by an adversary and
-    a legitimate user. If confirmed malicious, this activity could allow unauthorized
-    access to corpora
+  description: The following analytic detects an AWS account successfully authenticating from multiple unique IP addresses within a 5-minute window. It leverages AWS CloudTrail logs, specifically monitoring `ConsoleLogin` events and counting distinct source IPs. This behavior is significant as it may indicate compromised credentials, potentially from a phishing attack, being used concurrently by an adversary and a legitimate user. If confirmed malicious, this activity could allow unauthorized access to corporate resources, leading to data breaches or further exploitation within the AWS environment.
   author: Bhavin Patel, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -17,20 +13,45 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1586
-      name: Technique T1586
+      name: Compromise Accounts
+      tactics:
+      - resource-development
     - id: T1535
-      name: Technique T1535
-    tactics: []
+      name: Unused/Unsupported Cloud Regions
+      tactics:
+      - defense-evasion
+    tactics:
+    - resource-development
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/aws_successful_console_authentication_from_multiple_ips.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/aws_successful_console_authentication_from_multiple_ips.yml
+      rule_sha256: sha256:beeb730615d1fcb20882f5c065f6c2cdbde555c86ff86663c45a38978478421d
+      detection_id: 395e50e1-2b87-4fa3-8632-0dfbdcbcd2cb
+      source_version: 8
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1586.003/aws_console_login_multiple_ips/cloudtrail.json
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1586.003/aws_console_login_multiple_ips/cloudtrail.json
     description: aws_cloudtrail - aws:cloudtrail
     format: auto
     schema: raw
     sourcetype: aws:cloudtrail
+    checksum: sha256:d34e9b8c2623885b2599176297e7983ef474e022fa44808d7bd38f9f3bea631f
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

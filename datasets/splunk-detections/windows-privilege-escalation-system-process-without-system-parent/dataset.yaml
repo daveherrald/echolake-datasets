@@ -1,13 +1,10 @@
 metadata:
   name: windows-privilege-escalation-system-process-without-system-parent
   version: 6.0.0
-  description: The following analytic detects any system integrity level process spawned
-    by a non-system account. It leverages Sysmon EventID 1, focusing on process integrity
-    and parent user data. This behavior is significant as it often indicates successful
-    privilege escalation to SYSTEM from a user-controlled process or service. If confirmed
-    malicious, this activity could allow an attacker to gain full control over the
-    system, execute arbitrary code, and potentially compromise the entire environment.
+  description: The following analytic detects any system integrity level process spawned by a non-system account. It leverages Sysmon EventID 1, focusing on process integrity and parent user data. This behavior is significant as it often indicates successful privilege escalation to SYSTEM from a user-controlled process or service. If confirmed malicious, this activity could allow an attacker to gain full control over the system, execute arbitrary code, and potentially compromise the entire environment.
   author: Steven Dick
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,22 +13,51 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1068
-      name: Technique T1068
+      name: Exploitation for Privilege Escalation
+      tactics:
+      - privilege-escalation
     - id: T1548
-      name: Technique T1548
+      name: Abuse Elevation Control Mechanism
+      tactics:
+      - privilege-escalation
+      - defense-evasion
     - id: T1134
-      name: Technique T1134
-    tactics: []
+      name: Access Token Manipulation
+      tactics:
+      - privilege-escalation
+      - defense-evasion
+    tactics:
+    - privilege-escalation
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_privilege_escalation_system_process_without_system_parent.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_privilege_escalation_system_process_without_system_parent.yml
+      rule_sha256: sha256:56f314aed2afaa6d4b7885fe7788659a150a5a3718fed7f96196b50c2fc525d6
+      detection_id: 5a5351cd-ba7e-499e-ad82-2ce160ffa637
+      source_version: 6
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1068/windows_escalation_behavior/windows_escalation_behavior_sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1068/windows_escalation_behavior/windows_escalation_behavior_sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:888defe1a65bbb87861535b7b84a511b0d464bcdfabeb88e3938f94434aa9437
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

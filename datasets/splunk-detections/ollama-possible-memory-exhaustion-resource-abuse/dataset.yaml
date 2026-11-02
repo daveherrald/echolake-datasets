@@ -1,14 +1,10 @@
 metadata:
   name: ollama-possible-memory-exhaustion-resource-abuse
   version: 1.0.0
-  description: 'Detects abnormal memory allocation patterns and excessive runner operations
-    in Ollama that may indicate resource exhaustion attacks, memory abuse through
-    malicious model loading, or attempts to degrade system performance by overwhelming
-    GPU/CPU resources. Adversaries may deliberately load multiple large models, trigger
-    repeated model initialization cycles, or exploit memory allocation mechanisms
-    to exhaust available system resources, causing denial of service conditions or
-    degrading performance '
+  description: Detects abnormal memory allocation patterns and excessive runner operations in Ollama that may indicate resource exhaustion attacks, memory abuse through malicious model loading, or attempts to degrade system performance by overwhelming GPU/CPU resources. Adversaries may deliberately load multiple large models, trigger repeated model initialization cycles, or exploit memory allocation mechanisms to exhaust available system resources, causing denial of service conditions or degrading performance for legitimate users.
   author: Rod Soto
+  updated: '2025-10-05'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1499
-      name: Technique T1499
-    tactics: []
+      name: Endpoint Denial of Service
+      tactics:
+      - impact
+    tactics:
+    - impact
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/application/ollama_possible_memory_exhaustion_resource_abuse.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/application/ollama_possible_memory_exhaustion_resource_abuse.yml
+      rule_sha256: sha256:cd0f14519828e04e31641094e19102b110e299690337335c3cd35d7cd03b70de
+      detection_id: ca96297f-e82e-4749-8cc9-d1ab555abb57
+      source_version: 1
+      source_date: '2025-10-05'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/ollama/server.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/ollama/server.log
     description: server.log - ollama:server
     format: auto
     schema: raw
     sourcetype: ollama:server
+    checksum: sha256:4b147d8d35a897f6e136ed06e5d65e7baa55a9a95407bb0e9d778d5cd91cfa1e
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

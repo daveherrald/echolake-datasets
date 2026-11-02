@@ -1,12 +1,10 @@
 metadata:
   name: windows-usbstor-registry-key-modification
   version: 4.0.0
-  description: This analytic is used to identify when a USB removable media device
-    is attached to a Windows host. In this scenario we are querying the Endpoint Registry
-    data model to look for modifications to the HKLM\System\CurrentControlSet\Enum\USBSTOR\
-    key. Adversaries and Insider Threats may use removable media devices for several
-    malicious activities, including initial access, execution, and exfiltration.
+  description: This analytic is used to identify when a USB removable media device is attached to a Windows host. In this scenario we are querying the Endpoint Registry data model to look for modifications to the HKLM\System\CurrentControlSet\Enum\USBSTOR\ key. Adversaries and Insider Threats may use removable media devices for several malicious activities, including initial access, execution, and exfiltration.
   author: Steven Dick
+  updated: '2025-09-18'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -15,22 +13,51 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1200
-      name: Technique T1200
+      name: Hardware Additions
+      tactics:
+      - initial-access
     - id: T1025
-      name: Technique T1025
+      name: Data from Removable Media
+      tactics:
+      - collection
     - id: T1091
-      name: Technique T1091
-    tactics: []
+      name: Replication Through Removable Media
+      tactics:
+      - initial-access
+      - lateral-movement
+    tactics:
+    - initial-access
+    - lateral-movement
+    - collection
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_usbstor_registry_key_modification.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_usbstor_registry_key_modification.yml
+      rule_sha256: sha256:6a37981f66d97cfc25bc4b2073712f6ed9d07226de76aaa6645017ab2f8638e9
+      detection_id: a345980a-417d-4ed3-9fb4-cac30c9405a0
+      source_version: 4
+      source_date: '2025-09-18'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1200/sysmon_usb_use_execution/sysmon_usb_use_execution.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1200/sysmon_usb_use_execution/sysmon_usb_use_execution.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:d2ff8b475eaec6f05411043503cf210d126c15e6a747a8c5f5c5241af1b106f4
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

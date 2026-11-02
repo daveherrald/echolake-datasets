@@ -1,14 +1,10 @@
 metadata:
   name: remote-process-instantiation-via-dcom-and-powershell
   version: 9.0.0
-  description: The following analytic detects the execution of `powershell.exe` with
-    arguments used to start a process on a remote endpoint by abusing the DCOM protocol,
-    specifically targeting ShellExecute and ExecuteShellCommand. It leverages data
-    from Endpoint Detection and Response (EDR) agents, focusing on process names,
-    parent processes, and command-line executions. This activity is significant as
-    it indicates potential lateral movement and remote code execution attempts by
-    adversaries. If confirmed malic
+  description: The following analytic detects the execution of `powershell.exe` with arguments used to start a process on a remote endpoint by abusing the DCOM protocol, specifically targeting ShellExecute and ExecuteShellCommand. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names, parent processes, and command-line executions. This activity is significant as it indicates potential lateral movement and remote code execution attempts by adversaries. If confirmed malicious, this could allow attackers to execute arbitrary code remotely, escalate privileges, and move laterally within the network, posing a severe security risk.
   author: Mauricio Velazco, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1021.003
-      name: Technique T1021.003
-    tactics: []
+      name: Distributed Component Object Model
+      tactics:
+      - lateral-movement
+    tactics:
+    - lateral-movement
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/remote_process_instantiation_via_dcom_and_powershell.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/remote_process_instantiation_via_dcom_and_powershell.yml
+      rule_sha256: sha256:1bf329140c1d05b9754dec221c4355c86ad7af4b5693c7c14317cc4ab3469d6e
+      detection_id: d4f42098-4680-11ec-ad07-3e22fbd008af
+      source_version: 9
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1021.003/lateral_movement/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1021.003/lateral_movement/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:f5708b28b511e3036774f04d754e7d0a38bf6391a8f6602a42fb65e4460536f5
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

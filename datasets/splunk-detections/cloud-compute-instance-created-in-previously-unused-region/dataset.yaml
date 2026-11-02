@@ -1,14 +1,10 @@
 metadata:
   name: cloud-compute-instance-created-in-previously-unused-region
   version: 6.0.0
-  description: The following analytic detects the creation of a cloud compute instance
-    in a region that has not been previously used within the last hour. It leverages
-    cloud infrastructure logs and compares the regions of newly created instances
-    against a lookup file of historically used regions. This activity is significant
-    because the creation of instances in new regions can indicate unauthorized or
-    suspicious activity, such as an attacker attempting to evade detection or establish
-    a foothold in a less monit
+  description: The following analytic detects the creation of a cloud compute instance in a region that has not been previously used within the last hour. It leverages cloud infrastructure logs and compares the regions of newly created instances against a lookup file of historically used regions. This activity is significant because the creation of instances in new regions can indicate unauthorized or suspicious activity, such as an attacker attempting to evade detection or establish a foothold in a less monitored area. If confirmed malicious, this could lead to unauthorized resource usage, data exfiltration, or further compromise of the cloud environment.
   author: David Dorsey, Splunk
+  updated: '2025-06-10'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1535
-      name: Technique T1535
-    tactics: []
+      name: Unused/Unsupported Cloud Regions
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/cloud_compute_instance_created_in_previously_unused_region.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/cloud_compute_instance_created_in_previously_unused_region.yml
+      rule_sha256: sha256:3f9dd2f12f033e5a97357a65092146ea71c43f6bfdec04ee0ac5cc14c07f3bfb
+      detection_id: fa4089e2-50e3-40f7-8469-d2cc1564ca59
+      source_version: 6
+      source_date: '2025-06-10'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/suspicious_behaviour/abnormally_high_cloud_instances_launched/cloudtrail_behavioural_detections.json
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/suspicious_behaviour/abnormally_high_cloud_instances_launched/cloudtrail_behavioural_detections.json
     description: aws_cloudtrail - aws:cloudtrail
     format: auto
     schema: raw
     sourcetype: aws:cloudtrail
+    checksum: sha256:8b50b35094902fd94bd7c86b6c48d7e226ee5a63a98436b5da8b9ee716f63d43
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

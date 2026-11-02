@@ -1,14 +1,10 @@
 metadata:
   name: suspicious-writes-to-windows-recycle-bin
   version: 8.0.0
-  description: The following analytic detects when a process other than explorer.exe
-    writes to the Windows Recycle Bin. It leverages the Endpoint.Filesystem and Endpoint.Processes
-    data models in Splunk to identify any process writing to the "*$Recycle.Bin*"
-    file path, excluding explorer.exe. This activity is significant because it may
-    indicate an attacker attempting to hide their actions, potentially leading to
-    data theft, ransomware, or other malicious outcomes. If confirmed malicious, this
-    behavior could all
+  description: The following analytic detects when a process other than explorer.exe writes to the Windows Recycle Bin. It leverages the Endpoint.Filesystem and Endpoint.Processes data models in Splunk to identify any process writing to the "*$Recycle.Bin*" file path, excluding explorer.exe. This activity is significant because it may indicate an attacker attempting to hide their actions, potentially leading to data theft, ransomware, or other malicious outcomes. If confirmed malicious, this behavior could allow an attacker to persist in the environment and evade detection by security tools.
   author: Rico Valdez, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1036
-      name: Technique T1036
-    tactics: []
+      name: Masquerading
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/suspicious_writes_to_windows_recycle_bin.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/suspicious_writes_to_windows_recycle_bin.yml
+      rule_sha256: sha256:9e7efd23fe44b8228544c57ef2ce85efee6583ba93e8051860147ac1b0529e79
+      detection_id: b5541828-8ffd-4070-9d95-b3da4de924cb
+      source_version: 8
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1036/write_to_recycle_bin/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1036/write_to_recycle_bin/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:c7c968a58f0be7ca323530e296d3fea132fc203388026425ea5eaf4e7fc1a31b
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

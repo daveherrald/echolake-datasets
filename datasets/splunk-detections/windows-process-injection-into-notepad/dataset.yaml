@@ -1,14 +1,10 @@
 metadata:
   name: windows-process-injection-into-notepad
   version: 10.0.0
-  description: The following analytic detects process injection into Notepad.exe using
-    Sysmon EventCode 10. It identifies suspicious GrantedAccess requests (0x40 and
-    0x1fffff) to Notepad.exe, excluding common system paths like System32, Syswow64,
-    and Program Files. This behavior is often associated with the SliverC2 framework
-    by BishopFox. Monitoring this activity is crucial as it may indicate an initial
-    payload attempting to execute malicious code within Notepad.exe. If confirmed
-    malicious, this could allow a
+  description: The following analytic detects process injection into Notepad.exe using Sysmon EventCode 10. It identifies suspicious GrantedAccess requests (0x40 and 0x1fffff) to Notepad.exe, excluding common system paths like System32, Syswow64, and Program Files. This behavior is often associated with the SliverC2 framework by BishopFox. Monitoring this activity is crucial as it may indicate an initial payload attempting to execute malicious code within Notepad.exe. If confirmed malicious, this could allow attackers to execute arbitrary code, potentially leading to privilege escalation or persistent access within the environment.
   author: Michael Haag, Splunk
+  updated: '2025-09-18'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,18 +14,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1055.002
-      name: Technique T1055.002
-    tactics: []
+      name: Portable Executable Injection
+      tactics:
+      - privilege-escalation
+      - defense-evasion
+    tactics:
+    - privilege-escalation
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_process_injection_into_notepad.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_process_injection_into_notepad.yml
+      rule_sha256: sha256:20d60147cca25dc5fcbb2afb1c4bc8f028eb1cc3ef1ea0ae14c4ad7c076b8eec
+      detection_id: b8340d0f-ba48-4391-bea7-9e793c5aae36
+      source_version: 10
+      source_date: '2025-09-18'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1055/sliver/T1055_windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1055/sliver/T1055_windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:1d689c147913ff7f81668a72d37de72c4448ddb3e9a675adaa766cdd1a7fbd6c
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

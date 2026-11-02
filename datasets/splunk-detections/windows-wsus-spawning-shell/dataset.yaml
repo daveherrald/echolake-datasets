@@ -1,14 +1,10 @@
 metadata:
   name: windows-wsus-spawning-shell
   version: 1.0.0
-  description: The following analytic identifies instances where a shell (PowerShell.exe
-    or Cmd.exe) is spawned from wsusservice.exe, the Windows Server Update Services
-    process. This detection leverages data from Endpoint Detection and Response (EDR)
-    agents, focusing on process creation events where the parent process is wsusservice.exe.
-    This activity is significant as it may indicate exploitation of CVE-2025-59287,
-    a critical deserialization vulnerability in WSUS that allows unauthenticated remote
-    code execut
+  description: The following analytic identifies instances where a shell (PowerShell.exe or Cmd.exe) is spawned from wsusservice.exe, the Windows Server Update Services process. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process creation events where the parent process is wsusservice.exe. This activity is significant as it may indicate exploitation of CVE-2025-59287, a critical deserialization vulnerability in WSUS that allows unauthenticated remote code execution. If confirmed malicious, this behavior could allow attackers to execute arbitrary commands on WSUS servers, potentially leading to system compromise, data exfiltration, domain enumeration, or further lateral movement within the network.
   author: Michael Haag, Splunk
+  updated: '2025-10-24'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,20 +12,45 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1190
-      name: Technique T1190
+      name: Exploit Public-Facing Application
+      tactics:
+      - initial-access
     - id: T1505.003
-      name: Technique T1505.003
-    tactics: []
+      name: Web Shell
+      tactics:
+      - persistence
+    tactics:
+    - initial-access
+    - persistence
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_wsus_spawning_shell.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_wsus_spawning_shell.yml
+      rule_sha256: sha256:155215834b7eb1861d4c844ba9ef66557049ffe01817222a7e57daf6b912cefc
+      detection_id: 76ea28ac-6f10-43fd-b5fe-340022ad0fd3
+      source_version: 1
+      source_date: '2025-10-24'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1505.003/wsus-windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1505.003/wsus-windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:f9a4be69d25d2c39be02a4288f75780b4e34a80d3555a8900e4f7a3c977ec220
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

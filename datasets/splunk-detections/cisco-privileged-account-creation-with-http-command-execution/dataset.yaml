@@ -1,17 +1,18 @@
 metadata:
   name: cisco-privileged-account-creation-with-http-command-execution
   version: 2.0.0
-  description: 'This analytic correlates risk events between privileged account creation
-    on Cisco IOS devices and HTTP requests to privileged execution paths such as `/level/15/exec/-/*`.
+  description: 'This analytic correlates risk events between privileged account creation on Cisco IOS devices and HTTP requests to privileged execution paths such as `/level/15/exec/-/*`.
 
-    APT actors have been observed creating privileged accounts and then running commands
-    on routers via HTTP GET or POST requests that target privileged execution paths.
+    APT actors have been observed creating privileged accounts and then running commands on routers via HTTP GET or POST requests that target privileged execution paths.
 
-    These requests allow attackers to execute commands with the highest privilege
-    level (15) on Cisco devices without requiring interactive SSH access.
+    These requests allow attackers to execute commands with the highest privilege level (15) on Cisco devices without requiring interactive SSH access.
 
-    This correlati'
+    This correlation identifies when both "Cisco IOS Suspicious Privileged Account Creation" and "Privileged Command Execution via HTTP" Snort detections fire for the same network device.
+
+    This behavior indicates an attacker leveraging the newly created account to execute commands remotely via HTTP.'
   author: Nasreddine Bencherchali, Splunk
+  updated: '2026-01-22'
+  license: Apache-2.0
   tags:
   - correlation
   - splunk-security-content
@@ -20,22 +21,55 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1021.004
-      name: Technique T1021.004
+      name: SSH
+      tactics:
+      - lateral-movement
     - id: T1136
-      name: Technique T1136
+      name: Create Account
+      tactics:
+      - persistence
     - id: T1078
-      name: Technique T1078
-    tactics: []
+      name: Valid Accounts
+      tactics:
+      - initial-access
+      - persistence
+      - privilege-escalation
+      - defense-evasion
+    tactics:
+    - initial-access
+    - persistence
+    - privilege-escalation
+    - defense-evasion
+    - lateral-movement
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/network/cisco_privileged_account_creation_with_http_command_execution.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/network/cisco_privileged_account_creation_with_http_command_execution.yml
+      rule_sha256: sha256:5b234ad2975d1ba1f0b241907be0b1ab00366fc54ffb3bba9b95a79e1464e145
+      detection_id: 2c9d4f5a-8b6e-4c7f-9d8e-1a2b3c4d5e6f
+      source_version: 2
+      source_date: '2026-01-22'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/emerging_threats/SaltTyphoon/salttyphoon_correlation.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/emerging_threats/SaltTyphoon/salttyphoon_correlation.log
     description: not_applicable - stash
     format: auto
     schema: raw
     sourcetype: stash
+    checksum: sha256:02431125a76164dc9198769e4257c1d038c6c85b4943e7d0a56c6492cab61ace
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

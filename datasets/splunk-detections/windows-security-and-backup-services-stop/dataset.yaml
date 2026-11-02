@@ -1,14 +1,10 @@
 metadata:
   name: windows-security-and-backup-services-stop
   version: 4.0.0
-  description: The following analytic detects the suspicious termination of known
-    services commonly targeted by ransomware before file encryption. It leverages
-    Windows System Event Logs (EventCode 7036) to identify when critical services
-    such as Volume Shadow Copy, backup, and antivirus services are stopped. This activity
-    is significant because ransomware often disables these services to avoid errors
-    and ensure successful file encryption. If confirmed malicious, this behavior could
-    lead to widespread data encr
+  description: The following analytic detects the suspicious termination of known services commonly targeted by ransomware before file encryption. It leverages Windows System Event Logs (EventCode 7036) to identify when critical services such as Volume Shadow Copy, backup, and antivirus services are stopped. This activity is significant because ransomware often disables these services to avoid errors and ensure successful file encryption. If confirmed malicious, this behavior could lead to widespread data encryption, rendering files inaccessible and potentially causing significant operational disruption and data loss.
   author: Teoderick Contreras, Splunk
+  updated: '2025-10-14'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1490
-      name: Technique T1490
-    tactics: []
+      name: Inhibit System Recovery
+      tactics:
+      - impact
+    tactics:
+    - impact
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_security_and_backup_services_stop.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_security_and_backup_services_stop.yml
+      rule_sha256: sha256:6045ae979cd0c9b84d7906402f411602511a8bca78b328c1671c76a61fe418b0
+      detection_id: 9c24aef6-cad9-4931-acce-74318aa5663b
+      source_version: 4
+      source_date: '2025-10-14'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1490/known_services_killed_by_ransomware/windows-xml.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1490/known_services_killed_by_ransomware/windows-xml.log
     description: XmlWinEventLog:System - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:25bdf63c8ae037553f385770e07ee0b16fd12decc420845fd10d31d004e05fa6
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,14 +1,10 @@
 metadata:
   name: windows-clipboard-data-via-get-clipboard
   version: 7.0.0
-  description: The following analytic detects the execution of the PowerShell command
-    'Get-Clipboard' to retrieve clipboard data. It leverages PowerShell Script Block
-    Logging (EventCode 4104) to identify instances where this command is used. This
-    activity is significant because it can indicate an attempt to steal sensitive
-    information such as usernames, passwords, or other confidential data copied to
-    the clipboard. If confirmed malicious, this behavior could lead to unauthorized
-    access to sensitive information
+  description: The following analytic detects the execution of the PowerShell command 'Get-Clipboard' to retrieve clipboard data. It leverages PowerShell Script Block Logging (EventCode 4104) to identify instances where this command is used. This activity is significant because it can indicate an attempt to steal sensitive information such as usernames, passwords, or other confidential data copied to the clipboard. If confirmed malicious, this behavior could lead to unauthorized access to sensitive information, potentially compromising user accounts and other critical assets.
   author: Teoderick Contreras, Splunk
+  updated: '2025-06-24'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1115
-      name: Technique T1115
-    tactics: []
+      name: Clipboard Data
+      tactics:
+      - collection
+    tactics:
+    - collection
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_clipboard_data_via_get_clipboard.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_clipboard_data_via_get_clipboard.yml
+      rule_sha256: sha256:196d523603d22c3e911938b4bb8cb7633a1b4d170da1f71d75b4c9dce7e5e0a9
+      detection_id: ab73289e-2246-4de0-a14b-67006c72a893
+      source_version: 7
+      source_date: '2025-06-24'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/winpeas/powershell/windows-powershell-xml2.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/winpeas/powershell/windows-powershell-xml2.log
     description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:ce7d1454d1a15b96a88d847783beb4fedb36b75853f39cc29624f71381caef34
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

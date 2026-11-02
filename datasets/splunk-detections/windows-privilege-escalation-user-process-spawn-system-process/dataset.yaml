@@ -1,14 +1,10 @@
 metadata:
   name: windows-privilege-escalation-user-process-spawn-system-process
   version: 8.0.0
-  description: The following analytic detects when a process with low, medium, or
-    high integrity spawns a system integrity process from a user-controlled location.
-    This behavior is indicative of privilege escalation attempts where attackers elevate
-    their privileges to SYSTEM level from a user-controlled process or service. The
-    detection leverages Sysmon data, specifically Event ID 15, to identify such transitions.
-    Monitoring this activity is crucial as it can signify an attacker gaining SYSTEM-level
-    access, po
+  description: The following analytic detects when a process with low, medium, or high integrity spawns a system integrity process from a user-controlled location. This behavior is indicative of privilege escalation attempts where attackers elevate their privileges to SYSTEM level from a user-controlled process or service. The detection leverages Sysmon data, specifically Event ID 15, to identify such transitions. Monitoring this activity is crucial as it can signify an attacker gaining SYSTEM-level access, potentially leading to full control over the affected system, unauthorized access to sensitive data, and further malicious activities.
   author: Steven Dick
+  updated: '2025-09-16'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,22 +14,51 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1068
-      name: Technique T1068
+      name: Exploitation for Privilege Escalation
+      tactics:
+      - privilege-escalation
     - id: T1548
-      name: Technique T1548
+      name: Abuse Elevation Control Mechanism
+      tactics:
+      - privilege-escalation
+      - defense-evasion
     - id: T1134
-      name: Technique T1134
-    tactics: []
+      name: Access Token Manipulation
+      tactics:
+      - privilege-escalation
+      - defense-evasion
+    tactics:
+    - privilege-escalation
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_privilege_escalation_user_process_spawn_system_process.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_privilege_escalation_user_process_spawn_system_process.yml
+      rule_sha256: sha256:24d52f02eab35b574f939d076a3a5e1a275c21268f8f7fa21a5164ed98bd909d
+      detection_id: c9687a28-39ad-43c6-8bcf-eaf061ba0cbe
+      source_version: 8
+      source_date: '2025-09-16'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1068/windows_escalation_behavior/windows_escalation_behavior_sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1068/windows_escalation_behavior/windows_escalation_behavior_sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:888defe1a65bbb87861535b7b84a511b0d464bcdfabeb88e3938f94434aa9437
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

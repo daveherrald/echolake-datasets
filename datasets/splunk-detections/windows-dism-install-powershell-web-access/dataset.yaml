@@ -1,14 +1,10 @@
 metadata:
   name: windows-dism-install-powershell-web-access
   version: 7.0.0
-  description: The following analytic detects the installation of PowerShell Web Access
-    using the Deployment Image Servicing and Management (DISM) tool. It leverages
-    Sysmon EventID 1 to identify the execution of `dism.exe` with specific parameters
-    related to enabling the WindowsPowerShellWebAccess feature. This activity is significant
-    because enabling PowerShell Web Access can facilitate remote execution of PowerShell
-    commands, potentially allowing an attacker to gain unauthorized access to systems
-    and network
+  description: The following analytic detects the installation of PowerShell Web Access using the Deployment Image Servicing and Management (DISM) tool. It leverages Sysmon EventID 1 to identify the execution of `dism.exe` with specific parameters related to enabling the WindowsPowerShellWebAccess feature. This activity is significant because enabling PowerShell Web Access can facilitate remote execution of PowerShell commands, potentially allowing an attacker to gain unauthorized access to systems and networks. If confirmed malicious, this action could lead to further exploitation and compromise of the affected system.
   author: Michael Haag, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +12,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1548.002
-      name: Technique T1548.002
-    tactics: []
+      name: Bypass User Account Control
+      tactics:
+      - privilege-escalation
+      - defense-evasion
+    tactics:
+    - privilege-escalation
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_dism_install_powershell_web_access.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_dism_install_powershell_web_access.yml
+      rule_sha256: sha256:8fa81ad0be0f1b171d2094f981fb705ccb917dda10237c887940487181fe162f
+      detection_id: fa6142a7-c364-4d11-9954-895dd9efb2d4
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1548.002/atomic_red_team/dism_pswa_4688_windows-security.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1548.002/atomic_red_team/dism_pswa_4688_windows-security.log
     description: XmlWinEventLog:Security - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:c8d6a60eb764e0fafb12da8fbe377d041082cc9ac21255be47c8bbd4e126ea6f
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

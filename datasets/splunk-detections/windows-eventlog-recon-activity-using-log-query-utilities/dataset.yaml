@@ -1,14 +1,10 @@
 metadata:
   name: windows-eventlog-recon-activity-using-log-query-utilities
   version: 3.0.0
-  description: This analytic detects EventLog reconnaissance activity using utilities
-    such as `wevtutil.exe`, `wmic.exe`, PowerShell cmdlets like `Get-WinEvent`, or
-    WMI queries targeting `Win32_NTLogEvent`. It leverages data from Endpoint Detection
-    and Response (EDR) agents, focusing on process names and command-line arguments.
-    These tools are often used by adversaries to extract usernames, IP addresses,
-    session data, and event information for credential access or situational awareness
-    during lateral movement.
+  description: This analytic detects EventLog reconnaissance activity using utilities such as `wevtutil.exe`, `wmic.exe`, PowerShell cmdlets like `Get-WinEvent`, or WMI queries targeting `Win32_NTLogEvent`. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line arguments. These tools are often used by adversaries to extract usernames, IP addresses, session data, and event information for credential access or situational awareness during lateral movement. While these utilities are legitimate, execution with specific arguments or targeting sensitive logs like `Security`, `PowerShell`, or specific EventIDs (e.g., 4624, 4778) can indicate malicious intent. If confirmed malicious, this behavior could allow an attacker to extract sensitive info and potentially have leveraged access or move laterally.
   author: Nasreddine Bencherchali, Splunk
+  updated: '2025-10-14'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1654
-      name: Technique T1654
-    tactics: []
+      name: Log Enumeration
+      tactics:
+      - discovery
+    tactics:
+    - discovery
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_eventlog_recon_activity_using_log_query_utilities.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_eventlog_recon_activity_using_log_query_utilities.yml
+      rule_sha256: sha256:efe777dbec7155ab10a453376e0993b93da83194635adbe29d92886e9f3ad767
+      detection_id: dc167f8b-3f9d-4460-9c98-8b6e703fd628
+      source_version: 3
+      source_date: '2025-10-14'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1654/eventlog_enumeration/eventlog_enumeration.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1654/eventlog_enumeration/eventlog_enumeration.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:b7d86de9df27311dfc987ce78cb0fc1ea1a70a479d758fad350c438065f72131
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

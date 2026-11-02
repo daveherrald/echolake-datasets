@@ -1,14 +1,10 @@
 metadata:
   name: windows-regsvr32-renamed-binary
   version: 8.0.0
-  description: The following analytic identifies instances where the regsvr32.exe
-    binary has been renamed and executed. This detection leverages Endpoint Detection
-    and Response (EDR) data, specifically focusing on the original filename metadata.
-    Renaming regsvr32.exe is significant as it can be an evasion technique used by
-    attackers to bypass security controls. If confirmed malicious, this activity could
-    allow an attacker to execute arbitrary DLLs, potentially leading to code execution,
-    privilege escalation, o
+  description: The following analytic identifies instances where the regsvr32.exe binary has been renamed and executed. This detection leverages Endpoint Detection and Response (EDR) data, specifically focusing on the original filename metadata. Renaming regsvr32.exe is significant as it can be an evasion technique used by attackers to bypass security controls. If confirmed malicious, this activity could allow an attacker to execute arbitrary DLLs, potentially leading to code execution, privilege escalation, or persistence within the environment.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1218.010
-      name: Technique T1218.010
-    tactics: []
+      name: Regsvr32
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_regsvr32_renamed_binary.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_regsvr32_renamed_binary.yml
+      rule_sha256: sha256:a238888ac5a7faa132ffdefb73888f00ee1eb3400176445e4c494435c640cd6a
+      detection_id: 7349a9e9-3cf6-4171-bb0c-75607a8dcd1a
+      source_version: 8
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/qakbot/qbot_3/sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/qakbot/qbot_3/sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:53d4bc90cfef0967944f730ef1246b4ab7622ca48ff95d3d323e7fc0320f561f
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

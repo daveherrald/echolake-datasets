@@ -1,14 +1,10 @@
 metadata:
   name: common-ransomware-extensions
   version: 17.0.0
-  description: The following analytic detects modifications to files with extensions
-    commonly associated with ransomware. It leverages the Endpoint.Filesystem data
-    model to identify changes in file extensions that match known ransomware patterns.
-    This activity is significant because it suggests an attacker is attempting to
-    encrypt or alter files, potentially leading to severe data loss and operational
-    disruption. If confirmed malicious, this activity could result in the encryption
-    of critical data, rendering i
+  description: The following analytic detects modifications to files with extensions commonly associated with ransomware. It leverages the Endpoint.Filesystem data model to identify changes in file extensions that match known ransomware patterns. This activity is significant because it suggests an attacker is attempting to encrypt or alter files, potentially leading to severe data loss and operational disruption. If confirmed malicious, this activity could result in the encryption of critical data, rendering it inaccessible and causing significant damage to the organization's data integrity and availability.
   author: David Dorsey, Michael Haag, Splunk, Steven Dick
+  updated: '2026-01-19'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1485
-      name: Technique T1485
-    tactics: []
+      name: Data Destruction
+      tactics:
+      - impact
+    tactics:
+    - impact
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/common_ransomware_extensions.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/common_ransomware_extensions.yml
+      rule_sha256: sha256:9359b3ab4ccb6149ed14cbcd5c60303015eb4e043ee52123514c441da6239b0d
+      detection_id: a9e5c5db-db11-43ca-86a8-c852d1b2c0ec
+      source_version: 17
+      source_date: '2026-01-19'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1485/ransomware_notes/ransom-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1485/ransomware_notes/ransom-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:d6d53e2216d1fb63f03ccabb6beea7f6158adddaddbb58486f6d71550389aad4
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

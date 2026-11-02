@@ -1,14 +1,10 @@
 metadata:
   name: windows-iis-server-pswa-console-access
   version: 4.0.0
-  description: This analytic detects access attempts to the PowerShell Web Access
-    (PSWA) console on Windows IIS servers. It monitors web traffic for requests to
-    PSWA-related URIs, which could indicate legitimate administrative activity or
-    potential unauthorized access attempts. By tracking source IP, HTTP status, URI
-    path, and HTTP method, it helps identify suspicious patterns or brute-force attacks
-    targeting PSWA. This detection is crucial for maintaining the security of remote
-    PowerShell management interface
+  description: This analytic detects access attempts to the PowerShell Web Access (PSWA) console on Windows IIS servers. It monitors web traffic for requests to PSWA-related URIs, which could indicate legitimate administrative activity or potential unauthorized access attempts. By tracking source IP, HTTP status, URI path, and HTTP method, it helps identify suspicious patterns or brute-force attacks targeting PSWA. This detection is crucial for maintaining the security of remote PowerShell management interfaces and preventing potential exploitation of this powerful administrative tool.
   author: Michael Haag, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - hunting
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1190
-      name: Technique T1190
-    tactics: []
+      name: Exploit Public-Facing Application
+      tactics:
+      - initial-access
+    tactics:
+    - initial-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/web/windows_iis_server_pswa_console_access.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/web/windows_iis_server_pswa_console_access.yml
+      rule_sha256: sha256:6a0596c36d9dc21fefe2c0c6caecea417a46fe651f8a702a9a9bf727265446a9
+      detection_id: 914ab191-fa8a-48cb-83a6-0565e061f934
+      source_version: 4
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/pswa/iis_pswaaccess.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1190/pswa/iis_pswaaccess.log
     description: ms:iis:splunk - ms:iis:splunk
     format: auto
     schema: raw
     sourcetype: ms:iis:splunk
+    checksum: sha256:d23b989fbeae958d99736ba8f120d9c66836d530c8758efd5af519f7f4716148
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

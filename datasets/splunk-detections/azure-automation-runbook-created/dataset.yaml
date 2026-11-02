@@ -1,14 +1,10 @@
 metadata:
   name: azure-automation-runbook-created
   version: 10.0.0
-  description: The following analytic detects the creation of a new Azure Automation
-    Runbook within an Azure tenant. It leverages Azure Audit events, specifically
-    the Azure Activity log category, to identify when a new Runbook is created or
-    updated. This activity is significant because adversaries with privileged access
-    can use Runbooks to maintain persistence, escalate privileges, or execute malicious
-    code. If confirmed malicious, this could lead to unauthorized actions such as
-    creating Global Administrators,
+  description: The following analytic detects the creation of a new Azure Automation Runbook within an Azure tenant. It leverages Azure Audit events, specifically the Azure Activity log category, to identify when a new Runbook is created or updated. This activity is significant because adversaries with privileged access can use Runbooks to maintain persistence, escalate privileges, or execute malicious code. If confirmed malicious, this could lead to unauthorized actions such as creating Global Administrators, executing code on VMs, and compromising the entire Azure environment.
   author: Mauricio Velazco, Brian Serocki, Splunk
+  updated: '2025-09-03'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1136.003
-      name: Technique T1136.003
-    tactics: []
+      name: Cloud Account
+      tactics:
+      - persistence
+    tactics:
+    - persistence
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/azure_automation_runbook_created.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/azure_automation_runbook_created.yml
+      rule_sha256: sha256:ff50de8b134b31eef12eac9ab4699ceb7b89d9bc487832923e0a8d3c7acc8e9e
+      detection_id: 178d696d-6dc6-4ee8-9d25-93fee34eaf5b
+      source_version: 10
+      source_date: '2025-09-03'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1078.004/azure_automation_runbook/azure-activity.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1078.004/azure_automation_runbook/azure-activity.log
     description: mscs:azure:audit - mscs:azure:audit
     format: auto
     schema: raw
     sourcetype: mscs:azure:audit
+    checksum: sha256:e9f580e9d787107b96211d2129d3ed9b9b9dd5a4478bc456acb27a561c945b66
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

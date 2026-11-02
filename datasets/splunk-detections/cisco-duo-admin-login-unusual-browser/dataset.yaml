@@ -1,14 +1,10 @@
 metadata:
   name: cisco-duo-admin-login-unusual-browser
   version: 1.0.0
-  description: The following analytic identifies instances where a Duo admin logs
-    in using a browser other than Chrome, which is considered unusual based on typical
-    access patterns. Please adjust as needed to your environment. The detection leverages
-    Duo activity logs ingested via the Cisco Security Cloud App and filters for admin
-    login actions where the browser is not Chrome. By renaming and aggregating relevant
-    fields such as user, browser, IP address, and location, the analytic highlights
-    potentially suspic
+  description: The following analytic identifies instances where a Duo admin logs in using a browser other than Chrome, which is considered unusual based on typical access patterns. Please adjust as needed to your environment. The detection leverages Duo activity logs ingested via the Cisco Security Cloud App and filters for admin login actions where the browser is not Chrome. By renaming and aggregating relevant fields such as user, browser, IP address, and location, the analytic highlights potentially suspicious access attempts that deviate from the norm. This behavior is significant for a SOC because the use of an unexpected browser may indicate credential compromise, session hijacking, or the use of unauthorized devices by attackers attempting to evade detection. Detecting such anomalies enables early investigation and response, helping to prevent privilege escalation, policy manipulation, or further compromise of sensitive administrative accounts. The impact of this attack could include unauthorized changes to security policies, user access, or the disabling of critical security controls, posing a substantial risk to the organizations security posture.
   author: Patrick Bareiss, Splunk
+  updated: '2025-07-10'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +12,44 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1556
-      name: Technique T1556
-    tactics: []
+      name: Modify Authentication Process
+      tactics:
+      - persistence
+      - defense-evasion
+      - credential-access
+    tactics:
+    - persistence
+    - defense-evasion
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/application/cisco_duo_admin_login_unusual_browser.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/application/cisco_duo_admin_login_unusual_browser.yml
+      rule_sha256: sha256:8155d8e4c686bb38191fec77066ea44e993bdc28aeab37fc9c83a44ebe541205
+      detection_id: b38932ad-e663-4e90-bfdf-8446ee5b3f34
+      source_version: 1
+      source_date: '2025-07-10'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1556/cisco_duo_unusual_admin_login/cisco_duo_activity.json
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1556/cisco_duo_unusual_admin_login/cisco_duo_activity.json
     description: duo - cisco:duo:activity
     format: auto
     schema: raw
     sourcetype: cisco:duo:activity
+    checksum: sha256:f227990d742fbca024a6a2e6eefabef088c3558849985ae2ef14deb2c97bc9fb
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

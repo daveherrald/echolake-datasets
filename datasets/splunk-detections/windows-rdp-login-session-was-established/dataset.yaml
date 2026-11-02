@@ -1,14 +1,10 @@
 metadata:
   name: windows-rdp-login-session-was-established
   version: 2.0.0
-  description: The following analytic detects instances where a successful Remote
-    Desktop Protocol (RDP) login session was established, as indicated by Windows
-    Security Event ID 4624 with Logon Type 10. This event confirms that a user has
-    not only provided valid credentials but has also initiated a full interactive
-    RDP session. It is a key indicator of successful remote access to a Windows system.
-    When correlated with Event ID 1149, which logs RDP authentication success, this
-    analytic helps distinguish between
+  description: "The following analytic detects instances where a successful Remote Desktop Protocol (RDP) login session was established, as indicated by Windows Security Event ID 4624 with Logon Type 10. This event confirms that a user has not only provided valid credentials but has also initiated a full interactive RDP session. It is a key indicator of successful remote access to a Windows system. When correlated with Event ID 1149, which logs RDP authentication success, this analytic helps distinguish between mere credential acceptance and actual session establishment\u2014critical for effective monitoring and threat detection."
   author: Teoderick Contreras, Splunk
+  updated: '2025-10-14'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1021.001
-      name: Technique T1021.001
-    tactics: []
+      name: Remote Desktop Protocol
+      tactics:
+      - lateral-movement
+    tactics:
+    - lateral-movement
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_rdp_login_session_was_established.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_rdp_login_session_was_established.yml
+      rule_sha256: sha256:d5f53a2ead83ab5c198b9e9513315079e08079de122b32aa1e1db5f8f808f382
+      detection_id: 00ca7f9e-88ab-4841-a6c2-83979ab1ed29
+      source_version: 2
+      source_date: '2025-10-14'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1021.001/rdp_session_established/4624_10_logon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1021.001/rdp_session_established/4624_10_logon.log
     description: XmlWinEventLog:Security - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:03a9cef0403dda73c10b0b27f051e39d9dd7b3ab05514c59b1ef11fef60c56df
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

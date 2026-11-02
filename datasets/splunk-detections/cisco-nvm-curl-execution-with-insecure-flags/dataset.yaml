@@ -1,21 +1,20 @@
 metadata:
   name: cisco-nvm-curl-execution-with-insecure-flags
   version: 4.0.0
-  description: 'This analytic detects the use of `curl.exe` with insecure flags such
-    as `-k`, `--insecure`, `--proxy-insecure`, or `--doh-insecure`
+  description: 'This analytic detects the use of `curl.exe` with insecure flags such as `-k`, `--insecure`, `--proxy-insecure`, or `--doh-insecure`
 
     which disable TLS certificate validation.
 
     It leverages Cisco Network Visibility Module (NVM) flow data and process arguments
 
-    to identify outbound connections initiated by curl where TLS checks were explicitly
-    disabled.
+    to identify outbound connections initiated by curl where TLS checks were explicitly disabled.
 
-    This behavior may indicate an attempt to bypass certificate validation to connect
-    to potentially untrusted or malicious endpoints,
+    This behavior may indicate an attempt to bypass certificate validation to connect to potentially untrusted or malicious endpoints,
 
-    a common tactic in'
+    a common tactic in red team operations, malware staging, or data exfiltration over HTTPS.'
   author: Nasreddine Bencherchali, Splunk
+  updated: '2025-10-24'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -25,18 +24,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1197
-      name: Technique T1197
-    tactics: []
+      name: BITS Jobs
+      tactics:
+      - persistence
+      - defense-evasion
+    tactics:
+    - persistence
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/cisco_nvm___curl_execution_with_insecure_flags.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/cisco_nvm___curl_execution_with_insecure_flags.yml
+      rule_sha256: sha256:ee89c071422cdf78e249722d67744ff1b86657fa6f46abed2544412cbeaa176a
+      detection_id: cc695238-3117-4e60-aa83-4beac2a42c69
+      source_version: 4
+      source_date: '2025-10-24'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_network_visibility_module/cisco_nvm_flowdata/nvm_flowdata.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/cisco_network_visibility_module/cisco_nvm_flowdata/nvm_flowdata.log
     description: not_applicable - cisco:nvm:flowdata
     format: auto
     schema: raw
     sourcetype: cisco:nvm:flowdata
+    checksum: sha256:f427b5cc3a60bb3b41ae1c679bda85c1bb9aba78cc9468b94d3eec36adedfaaa
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

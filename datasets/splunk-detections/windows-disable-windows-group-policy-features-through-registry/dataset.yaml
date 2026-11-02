@@ -1,14 +1,10 @@
 metadata:
   name: windows-disable-windows-group-policy-features-through-registry
   version: 12.0.0
-  description: The following analytic detects suspicious registry modifications aimed
-    at disabling Windows Group Policy features. It leverages data from the Endpoint.Registry
-    data model, focusing on specific registry paths and values associated with disabling
-    key Windows functionalities. This activity is significant because it is commonly
-    used by ransomware to hinder mitigation and forensic response efforts. If confirmed
-    malicious, this behavior could severely impair the ability of security teams to
-    analyze an
+  description: The following analytic detects suspicious registry modifications aimed at disabling Windows Group Policy features. It leverages data from the Endpoint.Registry data model, focusing on specific registry paths and values associated with disabling key Windows functionalities. This activity is significant because it is commonly used by ransomware to hinder mitigation and forensic response efforts. If confirmed malicious, this behavior could severely impair the ability of security teams to analyze and respond to the attack, allowing the attacker to maintain control and persist within the compromised environment.
   author: Steven Dick, Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,18 +14,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1112
-      name: Technique T1112
-    tactics: []
+      name: Modify Registry
+      tactics:
+      - persistence
+      - defense-evasion
+    tactics:
+    - persistence
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_disable_windows_group_policy_features_through_registry.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_disable_windows_group_policy_features_through_registry.yml
+      rule_sha256: sha256:bf7c5ca01a812eb51d284deb2017105026bbc943439df50a4ac1f7fd4f74e69f
+      detection_id: 63a449ae-9f04-11ec-945e-acde48001122
+      source_version: 12
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1112/ransomware_disable_reg/sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1112/ransomware_disable_reg/sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:a0781f5804e422166b179ac889b4979d406055530077f71b66b4b7020772d5d4
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

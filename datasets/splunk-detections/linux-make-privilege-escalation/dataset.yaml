@@ -1,14 +1,10 @@
 metadata:
   name: linux-make-privilege-escalation
   version: 9.0.0
-  description: The following analytic detects the use of the 'make' command with elevated
-    privileges to execute system commands as root, potentially leading to a root shell.
-    It leverages data from Endpoint Detection and Response (EDR) agents, focusing
-    on command-line executions that include 'make', '--eval', and 'sudo'. This activity
-    is significant because it indicates a possible privilege escalation attempt, allowing
-    a user to gain root access. If confirmed malicious, an attacker could achieve
-    full control ov
+  description: The following analytic detects the use of the 'make' command with elevated privileges to execute system commands as root, potentially leading to a root shell. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on command-line executions that include 'make', '--eval', and 'sudo'. This activity is significant because it indicates a possible privilege escalation attempt, allowing a user to gain root access. If confirmed malicious, an attacker could achieve full control over the system, execute arbitrary commands, and compromise the entire environment.
   author: Gowthamaraj Rajendran, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -17,18 +13,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1548.003
-      name: Technique T1548.003
-    tactics: []
+      name: Sudo and Sudo Caching
+      tactics:
+      - privilege-escalation
+      - defense-evasion
+    tactics:
+    - privilege-escalation
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/linux_make_privilege_escalation.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/linux_make_privilege_escalation.yml
+      rule_sha256: sha256:7522a9fc2e82a644b0b8284160a10f159a237209f3ae92b085250da5bc04afea
+      detection_id: 80b22836-5091-4944-80ee-f733ac443f4f
+      source_version: 9
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1548/make/sysmon_linux.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1548/make/sysmon_linux.log
     description: Syslog:Linux-Sysmon/Operational - sysmon:linux
     format: auto
     schema: raw
     sourcetype: sysmon:linux
+    checksum: sha256:5cc7a4f1359761adf21f99f212c8a1149e198cb749058470f6e99022947024b4
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

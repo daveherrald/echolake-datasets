@@ -1,14 +1,10 @@
 metadata:
   name: windows-credentials-from-password-stores-chrome-extension-access
   version: 9.0.0
-  description: The following analytic detects non-Chrome processes attempting to access
-    the Chrome extensions file. It leverages Windows Security Event logs, specifically
-    event code 4663, to identify this behavior. This activity is significant because
-    adversaries may exploit this file to extract sensitive information from the Chrome
-    browser, posing a security risk. If confirmed malicious, this could lead to unauthorized
-    access to stored credentials and other sensitive data, potentially compromising
-    the securit
+  description: The following analytic detects non-Chrome processes attempting to access the Chrome extensions file. It leverages Windows Security Event logs, specifically event code 4663, to identify this behavior. This activity is significant because adversaries may exploit this file to extract sensitive information from the Chrome browser, posing a security risk. If confirmed malicious, this could lead to unauthorized access to stored credentials and other sensitive data, potentially compromising the security of the affected system and broader network.
   author: Teoderick Contreras, Splunk
+  updated: '2025-12-16'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1012
-      name: Technique T1012
-    tactics: []
+      name: Query Registry
+      tactics:
+      - discovery
+    tactics:
+    - discovery
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_credentials_from_password_stores_chrome_extension_access.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_credentials_from_password_stores_chrome_extension_access.yml
+      rule_sha256: sha256:1150829e0fa7319e5be31167bab06ff54038e70fcf10215d6ac972041dcc8ab8
+      detection_id: 2e65afe0-9a75-4487-bd87-ada9a9f1b9af
+      source_version: 9
+      source_date: '2025-12-16'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/redline/browser_ext_access/security-ext-raw.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/redline/browser_ext_access/security-ext-raw.log
     description: XmlWinEventLog:Security - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:aff1cf9ba8f548939cdae5c96bfa31b2f8d2f6760d5faaddcbeb275d303fd2a3
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

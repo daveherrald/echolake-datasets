@@ -1,13 +1,10 @@
 metadata:
   name: windows-short-lived-dns-record
   version: 1.0.0
-  description: The following analytic identifies the creation and quick deletion of
-    a DNS object within 300 seconds in an Active Directory environment, indicative
-    of a potential attack abusing DNS. This detection leverages Windows Security Event
-    Codes 5136 and 5137, analyzing the duration between these events. This activity
-    is significant as temporary DNS entries allows attackers to cause unexpecting
-    network trafficking, leading to potential compromise.
+  description: The following analytic identifies the creation and quick deletion of a DNS object within 300 seconds in an Active Directory environment, indicative of a potential attack abusing DNS. This detection leverages Windows Security Event Codes 5136 and 5137, analyzing the duration between these events. This activity is significant as temporary DNS entries allows attackers to cause unexpecting network trafficking, leading to potential compromise.
   author: Raven Tait, Splunk
+  updated: '2025-11-13'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,22 +14,51 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1071.004
-      name: Technique T1071.004
+      name: DNS
+      tactics:
+      - command-and-control
     - id: T1557.001
-      name: Technique T1557.001
+      name: LLMNR/NBT-NS Poisoning and SMB Relay
+      tactics:
+      - credential-access
+      - collection
     - id: T1187
-      name: Technique T1187
-    tactics: []
+      name: Forced Authentication
+      tactics:
+      - credential-access
+    tactics:
+    - credential-access
+    - collection
+    - command-and-control
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_short_lived_dns_record.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_short_lived_dns_record.yml
+      rule_sha256: sha256:c5b750dbe46c0ff6b9a98e7ca9d2190afa9a4d0c6b52e861d36153e07cf5cec6
+      detection_id: d585e253-1859-4170-977d-09376c731f74
+      source_version: 1
+      source_date: '2025-11-13'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1071.004/kerberos_coercion/windows-xml.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1071.004/kerberos_coercion/windows-xml.log
     description: XmlWinEventLog:Security - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:4f49d19ac0f319dfd8570d61eae774c3930c155f0b191498499cda1a9b2d7c4c
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

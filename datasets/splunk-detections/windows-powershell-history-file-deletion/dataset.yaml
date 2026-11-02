@@ -1,14 +1,10 @@
 metadata:
   name: windows-powershell-history-file-deletion
   version: 3.0.0
-  description: The following analytic detects the usage of PowerShell to delete its
-    command history file, which may indicate an attempt to evade detection by removing
-    evidence of executed commands. PowerShell stores command history in ConsoleHost_history.txt
-    under the user’s profile directory. Adversaries or malicious scripts may delete
-    this file using Remove-Item, del, or similar commands. This detection focuses
-    on file deletion events targeting the history file, correlating them with recent
-    PowerShell activi
+  description: "The following analytic detects the usage of PowerShell to delete its command history file, which may indicate an attempt to evade detection by removing evidence of executed commands. PowerShell stores command history in ConsoleHost_history.txt under the user\u2019s profile directory. Adversaries or malicious scripts may delete this file using Remove-Item, del, or similar commands. This detection focuses on file deletion events targeting the history file, correlating them with recent PowerShell activity. While legitimate users may occasionally clear history, frequent or automated deletions should be investigated for potential defense evasion or post-exploitation cleanup activities."
   author: Teoderick Contreras, Splunk
+  updated: '2025-06-24'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,20 +12,45 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1059.003
-      name: Technique T1059.003
+      name: Windows Command Shell
+      tactics:
+      - execution
     - id: T1070.003
-      name: Technique T1070.003
-    tactics: []
+      name: Clear Command History
+      tactics:
+      - defense-evasion
+    tactics:
+    - execution
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_powershell_history_file_deletion.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_powershell_history_file_deletion.yml
+      rule_sha256: sha256:1361cae87217e3d7673beb6ae618e3add6f1514c7d8c353ae4360d4a9e0142c6
+      detection_id: f1369394-48e1-4327-bf6d-14377f4b8687
+      source_version: 3
+      source_date: '2025-06-24'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1070.003/ConsoleHost_History_deletion/HistorySavePath_powershell.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1070.003/ConsoleHost_History_deletion/HistorySavePath_powershell.log
     description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:75de156569359e9e1ea44508621acc910552f2cf20f562f94ba6aa72b2a7992f
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

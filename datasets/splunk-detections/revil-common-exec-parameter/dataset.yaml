@@ -1,14 +1,10 @@
 metadata:
   name: revil-common-exec-parameter
   version: 7.0.0
-  description: The following analytic detects the execution of command-line parameters
-    commonly associated with REVIL ransomware, such as "-nolan", "-nolocal", "-fast",
-    and "-full". It leverages data from Endpoint Detection and Response (EDR) agents,
-    focusing on process execution logs mapped to the `Processes` node of the `Endpoint`
-    data model. This activity is significant because these parameters are indicative
-    of ransomware attempting to encrypt files on a compromised machine. If confirmed
-    malicious, this co
+  description: The following analytic detects the execution of command-line parameters commonly associated with REVIL ransomware, such as "-nolan", "-nolocal", "-fast", and "-full". It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process execution logs mapped to the `Processes` node of the `Endpoint` data model. This activity is significant because these parameters are indicative of ransomware attempting to encrypt files on a compromised machine. If confirmed malicious, this could lead to widespread data encryption, rendering critical files inaccessible and potentially causing significant operational disruption.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1204
-      name: Technique T1204
-    tactics: []
+      name: User Execution
+      tactics:
+      - execution
+    tactics:
+    - execution
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/revil_common_exec_parameter.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/revil_common_exec_parameter.yml
+      rule_sha256: sha256:cdf8cf2e6dc97d1493731d0a4e8d8e118940947e3666f518c1db621520505280
+      detection_id: 85facebe-c382-11eb-9c3e-acde48001122
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/revil/inf1/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/revil/inf1/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:4723cb5456dc4ab9bc279a96b512d7dd0b2d7a9d8556852a80550ed8a162ac74
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,14 +1,10 @@
 metadata:
   name: windows-impair-defense-disable-win-defender-network-protection
   version: 8.0.0
-  description: The following analytic detects modifications to the Windows registry
-    that disable Windows Defender Network Protection. It leverages data from the Endpoint.Registry
-    data model, specifically monitoring changes to the EnableNetworkProtection registry
-    entry. This activity is significant because disabling Network Protection can leave
-    the system vulnerable to network-based threats by preventing Windows Defender
-    from analyzing and blocking malicious network activity. If confirmed malicious,
-    this action
+  description: The following analytic detects modifications to the Windows registry that disable Windows Defender Network Protection. It leverages data from the Endpoint.Registry data model, specifically monitoring changes to the EnableNetworkProtection registry entry. This activity is significant because disabling Network Protection can leave the system vulnerable to network-based threats by preventing Windows Defender from analyzing and blocking malicious network activity. If confirmed malicious, this action could allow attackers to bypass security measures, potentially leading to unauthorized access, data exfiltration, or further compromise of the network.
   author: Teoderick Contreras, Splunk
+  updated: '2025-10-14'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1562.001
-      name: Technique T1562.001
-    tactics: []
+      name: Disable or Modify Tools
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_impair_defense_disable_win_defender_network_protection.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_impair_defense_disable_win_defender_network_protection.yml
+      rule_sha256: sha256:4ce61e059da053dbea7d3db2ec4ea41da27be05d5782bf1b0ec85b3f59222dc0
+      detection_id: 8b6c15c7-5556-463d-83c7-986326c21f12
+      source_version: 8
+      source_date: '2025-10-14'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.001/disable-windows-security-defender-features/windefender-bypas-2-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1562.001/disable-windows-security-defender-features/windefender-bypas-2-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:18281db53af013649ebf55d7a600be05b20c3cbedb21d72ae91902d21c6cbac8
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

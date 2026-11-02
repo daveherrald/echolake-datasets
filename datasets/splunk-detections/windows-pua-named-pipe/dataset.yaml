@@ -1,17 +1,14 @@
 metadata:
   name: windows-pua-named-pipe
   version: 1.0.0
-  description: 'The following analytic detects the creation or connection to named
-    pipes  used by potentially unwanted applications (PUAs) like VPNs or utilities
-    like PsExec.
+  description: 'The following analytic detects the creation or connection to named pipes  used by potentially unwanted applications (PUAs) like VPNs or utilities like PsExec.
 
     It leverages Sysmon EventCodes 17 and 18.
 
-    If confirmed malicious, this could allow an attacker to abuse these to potentially
-    gain persistence, command and control, or further system compromise.
-
-    '
+    If confirmed malicious, this could allow an attacker to abuse these to potentially gain persistence, command and control, or further system compromise.'
   author: Raven Tait, Splunk
+  updated: '2025-12-05'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -21,22 +18,52 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1559
-      name: Technique T1559
+      name: Inter-Process Communication
+      tactics:
+      - execution
     - id: T1021.002
-      name: Technique T1021.002
+      name: SMB/Windows Admin Shares
+      tactics:
+      - lateral-movement
     - id: T1055
-      name: Technique T1055
-    tactics: []
+      name: Process Injection
+      tactics:
+      - privilege-escalation
+      - defense-evasion
+    tactics:
+    - execution
+    - privilege-escalation
+    - defense-evasion
+    - lateral-movement
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_pua_named_pipe.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_pua_named_pipe.yml
+      rule_sha256: sha256:17152e2b635ae61ef320fd6b6c9cbcb0ee80fb967f936c6659826b65508a14f6
+      detection_id: 95b11d20-e2c6-46a5-b526-8629f5f0860a
+      source_version: 1
+      source_date: '2025-12-05'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1055/named_pipes/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1055/named_pipes/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:9c0237a14a9ee61476a5eaca97c406b0c249698bfef2049234609559d02de8c1
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

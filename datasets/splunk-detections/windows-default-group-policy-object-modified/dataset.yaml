@@ -1,14 +1,10 @@
 metadata:
   name: windows-default-group-policy-object-modified
   version: 9.0.0
-  description: The following analytic detects modifications to default Group Policy
-    Objects (GPOs) using Event ID 5136. It monitors changes to the `Default Domain
-    Controllers Policy` and `Default Domain Policy`, which are critical for enforcing
-    security settings across domain controllers and all users/computers, respectively.
-    This activity is significant because unauthorized changes to these GPOs can indicate
-    an adversary with privileged access attempting to deploy persistence mechanisms
-    or execute malware acr
+  description: The following analytic detects modifications to default Group Policy Objects (GPOs) using Event ID 5136. It monitors changes to the `Default Domain Controllers Policy` and `Default Domain Policy`, which are critical for enforcing security settings across domain controllers and all users/computers, respectively. This activity is significant because unauthorized changes to these GPOs can indicate an adversary with privileged access attempting to deploy persistence mechanisms or execute malware across the network. If confirmed malicious, such modifications could lead to widespread compromise, allowing attackers to maintain control and execute arbitrary code on numerous hosts.
   author: Mauricio Velazco, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1484.001
-      name: Technique T1484.001
-    tactics: []
+      name: Group Policy Modification
+      tactics:
+      - privilege-escalation
+      - defense-evasion
+    tactics:
+    - privilege-escalation
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_default_group_policy_object_modified.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_default_group_policy_object_modified.yml
+      rule_sha256: sha256:303ff9cba1b4edad4c6aac54950d6509f57030722e0c11f0f033e1a2cf17499b
+      detection_id: fe6a6cc4-9e0d-4d66-bcf4-2c7f44860876
+      source_version: 9
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1484.001/default_domain_policy_modified/windows-security.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1484.001/default_domain_policy_modified/windows-security.log
     description: XmlWinEventLog:Security - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:fdc974ea7d27a19b7d2d4a54a6e8c7552fa2a06cde02eb4de3ab9f95f53901a0
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

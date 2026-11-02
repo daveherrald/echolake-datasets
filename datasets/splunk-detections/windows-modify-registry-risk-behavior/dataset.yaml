@@ -1,14 +1,10 @@
 metadata:
   name: windows-modify-registry-risk-behavior
   version: 6.0.0
-  description: The following analytic identifies instances where three or more distinct
-    registry modification events associated with MITRE ATT&CK Technique T1112 are
-    detected. It leverages data from the Risk data model in Splunk, focusing on registry-related
-    sources and MITRE technique annotations. This activity is significant because
-    multiple registry modifications can indicate an attempt to persist, hide malicious
-    configurations, or erase forensic evidence. If confirmed malicious, this behavior
-    could allow a
+  description: The following analytic identifies instances where three or more distinct registry modification events associated with MITRE ATT&CK Technique T1112 are detected. It leverages data from the Risk data model in Splunk, focusing on registry-related sources and MITRE technique annotations. This activity is significant because multiple registry modifications can indicate an attempt to persist, hide malicious configurations, or erase forensic evidence. If confirmed malicious, this behavior could allow attackers to maintain persistent access, execute malicious code, and evade detection, posing a severe threat to the integrity and security of the affected host.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - correlation
   - splunk-security-content
@@ -16,18 +12,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1112
-      name: Technique T1112
-    tactics: []
+      name: Modify Registry
+      tactics:
+      - persistence
+      - defense-evasion
+    tactics:
+    - persistence
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_modify_registry_risk_behavior.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_modify_registry_risk_behavior.yml
+      rule_sha256: sha256:dd58dce401bf6d640b7904dabcace8c16cf01f18ef438ab22fb5c7957c8a4dd9
+      detection_id: 5eb479b1-a5ea-4e01-8365-780078613776
+      source_version: 6
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1112/windows_mod_reg_risk_behavior/modify_reg_risk.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1112/windows_mod_reg_risk_behavior/modify_reg_risk.log
     description: mod_reg - stash
     format: auto
     schema: raw
     sourcetype: stash
+    checksum: sha256:1c76438a56eb8f492eaac4055570bf34e65c8cb75022e7de542895affa003e2d
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,14 +1,10 @@
 metadata:
   name: detect-password-spray-attempts
   version: 8.0.0
-  description: This analytic employs the 3-sigma approach to detect an unusual volume
-    of failed authentication attempts from a single source. A password spray attack
-    is a type of brute force attack where an attacker tries a few common passwords
-    across many different accounts to avoid detection and account lockouts. By utilizing
-    the Authentication Data Model, this detection is effective for all CIM-mapped
-    authentication events, providing comprehensive coverage and enhancing security
-    against these attacks.
+  description: This analytic employs the 3-sigma approach to detect an unusual volume of failed authentication attempts from a single source. A password spray attack is a type of brute force attack where an attacker tries a few common passwords across many different accounts to avoid detection and account lockouts. By utilizing the Authentication Data Model, this detection is effective for all CIM-mapped authentication events, providing comprehensive coverage and enhancing security against these attacks.
   author: Dean Luxton
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1110.003
-      name: Technique T1110.003
-    tactics: []
+      name: Password Spraying
+      tactics:
+      - credential-access
+    tactics:
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/application/detect_password_spray_attempts.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/application/detect_password_spray_attempts.yml
+      rule_sha256: sha256:f4e1d38cca27b0f06558f82f13f050dc7ef9b01502b33c76fcf66dc7bf40bdf9
+      detection_id: 086ab581-8877-42b3-9aee-4a7ecb0923af
+      source_version: 8
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1110.003/purplesharp_invalid_users_kerberos_xml/windows-security.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1110.003/purplesharp_invalid_users_kerberos_xml/windows-security.log
     description: XmlWinEventLog:Security - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:5fdf6d4ff1d9495d7b99621de2ac537d4e07d6000d6c24a6b82878ce75085360
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

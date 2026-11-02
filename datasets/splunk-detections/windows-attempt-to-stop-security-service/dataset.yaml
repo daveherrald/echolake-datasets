@@ -1,14 +1,10 @@
 metadata:
   name: windows-attempt-to-stop-security-service
   version: 5.0.0
-  description: The following analytic detects attempts to stop security-related services
-    on an endpoint, which may indicate malicious activity. It leverages data from
-    Endpoint Detection and Response (EDR) agents, specifically searching for processes
-    involving the "sc.exe" or "net.exe" command with the "stop" parameter or the PowerShell
-    "Stop-Service" cmdlet. This activity is significant because disabling security
-    services can undermine the organization's security posture, potentially leading
-    to unauthorized ac
+  description: The following analytic detects attempts to stop security-related services on an endpoint, which may indicate malicious activity. It leverages data from Endpoint Detection and Response (EDR) agents, specifically searching for processes involving the "sc.exe" or "net.exe" command with the "stop" parameter or the PowerShell "Stop-Service" cmdlet. This activity is significant because disabling security services can undermine the organization's security posture, potentially leading to unauthorized access, data exfiltration, or further attacks like malware installation or privilege escalation. If confirmed malicious, this behavior could compromise the endpoint and the entire network, necessitating immediate investigation and response.
   author: Rico Valdez, Nasreddine Bencherchali, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1562.001
-      name: Technique T1562.001
-    tactics: []
+      name: Disable or Modify Tools
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_attempt_to_stop_security_service.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_attempt_to_stop_security_service.yml
+      rule_sha256: sha256:99be175f143609245ce56084458e83cd725fedfcb7ed3c38f206471755062107
+      detection_id: 9ed27cea-4e27-4eff-b2c6-aac9e78a7517
+      source_version: 5
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.001/win_defend_service_stop/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1562.001/win_defend_service_stop/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:f9dc84160d71a405117cbf792cb724bfe2779d1e0406e9be387ba591ceaacd71
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

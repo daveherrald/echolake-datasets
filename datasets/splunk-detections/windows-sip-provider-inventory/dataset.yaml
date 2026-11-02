@@ -1,14 +1,10 @@
 metadata:
   name: windows-sip-provider-inventory
   version: 5.0.0
-  description: The following analytic identifies all SIP (Subject Interface Package)
-    providers on a Windows system using PowerShell scripted inputs. It detects SIP
-    providers by capturing DLL paths from relevant events. This activity is significant
-    because malicious SIP providers can be used to bypass trust controls, potentially
-    allowing unauthorized code execution. If confirmed malicious, this activity could
-    enable attackers to subvert system integrity, leading to unauthorized access or
-    persistent threats with
+  description: The following analytic identifies all SIP (Subject Interface Package) providers on a Windows system using PowerShell scripted inputs. It detects SIP providers by capturing DLL paths from relevant events. This activity is significant because malicious SIP providers can be used to bypass trust controls, potentially allowing unauthorized code execution. If confirmed malicious, this activity could enable attackers to subvert system integrity, leading to unauthorized access or persistent threats within the environment. Analysts should review for new and non-standard paths to identify potential threats.
   author: Michael Haag, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - hunting
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1553.003
-      name: Technique T1553.003
-    tactics: []
+      name: SIP and Trust Provider Hijacking
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_sip_provider_inventory.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_sip_provider_inventory.yml
+      rule_sha256: sha256:09f0d5d8bccee5a7ed823f87b91840e5469c3ed14b6ac3b30834a6ace1fc0521
+      detection_id: 21c5af91-1a4a-4511-8603-64fb41df3fad
+      source_version: 5
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1553.003/sip/sip_inventory.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1553.003/sip/sip_inventory.log
     description: powershell://SubjectInterfacePackage - PwSh:SubjectInterfacePackage
     format: auto
     schema: raw
     sourcetype: PwSh:SubjectInterfacePackage
+    checksum: sha256:cb3d505da591666d7125bbf6672a3329f56744cf4c04b5a447ee15646d329311
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

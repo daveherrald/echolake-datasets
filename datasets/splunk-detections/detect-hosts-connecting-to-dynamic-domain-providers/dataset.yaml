@@ -1,14 +1,10 @@
 metadata:
   name: detect-hosts-connecting-to-dynamic-domain-providers
   version: 10.0.0
-  description: The following analytic identifies DNS queries from internal hosts to
-    dynamic domain providers. It leverages DNS query logs from the `Network_Resolution`
-    data model and cross-references them with a lookup file containing known dynamic
-    DNS providers. This activity is significant because attackers often use dynamic
-    DNS services to host malicious payloads or command-and-control servers, making
-    it crucial for security teams to monitor. If confirmed malicious, this activity
-    could allow attackers to by
+  description: The following analytic identifies DNS queries from internal hosts to dynamic domain providers. It leverages DNS query logs from the `Network_Resolution` data model and cross-references them with a lookup file containing known dynamic DNS providers. This activity is significant because attackers often use dynamic DNS services to host malicious payloads or command-and-control servers, making it crucial for security teams to monitor. If confirmed malicious, this activity could allow attackers to bypass firewall blocks, evade detection, and maintain persistent access to the network.
   author: Bhavin Patel, Splunk
+  updated: '2026-01-22'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1189
-      name: Technique T1189
-    tactics: []
+      name: Drive-by Compromise
+      tactics:
+      - initial-access
+    tactics:
+    - initial-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/network/detect_hosts_connecting_to_dynamic_domain_providers.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/network/detect_hosts_connecting_to_dynamic_domain_providers.yml
+      rule_sha256: sha256:eb163ead461096ab9c556556f23d96e42659766a90f77a602e9e75f1d481f5a1
+      detection_id: a1e761ac-1344-4dbd-88b2-3f34c912d359
+      source_version: 10
+      source_date: '2026-01-22'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1189/dyn_dns_site/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1189/dyn_dns_site/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:88001f008bc0df948c88dcf94ad4c8ee4378a5603b96fe77ffb09070fb468c55
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

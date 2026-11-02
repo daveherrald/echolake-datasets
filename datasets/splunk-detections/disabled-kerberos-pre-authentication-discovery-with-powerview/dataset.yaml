@@ -1,13 +1,10 @@
 metadata:
   name: disabled-kerberos-pre-authentication-discovery-with-powerview
   version: 11.0.0
-  description: 'The following analytic detects the execution of the `Get-DomainUser`
-    commandlet with the `-PreauthNotRequired` parameter using PowerShell Script Block
-    Logging (EventCode=4104). This command is part of PowerView, a tool used for enumerating
-    Windows Active Directory networks. Identifying domain accounts with Kerberos Pre-Authentication
-    disabled is significant because adversaries can leverage this information to attempt
-    offline password cracking. If confirmed malicious, this activity could lead to '
+  description: The following analytic detects the execution of the `Get-DomainUser` commandlet with the `-PreauthNotRequired` parameter using PowerShell Script Block Logging (EventCode=4104). This command is part of PowerView, a tool used for enumerating Windows Active Directory networks. Identifying domain accounts with Kerberos Pre-Authentication disabled is significant because adversaries can leverage this information to attempt offline password cracking. If confirmed malicious, this activity could lead to unauthorized access to domain accounts, potentially compromising sensitive information and escalating privileges within the network.
   author: Mauricio Velazco, Splunk
+  updated: '2025-07-28'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1558.004
-      name: Technique T1558.004
-    tactics: []
+      name: AS-REP Roasting
+      tactics:
+      - credential-access
+    tactics:
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/disabled_kerberos_pre_authentication_discovery_with_powerview.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/disabled_kerberos_pre_authentication_discovery_with_powerview.yml
+      rule_sha256: sha256:7e940a4d2296ef0fba8f5fd431e208b92a0ba795b7e6cf569d44046009e82f2f
+      detection_id: b0b34e2c-90de-11ec-baeb-acde48001122
+      source_version: 11
+      source_date: '2025-07-28'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/powershell_script_block_logging/getdomainuser.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1059.001/powershell_script_block_logging/getdomainuser.log
     description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:5fb96689ee4c94c9b3a648e057ccc634665128cc09955c259b2e0c4faae0da8d
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

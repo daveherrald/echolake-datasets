@@ -1,14 +1,10 @@
 metadata:
   name: o365-concurrent-sessions-from-different-ips
   version: 9.0.0
-  description: The following analytic identifies user sessions in Office 365 accessed
-    from multiple IP addresses, indicating potential adversary-in-the-middle (AiTM)
-    phishing attacks. It detects this activity by analyzing Azure Active Directory
-    logs for 'UserLoggedIn' operations and flags sessions with more than one associated
-    IP address. This behavior is significant as it suggests unauthorized concurrent
-    access, which is uncommon in normal usage. If confirmed malicious, the impact
-    could include data theft, ac
+  description: The following analytic identifies user sessions in Office 365 accessed from multiple IP addresses, indicating potential adversary-in-the-middle (AiTM) phishing attacks. It detects this activity by analyzing Azure Active Directory logs for 'UserLoggedIn' operations and flags sessions with more than one associated IP address. This behavior is significant as it suggests unauthorized concurrent access, which is uncommon in normal usage. If confirmed malicious, the impact could include data theft, account takeover, and the launching of internal phishing campaigns, posing severe risks to organizational security.
   author: Mauricio Velazco, Splunk
+  updated: '2025-10-14'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1185
-      name: Technique T1185
-    tactics: []
+      name: Browser Session Hijacking
+      tactics:
+      - collection
+    tactics:
+    - collection
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/o365_concurrent_sessions_from_different_ips.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/o365_concurrent_sessions_from_different_ips.yml
+      rule_sha256: sha256:265db06b4b972b1008b3a8ccdb1dd642c6ac0f0e3f08bfd328f0bca3886fd141
+      detection_id: 58e034de-1f87-4812-9dc3-a4f68c7db930
+      source_version: 9
+      source_date: '2025-10-14'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1185/o365_concurrent_sessions_from_different_ips/o365_concurrent_sessions_from_different_ips.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1185/o365_concurrent_sessions_from_different_ips/o365_concurrent_sessions_from_different_ips.log
     description: o365 - o365:management:activity
     format: auto
     schema: raw
     sourcetype: o365:management:activity
+    checksum: sha256:c57fce846b29486a9a6ca1cecd2b7004bf4662ff171f6a63e8c3e02aa416bafd
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

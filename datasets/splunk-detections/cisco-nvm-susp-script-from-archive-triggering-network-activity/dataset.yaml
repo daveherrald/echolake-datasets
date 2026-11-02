@@ -1,19 +1,18 @@
 metadata:
   name: cisco-nvm-susp-script-from-archive-triggering-network-activity
   version: 2.0.0
-  description: 'This analytic detects script execution (`wscript.exe` or `cscript.exe`)
-    triggered from compressed files opened directly using
+  description: 'This analytic detects script execution (`wscript.exe` or `cscript.exe`) triggered from compressed files opened directly using
 
     `explorer.exe`, `winrar.exe`, or `7zFM.exe`.
 
-    When a user double clicks on a ".js" file from within one of these compressed
-    files. Its extracted temporally in the temp directory in folder with certain markers.
+    When a user double clicks on a ".js" file from within one of these compressed files. Its extracted temporally in the temp directory in folder with certain markers.
 
-    It leverages Cisco Network Visibility Module (NVM) flow data, in order to look
-    for a specific parent/child relationship and an initiated network connection.
+    It leverages Cisco Network Visibility Module (NVM) flow data, in order to look for a specific parent/child relationship and an initiated network connection.
 
-    This beh'
+    This behavior is exploited by threat actors such as Scarlet Goldfinch to deliver and run malicious scripts as an initial access technique.'
   author: Nasreddine Bencherchali, Splunk
+  updated: '2025-09-09'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -21,20 +20,44 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1059.005
-      name: Technique T1059.005
+      name: Visual Basic
+      tactics:
+      - execution
     - id: T1204.002
-      name: Technique T1204.002
-    tactics: []
+      name: Malicious File
+      tactics:
+      - execution
+    tactics:
+    - execution
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/cisco_nvm___susp_script_from_archive_triggering_network_activity.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/cisco_nvm___susp_script_from_archive_triggering_network_activity.yml
+      rule_sha256: sha256:e23e9a084abb6966bad3f230e18e787dba53e79143cc2f84b43a96ae1c69c2a8
+      detection_id: 8b07c2c9-0cde-4c44-9fa6-59dcf2b25777
+      source_version: 2
+      source_date: '2025-09-09'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_network_visibility_module/cisco_nvm_flowdata/nvm_flowdata.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/cisco_network_visibility_module/cisco_nvm_flowdata/nvm_flowdata.log
     description: not_applicable - cisco:nvm:flowdata
     format: auto
     schema: raw
     sourcetype: cisco:nvm:flowdata
+    checksum: sha256:f427b5cc3a60bb3b41ae1c679bda85c1bb9aba78cc9468b94d3eec36adedfaaa
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,14 +1,10 @@
 metadata:
   name: windows-msix-package-interaction
   version: 1.0.0
-  description: 'This hunting query detects user interactions with MSIX packages by
-    monitoring EventCode 171 in the Microsoft-Windows-AppXPackaging/Operational logs.
-    These events are generated when a user clicks on or attempts to interact with
-    an MSIX package, even if the package is not fully installed. This information
-    can be valuable for security teams to identify what MSIX packages users are attempting
-    to open in their environment, which may help detect malicious MSIX packages before
-    they''re fully installed. '
+  description: This hunting query detects user interactions with MSIX packages by monitoring EventCode 171 in the Microsoft-Windows-AppXPackaging/Operational logs. These events are generated when a user clicks on or attempts to interact with an MSIX package, even if the package is not fully installed. This information can be valuable for security teams to identify what MSIX packages users are attempting to open in their environment, which may help detect malicious MSIX packages before they're fully installed. Monitoring these interactions can provide early warning of potential MSIX package abuse, which has been leveraged by threat actors such as FIN7, Zloader (Storm-0569), and FakeBat (Storm-1113).
   author: Michael Haag, Splunk
+  updated: '2025-08-05'
+  license: Apache-2.0
   tags:
   - hunting
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1204.002
-      name: Technique T1204.002
-    tactics: []
+      name: Malicious File
+      tactics:
+      - execution
+    tactics:
+    - execution
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_msix_package_interaction.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_msix_package_interaction.yml
+      rule_sha256: sha256:af4f02751831b827fbb04d5964151cb6abfbb730f05e74842e782d0b7792aeee
+      detection_id: 1a06689d-814e-4db2-b2c7-5a174f8c2d6d
+      source_version: 1
+      source_date: '2025-08-05'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1204.002/appx/windows-appxpackaging.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1204.002/appx/windows-appxpackaging.log
     description: XmlWinEventLog:Microsoft-Windows-AppxPackaging/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:59ee13548c26731003b3733b45f2754f105f97a226724e29d61551532a37ff90
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

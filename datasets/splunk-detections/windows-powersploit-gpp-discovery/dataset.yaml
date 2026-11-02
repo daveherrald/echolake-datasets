@@ -1,14 +1,10 @@
 metadata:
   name: windows-powersploit-gpp-discovery
   version: 10.0.0
-  description: The following analytic detects the execution of the Get-GPPPassword
-    PowerShell cmdlet, which is used to search for unsecured credentials in Group
-    Policy Preferences (GPP). This detection leverages PowerShell Script Block Logging
-    to identify specific script block text associated with this cmdlet. Monitoring
-    this activity is crucial as it can indicate an attempt to retrieve and decrypt
-    stored credentials from SYSVOL, potentially leading to unauthorized access. If
-    confirmed malicious, this activity
+  description: The following analytic detects the execution of the Get-GPPPassword PowerShell cmdlet, which is used to search for unsecured credentials in Group Policy Preferences (GPP). This detection leverages PowerShell Script Block Logging to identify specific script block text associated with this cmdlet. Monitoring this activity is crucial as it can indicate an attempt to retrieve and decrypt stored credentials from SYSVOL, potentially leading to unauthorized access. If confirmed malicious, this activity could allow an attacker to escalate privileges or move laterally within the network by exploiting exposed credentials.
   author: Mauricio Velazco, Splunk
+  updated: '2025-06-24'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1552.006
-      name: Technique T1552.006
-    tactics: []
+      name: Group Policy Preferences
+      tactics:
+      - credential-access
+    tactics:
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_powersploit_gpp_discovery.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_powersploit_gpp_discovery.yml
+      rule_sha256: sha256:c51bb3f3042ae46bbb0b03febbc2a7407ab2b83243815b1aadb45b20a7e6d5e1
+      detection_id: 0130a0df-83a1-4647-9011-841e950ff302
+      source_version: 10
+      source_date: '2025-06-24'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1552.006/powershell_gpp_discovery/win-powershell.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1552.006/powershell_gpp_discovery/win-powershell.log
     description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:a1a710999a7432a1c4d01e25a3f6852cbe9e93ffcb6a2f4a51fef66d04fcc9a0
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

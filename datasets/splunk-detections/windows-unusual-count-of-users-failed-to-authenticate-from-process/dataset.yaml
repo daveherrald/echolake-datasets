@@ -1,14 +1,10 @@
 metadata:
   name: windows-unusual-count-of-users-failed-to-authenticate-from-process
   version: 8.0.0
-  description: The following analytic identifies a source process failing to authenticate
-    multiple users, potentially indicating a Password Spraying attack. It leverages
-    Windows Event 4625, which logs failed logon attempts, and uses statistical analysis
-    to detect anomalies. This activity is significant as it may represent an adversary
-    attempting to gain initial access or elevate privileges within an Active Directory
-    environment. If confirmed malicious, the attacker could compromise multiple accounts,
-    leading t
+  description: The following analytic identifies a source process failing to authenticate multiple users, potentially indicating a Password Spraying attack. It leverages Windows Event 4625, which logs failed logon attempts, and uses statistical analysis to detect anomalies. This activity is significant as it may represent an adversary attempting to gain initial access or elevate privileges within an Active Directory environment. If confirmed malicious, the attacker could compromise multiple accounts, leading to unauthorized access, data exfiltration, or further lateral movement within the network.
   author: Mauricio Velazco, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1110.003
-      name: Technique T1110.003
-    tactics: []
+      name: Password Spraying
+      tactics:
+      - credential-access
+    tactics:
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_unusual_count_of_users_failed_to_authenticate_from_process.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_unusual_count_of_users_failed_to_authenticate_from_process.yml
+      rule_sha256: sha256:1472fcee0c53b571c65ac5e094fc28049f9ba311043c6e68e128fad13f3688f3
+      detection_id: 25bdb6cb-2e49-4d34-a93c-d6c567c122fe
+      source_version: 8
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1110.003/purplesharp_multiple_users_from_process_xml/windows-security.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1110.003/purplesharp_multiple_users_from_process_xml/windows-security.log
     description: XmlWinEventLog:Security - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:b9886899bdceb4c3c99aa19eeb23ef00da7df93013e9526815d40bdd1c2c81c1
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

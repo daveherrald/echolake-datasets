@@ -1,14 +1,10 @@
 metadata:
   name: cisco-duo-policy-allow-old-flash
   version: 1.0.0
-  description: The following analytic identifies instances where a Duo administrator
-    creates or updates a policy to allow the use of outdated Flash components, specifically
-    by detecting policy changes with the flash_remediation=no remediation attribute.
-    It leverages Duo activity logs ingested via the Cisco Security Cloud App, searching
-    for policy_update or policy_create actions and parsing the policy description
-    for indicators of weakened security controls. This behavior is significant for
-    a SOC because permit
+  description: The following analytic identifies instances where a Duo administrator creates or updates a policy to allow the use of outdated Flash components, specifically by detecting policy changes with the flash_remediation=no remediation attribute. It leverages Duo activity logs ingested via the Cisco Security Cloud App, searching for policy_update or policy_create actions and parsing the policy description for indicators of weakened security controls. This behavior is significant for a SOC because permitting old Flash increases the attack surface, as Flash is widely known for its security vulnerabilities and is no longer supported. Attackers may exploit such policy changes to bypass security controls, introduce malware, or escalate privileges within the environment. Detecting and responding to these policy modifications helps prevent potential exploitation, reduces organizational risk, and ensures adherence to security best practices. Immediate investigation is recommended to determine if the change was authorized or indicative of malicious activity.
   author: Patrick Bareiss, Splunk
+  updated: '2025-07-09'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +12,44 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1556
-      name: Technique T1556
-    tactics: []
+      name: Modify Authentication Process
+      tactics:
+      - persistence
+      - defense-evasion
+      - credential-access
+    tactics:
+    - persistence
+    - defense-evasion
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/application/cisco_duo_policy_allow_old_flash.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/application/cisco_duo_policy_allow_old_flash.yml
+      rule_sha256: sha256:c57568c8c499b91a3c41373a1f442ef2fa581de70c81cc62563b320868db30e8
+      detection_id: f36c0d3f-d57f-4b88-a5d4-0a4c9a0752f6
+      source_version: 1
+      source_date: '2025-07-09'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1556/cisco_duo_policy_allow_old_flash_and_java/cisco_duo_administrator.json
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1556/cisco_duo_policy_allow_old_flash_and_java/cisco_duo_administrator.json
     description: duo - cisco:duo:administrator
     format: auto
     schema: raw
     sourcetype: cisco:duo:administrator
+    checksum: sha256:f889c0bf46213a2b4c8166d4f255743e54d15348e049a16209ad47dbc5a1dcef
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,14 +1,10 @@
 metadata:
   name: windows-ai-platform-dns-query
   version: 2.0.0
-  description: The following analytic detects DNS queries initiated by the Windows
-    AI Platform to domains associated with Hugging Face, OpenAI, and other popular
-    providers of machine learning models and services. Monitoring these DNS requests
-    is important because it can reveal when systems are accessing external AI platforms,
-    which may indicate the use of third-party AI resources or the transfer of sensitive
-    data outside the organization’s environment. Detecting such activity enables organizations
-    to enforce d
+  description: "The following analytic detects DNS queries initiated by the Windows AI Platform to domains associated with Hugging Face, OpenAI, and other popular providers of machine learning models and services. Monitoring these DNS requests is important because it can reveal when systems are accessing external AI platforms, which may indicate the use of third-party AI resources or the transfer of sensitive data outside the organization\u2019s environment. Detecting such activity enables organizations to enforce data governance policies, prevent unapproved use of external AI services, and maintain visibility into potential data exfiltration risks. Proactive monitoring provides better control over AI model usage and helps safeguard organizational data flows."
   author: Teoderick Contreras, Splunk
+  updated: '2025-12-17'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1071.004
-      name: Technique T1071.004
-    tactics: []
+      name: DNS
+      tactics:
+      - command-and-control
+    tactics:
+    - command-and-control
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_ai_platform_dns_query.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_ai_platform_dns_query.yml
+      rule_sha256: sha256:69cbf7f91a0d39c9d4b70cafa8e88f322e501faf1d08dbd5d6e10a89b30385c5
+      detection_id: 1ad89d24-c856-4a0e-8fdf-c20c7b9febe1
+      source_version: 2
+      source_date: '2025-12-17'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/lamehug/T1071.004/hugging_face/huggingface.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/lamehug/T1071.004/hugging_face/huggingface.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:5ee9ab56b4218aa52d316105fa330f09261324cd4630aa158d814dc1a72c02bd
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

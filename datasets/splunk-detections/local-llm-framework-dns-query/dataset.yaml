@@ -1,17 +1,14 @@
 metadata:
   name: local-llm-framework-dns-query
   version: 1.0.0
-  description: 'Detects DNS queries related to local LLM models on endpoints by monitoring
-    Sysmon DNS query events (Event ID 22) for known LLM model domains and services.
+  description: 'Detects DNS queries related to local LLM models on endpoints by monitoring Sysmon DNS query events (Event ID 22) for known LLM model domains and services.
 
-    Local LLM frameworks like Ollama, LM Studio, and GPT4All make DNS calls to repositories
-    such as huggingface.co and ollama.ai for model downloads, updates, and telemetry.
+    Local LLM frameworks like Ollama, LM Studio, and GPT4All make DNS calls to repositories such as huggingface.co and ollama.ai for model downloads, updates, and telemetry.
 
-    These queries can reveal unauthorized AI tool usage or data exfiltration risks
-    on corporate networks.
-
-    '
+    These queries can reveal unauthorized AI tool usage or data exfiltration risks on corporate networks.'
   author: Rod Soto
+  updated: '2025-11-12'
+  license: Apache-2.0
   tags:
   - hunting
   - splunk-security-content
@@ -19,18 +16,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1590
-      name: Technique T1590
-    tactics: []
+      name: Gather Victim Network Information
+      tactics:
+      - reconnaissance
+    tactics:
+    - reconnaissance
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/local_llm_framework_dns_query.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/local_llm_framework_dns_query.yml
+      rule_sha256: sha256:4b2472eef1cf8152fa77af7f461fe6f2b6d1467cd7ca959826e2e5a816390f12
+      detection_id: d7ceffc5-a45e-412b-b9fa-2ba27c284503
+      source_version: 1
+      source_date: '2025-11-12'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/suspicious_behaviour/local_llms/sysmon_dns.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/suspicious_behaviour/local_llms/sysmon_dns.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:fad7741b9a15fe3b0e32740381bf724427997262f4b052e546598964fff35f2c
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

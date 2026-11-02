@@ -1,14 +1,10 @@
 metadata:
   name: windows-msiexec-spawn-discovery-command
   version: 11.0.0
-  description: The following analytic detects MSIExec spawning multiple discovery
-    commands, such as Cmd.exe or PowerShell.exe. This behavior is identified using
-    data from Endpoint Detection and Response (EDR) agents, focusing on process creation
-    events where MSIExec is the parent process. This activity is significant because
-    MSIExec typically does not spawn child processes other than itself, making this
-    behavior highly suspicious. If confirmed malicious, an attacker could use these
-    discovery commands to gather
+  description: The following analytic detects MSIExec spawning multiple discovery commands, such as Cmd.exe or PowerShell.exe. This behavior is identified using data from Endpoint Detection and Response (EDR) agents, focusing on process creation events where MSIExec is the parent process. This activity is significant because MSIExec typically does not spawn child processes other than itself, making this behavior highly suspicious. If confirmed malicious, an attacker could use these discovery commands to gather system information, potentially leading to further exploitation or lateral movement within the network.
   author: Michael Haag, Splunk
+  updated: '2025-12-16'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1218.007
-      name: Technique T1218.007
-    tactics: []
+      name: Msiexec
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_msiexec_spawn_discovery_command.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_msiexec_spawn_discovery_command.yml
+      rule_sha256: sha256:c8eb1d41fd2d9a2a56107f7e3a375fec46dec8db93d96a71890e64b580e8cab0
+      detection_id: e9d05aa2-32f0-411b-930c-5b8ca5c4fcee
+      source_version: 11
+      source_date: '2025-12-16'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218.007/atomic_red_team/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1218.007/atomic_red_team/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:f40aa55a99ea5e6c002b1ddbea5e56bcf529b4a08dbd5bf088269803da778939
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

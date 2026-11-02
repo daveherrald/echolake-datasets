@@ -1,14 +1,10 @@
 metadata:
   name: rundll-loading-dll-by-ordinal
   version: 12.0.0
-  description: The following analytic detects rundll32.exe loading a DLL export function
-    by ordinal value. It leverages data from Endpoint Detection and Response (EDR)
-    agents, focusing on process command-line executions. This behavior is significant
-    because adversaries may use rundll32.exe to execute malicious code while evading
-    security tools that do not monitor this process. If confirmed malicious, this
-    activity could allow attackers to execute arbitrary code, potentially leading
-    to system compromise, privil
+  description: The following analytic detects rundll32.exe loading a DLL export function by ordinal value. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process command-line executions. This behavior is significant because adversaries may use rundll32.exe to execute malicious code while evading security tools that do not monitor this process. If confirmed malicious, this activity could allow attackers to execute arbitrary code, potentially leading to system compromise, privilege escalation, or persistent access within the environment.
   author: Michael Haag, David Dorsey, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1218.011
-      name: Technique T1218.011
-    tactics: []
+      name: Rundll32
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/rundll_loading_dll_by_ordinal.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/rundll_loading_dll_by_ordinal.yml
+      rule_sha256: sha256:a1db1f13b53671bcc9177616a105ef75a56b201963eec14d3fcb61217b8b85ac
+      detection_id: 6c135f8d-5e60-454e-80b7-c56eed739833
+      source_version: 12
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218.011/atomic_red_team/ordinal_windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1218.011/atomic_red_team/ordinal_windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:441b465a0e8fb2c2989b11a37aed0485c17dbc75db54eae46fd54f16e4590450
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

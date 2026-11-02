@@ -1,14 +1,10 @@
 metadata:
   name: windows-time-based-evasion-via-choice-exec
   version: 8.0.0
-  description: The following analytic detects the use of choice.exe in batch files
-    as a delay tactic, a technique observed in SnakeKeylogger malware. It leverages
-    data from Endpoint Detection and Response (EDR) agents, focusing on process names
-    and command-line executions. This activity is significant as it indicates potential
-    time-based evasion techniques used by malware to avoid detection. If confirmed
-    malicious, this behavior could allow attackers to execute code stealthily, delete
-    malicious files, and pers
+  description: The following analytic detects the use of choice.exe in batch files as a delay tactic, a technique observed in SnakeKeylogger malware. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line executions. This activity is significant as it indicates potential time-based evasion techniques used by malware to avoid detection. If confirmed malicious, this behavior could allow attackers to execute code stealthily, delete malicious files, and persist on compromised hosts, making it crucial for SOC analysts to investigate promptly.
   author: Teoderick Contreras, Splunk
+  updated: '2025-08-22'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -17,18 +13,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1497.003
-      name: Technique T1497.003
-    tactics: []
+      name: Time Based Checks
+      tactics:
+      - defense-evasion
+      - discovery
+    tactics:
+    - defense-evasion
+    - discovery
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_time_based_evasion_via_choice_exec.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_time_based_evasion_via_choice_exec.yml
+      rule_sha256: sha256:a1f138446a0705fefb1b3d4bac647cac3373a97d097a122a0921dcbab609eeb1
+      detection_id: d5f54b38-10bf-4b3a-b6fc-85949862ed50
+      source_version: 8
+      source_date: '2025-08-22'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1497.003/time_delay_using_choice_exe/snakekeylogger_choice.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1497.003/time_delay_using_choice_exe/snakekeylogger_choice.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:089bdef853a88aea6b1cd7864997df84dbd2fd120fc9a839f7024bbe351e1113
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,15 +1,10 @@
 metadata:
   name: cisco-asa-core-syslog-message-volume-drop
   version: 3.0.0
-  description: 'Adversaries may intentionally suppress or reduce the volume of core
-    Cisco ASA syslog messages to evade detection or cover their tracks. This hunting
-    search is recommended to proactively identify suspicious downward shifts or absences
-    in key syslog message IDs, which may indicate tampering or malicious activity.
-    Visualizing this data in Splunk dashboards enables security teams to quickly spot
-    anomalies and investigate potential compromise.
-
-    '
+  description: Adversaries may intentionally suppress or reduce the volume of core Cisco ASA syslog messages to evade detection or cover their tracks. This hunting search is recommended to proactively identify suspicious downward shifts or absences in key syslog message IDs, which may indicate tampering or malicious activity. Visualizing this data in Splunk dashboards enables security teams to quickly spot anomalies and investigate potential compromise.
   author: Bhavin Patel, Micheal Haag, Splunk
+  updated: '2025-10-13'
+  license: Apache-2.0
   tags:
   - hunting
   - splunk-security-content
@@ -18,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1562
-      name: Technique T1562
-    tactics: []
+      name: Impair Defenses
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/application/cisco_asa___core_syslog_message_volume_drop.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/application/cisco_asa___core_syslog_message_volume_drop.yml
+      rule_sha256: sha256:4ef624e74075c2492918632caa9d0ce21a201e7b597ac837e34bf6070fe4f088
+      detection_id: 4b4f8fdd-1f9e-45d8-9b0f-1f64c0b297a4
+      source_version: 3
+      source_date: '2025-10-13'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_asa/arcane_door/cisco_asa.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/cisco_asa/arcane_door/cisco_asa.log
     description: not_applicable - cisco:asa
     format: auto
     schema: raw
     sourcetype: cisco:asa
+    checksum: sha256:8cf972ca97ab98b064a78b0b61a27d46d4b755f9dcd2c99ae96bf94a7400ced0
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

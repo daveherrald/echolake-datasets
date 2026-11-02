@@ -1,14 +1,10 @@
 metadata:
   name: windows-modify-registry-proxyserver
   version: 8.0.0
-  description: The following analytic detects modifications to the Windows registry
-    key for setting up a proxy server. It leverages data from the Endpoint.Registry
-    datamodel, focusing on changes to the "Internet Settings\\ProxyServer" registry
-    path. This activity is significant as it can indicate malware or adversaries configuring
-    a proxy to facilitate unauthorized communication with Command and Control (C2)
-    servers. If confirmed malicious, this could allow attackers to establish persistent,
-    covert channels fo
+  description: The following analytic detects modifications to the Windows registry key for setting up a proxy server. It leverages data from the Endpoint.Registry datamodel, focusing on changes to the "Internet Settings\\ProxyServer" registry path. This activity is significant as it can indicate malware or adversaries configuring a proxy to facilitate unauthorized communication with Command and Control (C2) servers. If confirmed malicious, this could allow attackers to establish persistent, covert channels for data exfiltration or further exploitation of the compromised host.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1112
-      name: Technique T1112
-    tactics: []
+      name: Modify Registry
+      tactics:
+      - persistence
+      - defense-evasion
+    tactics:
+    - persistence
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_modify_registry_proxyserver.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_modify_registry_proxyserver.yml
+      rule_sha256: sha256:477fdba424cea3163142418ebe83c4fecc75d4be86cc5999fbd803dea76d3f20
+      detection_id: 12bdaa0b-3c59-4489-aae1-bff6d67746ef
+      source_version: 8
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1112/proxy_server/ProxyServer_sys.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1112/proxy_server/ProxyServer_sys.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:d867fff9c62b862fae5cdc707f716b6db5019e02308cbd17a66c5c2f456d8aa0
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

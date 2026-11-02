@@ -1,14 +1,10 @@
 metadata:
   name: cisco-duo-policy-bypass-2fa
   version: 1.0.0
-  description: The following analytic detects instances where a Duo policy is created
-    or updated to allow access without two-factor authentication (2FA). It identifies
-    this behavior by searching Duo administrator activity logs for policy changes
-    that set the authentication status to "Allow access without 2FA." By monitoring
-    for these specific actions, the analytic highlights potential attempts to weaken
-    authentication controls, which could be indicative of malicious activity or insider
-    threats. This behavior i
+  description: The following analytic detects instances where a Duo policy is created or updated to allow access without two-factor authentication (2FA). It identifies this behavior by searching Duo administrator activity logs for policy changes that set the authentication status to "Allow access without 2FA." By monitoring for these specific actions, the analytic highlights potential attempts to weaken authentication controls, which could be indicative of malicious activity or insider threats. This behavior is critical for a SOC to identify, as bypassing 2FA significantly reduces the security posture of an organization, making it easier for attackers to gain unauthorized access to sensitive systems and data. Detecting and responding to such policy changes promptly helps prevent potential account compromise and mitigates the risk of broader security breaches.
   author: Patrick Bareiss, Splunk
+  updated: '2025-07-08'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +12,44 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1556
-      name: Technique T1556
-    tactics: []
+      name: Modify Authentication Process
+      tactics:
+      - persistence
+      - defense-evasion
+      - credential-access
+    tactics:
+    - persistence
+    - defense-evasion
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/application/cisco_duo_policy_bypass_2fa.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/application/cisco_duo_policy_bypass_2fa.yml
+      rule_sha256: sha256:75432ad66af41a8ee910659af72cde08e3bab08a9febf9e3bb436f0fb79ec4ed
+      detection_id: 65862e8a-799a-4509-ae1c-4602aa139580
+      source_version: 1
+      source_date: '2025-07-08'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1556/cisco_duo_policy_bypass_2FA/cisco_duo_administrator.json
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1556/cisco_duo_policy_bypass_2FA/cisco_duo_administrator.json
     description: duo - cisco:duo:administrator
     format: auto
     schema: raw
     sourcetype: cisco:duo:administrator
+    checksum: sha256:140dc72dbc8ac06fb6a473f8959a3466ea69f98e5b4f71ca27c09f579afa252c
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

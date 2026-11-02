@@ -1,12 +1,10 @@
 metadata:
   name: ollama-abnormal-network-connectivity
   version: 1.0.0
-  description: Detects abnormal network activity and connectivity issues in Ollama
-    including non-localhost API access attempts and warning-level network errors such
-    as DNS lookup failures, TCP connection issues, or host resolution problems that
-    may indicate network-based attacks, unauthorized access attempts, or infrastructure
-    reconnaissance activity.
+  description: Detects abnormal network activity and connectivity issues in Ollama including non-localhost API access attempts and warning-level network errors such as DNS lookup failures, TCP connection issues, or host resolution problems that may indicate network-based attacks, unauthorized access attempts, or infrastructure reconnaissance activity.
   author: Rod Soto
+  updated: '2025-10-05'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -14,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1571
-      name: Technique T1571
-    tactics: []
+      name: Non-Standard Port
+      tactics:
+      - command-and-control
+    tactics:
+    - command-and-control
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/application/ollama_abnormal_network_connectivity.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/application/ollama_abnormal_network_connectivity.yml
+      rule_sha256: sha256:60e5f5edcfc16dfe4425ad1812831f04d168d5446d7e02b51601830f683047a2
+      detection_id: 19ec30ad-faa2-496a-a6a9-f2e5f778fbdb
+      source_version: 1
+      source_date: '2025-10-05'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/ollama/app.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/ollama/app.log
     description: app.log - ollama:server
     format: auto
     schema: raw
     sourcetype: ollama:server
+    checksum: sha256:235644816f41c36d3b4106de98581f60510932db90e8e1efa26198942feb8007
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

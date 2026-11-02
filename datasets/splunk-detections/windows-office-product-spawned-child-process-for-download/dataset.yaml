@@ -1,14 +1,10 @@
 metadata:
   name: windows-office-product-spawned-child-process-for-download
   version: 6.0.0
-  description: 'The following analytic identifies Office applications spawning child
-    processes to download content via HTTP/HTTPS. It leverages data from Endpoint
-    Detection and Response (EDR) agents, focusing on process creation events where
-    Office applications like Word or Excel initiate network connections, excluding
-    common browsers. This activity is significant as it often indicates the use of
-    malicious documents to execute living-off-the-land binaries (LOLBins) for payload
-    delivery. If confirmed malicious, '
+  description: The following analytic identifies Office applications spawning child processes to download content via HTTP/HTTPS. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process creation events where Office applications like Word or Excel initiate network connections, excluding common browsers. This activity is significant as it often indicates the use of malicious documents to execute living-off-the-land binaries (LOLBins) for payload delivery. If confirmed malicious, this behavior could lead to unauthorized code execution, data exfiltration, or further malware deployment, posing a severe threat to the organization's security.
   author: Teoderick Contreras, Splunk
+  updated: '2025-09-18'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1566.001
-      name: Technique T1566.001
-    tactics: []
+      name: Spearphishing Attachment
+      tactics:
+      - initial-access
+    tactics:
+    - initial-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_office_product_spawned_child_process_for_download.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_office_product_spawned_child_process_for_download.yml
+      rule_sha256: sha256:b13384aae7c73895a6a682093876e82e3cf50c4752ccd3b71dc56556ee4bde24
+      detection_id: f02b64b8-cbea-4f75-bf77-7a05111566b1
+      source_version: 6
+      source_date: '2025-09-18'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566.001/datasets2/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1566.001/datasets2/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:dc13da161669f422c879b9dced6bf58e7f77cd9f7a9c7d37d3d4f59593c78417
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

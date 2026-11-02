@@ -1,14 +1,10 @@
 metadata:
   name: rubeus-command-line-parameters
   version: 9.0.0
-  description: The following analytic detects the use of Rubeus command line parameters,
-    a toolset for Kerberos attacks within Active Directory environments. It leverages
-    Endpoint Detection and Response (EDR) data to identify specific command-line arguments
-    associated with actions like ticket manipulation, kerberoasting, and password
-    spraying. This activity is significant as Rubeus is commonly used by adversaries
-    to exploit Kerberos for privilege escalation and lateral movement. If confirmed
-    malicious, this co
+  description: The following analytic detects the use of Rubeus command line parameters, a toolset for Kerberos attacks within Active Directory environments. It leverages Endpoint Detection and Response (EDR) data to identify specific command-line arguments associated with actions like ticket manipulation, kerberoasting, and password spraying. This activity is significant as Rubeus is commonly used by adversaries to exploit Kerberos for privilege escalation and lateral movement. If confirmed malicious, this could lead to unauthorized access, persistence, and potential compromise of sensitive information within the network.
   author: Mauricio Velazco, Splunk
+  updated: '2025-10-14'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,22 +14,51 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1550.003
-      name: Technique T1550.003
+      name: Pass the Ticket
+      tactics:
+      - defense-evasion
+      - lateral-movement
     - id: T1558.003
-      name: Technique T1558.003
+      name: Kerberoasting
+      tactics:
+      - credential-access
     - id: T1558.004
-      name: Technique T1558.004
-    tactics: []
+      name: AS-REP Roasting
+      tactics:
+      - credential-access
+    tactics:
+    - defense-evasion
+    - credential-access
+    - lateral-movement
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/rubeus_command_line_parameters.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/rubeus_command_line_parameters.yml
+      rule_sha256: sha256:56f006b969ec809b75bff8dc7e6ab9c25eb8fc3f0a6898b1ba7aa83ad5fce4c2
+      detection_id: cca37478-8377-11ec-b59a-acde48001122
+      source_version: 9
+      source_date: '2025-10-14'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1550.003/rubeus/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1550.003/rubeus/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:b5400fc0ea31ff26397efdd8760b264492e4d49854646b6a0ec173fa0f98a5d1
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

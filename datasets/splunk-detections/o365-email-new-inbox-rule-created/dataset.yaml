@@ -1,13 +1,10 @@
 metadata:
   name: o365-email-new-inbox-rule-created
   version: 2.0.0
-  description: The following analytic identifies the creation of new email inbox rules
-    in an Office 365 environment. It detects events logged under New-InboxRule and
-    Set-InboxRule operations within the o365_management_activity data source, focusing
-    on parameters that may indicate mail forwarding, removal, or obfuscation. Inbox
-    rule creation is a typical end-user activity however attackers also leverage this
-    technique for multiple reasons.
+  description: The following analytic identifies the creation of new email inbox rules in an Office 365 environment. It detects events logged under New-InboxRule and Set-InboxRule operations within the o365_management_activity data source, focusing on parameters that may indicate mail forwarding, removal, or obfuscation. Inbox rule creation is a typical end-user activity however attackers also leverage this technique for multiple reasons.
   author: Steven Dick
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -15,20 +12,45 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1114.003
-      name: Technique T1114.003
+      name: Email Forwarding Rule
+      tactics:
+      - collection
     - id: T1564.008
-      name: Technique T1564.008
-    tactics: []
+      name: Email Hiding Rules
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+    - collection
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/o365_email_new_inbox_rule_created.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/o365_email_new_inbox_rule_created.yml
+      rule_sha256: sha256:43a59039b4c6b0906cbf403264e9909cc8df81b9aa9a00f9ec74aeaa0ba4d7bf
+      detection_id: 449f525a-7b42-47be-96a7-d9724e336c19
+      source_version: 2
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1114/o365_suspect_email_actions/o365_exchange_suspect_events.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1114/o365_suspect_email_actions/o365_exchange_suspect_events.log
     description: o365 - o365:management:activity
     format: auto
     schema: raw
     sourcetype: o365:management:activity
+    checksum: sha256:34a11765788b8f38d9a7d499eeeac5f5ea8acd6e5a81af7cf3ebf8bd4a3e01c9
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

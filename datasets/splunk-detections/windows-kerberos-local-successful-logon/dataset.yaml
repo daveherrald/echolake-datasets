@@ -1,14 +1,10 @@
 metadata:
   name: windows-kerberos-local-successful-logon
   version: 10.0.0
-  description: The following analytic identifies a local successful authentication
-    event on a Windows endpoint using the Kerberos package. It detects EventCode 4624
-    with LogonType 3 and source address 127.0.0.1, indicating a login to the built-in
-    local Administrator account. This activity is significant as it may suggest a
-    Kerberos relay attack, a method attackers use to escalate privileges. If confirmed
-    malicious, this could allow an attacker to gain unauthorized access to sensitive
-    systems, execute arbitrary
+  description: The following analytic identifies a local successful authentication event on a Windows endpoint using the Kerberos package. It detects EventCode 4624 with LogonType 3 and source address 127.0.0.1, indicating a login to the built-in local Administrator account. This activity is significant as it may suggest a Kerberos relay attack, a method attackers use to escalate privileges. If confirmed malicious, this could allow an attacker to gain unauthorized access to sensitive systems, execute arbitrary code, or create new accounts in Active Directory, leading to potential system compromise.
   author: Michael Haag, Splunk
+  updated: '2025-11-06'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1558
-      name: Technique T1558
-    tactics: []
+      name: Steal or Forge Kerberos Tickets
+      tactics:
+      - credential-access
+    tactics:
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_kerberos_local_successful_logon.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_kerberos_local_successful_logon.yml
+      rule_sha256: sha256:2882999542c114a36ef177786acde2423f875002cf5c38d2f3dfd7ec27e1e50f
+      detection_id: 8309c3a8-4d34-48ae-ad66-631658214653
+      source_version: 10
+      source_date: '2025-11-06'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1558/windows_kerberos_local_successful_logon/windows-xml.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1558/windows_kerberos_local_successful_logon/windows-xml.log
     description: XmlWinEventLog:Security - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:e69fc32bb7ec626f5580cb84aefe09244472bb500c84572a800856c5842a0e11
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

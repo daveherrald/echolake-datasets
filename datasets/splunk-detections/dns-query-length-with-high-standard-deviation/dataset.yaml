@@ -1,14 +1,10 @@
 metadata:
   name: dns-query-length-with-high-standard-deviation
   version: 12.0.0
-  description: 'The following analytic identifies DNS queries with unusually large
-    lengths by computing the standard deviation of query lengths and filtering those
-    exceeding two times the standard deviation. It leverages DNS query data from the
-    Network_Resolution data model, focusing on the length of the domain names being
-    resolved. This activity is significant as unusually long DNS queries can indicate
-    data exfiltration or command-and-control communication attempts. If confirmed
-    malicious, this activity could '
+  description: The following analytic identifies DNS queries with unusually large lengths by computing the standard deviation of query lengths and filtering those exceeding two times the standard deviation. It leverages DNS query data from the Network_Resolution data model, focusing on the length of the domain names being resolved. This activity is significant as unusually long DNS queries can indicate data exfiltration or command-and-control communication attempts. If confirmed malicious, this activity could allow attackers to stealthily transfer data or maintain persistent communication channels within the network.
   author: Bhavin Patel, Splunk
+  updated: '2026-01-22'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1048.003
-      name: Technique T1048.003
-    tactics: []
+      name: Exfiltration Over Unencrypted Non-C2 Protocol
+      tactics:
+      - exfiltration
+    tactics:
+    - exfiltration
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/network/dns_query_length_with_high_standard_deviation.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/network/dns_query_length_with_high_standard_deviation.yml
+      rule_sha256: sha256:ec9d3cc6891051bc7c2e9d2e44da14d84dc0495e87ee56585a50d192911a7fc7
+      detection_id: 1a67f15a-f4ff-4170-84e9-08cf6f75d6f5
+      source_version: 12
+      source_date: '2026-01-22'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1071.004/long_dns_query/dns-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1071.004/long_dns_query/dns-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:665351a29bf5545503fb572c808bf9ebf157e74ec6dcc8a098890551db6932ed
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

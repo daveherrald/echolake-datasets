@@ -1,14 +1,10 @@
 metadata:
   name: windows-credentials-from-web-browsers-saved-in-temp-folder
   version: 6.0.0
-  description: The following analytic detects the creation of files containing passwords,
-    cookies, and saved login account information by the Braodo stealer malware in
-    temporary folders. Braodo often collects these credentials from browsers and applications,
-    storing them in temp directories before exfiltration. This detection focuses on
-    monitoring for the creation of files with patterns or formats commonly associated
-    with stolen credentials. By identifying these activities, security teams can take
-    needed actio
+  description: The following analytic detects the creation of files containing passwords, cookies, and saved login account information by the Braodo stealer malware in temporary folders. Braodo often collects these credentials from browsers and applications, storing them in temp directories before exfiltration. This detection focuses on monitoring for the creation of files with patterns or formats commonly associated with stolen credentials. By identifying these activities, security teams can take needed action to prevent sensitive login data from being leaked, reducing the risk of unauthorized access to user accounts and systems.
   author: Teoderick Contreras, Splunk
+  updated: '2025-10-14'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1555.003
-      name: Technique T1555.003
-    tactics: []
+      name: Credentials from Web Browsers
+      tactics:
+      - credential-access
+    tactics:
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_credentials_from_web_browsers_saved_in_temp_folder.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_credentials_from_web_browsers_saved_in_temp_folder.yml
+      rule_sha256: sha256:56f72f5e8d84815c3d8c67b262e7b8d1d137491efab8a91e4517ef1992677dc0
+      detection_id: b36b23ea-763c-417b-bd4a-6a378dabad1a
+      source_version: 6
+      source_date: '2025-10-14'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1555.003/browser_credential_info_temp/braodo_browser_info.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1555.003/browser_credential_info_temp/braodo_browser_info.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:905f93901e3a0df59a6c2490d7185c13c9e169ca69ccd815f68aaf0eef990468
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

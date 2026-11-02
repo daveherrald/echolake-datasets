@@ -1,12 +1,10 @@
 metadata:
   name: windows-ad-suspicious-attribute-modification
   version: 6.0.0
-  description: 'This detection monitors changes to the following Active Directory
-    attributes: "msDS-AllowedToDelegateTo", "msDS-AllowedToActOnBehalfOfOtherIdentity",
-    "msDS-KeyCredentialLink", "scriptPath", and "msTSInitialProgram".  Modifications
-    to these attributes can indicate potential malicious activity or privilege escalation
-    attempts. Immediate investigation is recommended upon alert.'
+  description: 'This detection monitors changes to the following Active Directory attributes: "msDS-AllowedToDelegateTo", "msDS-AllowedToActOnBehalfOfOtherIdentity", "msDS-KeyCredentialLink", "scriptPath", and "msTSInitialProgram".  Modifications to these attributes can indicate potential malicious activity or privilege escalation attempts. Immediate investigation is recommended upon alert.'
   author: Dean Luxton
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -14,20 +12,46 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1222.001
-      name: Technique T1222.001
+      name: Windows File and Directory Permissions Modification
+      tactics:
+      - defense-evasion
     - id: T1550
-      name: Technique T1550
-    tactics: []
+      name: Use Alternate Authentication Material
+      tactics:
+      - defense-evasion
+      - lateral-movement
+    tactics:
+    - defense-evasion
+    - lateral-movement
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_ad_suspicious_attribute_modification.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_ad_suspicious_attribute_modification.yml
+      rule_sha256: sha256:3cfcb0cbd25507ac23bcbe8ddec727d02e843685b987e041dda340dcb80605a9
+      detection_id: 5682052e-ce55-4f9f-8d28-59191420b7e0
+      source_version: 6
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1222.001/dacl_abuse/suspicious_acl_modification-windows-security-xml.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1222.001/dacl_abuse/suspicious_acl_modification-windows-security-xml.log
     description: XmlWinEventLog:Security - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:4ac98ac3b2f8f1a70fba88b0f2d3c560be6b7bd5b78442f846b6fca04c4b4a16
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

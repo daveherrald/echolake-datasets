@@ -1,13 +1,10 @@
 metadata:
   name: disabling-norun-windows-app
   version: 13.0.0
-  description: The following analytic detects the modification of the Windows registry
-    to disable the Run application in the Start menu. It leverages data from the Endpoint.Registry
-    data model, specifically monitoring changes to the registry path "*\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\NoRun"
-    with a value of "0x00000001". This activity is significant because the Run application
-    is a useful shortcut for executing known applications and scripts. If confirmed
-    malicious, this action c
+  description: The following analytic detects the modification of the Windows registry to disable the Run application in the Start menu. It leverages data from the Endpoint.Registry data model, specifically monitoring changes to the registry path "*\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\NoRun" with a value of "0x00000001". This activity is significant because the Run application is a useful shortcut for executing known applications and scripts. If confirmed malicious, this action could hinder system cleaning efforts and make it more difficult to run essential tools, thereby aiding malware persistence.
   author: Teoderick Contreras, Splunk, Steven Dick
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,20 +13,46 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1112
-      name: Technique T1112
+      name: Modify Registry
+      tactics:
+      - persistence
+      - defense-evasion
     - id: T1562.001
-      name: Technique T1562.001
-    tactics: []
+      name: Disable or Modify Tools
+      tactics:
+      - defense-evasion
+    tactics:
+    - persistence
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/disabling_norun_windows_app.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/disabling_norun_windows_app.yml
+      rule_sha256: sha256:668e9a2ff80e030ad605bf39975681190fa190218bffb99771aef66675c1769f
+      detection_id: de81bc46-9213-11eb-adc9-acde48001122
+      source_version: 13
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.001/win_app_defender_disabling/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1562.001/win_app_defender_disabling/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:8886e363b137555f5a0403783106e656b77e328fab2e503a645015f5e1cc3756
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

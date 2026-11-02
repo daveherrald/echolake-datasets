@@ -1,10 +1,10 @@
 metadata:
   name: http-pua-user-agent
   version: 1.0.0
-  description: This Splunk query analyzes web logs to identify and categorize user
-    agents, detecting various types of unwanted applications. This activity can signify
-    possible compromised hosts on the network.
+  description: This Splunk query analyzes web logs to identify and categorize user agents, detecting various types of unwanted applications. This activity can signify possible compromised hosts on the network.
   author: Raven Tait, Splunk
+  updated: '2025-12-17'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -14,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1071.001
-      name: Technique T1071.001
-    tactics: []
+      name: Web Protocols
+      tactics:
+      - command-and-control
+    tactics:
+    - command-and-control
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/network/http_pua_user_agent.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/network/http_pua_user_agent.yml
+      rule_sha256: sha256:deed42e9ca24ad53157baab9bc56ecb6b337a9a395cbd63f5c152b9b2a61f875
+      detection_id: 21af5447-734f-4549-956b-7a255cb2b032
+      source_version: 1
+      source_date: '2025-12-17'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1071.001/http_user_agents/suricata_pua.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1071.001/http_user_agents/suricata_pua.log
     description: suricata - suricata
     format: auto
     schema: raw
     sourcetype: suricata
+    checksum: sha256:a4e6904a2ad806985f244c1583cd4ffc50cc7198a744adcdde16f707ecab0305
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

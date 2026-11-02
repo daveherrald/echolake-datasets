@@ -1,14 +1,10 @@
 metadata:
   name: aws-createloginprofile
   version: 8.0.0
-  description: The following analytic identifies the creation of a login profile for
-    one AWS user by another, followed by a console login from the same source IP.
-    It uses AWS CloudTrail logs to correlate the `CreateLoginProfile` and `ConsoleLogin`
-    events based on the source IP and user identity. This activity is significant
-    as it may indicate privilege escalation, where an attacker creates a new login
-    profile to gain unauthorized access. If confirmed malicious, this could allow
-    the attacker to escalate privile
+  description: The following analytic identifies the creation of a login profile for one AWS user by another, followed by a console login from the same source IP. It uses AWS CloudTrail logs to correlate the `CreateLoginProfile` and `ConsoleLogin` events based on the source IP and user identity. This activity is significant as it may indicate privilege escalation, where an attacker creates a new login profile to gain unauthorized access. If confirmed malicious, this could allow the attacker to escalate privileges and maintain persistent access to the AWS environment.
   author: Bhavin Patel, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1136.003
-      name: Technique T1136.003
-    tactics: []
+      name: Cloud Account
+      tactics:
+      - persistence
+    tactics:
+    - persistence
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/aws_createloginprofile.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/aws_createloginprofile.yml
+      rule_sha256: sha256:cf71a315280b591b12864f11cb630264905a8879aac31b787542a39bfac80e83
+      detection_id: 2a9b80d3-6340-4345-11ad-212bf444d111
+      source_version: 8
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1078/aws_createloginprofile/aws_cloudtrail_events.json
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1078/aws_createloginprofile/aws_cloudtrail_events.json
     description: aws_cloudtrail - aws:cloudtrail
     format: auto
     schema: raw
     sourcetype: aws:cloudtrail
+    checksum: sha256:6825bd4e351d0bec876dd146dd0731c27b99b571c88cb6fea91dd0d447810d52
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

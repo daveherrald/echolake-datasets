@@ -1,14 +1,10 @@
 metadata:
   name: windows-office-product-spawned-msdt
   version: 5.0.0
-  description: The following analytic detects a Microsoft Office product spawning
-    the Windows msdt.exe process. This detection leverages data from Endpoint Detection
-    and Response (EDR) agents, focusing on process creation events where Office applications
-    are the parent process. This activity is significant as it may indicate an attempt
-    to exploit protocol handlers to bypass security controls, even if macros are disabled.
-    If confirmed malicious, this behavior could allow an attacker to execute arbitrary
-    code, p
+  description: The following analytic detects a Microsoft Office product spawning the Windows msdt.exe process. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process creation events where Office applications are the parent process. This activity is significant as it may indicate an attempt to exploit protocol handlers to bypass security controls, even if macros are disabled. If confirmed malicious, this behavior could allow an attacker to execute arbitrary code, potentially leading to system compromise, data exfiltration, or further lateral movement within the network.
   author: Michael Haag, Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1566.001
-      name: Technique T1566.001
-    tactics: []
+      name: Spearphishing Attachment
+      tactics:
+      - initial-access
+    tactics:
+    - initial-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_office_product_spawned_msdt.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_office_product_spawned_msdt.yml
+      rule_sha256: sha256:a7d0447f47f91166f8e9ee92aeea4a4fddfea9196a87497d354187ea49814986
+      detection_id: a3148fad-3734-4b7f-9a71-62f08d39fab1
+      source_version: 5
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566.001/macro/msdt.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1566.001/macro/msdt.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:ea00e719127a30e72ffa6a2cf97730d687f74a4b61cb687f7bb3bbc1addc56e9
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

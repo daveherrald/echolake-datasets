@@ -1,14 +1,10 @@
 metadata:
   name: linux-auditd-kernel-module-using-rmmod-utility
   version: 6.0.0
-  description: 'The following analytic detects suspicious use of the `rmmod` utility
-    for kernel module removal, which may indicate an attacker attempt to unload critical
-    or security-related kernel modules. The `rmmod` command is used to remove modules
-    from the Linux kernel, and unauthorized use can be a tactic to disable security
-    features, conceal malicious activities, or disrupt system operations. By monitoring
-    for unusual or unauthorized `rmmod` activity, this analytic helps identify potential
-    tampering with '
+  description: The following analytic detects suspicious use of the `rmmod` utility for kernel module removal, which may indicate an attacker attempt to unload critical or security-related kernel modules. The `rmmod` command is used to remove modules from the Linux kernel, and unauthorized use can be a tactic to disable security features, conceal malicious activities, or disrupt system operations. By monitoring for unusual or unauthorized `rmmod` activity, this analytic helps identify potential tampering with kernel modules, enabling security teams to take proactive measures to protect system integrity and security.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1547.006
-      name: Technique T1547.006
-    tactics: []
+      name: Kernel Modules and Extensions
+      tactics:
+      - persistence
+      - privilege-escalation
+    tactics:
+    - persistence
+    - privilege-escalation
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/linux_auditd_kernel_module_using_rmmod_utility.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/linux_auditd_kernel_module_using_rmmod_utility.yml
+      rule_sha256: sha256:1200990025ef1736db1ec72819409724084ae05916267a06ba10c6df28da5942
+      detection_id: 31810b7a-0abe-42be-a210-0dec8106afee
+      source_version: 6
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1547.006/linux_auditd_rmmod_new/linux_auditd_new_rmmod.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1547.006/linux_auditd_rmmod_new/linux_auditd_new_rmmod.log
     description: auditd - auditd
     format: auto
     schema: raw
     sourcetype: auditd
+    checksum: sha256:e91fbe80f2070c0d70f873469594e82bec126c58dab5e5e678417a78ff08336f
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

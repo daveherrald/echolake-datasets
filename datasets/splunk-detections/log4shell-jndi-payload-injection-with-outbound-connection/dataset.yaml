@@ -1,14 +1,10 @@
 metadata:
   name: log4shell-jndi-payload-injection-with-outbound-connection
   version: 5.0.0
-  description: The following analytic detects Log4Shell JNDI payload injections via
-    outbound connections. It identifies suspicious LDAP lookup functions in web logs,
-    such as `${jndi:ldap://PAYLOAD_INJECTED}`, and correlates them with network traffic
-    to known malicious IP addresses. This detection leverages the Web and Network_Traffic
-    data models in Splunk. Monitoring this activity is crucial as it targets vulnerabilities
-    in Java web applications using log4j, potentially leading to remote code execution.
-    If con
+  description: The following analytic detects Log4Shell JNDI payload injections via outbound connections. It identifies suspicious LDAP lookup functions in web logs, such as `${jndi:ldap://PAYLOAD_INJECTED}`, and correlates them with network traffic to known malicious IP addresses. This detection leverages the Web and Network_Traffic data models in Splunk. Monitoring this activity is crucial as it targets vulnerabilities in Java web applications using log4j, potentially leading to remote code execution. If confirmed malicious, attackers could gain unauthorized access, execute arbitrary code, and compromise sensitive data within the affected environment.
   author: Jose Hernandez
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -17,25 +13,52 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1190
-      name: Technique T1190
+      name: Exploit Public-Facing Application
+      tactics:
+      - initial-access
     - id: T1133
-      name: Technique T1133
-    tactics: []
+      name: External Remote Services
+      tactics:
+      - initial-access
+      - persistence
+    tactics:
+    - initial-access
+    - persistence
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/web/log4shell_jndi_payload_injection_with_outbound_connection.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/web/log4shell_jndi_payload_injection_with_outbound_connection.yml
+      rule_sha256: sha256:0a4d2ca7a2acac829aa74bb473e44a6fea5ad75d0e4a982e88bc60946dbcc256
+      detection_id: 69afee44-5c91-11ec-bf1f-497c9a704a72
+      source_version: 5
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/log4j_proxy_logs/log4j_proxy_logs.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1190/log4j_proxy_logs/log4j_proxy_logs.log
     description: nginx - nginx:plus:kv
     format: auto
     schema: raw
     sourcetype: nginx:plus:kv
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/log4j_network_logs/log4j_network_logs.log
+    checksum: sha256:36f9c6971ea83da6c3283a2413f8aa73caaa680c53e90a54b8e44fe29ffed89a
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1190/log4j_network_logs/log4j_network_logs.log
     description: stream:Splunk_IP - stream:ip
     format: auto
     schema: raw
     sourcetype: stream:ip
+    checksum: sha256:0b9ad1d7f14f33fc46f80921c20f9d563a4156f9f8cb6e7b111ba64144015b47
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,14 +1,10 @@
 metadata:
   name: windows-create-local-administrator-account-via-net
   version: 7.0.0
-  description: The following analytic detects the creation of a local administrator
-    account using the "net.exe" command. It leverages Endpoint Detection and Response
-    (EDR) data to identify processes named "net.exe" with the "/add" parameter and
-    keywords related to administrator accounts. This activity is significant as it
-    may indicate an attacker attempting to gain persistent access or escalate privileges.
-    If confirmed malicious, this could lead to unauthorized access, data theft, or
-    further system compromise.
+  description: The following analytic detects the creation of a local administrator account using the "net.exe" command. It leverages Endpoint Detection and Response (EDR) data to identify processes named "net.exe" with the "/add" parameter and keywords related to administrator accounts. This activity is significant as it may indicate an attacker attempting to gain persistent access or escalate privileges. If confirmed malicious, this could lead to unauthorized access, data theft, or further system compromise. Review the process details, user context, and related artifacts to determine the legitimacy of the activity.
   author: Bhavin Patel, Splunk
+  updated: '2025-10-14'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1136.001
-      name: Technique T1136.001
-    tactics: []
+      name: Local Account
+      tactics:
+      - persistence
+    tactics:
+    - persistence
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_create_local_administrator_account_via_net.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_create_local_administrator_account_via_net.yml
+      rule_sha256: sha256:77dc7ae697be08f000a59f3fa82b1101af992f3000d40fdb9450d6f73e8fe337
+      detection_id: 2c568c34-bb57-4b43-9d75-19c605b98e70
+      source_version: 7
+      source_date: '2025-10-14'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1136.001/atomic_red_team/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1136.001/atomic_red_team/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:334fff113e8d15026a7a1a0d3343643ce7e8a73552b1f33ee476eaa7826cbe42
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

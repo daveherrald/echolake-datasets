@@ -1,14 +1,10 @@
 metadata:
   name: gsuite-outbound-email-with-attachment-to-external-domain
   version: 7.0.0
-  description: The following analytic detects outbound emails with attachments sent
-    from an internal email domain to an external domain. It leverages Gsuite Gmail
-    logs, parsing the source and destination email domains, and flags emails with
-    fewer than 20 outbound instances. This activity is significant as it may indicate
-    potential data exfiltration or insider threats. If confirmed malicious, an attacker
-    could use this method to exfiltrate sensitive information, leading to data breaches
-    and compliance violation
+  description: The following analytic detects outbound emails with attachments sent from an internal email domain to an external domain. It leverages Gsuite Gmail logs, parsing the source and destination email domains, and flags emails with fewer than 20 outbound instances. This activity is significant as it may indicate potential data exfiltration or insider threats. If confirmed malicious, an attacker could use this method to exfiltrate sensitive information, leading to data breaches and compliance violations.
   author: Teoderick Contreras, Stanislav Miskovic, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - hunting
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1048.003
-      name: Technique T1048.003
-    tactics: []
+      name: Exfiltration Over Unencrypted Non-C2 Protocol
+      tactics:
+      - exfiltration
+    tactics:
+    - exfiltration
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/gsuite_outbound_email_with_attachment_to_external_domain.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/gsuite_outbound_email_with_attachment_to_external_domain.yml
+      rule_sha256: sha256:20e4fa81f964f8e7970a03e0e8e58a75ea2b6ae04ff70aa56dd181785f7360a6
+      detection_id: dc4dc3a8-ff54-11eb-8bf7-acde48001122
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566.001/gsuite_outbound_email_to_external/gsuite_external_domain.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1566.001/gsuite_outbound_email_to_external/gsuite_external_domain.log
     description: http:gsuite - gsuite:gmail:bigquery
     format: auto
     schema: raw
     sourcetype: gsuite:gmail:bigquery
+    checksum: sha256:7a40be026117a38b5b72e50c6da5d186bb4132f62b9e03c90724616b9648ed49
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

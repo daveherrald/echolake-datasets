@@ -1,14 +1,10 @@
 metadata:
   name: linux-auditd-file-and-directory-discovery
   version: 5.0.0
-  description: 'The following analytic detects suspicious file and directory discovery
-    activities, which may indicate an attacker''s effort to locate sensitive documents
-    and files on a compromised system. This behavior often precedes data exfiltration,
-    as adversaries seek to identify valuable or confidential information for theft.
-    By identifying unusual or unauthorized attempts to browse or enumerate files and
-    directories, this analytic helps security teams detect potential reconnaissance
-    or preparatory actions '
+  description: The following analytic detects suspicious file and directory discovery activities, which may indicate an attacker's effort to locate sensitive documents and files on a compromised system. This behavior often precedes data exfiltration, as adversaries seek to identify valuable or confidential information for theft. By identifying unusual or unauthorized attempts to browse or enumerate files and directories, this analytic helps security teams detect potential reconnaissance or preparatory actions by an attacker, enabling timely intervention to prevent data breaches or unauthorized access.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1083
-      name: Technique T1083
-    tactics: []
+      name: File and Directory Discovery
+      tactics:
+      - discovery
+    tactics:
+    - discovery
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/linux_auditd_file_and_directory_discovery.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/linux_auditd_file_and_directory_discovery.yml
+      rule_sha256: sha256:df35718f6e10f9b682e456d12a3321b10145a411a05af5dff2a2887a384709d8
+      detection_id: 0bbfb79c-a755-49a5-a38a-1128d0a452f1
+      source_version: 5
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1083/linux_auditd_find_document/auditd_execve_file_dir_discovery.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1083/linux_auditd_find_document/auditd_execve_file_dir_discovery.log
     description: auditd - auditd
     format: auto
     schema: raw
     sourcetype: auditd
+    checksum: sha256:bb5c8a5ff93ec2b5606c95f5ea6f0f0fe02450c424263bde43df5b0347b1dbce
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

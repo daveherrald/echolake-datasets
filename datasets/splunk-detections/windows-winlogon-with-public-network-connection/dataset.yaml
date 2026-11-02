@@ -1,14 +1,10 @@
 metadata:
   name: windows-winlogon-with-public-network-connection
   version: 9.0.0
-  description: The following analytic detects instances of Winlogon.exe, a critical
-    Windows process, connecting to public IP addresses. This behavior is identified
-    using Endpoint Detection and Response (EDR) telemetry, focusing on network connections
-    made by Winlogon.exe. Under normal circumstances, Winlogon.exe should not connect
-    to public IPs, and such activity may indicate a compromise, such as the BlackLotus
-    bootkit attack. This detection is significant as it highlights potential system
-    integrity breaches.
+  description: The following analytic detects instances of Winlogon.exe, a critical Windows process, connecting to public IP addresses. This behavior is identified using Endpoint Detection and Response (EDR) telemetry, focusing on network connections made by Winlogon.exe. Under normal circumstances, Winlogon.exe should not connect to public IPs, and such activity may indicate a compromise, such as the BlackLotus bootkit attack. This detection is significant as it highlights potential system integrity breaches. If confirmed malicious, attackers could maintain persistence, bypass security measures, and compromise the system at a fundamental level.
   author: Michael Haag, Splunk
+  updated: '2025-06-10'
+  license: Apache-2.0
   tags:
   - hunting
   - splunk-security-content
@@ -16,18 +12,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1542.003
-      name: Technique T1542.003
-    tactics: []
+      name: Bootkit
+      tactics:
+      - persistence
+      - defense-evasion
+    tactics:
+    - persistence
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_winlogon_with_public_network_connection.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_winlogon_with_public_network_connection.yml
+      rule_sha256: sha256:395031bdc4b2c786a7008fc5d3bf0e93be0c3c9bff3ac4d4d5cb03da860d152e
+      detection_id: 65615b3a-62ea-4d65-bb9f-6f07c17df4ea
+      source_version: 9
+      source_date: '2025-06-10'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1542.003/bootkits/network-winlogon-windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1542.003/bootkits/network-winlogon-windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:a87502fc8d440c1eb34d5089d888a71e3f017d103d509ffbb3da5d32226aff60
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

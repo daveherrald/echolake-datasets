@@ -1,14 +1,10 @@
 metadata:
   name: windows-defender-asr-block-events
   version: 6.0.0
-  description: This detection searches for Windows Defender ASR block events. ASR
-    is a feature of Windows Defender Exploit Guard that prevents actions and apps
-    that are typically used by exploit-seeking malware to infect machines. ASR rules
-    are applied to processes and applications. When a process or application attempts
-    to perform an action that is blocked by an ASR rule, an event is generated. This
-    detection searches for ASR block events that are generated when a process or application
-    attempts to perform an
+  description: This detection searches for Windows Defender ASR block events. ASR is a feature of Windows Defender Exploit Guard that prevents actions and apps that are typically used by exploit-seeking malware to infect machines. ASR rules are applied to processes and applications. When a process or application attempts to perform an action that is blocked by an ASR rule, an event is generated. This detection searches for ASR block events that are generated when a process or application attempts to perform an action that is blocked by an ASR rule. Typically, these will be enabled in block most after auditing and tuning the ASR rules themselves. Set to TTP once tuned.
   author: Michael Haag, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,22 +12,49 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1059
-      name: Technique T1059
+      name: Command and Scripting Interpreter
+      tactics:
+      - execution
     - id: T1566.001
-      name: Technique T1566.001
+      name: Spearphishing Attachment
+      tactics:
+      - initial-access
     - id: T1566.002
-      name: Technique T1566.002
-    tactics: []
+      name: Spearphishing Link
+      tactics:
+      - initial-access
+    tactics:
+    - initial-access
+    - execution
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_defender_asr_block_events.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_defender_asr_block_events.yml
+      rule_sha256: sha256:de0b1de0dde9436ccede72ca8cfc9826d2d400ddab80bd39afb332d17029cfd4
+      detection_id: 026f5f4e-e99f-4155-9e63-911ba587300b
+      source_version: 6
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059/defender/asr_block.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1059/defender/asr_block.log
     description: XmlWinEventLog:Microsoft-Windows-Windows Defender/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:f28f703577db82e57eb58b5eb14ae326563448962973e883b798aa5d3cfa4d8b
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

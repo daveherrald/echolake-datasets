@@ -1,14 +1,10 @@
 metadata:
   name: windows-soaphound-binary-execution
   version: 9.0.0
-  description: 'The following analytic detects the execution of the SOAPHound binary
-    (`soaphound.exe`) with specific command-line arguments. It leverages data from
-    Endpoint Detection and Response (EDR) agents, focusing on process names, command-line
-    arguments, and other process-related metadata. This activity is significant because
-    SOAPHound is a known tool used for credential dumping and other malicious activities.
-    If confirmed malicious, this behavior could allow an attacker to extract sensitive
-    information, '
+  description: The following analytic detects the execution of the SOAPHound binary (`soaphound.exe`) with specific command-line arguments. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names, command-line arguments, and other process-related metadata. This activity is significant because SOAPHound is a known tool used for credential dumping and other malicious activities. If confirmed malicious, this behavior could allow an attacker to extract sensitive information, escalate privileges, or persist within the environment, posing a severe threat to organizational security.
   author: Michael Haag, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,26 +13,56 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1069.001
-      name: Technique T1069.001
+      name: Local Groups
+      tactics:
+      - discovery
     - id: T1069.002
-      name: Technique T1069.002
+      name: Domain Groups
+      tactics:
+      - discovery
     - id: T1087.001
-      name: Technique T1087.001
+      name: Local Account
+      tactics:
+      - discovery
     - id: T1087.002
-      name: Technique T1087.002
+      name: Domain Account
+      tactics:
+      - discovery
     - id: T1482
-      name: Technique T1482
-    tactics: []
+      name: Domain Trust Discovery
+      tactics:
+      - discovery
+    tactics:
+    - discovery
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_soaphound_binary_execution.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_soaphound_binary_execution.yml
+      rule_sha256: sha256:506c778c4b61bd53470fffa0739161d046869c94a412167f44760d60b8be6788
+      detection_id: 8e53f839-e127-4d6d-a54d-a2f67044a57f
+      source_version: 9
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/soaphound/sysmon_soaphound.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1059.001/soaphound/sysmon_soaphound.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:99d01ead83b5a6d435c25fc101a1886a698ca0880c8da769d6914bbd23a475cc
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

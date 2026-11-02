@@ -1,14 +1,10 @@
 metadata:
   name: windows-modify-registry-disabling-wer-settings
   version: 8.0.0
-  description: The following analytic detects modifications in the Windows registry
-    to disable Windows Error Reporting (WER) settings. It leverages data from the
-    Endpoint.Registry datamodel, specifically monitoring changes to registry paths
-    related to WER with a value set to "0x00000001". This activity is significant
-    as adversaries may disable WER to suppress error notifications, hiding the presence
-    of malicious activities. If confirmed malicious, this could allow attackers to
-    operate undetected, potentially l
+  description: The following analytic detects modifications in the Windows registry to disable Windows Error Reporting (WER) settings. It leverages data from the Endpoint.Registry datamodel, specifically monitoring changes to registry paths related to WER with a value set to "0x00000001". This activity is significant as adversaries may disable WER to suppress error notifications, hiding the presence of malicious activities. If confirmed malicious, this could allow attackers to operate undetected, potentially leading to prolonged persistence and further exploitation within the environment.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1112
-      name: Technique T1112
-    tactics: []
+      name: Modify Registry
+      tactics:
+      - persistence
+      - defense-evasion
+    tactics:
+    - persistence
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_modify_registry_disabling_wer_settings.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_modify_registry_disabling_wer_settings.yml
+      rule_sha256: sha256:3984f278f3964a4844d58309395ccac645f8d561dcf8916d99271aad6211ea00
+      detection_id: 21cbcaf1-b51f-496d-a0c1-858ff3070452
+      source_version: 8
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/azorult/sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/azorult/sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:00b51f8b994ee390d7305f35b43fd2a92570d41261576ebd548d5e9c5b187429
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

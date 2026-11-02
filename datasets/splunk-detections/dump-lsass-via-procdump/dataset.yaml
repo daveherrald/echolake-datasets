@@ -1,8 +1,7 @@
 metadata:
   name: dump-lsass-via-procdump
   version: 15.0.0
-  description: 'The following analytic detects the use of procdump.exe to dump the
-    LSASS
+  description: 'The following analytic detects the use of procdump.exe to dump the LSASS
 
     process, specifically looking for the -mm and -ma command-line arguments. It leverages
 
@@ -10,13 +9,16 @@ metadata:
 
     command-line executions, and parent processes. This activity is significant because
 
-    dumping LSASS can expose sensitive credentials, posing a severe security risk.
-    If
+    dumping LSASS can expose sensitive credentials, posing a severe security risk. If
 
     confirmed malicious, an attacker could obtain credentials, escalate privileges,
 
-    and move la'
+    and move laterally within the network, leading to potential data breaches and further
+
+    compromise of the environment.'
   author: Michael Haag, Splunk
+  updated: '2025-12-15'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -26,23 +28,46 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1003.001
-      name: Technique T1003.001
-    tactics: []
+      name: LSASS Memory
+      tactics:
+      - credential-access
+    tactics:
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/dump_lsass_via_procdump.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/dump_lsass_via_procdump.yml
+      rule_sha256: sha256:f65cab4af4efc93f283a1271614f6562977653d4c0eb3bb977cd6465e98da05f
+      detection_id: 3742ebfe-64c2-11eb-ae93-0242ac130002
+      source_version: 15
+      source_date: '2025-12-15'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1003.001/atomic_red_team/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1003.001/atomic_red_team/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1003.001/atomic_red_team/crowdstrike_falcon.log
+    checksum: sha256:a1905850598f1e943708c3329190e29c6cb046389c1575cb2afd6369b5f269f1
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1003.001/atomic_red_team/crowdstrike_falcon.log
     description: crowdstrike - crowdstrike:events:sensor
     format: auto
     schema: raw
     sourcetype: crowdstrike:events:sensor
+    checksum: sha256:9eb639b8642f067f76ddb8b4ab66494deb9893eed528bcb02063802c2dbff140
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

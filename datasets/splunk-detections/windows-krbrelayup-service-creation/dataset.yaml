@@ -1,13 +1,10 @@
 metadata:
   name: windows-krbrelayup-service-creation
   version: 7.0.0
-  description: The following analytic detects the creation of a service with the default
-    name "KrbSCM" associated with the KrbRelayUp tool. It leverages Windows System
-    Event Logs, specifically EventCode 7045, to identify this activity. This behavior
-    is significant as KrbRelayUp is a known tool used for privilege escalation attacks.
-    If confirmed malicious, this activity could allow an attacker to escalate privileges,
-    potentially gaining unauthorized access to sensitive systems and data.
+  description: The following analytic detects the creation of a service with the default name "KrbSCM" associated with the KrbRelayUp tool. It leverages Windows System Event Logs, specifically EventCode 7045, to identify this activity. This behavior is significant as KrbRelayUp is a known tool used for privilege escalation attacks. If confirmed malicious, this activity could allow an attacker to escalate privileges, potentially gaining unauthorized access to sensitive systems and data.
   author: Michael Haag, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +13,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1543.003
-      name: Technique T1543.003
-    tactics: []
+      name: Windows Service
+      tactics:
+      - persistence
+      - privilege-escalation
+    tactics:
+    - persistence
+    - privilege-escalation
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_krbrelayup_service_creation.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_krbrelayup_service_creation.yml
+      rule_sha256: sha256:9d2efeb842f2493b28df65071c8b137a3ae87f161371996022c048ecc125b807
+      detection_id: e40ef542-8241-4419-9af4-6324582ea60a
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1543.003/windows_krbrelayup_service_creation/windows-xml.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1543.003/windows_krbrelayup_service_creation/windows-xml.log
     description: XmlWinEventLog:System - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:9e13bad9bf4516f4b96f4db6c97d7eb5a2f3581686f126028ac3cc6fa7f792d1
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

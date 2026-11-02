@@ -1,13 +1,10 @@
 metadata:
   name: citrix-adc-and-gateway-unauthorized-data-disclosure
   version: 6.0.0
-  description: The following analytic detects attempts to exploit the Citrix Bleed
-    vulnerability (CVE-2023-4966), which can lead to the leaking of session tokens.
-    It identifies HTTP requests with a 200 status code targeting the /oauth/idp/.well-known/openid-configuration
-    URL endpoint. By parsing web traffic and filtering based on user agent details,
-    HTTP method, source and destination IPs, and sourcetype, it aims to identify potentially
-    malicious requests. This activity is significant for a SOC because success
+  description: The following analytic detects attempts to exploit the Citrix Bleed vulnerability (CVE-2023-4966), which can lead to the leaking of session tokens. It identifies HTTP requests with a 200 status code targeting the /oauth/idp/.well-known/openid-configuration URL endpoint. By parsing web traffic and filtering based on user agent details, HTTP method, source and destination IPs, and sourcetype, it aims to identify potentially malicious requests. This activity is significant for a SOC because successful exploitation can allow attackers to impersonate legitimate users, bypass authentication, and access sensitive data. If confirmed malicious, it could lead to unauthorized data access, network propagation, and critical information exfiltration.
   author: Michael Haag, Splunk
+  updated: '2025-10-14'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1190
-      name: Technique T1190
-    tactics: []
+      name: Exploit Public-Facing Application
+      tactics:
+      - initial-access
+    tactics:
+    - initial-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/web/citrix_adc_and_gateway_unauthorized_data_disclosure.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/web/citrix_adc_and_gateway_unauthorized_data_disclosure.yml
+      rule_sha256: sha256:4cf78fc38724b7fdc6417e6aac77f4c1000f35c3916a2b0940f97d2bb57c87ee
+      detection_id: b593cac5-dd20-4358-972a-d945fefdaf17
+      source_version: 6
+      source_date: '2025-10-14'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/citrix/cve-2023-4966-citrix.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1190/citrix/cve-2023-4966-citrix.log
     description: suricata - suricata
     format: auto
     schema: raw
     sourcetype: suricata
+    checksum: sha256:393a529177792c6d17a51817cde1d5bacc98ab159c395261c58aa928a0c1718e
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

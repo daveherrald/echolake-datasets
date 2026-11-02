@@ -1,14 +1,10 @@
 metadata:
   name: windows-admon-default-group-policy-object-modified
   version: 8.0.0
-  description: The following analytic detects modifications to the default Group Policy
-    Objects (GPOs) in an Active Directory environment. It leverages Splunk's Admon
-    to monitor updates to the "Default Domain Policy" and "Default Domain Controllers
-    Policy." This activity is significant because changes to these default GPOs can
-    indicate an adversary with privileged access attempting to gain further control,
-    establish persistence, or deploy malware across multiple hosts. If confirmed malicious,
-    such modification
+  description: The following analytic detects modifications to the default Group Policy Objects (GPOs) in an Active Directory environment. It leverages Splunk's Admon to monitor updates to the "Default Domain Policy" and "Default Domain Controllers Policy." This activity is significant because changes to these default GPOs can indicate an adversary with privileged access attempting to gain further control, establish persistence, or deploy malware across multiple hosts. If confirmed malicious, such modifications could lead to widespread policy enforcement changes, unauthorized access, and potential compromise of the entire domain environment.
   author: Mauricio Velazco, Splunk
+  updated: '2025-06-24'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1484.001
-      name: Technique T1484.001
-    tactics: []
+      name: Group Policy Modification
+      tactics:
+      - privilege-escalation
+      - defense-evasion
+    tactics:
+    - privilege-escalation
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_admon_default_group_policy_object_modified.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_admon_default_group_policy_object_modified.yml
+      rule_sha256: sha256:70b1d0955713dc5d0a1ec68005466f0ff866a045995e09f5f3f84526facee52b
+      detection_id: 83458004-db60-4170-857d-8572f16f070b
+      source_version: 8
+      source_date: '2025-06-24'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1484.001/default_domain_policy_modified/windows-security.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1484.001/default_domain_policy_modified/windows-security.log
     description: ActiveDirectory - ActiveDirectory
     format: auto
     schema: raw
     sourcetype: ActiveDirectory
+    checksum: sha256:fdc974ea7d27a19b7d2d4a54a6e8c7552fa2a06cde02eb4de3ab9f95f53901a0
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

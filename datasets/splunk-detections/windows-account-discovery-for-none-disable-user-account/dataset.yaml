@@ -1,14 +1,10 @@
 metadata:
   name: windows-account-discovery-for-none-disable-user-account
   version: 9.0.0
-  description: The following analytic detects the execution of the PowerView PowerShell
-    cmdlet Get-NetUser with the UACFilter parameter set to NOT_ACCOUNTDISABLE, indicating
-    an attempt to enumerate Active Directory user accounts that are not disabled.
-    This detection leverages PowerShell Script Block Logging (EventCode 4104) to identify
-    the specific script block text. Monitoring this activity is significant as it
-    may indicate reconnaissance efforts by an attacker to identify active user accounts
-    for further exp
+  description: The following analytic detects the execution of the PowerView PowerShell cmdlet Get-NetUser with the UACFilter parameter set to NOT_ACCOUNTDISABLE, indicating an attempt to enumerate Active Directory user accounts that are not disabled. This detection leverages PowerShell Script Block Logging (EventCode 4104) to identify the specific script block text. Monitoring this activity is significant as it may indicate reconnaissance efforts by an attacker to identify active user accounts for further exploitation. If confirmed malicious, this activity could lead to unauthorized access, privilege escalation, or lateral movement within the network.
   author: Teoderick Contreras, Splunk
+  updated: '2025-06-24'
+  license: Apache-2.0
   tags:
   - hunting
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1087.001
-      name: Technique T1087.001
-    tactics: []
+      name: Local Account
+      tactics:
+      - discovery
+    tactics:
+    - discovery
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_account_discovery_for_none_disable_user_account.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_account_discovery_for_none_disable_user_account.yml
+      rule_sha256: sha256:a4777848541d7a2040d29bd0bb2772f4ce79623c97e9bee89551f21761bf1d95
+      detection_id: eddbf5ba-b89e-47ca-995e-2d259804e55e
+      source_version: 9
+      source_date: '2025-06-24'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1087/powerview_get_netuser_preauthnotrequire/get-netuser-not-require-pwh.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1087/powerview_get_netuser_preauthnotrequire/get-netuser-not-require-pwh.log
     description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:636b1d6ad09d3ed58273122cf54b19bc815781aac4ee193c6e1fe0c6a0bc22b9
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

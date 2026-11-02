@@ -1,14 +1,10 @@
 metadata:
   name: remote-process-instantiation-via-wmi
   version: 14.0.0
-  description: The following analytic detects the execution of wmic.exe with parameters
-    to spawn a process on a remote system. It leverages data from Endpoint Detection
-    and Response (EDR) agents, focusing on command-line executions and process telemetry
-    mapped to the `Processes` node of the `Endpoint` data model. This activity is
-    significant as WMI can be abused for lateral movement and remote code execution,
-    often used by adversaries and Red Teams. If confirmed malicious, this could allow
-    attackers to execute
+  description: The following analytic detects the execution of wmic.exe with parameters to spawn a process on a remote system. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on command-line executions and process telemetry mapped to the `Processes` node of the `Endpoint` data model. This activity is significant as WMI can be abused for lateral movement and remote code execution, often used by adversaries and Red Teams. If confirmed malicious, this could allow attackers to execute arbitrary code on remote systems, facilitating further compromise and lateral spread within the network.
   author: Mauricio Velazco, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1047
-      name: Technique T1047
-    tactics: []
+      name: Windows Management Instrumentation
+      tactics:
+      - execution
+    tactics:
+    - execution
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/remote_process_instantiation_via_wmi.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/remote_process_instantiation_via_wmi.yml
+      rule_sha256: sha256:401f9ab37c44a3f326730a854cd8ea25ed21d41deafac823b399325bd19fee3b
+      detection_id: d25d2c3d-d9d8-40ec-8fdf-e86fe155a3da
+      source_version: 14
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1047/atomic_red_team/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1047/atomic_red_team/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:64651720e10813aa57d0f25ce149005ab06039b1974dbc09818b1fb45fbbc196
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

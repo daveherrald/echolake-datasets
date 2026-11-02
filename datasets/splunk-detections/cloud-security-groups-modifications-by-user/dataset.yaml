@@ -1,14 +1,10 @@
 metadata:
   name: cloud-security-groups-modifications-by-user
   version: 5.0.0
-  description: The following analytic identifies unusual modifications to security
-    groups in your cloud environment by users, focusing on actions such as modifications,
-    deletions, or creations over 30-minute intervals. It leverages cloud infrastructure
-    logs and calculates the standard deviation for each user, using the 3-sigma rule
-    to detect anomalies. This activity is significant as it may indicate a compromised
-    account or insider threat. If confirmed malicious, attackers could alter security
-    group configurat
+  description: The following analytic identifies unusual modifications to security groups in your cloud environment by users, focusing on actions such as modifications, deletions, or creations over 30-minute intervals. It leverages cloud infrastructure logs and calculates the standard deviation for each user, using the 3-sigma rule to detect anomalies. This activity is significant as it may indicate a compromised account or insider threat. If confirmed malicious, attackers could alter security group configurations, potentially exposing sensitive resources or disrupting services.
   author: Bhavin Patel, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1578.005
-      name: Technique T1578.005
-    tactics: []
+      name: Modify Cloud Compute Configurations
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/cloud_security_groups_modifications_by_user.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/cloud_security_groups_modifications_by_user.yml
+      rule_sha256: sha256:049e0b7276b4ea9ab458298fe9d2bb7b1fd70d19fc89085964ab063227d1917c
+      detection_id: cfe7cca7-2746-4bdf-b712-b01ed819b9de
+      source_version: 5
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1578.005/aws_authorize_security_group/aws_authorize_security_group.json
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1578.005/aws_authorize_security_group/aws_authorize_security_group.json
     description: aws_cloudtrail - aws:cloudtrail
     format: auto
     schema: raw
     sourcetype: aws:cloudtrail
+    checksum: sha256:fe14f454dc7270e5d02a2b3a663e14130bacce7cc1f2a7cf796cf1dd1e950561
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

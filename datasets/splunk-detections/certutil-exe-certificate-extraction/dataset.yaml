@@ -1,30 +1,50 @@
 metadata:
   name: certutil-exe-certificate-extraction
   version: 11.0.0
-  description: The following analytic identifies the use of certutil.exe with arguments
-    indicating the manipulation or extraction of certificates. It leverages data from
-    Endpoint Detection and Response (EDR) agents, focusing on process names and command-line
-    arguments. This activity is significant because extracting certificates can allow
-    attackers to sign new authentication tokens, particularly in federated environments
-    like Windows ADFS. If confirmed malicious, this could enable attackers to forge
-    authentica
+  description: The following analytic identifies the use of certutil.exe with arguments indicating the manipulation or extraction of certificates. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line arguments. This activity is significant because extracting certificates can allow attackers to sign new authentication tokens, particularly in federated environments like Windows ADFS. If confirmed malicious, this could enable attackers to forge authentication tokens, potentially leading to unauthorized access and privilege escalation within the network.
   author: Rod Soto, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
   - windows-persistence-techniques
   - living-off-the-land
   - cloud-federated-credential-abuse
+  mitre_attack:
+    techniques: []
+    tactics: []
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/certutil_exe_certificate_extraction.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/certutil_exe_certificate_extraction.yml
+      rule_sha256: sha256:9aa9f2102d07b2289292ba486fae60d7a00beaf3d0d60158cce7ec99cbea7a1f
+      detection_id: 337a46be-600f-11eb-ae93-0242ac130002
+      source_version: 11
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: upstream-unmapped
+        reviewed: '2026-11-02'
+        rationale: The pinned upstream rule has no ATT&CK ID. A later upstream revision maps it to T1649, so this historical snapshot remains unmapped.
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/suspicious_behaviour/certutil_exe_certificate_extraction/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/suspicious_behaviour/certutil_exe_certificate_extraction/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:ff0fc71c4824ae7c6d5a9f3d48d1381bf7f76dc3acd87c2f6197da555cc2486d
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

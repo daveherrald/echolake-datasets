@@ -1,14 +1,10 @@
 metadata:
   name: detect-rtlo-in-process
   version: 8.0.0
-  description: 'The following analytic identifies the abuse of the right-to-left override
-    (RTLO) character (U+202E) in process names. It leverages data from Endpoint Detection
-    and Response (EDR) agents, focusing on process execution logs and command-line
-    data. This activity is significant because adversaries use the RTLO character
-    to disguise malicious files or commands, making them appear benign. If confirmed
-    malicious, this technique can allow attackers to execute harmful code undetected,
-    potentially leading '
+  description: The following analytic identifies the abuse of the right-to-left override (RTLO) character (U+202E) in process names. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process execution logs and command-line data. This activity is significant because adversaries use the RTLO character to disguise malicious files or commands, making them appear benign. If confirmed malicious, this technique can allow attackers to execute harmful code undetected, potentially leading to unauthorized access, data exfiltration, or further system compromise.
   author: Steven Dick
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1036.002
-      name: Technique T1036.002
-    tactics: []
+      name: Right-to-Left Override
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/detect_rtlo_in_process.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/detect_rtlo_in_process.yml
+      rule_sha256: sha256:1017c676a8c7580a3b79b63f3ebe71627c1299ce7ab1b3b4edc740b8517d0a6b
+      detection_id: 22ac27b4-7189-4a4f-9375-b9017c9620d7
+      source_version: 8
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1036.002/outlook_attachment/rtlo_events.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1036.002/outlook_attachment/rtlo_events.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:70a4bd7a16359a4a59a68c4d60849be6ef1db1b0527db6df2e49aeb4ccf8339e
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

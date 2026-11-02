@@ -1,14 +1,10 @@
 metadata:
   name: windows-disableantispyware-registry
   version: 8.0.0
-  description: The following analytic detects the modification of the Windows Registry
-    key "DisableAntiSpyware" being set to disable. This detection leverages data from
-    the Endpoint.Registry datamodel, specifically looking for the registry value name
-    "DisableAntiSpyware" with a value of "0x00000001". This activity is significant
-    as it is commonly associated with Ryuk ransomware infections, indicating potential
-    malicious intent to disable Windows Defender. If confirmed malicious, this action
-    could allow attacke
+  description: The following analytic detects the modification of the Windows Registry key "DisableAntiSpyware" being set to disable. This detection leverages data from the Endpoint.Registry datamodel, specifically looking for the registry value name "DisableAntiSpyware" with a value of "0x00000001". This activity is significant as it is commonly associated with Ryuk ransomware infections, indicating potential malicious intent to disable Windows Defender. If confirmed malicious, this action could allow attackers to disable critical security defenses, facilitating further malicious activities such as data encryption, exfiltration, or additional system compromise.
   author: Rod Soto, Jose Hernandez, Michael Haag, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1562.001
-      name: Technique T1562.001
-    tactics: []
+      name: Disable or Modify Tools
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_disableantispyware_registry.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_disableantispyware_registry.yml
+      rule_sha256: sha256:e22ae9b02336a0c3af76980ec969f011bf861359f8413867f00bc059b5170ebe
+      detection_id: 23150a40-9301-4195-b802-5bb4f43067fb
+      source_version: 8
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.001/atomic_red_team/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1562.001/atomic_red_team/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:696e1d2800d215e13c8f1ea5252cf2c2118e1018c1cacda82c041fdbeeac403d
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

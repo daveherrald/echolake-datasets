@@ -1,29 +1,49 @@
 metadata:
   name: detect-spike-in-aws-security-hub-alerts-for-ec2-instance
   version: 7.0.0
-  description: The following analytic identifies a spike in the number of AWS Security
-    Hub alerts for an EC2 instance within a 4-hour interval. It leverages AWS Security
-    Hub findings data, calculating the average and standard deviation of alerts to
-    detect anomalies. This activity is significant for a SOC as a sudden increase
-    in alerts may indicate potential security incidents or misconfigurations requiring
-    immediate attention. If confirmed malicious, this could signify an ongoing attack,
-    leading to unauthorize
+  description: The following analytic identifies a spike in the number of AWS Security Hub alerts for an EC2 instance within a 4-hour interval. It leverages AWS Security Hub findings data, calculating the average and standard deviation of alerts to detect anomalies. This activity is significant for a SOC as a sudden increase in alerts may indicate potential security incidents or misconfigurations requiring immediate attention. If confirmed malicious, this could signify an ongoing attack, leading to unauthorized access, data exfiltration, or disruption of services on the affected EC2 instance.
   author: Bhavin Patel, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
   - aws-security-hub-alerts
   - critical-alerts
+  mitre_attack:
+    techniques: []
+    tactics: []
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/detect_spike_in_aws_security_hub_alerts_for_ec2_instance.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/detect_spike_in_aws_security_hub_alerts_for_ec2_instance.yml
+      rule_sha256: sha256:74063eb80cdc57dd03040aca6d32ef22edc205884f282c64346ce90fdad6f7b7
+      detection_id: 2a9b80d3-6340-4345-b5ad-290bf5d0d222
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: upstream-unmapped
+        reviewed: '2026-11-02'
+        rationale: This alert-volume anomaly can represent several behaviors and has no static upstream ATT&CK mapping.
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/suspicious_behaviour/security_hub_ec2_spike/security_hub_ec2_spike.json
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/suspicious_behaviour/security_hub_ec2_spike/security_hub_ec2_spike.json
     description: aws_securityhub_finding - aws:securityhub:finding
     format: auto
     schema: raw
     sourcetype: aws:securityhub:finding
+    checksum: sha256:879955e21cf56bc8c2815d26b745cdd433c6fd849296d2e7d9634fd4dcce4e56
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

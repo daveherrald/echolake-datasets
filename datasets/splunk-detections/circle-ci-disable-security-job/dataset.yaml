@@ -1,14 +1,10 @@
 metadata:
   name: circle-ci-disable-security-job
   version: 5.0.0
-  description: The following analytic detects the disabling of security jobs in CircleCI
-    pipelines. It leverages CircleCI log data, renaming and extracting fields such
-    as job names, workflow IDs, user information, commit messages, URLs, and branches.
-    The detection identifies mandatory jobs for each workflow and checks if they were
-    executed. This activity is significant because disabling security jobs can allow
-    malicious code to bypass security checks, leading to potential data breaches,
-    system downtime, and re
+  description: The following analytic detects the disabling of security jobs in CircleCI pipelines. It leverages CircleCI log data, renaming and extracting fields such as job names, workflow IDs, user information, commit messages, URLs, and branches. The detection identifies mandatory jobs for each workflow and checks if they were executed. This activity is significant because disabling security jobs can allow malicious code to bypass security checks, leading to potential data breaches, system downtime, and reputational damage. If confirmed malicious, this could result in unauthorized code execution and compromised pipeline integrity.
   author: Patrick Bareiss, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1554
-      name: Technique T1554
-    tactics: []
+      name: Compromise Host Software Binary
+      tactics:
+      - persistence
+    tactics:
+    - persistence
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/circle_ci_disable_security_job.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/circle_ci_disable_security_job.yml
+      rule_sha256: sha256:04654732cc7865976bff5e06353342fcb7cdad628c7ba9758ddbc34c06d5a630
+      detection_id: 4a2fdd41-c578-4cd4-9ef7-980e352517f2
+      source_version: 5
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1554/circle_ci_disable_security_job/circle_ci_disable_security_job.json
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1554/circle_ci_disable_security_job/circle_ci_disable_security_job.json
     description: circleci - circleci
     format: auto
     schema: raw
     sourcetype: circleci
+    checksum: sha256:332c3bd839f9c19666e41fb4cdc2a8965da07918798f7da4d0d0c5996e31bf6b
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

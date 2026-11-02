@@ -1,17 +1,14 @@
 metadata:
   name: citrix-adc-and-gateway-citrixbleed-2-memory-disclosure
   version: 1.0.0
-  description: 'This detection identifies potential exploitation attempts of CVE-2025-5777
-    (CitrixBleed 2), a memory disclosure vulnerability in Citrix NetScaler ADC and
-    Gateway.
+  description: 'This detection identifies potential exploitation attempts of CVE-2025-5777 (CitrixBleed 2), a memory disclosure vulnerability in Citrix NetScaler ADC and Gateway.
 
-    The vulnerability is triggered by sending POST requests with incomplete form data
-    to the /p/u/doAuthentication.do endpoint, causing the device to leak memory contents
-    including session tokens and authentication materials.
+    The vulnerability is triggered by sending POST requests with incomplete form data to the /p/u/doAuthentication.do endpoint, causing the device to leak memory contents including session tokens and authentication materials.
 
-    This search looks for POST requests to the vulnerable endpoint that may indicate
-    scanning or exploitation attempts.'
+    This search looks for POST requests to the vulnerable endpoint that may indicate scanning or exploitation attempts.'
   author: Michael Haag, Splunk
+  updated: '2025-01-07'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -19,18 +16,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1190
-      name: Technique T1190
-    tactics: []
+      name: Exploit Public-Facing Application
+      tactics:
+      - initial-access
+    tactics:
+    - initial-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/web/citrix_adc_and_gateway_citrixbleed_2_memory_disclosure.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/web/citrix_adc_and_gateway_citrixbleed_2_memory_disclosure.yml
+      rule_sha256: sha256:147f2e383c60b5d9e6aad2e5e833a3bb75e64d7a695da56832f37715b1115370
+      detection_id: bef92f3f-7dc8-413a-8989-50581039e250
+      source_version: 1
+      source_date: '2025-01-07'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/citrix/suricata_citrixbleed2.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1190/citrix/suricata_citrixbleed2.log
     description: suricata - suricata
     format: auto
     schema: raw
     sourcetype: suricata
+    checksum: sha256:de886787e69eb239a23040188de48ad3cad4d4b32755c6f59ca897230f00758b
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

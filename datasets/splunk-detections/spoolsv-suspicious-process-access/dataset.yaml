@@ -1,14 +1,10 @@
 metadata:
   name: spoolsv-suspicious-process-access
   version: 9.0.0
-  description: The following analytic detects suspicious process access by spoolsv.exe,
-    potentially indicating exploitation of the PrintNightmare vulnerability (CVE-2021-34527).
-    It leverages Sysmon EventCode 10 to identify when spoolsv.exe accesses critical
-    system files or processes like rundll32.exe with elevated privileges. This activity
-    is significant as it may signal an attempt to gain unauthorized privilege escalation
-    on a vulnerable machine. If confirmed malicious, an attacker could achieve elevated
-    priv
+  description: The following analytic detects suspicious process access by spoolsv.exe, potentially indicating exploitation of the PrintNightmare vulnerability (CVE-2021-34527). It leverages Sysmon EventCode 10 to identify when spoolsv.exe accesses critical system files or processes like rundll32.exe with elevated privileges. This activity is significant as it may signal an attempt to gain unauthorized privilege escalation on a vulnerable machine. If confirmed malicious, an attacker could achieve elevated privileges, leading to further system compromise, persistent access, or unauthorized control over the affected environment.
   author: Mauricio Velazco, Michael Haag, Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1068
-      name: Technique T1068
-    tactics: []
+      name: Exploitation for Privilege Escalation
+      tactics:
+      - privilege-escalation
+    tactics:
+    - privilege-escalation
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/spoolsv_suspicious_process_access.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/spoolsv_suspicious_process_access.yml
+      rule_sha256: sha256:d6bbe6ccbea8317830b89fc9cdfaf1ec367baaba74a14c9a2cffefa199d29788
+      detection_id: 799b606e-da81-11eb-93f8-acde48001122
+      source_version: 9
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1547.012/printnightmare/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1547.012/printnightmare/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:9e71f4c59caa60932c40fe56e8f1ea51c13baf113709775044ce5828a35ebd6f
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,14 +1,10 @@
 metadata:
   name: linux-hardware-addition-swapoff
   version: 7.0.0
-  description: The following analytic detects the execution of the "swapoff" command,
-    which disables the swapping of paging devices on a Linux system. It leverages
-    data from Endpoint Detection and Response (EDR) agents, focusing on process execution
-    logs. This activity is significant because disabling swap can be a tactic used
-    by malware, such as Awfulshred, to evade detection and hinder forensic analysis.
-    If confirmed malicious, this action could allow an attacker to manipulate system
-    memory management, poten
+  description: The following analytic detects the execution of the "swapoff" command, which disables the swapping of paging devices on a Linux system. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process execution logs. This activity is significant because disabling swap can be a tactic used by malware, such as Awfulshred, to evade detection and hinder forensic analysis. If confirmed malicious, this action could allow an attacker to manipulate system memory management, potentially leading to data corruption, system instability, or evasion of memory-based detection mechanisms.
   author: Teoderick Contreras, Splunk
+  updated: '2025-10-14'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1200
-      name: Technique T1200
-    tactics: []
+      name: Hardware Additions
+      tactics:
+      - initial-access
+    tactics:
+    - initial-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/linux_hardware_addition_swapoff.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/linux_hardware_addition_swapoff.yml
+      rule_sha256: sha256:6b9531ff961bf03dd820f3e9be14b252723492ebe16bc798a74f2f218103f52d
+      detection_id: c1eea697-99ed-44c2-9b70-d8935464c499
+      source_version: 7
+      source_date: '2025-10-14'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/awfulshred/test1/sysmon_linux.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/awfulshred/test1/sysmon_linux.log
     description: Syslog:Linux-Sysmon/Operational - sysmon:linux
     format: auto
     schema: raw
     sourcetype: sysmon:linux
+    checksum: sha256:397b280dfd3393d982b06930d929a6ae66e4a618fb3324a4d9a20beae740f97a
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

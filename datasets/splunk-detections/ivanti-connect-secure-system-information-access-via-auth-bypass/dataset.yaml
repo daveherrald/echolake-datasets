@@ -1,14 +1,10 @@
 metadata:
   name: ivanti-connect-secure-system-information-access-via-auth-bypass
   version: 5.0.0
-  description: The following analytic identifies attempts to exploit the CVE-2023-46805
-    and CVE-2024-21887 vulnerabilities in Ivanti Connect Secure. It detects GET requests
-    to the /api/v1/totp/user-backup-code/../../system/system-information URI, which
-    leverage an authentication bypass to access system information. The detection
-    uses the Web datamodel to identify requests with a 200 OK response, indicating
-    a successful exploit attempt. This activity is significant as it reveals potential
-    unauthorized access to
+  description: The following analytic identifies attempts to exploit the CVE-2023-46805 and CVE-2024-21887 vulnerabilities in Ivanti Connect Secure. It detects GET requests to the /api/v1/totp/user-backup-code/../../system/system-information URI, which leverage an authentication bypass to access system information. The detection uses the Web datamodel to identify requests with a 200 OK response, indicating a successful exploit attempt. This activity is significant as it reveals potential unauthorized access to sensitive system information. If confirmed malicious, attackers could gain critical insights into the system, facilitating further exploitation and compromise.
   author: Michael Haag, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1190
-      name: Technique T1190
-    tactics: []
+      name: Exploit Public-Facing Application
+      tactics:
+      - initial-access
+    tactics:
+    - initial-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/web/ivanti_connect_secure_system_information_access_via_auth_bypass.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/web/ivanti_connect_secure_system_information_access_via_auth_bypass.yml
+      rule_sha256: sha256:732217551415c176486de7b0c5aa1d8f49157bbc6af5e96f5b01f0db092c4859
+      detection_id: d51c13dd-a232-4c83-a2bb-72ab36233c5d
+      source_version: 5
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/ivanti/suricata_ivanti_secure_connect_checkphase.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1190/ivanti/suricata_ivanti_secure_connect_checkphase.log
     description: suricata - suricata
     format: auto
     schema: raw
     sourcetype: suricata
+    checksum: sha256:1e5005b8202fb75775e16375dc642b2b94638081cea5885f83e324d93aa1d91c
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

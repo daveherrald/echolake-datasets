@@ -1,14 +1,10 @@
 metadata:
   name: network-discovery-using-route-windows-app
   version: 9.0.0
-  description: 'The following analytic detects the execution of the `route.exe` Windows
-    application, commonly used for network discovery. It leverages data from Endpoint
-    Detection and Response (EDR) agents, focusing on process creation events. This
-    activity is significant because adversaries often use `route.exe` to map network
-    routes and identify potential targets within a network. If confirmed malicious,
-    this behavior could allow attackers to gain insights into network topology, facilitating
-    lateral movement '
+  description: The following analytic detects the execution of the `route.exe` Windows application, commonly used for network discovery. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process creation events. This activity is significant because adversaries often use `route.exe` to map network routes and identify potential targets within a network. If confirmed malicious, this behavior could allow attackers to gain insights into network topology, facilitating lateral movement and further exploitation. Note that false positives may occur due to legitimate administrative tasks or automated scripts.
   author: Teoderick Contreras, Splunk
+  updated: '2025-12-15'
+  license: Apache-2.0
   tags:
   - hunting
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1016.001
-      name: Technique T1016.001
-    tactics: []
+      name: Internet Connection Discovery
+      tactics:
+      - discovery
+    tactics:
+    - discovery
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/network_discovery_using_route_windows_app.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/network_discovery_using_route_windows_app.yml
+      rule_sha256: sha256:4079d934b2475475276788c7e9d4033c54956bca5bce66997fc98b0a4be7c710
+      detection_id: dd83407e-439f-11ec-ab8e-acde48001122
+      source_version: 9
+      source_date: '2025-12-15'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/vilsel/sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/vilsel/sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:29f318a716934ee6fbf71f4970652a282f8fc00c2a3fc8c3f5c315206e333e79
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,14 +1,10 @@
 metadata:
   name: gcp-multiple-users-failing-to-authenticate-from-ip
   version: 7.0.0
-  description: The following analytic detects a single source IP address failing to
-    authenticate into more than 20 unique Google Workspace user accounts within a
-    5-minute window. It leverages Google Workspace login failure events to identify
-    potential password spraying attacks. This activity is significant as it may indicate
-    an adversary attempting to gain unauthorized access or elevate privileges within
-    the Google Cloud Platform. If confirmed malicious, this behavior could lead to
-    unauthorized access to sensi
+  description: The following analytic detects a single source IP address failing to authenticate into more than 20 unique Google Workspace user accounts within a 5-minute window. It leverages Google Workspace login failure events to identify potential password spraying attacks. This activity is significant as it may indicate an adversary attempting to gain unauthorized access or elevate privileges within the Google Cloud Platform. If confirmed malicious, this behavior could lead to unauthorized access to sensitive resources, data breaches, or further exploitation within the environment.
   author: Bhavin Patel, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,22 +12,49 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1110.003
-      name: Technique T1110.003
+      name: Password Spraying
+      tactics:
+      - credential-access
     - id: T1110.004
-      name: Technique T1110.004
+      name: Credential Stuffing
+      tactics:
+      - credential-access
     - id: T1586.003
-      name: Technique T1586.003
-    tactics: []
+      name: Cloud Accounts
+      tactics:
+      - resource-development
+    tactics:
+    - resource-development
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/gcp_multiple_users_failing_to_authenticate_from_ip.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/gcp_multiple_users_failing_to_authenticate_from_ip.yml
+      rule_sha256: sha256:13d37f9c17b6b3918b7efa80f9e79f39bc43bfbb9692d8b7a65a17a53feb47df
+      detection_id: da20828e-d6fb-4ee5-afb7-d0ac200923d5
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1110.003/gcp_gws_multiple_login_failure/gws_login.json
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1110.003/gcp_gws_multiple_login_failure/gws_login.json
     description: gws_login - gws:reports:login
     format: auto
     schema: raw
     sourcetype: gws:reports:login
+    checksum: sha256:c8e9f68c26e016e82d87f0e3bb3697b2b3f1d187ba16f5b02b2f07758b2d5672
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

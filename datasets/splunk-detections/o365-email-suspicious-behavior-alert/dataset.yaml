@@ -1,13 +1,10 @@
 metadata:
   name: o365-email-suspicious-behavior-alert
   version: 7.0.0
-  description: The following analytic identifies when one of O365 the built-in security
-    detections for suspicious email behaviors are triggered.  These alerts often indicate
-    that an attacker may have compromised a mailbox within the environment. Any detections
-    from built-in Office 365 capabilities should be monitored and responded to appropriately.
-    Certain premium Office 365 capabilities further enhance these detection and response
-    functions.
+  description: The following analytic identifies when one of O365 the built-in security detections for suspicious email behaviors are triggered.  These alerts often indicate that an attacker may have compromised a mailbox within the environment. Any detections from built-in Office 365 capabilities should be monitored and responded to appropriately. Certain premium Office 365 capabilities further enhance these detection and response functions.
   author: Steven Dick
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1114.003
-      name: Technique T1114.003
-    tactics: []
+      name: Email Forwarding Rule
+      tactics:
+      - collection
+    tactics:
+    - collection
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/o365_email_suspicious_behavior_alert.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/o365_email_suspicious_behavior_alert.yml
+      rule_sha256: sha256:fce914f332ea27979abacd4d479013986c4f8b807bd9eb684f7ab6963c17e5c2
+      detection_id: 85c7555a-05af-4322-81aa-76b4ddf52baa
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566/o365_various_alerts/o365_various_alerts.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1566/o365_various_alerts/o365_various_alerts.log
     description: o365 - o365:management:activity
     format: auto
     schema: raw
     sourcetype: o365:management:activity
+    checksum: sha256:e669b123a43b1ca7f707e7ac69e3edb32fe0f7631ced09e5a55e1e93d2aea57a
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

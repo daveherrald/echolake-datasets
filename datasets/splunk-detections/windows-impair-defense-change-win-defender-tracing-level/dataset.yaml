@@ -1,14 +1,10 @@
 metadata:
   name: windows-impair-defense-change-win-defender-tracing-level
   version: 7.0.0
-  description: The following analytic detects modifications to the Windows registry
-    specifically targeting the "WppTracingLevel" setting within Windows Defender.
-    This detection leverages data from the Endpoint.Registry data model to identify
-    changes in the registry path associated with Windows Defender tracing levels.
-    Such modifications are significant as they can impair the diagnostic capabilities
-    of Windows Defender, potentially hiding malicious activities. If confirmed malicious,
-    this activity could allow a
+  description: The following analytic detects modifications to the Windows registry specifically targeting the "WppTracingLevel" setting within Windows Defender. This detection leverages data from the Endpoint.Registry data model to identify changes in the registry path associated with Windows Defender tracing levels. Such modifications are significant as they can impair the diagnostic capabilities of Windows Defender, potentially hiding malicious activities. If confirmed malicious, this activity could allow an attacker to evade detection and maintain persistence within the environment, leading to further compromise and data exfiltration.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1562.001
-      name: Technique T1562.001
-    tactics: []
+      name: Disable or Modify Tools
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_impair_defense_change_win_defender_tracing_level.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_impair_defense_change_win_defender_tracing_level.yml
+      rule_sha256: sha256:2925eef4783764d4ebf97e647dcaa29f2f79f2c865ef23bd3fd166400bf6afc9
+      detection_id: fe9391cd-952a-4c64-8f56-727cb0d4f2d4
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.001/disable-windows-security-defender-features/windefender-bypas-2-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1562.001/disable-windows-security-defender-features/windefender-bypas-2-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:18281db53af013649ebf55d7a600be05b20c3cbedb21d72ae91902d21c6cbac8
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

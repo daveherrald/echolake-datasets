@@ -1,13 +1,10 @@
 metadata:
   name: vmware-server-side-template-injection-hunt
   version: 5.0.0
-  description: The following analytic identifies potential server-side template injection
-    attempts related to CVE-2022-22954. It detects suspicious URL patterns containing
-    "deviceudid" and keywords like "java.lang.ProcessBuilder" or "freemarker.template.utility.ObjectConstructor"
-    using web or proxy logs within the Web Datamodel. This activity is significant
-    as it may indicate an attempt to exploit a known vulnerability in VMware, potentially
-    leading to remote code execution. If confirmed malicious, attackers c
+  description: The following analytic identifies potential server-side template injection attempts related to CVE-2022-22954. It detects suspicious URL patterns containing "deviceudid" and keywords like "java.lang.ProcessBuilder" or "freemarker.template.utility.ObjectConstructor" using web or proxy logs within the Web Datamodel. This activity is significant as it may indicate an attempt to exploit a known vulnerability in VMware, potentially leading to remote code execution. If confirmed malicious, attackers could gain unauthorized access, execute arbitrary code, and compromise the affected system, posing a severe security risk.
   author: Michael Haag, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - hunting
   - splunk-security-content
@@ -15,20 +12,46 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1190
-      name: Technique T1190
+      name: Exploit Public-Facing Application
+      tactics:
+      - initial-access
     - id: T1133
-      name: Technique T1133
-    tactics: []
+      name: External Remote Services
+      tactics:
+      - initial-access
+      - persistence
+    tactics:
+    - initial-access
+    - persistence
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/web/vmware_server_side_template_injection_hunt.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/web/vmware_server_side_template_injection_hunt.yml
+      rule_sha256: sha256:da066c49ad989a1d8166f76986427614c35a8feed41c300fc04f9bbf45a6b6fb
+      detection_id: 5796b570-ad12-44df-b1b5-b7e6ae3aabb0
+      source_version: 5
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/vmware/vmware_scanning_pan_threat.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1190/vmware/vmware_scanning_pan_threat.log
     description: pan:threat - pan:threat
     format: auto
     schema: raw
     sourcetype: pan:threat
+    checksum: sha256:ef88283f3fa3894065a08002053e5db74e4ccf1c39ef46300c15a6c8636df8a8
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

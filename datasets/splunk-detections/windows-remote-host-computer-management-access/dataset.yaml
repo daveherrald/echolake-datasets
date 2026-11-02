@@ -1,14 +1,10 @@
 metadata:
   name: windows-remote-host-computer-management-access
   version: 2.0.0
-  description: The following analytic detects the use of mmc.exe to launch Computer
-    Management (compmgmt.msc) and connect to a remote machine. This technique allows
-    administrators to access system management tools, including Event Viewer, Services,
-    Shared Folders, and Local Users & Groups, without initiating a full remote desktop
-    session. While commonly used for legitimate administrative purposes, adversaries
-    may leverage this method for remote reconnaissance, privilege escalation, or persistence.
-    Monitoring t
+  description: The following analytic detects the use of mmc.exe to launch Computer Management (compmgmt.msc) and connect to a remote machine. This technique allows administrators to access system management tools, including Event Viewer, Services, Shared Folders, and Local Users & Groups, without initiating a full remote desktop session. While commonly used for legitimate administrative purposes, adversaries may leverage this method for remote reconnaissance, privilege escalation, or persistence. Monitoring the execution of mmc.exe with the /computer:{hostname/ip} argument can help detect unauthorized system administration attempts or lateral movement within a network.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1021.006
-      name: Technique T1021.006
-    tactics: []
+      name: Windows Remote Management
+      tactics:
+      - lateral-movement
+    tactics:
+    - lateral-movement
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_remote_host_computer_management_access.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_remote_host_computer_management_access.yml
+      rule_sha256: sha256:c0646461ac6c199b9c5d110ed3247eb53624cd55bef3ee1bc3faaec16f4bdbf3
+      detection_id: 455da527-0047-4610-a3ca-b4a005c2d346
+      source_version: 2
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1021.006/compmgtm_access/compmgmt_load.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1021.006/compmgtm_access/compmgmt_load.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:31159e87ede769315c099aada31b6632dd4f8a2fd982efdcda1daa879e2fdbc3
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

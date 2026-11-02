@@ -1,14 +1,10 @@
 metadata:
   name: windows-anonymous-pipe-activity
   version: 5.0.0
-  description: The following analytic detects the creation or connection of anonymous
-    pipes for inter-process communication (IPC) within a Windows environment. Anonymous
-    pipes are commonly used by legitimate system processes, services, and applications
-    to transfer data between related processes. However, adversaries frequently abuse
-    anonymous pipes to facilitate stealthy process injection, command-and-control
-    (C2) communication, credential theft, or privilege escalation. This detection
-    monitors for unusual ano
+  description: "The following analytic detects the creation or connection of anonymous pipes for inter-process communication (IPC) within a Windows environment. Anonymous pipes are commonly used by legitimate system processes, services, and applications to transfer data between related processes. However, adversaries frequently abuse anonymous pipes to facilitate stealthy process injection, command-and-control (C2) communication, credential theft, or privilege escalation. This detection monitors for unusual anonymous pipe activity, particularly involving non-system processes, unsigned executables, or unexpected parent-child process relationships. While legitimate use cases exist\u2014such as Windows services, software installers, or security tools\u2014unusual or high-frequency anonymous pipe activity should be investigated for potential malware, persistence mechanisms, or lateral movement techniques."
   author: Teoderick Contreras, Splunk
+  updated: '2025-10-31'
+  license: Apache-2.0
   tags:
   - hunting
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1559
-      name: Technique T1559
-    tactics: []
+      name: Inter-Process Communication
+      tactics:
+      - execution
+    tactics:
+    - execution
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_anonymous_pipe_activity.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_anonymous_pipe_activity.yml
+      rule_sha256: sha256:1900391680ae93e5a0f8f67907b51dac07b6bc2ca372cf58209ae62bab52e0ef
+      detection_id: ee301e1e-cd81-4011-a911-e5f049b9e3d5
+      source_version: 5
+      source_date: '2025-10-31'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1559/anonymous_pipe/anonymouspipe.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1559/anonymous_pipe/anonymouspipe.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:52f733e56634f951983afb6ce25e1205dda7afa4f79b371128751ceae8b2d3a2
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

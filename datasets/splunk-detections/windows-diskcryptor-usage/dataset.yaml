@@ -1,14 +1,10 @@
 metadata:
   name: windows-diskcryptor-usage
   version: 7.0.0
-  description: The following analytic detects the execution of DiskCryptor, identified
-    by the process names "dcrypt.exe" or "dcinst.exe". This detection leverages data
-    from Endpoint Detection and Response (EDR) agents, focusing on process names and
-    original file names. DiskCryptor is significant because adversaries use it to
-    manually encrypt disks during an operation, potentially leading to data inaccessibility.
-    If confirmed malicious, this activity could result in complete disk encryption,
-    causing data loss a
+  description: The following analytic detects the execution of DiskCryptor, identified by the process names "dcrypt.exe" or "dcinst.exe". This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and original file names. DiskCryptor is significant because adversaries use it to manually encrypt disks during an operation, potentially leading to data inaccessibility. If confirmed malicious, this activity could result in complete disk encryption, causing data loss and operational disruption. Immediate investigation is required to mitigate potential ransomware attacks.
   author: Michael Haag, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - hunting
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1486
-      name: Technique T1486
-    tactics: []
+      name: Data Encrypted for Impact
+      tactics:
+      - impact
+    tactics:
+    - impact
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_diskcryptor_usage.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_diskcryptor_usage.yml
+      rule_sha256: sha256:86f6f516c4c25873dd5f0c71c7cbbf5cbca8e48db386b0f83a575bd9c406ef8c
+      detection_id: d56fe0c8-4650-11ec-a8fa-acde48001122
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1486/dcrypt/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1486/dcrypt/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:c70b712dbfa68c6d1e982f032b386cf8dcaae031b34e380fdb875df4d9c838d3
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

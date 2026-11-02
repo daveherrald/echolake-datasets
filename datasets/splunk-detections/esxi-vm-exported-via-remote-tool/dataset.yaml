@@ -1,11 +1,10 @@
 metadata:
   name: esxi-vm-exported-via-remote-tool
   version: 1.0.0
-  description: This detection identifies the use of a remote tool to download virtual
-    machine disk files from a datastore. The NFC protocol is used by management tools
-    to transfer files to and from ESXi hosts, but it can also be abused by attackers
-    or insiders to exfiltrate full virtual disk images
+  description: This detection identifies the use of a remote tool to download virtual machine disk files from a datastore. The NFC protocol is used by management tools to transfer files to and from ESXi hosts, but it can also be abused by attackers or insiders to exfiltrate full virtual disk images
   author: Raven Tait, Splunk
+  updated: '2025-05-15'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -14,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1005
-      name: Technique T1005
-    tactics: []
+      name: Data from Local System
+      tactics:
+      - collection
+    tactics:
+    - collection
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/application/esxi_vm_exported_via_remote_tool.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/application/esxi_vm_exported_via_remote_tool.yml
+      rule_sha256: sha256:81eaec06f9affae3ea7e5833cc1ea7426a38dff1dae590fd0eb5daaccb40102e
+      detection_id: 2e155547-aaac-49d3-b0ef-ceabc31fd364
+      source_version: 1
+      source_date: '2025-05-15'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1005/esxi_vm_download/esxi_vm_download.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1005/esxi_vm_download/esxi_vm_download.log
     description: vmware:esxlog - vmw-syslog
     format: auto
     schema: raw
     sourcetype: vmw-syslog
+    checksum: sha256:a50666c61f331226509ef462349fc891e46caaad70b1767422aee048f664acef
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

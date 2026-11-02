@@ -1,14 +1,10 @@
 metadata:
   name: powershell-windows-defender-exclusion-commands
   version: 10.0.0
-  description: The following analytic detects the use of PowerShell commands to add
-    or set Windows Defender exclusions. It leverages EventCode 4104 to identify suspicious
-    `Add-MpPreference` or `Set-MpPreference` commands with exclusion parameters. This
-    activity is significant because adversaries often use it to bypass Windows Defender,
-    allowing malicious code to execute without detection. If confirmed malicious,
-    this behavior could enable attackers to evade antivirus defenses, maintain persistence,
-    and execute
+  description: The following analytic detects the use of PowerShell commands to add or set Windows Defender exclusions. It leverages EventCode 4104 to identify suspicious `Add-MpPreference` or `Set-MpPreference` commands with exclusion parameters. This activity is significant because adversaries often use it to bypass Windows Defender, allowing malicious code to execute without detection. If confirmed malicious, this behavior could enable attackers to evade antivirus defenses, maintain persistence, and execute further malicious activities undetected.
   author: Teoderick Contreras, Splunk
+  updated: '2025-11-20'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1562.001
-      name: Technique T1562.001
-    tactics: []
+      name: Disable or Modify Tools
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/powershell_windows_defender_exclusion_commands.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/powershell_windows_defender_exclusion_commands.yml
+      rule_sha256: sha256:1563a73bf482a78e7910f7a6fb61dca0df997d891fbf7f4eb3e2b0c4ba29b9f2
+      detection_id: 907ac95c-4dd9-11ec-ba2c-acde48001122
+      source_version: 10
+      source_date: '2025-11-20'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.001/powershell_windows_defender_exclusion_commands/windows-xml.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1562.001/powershell_windows_defender_exclusion_commands/windows-xml.log
     description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:5588af068a93d3d28e75834bd792c60da031db84498a4c3d067d457a6f3c2b8b
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

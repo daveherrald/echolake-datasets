@@ -1,14 +1,16 @@
 metadata:
   name: windows-wbadmin-file-recovery-from-backup
   version: 2.0.0
-  description: "The following analytic identifies the execution of wbadmin.exe with\
-    \ arguments indicative of restoring files from an existing backup. \nWBAdmin is\
-    \ a legitimate Windows Backup utility used for creating, managing, and restoring\
-    \ backups. However, adversaries may abuse it to restore specific files (e.g.,\
-    \ sensitive credentials, configuration files, or malware stagers) from prior backups\
-    \ to regain access or re-establish persistence after cleanup or encryption events.\n\
-    Monitoring this behavior is importan"
+  description: 'The following analytic identifies the execution of wbadmin.exe with arguments indicative of restoring files from an existing backup.
+
+    WBAdmin is a legitimate Windows Backup utility used for creating, managing, and restoring backups. However, adversaries may abuse it to restore specific files (e.g., sensitive credentials, configuration files, or malware stagers) from prior backups to regain access or re-establish persistence after cleanup or encryption events.
+
+    Monitoring this behavior is important because restoring individual files from a system backup outside of approved recovery workflows may indicate an attacker attempting to retrieve deleted or encrypted data, recover previously dropped payloads, or access prior system states as part of post-compromise activity.
+
+    If confirmed malicious, this action could enable attackers to regain operational footholds, extract sensitive data, or restore tampered components, undermining remediation and containment efforts.'
   author: Nasreddine Bencherchali, Splunk
+  updated: '2025-12-18'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,20 +18,44 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1490
-      name: Technique T1490
+      name: Inhibit System Recovery
+      tactics:
+      - impact
     - id: T1565.001
-      name: Technique T1565.001
-    tactics: []
+      name: Stored Data Manipulation
+      tactics:
+      - impact
+    tactics:
+    - impact
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_wbadmin_file_recovery_from_backup.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_wbadmin_file_recovery_from_backup.yml
+      rule_sha256: sha256:f2272ede87324dd18028e8a06a19aac561b0be67ec6c428d58de0dc57bb8ebd2
+      detection_id: 0175f0b7-728d-4038-bbf1-1c30d6ee3d31
+      source_version: 2
+      source_date: '2025-12-18'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1565.001/wbadmin_recovery/wbadmin_recovery.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1565.001/wbadmin_recovery/wbadmin_recovery.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:b84e4684fd9c52ab2cd065313bfc6d40ea327539ce40f5c6f1d53d38d4751af0
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

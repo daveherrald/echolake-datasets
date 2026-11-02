@@ -1,12 +1,10 @@
 metadata:
   name: windows-esx-admins-group-creation-via-powershell
   version: 6.0.0
-  description: This analytic detects attempts to create an "ESX Admins" group using
-    PowerShell commands. This activity may indicate an attempt to exploit the VMware
-    ESXi Active Directory Integration Authentication Bypass vulnerability (CVE-2024-37085).
-    Attackers can use this method to gain unauthorized access to ESXi hosts by recreating
-    the 'ESX Admins' group after its deletion from Active Directory.
+  description: This analytic detects attempts to create an "ESX Admins" group using PowerShell commands. This activity may indicate an attempt to exploit the VMware ESXi Active Directory Integration Authentication Bypass vulnerability (CVE-2024-37085). Attackers can use this method to gain unauthorized access to ESXi hosts by recreating the 'ESX Admins' group after its deletion from Active Directory.
   author: Michael Haag, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -14,20 +12,44 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1136.002
-      name: Technique T1136.002
+      name: Domain Account
+      tactics:
+      - persistence
     - id: T1136.001
-      name: Technique T1136.001
-    tactics: []
+      name: Local Account
+      tactics:
+      - persistence
+    tactics:
+    - persistence
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_esx_admins_group_creation_via_powershell.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_esx_admins_group_creation_via_powershell.yml
+      rule_sha256: sha256:b94f092455403576335b7f02287240c5e1a019ca1ac8f92574afab75ad21e2f5
+      detection_id: f48a5557-be06-4b96-b8e8-be563e387620
+      source_version: 6
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1136.001/atomic_red_team/windows-powershell-esxadmins.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1136.001/atomic_red_team/windows-powershell-esxadmins.log
     description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:e1b77b283b038e7aa7933dbc6ed77871d1a599ca71e611553ac20fe75c3fccbe
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

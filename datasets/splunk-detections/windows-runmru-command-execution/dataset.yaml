@@ -1,14 +1,10 @@
 metadata:
   name: windows-runmru-command-execution
   version: 8.0.0
-  description: The following analytic detects modifications to the Windows RunMRU
-    registry key, which stores a history of commands executed through the Run dialog
-    box (Windows+R). It leverages Endpoint Detection and Response (EDR) telemetry
-    to monitor registry events targeting this key. This activity is significant as
-    malware often uses the Run dialog to execute malicious commands while attempting
-    to appear legitimate. If confirmed malicious, this could indicate an attacker
-    using indirect command execution tec
+  description: The following analytic detects modifications to the Windows RunMRU registry key, which stores a history of commands executed through the Run dialog box (Windows+R). It leverages Endpoint Detection and Response (EDR) telemetry to monitor registry events targeting this key. This activity is significant as malware often uses the Run dialog to execute malicious commands while attempting to appear legitimate. If confirmed malicious, this could indicate an attacker using indirect command execution techniques for defense evasion or persistence. The detection excludes MRUList value changes to focus on actual command entries.
   author: Nasreddine Bencherchali, Michael Haag, Splunk
+  updated: '2025-06-10'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1202
-      name: Technique T1202
-    tactics: []
+      name: Indirect Command Execution
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_runmru_command_execution.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_runmru_command_execution.yml
+      rule_sha256: sha256:781138cb447011684c2f0700236b6e5c2edab5c72cddcbcaf6a2f7e65d9addc2
+      detection_id: a15aa1ab-2b79-467f-8201-65e0f32d5b1a
+      source_version: 8
+      source_date: '2025-06-10'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1202/atomic_red_team/windows-sysmon_runmru.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1202/atomic_red_team/windows-sysmon_runmru.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:3c5ef0377d8d853111145b07ab29035a61f220e6b884a2520b2fc0ef89b86b41
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

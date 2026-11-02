@@ -1,11 +1,9 @@
 metadata:
   name: cisco-secure-firewall-high-priority-intrusion-classification
   version: 2.0.0
-  description: 'This analytic identifies high-severity intrusion events based on the
-    classification assigned to Snort rules within Cisco Secure Firewall logs.
+  description: 'This analytic identifies high-severity intrusion events based on the classification assigned to Snort rules within Cisco Secure Firewall logs.
 
-    It leverages Cisco Secure Firewall Threat Defense logs and focuses on events classified
-    as:
+    It leverages Cisco Secure Firewall Threat Defense logs and focuses on events classified as:
 
 
     - A Network Trojan was Detected
@@ -20,8 +18,15 @@ metadata:
 
     - Known malicious file or file based exploit
 
-    - Known client'
+    - Known client side exploit attempt
+
+    - Large Scale Information Leak"
+
+
+    These classifications typically represent significant threats such as remote code execution, credential theft, lateral movement, or malware communication. Detection of these classifications should be prioritized for immediate investigation.'
   author: Nasreddine Bencherchali, Splunk
+  updated: '2026-06-01'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -29,26 +34,65 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1203
-      name: Technique T1203
+      name: Exploitation for Client Execution
+      tactics:
+      - execution
     - id: T1003
-      name: Technique T1003
+      name: OS Credential Dumping
+      tactics:
+      - credential-access
     - id: T1071
-      name: Technique T1071
+      name: Application Layer Protocol
+      tactics:
+      - command-and-control
     - id: T1190
-      name: Technique T1190
+      name: Exploit Public-Facing Application
+      tactics:
+      - initial-access
     - id: T1078
-      name: Technique T1078
-    tactics: []
+      name: Valid Accounts
+      tactics:
+      - initial-access
+      - persistence
+      - privilege-escalation
+      - defense-evasion
+    tactics:
+    - initial-access
+    - execution
+    - persistence
+    - privilege-escalation
+    - defense-evasion
+    - credential-access
+    - command-and-control
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/network/cisco_secure_firewall___high_priority_intrusion_classification.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/network/cisco_secure_firewall___high_priority_intrusion_classification.yml
+      rule_sha256: sha256:00be32f9064b8ca5e6743c461cf8215cd4fc2c0bed0f02e4662f86fac4e5b390
+      detection_id: ec99bb81-c31b-4837-8c7d-1b32aa70b337
+      source_version: 2
+      source_date: '2026-06-01'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_secure_firewall_threat_defense/intrusion_event/intrusion_events.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/cisco_secure_firewall_threat_defense/intrusion_event/intrusion_events.log
     description: not_applicable - cisco:sfw:estreamer
     format: auto
     schema: raw
     sourcetype: cisco:sfw:estreamer
+    checksum: sha256:fbb3f751fe1eba2da9fb5214ca14e86d9e9bd3f9976e67c3ffe3874ffc2e5a8b
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

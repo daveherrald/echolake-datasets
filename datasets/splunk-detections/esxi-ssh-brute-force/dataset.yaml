@@ -1,11 +1,10 @@
 metadata:
   name: esxi-ssh-brute-force
   version: 2.0.0
-  description: This detection identifies signs of SSH brute-force attacks by monitoring
-    for a high number of failed login attempts within a short time frame. Such activity
-    may indicate an attacker attempting to gain unauthorized access through password
-    guessing.
+  description: This detection identifies signs of SSH brute-force attacks by monitoring for a high number of failed login attempts within a short time frame. Such activity may indicate an attacker attempting to gain unauthorized access through password guessing.
   author: Raven Tait, Splunk
+  updated: '2025-10-14'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -15,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1110
-      name: Technique T1110
-    tactics: []
+      name: Brute Force
+      tactics:
+      - credential-access
+    tactics:
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/application/esxi_ssh_brute_force.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/application/esxi_ssh_brute_force.yml
+      rule_sha256: sha256:909f9ee4db193d21ab7f7695d7262207362d75bf4a5bb6a63b68541b8ae425e6
+      detection_id: 68fe4efa-bbbb-44ee-9f09-d07d2f0f346b
+      source_version: 2
+      source_date: '2025-10-14'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1110/esxi_ssh_brute_force/esxi_ssh_brute_force.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1110/esxi_ssh_brute_force/esxi_ssh_brute_force.log
     description: vmware:esxlog - vmw-syslog
     format: auto
     schema: raw
     sourcetype: vmw-syslog
+    checksum: sha256:19f8cb2e6f07b840f59333038e4c9ebf358104e8088be0c85497c711dab78e22
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

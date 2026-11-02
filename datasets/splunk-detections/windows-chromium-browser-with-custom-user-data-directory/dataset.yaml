@@ -1,15 +1,10 @@
 metadata:
   name: windows-chromium-browser-with-custom-user-data-directory
   version: 3.0.0
-  description: 'The following analytic detects instances where the Chromium-based
-    browser (e.g., Google Chrome, Microsoft Edge) is launched with the --user-data-dir
-    command-line argument. While this flag is legitimate and used for multi-profile
-    support or automation, it is frequently leveraged by malware and adversaries to
-    run Chrome in an isolated environment for stealth operations, credential harvesting,
-    phishing delivery, or evasion of user session artifacts.
-
-    '
+  description: The following analytic detects instances where the Chromium-based browser (e.g., Google Chrome, Microsoft Edge) is launched with the --user-data-dir command-line argument. While this flag is legitimate and used for multi-profile support or automation, it is frequently leveraged by malware and adversaries to run Chrome in an isolated environment for stealth operations, credential harvesting, phishing delivery, or evasion of user session artifacts.
   author: Teoderick Contreras, Splunk
+  updated: '2025-12-16'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -19,18 +14,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1497
-      name: Technique T1497
-    tactics: []
+      name: Virtualization/Sandbox Evasion
+      tactics:
+      - defense-evasion
+      - discovery
+    tactics:
+    - defense-evasion
+    - discovery
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_chromium_browser_with_custom_user_data_directory.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_chromium_browser_with_custom_user_data_directory.yml
+      rule_sha256: sha256:bd3bed93710f3522d68f1d8178056d8009bb745b0aff60a84a8e35e21e9aa16d
+      detection_id: 4f546cf4-15aa-4368-80f7-940e92bc551e
+      source_version: 3
+      source_date: '2025-12-16'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1497/chrom_no_sandbox/chrome-no_sandbox.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1497/chrom_no_sandbox/chrome-no_sandbox.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:8d407e5c516063f267694431f34640fa60c9c98f32449f0fcb74ad55904dd0a2
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

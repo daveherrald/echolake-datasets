@@ -1,14 +1,10 @@
 metadata:
   name: get-domainuser-with-powershell-script-block
   version: 9.0.0
-  description: The following analytic detects the execution of the `Get-DomainUser`
-    cmdlet using PowerShell Script Block Logging (EventCode=4104). This cmdlet is
-    part of PowerView, a tool often used for domain enumeration. The detection leverages
-    PowerShell operational logs to identify instances where this command is executed.
-    Monitoring this activity is crucial as it may indicate an adversary's attempt
-    to gather information about domain users, which is a common step in Active Directory
-    Discovery. If confirmed
+  description: The following analytic detects the execution of the `Get-DomainUser` cmdlet using PowerShell Script Block Logging (EventCode=4104). This cmdlet is part of PowerView, a tool often used for domain enumeration. The detection leverages PowerShell operational logs to identify instances where this command is executed. Monitoring this activity is crucial as it may indicate an adversary's attempt to gather information about domain users, which is a common step in Active Directory Discovery. If confirmed malicious, this activity could lead to further reconnaissance and potential exploitation of domain resources.
   author: Teoderick Contreras, Mauricio Velazco, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1087.002
-      name: Technique T1087.002
-    tactics: []
+      name: Domain Account
+      tactics:
+      - discovery
+    tactics:
+    - discovery
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/get_domainuser_with_powershell_script_block.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/get_domainuser_with_powershell_script_block.yml
+      rule_sha256: sha256:6ded6bd964bc64b3030e0d1878310718e9588d4cad17e4f4068caaac93167396
+      detection_id: 61994268-04f4-11ec-865c-acde48001122
+      source_version: 9
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1087.002/AD_discovery/windows-powershell-xml.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1087.002/AD_discovery/windows-powershell-xml.log
     description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:ce45d417d0bd66e05939f835935dd24cfe6f55b257d7b2bb968c726ae378c8c3
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,14 +1,10 @@
 metadata:
   name: windows-non-system-account-targeting-lsass
   version: 11.0.0
-  description: The following analytic identifies non-SYSTEM accounts requesting access
-    to lsass.exe. This detection leverages Sysmon EventCode 10 logs to monitor access
-    attempts to the Local Security Authority Subsystem Service (lsass.exe) by non-SYSTEM
-    users. This activity is significant as it may indicate credential dumping attempts
-    or unauthorized access to sensitive credentials. If confirmed malicious, an attacker
-    could potentially extract credentials from memory, leading to privilege escalation
-    or lateral
+  description: The following analytic identifies non-SYSTEM accounts requesting access to lsass.exe. This detection leverages Sysmon EventCode 10 logs to monitor access attempts to the Local Security Authority Subsystem Service (lsass.exe) by non-SYSTEM users. This activity is significant as it may indicate credential dumping attempts or unauthorized access to sensitive credentials. If confirmed malicious, an attacker could potentially extract credentials from memory, leading to privilege escalation or lateral movement within the network. Immediate investigation is required to determine the legitimacy of the access request and to mitigate any potential threats.
   author: Michael Haag, Splunk
+  updated: '2025-10-14'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1003.001
-      name: Technique T1003.001
-    tactics: []
+      name: LSASS Memory
+      tactics:
+      - credential-access
+    tactics:
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_non_system_account_targeting_lsass.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_non_system_account_targeting_lsass.yml
+      rule_sha256: sha256:9039eac4e42704331a6112667084470a956b28c132eddb186d8d5cca24851267
+      detection_id: b1ce9a72-73cf-11ec-981b-acde48001122
+      source_version: 11
+      source_date: '2025-10-14'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1003.001/atomic_red_team/windows-sysmon_creddump.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1003.001/atomic_red_team/windows-sysmon_creddump.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:a37b69dce32eaff6b5c1fdb4bb9cbea6dec78a4fbd22cd41362ab0e377f075ef
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

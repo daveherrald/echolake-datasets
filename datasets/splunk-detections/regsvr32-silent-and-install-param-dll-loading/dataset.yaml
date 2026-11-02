@@ -1,14 +1,10 @@
 metadata:
   name: regsvr32-silent-and-install-param-dll-loading
   version: 9.0.0
-  description: 'The following analytic detects the loading of a DLL using the regsvr32
-    application with the silent parameter and DLLInstall execution. It leverages data
-    from Endpoint Detection and Response (EDR) agents, focusing on process command-line
-    arguments and parent process details. This activity is significant as it is commonly
-    used by RAT malware like Remcos and njRAT to load malicious DLLs on compromised
-    machines. If confirmed malicious, this technique could allow attackers to execute
-    arbitrary code, '
+  description: The following analytic detects the loading of a DLL using the regsvr32 application with the silent parameter and DLLInstall execution. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process command-line arguments and parent process details. This activity is significant as it is commonly used by RAT malware like Remcos and njRAT to load malicious DLLs on compromised machines. If confirmed malicious, this technique could allow attackers to execute arbitrary code, maintain persistence, and further compromise the system.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1218.010
-      name: Technique T1218.010
-    tactics: []
+      name: Regsvr32
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/regsvr32_silent_and_install_param_dll_loading.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/regsvr32_silent_and_install_param_dll_loading.yml
+      rule_sha256: sha256:396da7ba924a30a360f3b1d8110030d983974e844a3319e000dbefad01a53d90
+      detection_id: f421c250-24e7-11ec-bc43-acde48001122
+      source_version: 9
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.005/vbs_wscript/sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1059.005/vbs_wscript/sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:86ddf5d473d2be5d780dc171da8e00e33d572c9f387bb3d17aa3fc3e5b5ac2fc
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

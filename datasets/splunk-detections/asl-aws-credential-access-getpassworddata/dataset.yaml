@@ -1,14 +1,10 @@
 metadata:
   name: asl-aws-credential-access-getpassworddata
   version: 4.0.0
-  description: The following analytic identifiesGetPasswordData API calls in your
-    AWS account. It leverages  CloudTrail logs from Amazon Security Lake to detect
-    this activity by counting the distinct instance IDs accessed. This behavior is
-    significant as it may indicate an attempt to retrieve encrypted administrator
-    passwords for running Windows instances, which is a critical security concern.
-    If confirmed malicious, attackers could gain unauthorized access to administrative
-    credentials, potentially leading to
+  description: The following analytic identifiesGetPasswordData API calls in your AWS account. It leverages  CloudTrail logs from Amazon Security Lake to detect this activity by counting the distinct instance IDs accessed. This behavior is significant as it may indicate an attempt to retrieve encrypted administrator passwords for running Windows instances, which is a critical security concern. If confirmed malicious, attackers could gain unauthorized access to administrative credentials, potentially leading to full control over the affected instances and further compromise of the AWS environment.
   author: Patrick Bareiss, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,20 +12,45 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1110.001
-      name: Technique T1110.001
+      name: Password Guessing
+      tactics:
+      - credential-access
     - id: T1586.003
-      name: Technique T1586.003
-    tactics: []
+      name: Cloud Accounts
+      tactics:
+      - resource-development
+    tactics:
+    - resource-development
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/asl_aws_credential_access_getpassworddata.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/asl_aws_credential_access_getpassworddata.yml
+      rule_sha256: sha256:75c8e47ea1f5f7a7cf459d6484bcd94a3bfce896724857e3d6caa13d13a81f1b
+      detection_id: a79b607a-50cc-4704-bb9d-eff280cb78c2
+      source_version: 4
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1552/aws_getpassworddata/asl_ocsf_cloudtrail.json
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1552/aws_getpassworddata/asl_ocsf_cloudtrail.json
     description: aws_asl - aws:asl
     format: auto
     schema: raw
     sourcetype: aws:asl
+    checksum: sha256:10cd7f9d56f9c05fefa70c6fb455b012b441b372317b4aa8fe7cbd4236b113dd
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

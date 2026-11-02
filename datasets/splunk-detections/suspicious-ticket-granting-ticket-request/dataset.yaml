@@ -1,14 +1,10 @@
 metadata:
   name: suspicious-ticket-granting-ticket-request
   version: 8.0.0
-  description: The following analytic detects suspicious Kerberos Ticket Granting
-    Ticket (TGT) requests that may indicate exploitation of CVE-2021-42278 and CVE-2021-42287.
-    It leverages Event ID 4781 (account name change) and Event ID 4768 (TGT request)
-    to identify sequences where a newly renamed computer account requests a TGT. This
-    behavior is significant as it could represent an attempt to escalate privileges
-    by impersonating a Domain Controller. If confirmed malicious, this activity could
-    allow attackers t
+  description: The following analytic detects suspicious Kerberos Ticket Granting Ticket (TGT) requests that may indicate exploitation of CVE-2021-42278 and CVE-2021-42287. It leverages Event ID 4781 (account name change) and Event ID 4768 (TGT request) to identify sequences where a newly renamed computer account requests a TGT. This behavior is significant as it could represent an attempt to escalate privileges by impersonating a Domain Controller. If confirmed malicious, this activity could allow attackers to gain elevated access and potentially control over the domain environment.
   author: Mauricio Velazco, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - hunting
   - splunk-security-content
@@ -18,18 +14,46 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1078.002
-      name: Technique T1078.002
-    tactics: []
+      name: Domain Accounts
+      tactics:
+      - initial-access
+      - persistence
+      - privilege-escalation
+      - defense-evasion
+    tactics:
+    - initial-access
+    - persistence
+    - privilege-escalation
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/suspicious_ticket_granting_ticket_request.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/suspicious_ticket_granting_ticket_request.yml
+      rule_sha256: sha256:98bb13ac6d6922fc4d13f4e0391bc6e3e69877e4c1fdff90fe64c2a2ca623f6b
+      detection_id: d77d349e-6269-11ec-9cfe-acde48001122
+      source_version: 8
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1078.002/suspicious_ticket_granting_ticket_request/windows-xml.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1078.002/suspicious_ticket_granting_ticket_request/windows-xml.log
     description: XmlWinEventLog:Security - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:5a71aea282ca70e9730f04364578b41fed2849a5e73e0198b70913f53c7e3dc4
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

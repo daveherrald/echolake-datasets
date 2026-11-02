@@ -1,14 +1,10 @@
 metadata:
   name: windows-excessive-usage-of-net-app
   version: 4.0.0
-  description: The following analytic detects excessive usage of `net.exe` within
-    a one-minute interval. It leverages data from Endpoint Detection and Response
-    (EDR) agents, focusing on process names, parent processes, and command-line executions.
-    This behavior is significant as it may indicate an adversary attempting to create,
-    delete, or disable multiple user accounts rapidly, a tactic observed in Monero
-    mining incidents. If confirmed malicious, this activity could lead to unauthorized
-    user account manipulat
+  description: The following analytic detects excessive usage of `net.exe` within a one-minute interval. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names, parent processes, and command-line executions. This behavior is significant as it may indicate an adversary attempting to create, delete, or disable multiple user accounts rapidly, a tactic observed in Monero mining incidents. If confirmed malicious, this activity could lead to unauthorized user account manipulation, potentially compromising system integrity and enabling further malicious actions.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1531
-      name: Technique T1531
-    tactics: []
+      name: Account Access Removal
+      tactics:
+      - impact
+    tactics:
+    - impact
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_excessive_usage_of_net_app.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_excessive_usage_of_net_app.yml
+      rule_sha256: sha256:4458f4383374709ef233e5e7acdaae222baf351b57d170351aba9aa0fb999e0d
+      detection_id: 355ba810-0a20-4215-8485-9ce3f87f2e38
+      source_version: 4
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/xmrig_miner/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/xmrig_miner/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:279cbbeda641d10e093a4a3339d04d17c814da164a354a1d57b93ae5b82d2172
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

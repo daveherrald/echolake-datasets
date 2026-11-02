@@ -1,14 +1,10 @@
 metadata:
   name: getadcomputer-with-powershell-script-block
   version: 9.0.0
-  description: The following analytic detects the execution of the `Get-AdComputer`
-    PowerShell commandlet using PowerShell Script Block Logging (EventCode=4104).
-    This detection leverages script block text to identify when this commandlet is
-    run. The `Get-AdComputer` commandlet is significant as it can be used by adversaries
-    to enumerate all domain computers, aiding in situational awareness and Active
-    Directory discovery. If confirmed malicious, this activity could allow attackers
-    to map the network, identify t
+  description: The following analytic detects the execution of the `Get-AdComputer` PowerShell commandlet using PowerShell Script Block Logging (EventCode=4104). This detection leverages script block text to identify when this commandlet is run. The `Get-AdComputer` commandlet is significant as it can be used by adversaries to enumerate all domain computers, aiding in situational awareness and Active Directory discovery. If confirmed malicious, this activity could allow attackers to map the network, identify targets, and plan further attacks, potentially leading to unauthorized access and data exfiltration.
   author: Mauricio Velazco, Splunk
+  updated: '2025-06-24'
+  license: Apache-2.0
   tags:
   - hunting
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1018
-      name: Technique T1018
-    tactics: []
+      name: Remote System Discovery
+      tactics:
+      - discovery
+    tactics:
+    - discovery
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/getadcomputer_with_powershell_script_block.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/getadcomputer_with_powershell_script_block.yml
+      rule_sha256: sha256:cfe449b591b522c83af07bd134878750fb3682d3f5ccacf84076151261c79a2b
+      detection_id: a9a1da02-8e27-4bf7-a348-f4389c9da487
+      source_version: 9
+      source_date: '2025-06-24'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/powershell_script_block_logging/sbl_xml.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1059.001/powershell_script_block_logging/sbl_xml.log
     description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:6f0c23eeef584afd7403cbdad06206b6f0861d7d01c8051a7478eae00b012487
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

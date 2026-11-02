@@ -1,14 +1,10 @@
 metadata:
   name: msi-module-loaded-by-non-system-binary
   version: 9.0.0
-  description: 'The following analytic detects the loading of `msi.dll` by a binary
-    not located in `system32`, `syswow64`, `winsxs`, or `windows` directories. This
-    is identified using Sysmon EventCode 7, which logs DLL loads, and filters out
-    legitimate system paths. This activity is significant as it may indicate exploitation
-    of CVE-2021-41379 or DLL side-loading attacks, both of which can lead to unauthorized
-    system modifications. If confirmed malicious, this could allow an attacker to
-    execute arbitrary code, '
+  description: The following analytic detects the loading of `msi.dll` by a binary not located in `system32`, `syswow64`, `winsxs`, or `windows` directories. This is identified using Sysmon EventCode 7, which logs DLL loads, and filters out legitimate system paths. This activity is significant as it may indicate exploitation of CVE-2021-41379 or DLL side-loading attacks, both of which can lead to unauthorized system modifications. If confirmed malicious, this could allow an attacker to execute arbitrary code, escalate privileges, or persist within the environment.
   author: Michael Haag, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - hunting
   - splunk-security-content
@@ -18,18 +14,44 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1574.001
-      name: Technique T1574.001
-    tactics: []
+      name: DLL
+      tactics:
+      - persistence
+      - privilege-escalation
+      - defense-evasion
+    tactics:
+    - persistence
+    - privilege-escalation
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/msi_module_loaded_by_non_system_binary.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/msi_module_loaded_by_non_system_binary.yml
+      rule_sha256: sha256:78c2a3863c2bd47f4e911f948a39c8d73c7718a63301892070dbd0735b537ba5
+      detection_id: ccb98a66-5851-11ec-b91c-acde48001122
+      source_version: 9
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1574.002/msi_module_load/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1574.002/msi_module_load/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:97adffda36f082369003f4a3549704190fbe04de1cbb88d014bbac8f1975b6fa
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

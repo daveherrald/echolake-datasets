@@ -1,14 +1,10 @@
 metadata:
   name: malicious-powershell-executed-as-a-service
   version: 9.0.0
-  description: The following analytic identifies the execution of malicious PowerShell
-    commands or payloads via the Windows SC.exe utility. It detects this activity
-    by analyzing Windows System logs (EventCode 7045) and filtering for specific PowerShell-related
-    patterns in the ImagePath field. This behavior is significant because it indicates
-    potential abuse of the Windows Service Control Manager to run unauthorized or
-    harmful scripts, which could lead to system compromise. If confirmed malicious,
-    this activity
+  description: The following analytic identifies the execution of malicious PowerShell commands or payloads via the Windows SC.exe utility. It detects this activity by analyzing Windows System logs (EventCode 7045) and filtering for specific PowerShell-related patterns in the ImagePath field. This behavior is significant because it indicates potential abuse of the Windows Service Control Manager to run unauthorized or harmful scripts, which could lead to system compromise. If confirmed malicious, this activity could allow attackers to execute arbitrary code, escalate privileges, or maintain persistence within the environment.
   author: Ryan Becwar
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1569.002
-      name: Technique T1569.002
-    tactics: []
+      name: Service Execution
+      tactics:
+      - execution
+    tactics:
+    - execution
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/malicious_powershell_executed_as_a_service.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/malicious_powershell_executed_as_a_service.yml
+      rule_sha256: sha256:7405c5ef85abede9f680eefba158aba665f2a78463ebe0b8555717a3fc791a94
+      detection_id: 8e204dfd-cae0-4ea8-a61d-e972a1ff2ff8
+      source_version: 9
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1569.002/malicious_powershell_executed_as_a_service/windows-xml.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1569.002/malicious_powershell_executed_as_a_service/windows-xml.log
     description: XmlWinEventLog:System - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:17ecd8e5711484349afaa259d7b1167a360370dd9c417c3fb52d1dbf1ab792c3
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

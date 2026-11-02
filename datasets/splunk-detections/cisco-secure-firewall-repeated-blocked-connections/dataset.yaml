@@ -1,14 +1,10 @@
 metadata:
   name: cisco-secure-firewall-repeated-blocked-connections
   version: 4.0.0
-  description: The following analytic detects repeated blocked connection attempts
-    from the same initiator to the same responder within a short time window. It leverages
-    Cisco Secure Firewall Threat Defense logs and identifies connections where the
-    action is set to Block, and the number of occurrences reaches or exceeds a threshold
-    of ten within a one-minute span. This pattern may indicate a misconfigured application,
-    unauthorized access attempts, or early stages of a brute-force or scanning operation.
-    If conf
+  description: The following analytic detects repeated blocked connection attempts from the same initiator to the same responder within a short time window. It leverages Cisco Secure Firewall Threat Defense logs and identifies connections where the action is set to Block, and the number of occurrences reaches or exceeds a threshold of ten within a one-minute span. This pattern may indicate a misconfigured application, unauthorized access attempts, or early stages of a brute-force or scanning operation. If confirmed malicious, this behavior may represent an attacker probing the network, attempting lateral movement, or testing firewall rules for weaknesses.
   author: Nasreddine Bencherchali, Splunk
+  updated: '2026-06-01'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,26 +12,59 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1018
-      name: Technique T1018
+      name: Remote System Discovery
+      tactics:
+      - discovery
     - id: T1046
-      name: Technique T1046
+      name: Network Service Discovery
+      tactics:
+      - discovery
     - id: T1110
-      name: Technique T1110
+      name: Brute Force
+      tactics:
+      - credential-access
     - id: T1203
-      name: Technique T1203
+      name: Exploitation for Client Execution
+      tactics:
+      - execution
     - id: T1595.002
-      name: Technique T1595.002
-    tactics: []
+      name: Vulnerability Scanning
+      tactics:
+      - reconnaissance
+    tactics:
+    - reconnaissance
+    - execution
+    - credential-access
+    - discovery
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/network/cisco_secure_firewall___repeated_blocked_connections.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/network/cisco_secure_firewall___repeated_blocked_connections.yml
+      rule_sha256: sha256:ddcec6e915bb320d37207bb8807fba4e4ffe6412b3aafea8aac7be0b24c8a4cc
+      detection_id: 1f57f10e-1dc5-47ea-852c-2e85b2503d79
+      source_version: 4
+      source_date: '2026-06-01'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_secure_firewall_threat_defense/connection_event/connection_events.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/cisco_secure_firewall_threat_defense/connection_event/connection_events.log
     description: not_applicable - cisco:sfw:estreamer
     format: auto
     schema: raw
     sourcetype: cisco:sfw:estreamer
+    checksum: sha256:37e737d87c4e8396396f3a69621c127bd943eb733036deb7abaa5a5a7276371d
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

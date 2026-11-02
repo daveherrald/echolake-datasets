@@ -1,14 +1,10 @@
 metadata:
   name: linux-auditd-data-transfer-size-limits-via-split-syscall
   version: 5.0.0
-  description: The following analytic detects suspicious data transfer activities
-    that involve the use of the `split` syscall, potentially indicating an attempt
-    to evade detection by breaking large files into smaller parts. Attackers may use
-    this technique to bypass size-based security controls, facilitating the covert
-    exfiltration of sensitive data. By monitoring for unusual or unauthorized use
-    of the `split` syscall, this analytic helps identify potential data exfiltration
-    attempts, allowing security teams t
+  description: The following analytic detects suspicious data transfer activities that involve the use of the `split` syscall, potentially indicating an attempt to evade detection by breaking large files into smaller parts. Attackers may use this technique to bypass size-based security controls, facilitating the covert exfiltration of sensitive data. By monitoring for unusual or unauthorized use of the `split` syscall, this analytic helps identify potential data exfiltration attempts, allowing security teams to intervene and prevent the unauthorized transfer of critical information from the network.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1030
-      name: Technique T1030
-    tactics: []
+      name: Data Transfer Size Limits
+      tactics:
+      - exfiltration
+    tactics:
+    - exfiltration
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/linux_auditd_data_transfer_size_limits_via_split_syscall.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/linux_auditd_data_transfer_size_limits_via_split_syscall.yml
+      rule_sha256: sha256:9f661f69af15f9e066c7214ce5c38f90561cc116cc9b48896b86988e66b434ba
+      detection_id: c03d4a49-cf9d-435b-86e9-c6f8c9b6c42e
+      source_version: 5
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1030/linux_auditd_split_syscall_new/linux_auditd_new_split.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1030/linux_auditd_split_syscall_new/linux_auditd_new_split.log
     description: auditd - auditd
     format: auto
     schema: raw
     sourcetype: auditd
+    checksum: sha256:cc26e035942fb454da59b44fb73ea95ddcc5abcb8f9fa739ab69dad15f0c3456
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

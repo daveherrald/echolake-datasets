@@ -1,14 +1,10 @@
 metadata:
   name: suspicious-mshta-spawn
   version: 9.0.0
-  description: 'The following analytic detects the spawning of mshta.exe by wmiprvse.exe
-    or svchost.exe. This behavior is identified using Endpoint Detection and Response
-    (EDR) data, focusing on process creation events where the parent process is either
-    wmiprvse.exe or svchost.exe. This activity is significant as it may indicate the
-    use of a DCOM object to execute malicious scripts via mshta.exe, a common tactic
-    in sophisticated attacks. If confirmed malicious, this could allow an attacker
-    to execute arbitrary '
+  description: The following analytic detects the spawning of mshta.exe by wmiprvse.exe or svchost.exe. This behavior is identified using Endpoint Detection and Response (EDR) data, focusing on process creation events where the parent process is either wmiprvse.exe or svchost.exe. This activity is significant as it may indicate the use of a DCOM object to execute malicious scripts via mshta.exe, a common tactic in sophisticated attacks. If confirmed malicious, this could allow an attacker to execute arbitrary code, potentially leading to system compromise and further malicious activities.
   author: Michael Haag, Splunk
+  updated: '2025-09-18'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1218.005
-      name: Technique T1218.005
-    tactics: []
+      name: Mshta
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/suspicious_mshta_spawn.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/suspicious_mshta_spawn.yml
+      rule_sha256: sha256:f585db719d7945116a52ddda7460b6a820b82b8bad37922fd2a5f8253d95e7ed
+      detection_id: 4d33a488-5b5f-11eb-ae93-0242ac130002
+      source_version: 9
+      source_date: '2025-09-18'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218.005/atomic_red_team/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1218.005/atomic_red_team/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:9cd448deed170bd087c9cf2ca7cd2e7d4bc9ce60b13b254b2d39e858e7b020b4
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,8 +1,7 @@
 metadata:
   name: windows-cabinet-file-extraction-via-expand
   version: 2.0.0
-  description: 'Detects usage of expand.exe to extract Microsoft Cabinet (CAB) archives,
-    with
+  description: 'Detects usage of expand.exe to extract Microsoft Cabinet (CAB) archives, with
 
     emphasis on extractions into `C:\\ProgramData` or similar staging locations. In
 
@@ -10,10 +9,10 @@ metadata:
 
     ProgramData prior to persistence and execution. This behavior is a strong signal
 
-    for ingress tool transfer and staging of payloads.
-
-    '
+    for ingress tool transfer and staging of payloads.'
   author: Michael Haag, Splunk
+  updated: '2025-11-20'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -22,18 +21,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1105
-      name: Technique T1105
-    tactics: []
+      name: Ingress Tool Transfer
+      tactics:
+      - command-and-control
+    tactics:
+    - command-and-control
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_cabinet_file_extraction_via_expand.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_cabinet_file_extraction_via_expand.yml
+      rule_sha256: sha256:48273fdc18a49780854b04be9ee7aa9e1dd716376d658199b0560b4ed83e9fa2
+      detection_id: 4e3e3b8c-6d3a-4b47-9f5a-9e3e0a0a6f2f
+      source_version: 2
+      source_date: '2025-11-20'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1140/atomic_red_team/expand_windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1140/atomic_red_team/expand_windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:183204efd8001f652380ba1ae77789782e5934b1e5ffc7c079bb346bbb049342
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

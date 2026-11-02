@@ -1,20 +1,61 @@
 metadata:
   name: cisco-secure-firewall-intrusion-events-by-threat-activity
   version: 6.0.0
-  description: 'This analytic detects intrusion events from known threat activity
-    using Cisco Secure Firewall Intrusion Events.
+  description: 'This analytic detects intrusion events from known threat activity using Cisco Secure Firewall Intrusion Events.
 
-    It leverages Cisco Secure Firewall Threat Defense IntrusionEvent logs to identify
-    cases where one or multiple Snort signatures
+    It leverages Cisco Secure Firewall Threat Defense IntrusionEvent logs to identify cases where one or multiple Snort signatures
 
-    associated with a known threat or threat actor activity have been triggered within
-    a one-hour time window. The detection uses a
+    associated with a known threat or threat actor activity have been triggered within a one-hour time window. The detection uses a
 
-    lookup table (cisco_snort_ids_to_threat_mapping) to map Snort signature IDs to
-    known threat actors and their techniques.
+    lookup table (cisco_snort_ids_to_threat_mapping) to map Snort signature IDs to known threat actors and their techniques.
 
-    When multipl'
+    When multiple signatures associated with the same threat actor are triggered within the time window, and the count of
+
+    unique signatures matches or exceeds the expected number of signatures for that threat technique, an alert is generated.
+
+    This helps identify potential coordinated threat activity in your network environment by correlating related intrusion
+
+    events that occur in close temporal proximity.
+
+
+    Currently, this detection will alert on the following threat actors or malware families as defined in the cisco_snort_ids_to_threat_mapping lookup:
+
+
+    * AgentTesla
+
+    * Amadey
+
+    * ArcaneDoor
+
+    * AsyncRAT
+
+    * CastleRAT
+
+    * Chafer
+
+    * DCRAT
+
+    * LokiBot
+
+    * Lumma Stealer
+
+    * Nobelium
+
+    * Quasar
+
+    * Remcos
+
+    * Snake
+
+    * Static Tundra
+
+    * Xworm
+
+
+    To add or update threat actors, update the cisco_snort_ids_to_threat_mapping.csv lookup file with new or modified threat names and associated Snort signature IDs.'
   author: Bhavin Patel, Nasreddine Bencherchali, Splunk
+  updated: '2026-06-01'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -23,20 +64,45 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1041
-      name: Technique T1041
+      name: Exfiltration Over C2 Channel
+      tactics:
+      - exfiltration
     - id: T1573.002
-      name: Technique T1573.002
-    tactics: []
+      name: Asymmetric Cryptography
+      tactics:
+      - command-and-control
+    tactics:
+    - command-and-control
+    - exfiltration
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/network/cisco_secure_firewall___intrusion_events_by_threat_activity.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/network/cisco_secure_firewall___intrusion_events_by_threat_activity.yml
+      rule_sha256: sha256:20e21edfac2e204e1be65efdfd345f228914a182f14f51c5275fca8abb068200
+      detection_id: b71e57e8-c571-4ff1-ae13-bc4384a9e891
+      source_version: 6
+      source_date: '2026-06-01'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_secure_firewall_threat_defense/lumma_stealer/lumma_stealer_events.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/cisco_secure_firewall_threat_defense/lumma_stealer/lumma_stealer_events.log
     description: not_applicable - cisco:sfw:estreamer
     format: auto
     schema: raw
     sourcetype: cisco:sfw:estreamer
+    checksum: sha256:94f3acbdeb98527184106eb4546cfeebfca3e9f807932faade314181ad16ff0a
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

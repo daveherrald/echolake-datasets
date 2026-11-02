@@ -1,14 +1,10 @@
 metadata:
   name: windows-audit-policy-excluded-category-via-auditpol
   version: 3.0.0
-  description: The following analytic identifies the execution of `auditpol.exe` with
-    the "/set" and "/exclude" command-line arguments which indicates that the user's
-    per-user policy will cause audit to be suppressed regardless of the system audit
-    policy. It leverages data from Endpoint Detection and Response (EDR) agents, focusing
-    on process names and command-line executions. This activity can be significant
-    as it indicates potential defense evasion by adversaries or Red Teams, aiming
-    to exclude specific user
+  description: The following analytic identifies the execution of `auditpol.exe` with the "/set" and "/exclude" command-line arguments which indicates that the user's per-user policy will cause audit to be suppressed regardless of the system audit policy. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line executions. This activity can be significant as it indicates potential defense evasion by adversaries or Red Teams, aiming to exclude specific users events from log data. If confirmed malicious, this behavior could allow attackers to bypass defenses, and plan further attacks, potentially leading to full machine compromise or lateral movement.
   author: Nasreddine Bencherchali, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,23 +12,46 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1562.002
-      name: Technique T1562.002
-    tactics: []
+      name: Disable Windows Event Logging
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_audit_policy_excluded_category_via_auditpol.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_audit_policy_excluded_category_via_auditpol.yml
+      rule_sha256: sha256:58ffd648c44a0fd4dcb4162ab337a972b9ed19e4b9fc78b1e230282968e677e1
+      detection_id: 083708d4-d763-4ba2-87ac-105b526de81a
+      source_version: 3
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.002/auditpol_tampering/auditpol_tampering_sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1562.002/auditpol_tampering/auditpol_tampering_sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.002/auditpol_tampering/auditpol_tampering_security.log
+    checksum: sha256:a417ec3d8d48c9cdcf4d5bcfc834fe100ba8a03105bcf08305f5af40a830b363
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1562.002/auditpol_tampering/auditpol_tampering_security.log
     description: XmlWinEventLog:Security - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:72676e3ca8de940f4eb181c3642c4f3ce3df5fea2e5a4da29d346ea562ab4045
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

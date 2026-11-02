@@ -1,14 +1,10 @@
 metadata:
   name: o365-high-privilege-role-granted
   version: 7.0.0
-  description: The following analytic detects when high-privilege roles such as "Exchange
-    Administrator," "SharePoint Administrator," or "Global Administrator" are granted
-    within Office 365. It leverages O365 audit logs to identify events where these
-    roles are assigned to any user or service account. This activity is significant
-    for SOCs as these roles provide extensive permissions, allowing broad access and
-    control over critical resources and data. If confirmed malicious, this could enable
-    attackers to gain s
+  description: The following analytic detects when high-privilege roles such as "Exchange Administrator," "SharePoint Administrator," or "Global Administrator" are granted within Office 365. It leverages O365 audit logs to identify events where these roles are assigned to any user or service account. This activity is significant for SOCs as these roles provide extensive permissions, allowing broad access and control over critical resources and data. If confirmed malicious, this could enable attackers to gain significant control over O365 resources, access, modify, or delete critical data, and compromise the overall security and functionality of the O365 environment.
   author: Mauricio Velazco, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +12,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1098.003
-      name: Technique T1098.003
-    tactics: []
+      name: Additional Cloud Roles
+      tactics:
+      - persistence
+      - privilege-escalation
+    tactics:
+    - persistence
+    - privilege-escalation
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/o365_high_privilege_role_granted.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/o365_high_privilege_role_granted.yml
+      rule_sha256: sha256:0139dd8c477ad703d48050826ca7c422414c2b9d00a026f460bf2dc6ee34cd67
+      detection_id: e78a1037-4548-4072-bb1b-ad99ae416426
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1098.003/o365_high_priv_role_assigned/o365_high_priv_role_assigned.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1098.003/o365_high_priv_role_assigned/o365_high_priv_role_assigned.log
     description: o365 - o365:management:activity
     format: auto
     schema: raw
     sourcetype: o365:management:activity
+    checksum: sha256:bf1dd93cef69ae323407fc710174a4b8ef77d42dc3bb9fc081847c96d518621c
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

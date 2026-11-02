@@ -1,14 +1,10 @@
 metadata:
   name: windows-dll-module-loaded-in-temp-dir
   version: 2.0.0
-  description: The following analytic detects instances where a Dynamic Link Library
-    (DLL) is loaded from a temporary directory on a Windows system. Loading DLLs from
-    non-standard paths such as %TEMP% is uncommon for legitimate applications and
-    is often associated with adversary tradecraft, including DLL search order hijacking,
-    side-loading, or execution of malicious payloads staged in temporary folders.
-    Adversaries frequently leverage these directories because they are writable by
-    standard users and often ove
+  description: The following analytic detects instances where a Dynamic Link Library (DLL) is loaded from a temporary directory on a Windows system. Loading DLLs from non-standard paths such as %TEMP% is uncommon for legitimate applications and is often associated with adversary tradecraft, including DLL search order hijacking, side-loading, or execution of malicious payloads staged in temporary folders. Adversaries frequently leverage these directories because they are writable by standard users and often overlooked by security controls, making them convenient locations to drop and execute malicious files. This behavior may indicate attempts to evade detection, execute unauthorized code, or maintain persistence through hijacked execution flows. Detection of DLL loads from %TEMP% can help surface early signs of compromise and should be investigated in the context of the originating process, user account, and potential file creation or modification activity within the same directory.
   author: Teoderick Contreras, Splunk
+  updated: '2025-09-30'
+  license: Apache-2.0
   tags:
   - hunting
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1105
-      name: Technique T1105
-    tactics: []
+      name: Ingress Tool Transfer
+      tactics:
+      - command-and-control
+    tactics:
+    - command-and-control
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_dll_module_loaded_in_temp_dir.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_dll_module_loaded_in_temp_dir.yml
+      rule_sha256: sha256:85c3e9f91da1671f000e8ee5a40dedc6f8b5aa6ad96f5fc06a1271ed318221aa
+      detection_id: c2998141-235a-4e31-83cf-46afb5208a87
+      source_version: 2
+      source_date: '2025-09-30'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1105/dll_loaded_in_temp/module_loaded_in_temp.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1105/dll_loaded_in_temp/module_loaded_in_temp.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:f190e90bdefef1523b5af5bade0c217c33efbd0eb8497ea2e812f805c8b1ef72
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

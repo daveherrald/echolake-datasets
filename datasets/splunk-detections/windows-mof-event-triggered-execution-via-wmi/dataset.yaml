@@ -1,14 +1,10 @@
 metadata:
   name: windows-mof-event-triggered-execution-via-wmi
   version: 10.0.0
-  description: The following analytic detects the execution of MOFComp.exe loading
-    a MOF file, often triggered by cmd.exe or powershell.exe, or from unusual paths
-    like User Profile directories. It leverages Endpoint Detection and Response (EDR)
-    data, focusing on process names, parent processes, and command-line executions.
-    This activity is significant as it may indicate an attacker using WMI for persistence
-    or lateral movement. If confirmed malicious, it could allow the attacker to execute
-    arbitrary code, main
+  description: The following analytic detects the execution of MOFComp.exe loading a MOF file, often triggered by cmd.exe or powershell.exe, or from unusual paths like User Profile directories. It leverages Endpoint Detection and Response (EDR) data, focusing on process names, parent processes, and command-line executions. This activity is significant as it may indicate an attacker using WMI for persistence or lateral movement. If confirmed malicious, it could allow the attacker to execute arbitrary code, maintain persistence, or escalate privileges within the environment.
   author: Michael Haag, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1546.003
-      name: Technique T1546.003
-    tactics: []
+      name: Windows Management Instrumentation Event Subscription
+      tactics:
+      - persistence
+      - privilege-escalation
+    tactics:
+    - persistence
+    - privilege-escalation
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_mof_event_triggered_execution_via_wmi.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_mof_event_triggered_execution_via_wmi.yml
+      rule_sha256: sha256:97fd5cf1e81fa78b15cbee025e8050de4e3d8fa0c72c35db2a1a0753d7f234ed
+      detection_id: e59b5a73-32bf-4467-a585-452c36ae10c1
+      source_version: 10
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1546.003/atomic_red_team/mofcomp.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1546.003/atomic_red_team/mofcomp.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:29ca39a4f1980c43f819440ed8084f74de090682784bdcf43ebcf85a911f0081
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

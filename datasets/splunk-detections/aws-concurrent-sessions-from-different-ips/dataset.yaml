@@ -1,14 +1,10 @@
 metadata:
   name: aws-concurrent-sessions-from-different-ips
   version: 8.0.0
-  description: 'The following analytic identifies an AWS IAM account with concurrent
-    sessions originating from more than one unique IP address within a 5-minute window.
-    It leverages AWS CloudTrail logs, specifically the `DescribeEventAggregates` event,
-    to detect this behavior. This activity is significant as it may indicate a session
-    hijacking attack, where an adversary uses stolen session cookies to access AWS
-    resources from a different location. If confirmed malicious, this could allow
-    unauthorized access to '
+  description: The following analytic identifies an AWS IAM account with concurrent sessions originating from more than one unique IP address within a 5-minute window. It leverages AWS CloudTrail logs, specifically the `DescribeEventAggregates` event, to detect this behavior. This activity is significant as it may indicate a session hijacking attack, where an adversary uses stolen session cookies to access AWS resources from a different location. If confirmed malicious, this could allow unauthorized access to sensitive corporate resources, leading to potential data breaches or further exploitation within the AWS environment.
   author: Bhavin Patel, Splunk
+  updated: '2025-10-14'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1185
-      name: Technique T1185
-    tactics: []
+      name: Browser Session Hijacking
+      tactics:
+      - collection
+    tactics:
+    - collection
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/aws_concurrent_sessions_from_different_ips.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/aws_concurrent_sessions_from_different_ips.yml
+      rule_sha256: sha256:683782d1b3f240eb2313b4a98579f08d2d64e1c8fa2ad64ca3988a24ec3f3831
+      detection_id: 51c04fdb-2746-465a-b86e-b413a09c9085
+      source_version: 8
+      source_date: '2025-10-14'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1185/aws_concurrent_sessions_from_different_ips/cloudtrail.json
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1185/aws_concurrent_sessions_from_different_ips/cloudtrail.json
     description: aws_cloudtrail - aws:cloudtrail
     format: auto
     schema: raw
     sourcetype: aws:cloudtrail
+    checksum: sha256:cf948583b0a978481ca3033c2d095ff4793b16c697a6de100dec18271067fad3
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

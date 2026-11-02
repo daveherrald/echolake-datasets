@@ -1,14 +1,10 @@
 metadata:
   name: github-enterprise-disable-ip-allow-list
   version: 2.0.0
-  description: 'The following analytic identifies when an IP allow list is disabled
-    in GitHub Enterprise. The detection monitors GitHub Enterprise audit logs for
-    actions related to disabling IP allow lists at the organization or enterprise
-    level. This behavior is concerning because IP allow lists are a critical security
-    control that restricts access to GitHub Enterprise resources to only trusted IP
-    addresses. When disabled, it could indicate an attacker attempting to bypass access
-    controls to gain unauthorized '
+  description: The following analytic identifies when an IP allow list is disabled in GitHub Enterprise. The detection monitors GitHub Enterprise audit logs for actions related to disabling IP allow lists at the organization or enterprise level. This behavior is concerning because IP allow lists are a critical security control that restricts access to GitHub Enterprise resources to only trusted IP addresses. When disabled, it could indicate an attacker attempting to bypass access controls to gain unauthorized access from untrusted networks. The impact includes potential exposure of sensitive code repositories and GitHub Enterprise resources to access from any IP address. SOC teams should investigate such events, especially if they were not pre-approved changes, as they may indicate compromise of admin credentials or malicious insider activity.
   author: Patrick Bareiss, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,20 +12,45 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1562.001
-      name: Technique T1562.001
+      name: Disable or Modify Tools
+      tactics:
+      - defense-evasion
     - id: T1195
-      name: Technique T1195
-    tactics: []
+      name: Supply Chain Compromise
+      tactics:
+      - initial-access
+    tactics:
+    - initial-access
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/github_enterprise_disable_ip_allow_list.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/github_enterprise_disable_ip_allow_list.yml
+      rule_sha256: sha256:f03fbb3f7a5896ebbcca48961811c7d1afcdb4cb174b79bee7d2710098dc3f50
+      detection_id: afed020e-edcd-4913-a675-cebedf81d4fb
+      source_version: 2
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.001/github_disable_ip_allow_list/github.json
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1562.001/github_disable_ip_allow_list/github.json
     description: http:github - httpevent
     format: auto
     schema: raw
     sourcetype: httpevent
+    checksum: sha256:10e93f0a05dd83768698c8160888b46c6cfd524cc2c7a98e874f62f9ea83a36f
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

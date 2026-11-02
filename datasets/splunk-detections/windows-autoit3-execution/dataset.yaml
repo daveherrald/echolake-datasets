@@ -1,14 +1,22 @@
 metadata:
   name: windows-autoit3-execution
   version: 9.0.0
-  description: "The following analytic detects the execution of AutoIt3, a scripting\n\
-    language often used for automating Windows GUI tasks and general scripting. \n\
-    It identifies instances where AutoIt3 or its variants are executed by searching\
-    \ for process names\nor original file names matching 'autoit3.exe'. \nThis activity\
-    \ is significant because attackers frequently use AutoIt3 to automate malicious\
-    \ actions, such as executing malware. \nIf confirmed malicious, this activity\
-    \ could lead to unauthorized code execution"
+  description: 'The following analytic detects the execution of AutoIt3, a scripting
+
+    language often used for automating Windows GUI tasks and general scripting.
+
+    It identifies instances where AutoIt3 or its variants are executed by searching for process names
+
+    or original file names matching ''autoit3.exe''.
+
+    This activity is significant because attackers frequently use AutoIt3 to automate malicious actions, such as executing malware.
+
+    If confirmed malicious, this activity could lead to unauthorized code execution,
+
+    system compromise, or further propagation of malware within the environment.'
   author: Michael Haag, Splunk
+  updated: '2025-10-06'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +26,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1059
-      name: Technique T1059
-    tactics: []
+      name: Command and Scripting Interpreter
+      tactics:
+      - execution
+    tactics:
+    - execution
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_autoit3_execution.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_autoit3_execution.yml
+      rule_sha256: sha256:b4ad3084b9a4d4a0e13320db6c97b6c34f54f032ed49b3ec402619f31281cba7
+      detection_id: 0ecb40d9-492b-4a57-9f87-515dd742794c
+      source_version: 9
+      source_date: '2025-10-06'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059/autoit/sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1059/autoit/sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:a97cf678542378d2e601570980f086cba1980c5ead1a73c01656527c32cf607a
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

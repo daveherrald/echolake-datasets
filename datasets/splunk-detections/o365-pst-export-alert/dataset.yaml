@@ -1,14 +1,10 @@
 metadata:
   name: o365-pst-export-alert
   version: 7.0.0
-  description: The following analytic detects instances where a user has initiated
-    an eDiscovery search or exported a PST file in an Office 365 environment. It leverages
-    Office 365 management activity logs, specifically filtering for events under ThreatManagement
-    with the name "eDiscovery search started or exported." This activity is significant
-    as it may indicate data exfiltration attempts or unauthorized access to sensitive
-    information. If confirmed malicious, it suggests an attacker or insider threat
-    is att
+  description: The following analytic detects instances where a user has initiated an eDiscovery search or exported a PST file in an Office 365 environment. It leverages Office 365 management activity logs, specifically filtering for events under ThreatManagement with the name "eDiscovery search started or exported." This activity is significant as it may indicate data exfiltration attempts or unauthorized access to sensitive information. If confirmed malicious, it suggests an attacker or insider threat is attempting to gather or exfiltrate data, potentially leading to data breaches, loss of intellectual property, or unauthorized access to confidential communications. Immediate investigation is required.
   author: Rod Soto, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1114
-      name: Technique T1114
-    tactics: []
+      name: Email Collection
+      tactics:
+      - collection
+    tactics:
+    - collection
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/o365_pst_export_alert.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/o365_pst_export_alert.yml
+      rule_sha256: sha256:79619cb118a23444bfe69edc89c13e016fb6cfba288a02e8a29b11375472cb27
+      detection_id: 5f694cc4-a678-4a60-9410-bffca1b647dc
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1114/o365_export_pst_file/o365_export_pst_file.json
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1114/o365_export_pst_file/o365_export_pst_file.json
     description: o365 - o365:management:activity
     format: auto
     schema: raw
     sourcetype: o365:management:activity
+    checksum: sha256:922f890f21279e6dcec8ec0f765e3451cb0715ba0640f014267c5d582998a16b
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,14 +1,10 @@
 metadata:
   name: cisco-isovalent-nsenter-usage-in-kubernetes-pod
   version: 1.0.0
-  description: This analytic detects the execution of the nsenter utility from within
-    a container, a technique often used for exploitation and container escape. Nsenter
-    allows an attacker to enter the namespaces of another process—such as the host's
-    init process (PID 1)—and execute a shell or other binaries with elevated privileges.
-    For example, an attacker may use docker exec to gain a shell in a container, enumerate
-    the PID of a target container or the host, and then use nsenter to access all
-    namespaces (mou
+  description: "This analytic detects the execution of the nsenter utility from within a container, a technique often used for exploitation and container escape. Nsenter allows an attacker to enter the namespaces of another process\u2014such as the host's init process (PID 1)\u2014and execute a shell or other binaries with elevated privileges. For example, an attacker may use docker exec to gain a shell in a container, enumerate the PID of a target container or the host, and then use nsenter to access all namespaces (mount, UTS, IPC, net, pid) of the host or another container.  Example to escape to the host: `nsenter --target 1 --mount --uts --ipc --net --pid -- bash`. The WorkloadAncestorsBinary field is used to track the ancestry of the process, this is useful to understand the context of the nsenter usage.\n\nThe options -m -u -n -i -p correspond to the various Linux namespaces. Adversaries exploit nsenter when pods are misconfigured with excessive privileges (e.g., privileged, hostPID, or broad hostPath mounts), enabling them to interact with the underlying node filesystem and processes. This can be an indicator of a container escape attempt or privilege escalation. Security teams should pay close attention to any nsenter invocation from within containers, especially outside of normal maintenance activity or in workloads with elevated privileges."
   author: Bhavin Patel, Splunk
+  updated: '2026-01-05'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1543
-      name: Technique T1543
-    tactics: []
+      name: Create or Modify System Process
+      tactics:
+      - persistence
+      - privilege-escalation
+    tactics:
+    - persistence
+    - privilege-escalation
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/cisco_isovalent___nsenter_usage_in_kubernetes_pod.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/cisco_isovalent___nsenter_usage_in_kubernetes_pod.yml
+      rule_sha256: sha256:330cc5976459b26839c1b0f1b12597aa828994f4726e4f02e2828f80174f3500
+      detection_id: cd07120d-4265-481a-ba0f-3b91fbc5a02f
+      source_version: 1
+      source_date: '2026-01-05'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_isovalent/cisco_isovalent.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/cisco_isovalent/cisco_isovalent.log
     description: not_applicable - cisco:isovalent:processExec
     format: auto
     schema: raw
     sourcetype: cisco:isovalent:processExec
+    checksum: sha256:2cb7e1ad95df218a8823f7f7d517be3f57ee067716c7efb35edc9bb0e1fa7914
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,14 +1,10 @@
 metadata:
   name: sam-database-file-access-attempt
   version: 7.0.0
-  description: The following analytic detects attempts to access the SAM, SYSTEM,
-    or SECURITY database files within the `windows\system32\config` directory using
-    Windows Security EventCode 4663. This detection leverages Windows Security Event
-    logs to identify unauthorized access attempts. Monitoring this activity is crucial
-    as it indicates potential credential access attempts, possibly exploiting vulnerabilities
-    like CVE-2021-36934. If confirmed malicious, an attacker could extract user passwords,
-    leading to u
+  description: The following analytic detects attempts to access the SAM, SYSTEM, or SECURITY database files within the `windows\system32\config` directory using Windows Security EventCode 4663. This detection leverages Windows Security Event logs to identify unauthorized access attempts. Monitoring this activity is crucial as it indicates potential credential access attempts, possibly exploiting vulnerabilities like CVE-2021-36934. If confirmed malicious, an attacker could extract user passwords, leading to unauthorized access, privilege escalation, and further compromise of the system.
   author: Michael Haag, Mauricio Velazco, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - hunting
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1003.002
-      name: Technique T1003.002
-    tactics: []
+      name: Security Account Manager
+      tactics:
+      - credential-access
+    tactics:
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/sam_database_file_access_attempt.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/sam_database_file_access_attempt.yml
+      rule_sha256: sha256:37d8cd4bb5362ed09c036997afe39fa284f1bc00c42995633e9621f32f4b0e76
+      detection_id: 57551656-ebdb-11eb-afdf-acde48001122
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1003.002/serioussam/windows-xml.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1003.002/serioussam/windows-xml.log
     description: XmlWinEventLog:Security - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:5fee45165d56b7dc3d5c3f809b940b9a7daf29e71c71119fc2cc7b6f56518ea4
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

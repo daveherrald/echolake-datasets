@@ -1,14 +1,10 @@
 metadata:
   name: linux-auditd-kernel-module-enumeration
   version: 6.0.0
-  description: The following analytic identifies the use of the 'kmod' process to
-    list kernel modules on a Linux system. This detection leverages data from Linux
-    Auditd, focusing on process names and command-line executions. While listing kernel
-    modules is not inherently malicious, it can be a precursor to loading unauthorized
-    modules using 'insmod'. If confirmed malicious, this activity could allow an attacker
-    to load kernel modules, potentially leading to privilege escalation, persistence,
-    or other malicious
+  description: The following analytic identifies the use of the 'kmod' process to list kernel modules on a Linux system. This detection leverages data from Linux Auditd, focusing on process names and command-line executions. While listing kernel modules is not inherently malicious, it can be a precursor to loading unauthorized modules using 'insmod'. If confirmed malicious, this activity could allow an attacker to load kernel modules, potentially leading to privilege escalation, persistence, or other malicious actions within the system.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,20 +14,45 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1082
-      name: Technique T1082
+      name: System Information Discovery
+      tactics:
+      - discovery
     - id: T1014
-      name: Technique T1014
-    tactics: []
+      name: Rootkit
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+    - discovery
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/linux_auditd_kernel_module_enumeration.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/linux_auditd_kernel_module_enumeration.yml
+      rule_sha256: sha256:282ef011122f1e03ad4390b8cf3e6dfaa6747ab14ce5d999d16ca8bf3c805998
+      detection_id: d1b088de-c47a-4572-9339-bdcc26493b32
+      source_version: 6
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1082/linux_auditd_lsmod_new/linux_auditd_new_lsmod.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1082/linux_auditd_lsmod_new/linux_auditd_new_lsmod.log
     description: auditd - auditd
     format: auto
     schema: raw
     sourcetype: auditd
+    checksum: sha256:abf7f579f94d3e6f0298870555cb985f36e65c29eb9b470b50e1d1f94ed54a9a
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

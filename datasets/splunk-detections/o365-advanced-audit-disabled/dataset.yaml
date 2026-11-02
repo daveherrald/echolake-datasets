@@ -1,14 +1,10 @@
 metadata:
   name: o365-advanced-audit-disabled
   version: 7.0.0
-  description: The following analytic detects instances where the O365 advanced audit
-    is disabled for a specific user within the Office 365 tenant. It uses O365 audit
-    logs, focusing on events related to audit license changes in AzureActiveDirectory
-    workloads. This activity is significant because the O365 advanced audit provides
-    critical logging and insights into user and administrator activities. Disabling
-    it can blind security teams to potential malicious actions. If confirmed malicious,
-    attackers could opera
+  description: The following analytic detects instances where the O365 advanced audit is disabled for a specific user within the Office 365 tenant. It uses O365 audit logs, focusing on events related to audit license changes in AzureActiveDirectory workloads. This activity is significant because the O365 advanced audit provides critical logging and insights into user and administrator activities. Disabling it can blind security teams to potential malicious actions. If confirmed malicious, attackers could operate within the user's mailbox or account with reduced risk of detection, leading to unauthorized data access, data exfiltration, or account compromise.
   author: Mauricio Velazco, Michael Haag, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1562.008
-      name: Technique T1562.008
-    tactics: []
+      name: Disable or Modify Cloud Logs
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/o365_advanced_audit_disabled.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/o365_advanced_audit_disabled.yml
+      rule_sha256: sha256:303b0b2b97fe41fd32229f9ccfb1e484f3255a164048f189c757de0a71427d79
+      detection_id: 49862dd4-9cb2-4c48-a542-8c8a588d9361
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.008/o365_advanced_audit_disabled/o365_advanced_audit_disabled.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1562.008/o365_advanced_audit_disabled/o365_advanced_audit_disabled.log
     description: o365 - o365:management:activity
     format: auto
     schema: raw
     sourcetype: o365:management:activity
+    checksum: sha256:351ae63e42a4533080f2411bcbf345b2439f933fd1800e31996f06a3f6efb50c
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

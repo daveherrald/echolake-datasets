@@ -1,17 +1,16 @@
 metadata:
   name: advanced-ip-or-port-scanner-execution
   version: 1.0.0
-  description: 'The following analytic detects the execution of network scanning utilities
-    such as Advanced IP Scanner or Advanced Port Scanner.
+  description: 'The following analytic detects the execution of network scanning utilities such as Advanced IP Scanner or Advanced Port Scanner.
 
-    These legitimate administrative tools are often leveraged by threat actors and
-    ransomware operators during the discovery phase to enumerate active hosts and
-    open ports within a target environment.
+    These legitimate administrative tools are often leveraged by threat actors and ransomware operators during the discovery phase to enumerate active hosts and open ports within a target environment.
 
-    Detection is based on process creation telemetry referencing known executable
-    names, original file names, or specific command-line parameters such as "/portable"
-    and "/lng" t'
+    Detection is based on process creation telemetry referencing known executable names, original file names, or specific command-line parameters such as "/portable" and "/lng" that are characteristic of these tools.
+
+    If confirmed malicious, this activity may indicate internal reconnaissance aimed at identifying reachable systems or services prior to lateral movement or further post-compromise actions.'
   author: Nasreddine Bencherchali, Splunk
+  updated: '2025-10-13'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -19,20 +18,44 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1046
-      name: Technique T1046
+      name: Network Service Discovery
+      tactics:
+      - discovery
     - id: T1135
-      name: Technique T1135
-    tactics: []
+      name: Network Share Discovery
+      tactics:
+      - discovery
+    tactics:
+    - discovery
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/advanced_ip_or_port_scanner_execution.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/advanced_ip_or_port_scanner_execution.yml
+      rule_sha256: sha256:998bb045b0431c95931de8289ebf5b856dea6f506cfb15812912114620f51ef8
+      detection_id: 9a4e50c7-5b62-4d52-93b4-f2b61332e9a5
+      source_version: 1
+      source_date: '2025-10-13'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1046/advanced_ip_port_scanner/advanced_ip_port_scanner.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1046/advanced_ip_port_scanner/advanced_ip_port_scanner.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:3a4fb67d7aa2e86c0ecedb60c9d02c9b4a178a7a8fdf228c0535a965ce7dad6c
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

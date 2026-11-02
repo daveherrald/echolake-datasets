@@ -1,14 +1,10 @@
 metadata:
   name: windows-powershell-script-block-with-malicious-string
   version: 3.0.0
-  description: The following analytic detects the execution of multiple offensive
-    toolkits and commands by leveraging PowerShell Script Block Logging (EventCode=4104).
-    This method captures and logs the full command sent to PowerShell, allowing for
-    the identification of suspicious activities including several well-known tools
-    used for credential theft, lateral movement, and persistence. If confirmed malicious,
-    this could lead to unauthorized access, privilege escalation, and potential compromise
-    of sensitive in
+  description: The following analytic detects the execution of multiple offensive toolkits and commands by leveraging PowerShell Script Block Logging (EventCode=4104). This method captures and logs the full command sent to PowerShell, allowing for the identification of suspicious activities including several well-known tools used for credential theft, lateral movement, and persistence. If confirmed malicious, this could lead to unauthorized access, privilege escalation, and potential compromise of sensitive information within the environment.
   author: Steven Dick
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1059.001
-      name: Technique T1059.001
-    tactics: []
+      name: PowerShell
+      tactics:
+      - execution
+    tactics:
+    - execution
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_powershell_script_block_with_malicious_string.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_powershell_script_block_with_malicious_string.yml
+      rule_sha256: sha256:630e230080696dacd2b4cfda8f4969bbef37f11e417163f52f183dcf923e0b9b
+      detection_id: 0f09cedd-10f1-4b9f-bdea-7a8b06ea575d
+      source_version: 3
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1552.006/powershell_gpp_discovery/win-powershell.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1552.006/powershell_gpp_discovery/win-powershell.log
     description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:a1a710999a7432a1c4d01e25a3f6852cbe9e93ffcb6a2f4a51fef66d04fcc9a0
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

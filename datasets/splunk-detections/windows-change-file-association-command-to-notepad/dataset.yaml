@@ -1,17 +1,16 @@
 metadata:
   name: windows-change-file-association-command-to-notepad
   version: 1.0.0
-  description: 'The following analytic detects attempts to change the command value
-    of a file association of an extension to open with Notepad.exe.
+  description: 'The following analytic detects attempts to change the command value of a file association of an extension to open with Notepad.exe.
 
-    It leverages data from Endpoint Detection and Response (EDR) agents, focusing
-    on specific command-line patterns and registry modifications.
+    It leverages data from Endpoint Detection and Response (EDR) agents, focusing on specific command-line patterns and registry modifications.
 
-    This activity is significant as it can indicate an attempt to manipulate file
-    handling behavior, a technique observed in APT and ransomware attacks like Prestige.
+    This activity is significant as it can indicate an attempt to manipulate file handling behavior, a technique observed in APT and ransomware attacks like Prestige.
 
-    After changing the extension of all encrypted files to a new one,'
+    After changing the extension of all encrypted files to a new one, Prestige ransomware modifies the file association for that extension to open with Notepad.exe in order to display a ransom note.'
   author: Teoderick Contreras, Nasreddine Bencherchali, Splunk
+  updated: '2025-10-06'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -20,18 +19,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1546.001
-      name: Technique T1546.001
-    tactics: []
+      name: Change Default File Association
+      tactics:
+      - persistence
+      - privilege-escalation
+    tactics:
+    - persistence
+    - privilege-escalation
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_change_file_association_command_to_notepad.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_change_file_association_command_to_notepad.yml
+      rule_sha256: sha256:0b820736f6a24fc403c60fea97cf4f8f46f92d090c2a5fe0de27e81dcdde3f1c
+      detection_id: 339155d6-34cb-4788-9d00-e67f190af93a
+      source_version: 1
+      source_date: '2025-10-06'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/prestige_ransomware/sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/prestige_ransomware/sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:ae83b90c36ecb96cd81c449d225962f36ca4771a3c8a518ebd63fe4988a0dd86
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

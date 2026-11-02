@@ -1,14 +1,10 @@
 metadata:
   name: linux-auditd-install-kernel-module-using-modprobe-utility
   version: 7.0.0
-  description: The following analytic detects the installation of a Linux kernel module
-    using the modprobe utility. It leverages data from Linux Auditd, focusing on process
-    names and command-line executions. This activity is significant because installing
-    a kernel module can indicate an attempt to deploy a rootkit or other malicious
-    kernel-level code, potentially leading to elevated privileges and bypassing security
-    detections. If confirmed malicious, this could allow an attacker to gain persistent,
-    high-level
+  description: The following analytic detects the installation of a Linux kernel module using the modprobe utility. It leverages data from Linux Auditd, focusing on process names and command-line executions. This activity is significant because installing a kernel module can indicate an attempt to deploy a rootkit or other malicious kernel-level code, potentially leading to elevated privileges and bypassing security detections. If confirmed malicious, this could allow an attacker to gain persistent, high-level access to the system, compromising its integrity and security.
   author: Teoderick Contreras, Splunk
+  updated: '2025-08-18'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,18 +14,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1547.006
-      name: Technique T1547.006
-    tactics: []
+      name: Kernel Modules and Extensions
+      tactics:
+      - persistence
+      - privilege-escalation
+    tactics:
+    - persistence
+    - privilege-escalation
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/linux_auditd_install_kernel_module_using_modprobe_utility.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/linux_auditd_install_kernel_module_using_modprobe_utility.yml
+      rule_sha256: sha256:c55d3be35a6c5b99d8b96c81934904c90924cf9d00f209c988f56b6d8338bffb
+      detection_id: 95165985-ace5-4d42-9c42-93a89a5af901
+      source_version: 7
+      source_date: '2025-08-18'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1547.006/linux_auditd_modprobe_new/linux_auditd_new_modprobe.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1547.006/linux_auditd_modprobe_new/linux_auditd_new_modprobe.log
     description: auditd - auditd
     format: auto
     schema: raw
     sourcetype: auditd
+    checksum: sha256:66aefc5e9518639993c9739948451a6593899d63e6ee93b0b685191c02627caf
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

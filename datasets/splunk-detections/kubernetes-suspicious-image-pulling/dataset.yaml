@@ -1,14 +1,10 @@
 metadata:
   name: kubernetes-suspicious-image-pulling
   version: 5.0.0
-  description: The following analytic detects suspicious image pulling in Kubernetes
-    environments. It identifies this activity by monitoring Kubernetes audit logs
-    for image pull requests that do not match a predefined list of allowed images.
-    This behavior is significant for a SOC as it may indicate an attacker attempting
-    to deploy malicious software or infiltrate the system. If confirmed malicious,
-    the impact could be severe, potentially leading to unauthorized access to sensitive
-    systems or data, and enabling
+  description: The following analytic detects suspicious image pulling in Kubernetes environments. It identifies this activity by monitoring Kubernetes audit logs for image pull requests that do not match a predefined list of allowed images. This behavior is significant for a SOC as it may indicate an attacker attempting to deploy malicious software or infiltrate the system. If confirmed malicious, the impact could be severe, potentially leading to unauthorized access to sensitive systems or data, and enabling further malicious activities within the cluster.
   author: Patrick Bareiss, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1526
-      name: Technique T1526
-    tactics: []
+      name: Cloud Service Discovery
+      tactics:
+      - discovery
+    tactics:
+    - discovery
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/kubernetes_suspicious_image_pulling.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/kubernetes_suspicious_image_pulling.yml
+      rule_sha256: sha256:ca68ce40270d7cde0fc5f1bb9843538df6160d1861b071bade3b26d04749ffd1
+      detection_id: 4d3a17b3-0a6d-4ae0-9421-46623a69c122
+      source_version: 5
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1526/kubernetes_audit_pull_image/kubernetes_audit_pull_image.json
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1526/kubernetes_audit_pull_image/kubernetes_audit_pull_image.json
     description: kubernetes - _json
     format: auto
     schema: raw
     sourcetype: _json
+    checksum: sha256:475f2dd4d793bb9d32dbfab2ce49968010b13edc9c35ae09e9f989134ae3a8ba
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,10 +1,10 @@
 metadata:
   name: esxi-system-clock-manipulation
   version: 1.0.0
-  description: This detection identifies a significant change to the system clock
-    on an ESXi host, which may indicate an attempt to manipulate timestamps and evade
-    detection or forensic analysis
+  description: This detection identifies a significant change to the system clock on an ESXi host, which may indicate an attempt to manipulate timestamps and evade detection or forensic analysis
   author: Raven Tait, Splunk
+  updated: '2025-05-19'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -13,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1070.006
-      name: Technique T1070.006
-    tactics: []
+      name: Timestomp
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/application/esxi_system_clock_manipulation.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/application/esxi_system_clock_manipulation.yml
+      rule_sha256: sha256:27b5ae0fa3c145b7230cbd5d11dc7a6dd5f44ac6e91ee5166337c969e854da6a
+      detection_id: 910df401-b215-4675-88c5-2ad7b06d82a5
+      source_version: 1
+      source_date: '2025-05-19'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1070/esxi_system_clock_manipulation/esxi_system_clock_manipulation.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1070/esxi_system_clock_manipulation/esxi_system_clock_manipulation.log
     description: vmware:esxlog - vmw-syslog
     format: auto
     schema: raw
     sourcetype: vmw-syslog
+    checksum: sha256:7cb44861fb8575eb9e3c3176dea650c85f8f670a7156247b7744d65639c5f43c
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h
