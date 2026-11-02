@@ -1,14 +1,10 @@
 metadata:
   name: azure-ad-external-guest-user-invited
   version: 8.0.0
-  description: The following analytic detects the invitation of an external guest
-    user within Azure AD. It leverages Azure AD AuditLogs to identify events where
-    an external user is invited, using fields such as operationName and initiatedBy.
-    Monitoring these invitations is crucial as they can lead to unauthorized access
-    if abused. If confirmed malicious, this activity could allow attackers to gain
-    access to internal resources, potentially leading to data breaches or further
-    exploitation of the environment.
+  description: The following analytic detects the invitation of an external guest user within Azure AD. It leverages Azure AD AuditLogs to identify events where an external user is invited, using fields such as operationName and initiatedBy. Monitoring these invitations is crucial as they can lead to unauthorized access if abused. If confirmed malicious, this activity could allow attackers to gain access to internal resources, potentially leading to data breaches or further exploitation of the environment.
   author: Gowthamaraj Rajendran, Mauricio Velazco, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1136.003
-      name: Technique T1136.003
-    tactics: []
+      name: Cloud Account
+      tactics:
+      - persistence
+    tactics:
+    - persistence
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/azure_ad_external_guest_user_invited.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/azure_ad_external_guest_user_invited.yml
+      rule_sha256: sha256:6363bcc998d11b42c81e5715faf9020beaff30839785519139c73e358639e06b
+      detection_id: c1fb4edb-cab1-4359-9b40-925ffd797fb5
+      source_version: 8
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1136.003/azure_ad_external_guest_user_invited/azure-audit.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1136.003/azure_ad_external_guest_user_invited/azure-audit.log
     description: Azure AD - azure:monitor:aad
     format: auto
     schema: raw
     sourcetype: azure:monitor:aad
+    checksum: sha256:aff6198be1ded2c3d1bbce45745996b541181b8fb3c5af6887be357627f25d4a
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

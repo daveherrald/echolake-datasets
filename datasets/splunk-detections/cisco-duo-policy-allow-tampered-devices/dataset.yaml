@@ -1,14 +1,24 @@
 metadata:
   name: cisco-duo-policy-allow-tampered-devices
   version: 1.0.0
-  description: "The following analytic detects when a Duo policy is created or updated\
-    \ to allow tampered or rooted devices, such as jailbroken smartphones, \nto access\
-    \ protected resources. It identifies this behavior by searching Duo administrator\
-    \ activity logs for policy changes where the allow_rooted_devices \nsetting is\
-    \ enabled. This is accomplished by filtering for policy creation or update actions\
-    \ and parsing the policy description for the relevant configuration. \nAllowing\
-    \ tampered devices poses a significan"
+  description: 'The following analytic detects when a Duo policy is created or updated to allow tampered or rooted devices, such as jailbroken smartphones,
+
+    to access protected resources. It identifies this behavior by searching Duo administrator activity logs for policy changes where the allow_rooted_devices
+
+    setting is enabled. This is accomplished by filtering for policy creation or update actions and parsing the policy description for the relevant configuration.
+
+    Allowing tampered devices poses a significant security risk, as these devices may bypass built-in security controls, run unauthorized software, or be more
+
+    susceptible to compromise. For a Security Operations Center (SOC), identifying such policy changes is critical because it may indicate either a
+
+    misconfiguration or a malicious attempt to weaken authentication requirements, potentially enabling attackers to access sensitive systems with
+
+    compromised devices. The impact of this attack can include unauthorized access, data breaches, and lateral movement within the environment,
+
+    making prompt detection and response essential to maintaining organizational security.'
   author: Patrick Bareiss, Splunk
+  updated: '2025-07-10'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +26,44 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1556
-      name: Technique T1556
-    tactics: []
+      name: Modify Authentication Process
+      tactics:
+      - persistence
+      - defense-evasion
+      - credential-access
+    tactics:
+    - persistence
+    - defense-evasion
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/application/cisco_duo_policy_allow_tampered_devices.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/application/cisco_duo_policy_allow_tampered_devices.yml
+      rule_sha256: sha256:921a7a276deac2f49b1c7d2dda05681ebb69ac1ae7ac300f4e1d0f8b42bd8812
+      detection_id: 6b813efd-8859-406f-b677-719458387fac
+      source_version: 1
+      source_date: '2025-07-10'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1556/cisco_duo_policy_allow_tampered_devices/cisco_duo_administrator.json
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1556/cisco_duo_policy_allow_tampered_devices/cisco_duo_administrator.json
     description: duo - cisco:duo:administrator
     format: auto
     schema: raw
     sourcetype: cisco:duo:administrator
+    checksum: sha256:5d4bf93f8c0d7b075f3a9db935dca4ff934ecb9920dafbb1ae4965d1e30c125e
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

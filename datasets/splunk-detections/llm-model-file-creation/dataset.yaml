@@ -1,17 +1,16 @@
 metadata:
   name: llm-model-file-creation
   version: 1.0.0
-  description: 'Detects the creation of Large Language Model (LLM) files on Windows
-    endpoints by monitoring file creation events for specific model file formats and
-    extensions commonly used by local AI frameworks.
+  description: 'Detects the creation of Large Language Model (LLM) files on Windows endpoints by monitoring file creation events for specific model file formats and extensions commonly used by local AI frameworks.
 
-    This detection identifies potential shadow AI deployments, unauthorized model
-    downloads, and rogue LLM infrastructure by detecting file creation patterns associated
-    with quantized models (.gguf, .ggml), safetensors model format files, and Ollama
-    Modelfiles.
+    This detection identifies potential shadow AI deployments, unauthorized model downloads, and rogue LLM infrastructure by detecting file creation patterns associated with quantized models (.gguf, .ggml), safetensors model format files, and Ollama Modelfiles.
 
-    These file types are characteristic of local'
+    These file types are characteristic of local inference frameworks such as Ollama, llama.cpp, GPT4All, LM Studio, and similar tools that enable running LLMs locally without cloud dependencies.
+
+    Organizations can use this detection to identify potential data exfiltration risks, policy violations related to unapproved AI usage, and security blind spots created by decentralized AI deployments that bypass enterprise governance and monitoring.'
   author: Rod Soto
+  updated: '2025-11-12'
+  license: Apache-2.0
   tags:
   - hunting
   - splunk-security-content
@@ -19,18 +18,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1543
-      name: Technique T1543
-    tactics: []
+      name: Create or Modify System Process
+      tactics:
+      - persistence
+      - privilege-escalation
+    tactics:
+    - persistence
+    - privilege-escalation
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/llm_model_file_creation.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/llm_model_file_creation.yml
+      rule_sha256: sha256:9144b8a2c8bf318a1ba7e4879fd853d5b53541b4639b633021a8ee371e9724a8
+      detection_id: 23e5b797-378d-45d6-ab3e-d034ca12a99b
+      source_version: 1
+      source_date: '2025-11-12'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/suspicious_behaviour/local_llms/sysmon_local_llms.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/suspicious_behaviour/local_llms/sysmon_local_llms.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:4916f9587730db30bb5228a4b3e7c29ffde1d625f8f9ac830d8783e20b7ebcc8
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,14 +1,10 @@
 metadata:
   name: detect-excessive-account-lockouts-from-endpoint
   version: 13.0.0
-  description: The following analytic detects endpoints causing a high number of account
-    lockouts within a short period. It leverages the Windows security event logs ingested
-    into the `Change` datamodel, specifically under the `Account_Management` node,
-    to identify and count lockout events. This activity is significant as it may indicate
-    a brute-force attack or misconfigured system causing repeated authentication failures.
-    If confirmed malicious, this behavior could lead to account lockouts, disrupting
-    user ac
+  description: The following analytic detects endpoints causing a high number of account lockouts within a short period. It leverages the Windows security event logs ingested into the `Change` datamodel, specifically under the `Account_Management` node, to identify and count lockout events. This activity is significant as it may indicate a brute-force attack or misconfigured system causing repeated authentication failures. If confirmed malicious, this behavior could lead to account lockouts, disrupting user access and potentially indicating an ongoing attack attempting to compromise user credentials.
   author: David Dorsey, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,28 +12,58 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1078.002
-      name: Technique T1078.002
-    tactics: []
+      name: Domain Accounts
+      tactics:
+      - initial-access
+      - persistence
+      - privilege-escalation
+      - defense-evasion
+    tactics:
+    - initial-access
+    - persistence
+    - privilege-escalation
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/detect_excessive_account_lockouts_from_endpoint.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/detect_excessive_account_lockouts_from_endpoint.yml
+      rule_sha256: sha256:933117e70e3081a1b46b338815ae23a541e6dec37d414d9b48e9733fc24cf0e0
+      detection_id: c026e3dd-7e18-4abb-8f41-929e836efe74
+      source_version: 13
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1078.002/account_lockout/windows-security.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1078.002/account_lockout/windows-security.log
     description: WinEventLog:Security - WinEventLog
     format: auto
     schema: raw
     sourcetype: WinEventLog
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1078.002/account_lockout/windows-system.log
+    checksum: sha256:e60b409cbf58884ac39da3199a0187003b74f1b1d80b0018016b3098aedbfcc0
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1078.002/account_lockout/windows-system.log
     description: WinEventLog:System - WinEventLog
     format: auto
     schema: raw
     sourcetype: WinEventLog
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1078.002/account_lockout/windows-xml.log
+    checksum: sha256:663be837e4226e235edc796982a4343c12c780257198f9dcbc2752c1117bddbe
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1078.002/account_lockout/windows-xml.log
     description: XmlWinEventLog:Security - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:35b70e753d2c0eb3a0dc4bea2abfbc5bfdc78b7249f86ed4898a9cec965c6a28
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

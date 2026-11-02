@@ -1,14 +1,10 @@
 metadata:
   name: aws-bedrock-delete-knowledge-base
   version: 2.0.0
-  description: The following analytic identifies attempts to delete AWS Bedrock Knowledge
-    Bases, which are resources that store and manage domain-specific information for
-    AI models. It monitors AWS CloudTrail logs for DeleteKnowledgeBase API calls.
-    This activity could indicate an adversary attempting to remove knowledge bases
-    after compromising credentials, potentially to disrupt business operations or
-    remove traces of data access. Deleting knowledge bases could impact model performance,
-    remove critical busine
+  description: The following analytic identifies attempts to delete AWS Bedrock Knowledge Bases, which are resources that store and manage domain-specific information for AI models. It monitors AWS CloudTrail logs for DeleteKnowledgeBase API calls. This activity could indicate an adversary attempting to remove knowledge bases after compromising credentials, potentially to disrupt business operations or remove traces of data access. Deleting knowledge bases could impact model performance, remove critical business context, or be part of a larger attack to degrade AI capabilities. If confirmed malicious, this could represent a deliberate attempt to cause service disruption or data loss.
   author: Bhavin Patel, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1485
-      name: Technique T1485
-    tactics: []
+      name: Data Destruction
+      tactics:
+      - impact
+    tactics:
+    - impact
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/aws_bedrock_delete_knowledge_base.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/aws_bedrock_delete_knowledge_base.yml
+      rule_sha256: sha256:39923064e090791aef2d656045abd72de1c814a68c4b845a40fb82faa61870b6
+      detection_id: 8b4e3d62-f743-11ee-9f6e-acde48001123
+      source_version: 2
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1485/aws_delete_knowledge_base/cloudtrail.json
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1485/aws_delete_knowledge_base/cloudtrail.json
     description: aws_cloudtrail - aws:cloudtrail
     format: auto
     schema: raw
     sourcetype: aws:cloudtrail
+    checksum: sha256:0074532dade6167059a8b32c6fc31cf16e545d2668686e5c636818b9c77742b5
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

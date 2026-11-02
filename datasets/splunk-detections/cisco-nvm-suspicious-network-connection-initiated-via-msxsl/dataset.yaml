@@ -1,21 +1,18 @@
 metadata:
   name: cisco-nvm-suspicious-network-connection-initiated-via-msxsl
   version: 2.0.0
-  description: 'This analytic identifies the use of `msxsl.exe` initiating a network
-    connection to a non-private IP address.
+  description: 'This analytic identifies the use of `msxsl.exe` initiating a network connection to a non-private IP address.
 
-    Although `msxsl.exe` is a legitimate Microsoft utility used to apply XSLT transformations,
-    adversaries can abuse it
+    Although `msxsl.exe` is a legitimate Microsoft utility used to apply XSLT transformations, adversaries can abuse it
 
     to execute arbitrary code or load external resources in an evasive manner.
 
-    This detection leverages Cisco NVM telemetry to identify potentially malicious
-    use of `msxsl.exe` making network connections
+    This detection leverages Cisco NVM telemetry to identify potentially malicious use of `msxsl.exe` making network connections
 
-    that may indicate command and control (C2) or data exfiltration activity.
-
-    '
+    that may indicate command and control (C2) or data exfiltration activity.'
   author: Nasreddine Bencherchali, Splunk
+  updated: '2025-09-09'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -23,18 +20,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1220
-      name: Technique T1220
-    tactics: []
+      name: XSL Script Processing
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/cisco_nvm___suspicious_network_connection_initiated_via_msxsl.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/cisco_nvm___suspicious_network_connection_initiated_via_msxsl.yml
+      rule_sha256: sha256:b81f78a6e70e7b7a3aec6007438c57e29d75a102b135d173a35e224783629673
+      detection_id: 1cbcf75f-0e45-4f29-8c1b-7fcd7e55cc55
+      source_version: 2
+      source_date: '2025-09-09'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_network_visibility_module/cisco_nvm_flowdata/nvm_flowdata.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/cisco_network_visibility_module/cisco_nvm_flowdata/nvm_flowdata.log
     description: not_applicable - cisco:nvm:flowdata
     format: auto
     schema: raw
     sourcetype: cisco:nvm:flowdata
+    checksum: sha256:f427b5cc3a60bb3b41ae1c679bda85c1bb9aba78cc9468b94d3eec36adedfaaa
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

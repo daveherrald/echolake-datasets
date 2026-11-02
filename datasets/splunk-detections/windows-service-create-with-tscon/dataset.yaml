@@ -1,14 +1,10 @@
 metadata:
   name: windows-service-create-with-tscon
   version: 11.0.0
-  description: The following analytic detects potential RDP Hijacking attempts by
-    identifying the creation of a Windows service using sc.exe with a binary path
-    that includes tscon.exe. This detection leverages data from Endpoint Detection
-    and Response (EDR) agents, focusing on process creation events and command-line
-    arguments. This activity is significant as it indicates an attacker may be trying
-    to hijack a disconnected RDP session, posing a risk of unauthorized access. If
-    confirmed malicious, the attacker c
+  description: The following analytic detects potential RDP Hijacking attempts by identifying the creation of a Windows service using sc.exe with a binary path that includes tscon.exe. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process creation events and command-line arguments. This activity is significant as it indicates an attacker may be trying to hijack a disconnected RDP session, posing a risk of unauthorized access. If confirmed malicious, the attacker could gain control over an existing user session, leading to potential data theft or further system compromise.
   author: Michael Haag, Splunk
+  updated: '2025-08-01'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,20 +14,47 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1543.003
-      name: Technique T1543.003
+      name: Windows Service
+      tactics:
+      - persistence
+      - privilege-escalation
     - id: T1563.002
-      name: Technique T1563.002
-    tactics: []
+      name: RDP Hijacking
+      tactics:
+      - lateral-movement
+    tactics:
+    - persistence
+    - privilege-escalation
+    - lateral-movement
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_service_create_with_tscon.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_service_create_with_tscon.yml
+      rule_sha256: sha256:362948592480ece7ec4dfaae627978b5984d7c7482e630409728d06e5c258626
+      detection_id: c13b3d74-6b63-4db5-a841-4206f0370077
+      source_version: 11
+      source_date: '2025-08-01'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1563.002/rdphijack/tscon_windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1563.002/rdphijack/tscon_windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:8378b41d38011d79df39f53ccf08cd251471d55d35029f97bf8a8037b49c4c3d
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

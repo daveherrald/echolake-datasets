@@ -3,11 +3,9 @@ metadata:
   version: 2.0.0
   description: 'The following analytic detects instances where Java, or Tomcat
 
-    processes spawn a Linux shell, which may indicate exploitation attempts, such
-    as
+    processes spawn a Linux shell, which may indicate exploitation attempts, such as
 
-    those related to CVE-2021-44228 (Log4Shell). This detection leverages Endpoint
-    Detection
+    those related to CVE-2021-44228 (Log4Shell). This detection leverages Endpoint Detection
 
     and Response (EDR) telemetry, focusing on process names and parent-child process
 
@@ -15,8 +13,12 @@ metadata:
 
     application, potentially leading to unauthorized shell access. If confirmed malicious,
 
-    attackers could ex'
+    attackers could execute arbitrary commands, escalate privileges, or maintain persistent
+
+    access, posing a severe threat to the environment.'
   author: Michael Haag, Nasreddine Bencherchali, Splunk
+  updated: '2025-10-16'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -26,20 +28,46 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1190
-      name: Technique T1190
+      name: Exploit Public-Facing Application
+      tactics:
+      - initial-access
     - id: T1133
-      name: Technique T1133
-    tactics: []
+      name: External Remote Services
+      tactics:
+      - initial-access
+      - persistence
+    tactics:
+    - initial-access
+    - persistence
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/web_or_application_server_spawning_a_shell.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/web_or_application_server_spawning_a_shell.yml
+      rule_sha256: sha256:c708ba3e78510729873e898a78bf3fad8d484641274f082374ae120e9c8f6aa5
+      detection_id: 8fdb41ad-091c-4d7a-af1d-9123fe94b539
+      source_version: 2
+      source_date: '2025-10-16'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/java/java_spawn_shell_nix.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1190/java/java_spawn_shell_nix.log
     description: Syslog:Linux-Sysmon/Operational - sysmon:linux
     format: auto
     schema: raw
     sourcetype: sysmon:linux
+    checksum: sha256:eab1d19a5fe4cd073270105c69002e0f6e4270ffc7fdbc368a10272db32a1e02
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

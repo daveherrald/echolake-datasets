@@ -1,14 +1,10 @@
 metadata:
   name: windows-input-capture-using-credential-ui-dll
   version: 8.0.0
-  description: The following analytic detects a process loading the credui.dll or
-    wincredui.dll module. This detection leverages Sysmon EventCode 7 to identify
-    instances where these DLLs are loaded by processes outside typical system directories.
-    This activity is significant because adversaries often abuse these modules to
-    create fake credential prompts or dump credentials, posing a risk of credential
-    theft. If confirmed malicious, this activity could allow attackers to harvest
-    user credentials, leading to una
+  description: The following analytic detects a process loading the credui.dll or wincredui.dll module. This detection leverages Sysmon EventCode 7 to identify instances where these DLLs are loaded by processes outside typical system directories. This activity is significant because adversaries often abuse these modules to create fake credential prompts or dump credentials, posing a risk of credential theft. If confirmed malicious, this activity could allow attackers to harvest user credentials, leading to unauthorized access and potential lateral movement within the network.
   author: Teoderick Contreras, Splunk
+  updated: '2025-09-18'
+  license: Apache-2.0
   tags:
   - hunting
   - splunk-security-content
@@ -17,18 +13,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1056.002
-      name: Technique T1056.002
-    tactics: []
+      name: GUI Input Capture
+      tactics:
+      - credential-access
+      - collection
+    tactics:
+    - credential-access
+    - collection
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_input_capture_using_credential_ui_dll.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_input_capture_using_credential_ui_dll.yml
+      rule_sha256: sha256:c7f809b2b1d8ffe8b756927df0e2df405a1556962dcf026d0f5d7c1616c0dd1c
+      detection_id: 406c21d6-6c75-4e9f-9ca9-48049a1dd90e
+      source_version: 8
+      source_date: '2025-09-18'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/brute_ratel/iso_version_dll_campaign/sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/brute_ratel/iso_version_dll_campaign/sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:aababed8e915afbf9096a289a219eae99a93512c67a7f79b1fe8cc0f26036774
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

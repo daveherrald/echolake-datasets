@@ -1,14 +1,10 @@
 metadata:
   name: linux-auditd-disable-or-modify-system-firewall
   version: 7.0.0
-  description: 'The following analytic detects the suspicious disable or modify system
-    firewall. This behavior is critical for a SOC to monitor because it may indicate
-    attempts to gain unauthorized access or maintain control over a system. Such actions
-    could be signs of malicious activity. If confirmed, this could lead to serious
-    consequences, including a compromised system, unauthorized access to sensitive
-    data, or even a wider breach affecting the entire network. Detecting and responding
-    to these signs early '
+  description: The following analytic detects the suspicious disable or modify system firewall. This behavior is critical for a SOC to monitor because it may indicate attempts to gain unauthorized access or maintain control over a system. Such actions could be signs of malicious activity. If confirmed, this could lead to serious consequences, including a compromised system, unauthorized access to sensitive data, or even a wider breach affecting the entire network. Detecting and responding to these signs early is essential to prevent potential security incidents.
   author: Teoderick Contreras, Splunk
+  updated: '2025-06-10'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1562.004
-      name: Technique T1562.004
-    tactics: []
+      name: Disable or Modify System Firewall
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/linux_auditd_disable_or_modify_system_firewall.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/linux_auditd_disable_or_modify_system_firewall.yml
+      rule_sha256: sha256:30d9c869116b9978395b05d4196ca37ac1ae0be42489ba0c961109f7e72e085f
+      detection_id: 07052556-d4b5-4bae-89aa-cbdc1bb11250
+      source_version: 7
+      source_date: '2025-06-10'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.004/linux_auditd_disable_firewall/linux_auditd_disable_firewall.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1562.004/linux_auditd_disable_firewall/linux_auditd_disable_firewall.log
     description: auditd - auditd
     format: auto
     schema: raw
     sourcetype: auditd
+    checksum: sha256:a8a78f7b79d3d633336ba6073f7725fe91cd0a7adcc25eeec77b828d865793ba
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,14 +1,10 @@
 metadata:
   name: windows-privileged-group-modification
   version: 7.0.0
-  description: This analytic detects modifications to privileged groups in Active
-    Directory, including creation, deletion, and changes to various types of groups
-    such as local, global, universal, and LDAP query groups. It specifically monitors
-    for changes to high-privilege groups like "Administrators", "Domain Admins", "Enterprise
-    Admins", and "ESX Admins", among others. This detection is particularly relevant
-    in the context of potential exploitation of vulnerabilities like the VMware ESXi
-    Active Directory Int
+  description: This analytic detects modifications to privileged groups in Active Directory, including creation, deletion, and changes to various types of groups such as local, global, universal, and LDAP query groups. It specifically monitors for changes to high-privilege groups like "Administrators", "Domain Admins", "Enterprise Admins", and "ESX Admins", among others. This detection is particularly relevant in the context of potential exploitation of vulnerabilities like the VMware ESXi Active Directory Integration Authentication Bypass (CVE-2024-37085), where attackers may attempt to manipulate privileged groups to gain unauthorized access to systems.
   author: Brandon Sternfield, Optiv + ClearShark
+  updated: '2025-10-14'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,20 +13,44 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1136.001
-      name: Technique T1136.001
+      name: Local Account
+      tactics:
+      - persistence
     - id: T1136.002
-      name: Technique T1136.002
-    tactics: []
+      name: Domain Account
+      tactics:
+      - persistence
+    tactics:
+    - persistence
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_privileged_group_modification.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_privileged_group_modification.yml
+      rule_sha256: sha256:bfe2aa7eec6a1fff40c51526ed7eca727c3858e7bfcb4bd5530e71e78f8974c4
+      detection_id: b8cbef2c-2cc3-4550-b0fc-9715b7852df9
+      source_version: 7
+      source_date: '2025-10-14'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1136.001/atomic_red_team/windows-security-esxadmins.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1136.001/atomic_red_team/windows-security-esxadmins.log
     description: XmlWinEventLog:Security - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:c7bde8b973fa27199ece3f04bbf6f99a26e317c77c36cd1249af3cdbe6cae767
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

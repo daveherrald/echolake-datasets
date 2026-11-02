@@ -1,14 +1,10 @@
 metadata:
   name: detect-new-local-admin-account
   version: 9.0.0
-  description: 'The following analytic detects the creation of new accounts elevated
-    to local administrators. It uses Windows event logs, specifically EventCode 4720
-    (user account creation) and EventCode 4732 (user added to Administrators group).
-    This activity is significant as it indicates potential unauthorized privilege
-    escalation, which is critical for SOC monitoring. If confirmed malicious, this
-    could allow attackers to gain administrative access, leading to unauthorized data
-    access, system modifications, '
+  description: The following analytic detects the creation of new accounts elevated to local administrators. It uses Windows event logs, specifically EventCode 4720 (user account creation) and EventCode 4732 (user added to Administrators group). This activity is significant as it indicates potential unauthorized privilege escalation, which is critical for SOC monitoring. If confirmed malicious, this could allow attackers to gain administrative access, leading to unauthorized data access, system modifications, and disruption of services. Immediate investigation is required to mitigate risks and prevent further unauthorized actions.
   author: David Dorsey, Splunk
+  updated: '2025-10-23'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,28 +14,52 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1136.001
-      name: Technique T1136.001
-    tactics: []
+      name: Local Account
+      tactics:
+      - persistence
+    tactics:
+    - persistence
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/detect_new_local_admin_account.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/detect_new_local_admin_account.yml
+      rule_sha256: sha256:57322ce5cb4bb6dbb38a9eceea249460c4e6f24c09280f4bd8c4d27e3a208a16
+      detection_id: b25f6f62-0712-43c1-b203-083231ffd97d
+      source_version: 9
+      source_date: '2025-10-23'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1136.001/atomic_red_team/windows-security.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1136.001/atomic_red_team/windows-security.log
     description: WinEventLog:Security - WinEventLog
     format: auto
     schema: raw
     sourcetype: WinEventLog
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1136.001/atomic_red_team/windows-system.log
+    checksum: sha256:c6f43003a4defb5bd31776d931de18c4576a8e22de486790fa519aa76a06b153
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1136.001/atomic_red_team/windows-system.log
     description: WinEventLog:System - WinEventLog
     format: auto
     schema: raw
     sourcetype: WinEventLog
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1136.001/atomic_red_team/windows-sysmon.log
+    checksum: sha256:2f64c266ac0aa27c2c76762028c19e2c8d273fd9d4087c2b54ff6c3b9d7abf98
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1136.001/atomic_red_team/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:334fff113e8d15026a7a1a0d3343643ce7e8a73552b1f33ee476eaa7826cbe42
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,14 +1,10 @@
 metadata:
   name: vbscript-execution-using-wscript-app
   version: 8.0.0
-  description: The following analytic detects the execution of VBScript using the
-    wscript.exe application. It leverages data from Endpoint Detection and Response
-    (EDR) agents, focusing on process and command-line telemetry. This activity is
-    significant because wscript.exe is typically not used to execute VBScript, which
-    is usually associated with cscript.exe. This deviation can indicate an attempt
-    to evade traditional process monitoring and antivirus defenses. If confirmed malicious,
-    this technique could allow
+  description: The following analytic detects the execution of VBScript using the wscript.exe application. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process and command-line telemetry. This activity is significant because wscript.exe is typically not used to execute VBScript, which is usually associated with cscript.exe. This deviation can indicate an attempt to evade traditional process monitoring and antivirus defenses. If confirmed malicious, this technique could allow attackers to execute arbitrary code, potentially leading to system compromise, data exfiltration, or further lateral movement within the network.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1059.005
-      name: Technique T1059.005
-    tactics: []
+      name: Visual Basic
+      tactics:
+      - execution
+    tactics:
+    - execution
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/vbscript_execution_using_wscript_app.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/vbscript_execution_using_wscript_app.yml
+      rule_sha256: sha256:352201035f03b2fdfb66bb3dacbf7f15a24e8de23f397653df31d105f229327a
+      detection_id: 35159940-228f-11ec-8a49-acde48001122
+      source_version: 8
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.005/vbs_wscript/sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1059.005/vbs_wscript/sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:86ddf5d473d2be5d780dc171da8e00e33d572c9f387bb3d17aa3fc3e5b5ac2fc
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

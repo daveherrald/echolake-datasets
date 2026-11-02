@@ -1,14 +1,10 @@
 metadata:
   name: linux-indicator-removal-clear-cache
   version: 6.0.0
-  description: 'The following analytic detects processes that clear or free page cache
-    on a Linux system. It leverages Endpoint Detection and Response (EDR) data, focusing
-    on specific command-line executions involving the kernel system request `drop_caches`.
-    This activity is significant as it may indicate an attempt to delete forensic
-    evidence or the presence of wiper malware like Awfulshred. If confirmed malicious,
-    this behavior could allow an attacker to cover their tracks, making it difficult
-    to investigate '
+  description: The following analytic detects processes that clear or free page cache on a Linux system. It leverages Endpoint Detection and Response (EDR) data, focusing on specific command-line executions involving the kernel system request `drop_caches`. This activity is significant as it may indicate an attempt to delete forensic evidence or the presence of wiper malware like Awfulshred. If confirmed malicious, this behavior could allow an attacker to cover their tracks, making it difficult to investigate other malicious activities or system compromises.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1070
-      name: Technique T1070
-    tactics: []
+      name: Indicator Removal
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/linux_indicator_removal_clear_cache.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/linux_indicator_removal_clear_cache.yml
+      rule_sha256: sha256:e28e69d79f300a56601b3126a3a00e21ae005a024b9d9c5034325ee81ffb25a6
+      detection_id: e0940505-0b73-4719-84e6-cb94c44a5245
+      source_version: 6
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/awfulshred/test3/sysmon_linux.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/awfulshred/test3/sysmon_linux.log
     description: Syslog:Linux-Sysmon/Operational - sysmon:linux
     format: auto
     schema: raw
     sourcetype: sysmon:linux
+    checksum: sha256:5975cd721d5a6e8452c18e195c226f7dc43e9bd37e865102382f743debdc87cf
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

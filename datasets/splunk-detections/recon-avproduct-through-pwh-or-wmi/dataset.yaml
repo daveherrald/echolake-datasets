@@ -1,14 +1,10 @@
 metadata:
   name: recon-avproduct-through-pwh-or-wmi
   version: 11.0.0
-  description: 'The following analytic detects suspicious PowerShell script execution
-    via EventCode 4104, specifically targeting checks for installed anti-virus products
-    using WMI or PowerShell commands. This detection leverages PowerShell Script Block
-    Logging to identify scripts containing keywords like "SELECT," "WMIC," "AntiVirusProduct,"
-    or "AntiSpywareProduct." This activity is significant as it is commonly used by
-    malware and APT actors to map running security applications or services, potentially
-    aiding '
+  description: The following analytic detects suspicious PowerShell script execution via EventCode 4104, specifically targeting checks for installed anti-virus products using WMI or PowerShell commands. This detection leverages PowerShell Script Block Logging to identify scripts containing keywords like "SELECT," "WMIC," "AntiVirusProduct," or "AntiSpywareProduct." This activity is significant as it is commonly used by malware and APT actors to map running security applications or services, potentially aiding in evasion techniques. If confirmed malicious, this could allow attackers to disable or bypass security measures, leading to further compromise of the endpoint.
   author: Teoderick Contreras, Splunk
+  updated: '2025-07-16'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1592
-      name: Technique T1592
-    tactics: []
+      name: Gather Victim Host Information
+      tactics:
+      - reconnaissance
+    tactics:
+    - reconnaissance
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/recon_avproduct_through_pwh_or_wmi.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/recon_avproduct_through_pwh_or_wmi.yml
+      rule_sha256: sha256:5187577df68978148d007ca1a878f9425516163ff920b31616f077261098cc56
+      detection_id: 28077620-c9f6-11eb-8785-acde48001122
+      source_version: 11
+      source_date: '2025-07-16'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/t1592/pwh_av_recon/windows-powershell-xml.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/t1592/pwh_av_recon/windows-powershell-xml.log
     description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:d4672a94cc8edf19b869628158a3a4280b7db338ea12f15eb7d90f92d34c7fd2
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

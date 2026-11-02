@@ -1,14 +1,10 @@
 metadata:
   name: windows-powershell-logoff-user-via-quser
   version: 4.0.0
-  description: The following analytic detects the process of logging off a user through
-    the use of the quser and logoff commands. By monitoring for these commands, the
-    analytic identifies actions where a user session is forcibly terminated, which
-    could be part of an administrative task or a potentially unauthorized access attempt.
-    This detection helps identify potential misuse or malicious activity where a user’s
-    access is revoked without proper authorization, providing insight into potential
-    security incident
+  description: "The following analytic detects the process of logging off a user through the use of the quser and logoff commands. By monitoring for these commands, the analytic identifies actions where a user session is forcibly terminated, which could be part of an administrative task or a potentially unauthorized access attempt. This detection helps identify potential misuse or malicious activity where a user\u2019s access is revoked without proper authorization, providing insight into potential security incidents involving account management or session manipulation."
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,20 +12,45 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1059.001
-      name: Technique T1059.001
+      name: PowerShell
+      tactics:
+      - execution
     - id: T1531
-      name: Technique T1531
-    tactics: []
+      name: Account Access Removal
+      tactics:
+      - impact
+    tactics:
+    - execution
+    - impact
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_powershell_logoff_user_via_quser.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_powershell_logoff_user_via_quser.yml
+      rule_sha256: sha256:483003f6fa04a168ff1a635e7a58d688850365cded02bae72fb968aca7425a06
+      detection_id: 6d70780d-4cfe-4820-bafd-1b43941986b5
+      source_version: 4
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1531/log_off_user/pwh_quser_logoff.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1531/log_off_user/pwh_quser_logoff.log
     description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:61a8b4a639dde81a649321c12b886bc031a58c89fb39be50905f6572c456cca3
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

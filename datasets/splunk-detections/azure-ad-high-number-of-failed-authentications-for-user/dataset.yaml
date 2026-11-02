@@ -1,14 +1,10 @@
 metadata:
   name: azure-ad-high-number-of-failed-authentications-for-user
   version: 10.0.0
-  description: The following analytic identifies an Azure AD account experiencing
-    more than 20 failed authentication attempts within a 10-minute window. This detection
-    leverages Azure SignInLogs data, specifically monitoring for error code 50126
-    and unsuccessful authentication attempts. This behavior is significant as it may
-    indicate a brute force attack targeting the account. If confirmed malicious, an
-    attacker could potentially gain unauthorized access, leading to data breaches
-    or further exploitation within
+  description: The following analytic identifies an Azure AD account experiencing more than 20 failed authentication attempts within a 10-minute window. This detection leverages Azure SignInLogs data, specifically monitoring for error code 50126 and unsuccessful authentication attempts. This behavior is significant as it may indicate a brute force attack targeting the account. If confirmed malicious, an attacker could potentially gain unauthorized access, leading to data breaches or further exploitation within the environment. Security teams should adjust the threshold based on their specific environment to reduce false positives.
   author: Mauricio Velazco, Splunk
+  updated: '2025-12-01'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1110.001
-      name: Technique T1110.001
-    tactics: []
+      name: Password Guessing
+      tactics:
+      - credential-access
+    tactics:
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/azure_ad_high_number_of_failed_authentications_for_user.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/azure_ad_high_number_of_failed_authentications_for_user.yml
+      rule_sha256: sha256:c77ae8f70bad9b29e917be252c17d399f8450502753758ea12d15e58a00edbe5
+      detection_id: 630b1694-210a-48ee-a450-6f79e7679f2c
+      source_version: 10
+      source_date: '2025-12-01'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1110.001/azure_ad_high_number_of_failed_authentications_for_user/azuread.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1110.001/azure_ad_high_number_of_failed_authentications_for_user/azuread.log
     description: Azure AD - azure:monitor:aad
     format: auto
     schema: raw
     sourcetype: azure:monitor:aad
+    checksum: sha256:1d5c729dc5e864ca2894cceae832ff4119f17a709e1ec33838b3f60baab3af87
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

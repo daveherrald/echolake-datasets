@@ -1,14 +1,10 @@
 metadata:
   name: windows-system-binary-proxy-execution-compiled-html-file-decompile
   version: 11.0.0
-  description: The following analytic detects the use of the decompile parameter with
-    the HTML Help application (HH.exe). This behavior is identified through Endpoint
-    Detection and Response (EDR) telemetry, focusing on command-line executions involving
-    the decompile parameter. This activity is significant because it is an uncommon
-    command and has been associated with APT41 campaigns, where it was used to unpack
-    HTML help files for further malicious actions. If confirmed malicious, this technique
-    could allow at
+  description: The following analytic detects the use of the decompile parameter with the HTML Help application (HH.exe). This behavior is identified through Endpoint Detection and Response (EDR) telemetry, focusing on command-line executions involving the decompile parameter. This activity is significant because it is an uncommon command and has been associated with APT41 campaigns, where it was used to unpack HTML help files for further malicious actions. If confirmed malicious, this technique could allow attackers to execute arbitrary commands, potentially leading to further compromise and persistence within the environment.
   author: Michael Haag, Splunk
+  updated: '2025-09-18'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1218.001
-      name: Technique T1218.001
-    tactics: []
+      name: Compiled HTML File
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_system_binary_proxy_execution_compiled_html_file_decompile.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_system_binary_proxy_execution_compiled_html_file_decompile.yml
+      rule_sha256: sha256:d6525dc4f686c5a9a02e35ce6958b38c21933e85af3011756857986daa0768cd
+      detection_id: 2acf0e19-4149-451c-a3f3-39cd3c77e37d
+      source_version: 11
+      source_date: '2025-09-18'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218.001/atomic_red_team/hh_decom_windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1218.001/atomic_red_team/hh_decom_windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:1445c69416168a5f8cc0434da14fcb83458d54985d5d48064a9962cd0c4ed1d9
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,14 +1,10 @@
 metadata:
   name: detect-rundll32-inline-hta-execution
   version: 9.0.0
-  description: The following analytic detects the execution of "rundll32.exe" with
-    inline protocol handlers such as "JavaScript", "VBScript", and "About". This behavior
-    is identified using Endpoint Detection and Response (EDR) telemetry, focusing
-    on command-line arguments. This activity is significant as it is often associated
-    with fileless malware or application whitelisting bypass techniques. If confirmed
-    malicious, this could allow an attacker to execute arbitrary code, bypass security
-    controls, and maintai
+  description: The following analytic detects the execution of "rundll32.exe" with inline protocol handlers such as "JavaScript", "VBScript", and "About". This behavior is identified using Endpoint Detection and Response (EDR) telemetry, focusing on command-line arguments. This activity is significant as it is often associated with fileless malware or application whitelisting bypass techniques. If confirmed malicious, this could allow an attacker to execute arbitrary code, bypass security controls, and maintain persistence within the environment.
   author: Michael Haag, Splunk
+  updated: '2025-09-18'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1218.005
-      name: Technique T1218.005
-    tactics: []
+      name: Mshta
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/detect_rundll32_inline_hta_execution.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/detect_rundll32_inline_hta_execution.yml
+      rule_sha256: sha256:a66236a11031c560268f397b83703c4d39eadd4a5e981c56dee1214d8e20168b
+      detection_id: 91c79f14-5b41-11eb-ae93-0242ac130002
+      source_version: 9
+      source_date: '2025-09-18'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218.005/atomic_red_team/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1218.005/atomic_red_team/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:9cd448deed170bd087c9cf2ca7cd2e7d4bc9ce60b13b254b2d39e858e7b020b4
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

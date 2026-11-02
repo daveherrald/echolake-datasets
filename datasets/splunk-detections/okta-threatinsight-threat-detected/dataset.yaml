@@ -1,14 +1,10 @@
 metadata:
   name: okta-threatinsight-threat-detected
   version: 8.0.0
-  description: The following analytic identifies threats detected by Okta ThreatInsight,
-    such as password spraying, login failures, and high counts of unknown user login
-    attempts. It leverages Okta Identity Management logs, specifically focusing on
-    security.threat.detected events. This activity is significant for a SOC as it
-    highlights potential unauthorized access attempts and credential-based attacks.
-    If confirmed malicious, these activities could lead to unauthorized access, data
-    breaches, and further explo
+  description: The following analytic identifies threats detected by Okta ThreatInsight, such as password spraying, login failures, and high counts of unknown user login attempts. It leverages Okta Identity Management logs, specifically focusing on security.threat.detected events. This activity is significant for a SOC as it highlights potential unauthorized access attempts and credential-based attacks. If confirmed malicious, these activities could lead to unauthorized access, data breaches, and further exploitation of compromised accounts, posing a significant risk to the organization's security posture.
   author: Michael Haag, Mauricio Velazco, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,46 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1078.004
-      name: Technique T1078.004
-    tactics: []
+      name: Cloud Accounts
+      tactics:
+      - initial-access
+      - persistence
+      - privilege-escalation
+      - defense-evasion
+    tactics:
+    - initial-access
+    - persistence
+    - privilege-escalation
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/application/okta_threatinsight_threat_detected.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/application/okta_threatinsight_threat_detected.yml
+      rule_sha256: sha256:a4c4cd930c3531f6b3597492e10668b7ac85a173a796f7ba755a5cc7cce7152d
+      detection_id: 140504ae-5fe2-4d65-b2bc-a211813fbca6
+      source_version: 8
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1078.004/okta_threatinsight_threat_detected/okta_threatinsight_threat_detected.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1078.004/okta_threatinsight_threat_detected/okta_threatinsight_threat_detected.log
     description: Okta - OktaIM2:log
     format: auto
     schema: raw
     sourcetype: OktaIM2:log
+    checksum: sha256:b2bbe7f52709d78cc8a3c4c4a5d8b71564538d49292533dd2aa4f1c3194bdaed
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

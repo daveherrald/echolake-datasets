@@ -1,14 +1,10 @@
 metadata:
   name: windows-remote-assistance-spawning-process
   version: 9.0.0
-  description: The following analytic detects Microsoft Remote Assistance (msra.exe)
-    spawning PowerShell.exe or cmd.exe as a child process. This detection leverages
-    data from Endpoint Detection and Response (EDR) agents, focusing on process creation
-    events where msra.exe is the parent process. This activity is significant because
-    msra.exe typically does not spawn command-line interfaces, indicating potential
-    process injection or misuse. If confirmed malicious, an attacker could use this
-    technique to execute ar
+  description: The following analytic detects Microsoft Remote Assistance (msra.exe) spawning PowerShell.exe or cmd.exe as a child process. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process creation events where msra.exe is the parent process. This activity is significant because msra.exe typically does not spawn command-line interfaces, indicating potential process injection or misuse. If confirmed malicious, an attacker could use this technique to execute arbitrary commands, escalate privileges, or maintain persistence on the compromised system.
   author: Michael Haag, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1055
-      name: Technique T1055
-    tactics: []
+      name: Process Injection
+      tactics:
+      - privilege-escalation
+      - defense-evasion
+    tactics:
+    - privilege-escalation
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_remote_assistance_spawning_process.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_remote_assistance_spawning_process.yml
+      rule_sha256: sha256:66acdce4a6bce7fa9e72de20b0fd9f0073650754373746dabeb06f41c831cec8
+      detection_id: ced50492-8849-11ec-9f68-acde48001122
+      source_version: 9
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1055/msra/msra-windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1055/msra/msra-windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:814f426f84e7a0f193d68828189e4d1691feed2005a4d70cc7b86ec2847cbe15
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

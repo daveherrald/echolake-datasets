@@ -1,13 +1,10 @@
 metadata:
   name: excessive-file-deletion-in-windefender-folder
   version: 7.0.0
-  description: The following analytic detects excessive file deletion events in the
-    Windows Defender folder. It leverages Sysmon EventCodes 23 and 26 to identify
-    processes deleting multiple files within this directory. This behavior is significant
-    as it may indicate an attempt to corrupt or disable Windows Defender, a key security
-    component. If confirmed malicious, this activity could allow an attacker to disable
-    endpoint protection, facilitating further malicious actions without detection.
+  description: The following analytic detects excessive file deletion events in the Windows Defender folder. It leverages Sysmon EventCodes 23 and 26 to identify processes deleting multiple files within this directory. This behavior is significant as it may indicate an attempt to corrupt or disable Windows Defender, a key security component. If confirmed malicious, this activity could allow an attacker to disable endpoint protection, facilitating further malicious actions without detection.
   author: Teoderick Contreras, Splunk, Steven Dick
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1485
-      name: Technique T1485
-    tactics: []
+      name: Data Destruction
+      tactics:
+      - impact
+    tactics:
+    - impact
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/excessive_file_deletion_in_windefender_folder.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/excessive_file_deletion_in_windefender_folder.yml
+      rule_sha256: sha256:d8885bda856ddca0a6d6dec8dd76004a39d709dbf359d85bdbf2735b5cd98ad9
+      detection_id: b5baa09a-7a05-11ec-8da4-acde48001122
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1485/excessive_file_del_in_windefender_dir/sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1485/excessive_file_del_in_windefender_dir/sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:3625cc59f4e9524ee9916b4890ea90114e5bdd3a2bb62a95095795d3947123ca
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

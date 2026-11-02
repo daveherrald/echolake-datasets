@@ -1,14 +1,10 @@
 metadata:
   name: windows-credential-access-from-browser-password-store
   version: 17.0.0
-  description: The following analytic identifies a possible non-common browser process
-    accessing its browser user data profile. This tactic/technique has been observed
-    in various Trojan Stealers, such as SnakeKeylogger, which attempt to gather sensitive
-    browser information and credentials as part of their exfiltration strategy. Detecting
-    this anomaly can serve as a valuable pivot for identifying processes that access
-    lists of browser user data profiles unexpectedly. This detection uses a lookup
-    file `browser_a
+  description: The following analytic identifies a possible non-common browser process accessing its browser user data profile. This tactic/technique has been observed in various Trojan Stealers, such as SnakeKeylogger, which attempt to gather sensitive browser information and credentials as part of their exfiltration strategy. Detecting this anomaly can serve as a valuable pivot for identifying processes that access lists of browser user data profiles unexpectedly. This detection uses a lookup file `browser_app_list` that maintains a list of well known browser applications and the browser paths that are allowed to access the browser user data profiles.
   author: Teoderick Contreras, Bhavin Patel Splunk
+  updated: '2025-12-16'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1012
-      name: Technique T1012
-    tactics: []
+      name: Query Registry
+      tactics:
+      - discovery
+    tactics:
+    - discovery
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_credential_access_from_browser_password_store.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_credential_access_from_browser_password_store.yml
+      rule_sha256: sha256:161cfd969febbb291b0c878d1201960a7f66bb0cab8f6d4c731b83b04228955e
+      detection_id: 72013a8e-5cea-408a-9d51-5585386b4d69
+      source_version: 17
+      source_date: '2025-12-16'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1552/snakey_keylogger_outlook_reg_access/snakekeylogger_4663.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1552/snakey_keylogger_outlook_reg_access/snakekeylogger_4663.log
     description: XmlWinEventLog:Security - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:fa6b01bb3eabd856783f64274f12abf89709f62f043fdc0cbd6009a6221dd436
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

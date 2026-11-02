@@ -1,14 +1,10 @@
 metadata:
   name: detect-distributed-password-spray-attempts
   version: 5.0.0
-  description: This analytic employs the 3-sigma approach to identify distributed
-    password spray attacks. A distributed password spray attack is a type of brute
-    force attack where the attacker attempts a few common passwords against many different
-    accounts, connecting from multiple IP addresses to avoid detection. By utilizing
-    the Authentication Data Model, this detection is effective for all CIM-mapped
-    authentication events, providing comprehensive coverage and enhancing security
-    against these attacks.
+  description: This analytic employs the 3-sigma approach to identify distributed password spray attacks. A distributed password spray attack is a type of brute force attack where the attacker attempts a few common passwords against many different accounts, connecting from multiple IP addresses to avoid detection. By utilizing the Authentication Data Model, this detection is effective for all CIM-mapped authentication events, providing comprehensive coverage and enhancing security against these attacks.
   author: Dean Luxton
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - hunting
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1110.003
-      name: Technique T1110.003
-    tactics: []
+      name: Password Spraying
+      tactics:
+      - credential-access
+    tactics:
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/application/detect_distributed_password_spray_attempts.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/application/detect_distributed_password_spray_attempts.yml
+      rule_sha256: sha256:b98d7339039a54a82e24be19e47e48b5665cb4fab6138405eeed1a5b54d56033
+      detection_id: b1a82fc8-8a9f-4344-9ec2-bde5c5331b57
+      source_version: 5
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1110.003/azure_ad_distributed_spray/azure_ad_distributed_spray.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1110.003/azure_ad_distributed_spray/azure_ad_distributed_spray.log
     description: azure:monitor:aad - azure:monitor:aad
     format: auto
     schema: raw
     sourcetype: azure:monitor:aad
+    checksum: sha256:e449c7a937e83f9795065e6ac215ad71ec80ae2fa66fdba0621326aa23bd7f85
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

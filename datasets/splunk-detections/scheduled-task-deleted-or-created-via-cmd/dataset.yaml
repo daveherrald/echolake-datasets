@@ -1,14 +1,10 @@
 metadata:
   name: scheduled-task-deleted-or-created-via-cmd
   version: 23.0.0
-  description: The following analytic identifies the creation or deletion of scheduled
-    tasks using the schtasks.exe utility with the -create or -delete flags. It leverages
-    data from Endpoint Detection and Response (EDR) agents, focusing on process names
-    and command-line executions. This activity is significant as it can indicate unauthorized
-    system manipulation or malicious intent, often associated with threat actors like
-    Dragonfly and incidents such as the SUNBURST attack. If confirmed malicious, this
-    activit
+  description: The following analytic identifies the creation or deletion of scheduled tasks using the schtasks.exe utility with the -create or -delete flags. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line executions. This activity is significant as it can indicate unauthorized system manipulation or malicious intent, often associated with threat actors like Dragonfly and incidents such as the SUNBURST attack. If confirmed malicious, this activity could allow attackers to execute code, escalate privileges, or persist within the environment, posing a significant security risk.
   author: Bhavin Patel, Splunk
+  updated: '2025-12-10'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,44 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1053.005
-      name: Technique T1053.005
-    tactics: []
+      name: Scheduled Task
+      tactics:
+      - execution
+      - persistence
+      - privilege-escalation
+    tactics:
+    - execution
+    - persistence
+    - privilege-escalation
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/scheduled_task_deleted_or_created_via_cmd.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/scheduled_task_deleted_or_created_via_cmd.yml
+      rule_sha256: sha256:c7c4af030ed50dc3b2e274ad5ddac8140b2450e5f0c759bc7383565118c0a58f
+      detection_id: d5af132c-7c17-439c-9d31-13d55340f36c
+      source_version: 23
+      source_date: '2025-12-10'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053.005/atomic_red_team/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1053.005/atomic_red_team/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:d346ab6c75b3151217dfc2c4c166c951fc16d68c31b7d5a8f3e577d9545ff9f0
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

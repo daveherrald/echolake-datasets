@@ -1,14 +1,10 @@
 metadata:
   name: windows-steal-authentication-certificates-export-certificate
   version: 8.0.0
-  description: The following analytic detects the use of the PowerShell cmdlet 'export-certificate'
-    executed via the command line, indicating an attempt to export a certificate from
-    the local Windows Certificate Store. This detection leverages data from Endpoint
-    Detection and Response (EDR) agents, focusing on process execution logs and command-line
-    arguments. Exporting certificates is significant as it may indicate credential
-    theft or preparation for man-in-the-middle attacks. If confirmed malicious, this
-    act
+  description: The following analytic detects the use of the PowerShell cmdlet 'export-certificate' executed via the command line, indicating an attempt to export a certificate from the local Windows Certificate Store. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process execution logs and command-line arguments. Exporting certificates is significant as it may indicate credential theft or preparation for man-in-the-middle attacks. If confirmed malicious, this activity could allow an attacker to impersonate users, decrypt sensitive communications, or gain unauthorized access to systems and data.
   author: Michael Haag, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1649
-      name: Technique T1649
-    tactics: []
+      name: Steal or Forge Authentication Certificates
+      tactics:
+      - credential-access
+    tactics:
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_steal_authentication_certificates_export_certificate.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_steal_authentication_certificates_export_certificate.yml
+      rule_sha256: sha256:85bf2c44a8cfbbc9b9c08eedabb5ea3a8e316704dd7d92441dd0adefe652e560
+      detection_id: e39dc429-c2a5-4f1f-9c3c-6b211af6b332
+      source_version: 8
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1649/atomic_red_team/export_certificate_windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1649/atomic_red_team/export_certificate_windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:f4d5f9368fe075b6f89fe007dca2fca487cf69db4780700aae573469bbc39eed
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

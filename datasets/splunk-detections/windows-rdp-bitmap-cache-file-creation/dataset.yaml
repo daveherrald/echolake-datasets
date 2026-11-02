@@ -1,14 +1,10 @@
 metadata:
   name: windows-rdp-bitmap-cache-file-creation
   version: 1.0.0
-  description: This detection identifies the creation of Remote Desktop Protocol (RDP)
-    bitmap cache files on a Windows system, typically located in the user’s profile
-    under the Terminal Server Client cache directory. These files (*.bmc, cache*.bin)
-    are generated when a user initiates an RDP session using the built-in mstsc.exe
-    client. Their presence can indicate interactive remote access activity and may
-    be useful in detecting lateral movement or unauthorized RDP usage. Monitoring
-    this behavior is especially i
+  description: "This detection identifies the creation of Remote Desktop Protocol (RDP) bitmap cache files on a Windows system, typically located in the user\u2019s profile under the Terminal Server Client cache directory. These files (*.bmc, cache*.bin) are generated when a user initiates an RDP session using the built-in mstsc.exe client. Their presence can indicate interactive remote access activity and may be useful in detecting lateral movement or unauthorized RDP usage. Monitoring this behavior is especially important, as attackers may attempt to delete or suppress these artifacts to evade forensic analysis."
   author: Teoderick Contreras, Splunk
+  updated: '2025-07-30'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1021.001
-      name: Technique T1021.001
-    tactics: []
+      name: Remote Desktop Protocol
+      tactics:
+      - lateral-movement
+    tactics:
+    - lateral-movement
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_rdp_bitmap_cache_file_creation.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_rdp_bitmap_cache_file_creation.yml
+      rule_sha256: sha256:80fce6fc39a2bbed07801a28ffc7f46ddedefd1092804dc728f94e54e2b2d871
+      detection_id: 5f8671b6-07a7-425d-b3da-c39a53f2a6ae
+      source_version: 1
+      source_date: '2025-07-30'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1021.001/bmc_creation/bmc_creation.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1021.001/bmc_creation/bmc_creation.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:02509f46c0827bf20cab033da354191ec78f76f78cee88ab469b800efa816089
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

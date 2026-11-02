@@ -1,14 +1,10 @@
 metadata:
   name: windows-vulnerable-3cx-software
   version: 7.0.0
-  description: The following analytic detects instances of the 3CXDesktopApp.exe with
-    a FileVersion of 18.12.x, leveraging Sysmon logs. This detection focuses on identifying
-    vulnerable versions 18.12.407 and 18.12.416 of the 3CX desktop app. Monitoring
-    this activity is crucial as these specific versions have known vulnerabilities
-    that could be exploited by attackers. If confirmed malicious, exploitation of
-    this vulnerability could lead to unauthorized access, code execution, or further
-    compromise of the affect
+  description: The following analytic detects instances of the 3CXDesktopApp.exe with a FileVersion of 18.12.x, leveraging Sysmon logs. This detection focuses on identifying vulnerable versions 18.12.407 and 18.12.416 of the 3CX desktop app. Monitoring this activity is crucial as these specific versions have known vulnerabilities that could be exploited by attackers. If confirmed malicious, exploitation of this vulnerability could lead to unauthorized access, code execution, or further compromise of the affected system, posing significant security risks.
   author: Michael Haag, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1195.002
-      name: Technique T1195.002
-    tactics: []
+      name: Compromise Software Supply Chain
+      tactics:
+      - initial-access
+    tactics:
+    - initial-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_vulnerable_3cx_software.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_vulnerable_3cx_software.yml
+      rule_sha256: sha256:7af5f72eda08c1fd7574fd15098a8b778a857cb531b85a467f0a4e5784476118
+      detection_id: f2cc1584-46ee-485b-b905-977c067f36de
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1195.002/3CX/3cx_windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1195.002/3CX/3cx_windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:b477e96a199201c1bbb9c74bbe3993849a37d2c08c37389c6b3551d3856e4c0f
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

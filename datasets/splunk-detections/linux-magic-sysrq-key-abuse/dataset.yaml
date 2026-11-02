@@ -1,20 +1,16 @@
 metadata:
   name: linux-magic-sysrq-key-abuse
   version: 2.0.0
-  description: 'Detects potential abuse of the Linux Magic SysRq (System Request)
-    key by adversaries with root or sufficient privileges to manipulate or destabilize
-    a system.
+  description: 'Detects potential abuse of the Linux Magic SysRq (System Request) key by adversaries with root or sufficient privileges to manipulate or destabilize a system.
 
-    Writing to /proc/sysrq-trigger can crash the system, kill processes, or bypass
-    standard logging.
+    Writing to /proc/sysrq-trigger can crash the system, kill processes, or bypass standard logging.
 
     Monitoring SysRq abuse helps detect stealthy post-exploitation activity.
 
-    Correlate with related EXECVE or PROCTITLE events to identify the process or user
-    responsible for the access or modification.
-
-    '
+    Correlate with related EXECVE or PROCTITLE events to identify the process or user responsible for the access or modification.'
   author: Milad Cheraghi
+  updated: '2025-11-27'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -22,24 +18,53 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1059.004
-      name: Technique T1059.004
+      name: Unix Shell
+      tactics:
+      - execution
     - id: T1529
-      name: Technique T1529
+      name: System Shutdown/Reboot
+      tactics:
+      - impact
     - id: T1489
-      name: Technique T1489
+      name: Service Stop
+      tactics:
+      - impact
     - id: T1499
-      name: Technique T1499
-    tactics: []
+      name: Endpoint Denial of Service
+      tactics:
+      - impact
+    tactics:
+    - execution
+    - impact
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/linux_magic_sysrq_key_abuse.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/linux_magic_sysrq_key_abuse.yml
+      rule_sha256: sha256:a36def2ed53ac82f15642a608c6360435fdd9efcd940bfb9047c8f2c04e77fab
+      detection_id: 22c03600-f84a-47fa-abaa-ffbe3e72c782
+      source_version: 2
+      source_date: '2025-11-27'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1529/auditd_path_sysrq/path_sysrq.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1529/auditd_path_sysrq/path_sysrq.log
     description: auditd - auditd
     format: auto
     schema: raw
     sourcetype: auditd
+    checksum: sha256:6c4ca9e6150c822cf1b12e8a1090e0f1007b084fb0f8ab0c330d289516f7d823
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

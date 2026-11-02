@@ -1,14 +1,10 @@
 metadata:
   name: connectwise-screenconnect-authentication-bypass
   version: 7.0.0
-  description: The following analytic detects attempts to exploit the ConnectWise
-    ScreenConnect CVE-2024-1709 vulnerability, which allows attackers to bypass authentication
-    via an alternate path or channel. It leverages web request logs to identify access
-    to the SetupWizard.aspx page, indicating potential exploitation. This activity
-    is significant as it can lead to unauthorized administrative access and remote
-    code execution. If confirmed malicious, attackers could create administrative
-    users and gain full con
+  description: The following analytic detects attempts to exploit the ConnectWise ScreenConnect CVE-2024-1709 vulnerability, which allows attackers to bypass authentication via an alternate path or channel. It leverages web request logs to identify access to the SetupWizard.aspx page, indicating potential exploitation. This activity is significant as it can lead to unauthorized administrative access and remote code execution. If confirmed malicious, attackers could create administrative users and gain full control over the affected system, posing severe security risks. Immediate remediation by updating to version 23.9.8 or above is recommended.
   author: Michael Haag, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1190
-      name: Technique T1190
-    tactics: []
+      name: Exploit Public-Facing Application
+      tactics:
+      - initial-access
+    tactics:
+    - initial-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/web/connectwise_screenconnect_authentication_bypass.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/web/connectwise_screenconnect_authentication_bypass.yml
+      rule_sha256: sha256:0d0c1d090c7736879a0617b2ecdcb9a11a1dd5bab7ed478566e7e6aff3b37d9e
+      detection_id: d3f7a803-e802-448b-8eb2-e796b223bfff
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/screenconnect/connectwise_auth_suricata.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1190/screenconnect/connectwise_auth_suricata.log
     description: suricata - suricata
     format: auto
     schema: raw
     sourcetype: suricata
+    checksum: sha256:b68a4507d6cd88357f9c0964ef0e5765dc3c7f782f1624a14dffe19813ff270d
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

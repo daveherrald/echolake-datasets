@@ -1,14 +1,10 @@
 metadata:
   name: ryuk-test-files-detected
   version: 6.0.0
-  description: The following analytic identifies the presence of files containing
-    the keyword "Ryuk" in any folder on the C drive, indicative of Ryuk ransomware
-    activity. It leverages the Endpoint Filesystem data model to detect file paths
-    matching this pattern. This activity is significant as Ryuk ransomware is known
-    for its destructive impact, encrypting critical files and demanding ransom. If
-    confirmed malicious, this could lead to significant data loss, operational disruption,
-    and financial damage due to r
+  description: The following analytic identifies the presence of files containing the keyword "Ryuk" in any folder on the C drive, indicative of Ryuk ransomware activity. It leverages the Endpoint Filesystem data model to detect file paths matching this pattern. This activity is significant as Ryuk ransomware is known for its destructive impact, encrypting critical files and demanding ransom. If confirmed malicious, this could lead to significant data loss, operational disruption, and financial damage due to ransom payments and recovery efforts. Immediate investigation and response are crucial to mitigate potential damage.
   author: Rod Soto, Jose Hernandez, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1486
-      name: Technique T1486
-    tactics: []
+      name: Data Encrypted for Impact
+      tactics:
+      - impact
+    tactics:
+    - impact
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/ryuk_test_files_detected.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/ryuk_test_files_detected.yml
+      rule_sha256: sha256:79af3cc52706ee9464841ee51d0ce51e51be8343ba5fbadc00952d5129d8beab
+      detection_id: 57d44d70-28d9-4ed1-acf5-1c80ae2bbce3
+      source_version: 6
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/ryuk/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/ryuk/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:2311ff4c481acdfc6a96ce77fd15abe47e4830b16a183384ce0c9841f8285bfa
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

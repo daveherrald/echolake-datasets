@@ -1,14 +1,10 @@
 metadata:
   name: asl-aws-network-access-control-list-deleted
   version: 5.0.0
-  description: The following analytic detects the deletion of AWS Network Access Control
-    Lists (ACLs). It leverages AWS CloudTrail logs to identify events where a user
-    deletes a network ACL entry. This activity is significant because deleting a network
-    ACL can remove critical access restrictions, potentially allowing unauthorized
-    access to cloud instances. If confirmed malicious, this action could enable attackers
-    to bypass network security controls, leading to unauthorized access, data exfiltration,
-    or furthe
+  description: The following analytic detects the deletion of AWS Network Access Control Lists (ACLs). It leverages AWS CloudTrail logs to identify events where a user deletes a network ACL entry. This activity is significant because deleting a network ACL can remove critical access restrictions, potentially allowing unauthorized access to cloud instances. If confirmed malicious, this action could enable attackers to bypass network security controls, leading to unauthorized access, data exfiltration, or further compromise of the cloud environment.
   author: Patrick Bareiss, Splunk
+  updated: '2025-10-14'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1562.007
-      name: Technique T1562.007
-    tactics: []
+      name: Disable or Modify Cloud Firewall
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/asl_aws_network_access_control_list_deleted.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/asl_aws_network_access_control_list_deleted.yml
+      rule_sha256: sha256:5c33f51f9e53c7d8a1a8adcdb919784d5cdf9d5e7cd7d1664e7d74c9f6e9ed01
+      detection_id: e010ddf5-e9a5-44e5-bdd6-0c919ba8fc8b
+      source_version: 5
+      source_date: '2025-10-14'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.007/aws_delete_acl/asl_ocsf_cloudtrail.json
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1562.007/aws_delete_acl/asl_ocsf_cloudtrail.json
     description: aws_asl - aws:asl
     format: auto
     schema: raw
     sourcetype: aws:asl
+    checksum: sha256:bd943aeea797035118794289394ca36d53e150fb37e3db620f7ffb3b937be7fe
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

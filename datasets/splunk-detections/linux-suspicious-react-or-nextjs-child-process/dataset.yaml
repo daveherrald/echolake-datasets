@@ -1,16 +1,18 @@
 metadata:
   name: linux-suspicious-react-or-nextjs-child-process
   version: 1.0.0
-  description: 'This analytic detects Linux processes such as sh, bash, and common
-    Linux LOLBINs being spawned by React or Next.js application servers.
+  description: 'This analytic detects Linux processes such as sh, bash, and common Linux LOLBINs being spawned by React or Next.js application servers.
 
-    In the context of CVE-2025-55182 / React2Shell / CVE-2025-66478 for Next.js, successful
-    exploitation can lead to arbitrary JavaScript execution on the server, which in
-    turn is commonly used to invoke Node''s child_process APIs (for example child_process.execSync)
-    to run OS-level commands.
+    In the context of CVE-2025-55182 / React2Shell / CVE-2025-66478 for Next.js, successful exploitation can lead to arbitrary JavaScript execution on the server, which in turn is commonly used to invoke Node''s child_process APIs (for example child_process.execSync) to run OS-level commands.
 
-    Public proof-of-concept payloads and observed in-the-wild exploit traffic s'
+    Public proof-of-concept payloads and observed in-the-wild exploit traffic show patterns where the vulnerable React Server Components handler triggers process.mainModule.require(''child_process'').execSync() to execute binaries such as ping, curl, or arbitrary shells on the underlying host.
+
+    This detection focuses on suspicious child processes where a Next/React server process spawns an uncommon process.
+
+    Such activity might be a strong indicator of exploitation of the aforementioned vulnerability.'
   author: Nasreddine Bencherchali, Splunk
+  updated: '2025-12-05'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,20 +20,45 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1190
-      name: Technique T1190
+      name: Exploit Public-Facing Application
+      tactics:
+      - initial-access
     - id: T1059.004
-      name: Technique T1059.004
-    tactics: []
+      name: Unix Shell
+      tactics:
+      - execution
+    tactics:
+    - initial-access
+    - execution
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/linux_suspicious_react_or_next_js_child_process.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/linux_suspicious_react_or_next_js_child_process.yml
+      rule_sha256: sha256:7c8634b97f9c980db98d5508a922b1e104a52648b68266790310af745f1dca42
+      detection_id: cda04e9c-1950-43ab-87d6-e333a3d7f107
+      source_version: 1
+      source_date: '2025-12-05'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/emerging_threats/react2shell/react2shell_linux.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/emerging_threats/react2shell/react2shell_linux.log
     description: Syslog:Linux-Sysmon/Operational - sysmon:linux
     format: auto
     schema: raw
     sourcetype: sysmon:linux
+    checksum: sha256:52d7ad3faa5e13590da2c8872d9f9ac8d2b3fd645e4a1527fae083a3094f6d1b
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,17 +1,16 @@
 metadata:
   name: cisco-asa-packet-capture-activity
   version: 1.0.0
-  description: 'This analytic detects execution of packet capture commands on Cisco
-    ASA devices via CLI or ASDM.
+  description: 'This analytic detects execution of packet capture commands on Cisco ASA devices via CLI or ASDM.
 
-    Adversaries may abuse the built-in packet capture functionality to perform network
-    sniffing, intercept credentials transmitted over the network, capture sensitive
-    data in transit, or gather intelligence about network traffic patterns and internal
-    communications. Packet captures can reveal usernames, passwords, session tokens,
-    and confidential business data.
+    Adversaries may abuse the built-in packet capture functionality to perform network sniffing, intercept credentials transmitted over the network, capture sensitive data in transit, or gather intelligence about network traffic patterns and internal communications. Packet captures can reveal usernames, passwords, session tokens, and confidential business data.
 
-    The detection monitors for command executio'
+    The detection monitors for command execution events (message ID 111008 or 111010) containing "capture" commands, which are used to initiate packet capture sessions on specific interfaces or for specific traffic patterns on the ASA device.
+
+    Investigate unauthorized packet capture activities, especially captures targeting sensitive interfaces (internal network segments, DMZ), captures configured to capture large volumes of traffic, captures with suspicious filter criteria, captures initiated by non-administrative accounts, or captures during unusual hours.'
   author: Nasreddine Bencherchali, Splunk
+  updated: '2025-11-18'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -20,20 +19,48 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1040
-      name: Technique T1040
+      name: Network Sniffing
+      tactics:
+      - credential-access
+      - discovery
     - id: T1557
-      name: Technique T1557
-    tactics: []
+      name: Adversary-in-the-Middle
+      tactics:
+      - credential-access
+      - collection
+    tactics:
+    - credential-access
+    - discovery
+    - collection
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/application/cisco_asa___packet_capture_activity.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/application/cisco_asa___packet_capture_activity.yml
+      rule_sha256: sha256:1d705063c966973d9e1141beebe1c486f3e188643a91de1fec3536e1b608cf0e
+      detection_id: 7e9c3f8a-4b2d-4c5e-9a1f-6d8e5b3c2a9f
+      source_version: 1
+      source_date: '2025-11-18'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_asa/generic/cisco_asa_generic_logs.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/cisco_asa/generic/cisco_asa_generic_logs.log
     description: not_applicable - cisco:asa
     format: auto
     schema: raw
     sourcetype: cisco:asa
+    checksum: sha256:b42d51b1f09c7d447ebf3ca1c1a594a886bbf529b06a4300c9a5a58d191a2385
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,14 +1,10 @@
 metadata:
   name: windows-impair-defenses-disable-hvci
   version: 7.0.0
-  description: The following analytic detects the disabling of Hypervisor-protected
-    Code Integrity (HVCI) by monitoring changes in the Windows registry. It leverages
-    data from the Endpoint datamodel, specifically focusing on registry paths and
-    values related to HVCI settings. This activity is significant because HVCI helps
-    protect the kernel and system processes from tampering by malicious code. If confirmed
-    malicious, disabling HVCI could allow attackers to execute unsigned kernel-mode
-    code, potentially leadi
+  description: The following analytic detects the disabling of Hypervisor-protected Code Integrity (HVCI) by monitoring changes in the Windows registry. It leverages data from the Endpoint datamodel, specifically focusing on registry paths and values related to HVCI settings. This activity is significant because HVCI helps protect the kernel and system processes from tampering by malicious code. If confirmed malicious, disabling HVCI could allow attackers to execute unsigned kernel-mode code, potentially leading to kernel-level rootkits or other severe security breaches.
   author: Michael Haag, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1562.001
-      name: Technique T1562.001
-    tactics: []
+      name: Disable or Modify Tools
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_impair_defenses_disable_hvci.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_impair_defenses_disable_hvci.yml
+      rule_sha256: sha256:675e1c4f7bfaa2a462b39e99582122a192b21503ed1e818a59e87d57d9592811
+      detection_id: b061dfcc-f0aa-42cc-a6d4-a87f172acb79
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.001/atomic_red_team/hvci_windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1562.001/atomic_red_team/hvci_windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:c7f4485d1cc21f919d6aa985ccdbc36d8553b20c9cf34c4a19e9dba46395ee1c
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

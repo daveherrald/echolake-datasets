@@ -1,14 +1,10 @@
 metadata:
   name: single-letter-process-on-endpoint
   version: 11.0.0
-  description: The following analytic detects processes with names consisting of a
-    single letter, which is often indicative of malware or an attacker attempting
-    to evade detection. This detection leverages data from Endpoint Detection and
-    Response (EDR) agents, focusing on process names and command-line executions.
-    This activity is significant because attackers use such techniques to obscure
-    their presence and carry out malicious activities like data theft or ransomware
-    attacks. If confirmed malicious, this be
+  description: The following analytic detects processes with names consisting of a single letter, which is often indicative of malware or an attacker attempting to evade detection. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line executions. This activity is significant because attackers use such techniques to obscure their presence and carry out malicious activities like data theft or ransomware attacks. If confirmed malicious, this behavior could lead to unauthorized access, data exfiltration, or system compromise. Immediate investigation is required to determine the legitimacy of the process.
   author: David Dorsey, Splunk
+  updated: '2025-12-29'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1204.002
-      name: Technique T1204.002
-    tactics: []
+      name: Malicious File
+      tactics:
+      - execution
+    tactics:
+    - execution
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/single_letter_process_on_endpoint.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/single_letter_process_on_endpoint.yml
+      rule_sha256: sha256:7f54f5018cd3986f4d2ee4ed3cc4359f3d134ec2d3b6d55c2b179dd7e336949a
+      detection_id: a4214f0b-e01c-41bc-8cc4-d2b71e3056b4
+      source_version: 11
+      source_date: '2025-12-29'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1204.002/single_letter_exe/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1204.002/single_letter_exe/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:ac9411cc4c291c1b70925bf71633d2c4cdd6a51c1b5367c3a2ac12aab5642a76
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

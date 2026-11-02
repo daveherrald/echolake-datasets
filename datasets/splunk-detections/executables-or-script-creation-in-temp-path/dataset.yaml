@@ -1,14 +1,10 @@
 metadata:
   name: executables-or-script-creation-in-temp-path
   version: 17.0.0
-  description: 'The following analytic identifies the creation of executables or scripts
-    in suspicious file paths on Windows systems. It leverages the Endpoint.Filesystem
-    data model to detect files with specific extensions (e.g., .exe, .dll, .ps1) created
-    in uncommon directories (e.g., \windows\fonts\, \users\public\). This activity
-    is significant as adversaries often use these paths to evade detection and maintain
-    persistence. If confirmed malicious, this behavior could allow attackers to execute
-    unauthorized '
+  description: The following analytic identifies the creation of executables or scripts in suspicious file paths on Windows systems. It leverages the Endpoint.Filesystem data model to detect files with specific extensions (e.g., .exe, .dll, .ps1) created in uncommon directories (e.g., \windows\fonts\, \users\public\). This activity is significant as adversaries often use these paths to evade detection and maintain persistence. If confirmed malicious, this behavior could allow attackers to execute unauthorized code, escalate privileges, or persist within the environment, posing a significant security threat.
   author: Teoderick Contreras, Splunk
+  updated: '2025-12-10'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1036
-      name: Technique T1036
-    tactics: []
+      name: Masquerading
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/executables_or_script_creation_in_temp_path.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/executables_or_script_creation_in_temp_path.yml
+      rule_sha256: sha256:e3a96a5e42c916377f418fcecdf0af7971127e011a7c2f4da3e4f7cba56ba697
+      detection_id: e0422b71-2c05-4f32-8754-01fb415f49c9
+      source_version: 17
+      source_date: '2025-12-10'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/xmrig_miner/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/xmrig_miner/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:279cbbeda641d10e093a4a3339d04d17c814da164a354a1d57b93ae5b82d2172
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

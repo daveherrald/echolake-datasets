@@ -1,14 +1,10 @@
 metadata:
   name: windows-password-managers-discovery
   version: 8.0.0
-  description: The following analytic identifies command-line activity that searches
-    for files related to password manager software, such as "*.kdbx*" and "*credential*".
-    It leverages data from Endpoint Detection and Response (EDR) agents, focusing
-    on process execution logs. This activity is significant because attackers often
-    target password manager databases to extract stored credentials, which can be
-    used for further exploitation. If confirmed malicious, this behavior could lead
-    to unauthorized access to se
+  description: The following analytic identifies command-line activity that searches for files related to password manager software, such as "*.kdbx*" and "*credential*". It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process execution logs. This activity is significant because attackers often target password manager databases to extract stored credentials, which can be used for further exploitation. If confirmed malicious, this behavior could lead to unauthorized access to sensitive information, enabling attackers to escalate privileges, move laterally, or exfiltrate critical data.
   author: Teoderick Contreras, Splunk
+  updated: '2025-10-14'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1555.005
-      name: Technique T1555.005
-    tactics: []
+      name: Password Managers
+      tactics:
+      - credential-access
+    tactics:
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_password_managers_discovery.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_password_managers_discovery.yml
+      rule_sha256: sha256:0ae89e4515e2a78139fd9989146c617eb27f2e374d8916c405c016a579523f82
+      detection_id: a3b3bc96-1c4f-4eba-8218-027cac739a48
+      source_version: 8
+      source_date: '2025-10-14'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/winpeas/winpeas_search_pwd_db/dir-db-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/winpeas/winpeas_search_pwd_db/dir-db-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:901ae07769f5f22a14fbfa7ccdea76303f8d81732ad65e2d8bb1137a3862d84e
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

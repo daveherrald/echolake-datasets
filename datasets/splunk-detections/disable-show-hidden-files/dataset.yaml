@@ -1,14 +1,10 @@
 metadata:
   name: disable-show-hidden-files
   version: 13.0.0
-  description: 'The following analytic detects modifications to the Windows registry
-    that disable the display of hidden files. It leverages data from the Endpoint.Registry
-    data model, specifically monitoring changes to registry paths associated with
-    hidden file settings. This activity is significant because malware, such as worms
-    and trojan spyware, often use hidden files to evade detection. If confirmed malicious,
-    this behavior could allow an attacker to conceal malicious files on the system,
-    making it harder '
+  description: The following analytic detects modifications to the Windows registry that disable the display of hidden files. It leverages data from the Endpoint.Registry data model, specifically monitoring changes to registry paths associated with hidden file settings. This activity is significant because malware, such as worms and trojan spyware, often use hidden files to evade detection. If confirmed malicious, this behavior could allow an attacker to conceal malicious files on the system, making it harder for security tools and analysts to identify and remove the threat.
   author: Teoderick Contreras, Splunk, Steven Dick
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,32 +14,62 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1112
-      name: Technique T1112
+      name: Modify Registry
+      tactics:
+      - persistence
+      - defense-evasion
     - id: T1562.001
-      name: Technique T1562.001
+      name: Disable or Modify Tools
+      tactics:
+      - defense-evasion
     - id: T1564.001
-      name: Technique T1564.001
-    tactics: []
+      name: Hidden Files and Directories
+      tactics:
+      - defense-evasion
+    tactics:
+    - persistence
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/disable_show_hidden_files.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/disable_show_hidden_files.yml
+      rule_sha256: sha256:8740722deee96e0ed8b55ecac7de5e4cf3acea3eb506d4bb40c2b8de668c36fb
+      detection_id: 6f3ccfa2-91fe-11eb-8f9b-acde48001122
+      source_version: 13
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.001/win_app_defender_disabling/windows-security.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1562.001/win_app_defender_disabling/windows-security.log
     description: WinEventLog:Security - WinEventLog
     format: auto
     schema: raw
     sourcetype: WinEventLog
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.001/win_app_defender_disabling/windows-system.log
+    checksum: sha256:b55c57fd0256fa73f55116f9ad307de3b7403f1ba7536c10431b56426a09bd89
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1562.001/win_app_defender_disabling/windows-system.log
     description: WinEventLog:System - WinEventLog
     format: auto
     schema: raw
     sourcetype: WinEventLog
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.001/win_app_defender_disabling/windows-sysmon.log
+    checksum: sha256:9e3629e9a18bb1c6db424732e137595fd0fcb8c98318c2de2aa1b12b1baf528c
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1562.001/win_app_defender_disabling/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:8886e363b137555f5a0403783106e656b77e328fab2e503a645015f5e1cc3756
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

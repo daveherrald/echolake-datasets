@@ -18,6 +18,8 @@ from echolake.datasets.validation import validate_manifest_files
 
 
 IDENTIFIER = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*$")
+SHA256_CHECKSUM = re.compile(r"^sha256:[0-9a-f]{64}$")
+MIGRATED_REMOTE_FAMILIES = {"bots", "splunk-detections"}
 MAX_ERROR_DETAILS = 100
 
 
@@ -143,6 +145,42 @@ def _load_authored_yaml(path: Path) -> dict[str, Any]:
     return value
 
 
+def authored_remote_contract(authored: dict[str, Any], manifest: str) -> list[Finding]:
+    """Validate integrity metadata authored for external dataset references."""
+
+    findings: list[Finding] = []
+    parts = Path(manifest).parts
+    family = parts[1] if len(parts) > 1 and parts[0] == "datasets" else ""
+    authored_defaults = authored.get("defaults")
+    defaults = authored_defaults if isinstance(authored_defaults, dict) else {}
+    if family in MIGRATED_REMOTE_FAMILIES and "replay" in defaults:
+        findings.append(
+            Finding(
+                manifest,
+                "deprecated_replay_defaults",
+                "$.defaults.replay",
+                "Remote collections must author defaults.echo instead of defaults.replay.",
+            )
+        )
+
+    authored_files = authored.get("files")
+    files = authored_files if isinstance(authored_files, dict) else {}
+    authored_references = files.get("references")
+    references = authored_references if isinstance(authored_references, list) else []
+    for index, reference in enumerate(references):
+        checksum = reference.get("checksum") if isinstance(reference, dict) else None
+        if not isinstance(checksum, str) or not SHA256_CHECKSUM.fullmatch(checksum):
+            findings.append(
+                Finding(
+                    manifest,
+                    "remote_checksum_missing_or_invalid",
+                    f"$.files.references[{index}].checksum",
+                    "Remote references require sha256 followed by 64 lowercase hexadecimal characters.",
+                )
+            )
+    return findings
+
+
 def validate_repository(root: Path, *, check_counts: bool) -> Results:
     """Validate all manifests below ``root/datasets`` without network access."""
 
@@ -161,6 +199,8 @@ def validate_repository(root: Path, *, check_counts: bool) -> Results:
         except (OSError, UnicodeError, ValueError, yaml.YAMLError) as error:
             results.errors.append(Finding(name, "yaml_load_failed", "$", str(error)))
             continue
+
+        results.errors.extend(authored_remote_contract(authored, name))
 
         try:
             manifest = DatasetManifest.from_file(manifest_path)

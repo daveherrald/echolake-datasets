@@ -1,14 +1,10 @@
 metadata:
   name: detect-path-interception-by-creation-of-program-exe
   version: 14.0.0
-  description: The following analytic identifies the creation of a program executable
-    in an unquoted service path, a common technique for privilege escalation. It leverages
-    data from Endpoint Detection and Response (EDR) agents, focusing on process creation
-    events where the parent process is 'services.exe'. This activity is significant
-    because unquoted service paths can be exploited by attackers to execute arbitrary
-    code with elevated privileges. If confirmed malicious, this could allow an attacker
-    to gain hig
+  description: The following analytic identifies the creation of a program executable in an unquoted service path, a common technique for privilege escalation. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process creation events where the parent process is 'services.exe'. This activity is significant because unquoted service paths can be exploited by attackers to execute arbitrary code with elevated privileges. If confirmed malicious, this could allow an attacker to gain higher-level access, potentially leading to full system compromise and persistent control over the affected endpoint.
   author: Patrick Bareiss, Splunk
+  updated: '2025-10-14'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,44 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1574.009
-      name: Technique T1574.009
-    tactics: []
+      name: Path Interception by Unquoted Path
+      tactics:
+      - persistence
+      - privilege-escalation
+      - defense-evasion
+    tactics:
+    - persistence
+    - privilege-escalation
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/detect_path_interception_by_creation_of_program_exe.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/detect_path_interception_by_creation_of_program_exe.yml
+      rule_sha256: sha256:499182509418a3dfe0a93d3d39458beae044369d85bfa25a2853c4e5c122365c
+      detection_id: cbef820c-e1ff-407f-887f-0a9240a2d477
+      source_version: 14
+      source_date: '2025-10-14'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1574.009/atomic_red_team/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1574.009/atomic_red_team/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:da9ae38593a369e2cfcab73b44a897fcd37ff1a066fe698987abd6854c80ec4f
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

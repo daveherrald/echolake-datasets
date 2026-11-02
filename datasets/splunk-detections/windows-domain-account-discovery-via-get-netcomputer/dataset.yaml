@@ -1,14 +1,10 @@
 metadata:
   name: windows-domain-account-discovery-via-get-netcomputer
   version: 8.0.0
-  description: The following analytic detects the execution of the PowerView PowerShell
-    cmdlet Get-NetComputer, which is used to query Active Directory for user account
-    details such as "samaccountname," "accountexpires," "lastlogon," and more. It
-    leverages Event ID 4104 from PowerShell Script Block Logging to identify this
-    activity. This behavior is significant as it may indicate an attempt to gather
-    user account information, which is often a precursor to further malicious actions.
-    If confirmed malicious, this
+  description: The following analytic detects the execution of the PowerView PowerShell cmdlet Get-NetComputer, which is used to query Active Directory for user account details such as "samaccountname," "accountexpires," "lastlogon," and more. It leverages Event ID 4104 from PowerShell Script Block Logging to identify this activity. This behavior is significant as it may indicate an attempt to gather user account information, which is often a precursor to further malicious actions. If confirmed malicious, this activity could lead to unauthorized access, privilege escalation, or lateral movement within the network.
   author: Teoderick Contreras, Splunk
+  updated: '2025-06-24'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1087.002
-      name: Technique T1087.002
-    tactics: []
+      name: Domain Account
+      tactics:
+      - discovery
+    tactics:
+    - discovery
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_domain_account_discovery_via_get_netcomputer.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_domain_account_discovery_via_get_netcomputer.yml
+      rule_sha256: sha256:d2f80e6a89b836005f9625050395b9ba7a2cbae28cf0a689b03c10ddecca4d8a
+      detection_id: a7fbbc4e-4571-424a-b627-6968e1c939e4
+      source_version: 8
+      source_date: '2025-06-24'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1087/powerview_get_netuser_preauthnotrequire/get-netuser-not-require-pwh.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1087/powerview_get_netuser_preauthnotrequire/get-netuser-not-require-pwh.log
     description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:636b1d6ad09d3ed58273122cf54b19bc815781aac4ee193c6e1fe0c6a0bc22b9
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

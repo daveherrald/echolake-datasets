@@ -1,14 +1,10 @@
 metadata:
   name: lolbas-with-network-traffic
   version: 14.0.0
-  description: The following analytic identifies the use of Living Off the Land Binaries
-    and Scripts (LOLBAS) with network traffic. It leverages data from the Network
-    Traffic data model to detect when native Windows binaries, often abused by adversaries,
-    initiate network connections. This activity is significant as LOLBAS are frequently
-    used to download malicious payloads, enabling lateral movement, command-and-control,
-    or data exfiltration. If confirmed malicious, this behavior could allow attackers
-    to execut
+  description: The following analytic identifies the use of Living Off the Land Binaries and Scripts (LOLBAS) with network traffic. It leverages data from the Network Traffic data model to detect when native Windows binaries, often abused by adversaries, initiate network connections. This activity is significant as LOLBAS are frequently used to download malicious payloads, enabling lateral movement, command-and-control, or data exfiltration. If confirmed malicious, this behavior could allow attackers to execute arbitrary code, escalate privileges, or maintain persistence within the environment, posing a severe threat to organizational security.
   author: Steven Dick
+  updated: '2025-11-20'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,22 +14,50 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1105
-      name: Technique T1105
+      name: Ingress Tool Transfer
+      tactics:
+      - command-and-control
     - id: T1567
-      name: Technique T1567
+      name: Exfiltration Over Web Service
+      tactics:
+      - exfiltration
     - id: T1218
-      name: Technique T1218
-    tactics: []
+      name: System Binary Proxy Execution
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+    - command-and-control
+    - exfiltration
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/lolbas_with_network_traffic.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/lolbas_with_network_traffic.yml
+      rule_sha256: sha256:6a7af46d751ce64b148c08005d4c41186061da84041888609582ea243b467915
+      detection_id: 2820f032-19eb-497e-8642-25b04a880359
+      source_version: 14
+      source_date: '2025-11-20'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218/lolbas_with_network_traffic/lolbas_with_network_traffic.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1218/lolbas_with_network_traffic/lolbas_with_network_traffic.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:cdde3960c9869030b7c16e8749511777a45458b280500a0d47848a6d7477b661
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,14 +1,10 @@
 metadata:
   name: linux-apt-get-privilege-escalation
   version: 10.0.0
-  description: The following analytic detects the execution of the 'apt-get' command
-    with elevated privileges using 'sudo' on a Linux system. It leverages data from
-    Endpoint Detection and Response (EDR) agents, focusing on process execution logs
-    that include command-line details. This activity is significant because it indicates
-    a user may be attempting to escalate privileges to root, which could lead to unauthorized
-    system control. If confirmed malicious, an attacker could gain root access, allowing
-    them to e
+  description: The following analytic detects the execution of the 'apt-get' command with elevated privileges using 'sudo' on a Linux system. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process execution logs that include command-line details. This activity is significant because it indicates a user may be attempting to escalate privileges to root, which could lead to unauthorized system control. If confirmed malicious, an attacker could gain root access, allowing them to execute arbitrary commands, install or remove software, and potentially compromise the entire system.
   author: Gowthamaraj Rajendran, Bhavin Patel, Splunk
+  updated: '2025-11-18'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,23 +14,48 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1548.003
-      name: Technique T1548.003
-    tactics: []
+      name: Sudo and Sudo Caching
+      tactics:
+      - privilege-escalation
+      - defense-evasion
+    tactics:
+    - privilege-escalation
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/linux_apt_get_privilege_escalation.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/linux_apt_get_privilege_escalation.yml
+      rule_sha256: sha256:1c76214e39571a5c82eec47dff263366a74758d03491e9ec884b8b1423630ecd
+      detection_id: d870ce3b-e796-402f-b2af-cab4da1223f2
+      source_version: 10
+      source_date: '2025-11-18'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1548/apt_get/sysmon_linux.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1548/apt_get/sysmon_linux.log
     description: Syslog:Linux-Sysmon/Operational - sysmon:linux
     format: auto
     schema: raw
     sourcetype: sysmon:linux
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1548/apt_get/cisco_isovalent.log
+    checksum: sha256:abc543b761b52c1003fd61c5fbd9017914953ce0f7701dfd4a491641dd269dc9
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1548/apt_get/cisco_isovalent.log
     description: not_applicable - cisco:isovalent:processExec
     format: auto
     schema: raw
     sourcetype: cisco:isovalent:processExec
+    checksum: sha256:40f1e95fcb0567995357804f746a23b3323aaa90752ca52bcaaa41e5706b6323
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,14 +1,10 @@
 metadata:
   name: linux-auditd-file-permissions-modification-via-chattr
   version: 6.0.0
-  description: The following analytic detects suspicious file permissions modifications
-    using the chattr command, which may indicate an attacker attempting to manipulate
-    file attributes to evade detection or prevent alteration. The chattr command can
-    be used to make files immutable or restrict deletion, which can be leveraged to
-    protect malicious files or disrupt system operations. By monitoring for unusual
-    or unauthorized chattr usage, this analytic helps identify potential tampering
-    with critical files, enab
+  description: The following analytic detects suspicious file permissions modifications using the chattr command, which may indicate an attacker attempting to manipulate file attributes to evade detection or prevent alteration. The chattr command can be used to make files immutable or restrict deletion, which can be leveraged to protect malicious files or disrupt system operations. By monitoring for unusual or unauthorized chattr usage, this analytic helps identify potential tampering with critical files, enabling security teams to quickly respond to and mitigate threats associated with unauthorized file attribute changes.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1222.002
-      name: Technique T1222.002
-    tactics: []
+      name: Linux and Mac File and Directory Permissions Modification
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/linux_auditd_file_permissions_modification_via_chattr.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/linux_auditd_file_permissions_modification_via_chattr.yml
+      rule_sha256: sha256:44fb1f61afef375c46c7080980093e56d422a1c28e5def4e30f95dc6581243eb
+      detection_id: f2d1110d-b01c-4a58-9975-90a9edeb083a
+      source_version: 6
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1222.002/linux_auditd_chattr_i/auditd_proctitle_chattr.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1222.002/linux_auditd_chattr_i/auditd_proctitle_chattr.log
     description: auditd - auditd
     format: auto
     schema: raw
     sourcetype: auditd
+    checksum: sha256:7a04bee8117fe563b70b190b7d555671056c6f7e9e6e49c0d4c6c1ff114697ef
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

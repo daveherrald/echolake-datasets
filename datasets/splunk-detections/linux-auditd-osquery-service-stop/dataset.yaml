@@ -1,14 +1,10 @@
 metadata:
   name: linux-auditd-osquery-service-stop
   version: 6.0.0
-  description: The following analytic detects suspicious stopping of the `osquery`
-    service, which may indicate an attempt to disable monitoring and evade detection.
-    `Osquery` is a powerful tool used for querying system information and detecting
-    anomalies, and stopping its service can be a sign that an attacker is trying to
-    disrupt security monitoring or hide malicious activities. By monitoring for unusual
-    or unauthorized stops of the `osquery` service, this analytic helps identify potential
-    efforts to bypass s
+  description: The following analytic detects suspicious stopping of the `osquery` service, which may indicate an attempt to disable monitoring and evade detection. `Osquery` is a powerful tool used for querying system information and detecting anomalies, and stopping its service can be a sign that an attacker is trying to disrupt security monitoring or hide malicious activities. By monitoring for unusual or unauthorized stops of the `osquery` service, this analytic helps identify potential efforts to bypass security controls, enabling security teams to investigate and respond to possible threats effectively.
   author: Teoderick Contreras, Splunk
+  updated: '2025-06-10'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1489
-      name: Technique T1489
-    tactics: []
+      name: Service Stop
+      tactics:
+      - impact
+    tactics:
+    - impact
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/linux_auditd_osquery_service_stop.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/linux_auditd_osquery_service_stop.yml
+      rule_sha256: sha256:2f28dcd8b98df835a4050525785feea0ed54c39d8d9bc9ff579aeca49f8dfcd8
+      detection_id: 0c320fea-6e87-4b99-a884-74d09d4b655d
+      source_version: 6
+      source_date: '2025-06-10'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1489/linux_auditd_osquerd_service_stop/linux_auditd_osquerd_service_stop.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1489/linux_auditd_osquerd_service_stop/linux_auditd_osquerd_service_stop.log
     description: auditd - auditd
     format: auto
     schema: raw
     sourcetype: auditd
+    checksum: sha256:f45a192703a8b5d79ed28f66d4c91942044f93ceecc3cd3edeb51813c3b58428
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

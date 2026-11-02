@@ -1,28 +1,65 @@
 metadata:
   name: splunk-appdynamics-secure-application-alerts
   version: 1.0.0
-  description: The following analytic is to leverage alerts from Splunk AppDynamics
-    SecureApp, which identifies and monitors exploit attempts targeting business applications.
-    The primary attack observed involves exploiting vulnerabilities in web applications,
-    including injection attacks (SQL, API abuse), deserialization vulnerabilities,
-    remote code execution attempts, LOG4J and zero day attacks. These attacks are
-    typically aimed at gaining unauthorized access, exfiltrating sensitive data, or
-    disrupting applica
+  description: 'The following analytic is to leverage alerts from Splunk AppDynamics SecureApp, which identifies and monitors exploit attempts targeting business applications. The primary attack observed involves exploiting vulnerabilities in web applications, including injection attacks (SQL, API abuse), deserialization vulnerabilities, remote code execution attempts, LOG4J and zero day attacks. These attacks are typically aimed at gaining unauthorized access, exfiltrating sensitive data, or disrupting application functionality.
+
+
+    Splunk AppDynamics SecureApp provides real-time detection of these threats by analyzing application-layer events and correlating attack behavior with known vulnerability signatures. This detection methodology helps the Security Operations Center (SOC) by:
+
+
+    * Identifying active exploitation attempts in real-time, allowing for quicker incident response.
+
+    * Categorizing attack severity to prioritize remediation efforts based on risk level.
+
+    * Providing visibility into attacker tactics, including source IP, attack techniques, and affected applications.
+
+    * Generating risk-based scoring and contextual alerts to enhance decision-making within SOC workflows.
+
+    * Helping analysts determine whether an attack was merely an attempt or if it successfully exploited a vulnerability.
+
+
+    By leveraging this information, SOC teams can proactively mitigate security threats, patch vulnerable applications, and enforce security controls to prevent further exploitation.'
   author: Ryan Long, Bhavin Patel, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
   - critical-alerts
+  mitre_attack:
+    techniques: []
+    tactics: []
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/application/splunk_appdynamics_secure_application_alerts.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/application/splunk_appdynamics_secure_application_alerts.yml
+      rule_sha256: sha256:ba353c6458be3398b99d77636cd77cf763aed30d8d2b0b8181f5d23d413cd6d1
+      detection_id: d1a45d84-8dd1-4b31-8854-62b0b1d5da0b
+      source_version: 1
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: upstream-unmapped
+        reviewed: '2026-11-02'
+        rationale: This rule aggregates application alerts whose ATT&CK technique depends on the underlying alert.
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/suspicious_behaviour/alerts/cisco_secure_app_alerts.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/suspicious_behaviour/alerts/cisco_secure_app_alerts.log
     description: AppDynamics Security - appdynamics_security
     format: auto
     schema: raw
     sourcetype: appdynamics_security
+    checksum: sha256:5f0085892bb50f84cdd9d1d39d45ba888238f4e80820f8da08d82753cca8cfba
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

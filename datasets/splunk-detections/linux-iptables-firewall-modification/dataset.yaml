@@ -1,14 +1,10 @@
 metadata:
   name: linux-iptables-firewall-modification
   version: 11.0.0
-  description: The following analytic detects suspicious command-line activity that
-    modifies the iptables firewall settings on a Linux machine. It leverages data
-    from Endpoint Detection and Response (EDR) agents, focusing on specific command
-    patterns that alter firewall rules to accept traffic on certain TCP ports. This
-    activity is significant as it can indicate malware, such as CyclopsBlink, modifying
-    firewall settings to allow communication with a Command and Control (C2) server.
-    If confirmed malicious, this
+  description: The following analytic detects suspicious command-line activity that modifies the iptables firewall settings on a Linux machine. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on specific command patterns that alter firewall rules to accept traffic on certain TCP ports. This activity is significant as it can indicate malware, such as CyclopsBlink, modifying firewall settings to allow communication with a Command and Control (C2) server. If confirmed malicious, this could enable attackers to maintain persistent access and exfiltrate data, posing a severe security risk.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1562.004
-      name: Technique T1562.004
-    tactics: []
+      name: Disable or Modify System Firewall
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/linux_iptables_firewall_modification.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/linux_iptables_firewall_modification.yml
+      rule_sha256: sha256:6ff2c86782a459e613466dcc373feaceed86233ced8cd9a8641110bf29bdd0f1
+      detection_id: 309d59dc-1e1b-49b2-9800-7cf18d12f7b7
+      source_version: 11
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/cyclopsblink/sysmon_linux.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/cyclopsblink/sysmon_linux.log
     description: Syslog:Linux-Sysmon/Operational - sysmon:linux
     format: auto
     schema: raw
     sourcetype: sysmon:linux
+    checksum: sha256:5cb8e756cbf65b1feb803f42cec143dec2dd31eb9006cab617bc292241056645
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

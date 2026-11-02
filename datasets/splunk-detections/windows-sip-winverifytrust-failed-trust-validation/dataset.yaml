@@ -1,14 +1,10 @@
 metadata:
   name: windows-sip-winverifytrust-failed-trust-validation
   version: 5.0.0
-  description: 'The following analytic detects failed trust validation attempts using
-    Windows Event Log - CAPI2 (CryptoAPI 2). It specifically triggers on EventID 81,
-    which indicates that "The digital signature of the object did not verify." This
-    detection leverages the CAPI2 Operational log to identify instances where digital
-    signatures fail to validate. Monitoring this activity is crucial as it can indicate
-    attempts to execute untrusted or potentially malicious binaries. If confirmed
-    malicious, this activity '
+  description: The following analytic detects failed trust validation attempts using Windows Event Log - CAPI2 (CryptoAPI 2). It specifically triggers on EventID 81, which indicates that "The digital signature of the object did not verify." This detection leverages the CAPI2 Operational log to identify instances where digital signatures fail to validate. Monitoring this activity is crucial as it can indicate attempts to execute untrusted or potentially malicious binaries. If confirmed malicious, this activity could allow attackers to bypass security controls and execute unauthorized code, leading to potential system compromise.
   author: Michael Haag, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1553.003
-      name: Technique T1553.003
-    tactics: []
+      name: SIP and Trust Provider Hijacking
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_sip_winverifytrust_failed_trust_validation.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_sip_winverifytrust_failed_trust_validation.yml
+      rule_sha256: sha256:4275541c936236d24e79474efe2ec63e0f6abc9a734bd0f699b56e2a927a15bb
+      detection_id: 6ffc7f88-415b-4278-a80d-b957d6539e1a
+      source_version: 5
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1553.003/sip/capi2-operational.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1553.003/sip/capi2-operational.log
     description: XmlWinEventLog:Microsoft-Windows-CAPI2/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:abbd468ec032c1cb8db8532e66ff77d8f13800518fd435aadcdf0f6a39dc6982
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

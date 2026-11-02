@@ -1,14 +1,10 @@
 metadata:
   name: kerberos-pre-authentication-flag-disabled-with-powershell
   version: 9.0.0
-  description: The following analytic detects the use of the `Set-ADAccountControl`
-    PowerShell cmdlet with parameters that disable Kerberos Pre-Authentication. It
-    leverages PowerShell Script Block Logging (EventCode=4104) to identify this specific
-    command execution. Disabling Kerberos Pre-Authentication is significant because
-    it allows adversaries to perform offline brute force attacks against user passwords
-    using the AS-REP Roasting technique. If confirmed malicious, this activity could
-    enable attackers to es
+  description: The following analytic detects the use of the `Set-ADAccountControl` PowerShell cmdlet with parameters that disable Kerberos Pre-Authentication. It leverages PowerShell Script Block Logging (EventCode=4104) to identify this specific command execution. Disabling Kerberos Pre-Authentication is significant because it allows adversaries to perform offline brute force attacks against user passwords using the AS-REP Roasting technique. If confirmed malicious, this activity could enable attackers to escalate privileges or maintain persistence within an Active Directory environment, posing a severe security risk.
   author: Mauricio Velazco, Splunk
+  updated: '2025-06-24'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1558.004
-      name: Technique T1558.004
-    tactics: []
+      name: AS-REP Roasting
+      tactics:
+      - credential-access
+    tactics:
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/kerberos_pre_authentication_flag_disabled_with_powershell.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/kerberos_pre_authentication_flag_disabled_with_powershell.yml
+      rule_sha256: sha256:cc0bfffc498a84af65f06d3a19406704800a8ffa11a94adc0f7a1e17ff5b218b
+      detection_id: 59b51620-94c9-11ec-b3d5-acde48001122
+      source_version: 9
+      source_date: '2025-06-24'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1558.004/powershell/windows-powershell-xml.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1558.004/powershell/windows-powershell-xml.log
     description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:4dcc608c6f827d40fd1be046334c12e8b6ec2c0363b6cb0b69fefcef7c295b03
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

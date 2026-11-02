@@ -1,28 +1,48 @@
 metadata:
   name: microsoft-defender-atp-alerts
   version: 4.0.0
-  description: The following analytic is to leverage alerts from Microsoft Defender
-    ATP Alerts. This query aggregates and summarizes all alerts from Microsoft Defender
-    ATP Alerts, providing details such as the source, file name, severity, process
-    command line, ip address, registry key, signature, description, unique id, and
-    timestamps. This detection is not intended to detect new activity from raw data,
-    but leverages Microsoft provided alerts to be correlated with other data as part
-    of risk based alerting. The
+  description: The following analytic is to leverage alerts from Microsoft Defender ATP Alerts. This query aggregates and summarizes all alerts from Microsoft Defender ATP Alerts, providing details such as the source, file name, severity, process command line, ip address, registry key, signature, description, unique id, and timestamps. This detection is not intended to detect new activity from raw data, but leverages Microsoft provided alerts to be correlated with other data as part of risk based alerting. The data contained in the alert is mapped not only to the risk obejct, but also the threat object. This detection filters out evidence that has a verdict of clean from Microsoft. It dynamically maps the MITRE technique at search time to auto populate the annotation field with the value provided in the alert. It also uses a dynamic mapping to set the risk score in Enterprise Security based on the severity of the alert.
   author: Bryan Pluta, Bhavin Patel, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
   - critical-alerts
+  mitre_attack:
+    techniques: []
+    tactics: []
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/microsoft_defender_atp_alerts.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/microsoft_defender_atp_alerts.yml
+      rule_sha256: sha256:fc3fe937c8ea66d8c4b7142622bfa826b1d1245dec7411c59823d8a4df69e46d
+      detection_id: 38f034ed-1598-46c8-95e8-14edf05fdf5d
+      source_version: 4
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: upstream-unmapped
+        reviewed: '2026-11-02'
+        rationale: This rule aggregates vendor alerts whose ATT&CK technique depends on the underlying alert.
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/suspicious_behaviour/alerts/defender_atp_alerts_single_event.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/suspicious_behaviour/alerts/defender_atp_alerts_single_event.log
     description: ms_defender_atp_alerts - ms:defender:atp:alerts
     format: auto
     schema: raw
     sourcetype: ms:defender:atp:alerts
+    checksum: sha256:f03e447fa624ba875113e5a0184609a99e9c6967527a280438045c14661a00b3
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

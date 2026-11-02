@@ -1,17 +1,16 @@
 metadata:
   name: windows-local-llm-framework-execution
   version: 1.0.0
-  description: 'The following analytic detects execution of unauthorized local LLM
-    frameworks (Ollama, LM Studio, GPT4All, Jan, llama.cpp, KoboldCPP, Oobabooga,
-    NutStudio) and Python-based AI/ML libraries (HuggingFace Transformers, LangChain)
-    on Windows endpoints by leveraging process creation events.
+  description: 'The following analytic detects execution of unauthorized local LLM frameworks (Ollama, LM Studio, GPT4All, Jan, llama.cpp, KoboldCPP, Oobabooga, NutStudio) and Python-based AI/ML libraries (HuggingFace Transformers, LangChain) on Windows endpoints by leveraging process creation events.
 
-    It identifies cases where known LLM framework executables are launched or command-line
-    arguments reference AI/ML libraries.
+    It identifies cases where known LLM framework executables are launched or command-line arguments reference AI/ML libraries.
 
-    This activity is significant as it may indicate shadow AI deployments, unauthorized
-    model'
+    This activity is significant as it may indicate shadow AI deployments, unauthorized model inference operations, or potential data exfiltration through local AI systems.
+
+    If confirmed malicious, this could lead to unauthorized access to sensitive data, intellectual property theft, or circumvention of organizational AI governance policies.'
   author: Rod Soto, Splunk
+  updated: '2025-11-20'
+  license: Apache-2.0
   tags:
   - hunting
   - splunk-security-content
@@ -19,18 +18,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1543
-      name: Technique T1543
-    tactics: []
+      name: Create or Modify System Process
+      tactics:
+      - persistence
+      - privilege-escalation
+    tactics:
+    - persistence
+    - privilege-escalation
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_local_llm_framework_execution.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_local_llm_framework_execution.yml
+      rule_sha256: sha256:9644097cb0f250239899bb210118fac8d34b0408ec70256c088123763e311ed2
+      detection_id: a3f8e2c9-7d4b-4e1f-9c6a-2b5d8f3e1a7c
+      source_version: 1
+      source_date: '2025-11-20'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/suspicious_behaviour/local_llms/sysmon_local_llms.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/suspicious_behaviour/local_llms/sysmon_local_llms.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:4916f9587730db30bb5228a4b3e7c29ffde1d625f8f9ac830d8783e20b7ebcc8
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

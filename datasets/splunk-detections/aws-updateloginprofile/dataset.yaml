@@ -1,14 +1,10 @@
 metadata:
   name: aws-updateloginprofile
   version: 10.0.0
-  description: The following analytic detects an AWS CloudTrail event where a user
-    with permissions updates the login profile of another user. It leverages CloudTrail
-    logs to identify instances where the user making the change is different from
-    the user whose profile is being updated. This activity is significant because
-    it can indicate privilege escalation attempts, where an attacker uses a compromised
-    account to gain higher privileges. If confirmed malicious, this could allow the
-    attacker to escalate their p
+  description: The following analytic detects an AWS CloudTrail event where a user with permissions updates the login profile of another user. It leverages CloudTrail logs to identify instances where the user making the change is different from the user whose profile is being updated. This activity is significant because it can indicate privilege escalation attempts, where an attacker uses a compromised account to gain higher privileges. If confirmed malicious, this could allow the attacker to escalate their privileges, potentially leading to unauthorized access and control over sensitive resources within the AWS environment.
   author: Bhavin Patel, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1136.003
-      name: Technique T1136.003
-    tactics: []
+      name: Cloud Account
+      tactics:
+      - persistence
+    tactics:
+    - persistence
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/aws_updateloginprofile.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/aws_updateloginprofile.yml
+      rule_sha256: sha256:2ed2ee32f0bc1cd744b9aa9d42d2c25872f84a3df1d946c3a9572e92f53f09d4
+      detection_id: 2a9b80d3-6a40-4115-11ad-212bf3d0d111
+      source_version: 10
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1078/aws_updateloginprofile/aws_cloudtrail_events.json
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1078/aws_updateloginprofile/aws_cloudtrail_events.json
     description: aws_cloudtrail - aws:cloudtrail
     format: auto
     schema: raw
     sourcetype: aws:cloudtrail
+    checksum: sha256:8103aa638715ea463e633dc616076d7c6ff1838d796d712647cbd9a7f630278b
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

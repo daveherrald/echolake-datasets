@@ -1,14 +1,10 @@
 metadata:
   name: asl-aws-defense-evasion-update-cloudtrail
   version: 7.0.0
-  description: The following analytic detects `UpdateTrail` events within AWS CloudTrail
-    logs, aiming to identify attempts by attackers to evade detection by altering
-    logging configurations. By updating CloudTrail settings with incorrect parameters,
-    such as changing multi-regional logging to a single region, attackers can impair
-    the logging of their activities across other regions. This behavior is crucial
-    for Security Operations Centers (SOCs) to identify, as it indicates an adversary's
-    intent to operate unde
+  description: The following analytic detects `UpdateTrail` events within AWS CloudTrail logs, aiming to identify attempts by attackers to evade detection by altering logging configurations. By updating CloudTrail settings with incorrect parameters, such as changing multi-regional logging to a single region, attackers can impair the logging of their activities across other regions. This behavior is crucial for Security Operations Centers (SOCs) to identify, as it indicates an adversary's intent to operate undetected within a compromised AWS environment. The impact of such evasion tactics is significant, potentially allowing malicious activities to proceed without being logged, thereby hindering incident response and forensic investigations.
   author: Patrick Bareiss, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1562.008
-      name: Technique T1562.008
-    tactics: []
+      name: Disable or Modify Cloud Logs
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/asl_aws_defense_evasion_update_cloudtrail.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/asl_aws_defense_evasion_update_cloudtrail.yml
+      rule_sha256: sha256:45fc06d1a0a2245a23b9c77dca2cdfdc2a6e615c66c649849197ecccb34ac0a0
+      detection_id: f3eb471c-16d0-404d-897c-7653f0a78cba
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.008/update_cloudtrail/asl_ocsf_cloudtrail.json
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1562.008/update_cloudtrail/asl_ocsf_cloudtrail.json
     description: aws_asl - aws:asl
     format: auto
     schema: raw
     sourcetype: aws:asl
+    checksum: sha256:024c28304af04d4681278e00f1a1db1d240b95a84c4cba0434eaa71b337249b3
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

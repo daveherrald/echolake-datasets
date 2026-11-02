@@ -1,14 +1,10 @@
 metadata:
   name: aws-exfiltration-via-bucket-replication
   version: 6.0.0
-  description: 'The following analytic detects API calls to enable S3 bucket replication
-    services. It leverages AWS CloudTrail logs to identify `PutBucketReplication`
-    events, focusing on fields like `bucketName`, `ReplicationConfiguration.Rule.Destination.Bucket`,
-    and user details. This activity is significant as it can indicate unauthorized
-    data replication, potentially leading to data exfiltration. If confirmed malicious,
-    attackers could replicate sensitive data to external accounts, leading to data
-    breaches '
+  description: The following analytic detects API calls to enable S3 bucket replication services. It leverages AWS CloudTrail logs to identify `PutBucketReplication` events, focusing on fields like `bucketName`, `ReplicationConfiguration.Rule.Destination.Bucket`, and user details. This activity is significant as it can indicate unauthorized data replication, potentially leading to data exfiltration. If confirmed malicious, attackers could replicate sensitive data to external accounts, leading to data breaches and compliance violations.
   author: Bhavin Patel, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1537
-      name: Technique T1537
-    tactics: []
+      name: Transfer Data to Cloud Account
+      tactics:
+      - exfiltration
+    tactics:
+    - exfiltration
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/aws_exfiltration_via_bucket_replication.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/aws_exfiltration_via_bucket_replication.yml
+      rule_sha256: sha256:0304389af689ca168debeaba6a550c5b51d66cd09e4feb656b057e7cd8402730
+      detection_id: eeb432d6-2212-43b6-9e89-fcd753f7da4c
+      source_version: 6
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1119/aws_exfil_datasync/cloudtrail.json
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1119/aws_exfil_datasync/cloudtrail.json
     description: aws_cloudtrail - aws:cloudtrail
     format: auto
     schema: raw
     sourcetype: aws:cloudtrail
+    checksum: sha256:3e61b4eba628eaf58e86401d834e2fa277a01e5fa65e30c34f8c60138332707c
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

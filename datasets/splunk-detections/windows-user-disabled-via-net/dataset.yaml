@@ -1,14 +1,10 @@
 metadata:
   name: windows-user-disabled-via-net
   version: 4.0.0
-  description: The following analytic detects the use of the `net.exe` utility to
-    disable a user account via the command line. It leverages data from Endpoint Detection
-    and Response (EDR) agents, focusing on process execution logs and command-line
-    arguments. This activity is significant as it may indicate an adversary's attempt
-    to disrupt user availability, potentially as a precursor to further malicious
-    actions. If confirmed malicious, this could lead to denial of service for legitimate
-    users, aiding the atta
+  description: The following analytic detects the use of the `net.exe` utility to disable a user account via the command line. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process execution logs and command-line arguments. This activity is significant as it may indicate an adversary's attempt to disrupt user availability, potentially as a precursor to further malicious actions. If confirmed malicious, this could lead to denial of service for legitimate users, aiding the attacker in maintaining control or covering their tracks.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1531
-      name: Technique T1531
-    tactics: []
+      name: Account Access Removal
+      tactics:
+      - impact
+    tactics:
+    - impact
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_user_disabled_via_net.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_user_disabled_via_net.yml
+      rule_sha256: sha256:4810c55f89b7343b1537a2a6cb3ac55f2897bc1add485bc49c5b32f8757ac524
+      detection_id: b0359e05-c87b-4354-83d8-aee0d890243f
+      source_version: 4
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/xmrig_miner/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/xmrig_miner/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:279cbbeda641d10e093a4a3339d04d17c814da164a354a1d57b93ae5b82d2172
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

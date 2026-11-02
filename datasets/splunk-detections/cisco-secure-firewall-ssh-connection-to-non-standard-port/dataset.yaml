@@ -1,17 +1,12 @@
 metadata:
   name: cisco-secure-firewall-ssh-connection-to-non-standard-port
   version: 1.0.0
-  description: 'This analytic detects inbound SSH connections to non-standard ports
-    on network devices using Cisco Secure Firewall Intrusion Events. APT actors have
-    been observed enabling SSH servers on high, non-default TCP ports to maintain
-    encrypted remote access to compromised network infrastructure.
+  description: 'This analytic detects inbound SSH connections to non-standard ports on network devices using Cisco Secure Firewall Intrusion Events. APT actors have been observed enabling SSH servers on high, non-default TCP ports to maintain encrypted remote access to compromised network infrastructure.
 
-    This detection leverages Snort signature 65369 to identify SSH protocol traffic
-    on unusual ports, which may indicate persistence mechanisms or backdoor access
-    established by threat actors.
-
-    '
+    This detection leverages Snort signature 65369 to identify SSH protocol traffic on unusual ports, which may indicate persistence mechanisms or backdoor access established by threat actors.'
   author: Nasreddine Bencherchali, Michael Haag, Splunk
+  updated: '2026-01-06'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -20,18 +15,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1021.004
-      name: Technique T1021.004
-    tactics: []
+      name: SSH
+      tactics:
+      - lateral-movement
+    tactics:
+    - lateral-movement
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/network/cisco_secure_firewall___ssh_connection_to_non_standard_port.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/network/cisco_secure_firewall___ssh_connection_to_non_standard_port.yml
+      rule_sha256: sha256:150e037c1db3462b76ec8be42352958a0acb7ad3942f5018c87ac9223ab204e0
+      detection_id: 9b0c2d3e-4f5a-6b7c-8d9e-0f1a2b3c4d5e
+      source_version: 1
+      source_date: '2026-01-06'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_secure_firewall_threat_defense/intrusion_event/intrusion_events.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/cisco_secure_firewall_threat_defense/intrusion_event/intrusion_events.log
     description: not_applicable - cisco:sfw:estreamer
     format: auto
     schema: raw
     sourcetype: cisco:sfw:estreamer
+    checksum: sha256:fbb3f751fe1eba2da9fb5214ca14e86d9e9bd3f9976e67c3ffe3874ffc2e5a8b
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

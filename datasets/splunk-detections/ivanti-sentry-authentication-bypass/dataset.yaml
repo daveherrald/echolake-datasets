@@ -1,14 +1,10 @@
 metadata:
   name: ivanti-sentry-authentication-bypass
   version: 5.0.0
-  description: The following analytic identifies unauthenticated access attempts to
-    the System Manager Portal in Ivanti Sentry, exploiting CVE-2023-38035. It detects
-    this activity by monitoring HTTP requests to specific endpoints ("/mics/services/configservice/*",
-    "/mics/services/*", "/mics/services/MICSLogService*") with a status code of 200.
-    This behavior is significant for a SOC as it indicates potential unauthorized
-    access, which could lead to OS command execution as root. If confirmed malicious,
-    this acti
+  description: The following analytic identifies unauthenticated access attempts to the System Manager Portal in Ivanti Sentry, exploiting CVE-2023-38035. It detects this activity by monitoring HTTP requests to specific endpoints ("/mics/services/configservice/*", "/mics/services/*", "/mics/services/MICSLogService*") with a status code of 200. This behavior is significant for a SOC as it indicates potential unauthorized access, which could lead to OS command execution as root. If confirmed malicious, this activity could result in significant system compromise and data breaches, especially if port 8443 is exposed to the internet.
   author: Michael Haag, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1190
-      name: Technique T1190
-    tactics: []
+      name: Exploit Public-Facing Application
+      tactics:
+      - initial-access
+    tactics:
+    - initial-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/web/ivanti_sentry_authentication_bypass.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/web/ivanti_sentry_authentication_bypass.yml
+      rule_sha256: sha256:39b6699f2b25674e19afde227c736e7679f2194d28703e936f7bf0a71c832d2f
+      detection_id: b8e0d1cf-e6a8-4d46-a5ae-aebe18ead8f8
+      source_version: 5
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/ivanti/ivanti_sentry_CVE_2023_38035.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1190/ivanti/ivanti_sentry_CVE_2023_38035.log
     description: suricata - suricata
     format: auto
     schema: raw
     sourcetype: suricata
+    checksum: sha256:1b139e92de06311bf6b1e3c5a7e40d45d8ac62c855825dd4ad368ae0ff45a244
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,14 +1,10 @@
 metadata:
   name: windows-cached-domain-credentials-reg-query
   version: 7.0.0
-  description: The following analytic identifies a process command line querying the
-    CachedLogonsCount registry value in the Winlogon registry. This detection leverages
-    data from Endpoint Detection and Response (EDR) agents, focusing on command-line
-    executions and registry queries. Monitoring this activity is significant as it
-    can indicate the use of post-exploitation tools like Winpeas, which gather information
-    about login caching settings. If confirmed malicious, this activity could help
-    attackers understand
+  description: The following analytic identifies a process command line querying the CachedLogonsCount registry value in the Winlogon registry. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on command-line executions and registry queries. Monitoring this activity is significant as it can indicate the use of post-exploitation tools like Winpeas, which gather information about login caching settings. If confirmed malicious, this activity could help attackers understand login caching configurations, potentially aiding in credential theft or lateral movement within the network.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1003.005
-      name: Technique T1003.005
-    tactics: []
+      name: Cached Domain Credentials
+      tactics:
+      - credential-access
+    tactics:
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_cached_domain_credentials_reg_query.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_cached_domain_credentials_reg_query.yml
+      rule_sha256: sha256:e27ea3b98024419dba040082c1f3e24f220f3f558eef3a171dee1cc58c5a9a8e
+      detection_id: 40ccb8e0-1785-466e-901e-6a8b75c04ecd
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/winpeas/sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/winpeas/sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:3d884edd04405659a53f85e3570d96056c01bd58081f175fd9aa9362259872a4
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

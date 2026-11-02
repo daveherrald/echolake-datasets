@@ -1,14 +1,10 @@
 metadata:
   name: aws-high-number-of-failed-authentications-for-user
   version: 6.0.0
-  description: The following analytic detects an AWS account experiencing more than
-    20 failed authentication attempts within a 5-minute window. It leverages AWS CloudTrail
-    logs to identify multiple failed ConsoleLogin events. This behavior is significant
-    as it may indicate a brute force attack targeting the account. If confirmed malicious,
-    the attacker could potentially gain unauthorized access, leading to data breaches
-    or further exploitation of the AWS environment. Security teams should consider
-    adjusting th
+  description: The following analytic detects an AWS account experiencing more than 20 failed authentication attempts within a 5-minute window. It leverages AWS CloudTrail logs to identify multiple failed ConsoleLogin events. This behavior is significant as it may indicate a brute force attack targeting the account. If confirmed malicious, the attacker could potentially gain unauthorized access, leading to data breaches or further exploitation of the AWS environment. Security teams should consider adjusting the threshold based on their specific environment to reduce false positives.
   author: Bhavin Patel, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1201
-      name: Technique T1201
-    tactics: []
+      name: Password Policy Discovery
+      tactics:
+      - discovery
+    tactics:
+    - discovery
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/aws_high_number_of_failed_authentications_for_user.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/aws_high_number_of_failed_authentications_for_user.yml
+      rule_sha256: sha256:9d5694e17772e0b3bf53efd59b592be64f130d919d799719de43e35740250022
+      detection_id: e3236f49-daf3-4b70-b808-9290912ac64d
+      source_version: 6
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1110.003/aws_multiple_login_fail_per_user/cloudtrail.json
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1110.003/aws_multiple_login_fail_per_user/cloudtrail.json
     description: aws_cloudtrail - aws:cloudtrail
     format: auto
     schema: raw
     sourcetype: aws:cloudtrail
+    checksum: sha256:c0a030b82103f8065913a3dd0285d0534ef421b807e06febbe73537f4f11b2e7
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

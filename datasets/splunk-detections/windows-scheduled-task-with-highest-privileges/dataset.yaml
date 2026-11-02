@@ -1,14 +1,10 @@
 metadata:
   name: windows-scheduled-task-with-highest-privileges
   version: 12.0.0
-  description: The following analytic detects the creation of a new scheduled task
-    with the highest execution privileges via Schtasks.exe. It leverages Endpoint
-    Detection and Response (EDR) logs to monitor for specific command-line parameters
-    ('/rl' and 'highest') in schtasks.exe executions. This activity is significant
-    as it is commonly used in AsyncRAT attacks for persistence and privilege escalation.
-    If confirmed malicious, this could allow an attacker to maintain persistent access
-    and execute tasks with el
+  description: The following analytic detects the creation of a new scheduled task with the highest execution privileges via Schtasks.exe. It leverages Endpoint Detection and Response (EDR) logs to monitor for specific command-line parameters ('/rl' and 'highest') in schtasks.exe executions. This activity is significant as it is commonly used in AsyncRAT attacks for persistence and privilege escalation. If confirmed malicious, this could allow an attacker to maintain persistent access and execute tasks with elevated privileges, potentially leading to unauthorized system access and data breaches.
   author: Teoderick Contreras, Splunk
+  updated: '2025-11-20'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,44 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1053.005
-      name: Technique T1053.005
-    tactics: []
+      name: Scheduled Task
+      tactics:
+      - execution
+      - persistence
+      - privilege-escalation
+    tactics:
+    - execution
+    - persistence
+    - privilege-escalation
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_scheduled_task_with_highest_privileges.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_scheduled_task_with_highest_privileges.yml
+      rule_sha256: sha256:2c4538b167f57324f0cac4b42815d2a65aadcafa2ff050ad8dcd5c0d9c204deb
+      detection_id: 2f15e1a4-0fc2-49dd-919e-cbbe60699218
+      source_version: 12
+      source_date: '2025-11-20'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053.005/asyncrat_highest_priv_schtasks/sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1053.005/asyncrat_highest_priv_schtasks/sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:068cba2851e13e3708d353247c37891e2cdc5b78bc94f5d7099ada494ae644d9
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

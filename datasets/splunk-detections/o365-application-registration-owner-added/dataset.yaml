@@ -1,14 +1,10 @@
 metadata:
   name: o365-application-registration-owner-added
   version: 6.0.0
-  description: 'The following analytic identifies instances where a new owner is assigned
-    to an application registration within an Azure AD and Office 365 tenant. It leverages
-    O365 audit logs, specifically events related to changes in owner assignments within
-    the AzureActiveDirectory workload. This activity is significant because assigning
-    a new owner to an application registration can grant significant control over
-    the application''s configuration, permissions, and behavior. If confirmed malicious,
-    an attacker '
+  description: The following analytic identifies instances where a new owner is assigned to an application registration within an Azure AD and Office 365 tenant. It leverages O365 audit logs, specifically events related to changes in owner assignments within the AzureActiveDirectory workload. This activity is significant because assigning a new owner to an application registration can grant significant control over the application's configuration, permissions, and behavior. If confirmed malicious, an attacker could modify the application's settings, permissions, and behavior, leading to unauthorized data access, privilege escalation, or the introduction of malicious behavior within the application's operations.
   author: Mauricio Velazco, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1098
-      name: Technique T1098
-    tactics: []
+      name: Account Manipulation
+      tactics:
+      - persistence
+      - privilege-escalation
+    tactics:
+    - persistence
+    - privilege-escalation
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/o365_application_registration_owner_added.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/o365_application_registration_owner_added.yml
+      rule_sha256: sha256:a977236c6f3e9417c866f2209255d1e9d695d58c38cf22034e04efcb432f2025
+      detection_id: c068d53f-6aaa-4558-8011-3734df878266
+      source_version: 6
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1098/o365_add_app_registration_owner/o365_add_app_registration_owner.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1098/o365_add_app_registration_owner/o365_add_app_registration_owner.log
     description: o365 - o365:management:activity
     format: auto
     schema: raw
     sourcetype: o365:management:activity
+    checksum: sha256:210640d342031983ffc198280139663955e8178acab96b5c0d008b61acf0c042
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

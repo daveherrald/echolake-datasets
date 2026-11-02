@@ -1,14 +1,10 @@
 metadata:
   name: non-firefox-process-access-firefox-profile-dir
   version: 14.0.0
-  description: The following analytic detects non-Firefox processes accessing the
-    Firefox profile directory, which contains sensitive user data such as login credentials,
-    browsing history, and cookies. It leverages Windows Security Event logs, specifically
-    event code 4663, to monitor access attempts. This activity is significant because
-    it may indicate attempts by malware, such as RATs or trojans, to harvest user
-    information. If confirmed malicious, this behavior could lead to data exfiltration,
-    unauthorized a
+  description: The following analytic detects non-Firefox processes accessing the Firefox profile directory, which contains sensitive user data such as login credentials, browsing history, and cookies. It leverages Windows Security Event logs, specifically event code 4663, to monitor access attempts. This activity is significant because it may indicate attempts by malware, such as RATs or trojans, to harvest user information. If confirmed malicious, this behavior could lead to data exfiltration, unauthorized access to user accounts, and further compromise of the affected system.
   author: Teoderick Contreras, Splunk
+  updated: '2025-12-16'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1555.003
-      name: Technique T1555.003
-    tactics: []
+      name: Credentials from Web Browsers
+      tactics:
+      - credential-access
+    tactics:
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/non_firefox_process_access_firefox_profile_dir.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/non_firefox_process_access_firefox_profile_dir.yml
+      rule_sha256: sha256:9ba6e9530f5b5d1ca450fe9023dda67b6838b48b93f5735a76a2b1e2de15c18a
+      detection_id: e6fc13b0-1609-11ec-b533-acde48001122
+      source_version: 14
+      source_date: '2025-12-16'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1555/non_chrome_process_accessing_chrome_default_dir/windows-xml.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1555/non_chrome_process_accessing_chrome_default_dir/windows-xml.log
     description: XmlWinEventLog:Security - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:f8cfe7081aaf210146945fe0fa68a8aea843c3b08149172a0147b0065722a3e8
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

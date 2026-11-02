@@ -1,13 +1,10 @@
 metadata:
   name: powershell-load-module-in-meterpreter
   version: 8.0.0
-  description: The following analytic detects the execution of suspicious PowerShell
-    commands associated with Meterpreter modules, such as "MSF.Powershell" and "MSF.Powershell.Meterpreter".
-    It leverages PowerShell Script Block Logging (EventCode=4104) to capture and analyze
-    the full command sent to PowerShell. This activity is significant as it indicates
-    potential post-exploitation actions, including credential dumping and persistence
-    mechanisms. If confirmed malicious, an attacker could gain extensive control
+  description: The following analytic detects the execution of suspicious PowerShell commands associated with Meterpreter modules, such as "MSF.Powershell" and "MSF.Powershell.Meterpreter". It leverages PowerShell Script Block Logging (EventCode=4104) to capture and analyze the full command sent to PowerShell. This activity is significant as it indicates potential post-exploitation actions, including credential dumping and persistence mechanisms. If confirmed malicious, an attacker could gain extensive control over the compromised system, escalate privileges, and maintain long-term access, posing a severe threat to the environment.
   author: Michael Haag, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -15,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1059.001
-      name: Technique T1059.001
-    tactics: []
+      name: PowerShell
+      tactics:
+      - execution
+    tactics:
+    - execution
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/powershell_load_module_in_meterpreter.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/powershell_load_module_in_meterpreter.yml
+      rule_sha256: sha256:3fc923677166ef67544f0ce230712e7af4da3dcdba42511ab8914ad2e71a07de
+      detection_id: d5905da5-d050-48db-9259-018d8f034fcf
+      source_version: 8
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059/metasploit/msf.powershell.powershell.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1059/metasploit/msf.powershell.powershell.log
     description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:93608781b0e7a04669591ea3f12bc5c5835a0155f8c960e0e0348fc6e09ab777
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,14 +1,10 @@
 metadata:
   name: windows-credentials-from-password-stores-chrome-copied-in-temp-dir
   version: 6.0.0
-  description: The following analytic detects the copying of Chrome's Local State
-    and Login Data files into temporary folders, a tactic often used by the Braodo
-    stealer malware. These files contain encrypted user credentials, including saved
-    passwords and login session details. The detection monitors for suspicious copying
-    activity involving these specific Chrome files, particularly in temp directories
-    where malware typically processes the stolen data. Identifying this behavior enables
-    security teams to act qu
+  description: The following analytic detects the copying of Chrome's Local State and Login Data files into temporary folders, a tactic often used by the Braodo stealer malware. These files contain encrypted user credentials, including saved passwords and login session details. The detection monitors for suspicious copying activity involving these specific Chrome files, particularly in temp directories where malware typically processes the stolen data. Identifying this behavior enables security teams to act quickly, preventing attackers from decrypting and exfiltrating sensitive browser credentials and mitigating the risk of unauthorized access.
   author: Teoderick Contreras, Splunk
+  updated: '2025-10-14'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1555.003
-      name: Technique T1555.003
-    tactics: []
+      name: Credentials from Web Browsers
+      tactics:
+      - credential-access
+    tactics:
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_credentials_from_password_stores_chrome_copied_in_temp_dir.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_credentials_from_password_stores_chrome_copied_in_temp_dir.yml
+      rule_sha256: sha256:fb94ae2a4d71ff432d4072981d07be1faae5226aebab2a58a0f9762d7620d449
+      detection_id: 4d14c86d-fdee-4393-94da-238d2706902f
+      source_version: 6
+      source_date: '2025-10-14'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1555.003/browser_credential_info_temp/braodo_browser_info.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1555.003/browser_credential_info_temp/braodo_browser_info.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:905f93901e3a0df59a6c2490d7185c13c9e169ca69ccd815f68aaf0eef990468
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

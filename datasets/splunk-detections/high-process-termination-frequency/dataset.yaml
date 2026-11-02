@@ -1,14 +1,10 @@
 metadata:
   name: high-process-termination-frequency
   version: 10.0.0
-  description: The following analytic identifies a high frequency of process termination
-    events on a computer within a short period. It leverages Sysmon EventCode 5 logs
-    to detect instances where 15 or more processes are terminated within a 3-second
-    window. This behavior is significant as it is commonly associated with ransomware
-    attempting to avoid exceptions during file encryption. If confirmed malicious,
-    this activity could indicate an active ransomware attack, potentially leading
-    to widespread file encrypt
+  description: The following analytic identifies a high frequency of process termination events on a computer within a short period. It leverages Sysmon EventCode 5 logs to detect instances where 15 or more processes are terminated within a 3-second window. This behavior is significant as it is commonly associated with ransomware attempting to avoid exceptions during file encryption. If confirmed malicious, this activity could indicate an active ransomware attack, potentially leading to widespread file encryption and significant data loss.
   author: Teoderick Contreras
+  updated: '2025-10-14'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1486
-      name: Technique T1486
-    tactics: []
+      name: Data Encrypted for Impact
+      tactics:
+      - impact
+    tactics:
+    - impact
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/high_process_termination_frequency.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/high_process_termination_frequency.yml
+      rule_sha256: sha256:4160576146c96f92cde71bad8e57fd334fc819a1e63ef6bef957264196bd1963
+      detection_id: 17cd75b2-8666-11eb-9ab4-acde48001122
+      source_version: 10
+      source_date: '2025-10-14'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/clop/clop_a/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/clop/clop_a/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:b765f9864bd642603dc8a7a4bd3c23e5b036e4ebed9d2f0ac0716f69870996d3
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

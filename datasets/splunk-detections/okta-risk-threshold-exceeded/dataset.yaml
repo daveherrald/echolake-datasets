@@ -1,14 +1,10 @@
 metadata:
   name: okta-risk-threshold-exceeded
   version: 7.0.0
-  description: The following correlation identifies when a user exceeds a risk threshold
-    based on multiple suspicious Okta activities. It leverages the Risk Framework
-    from Enterprise Security, aggregating risk events from "Suspicious Okta Activity,"
-    "Okta Account Takeover," and "Okta MFA Exhaustion" analytic stories. This detection
-    is significant as it highlights potentially compromised user accounts exhibiting
-    multiple tactics, techniques, and procedures (TTPs) within a 24-hour period. If
-    confirmed malicious,
+  description: The following correlation identifies when a user exceeds a risk threshold based on multiple suspicious Okta activities. It leverages the Risk Framework from Enterprise Security, aggregating risk events from "Suspicious Okta Activity," "Okta Account Takeover," and "Okta MFA Exhaustion" analytic stories. This detection is significant as it highlights potentially compromised user accounts exhibiting multiple tactics, techniques, and procedures (TTPs) within a 24-hour period. If confirmed malicious, this activity could indicate a serious security breach, allowing attackers to gain unauthorized access, escalate privileges, or persist within the environment.
   author: Michael Haag, Bhavin Patel, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - correlation
   - splunk-security-content
@@ -18,20 +14,51 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1078
-      name: Technique T1078
+      name: Valid Accounts
+      tactics:
+      - initial-access
+      - persistence
+      - privilege-escalation
+      - defense-evasion
     - id: T1110
-      name: Technique T1110
-    tactics: []
+      name: Brute Force
+      tactics:
+      - credential-access
+    tactics:
+    - initial-access
+    - persistence
+    - privilege-escalation
+    - defense-evasion
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/application/okta_risk_threshold_exceeded.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/application/okta_risk_threshold_exceeded.yml
+      rule_sha256: sha256:9861286153b280c0f263d026b3bc6c1db14bf233c19e2781b0b3fc7600bb942b
+      detection_id: d8b967dd-657f-4d88-93b5-c588bcd7218c
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/suspicious_behaviour/okta_account_takeover_risk_events/okta_risk.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/suspicious_behaviour/okta_account_takeover_risk_events/okta_risk.log
     description: risk_data - stash
     format: auto
     schema: raw
     sourcetype: stash
+    checksum: sha256:828c9f21376292ed36c98262c272fcef1e009ac177c890b8e795dd2a850dad34
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,21 +1,22 @@
 metadata:
   name: cisco-nvm-suspicious-network-connection-to-ip-lookup-service-api
   version: 4.0.0
-  description: 'This analytic identifies non-browser processes reaching out to public
-    IP lookup or geolocation services,
+  description: 'This analytic identifies non-browser processes reaching out to public IP lookup or geolocation services,
 
     such as `ipinfo.io`, `icanhazip.com`, `ip-api.com`, and others.
 
-    These domains are commonly used by legitimate tools, but their usage outside of
-    browsers may indicate
+    These domains are commonly used by legitimate tools, but their usage outside of browsers may indicate
 
     network reconnaissance, virtual machine detection, or staging by malware.
 
-    This activity is observed in post-exploitation frameworks, stealer malware, and
-    advanced threat actor campaigns.
+    This activity is observed in post-exploitation frameworks, stealer malware, and advanced threat actor campaigns.
 
-    The detection relies on Cisco Network Visi'
+    The detection relies on Cisco Network Visibility Module (NVM) telemetry and excludes known browser
+
+    processes to reduce noise.'
   author: Nasreddine Bencherchali, Splunk, Janantha Marasinghe
+  updated: '2025-10-31'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -24,20 +25,45 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1590.005
-      name: Technique T1590.005
+      name: IP Addresses
+      tactics:
+      - reconnaissance
     - id: T1016
-      name: Technique T1016
-    tactics: []
+      name: System Network Configuration Discovery
+      tactics:
+      - discovery
+    tactics:
+    - reconnaissance
+    - discovery
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/cisco_nvm___suspicious_network_connection_to_ip_lookup_service_api.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/cisco_nvm___suspicious_network_connection_to_ip_lookup_service_api.yml
+      rule_sha256: sha256:0384e19a57ede252e4851e9b4d646555e02ba52ce6364b892cfd1ad37202941b
+      detection_id: 568cb83e-d79e-4a23-85ec-6e1f6c30cb2f
+      source_version: 4
+      source_date: '2025-10-31'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_network_visibility_module/cisco_nvm_flowdata/nvm_flowdata.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/cisco_network_visibility_module/cisco_nvm_flowdata/nvm_flowdata.log
     description: not_applicable - cisco:nvm:flowdata
     format: auto
     schema: raw
     sourcetype: cisco:nvm:flowdata
+    checksum: sha256:f427b5cc3a60bb3b41ae1c679bda85c1bb9aba78cc9468b94d3eec36adedfaaa
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

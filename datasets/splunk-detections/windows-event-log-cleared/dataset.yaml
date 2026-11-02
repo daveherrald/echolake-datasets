@@ -1,14 +1,10 @@
 metadata:
   name: windows-event-log-cleared
   version: 15.0.0
-  description: 'The following analytic detects the clearing of Windows event logs
-    by identifying Windows Security Event ID 1102 or System log event 104. This detection
-    leverages Windows event logs to monitor for log clearing activities. Such behavior
-    is significant as it may indicate an attempt to cover tracks after malicious activities.
-    If confirmed malicious, this action could hinder forensic investigations and allow
-    attackers to persist undetected, making it crucial to investigate further and
-    correlate with '
+  description: The following analytic detects the clearing of Windows event logs by identifying Windows Security Event ID 1102 or System log event 104. This detection leverages Windows event logs to monitor for log clearing activities. Such behavior is significant as it may indicate an attempt to cover tracks after malicious activities. If confirmed malicious, this action could hinder forensic investigations and allow attackers to persist undetected, making it crucial to investigate further and correlate with other alerts and data sources.
   author: Rico Valdez, Michael Haag, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1070.001
-      name: Technique T1070.001
-    tactics: []
+      name: Clear Windows Event Logs
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_event_log_cleared.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_event_log_cleared.yml
+      rule_sha256: sha256:39bd859b70dbc12cc05dc81017245def0169e2b9641e2112de21def2339725bc
+      detection_id: ad517544-aff9-4c96-bd99-d6eb43bfbb6a
+      source_version: 15
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1070.001/windows_event_log_cleared/windows-xml.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1070.001/windows_event_log_cleared/windows-xml.log
     description: XmlWinEventLog:Security - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:8720a4878af74ec20fdb87d9c7be80564592dcc4ef0582e8935b3d67ab9863b3
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

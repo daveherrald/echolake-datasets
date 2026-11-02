@@ -1,14 +1,10 @@
 metadata:
   name: system-info-gathering-using-dxdiag-application
   version: 7.0.0
-  description: The following analytic identifies the execution of the dxdiag.exe process
-    with specific command-line arguments, which is used to gather system information.
-    This detection leverages data from Endpoint Detection and Response (EDR) agents,
-    focusing on process creation events and command-line details. This activity is
-    significant because dxdiag.exe is rarely used in corporate environments and its
-    execution may indicate reconnaissance efforts by malicious actors. If confirmed
-    malicious, this activity
+  description: The following analytic identifies the execution of the dxdiag.exe process with specific command-line arguments, which is used to gather system information. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process creation events and command-line details. This activity is significant because dxdiag.exe is rarely used in corporate environments and its execution may indicate reconnaissance efforts by malicious actors. If confirmed malicious, this activity could allow attackers to collect detailed system information, aiding in further exploitation or lateral movement within the network.
   author: Teoderick Contreras, Splunk
+  updated: '2025-12-15'
+  license: Apache-2.0
   tags:
   - hunting
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1592
-      name: Technique T1592
-    tactics: []
+      name: Gather Victim Host Information
+      tactics:
+      - reconnaissance
+    tactics:
+    - reconnaissance
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/system_info_gathering_using_dxdiag_application.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/system_info_gathering_using_dxdiag_application.yml
+      rule_sha256: sha256:d4b79815ffae19ba1320d3398903b8de196dc8d7a588a1f7065e56c8372b2a53
+      detection_id: f92d74f2-4921-11ec-b685-acde48001122
+      source_version: 7
+      source_date: '2025-12-15'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/t1592/host_info_dxdiag/sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/t1592/host_info_dxdiag/sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:30ca4ce76590604ba1d8ef7828f596859c747c1c182d9235de439923d2145422
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,13 +1,10 @@
 metadata:
   name: windows-runmru-registry-key-or-value-deleted
   version: 1.0.0
-  description: The following analytic detects the deletion or modification of Most
-    Recently Used (MRU) command entries stored within the Windows Registry. Adversaries
-    often clear these registry keys, such as HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU,
-    to remove forensic evidence of commands executed via the Windows Run dialog or
-    other system utilities. This activity aims to obscure their actions, hinder incident
-    response efforts, and evade detection. Detection focuses on monitoring for chan
+  description: The following analytic detects the deletion or modification of Most Recently Used (MRU) command entries stored within the Windows Registry. Adversaries often clear these registry keys, such as HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU, to remove forensic evidence of commands executed via the Windows Run dialog or other system utilities. This activity aims to obscure their actions, hinder incident response efforts, and evade detection. Detection focuses on monitoring for changes (deletion of values or modification of the MRUList value) to these specific registry paths, particularly when performed by unusual processes or outside of typical user behavior. Anomalous deletion events can indicate an attempt at defense evasion or post-exploitation cleanup by a malicious actor.
   author: Teoderick Contreras, Splunk
+  updated: '2025-11-20'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -15,18 +12,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1112
-      name: Technique T1112
-    tactics: []
+      name: Modify Registry
+      tactics:
+      - persistence
+      - defense-evasion
+    tactics:
+    - persistence
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_runmru_registry_key_or_value_deleted.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_runmru_registry_key_or_value_deleted.yml
+      rule_sha256: sha256:0f21cf334034401abb2f8dfa50f3ea143ff357e14446693ec78816d87af2a532
+      detection_id: e651795f-b2c9-4a84-a18a-b901018a3bfa
+      source_version: 1
+      source_date: '2025-11-20'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1112/delete_runmru_reg/runmru_deletion.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1112/delete_runmru_reg/runmru_deletion.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:32fb866c1e62fd57d01a78ecb6a2114f8327e6bfcbc06d132e980e046efe6e4d
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

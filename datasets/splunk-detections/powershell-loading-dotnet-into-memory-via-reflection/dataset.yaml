@@ -1,14 +1,10 @@
 metadata:
   name: powershell-loading-dotnet-into-memory-via-reflection
   version: 14.0.0
-  description: 'The following analytic detects the use of PowerShell scripts to load
-    .NET assemblies into memory via reflection, a technique often used in malicious
-    activities such as those by Empire and Cobalt Strike. It leverages PowerShell
-    Script Block Logging (EventCode=4104) to capture and analyze the full command
-    executed. This behavior is significant as it can indicate advanced attack techniques
-    aiming to execute code in memory, bypassing traditional defenses. If confirmed
-    malicious, this activity could '
+  description: The following analytic detects the use of PowerShell scripts to load .NET assemblies into memory via reflection, a technique often used in malicious activities such as those by Empire and Cobalt Strike. It leverages PowerShell Script Block Logging (EventCode=4104) to capture and analyze the full command executed. This behavior is significant as it can indicate advanced attack techniques aiming to execute code in memory, bypassing traditional defenses. If confirmed malicious, this activity could lead to unauthorized code execution, privilege escalation, and persistent access within the environment.
   author: Michael Haag, Teoderick Contreras Splunk
+  updated: '2025-10-14'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1059.001
-      name: Technique T1059.001
-    tactics: []
+      name: PowerShell
+      tactics:
+      - execution
+    tactics:
+    - execution
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/powershell_loading_dotnet_into_memory_via_reflection.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/powershell_loading_dotnet_into_memory_via_reflection.yml
+      rule_sha256: sha256:fd50eaf2acc8ca0498e8cd8785871b128a1cec70aa228758199539c729fdb130
+      detection_id: 85bc3f30-ca28-11eb-bd21-acde48001122
+      source_version: 14
+      source_date: '2025-10-14'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/powershell_script_block_logging/reflection.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1059.001/powershell_script_block_logging/reflection.log
     description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:305fd3f5d0f315834d09079437ca2c6d0c7f1476a350e2749781e4a83e3c4bfe
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

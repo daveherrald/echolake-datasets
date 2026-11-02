@@ -1,14 +1,10 @@
 metadata:
   name: powershell-enable-smb1protocol-feature
   version: 8.0.0
-  description: The following analytic detects the enabling of the SMB1 protocol via
-    `powershell.exe`. It leverages PowerShell script block logging (EventCode 4104)
-    to identify the execution of the `Enable-WindowsOptionalFeature` cmdlet with the
-    `SMB1Protocol` parameter. This activity is significant because enabling SMB1 can
-    facilitate lateral movement and file encryption by ransomware, such as RedDot.
-    If confirmed malicious, this action could allow an attacker to propagate through
-    the network, encrypt files, a
+  description: The following analytic detects the enabling of the SMB1 protocol via `powershell.exe`. It leverages PowerShell script block logging (EventCode 4104) to identify the execution of the `Enable-WindowsOptionalFeature` cmdlet with the `SMB1Protocol` parameter. This activity is significant because enabling SMB1 can facilitate lateral movement and file encryption by ransomware, such as RedDot. If confirmed malicious, this action could allow an attacker to propagate through the network, encrypt files, and potentially disrupt business operations.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1027.005
-      name: Technique T1027.005
-    tactics: []
+      name: Indicator Removal from Tools
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/powershell_enable_smb1protocol_feature.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/powershell_enable_smb1protocol_feature.yml
+      rule_sha256: sha256:d8453f9dbdbb04bb301603daf49a4e686a31752658a16669c09f42afb12704a5
+      detection_id: afed80b2-d34b-11eb-a952-acde48001122
+      source_version: 8
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/powershell_script_block_logging/sbl_xml.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1059.001/powershell_script_block_logging/sbl_xml.log
     description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:6f0c23eeef584afd7403cbdad06206b6f0861d7d01c8051a7478eae00b012487
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

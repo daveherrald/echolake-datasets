@@ -1,14 +1,10 @@
 metadata:
   name: windows-app-layer-protocol-qakbot-namedpipe
   version: 6.0.0
-  description: The following analytic detects a suspicious process creating or connecting
-    to a potential Qakbot named pipe. It leverages Sysmon EventCodes 17 and 18, focusing
-    on specific processes known to be abused by Qakbot and identifying randomly generated
-    named pipes in GUID form. This activity is significant as Qakbot malware uses
-    named pipes for inter-process communication after code injection, facilitating
-    data theft. If confirmed malicious, this behavior could indicate a Qakbot infection,
-    leading to u
+  description: The following analytic detects a suspicious process creating or connecting to a potential Qakbot named pipe. It leverages Sysmon EventCodes 17 and 18, focusing on specific processes known to be abused by Qakbot and identifying randomly generated named pipes in GUID form. This activity is significant as Qakbot malware uses named pipes for inter-process communication after code injection, facilitating data theft. If confirmed malicious, this behavior could indicate a Qakbot infection, leading to unauthorized data access and potential exfiltration from the compromised host.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1071
-      name: Technique T1071
-    tactics: []
+      name: Application Layer Protocol
+      tactics:
+      - command-and-control
+    tactics:
+    - command-and-control
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_app_layer_protocol_qakbot_namedpipe.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_app_layer_protocol_qakbot_namedpipe.yml
+      rule_sha256: sha256:88b17cfe1e091b08a7643b3754a28040eee247aef5670bbb5fe42df25d216857
+      detection_id: 63a2c15e-9448-43c5-a4a8-9852266aaada
+      source_version: 6
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/qakbot/sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/qakbot/sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:a700ccfdd3bd93f76fe65deec68886a89d7f96c75c3db2ce0ca281e81a2b061c
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

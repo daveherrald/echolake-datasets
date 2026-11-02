@@ -1,13 +1,10 @@
 metadata:
   name: windows-powershell-export-pfxcertificate
   version: 10.0.0
-  description: The following analytic detects the use of the PowerShell cmdlet `export-pfxcertificate`
-    by leveraging Script Block Logging. This activity is significant as it may indicate
-    an adversary attempting to exfiltrate certificates from the Windows Certificate
-    Store. Monitoring this behavior is crucial for identifying potential certificate
-    theft, which can lead to unauthorized access and impersonation attacks. If confirmed
-    malicious, this activity could allow attackers to compromise secure communications
+  description: The following analytic detects the use of the PowerShell cmdlet `export-pfxcertificate` by leveraging Script Block Logging. This activity is significant as it may indicate an adversary attempting to exfiltrate certificates from the Windows Certificate Store. Monitoring this behavior is crucial for identifying potential certificate theft, which can lead to unauthorized access and impersonation attacks. If confirmed malicious, this activity could allow attackers to compromise secure communications, authenticate as legitimate users, and escalate their privileges within the network.
   author: Michael Haag, Splunk
+  updated: '2025-10-14'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -17,20 +14,44 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1552.004
-      name: Technique T1552.004
+      name: Private Keys
+      tactics:
+      - credential-access
     - id: T1649
-      name: Technique T1649
-    tactics: []
+      name: Steal or Forge Authentication Certificates
+      tactics:
+      - credential-access
+    tactics:
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_powershell_export_pfxcertificate.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_powershell_export_pfxcertificate.yml
+      rule_sha256: sha256:69927926271059557f338f37ea44f2a235ff387d9a444ea3486c3e00827bfa4c
+      detection_id: ed06725f-6da6-439f-9dcc-ab30e891297c
+      source_version: 10
+      source_date: '2025-10-14'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1649/atomic_red_team/4104_export_pfxcertificate.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1649/atomic_red_team/4104_export_pfxcertificate.log
     description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:ae8027241d18e99a9ba932811af9609375cd161a90f16bb260ce4886a4afd9e3
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

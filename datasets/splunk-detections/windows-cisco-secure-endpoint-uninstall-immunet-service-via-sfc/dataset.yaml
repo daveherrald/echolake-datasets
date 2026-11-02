@@ -1,14 +1,10 @@
 metadata:
   name: windows-cisco-secure-endpoint-uninstall-immunet-service-via-sfc
   version: 3.0.0
-  description: The following analytic detects the use of the sfc.exe utility with
-    the "-u" parameter, which is part of the Cisco Secure Endpoint installation. The
-    "-u" flag allows the uninstallation of Cisco Secure Endpoint components. This
-    detection leverages endpoint telemetry to monitor command-line executions that
-    include the "-u" parameter. The use of this flag is significant as it could indicate
-    an attempt to disable or remove endpoint protection, potentially leaving the system
-    vulnerable to further expl
+  description: The following analytic detects the use of the sfc.exe utility with the "-u" parameter, which is part of the Cisco Secure Endpoint installation. The "-u" flag allows the uninstallation of Cisco Secure Endpoint components. This detection leverages endpoint telemetry to monitor command-line executions that include the "-u" parameter. The use of this flag is significant as it could indicate an attempt to disable or remove endpoint protection, potentially leaving the system vulnerable to further exploitation. If identified as malicious, this action may be part of a broader effort to disable security mechanisms and avoid detection.
   author: Nasreddine Bencherchali, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1562.001
-      name: Technique T1562.001
-    tactics: []
+      name: Disable or Modify Tools
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_cisco_secure_endpoint_uninstall_immunet_service_via_sfc.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_cisco_secure_endpoint_uninstall_immunet_service_via_sfc.yml
+      rule_sha256: sha256:967ce6d6f6775ed617cae16fb47410450efc2e8bab1b72dc56c2b536c520f6a5
+      detection_id: ba6e7f4d-a85e-4a14-8e7d-41f4b82e3c9a
+      source_version: 3
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.001/cisco_secure_endpoint_tampering/sfc_tampering.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1562.001/cisco_secure_endpoint_tampering/sfc_tampering.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:f424d7dad8f504aa7c3c73d5b808a5378ec5e7f28f5e4ed3fd1cc93d9e01a9e6
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

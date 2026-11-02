@@ -1,14 +1,10 @@
 metadata:
   name: getwmiobject-ds-user-with-powershell-script-block
   version: 9.0.0
-  description: The following analytic detects the execution of the `Get-WmiObject`
-    cmdlet with the `DS_User` class parameter via PowerShell Script Block Logging
-    (EventCode=4104). It leverages logs to identify attempts to query all domain users
-    using WMI. This activity is significant as it may indicate an adversary or Red
-    Team operation attempting to enumerate domain users for situational awareness
-    and Active Directory discovery. If confirmed malicious, this behavior could lead
-    to further reconnaissance, enabli
+  description: The following analytic detects the execution of the `Get-WmiObject` cmdlet with the `DS_User` class parameter via PowerShell Script Block Logging (EventCode=4104). It leverages logs to identify attempts to query all domain users using WMI. This activity is significant as it may indicate an adversary or Red Team operation attempting to enumerate domain users for situational awareness and Active Directory discovery. If confirmed malicious, this behavior could lead to further reconnaissance, enabling attackers to map out the network and identify potential targets for privilege escalation or lateral movement.
   author: Teoderick Contreras, Mauricio Velazco, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1087.002
-      name: Technique T1087.002
-    tactics: []
+      name: Domain Account
+      tactics:
+      - discovery
+    tactics:
+    - discovery
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/getwmiobject_ds_user_with_powershell_script_block.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/getwmiobject_ds_user_with_powershell_script_block.yml
+      rule_sha256: sha256:1c482b3d5c67bd7a2ee3615127d61c3c624563c8f4db617ed1397c352f771be0
+      detection_id: fabd364e-04f3-11ec-b34b-acde48001122
+      source_version: 9
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/powershell_script_block_logging/sbl_xml.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1059.001/powershell_script_block_logging/sbl_xml.log
     description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:6f0c23eeef584afd7403cbdad06206b6f0861d7d01c8051a7478eae00b012487
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

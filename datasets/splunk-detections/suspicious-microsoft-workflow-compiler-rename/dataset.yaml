@@ -1,14 +1,10 @@
 metadata:
   name: suspicious-microsoft-workflow-compiler-rename
   version: 11.0.0
-  description: 'The following analytic detects the renaming of microsoft.workflow.compiler.exe,
-    a rarely used executable typically located in C:\Windows\Microsoft.NET\Framework64\v4.0.30319.
-    This detection leverages Endpoint Detection and Response (EDR) data, focusing
-    on process names and original file names. This activity is significant because
-    renaming this executable can indicate an attempt to evade security controls. If
-    confirmed malicious, an attacker could use this renamed executable to execute
-    arbitrary '
+  description: The following analytic detects the renaming of microsoft.workflow.compiler.exe, a rarely used executable typically located in C:\Windows\Microsoft.NET\Framework64\v4.0.30319. This detection leverages Endpoint Detection and Response (EDR) data, focusing on process names and original file names. This activity is significant because renaming this executable can indicate an attempt to evade security controls. If confirmed malicious, an attacker could use this renamed executable to execute arbitrary code, potentially leading to privilege escalation or persistent access within the environment.
   author: Michael Haag, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - hunting
   - splunk-security-content
@@ -18,20 +14,44 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1036.003
-      name: Technique T1036.003
+      name: Rename Legitimate Utilities
+      tactics:
+      - defense-evasion
     - id: T1127
-      name: Technique T1127
-    tactics: []
+      name: Trusted Developer Utilities Proxy Execution
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/suspicious_microsoft_workflow_compiler_rename.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/suspicious_microsoft_workflow_compiler_rename.yml
+      rule_sha256: sha256:5b84420a90f0598bd47e3fb352a2b8d63ebc87ec12da76e896e508b54537c483
+      detection_id: f0db4464-55d9-11eb-ae93-0242ac130002
+      source_version: 11
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1127/atomic_red_team/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1127/atomic_red_team/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:489de09c57bf14e5ea903b96ce1d742fa538d3f9389cfc484fcf4b3612158c96
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

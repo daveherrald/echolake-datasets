@@ -1,13 +1,10 @@
 metadata:
   name: windows-sharepoint-spinstall0-webshell-file-creation
   version: 1.0.0
-  description: This detection identifies the creation or modification of the "spinstall0.aspx"
-    webshell file in Microsoft SharePoint directories. This file is a known indicator
-    of compromise associated with the exploitation of CVE-2025-53770 (ToolShell vulnerability).
-    Attackers exploit the vulnerability to drop webshells that provide persistent
-    access to compromised SharePoint servers, allowing them to execute arbitrary commands,
-    access sensitive data, and move laterally within the network.
+  description: This detection identifies the creation or modification of the "spinstall0.aspx" webshell file in Microsoft SharePoint directories. This file is a known indicator of compromise associated with the exploitation of CVE-2025-53770 (ToolShell vulnerability). Attackers exploit the vulnerability to drop webshells that provide persistent access to compromised SharePoint servers, allowing them to execute arbitrary commands, access sensitive data, and move laterally within the network.
   author: Michael Haag, Splunk
+  updated: '2025-07-21'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -15,20 +12,45 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1190
-      name: Technique T1190
+      name: Exploit Public-Facing Application
+      tactics:
+      - initial-access
     - id: T1505.003
-      name: Technique T1505.003
-    tactics: []
+      name: Web Shell
+      tactics:
+      - persistence
+    tactics:
+    - initial-access
+    - persistence
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_sharepoint_spinstall0_webshell_file_creation.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_sharepoint_spinstall0_webshell_file_creation.yml
+      rule_sha256: sha256:946033e8e15b410f5f802e6bb9801103abecea610da24741c31bafed1053fbfa
+      detection_id: 7a0dda67-4cc7-4113-b3bd-b3f1489a98bf
+      source_version: 1
+      source_date: '2025-07-21'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1505.003/sharepoint_webshell/sysmon_spinstall0.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1505.003/sharepoint_webshell/sysmon_spinstall0.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:ae25e647c1fc51c2290a5782b620fe923f62f6d9d74dd9df935a7cbed79f930f
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

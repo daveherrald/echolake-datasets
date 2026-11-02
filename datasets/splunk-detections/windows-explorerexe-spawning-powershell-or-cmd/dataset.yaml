@@ -1,14 +1,10 @@
 metadata:
   name: windows-explorerexe-spawning-powershell-or-cmd
   version: 2.0.0
-  description: This detection identifies instances where Windows Explorer.exe spawns
-    PowerShell or cmd.exe processes, particularly focusing on executions initiated
-    by LNK files. This behavior is associated with the ZDI-CAN-25373 Windows shortcut
-    zero-day vulnerability, where specially crafted LNK files are used to trigger
-    malicious code execution through cmd.exe or powershell.exe. This technique has
-    been actively exploited by multiple APT groups in targeted attacks through both
-    HTTP and SMB delivery methods.
+  description: This detection identifies instances where Windows Explorer.exe spawns PowerShell or cmd.exe processes, particularly focusing on executions initiated by LNK files. This behavior is associated with the ZDI-CAN-25373 Windows shortcut zero-day vulnerability, where specially crafted LNK files are used to trigger malicious code execution through cmd.exe or powershell.exe. This technique has been actively exploited by multiple APT groups in targeted attacks through both HTTP and SMB delivery methods.
   author: Michael Haag, AJ King, Splunk, Jesse Hunter, Splunk Community Contributor
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - hunting
   - splunk-security-content
@@ -16,20 +12,44 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1059.001
-      name: Technique T1059.001
+      name: PowerShell
+      tactics:
+      - execution
     - id: T1204.002
-      name: Technique T1204.002
-    tactics: []
+      name: Malicious File
+      tactics:
+      - execution
+    tactics:
+    - execution
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_explorer_exe_spawning_powershell_or_cmd.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_explorer_exe_spawning_powershell_or_cmd.yml
+      rule_sha256: sha256:a2cd95957f1db36291c4736b7bc4d2d7bb1105ce17f2dab77cc165bfced85f22
+      detection_id: 593854c5-2182-49dd-9f31-18ef697445b9
+      source_version: 2
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/encoded_powershell/explorer_spawns_windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1059.001/encoded_powershell/explorer_spawns_windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:9200692ad74037b5234fe6f7da733d3e416b0ea8bb7f6d8ebb5bd16fc39b8b22
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

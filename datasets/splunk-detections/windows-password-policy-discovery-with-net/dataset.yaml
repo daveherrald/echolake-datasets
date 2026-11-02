@@ -1,14 +1,10 @@
 metadata:
   name: windows-password-policy-discovery-with-net
   version: 3.0.0
-  description: The following analytic identifies the execution of `net.exe` with command
-    line arguments aimed at obtaining the computer or domain password policy. It leverages
-    data from Endpoint Detection and Response (EDR) agents, focusing on process names
-    and command-line executions. This activity is significant as it indicates potential
-    reconnaissance efforts by adversaries to gather information about Active Directory
-    password policies. If confirmed malicious, this behavior could allow attackers
-    to understa
+  description: The following analytic identifies the execution of `net.exe` with command line arguments aimed at obtaining the computer or domain password policy. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line executions. This activity is significant as it indicates potential reconnaissance efforts by adversaries to gather information about Active Directory password policies. If confirmed malicious, this behavior could allow attackers to understand password complexity requirements, aiding in brute-force or password-guessing attacks, ultimately compromising user accounts and gaining unauthorized access to the network.
   author: Teoderick Contreras, Mauricio Velazco, Nasreddine Bencherchali, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - hunting
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1201
-      name: Technique T1201
-    tactics: []
+      name: Password Policy Discovery
+      tactics:
+      - discovery
+    tactics:
+    - discovery
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_password_policy_discovery_with_net.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_password_policy_discovery_with_net.yml
+      rule_sha256: sha256:ac76d98d1317e3a471528dec78acc058dd24fea1a9d184673029155c14bcc54c
+      detection_id: e52f7865-be78-46bf-b7ed-150fbe447613
+      source_version: 3
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1201/pwd_policy_discovery/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1201/pwd_policy_discovery/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:4ea9da4b4b229b1d84cac23d7feffad45f58ae4adda44a943254c0ef3a38aa5a
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

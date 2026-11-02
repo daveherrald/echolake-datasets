@@ -1,14 +1,10 @@
 metadata:
   name: windows-archived-collected-data-in-temp-folder
   version: 6.0.0
-  description: The following analytic detects the creation of archived files in a
-    temporary folder, which may contain collected data. This behavior is often associated
-    with malicious activity, where attackers compress sensitive information before
-    exfiltration. The detection focuses on monitoring specific directories, such as
-    temp folders, for the presence of newly created archive files (e.g., .zip, .rar,
-    .tar). By identifying this pattern, security teams can quickly respond to potential
-    data collection and exf
+  description: The following analytic detects the creation of archived files in a temporary folder, which may contain collected data. This behavior is often associated with malicious activity, where attackers compress sensitive information before exfiltration. The detection focuses on monitoring specific directories, such as temp folders, for the presence of newly created archive files (e.g., .zip, .rar, .tar). By identifying this pattern, security teams can quickly respond to potential data collection and exfiltration attempts, minimizing the risk of data breaches and improving overall threat detection.
   author: Teoderick Contreras, Splunk
+  updated: '2025-10-06'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1560
-      name: Technique T1560
-    tactics: []
+      name: Archive Collected Data
+      tactics:
+      - collection
+    tactics:
+    - collection
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_archived_collected_data_in_temp_folder.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_archived_collected_data_in_temp_folder.yml
+      rule_sha256: sha256:840a1e906f70499ed94ea48162a22d4ab14c25cd1e49b4c9e0d0664ed5d14bb7
+      detection_id: cb56a1ea-e0b1-46d5-913f-e024cba40cbe
+      source_version: 6
+      source_date: '2025-10-06'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1560/archived_in_temp_dir/braodo_zip_temp.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1560/archived_in_temp_dir/braodo_zip_temp.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:c1572789ccb204e590cbf80f5878a708bbe8b5f28bf249d5c59f18c59ab3e3c1
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

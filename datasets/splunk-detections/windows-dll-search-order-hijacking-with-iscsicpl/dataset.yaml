@@ -1,14 +1,10 @@
 metadata:
   name: windows-dll-search-order-hijacking-with-iscsicpl
   version: 9.0.0
-  description: The following analytic detects DLL search order hijacking involving
-    iscsicpl.exe. It identifies when iscsicpl.exe loads a malicious DLL from a new
-    path, triggering the payload execution. This detection leverages data from Endpoint
-    Detection and Response (EDR) agents, focusing on child processes spawned by iscsicpl.exe.
-    This activity is significant as it indicates a potential attempt to execute unauthorized
-    code via DLL hijacking. If confirmed malicious, this could allow an attacker to
-    execute ar
+  description: The following analytic detects DLL search order hijacking involving iscsicpl.exe. It identifies when iscsicpl.exe loads a malicious DLL from a new path, triggering the payload execution. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on child processes spawned by iscsicpl.exe. This activity is significant as it indicates a potential attempt to execute unauthorized code via DLL hijacking. If confirmed malicious, this could allow an attacker to execute arbitrary code, escalate privileges, or maintain persistence within the environment.
   author: Michael Haag, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,44 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1574.001
-      name: Technique T1574.001
-    tactics: []
+      name: DLL
+      tactics:
+      - persistence
+      - privilege-escalation
+      - defense-evasion
+    tactics:
+    - persistence
+    - privilege-escalation
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_dll_search_order_hijacking_with_iscsicpl.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_dll_search_order_hijacking_with_iscsicpl.yml
+      rule_sha256: sha256:17b5bcb86ac2a4b6427f1dedf39695f6c16e2a073199d96190321c08e9740b1c
+      detection_id: f39ee679-3b1e-4f47-841c-5c3c580acda2
+      source_version: 9
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1574.001/iscsicpl/iscsicpl-windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1574.001/iscsicpl/iscsicpl-windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:eefce73c61c9c3bc8b1e6b7bebcd3414ef5e623da2620f3f01ec8201108c3098
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

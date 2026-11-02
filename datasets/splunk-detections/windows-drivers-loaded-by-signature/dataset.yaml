@@ -1,14 +1,10 @@
 metadata:
   name: windows-drivers-loaded-by-signature
   version: 6.0.0
-  description: The following analytic identifies all drivers being loaded on Windows
-    systems using Sysmon EventCode 6 (Driver Load). It leverages fields such as driver
-    path, signature status, and hash to detect potentially suspicious drivers. This
-    activity is significant for a SOC as malicious drivers can be used to gain kernel-level
-    access, bypass security controls, or persist in the environment. If confirmed
-    malicious, this activity could allow an attacker to execute arbitrary code with
-    high privileges, lead
+  description: The following analytic identifies all drivers being loaded on Windows systems using Sysmon EventCode 6 (Driver Load). It leverages fields such as driver path, signature status, and hash to detect potentially suspicious drivers. This activity is significant for a SOC as malicious drivers can be used to gain kernel-level access, bypass security controls, or persist in the environment. If confirmed malicious, this activity could allow an attacker to execute arbitrary code with high privileges, leading to severe system compromise and potential data exfiltration.
   author: Michael Haag, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - hunting
   - splunk-security-content
@@ -18,20 +14,45 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1014
-      name: Technique T1014
+      name: Rootkit
+      tactics:
+      - defense-evasion
     - id: T1068
-      name: Technique T1068
-    tactics: []
+      name: Exploitation for Privilege Escalation
+      tactics:
+      - privilege-escalation
+    tactics:
+    - privilege-escalation
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_drivers_loaded_by_signature.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_drivers_loaded_by_signature.yml
+      rule_sha256: sha256:cd144d5e96a35ba322de955b87a2ffb39af45bbad5580a012b6c284106faecc4
+      detection_id: d2d4af6a-6c2b-4d79-80c5-fc2cf12a2f68
+      source_version: 6
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1014/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1014/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:e44aca9a9cd11b241498ac117686e8b632a3387d11f664d769be918ab3a66bef
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

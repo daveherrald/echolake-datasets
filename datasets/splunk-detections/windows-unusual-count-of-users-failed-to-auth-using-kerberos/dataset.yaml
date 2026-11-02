@@ -1,14 +1,10 @@
 metadata:
   name: windows-unusual-count-of-users-failed-to-auth-using-kerberos
   version: 7.0.0
-  description: The following analytic identifies a source endpoint failing to authenticate
-    multiple valid users using the Kerberos protocol, potentially indicating a Password
-    Spraying attack. It leverages Event 4771, which is generated when the Key Distribution
-    Center fails to issue a Kerberos Ticket Granting Ticket (TGT) due to a wrong password
-    (failure code 0x18). This detection uses statistical analysis, specifically the
-    3-sigma rule, to identify unusual authentication failures. If confirmed malicious,
-    this
+  description: The following analytic identifies a source endpoint failing to authenticate multiple valid users using the Kerberos protocol, potentially indicating a Password Spraying attack. It leverages Event 4771, which is generated when the Key Distribution Center fails to issue a Kerberos Ticket Granting Ticket (TGT) due to a wrong password (failure code 0x18). This detection uses statistical analysis, specifically the 3-sigma rule, to identify unusual authentication failures. If confirmed malicious, this activity could allow an attacker to gain initial access or elevate privileges within an Active Directory environment.
   author: Mauricio Velazco, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1110.003
-      name: Technique T1110.003
-    tactics: []
+      name: Password Spraying
+      tactics:
+      - credential-access
+    tactics:
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_unusual_count_of_users_failed_to_auth_using_kerberos.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_unusual_count_of_users_failed_to_auth_using_kerberos.yml
+      rule_sha256: sha256:8d9eddda00d7b2f4891e86498f0fe26ac4f809f1112804d9750f23ff87bdd1e8
+      detection_id: bc9cb715-08ba-40c3-9758-6e2b26e455cb
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1110.003/purplesharp_valid_users_kerberos_xml/windows-security.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1110.003/purplesharp_valid_users_kerberos_xml/windows-security.log
     description: XmlWinEventLog:Security - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:f786402e2336f80ef4202129ccc5809b8fdf6372301e647b48d2c69faeb55a96
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

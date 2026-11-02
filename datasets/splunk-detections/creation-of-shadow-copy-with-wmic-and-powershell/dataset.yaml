@@ -1,14 +1,10 @@
 metadata:
   name: creation-of-shadow-copy-with-wmic-and-powershell
   version: 11.0.0
-  description: The following analytic detects the creation of shadow copies using
-    "wmic" or "Powershell" commands. It leverages the Endpoint.Processes data model
-    in Splunk to identify processes where the command includes "shadowcopy" and "create".
-    This activity is significant because it may indicate an attacker attempting to
-    manipulate or access data in an unauthorized manner, potentially leading to data
-    theft or manipulation. If confirmed malicious, this behavior could allow attackers
-    to backup and exfiltrate
+  description: The following analytic detects the creation of shadow copies using "wmic" or "Powershell" commands. It leverages the Endpoint.Processes data model in Splunk to identify processes where the command includes "shadowcopy" and "create". This activity is significant because it may indicate an attacker attempting to manipulate or access data in an unauthorized manner, potentially leading to data theft or manipulation. If confirmed malicious, this behavior could allow attackers to backup and exfiltrate sensitive data or hide their tracks by restoring files to a previous state after an attack.
   author: Patrick Bareiss, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1003.003
-      name: Technique T1003.003
-    tactics: []
+      name: NTDS
+      tactics:
+      - credential-access
+    tactics:
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/creation_of_shadow_copy_with_wmic_and_powershell.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/creation_of_shadow_copy_with_wmic_and_powershell.yml
+      rule_sha256: sha256:508d3212b5057b35e7d3aab8237ea737664e5eb175bcab4e2ddce43fbb968666
+      detection_id: 2ed8b538-d284-449a-be1d-82ad1dbd186b
+      source_version: 11
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1003.003/atomic_red_team/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1003.003/atomic_red_team/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:ee1c7cd9fa20013c82da17f8cb1998197c117ab4c209ab56203290bc90739fda
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

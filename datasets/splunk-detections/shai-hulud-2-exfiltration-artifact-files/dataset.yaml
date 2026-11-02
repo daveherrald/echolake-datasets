@@ -1,20 +1,16 @@
 metadata:
   name: shai-hulud-2-exfiltration-artifact-files
   version: 1.0.0
-  description: 'Detects creation of exfiltration artifact files associated with Shai-Hulud
-    2.0 npm supply
+  description: 'Detects creation of exfiltration artifact files associated with Shai-Hulud 2.0 npm supply
 
-    chain malware. The malware creates cloud.json, contents.json, environment.json,
-    truffleSecrets.json,
+    chain malware. The malware creates cloud.json, contents.json, environment.json, truffleSecrets.json,
 
-    and actionsSecrets.json files containing harvested credentials from AWS, Azure,
-    GCP, GitHub secrets,
+    and actionsSecrets.json files containing harvested credentials from AWS, Azure, GCP, GitHub secrets,
 
-    and environment variables. These files are staged before being pushed to attacker-controlled
-    repositories.
-
-    '
+    and environment variables. These files are staged before being pushed to attacker-controlled repositories.'
   author: Michael Haag, Splunk
+  updated: '2025-11-25'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -22,27 +18,56 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1074.001
-      name: Technique T1074.001
+      name: Local Data Staging
+      tactics:
+      - collection
     - id: T1552.001
-      name: Technique T1552.001
+      name: Credentials In Files
+      tactics:
+      - credential-access
     - id: T1195.002
-      name: Technique T1195.002
-    tactics: []
+      name: Compromise Software Supply Chain
+      tactics:
+      - initial-access
+    tactics:
+    - initial-access
+    - credential-access
+    - collection
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/shai_hulud_2_exfiltration_artifact_files.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/shai_hulud_2_exfiltration_artifact_files.yml
+      rule_sha256: sha256:ea01dd4bb248a0bf11089f7129086e02f9feaade1ba5943609d85e735bdb64bc
+      detection_id: 9e7d3c0f-4a5b-6c8d-1e2f-3a4b5c6d7e8f
+      source_version: 1
+      source_date: '2025-11-25'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1195.001/npm/shai_hulud_workflow_sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1195.001/npm/shai_hulud_workflow_sysmon.log
     description: Syslog:Linux-Sysmon/Operational - sysmon:linux
     format: auto
     schema: raw
     sourcetype: sysmon:linux
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1195.001/npm/windows_workflow_sysmon.log
+    checksum: sha256:07d7235f1a63513ddb92fe8fb7d45e4f1afcdb90e0b5e8381aeb2f0847447980
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1195.001/npm/windows_workflow_sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:7d97125aa89a44a943604a166b58c8852d95f44d30fa0309cb3d92f2c6c8d6ca
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

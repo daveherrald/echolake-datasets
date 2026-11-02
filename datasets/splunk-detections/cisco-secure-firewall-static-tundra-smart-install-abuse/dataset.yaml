@@ -1,20 +1,18 @@
 metadata:
   name: cisco-secure-firewall-static-tundra-smart-install-abuse
   version: 2.0.0
-  description: 'This analytic detects activity associated with "Static Tundra" threat
-    actor abuse of the Cisco Smart Install (SMI) protocol
+  description: 'This analytic detects activity associated with "Static Tundra" threat actor abuse of the Cisco Smart Install (SMI) protocol
 
-    using Cisco Secure Firewall Intrusion Events. It leverages Cisco Secure Firewall
-    Threat Defense IntrusionEvent logs to
+    using Cisco Secure Firewall Intrusion Events. It leverages Cisco Secure Firewall Threat Defense IntrusionEvent logs to
 
-    identify occurrences of Smart Install exploitation and protocol abuse, including
-    denial-of-service and buffer overflow
+    identify occurrences of Smart Install exploitation and protocol abuse, including denial-of-service and buffer overflow
 
-    attempts. The detection triggers when multiple Cisco Smart Install-related Snort
-    signatures are observed in a short period from the
+    attempts. The detection triggers when multiple Cisco Smart Install-related Snort signatures are observed in a short period from the
 
-    same s'
+    same source, which is indicative of active exploitation or reconnaissance against Cisco devices that expose SMI.'
   author: Bhavin Patel, Michael Haag, Splunk
+  updated: '2026-06-01'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -23,22 +21,50 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1190
-      name: Technique T1190
+      name: Exploit Public-Facing Application
+      tactics:
+      - initial-access
     - id: T1210
-      name: Technique T1210
+      name: Exploitation of Remote Services
+      tactics:
+      - lateral-movement
     - id: T1499
-      name: Technique T1499
-    tactics: []
+      name: Endpoint Denial of Service
+      tactics:
+      - impact
+    tactics:
+    - initial-access
+    - lateral-movement
+    - impact
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/network/cisco_secure_firewall___static_tundra_smart_install_abuse.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/network/cisco_secure_firewall___static_tundra_smart_install_abuse.yml
+      rule_sha256: sha256:adb364863dbad097254fb3b5f70cafd8291624c343c41b07419891cdeb9b77fb
+      detection_id: 7e9a5a2c-2f1a-4b6a-9a4b-9e7d9c8f5a21
+      source_version: 2
+      source_date: '2026-06-01'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_secure_firewall_threat_defense/static_tundra/static_tundra.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/cisco_secure_firewall_threat_defense/static_tundra/static_tundra.log
     description: not_applicable - cisco:sfw:estreamer
     format: auto
     schema: raw
     sourcetype: cisco:sfw:estreamer
+    checksum: sha256:37e5b7a2f14d0784ac0005bb6a71f446952e5552599d98bc2d47fcc9830bd45c
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

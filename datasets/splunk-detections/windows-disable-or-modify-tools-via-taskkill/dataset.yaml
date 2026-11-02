@@ -1,14 +1,10 @@
 metadata:
   name: windows-disable-or-modify-tools-via-taskkill
   version: 9.0.0
-  description: The following analytic identifies the use of taskkill.exe to forcibly
-    terminate processes. It leverages data from Endpoint Detection and Response (EDR)
-    agents, focusing on command-line executions that include specific taskkill parameters.
-    This activity is significant because it can indicate attempts to disable security
-    tools or disrupt legitimate applications, a common tactic in malware operations.
-    If confirmed malicious, this behavior could allow attackers to evade detection,
-    disrupt system sta
+  description: The following analytic identifies the use of taskkill.exe to forcibly terminate processes. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on command-line executions that include specific taskkill parameters. This activity is significant because it can indicate attempts to disable security tools or disrupt legitimate applications, a common tactic in malware operations. If confirmed malicious, this behavior could allow attackers to evade detection, disrupt system stability, and potentially gain further control over the compromised system.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1562.001
-      name: Technique T1562.001
-    tactics: []
+      name: Disable or Modify Tools
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_disable_or_modify_tools_via_taskkill.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_disable_or_modify_tools_via_taskkill.yml
+      rule_sha256: sha256:e48d8fea5f402e72ae6c2305fe60a3e9eb3e9cf3db2e6addf7bb944ab1524dd2
+      detection_id: a43ae66f-c410-4b3d-8741-9ce1ad17ddb0
+      source_version: 9
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.001/taskkill/taskkill_im.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1562.001/taskkill/taskkill_im.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:47f313998031e200dd6780a9bb9a91718fbb08ff78657e631eab4863a0ee31bf
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

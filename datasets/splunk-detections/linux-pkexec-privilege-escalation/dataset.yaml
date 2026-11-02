@@ -1,14 +1,10 @@
 metadata:
   name: linux-pkexec-privilege-escalation
   version: 8.0.0
-  description: The following analytic detects the execution of `pkexec` without any
-    command-line arguments. This behavior leverages data from Endpoint Detection and
-    Response (EDR) agents, focusing on process telemetry. The significance lies in
-    the fact that this pattern is associated with the exploitation of CVE-2021-4034
-    (PwnKit), a critical vulnerability in Polkit's pkexec component. If confirmed
-    malicious, this activity could allow an attacker to gain full root privileges
-    on the affected Linux system, leadi
+  description: The following analytic detects the execution of `pkexec` without any command-line arguments. This behavior leverages data from Endpoint Detection and Response (EDR) agents, focusing on process telemetry. The significance lies in the fact that this pattern is associated with the exploitation of CVE-2021-4034 (PwnKit), a critical vulnerability in Polkit's pkexec component. If confirmed malicious, this activity could allow an attacker to gain full root privileges on the affected Linux system, leading to complete system compromise and potential unauthorized access to sensitive information.
   author: Michael Haag, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1068
-      name: Technique T1068
-    tactics: []
+      name: Exploitation for Privilege Escalation
+      tactics:
+      - privilege-escalation
+    tactics:
+    - privilege-escalation
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/linux_pkexec_privilege_escalation.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/linux_pkexec_privilege_escalation.yml
+      rule_sha256: sha256:dd6bfcb86f6f273478a7d3ad89b5c2c65ec53037b2be4ba6b5c12f372bbd3739
+      detection_id: 03e22c1c-8086-11ec-ac2e-acde48001122
+      source_version: 8
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1068/pkexec/linux-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1068/pkexec/linux-sysmon.log
     description: Syslog:Linux-Sysmon/Operational - sysmon:linux
     format: auto
     schema: raw
     sourcetype: sysmon:linux
+    checksum: sha256:fbfff0259a3c7cb00ca277e21ec7fcf3bcab8ca5789747a8168115521eb86c28
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

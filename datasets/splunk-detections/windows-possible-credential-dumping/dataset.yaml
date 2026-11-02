@@ -1,14 +1,10 @@
 metadata:
   name: windows-possible-credential-dumping
   version: 11.0.0
-  description: The following analytic detects potential credential dumping by identifying
-    specific GrantedAccess permission requests and CallTrace DLLs targeting the LSASS
-    process. It leverages Sysmon EventCode 10 logs, focusing on access requests to
-    lsass.exe and call traces involving debug and native API DLLs like dbgcore.dll,
-    dbghelp.dll, and ntdll.dll. This activity is significant as credential dumping
-    can lead to unauthorized access to sensitive credentials. If confirmed malicious,
-    attackers could gain el
+  description: The following analytic detects potential credential dumping by identifying specific GrantedAccess permission requests and CallTrace DLLs targeting the LSASS process. It leverages Sysmon EventCode 10 logs, focusing on access requests to lsass.exe and call traces involving debug and native API DLLs like dbgcore.dll, dbghelp.dll, and ntdll.dll. This activity is significant as credential dumping can lead to unauthorized access to sensitive credentials. If confirmed malicious, attackers could gain elevated privileges and persist within the environment, posing a severe security risk.
   author: Michael Haag, Splunk
+  updated: '2025-10-14'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1003.001
-      name: Technique T1003.001
-    tactics: []
+      name: LSASS Memory
+      tactics:
+      - credential-access
+    tactics:
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_possible_credential_dumping.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_possible_credential_dumping.yml
+      rule_sha256: sha256:71ebb84abea55b4c4c36984c5b5e34dd2e04073ab0d3b1a9e815287b1cee54cc
+      detection_id: e4723b92-7266-11ec-af45-acde48001122
+      source_version: 11
+      source_date: '2025-10-14'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1003.001/atomic_red_team/windows-sysmon_creddump.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1003.001/atomic_red_team/windows-sysmon_creddump.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:a37b69dce32eaff6b5c1fdb4bb9cbea6dec78a4fbd22cd41362ab0e377f075ef
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

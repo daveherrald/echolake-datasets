@@ -1,17 +1,22 @@
 metadata:
   name: common-ransomware-notes
   version: 14.0.0
-  description: 'The following analytic detects the creation of files with names commonly
-    associated with ransomware notes.
+  description: 'The following analytic detects the creation of files with names commonly associated with ransomware notes.
 
-    It leverages file-system activity data from the Endpoint Filesystem data model,
-    typically populated by endpoint detection and response (EDR) tools or Sysmon logs.
+    It leverages file-system activity data from the Endpoint Filesystem data model, typically populated by endpoint detection and response (EDR) tools or Sysmon logs.
 
-    This activity is significant because ransomware notes indicate a potential ransomware
-    attack, which can lead to data encryption and extortion.
+    This activity is significant because ransomware notes indicate a potential ransomware attack, which can lead to data encryption and extortion.
 
-    If confirmed malicious, this activity could result in significant data loss, operationa'
+    If confirmed malicious, this activity could result in significant data loss, operational disruption, and financial impact due to ransom demands.
+
+    Note that this analytic relies on a lookup table (ransomware_notes_lookup) that contains known ransomware note file names.
+
+    Ensure that this lookup table is regularly updated to include new ransomware note file names as they are identified in the threat landscape.
+
+    Also this analytic leverages a sub-search to enhance performance. sub-searches have limitations on the amount of data they can return. Keep this in mind if you have an extensive list of ransomware note file names.'
   author: David Dorsey, Splunk
+  updated: '2026-01-16'
+  license: Apache-2.0
   tags:
   - hunting
   - splunk-security-content
@@ -21,18 +26,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1485
-      name: Technique T1485
-    tactics: []
+      name: Data Destruction
+      tactics:
+      - impact
+    tactics:
+    - impact
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/common_ransomware_notes.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/common_ransomware_notes.yml
+      rule_sha256: sha256:6ba69f471a56bacfee6258c9fa0d65b26048c17f995ab29ebb192fe768903d3f
+      detection_id: ada0f478-84a8-4641-a3f1-d82362d6bd71
+      source_version: 14
+      source_date: '2026-01-16'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1485/ransomware_notes/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1485/ransomware_notes/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:1183c2dc15b80beb3b80d46f101da9537a9c30240fca3ca86208579865ecf72b
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

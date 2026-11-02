@@ -1,14 +1,10 @@
 metadata:
   name: windows-archive-collected-data-via-rar
   version: 10.0.0
-  description: The following analytic identifies the execution of RAR utilities to
-    archive files on a system. It leverages data from Endpoint Detection and Response
-    (EDR) agents, focusing on process names, GUIDs, and command-line arguments. This
-    activity is significant as threat actors, including red-teamers and malware like
-    DarkGate, use RAR archiving to compress and exfiltrate collected data from compromised
-    hosts. If confirmed malicious, this behavior could lead to the unauthorized transfer
-    of sensitive inf
+  description: The following analytic identifies the execution of RAR utilities to archive files on a system. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names, GUIDs, and command-line arguments. This activity is significant as threat actors, including red-teamers and malware like DarkGate, use RAR archiving to compress and exfiltrate collected data from compromised hosts. If confirmed malicious, this behavior could lead to the unauthorized transfer of sensitive information to command and control servers, posing a severe risk to data confidentiality and integrity.
   author: Teoderick Contreras, Splunk
+  updated: '2025-09-18'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1560.001
-      name: Technique T1560.001
-    tactics: []
+      name: Archive via Utility
+      tactics:
+      - collection
+    tactics:
+    - collection
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_archive_collected_data_via_rar.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_archive_collected_data_via_rar.yml
+      rule_sha256: sha256:e9404cb375a64ccc0a27bd4cad698033b4075e12631bd7c07b1a17b593db67a5
+      detection_id: 2015de95-fe91-413d-9d62-2fe011b67e82
+      source_version: 10
+      source_date: '2025-09-18'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1560.001/archive_utility_darkgate/rar_sys.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1560.001/archive_utility_darkgate/rar_sys.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:36686da83c770cf5d310a6b2d1820db3bdcdd5d4fc6c0a343aee98ffc4574e67
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

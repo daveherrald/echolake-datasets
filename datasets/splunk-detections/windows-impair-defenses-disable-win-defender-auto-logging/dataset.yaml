@@ -1,14 +1,10 @@
 metadata:
   name: windows-impair-defenses-disable-win-defender-auto-logging
   version: 8.0.0
-  description: The following analytic detects the disabling of Windows Defender logging
-    by identifying changes to the Registry keys DefenderApiLogger or DefenderAuditLogger
-    set to disable. It leverages data from the Endpoint.Registry datamodel to monitor
-    specific registry paths and values. This activity is significant as it is commonly
-    associated with Remote Access Trojan (RAT) malware attempting to evade detection.
-    If confirmed malicious, this action could allow an attacker to conceal their activities,
-    making
+  description: The following analytic detects the disabling of Windows Defender logging by identifying changes to the Registry keys DefenderApiLogger or DefenderAuditLogger set to disable. It leverages data from the Endpoint.Registry datamodel to monitor specific registry paths and values. This activity is significant as it is commonly associated with Remote Access Trojan (RAT) malware attempting to evade detection. If confirmed malicious, this action could allow an attacker to conceal their activities, making it harder to detect further malicious actions and maintain persistence on the compromised endpoint.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1562.001
-      name: Technique T1562.001
-    tactics: []
+      name: Disable or Modify Tools
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_impair_defenses_disable_win_defender_auto_logging.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_impair_defenses_disable_win_defender_auto_logging.yml
+      rule_sha256: sha256:eb1a63c3f69eda3810e11fd6b9bad88928723af7462a4a2ec8377c49e96bb9ba
+      detection_id: 76406a0f-f5e0-4167-8e1f-337fdc0f1b0c
+      source_version: 8
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.001/disable_defender_logging/sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1562.001/disable_defender_logging/sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:5a4b56945aa8474bb3b9ce30b22469a77f821a24c040447c0f1b557051a0c64b
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

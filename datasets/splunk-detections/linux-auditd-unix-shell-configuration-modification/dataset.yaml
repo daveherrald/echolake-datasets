@@ -1,18 +1,18 @@
 metadata:
   name: linux-auditd-unix-shell-configuration-modification
   version: 8.0.0
-  description: 'The following analytic detects suspicious access or modifications
-    to Unix shell configuration files, which may indicate an attempt to alter system
-    behavior or gain unauthorized access.
+  description: 'The following analytic detects suspicious access or modifications to Unix shell configuration files, which may indicate an attempt to alter system behavior or gain unauthorized access.
 
-    Unix shell configuration files, such as `.bashrc` or `.profile`, control user
-    environment settings and command execution.
+    Unix shell configuration files, such as `.bashrc` or `.profile`, control user environment settings and command execution.
 
-    Unauthorized changes to these files can be used to execute malicious commands,
-    escalate privileges, or hide malicious activities.
+    Unauthorized changes to these files can be used to execute malicious commands, escalate privileges, or hide malicious activities.
 
-    By monitoring for unusual or unauthorized modifications to shel'
+    By monitoring for unusual or unauthorized modifications to shell configuration files, this analytic helps identify potential security threats, allowing security teams to respond quickly and mitigate risks.
+
+    Correlate this with related EXECVE or PROCTITLE events to identify the process or user responsible for the access or modification.'
   author: Teoderick Contreras, Splunk
+  updated: '2025-11-27'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -22,18 +22,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1546.004
-      name: Technique T1546.004
-    tactics: []
+      name: Unix Shell Configuration Modification
+      tactics:
+      - persistence
+      - privilege-escalation
+    tactics:
+    - persistence
+    - privilege-escalation
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/linux_auditd_unix_shell_configuration_modification.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/linux_auditd_unix_shell_configuration_modification.yml
+      rule_sha256: sha256:3ecf84c286fd5e494d5e48e7eef69eb939f071e5aa833aaf9c25812c1d1fcf80
+      detection_id: 66f737c6-3f7f-46ed-8e9b-cc0e5bf01f04
+      source_version: 8
+      source_date: '2025-11-27'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1546.004/linux_auditd_unix_shell_mod_config//linux_path_profile_d.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1546.004/linux_auditd_unix_shell_mod_config/linux_path_profile_d.log
     description: auditd - auditd
     format: auto
     schema: raw
     sourcetype: auditd
+    checksum: sha256:c232815151609ba6854ae5e90b08ee8bfb83cf2c75ea783ac28986f92b9d1cba
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

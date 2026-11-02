@@ -1,14 +1,10 @@
 metadata:
   name: windows-sharepoint-spinstall0-get-request
   version: 1.0.0
-  description: The following analytic detects potential post-exploitation activity
-    related to the Microsoft SharePoint CVE-2025-53770 vulnerability. After successful
-    exploitation via the ToolPane.aspx endpoint, attackers typically deploy a webshell
-    named "spinstall0.aspx" in the SharePoint layouts directory. This detection identifies
-    GET requests to this webshell, which indicates active use of the backdoor for
-    command execution, data exfiltration, or credential/key extraction. Attackers
-    commonly use these webs
+  description: The following analytic detects potential post-exploitation activity related to the Microsoft SharePoint CVE-2025-53770 vulnerability. After successful exploitation via the ToolPane.aspx endpoint, attackers typically deploy a webshell named "spinstall0.aspx" in the SharePoint layouts directory. This detection identifies GET requests to this webshell, which indicates active use of the backdoor for command execution, data exfiltration, or credential/key extraction. Attackers commonly use these webshells to extract encryption keys, authentication tokens, and other sensitive information from the compromised SharePoint server.
   author: Michael Haag, Splunk
+  updated: '2025-07-21'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,22 +12,50 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1190
-      name: Technique T1190
+      name: Exploit Public-Facing Application
+      tactics:
+      - initial-access
     - id: T1505.003
-      name: Technique T1505.003
+      name: Web Shell
+      tactics:
+      - persistence
     - id: T1552
-      name: Technique T1552
-    tactics: []
+      name: Unsecured Credentials
+      tactics:
+      - credential-access
+    tactics:
+    - initial-access
+    - persistence
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/web/windows_sharepoint_spinstall0_get_request.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/web/windows_sharepoint_spinstall0_get_request.yml
+      rule_sha256: sha256:00a667fe833626cb49a3b3eaab39e26d043a49f05dc7b05a486d1abc50033d53
+      detection_id: ac490de2-ee39-421c-b61b-1c4005dde427
+      source_version: 1
+      source_date: '2025-07-21'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/sharepoint/spinstall0.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1190/sharepoint/spinstall0.log
     description: suricata - suricata
     format: auto
     schema: raw
     sourcetype: suricata
+    checksum: sha256:c4e5ee9c36898582b57468a9e3eb5b62c3c3b64b0dd347c7a61e97a3d4126507
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

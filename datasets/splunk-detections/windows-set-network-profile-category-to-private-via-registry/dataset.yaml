@@ -1,14 +1,10 @@
 metadata:
   name: windows-set-network-profile-category-to-private-via-registry
   version: 1.0.0
-  description: The following analytic detects attempts to modify the Windows Registry
-    to change a network profile's category to "Private", which may indicate an adversary
-    is preparing the environment for lateral movement or reducing firewall restrictions.
-    Specifically, this activity involves changes to the Category value within the
-    HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList\Profiles\{GUID}
-    registry path. A value of 1 corresponds to a private network profile, which typically
-    enables less rest
+  description: "The following analytic detects attempts to modify the Windows Registry to change a network profile's category to \"Private\", which may indicate an adversary is preparing the environment for lateral movement or reducing firewall restrictions. Specifically, this activity involves changes to the Category value within the HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\NetworkList\\Profiles\\{GUID} registry path. A value of 1 corresponds to a private network profile, which typically enables less restrictive firewall policies. While this action can occur during legitimate network configuration, it may also be a sign of malicious behavior when combined with other indicators such as suspicious account activity, unexpected administrative privilege usage, or execution of unsigned binaries. Monitoring for this registry modification\u2014especially outside standard IT processes or correlated with persistence mechanisms\u2014can help identify stealthy post-exploitation activity."
   author: Teoderick Contreras, Splunk
+  updated: '2025-10-07'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1112
-      name: Technique T1112
-    tactics: []
+      name: Modify Registry
+      tactics:
+      - persistence
+      - defense-evasion
+    tactics:
+    - persistence
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_set_network_profile_category_to_private_via_registry.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_set_network_profile_category_to_private_via_registry.yml
+      rule_sha256: sha256:c9ea87d6bf1feaf3fc36eff0d1882b4b51d199fbc0e1d773603fb835fa8663bb
+      detection_id: b11bb510-97e1-4b7a-b673-887ab228c280
+      source_version: 1
+      source_date: '2025-10-07'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1112/reg_profiles_private2/reg_profiles_private2.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1112/reg_profiles_private2/reg_profiles_private2.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:6556ab4d3665ac2ffa87f5db2347b95de9e118e610a0d873b9f530a0b36b41b9
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

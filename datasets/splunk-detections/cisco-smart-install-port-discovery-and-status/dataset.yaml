@@ -1,14 +1,10 @@
 metadata:
   name: cisco-smart-install-port-discovery-and-status
   version: 2.0.0
-  description: This analytic detects network traffic to TCP port 4786, which is used
-    by the Cisco Smart Install protocol. Smart Install is a plug-and-play configuration
-    and image-management feature that helps customers to deploy Cisco switches. This
-    protocol has been exploited via CVE-2018-0171, a vulnerability that allows unauthenticated
-    remote attackers to execute arbitrary code or cause denial of service conditions.
-    Recently, Cisco Talos reported that a Russian state-sponsored threat actor called
-    "Static Tu
+  description: This analytic detects network traffic to TCP port 4786, which is used by the Cisco Smart Install protocol. Smart Install is a plug-and-play configuration and image-management feature that helps customers to deploy Cisco switches. This protocol has been exploited via CVE-2018-0171, a vulnerability that allows unauthenticated remote attackers to execute arbitrary code or cause denial of service conditions. Recently, Cisco Talos reported that a Russian state-sponsored threat actor called "Static Tundra" has been actively exploiting this vulnerability to compromise unpatched and end-of-life network devices. Monitoring for traffic to this port can help identify potential exploitation attempts or unauthorized Smart Install activity.
   author: Bhavin Patel, Michael Haag, Splunk
+  updated: '2025-10-14'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1190
-      name: Technique T1190
-    tactics: []
+      name: Exploit Public-Facing Application
+      tactics:
+      - initial-access
+    tactics:
+    - initial-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/network/cisco_smart_install_port_discovery_and_status.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/network/cisco_smart_install_port_discovery_and_status.yml
+      rule_sha256: sha256:ae118bc9be987e9c0c5cefe455fddfce6dde938be43ad655cf26535fde60ed95
+      detection_id: ded9f9d7-edb8-48cf-8b72-1b459eee6785
+      source_version: 2
+      source_date: '2025-10-14'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/cisco/cisco_smart_install/stream_tcp.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1190/cisco/cisco_smart_install/stream_tcp.log
     description: stream:tcp - stream:tcp
     format: auto
     schema: raw
     sourcetype: stream:tcp
+    checksum: sha256:7f6455cfe9d2ae34714f6540e19fa79f9dae20b2c7690fc6049024c299e6c7e6
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

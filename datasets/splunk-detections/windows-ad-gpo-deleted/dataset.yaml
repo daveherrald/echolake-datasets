@@ -1,9 +1,10 @@
 metadata:
   name: windows-ad-gpo-deleted
   version: 6.0.0
-  description: This detection identifies when an Active Directory Group Policy is
-    deleted using the Group Policy Management Console.
+  description: This detection identifies when an Active Directory Group Policy is deleted using the Group Policy Management Console.
   author: Dean Luxton
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -11,25 +12,52 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1562.001
-      name: Technique T1562.001
+      name: Disable or Modify Tools
+      tactics:
+      - defense-evasion
     - id: T1484.001
-      name: Technique T1484.001
-    tactics: []
+      name: Group Policy Modification
+      tactics:
+      - privilege-escalation
+      - defense-evasion
+    tactics:
+    - privilege-escalation
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_ad_gpo_deleted.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_ad_gpo_deleted.yml
+      rule_sha256: sha256:517e1689f0a918e16f6c6004a5c41466e6c29cb54b8bc68fa2d0cb34c6097406
+      detection_id: 0d41772b-35ab-4e1c-a2ba-d0b455481aee
+      source_version: 6
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1484.001/group_policy_deleted/windows-security.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1484.001/group_policy_deleted/windows-security.log
     description: XmlWinEventLog:Security - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1484.001/group_policy_deleted/windows-admon.log
+    checksum: sha256:d061522eef597679ada26b0580687d38e8bede3895f1e975df538b25e0499dec
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1484.001/group_policy_deleted/windows-admon.log
     description: ActiveDirectory - ActiveDirectory
     format: auto
     schema: raw
     sourcetype: ActiveDirectory
+    checksum: sha256:9ce24202106e5e1ae492258a5211bbd2a6d961fa91b1b24c746999374bebf8bb
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

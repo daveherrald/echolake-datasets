@@ -1,17 +1,16 @@
 metadata:
   name: windows-process-execution-from-rdp-share
   version: 1.0.0
-  description: 'The following analytic identifies process executions originating from
-    RDP shares on Windows endpoints.
+  description: 'The following analytic identifies process executions originating from RDP shares on Windows endpoints.
 
-    Remote Desktop Protocol (RDP) shares, typically accessed via the "tsclient" path,
-    allow users to share files between their local machine and a remote desktop session.
-    However, threat actors may exploit RDP shares to execute malicious processes or
-    transfer harmful files onto a compromised system.
+    Remote Desktop Protocol (RDP) shares, typically accessed via the "tsclient" path, allow users to share files between their local machine and a remote desktop session. However, threat actors may exploit RDP shares to execute malicious processes or transfer harmful files onto a compromised system.
 
-    This detection focuses on identifying any process executions that originate from
-    RDP shares, which c'
+    This detection focuses on identifying any process executions that originate from RDP shares, which could indicate unauthorized access or malicious activity.
+
+    Security teams should investigate any instances of such process executions, especially if they are found on systems that should not be using RDP shares or if the executed processes are unfamiliar or suspicious.'
   author: Nasreddine Bencherchali, Splunk
+  updated: '2025-10-21'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -19,22 +18,50 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1021.001
-      name: Technique T1021.001
+      name: Remote Desktop Protocol
+      tactics:
+      - lateral-movement
     - id: T1105
-      name: Technique T1105
+      name: Ingress Tool Transfer
+      tactics:
+      - command-and-control
     - id: T1059
-      name: Technique T1059
-    tactics: []
+      name: Command and Scripting Interpreter
+      tactics:
+      - execution
+    tactics:
+    - execution
+    - lateral-movement
+    - command-and-control
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_process_execution_from_rdp_share.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_process_execution_from_rdp_share.yml
+      rule_sha256: sha256:6d7eb65b9cfe413b71c5e1fb2ee9db67e49c296fffaea6157768278bbe048622
+      detection_id: 6b1b84c4-3834-4dee-b062-9b79bdb31d15
+      source_version: 1
+      source_date: '2025-10-21'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1021.001/execution_from_rdp_share/execution_from_rdp_share.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1021.001/execution_from_rdp_share/execution_from_rdp_share.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:0faecc0797d5b9c320965de44fa7d722abff0f8387df570f65da2e8cb7e7a923
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

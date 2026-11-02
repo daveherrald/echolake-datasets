@@ -1,14 +1,10 @@
 metadata:
   name: windows-ingress-tool-transfer-using-explorer
   version: 10.0.0
-  description: The following analytic identifies instances where the Windows Explorer
-    process (explorer.exe) is executed with a URL in its command line. This detection
-    leverages data from Endpoint Detection and Response (EDR) agents, focusing on
-    process execution logs. This activity is significant because adversaries, such
-    as those using DCRat malware, may abuse explorer.exe to open URLs with the default
-    browser, which is an uncommon and suspicious behavior. If confirmed malicious,
-    this technique could allow a
+  description: The following analytic identifies instances where the Windows Explorer process (explorer.exe) is executed with a URL in its command line. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process execution logs. This activity is significant because adversaries, such as those using DCRat malware, may abuse explorer.exe to open URLs with the default browser, which is an uncommon and suspicious behavior. If confirmed malicious, this technique could allow attackers to download and execute malicious payloads, leading to potential system compromise and further malicious activities.
   author: Teoderick Contreras, Splunk
+  updated: '2025-07-01'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1105
-      name: Technique T1105
-    tactics: []
+      name: Ingress Tool Transfer
+      tactics:
+      - command-and-control
+    tactics:
+    - command-and-control
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_ingress_tool_transfer_using_explorer.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_ingress_tool_transfer_using_explorer.yml
+      rule_sha256: sha256:20b8241b0aa59f9946301193bdce665c42299cf99e93df679cff5ddc9925d025
+      detection_id: 76753bab-f116-4ea3-8fb9-89b638be58a9
+      source_version: 10
+      source_date: '2025-07-01'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/dcrat/dcrat_explorer_url/sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/dcrat/dcrat_explorer_url/sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:02eec874b06c904709f5669c17615c959063f7dc19e08c889fc8c16b1ba6c87c
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

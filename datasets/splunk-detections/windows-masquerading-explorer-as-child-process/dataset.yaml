@@ -1,14 +1,10 @@
 metadata:
   name: windows-masquerading-explorer-as-child-process
   version: 9.0.0
-  description: The following analytic identifies instances where explorer.exe is spawned
-    by unusual parent processes such as cmd.exe, powershell.exe, or regsvr32.exe.
-    This detection leverages data from Endpoint Detection and Response (EDR) agents,
-    focusing on process and parent process relationships. This activity is significant
-    because explorer.exe is typically initiated by userinit.exe, and deviations from
-    this norm can indicate code injection or process masquerading attempts by malware
-    like Qakbot. If confi
+  description: The following analytic identifies instances where explorer.exe is spawned by unusual parent processes such as cmd.exe, powershell.exe, or regsvr32.exe. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process and parent process relationships. This activity is significant because explorer.exe is typically initiated by userinit.exe, and deviations from this norm can indicate code injection or process masquerading attempts by malware like Qakbot. If confirmed malicious, this behavior could allow attackers to execute arbitrary code, evade detection, and maintain persistence within the environment.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,44 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1574.001
-      name: Technique T1574.001
-    tactics: []
+      name: DLL
+      tactics:
+      - persistence
+      - privilege-escalation
+      - defense-evasion
+    tactics:
+    - persistence
+    - privilege-escalation
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_masquerading_explorer_as_child_process.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_masquerading_explorer_as_child_process.yml
+      rule_sha256: sha256:f6a4bdfdcb01cfa87c0d1e7d9c82303c710bf03cb815e3349448fc9327d6a26b
+      detection_id: 61490da9-52a1-4855-a0c5-28233c88c481
+      source_version: 9
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/qakbot/sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/qakbot/sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:a700ccfdd3bd93f76fe65deec68886a89d7f96c75c3db2ce0ca281e81a2b061c
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

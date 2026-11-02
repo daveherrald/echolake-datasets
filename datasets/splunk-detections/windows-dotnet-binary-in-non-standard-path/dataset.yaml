@@ -1,17 +1,18 @@
 metadata:
   name: windows-dotnet-binary-in-non-standard-path
   version: 11.0.0
-  description: 'The following analytic detects the execution of native .NET binaries
-    from non-standard directories within the Windows operating system.
+  description: 'The following analytic detects the execution of native .NET binaries from non-standard directories within the Windows operating system.
 
-    It leverages Endpoint Detection and Response (EDR) telemetry, comparing process
-    names and original file names against a predefined lookup "is_net_windows_file".
+    It leverages Endpoint Detection and Response (EDR) telemetry, comparing process names and original file names against a predefined lookup "is_net_windows_file".
 
-    This activity is significant because adversaries may move .NET binaries to unconventional
-    paths to evade detection and execute malicious code.
+    This activity is significant because adversaries may move .NET binaries to unconventional paths to evade detection and execute malicious code.
 
-    If confirmed malicious, this behavior could allow attackers '
+    If confirmed malicious, this behavior could allow attackers to execute arbitrary code, escalate privileges, or maintain persistence within the environment, posing a significant security risk.
+
+    Also this analytic leverages a sub-search to enhance performance. sub-searches have limitations on the amount of data they can return. Keep this in mind if you have an extensive list of ransomware note file names.'
   author: Michael Haag, Splunk
+  updated: '2026-01-19'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -21,20 +22,44 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1036.003
-      name: Technique T1036.003
+      name: Rename Legitimate Utilities
+      tactics:
+      - defense-evasion
     - id: T1218.004
-      name: Technique T1218.004
-    tactics: []
+      name: InstallUtil
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_dotnet_binary_in_non_standard_path.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_dotnet_binary_in_non_standard_path.yml
+      rule_sha256: sha256:c594421c7c7e83a84e9adc8044ec0aa7c621847a16597c4847b46063e43ff7d3
+      detection_id: fddf3b56-7933-11ec-98a6-acde48001122
+      source_version: 11
+      source_date: '2026-01-19'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218.004/atomic_red_team/windows-sysmon_installutil_path.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1218.004/atomic_red_team/windows-sysmon_installutil_path.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:d89cb0855915ab7ff36856ebf90a85e63f34f25b0a9b5116bdc87f4f69ab0231
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

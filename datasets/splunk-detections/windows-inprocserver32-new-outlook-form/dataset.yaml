@@ -1,14 +1,10 @@
 metadata:
   name: windows-inprocserver32-new-outlook-form
   version: 7.0.0
-  description: The following analytic detects the creation or modification of registry
-    keys associated with new Outlook form installations, potentially indicating exploitation
-    of CVE-2024-21378. It leverages data from the Endpoint.Registry datamodel, focusing
-    on registry paths involving InProcServer32 keys linked to Outlook forms. This
-    activity is significant as it may signify an attempt to achieve authenticated
-    remote code execution via malicious form objects. If confirmed malicious, this
-    could allow an attac
+  description: The following analytic detects the creation or modification of registry keys associated with new Outlook form installations, potentially indicating exploitation of CVE-2024-21378. It leverages data from the Endpoint.Registry datamodel, focusing on registry paths involving InProcServer32 keys linked to Outlook forms. This activity is significant as it may signify an attempt to achieve authenticated remote code execution via malicious form objects. If confirmed malicious, this could allow an attacker to create arbitrary files and registry keys, leading to remote code execution and potential full system compromise.
   author: Michael Haag, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,20 +12,47 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1566
-      name: Technique T1566
+      name: Phishing
+      tactics:
+      - initial-access
     - id: T1112
-      name: Technique T1112
-    tactics: []
+      name: Modify Registry
+      tactics:
+      - persistence
+      - defense-evasion
+    tactics:
+    - initial-access
+    - persistence
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_inprocserver32_new_outlook_form.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_inprocserver32_new_outlook_form.yml
+      rule_sha256: sha256:cb7df8754bfde05ff38c247536c747e9f7ca45a18561b121dafa1f456f559117
+      detection_id: fedb49c4-4bd7-4d42-8fd9-f8c8538c73c4
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566/cve-2024-21378/inprocserver32_windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1566/cve-2024-21378/inprocserver32_windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:0e557887f0179c06497171bbac0190246a22e388be0871af30bd9c0fae35814e
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

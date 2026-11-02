@@ -1,14 +1,10 @@
 metadata:
   name: kubernetes-abuse-of-secret-by-unusual-user-name
   version: 5.0.0
-  description: The following analytic detects unauthorized access or misuse of Kubernetes
-    Secrets by unusual user names. It leverages Kubernetes Audit logs to identify
-    anomalies in access patterns by analyzing the source of requests based on user
-    names. This activity is significant for a SOC as Kubernetes Secrets store sensitive
-    information like passwords, OAuth tokens, and SSH keys, making them critical assets.
-    If confirmed malicious, this activity could lead to unauthorized access to sensitive
-    systems or dat
+  description: The following analytic detects unauthorized access or misuse of Kubernetes Secrets by unusual user names. It leverages Kubernetes Audit logs to identify anomalies in access patterns by analyzing the source of requests based on user names. This activity is significant for a SOC as Kubernetes Secrets store sensitive information like passwords, OAuth tokens, and SSH keys, making them critical assets. If confirmed malicious, this activity could lead to unauthorized access to sensitive systems or data, potentially resulting in significant security breaches and exfiltration of sensitive information.
   author: Patrick Bareiss, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1552.007
-      name: Technique T1552.007
-    tactics: []
+      name: Container API
+      tactics:
+      - credential-access
+    tactics:
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/kubernetes_abuse_of_secret_by_unusual_user_name.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/kubernetes_abuse_of_secret_by_unusual_user_name.yml
+      rule_sha256: sha256:89bd486e09c2b3d02b37af089df2dae94aa80046746b75f9cbfba3687aae96e5
+      detection_id: df6e9cae-5257-4a34-8f3a-df49fa0f5c46
+      source_version: 5
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1552.007/kube_audit_get_secret/kube_audit_get_secret.json
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1552.007/kube_audit_get_secret/kube_audit_get_secret.json
     description: kubernetes - _json
     format: auto
     schema: raw
     sourcetype: _json
+    checksum: sha256:a4ce2301ef2e3baf72b7f70c439b3f8de4770721f09b9d1e81370146b6cb030b
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

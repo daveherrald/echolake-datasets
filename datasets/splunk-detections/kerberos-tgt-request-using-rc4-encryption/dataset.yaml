@@ -1,14 +1,10 @@
 metadata:
   name: kerberos-tgt-request-using-rc4-encryption
   version: 8.0.0
-  description: 'The following analytic detects a Kerberos Ticket Granting Ticket (TGT)
-    request using RC4-HMAC encryption (type 0x17) by leveraging Event 4768. This encryption
-    type is outdated and its presence may indicate an OverPass The Hash attack. Monitoring
-    this activity is crucial as it can signify credential theft, allowing adversaries
-    to authenticate to the Kerberos Distribution Center (KDC) using a stolen NTLM
-    hash. If confirmed malicious, this could enable unauthorized access to systems
-    and resources, '
+  description: The following analytic detects a Kerberos Ticket Granting Ticket (TGT) request using RC4-HMAC encryption (type 0x17) by leveraging Event 4768. This encryption type is outdated and its presence may indicate an OverPass The Hash attack. Monitoring this activity is crucial as it can signify credential theft, allowing adversaries to authenticate to the Kerberos Distribution Center (KDC) using a stolen NTLM hash. If confirmed malicious, this could enable unauthorized access to systems and resources, potentially leading to lateral movement and further compromise within the network.
   author: Mauricio Velazco, Splunk
+  updated: '2025-10-14'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1550
-      name: Technique T1550
-    tactics: []
+      name: Use Alternate Authentication Material
+      tactics:
+      - defense-evasion
+      - lateral-movement
+    tactics:
+    - defense-evasion
+    - lateral-movement
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/kerberos_tgt_request_using_rc4_encryption.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/kerberos_tgt_request_using_rc4_encryption.yml
+      rule_sha256: sha256:a1e390d72e38ec61a62501783256a359d16799cf23f84d4444e1fc6129cc1d22
+      detection_id: 18916468-9c04-11ec-bdc6-acde48001122
+      source_version: 8
+      source_date: '2025-10-14'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1550/kerberos_tgt_request_using_rc4_encryption/windows-xml.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1550/kerberos_tgt_request_using_rc4_encryption/windows-xml.log
     description: XmlWinEventLog:Security - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:3a13b5380b75184d34fe181d4c5ae5a94bf7bf5a671c3a320ebf0c7b738c5ffc
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

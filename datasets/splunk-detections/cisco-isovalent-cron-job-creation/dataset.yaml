@@ -1,14 +1,10 @@
 metadata:
   name: cisco-isovalent-cron-job-creation
   version: 1.0.0
-  description: The following analytic detects the creation of a cron job within the
-    Cisco Isovalent environment. It identifies this activity by monitoring process
-    execution logs for cron job creation events. This behavior is significant for
-    a SOC as it could allow an attacker to execute malicious tasks repeatedly and
-    automatically, posing a threat to the Kubernetes infrastructure. If confirmed
-    malicious, this activity could lead to persistent attacks, service disruptions,
-    or unauthorized access to sensitive in
+  description: The following analytic detects the creation of a cron job within the Cisco Isovalent environment. It identifies this activity by monitoring process execution logs for cron job creation events. This behavior is significant for a SOC as it could allow an attacker to execute malicious tasks repeatedly and automatically, posing a threat to the Kubernetes infrastructure. If confirmed malicious, this activity could lead to persistent attacks, service disruptions, or unauthorized access to sensitive information.
   author: Bhavin Patel, Splunk
+  updated: '2026-01-05'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,20 +12,50 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1053.003
-      name: Technique T1053.003
+      name: Cron
+      tactics:
+      - execution
+      - persistence
+      - privilege-escalation
     - id: T1053.007
-      name: Technique T1053.007
-    tactics: []
+      name: Container Orchestration Job
+      tactics:
+      - execution
+      - persistence
+      - privilege-escalation
+    tactics:
+    - execution
+    - persistence
+    - privilege-escalation
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/cisco_isovalent___cron_job_creation.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/cisco_isovalent___cron_job_creation.yml
+      rule_sha256: sha256:2876643a36b9753b495a2a6941313c071d72ed141c42a63fbee7b8ce1cb282bd
+      detection_id: 94531a31-a041-4777-909f-cd92ed3b71ad
+      source_version: 1
+      source_date: '2026-01-05'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_isovalent/cisco_isovalent.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/cisco_isovalent/cisco_isovalent.log
     description: not_applicable - cisco:isovalent:processExec
     format: auto
     schema: raw
     sourcetype: cisco:isovalent:processExec
+    checksum: sha256:2cb7e1ad95df218a8823f7f7d517be3f57ee067716c7efb35edc9bb0e1fa7914
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

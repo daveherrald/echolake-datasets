@@ -1,14 +1,20 @@
 metadata:
   name: cisco-duo-policy-allow-devices-without-screen-lock
   version: 1.0.0
-  description: "The following analytic detects when a Duo policy is created or updated\
-    \ to allow devices without a screen lock requirement. It identifies this behavior\
-    \ \nby searching Duo administrator activity logs for policy creation or update\
-    \ events where the 'require_lock' setting is set to false. This action may indicate\
-    \ \na weakening of device security controls, potentially exposing the organization\
-    \ to unauthorized access if devices are lost or stolen. For a Security Operations\
-    \ \nCenter (SOC), identifying such"
+  description: 'The following analytic detects when a Duo policy is created or updated to allow devices without a screen lock requirement. It identifies this behavior
+
+    by searching Duo administrator activity logs for policy creation or update events where the ''require_lock'' setting is set to false. This action may indicate
+
+    a weakening of device security controls, potentially exposing the organization to unauthorized access if devices are lost or stolen. For a Security Operations
+
+    Center (SOC), identifying such policy changes is critical, as attackers or malicious insiders may attempt to lower authentication standards to facilitate
+
+    unauthorized access. The impact of this attack could include increased risk of credential compromise, data breaches, or lateral movement within the
+
+    environment due to reduced device security requirements.'
   author: Patrick Bareiss, Splunk
+  updated: '2025-07-10'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +22,44 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1556
-      name: Technique T1556
-    tactics: []
+      name: Modify Authentication Process
+      tactics:
+      - persistence
+      - defense-evasion
+      - credential-access
+    tactics:
+    - persistence
+    - defense-evasion
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/application/cisco_duo_policy_allow_devices_without_screen_lock.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/application/cisco_duo_policy_allow_devices_without_screen_lock.yml
+      rule_sha256: sha256:ea82d6f4888b5c08a60c4061194d0f4f6cb3d848ecf7d4b81e91bab319abfaf8
+      detection_id: 114c616b-c793-465d-a80d-758c9fe8a704
+      source_version: 1
+      source_date: '2025-07-10'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1556/cisco_duo_policy_allow_devices_without_screen_lock/cisco_duo_administrator.json
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1556/cisco_duo_policy_allow_devices_without_screen_lock/cisco_duo_administrator.json
     description: duo - cisco:duo:administrator
     format: auto
     schema: raw
     sourcetype: cisco:duo:administrator
+    checksum: sha256:5c5aebd7d22c939949ea0f673ffdf1aeccbd2902b550447291c68835435326ba
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

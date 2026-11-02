@@ -1,13 +1,10 @@
 metadata:
   name: asl-aws-iam-delete-policy
   version: 7.0.0
-  description: The following analytic identifies when a policy is deleted in AWS.
-    It leverages Amazon Security Lake logs to detect the DeletePolicy API operation.
-    Monitoring policy deletions is crucial as it can indicate unauthorized attempts
-    to weaken security controls. If confirmed malicious, this activity could allow
-    an attacker to remove critical security policies, potentially leading to privilege
-    escalation or unauthorized access to sensitive resources.
+  description: The following analytic identifies when a policy is deleted in AWS. It leverages Amazon Security Lake logs to detect the DeletePolicy API operation. Monitoring policy deletions is crucial as it can indicate unauthorized attempts to weaken security controls. If confirmed malicious, this activity could allow an attacker to remove critical security policies, potentially leading to privilege escalation or unauthorized access to sensitive resources.
   author: Patrick Bareiss, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - hunting
   - splunk-security-content
@@ -15,18 +12,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1098
-      name: Technique T1098
-    tactics: []
+      name: Account Manipulation
+      tactics:
+      - persistence
+      - privilege-escalation
+    tactics:
+    - persistence
+    - privilege-escalation
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/asl_aws_iam_delete_policy.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/asl_aws_iam_delete_policy.yml
+      rule_sha256: sha256:0a21fa42e86e8fb3f0b05c7f07c7fff550d4cd6b6c0da8af2cea4d846a0291f1
+      detection_id: 609ced68-d420-4ff7-8164-ae98b4b4018c
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1098/aws_iam_delete_policy/asl_ocsf_cloudtrail.json
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1098/aws_iam_delete_policy/asl_ocsf_cloudtrail.json
     description: aws_asl - aws:asl
     format: auto
     schema: raw
     sourcetype: aws:asl
+    checksum: sha256:a904eac8644379e46ea2a55d245e30a1779453d05f9954caf231c396f6061771
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

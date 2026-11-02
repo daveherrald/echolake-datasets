@@ -1,12 +1,10 @@
 metadata:
   name: windows-kerberos-coercion-via-dns
   version: 1.0.0
-  description: Detects DNS-based Kerberos coercion attacks where adversaries inject
-    marshaled credential structures into DNS records to spoof SPNs and redirect authentication
-    such as in CVE-2025-33073. This detection leverages Windows Security Event Codes
-    5136, 5137, 4662, looking for DNS events with specific CREDENTIAL_TARGET_INFORMATION
-    entries.
+  description: Detects DNS-based Kerberos coercion attacks where adversaries inject marshaled credential structures into DNS records to spoof SPNs and redirect authentication such as in CVE-2025-33073. This detection leverages Windows Security Event Codes 5136, 5137, 4662, looking for DNS events with specific CREDENTIAL_TARGET_INFORMATION entries.
   author: Raven Tait, Splunk
+  updated: '2025-11-12'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,22 +14,51 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1071.004
-      name: Technique T1071.004
+      name: DNS
+      tactics:
+      - command-and-control
     - id: T1557.001
-      name: Technique T1557.001
+      name: LLMNR/NBT-NS Poisoning and SMB Relay
+      tactics:
+      - credential-access
+      - collection
     - id: T1187
-      name: Technique T1187
-    tactics: []
+      name: Forced Authentication
+      tactics:
+      - credential-access
+    tactics:
+    - credential-access
+    - collection
+    - command-and-control
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_kerberos_coercion_via_dns.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_kerberos_coercion_via_dns.yml
+      rule_sha256: sha256:a2986e8b4252e738ef6727327db37161e841f4c596c91e3339102b7d8ce2ccf4
+      detection_id: 9029b575-6f6b-4ab1-b660-67b24b7e9c3d
+      source_version: 1
+      source_date: '2025-11-12'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1071.004/kerberos_coercion/windows-xml.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1071.004/kerberos_coercion/windows-xml.log
     description: XmlWinEventLog:Security - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:4f49d19ac0f319dfd8570d61eae774c3930c155f0b191498499cda1a9b2d7c4c
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

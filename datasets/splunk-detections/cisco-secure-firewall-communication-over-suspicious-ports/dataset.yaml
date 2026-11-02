@@ -1,14 +1,10 @@
 metadata:
   name: cisco-secure-firewall-communication-over-suspicious-ports
   version: 3.0.0
-  description: The following analytic detects potential reverse shell activity by
-    identifying connections involving ports commonly associated with remote access
-    tools, shell listeners, or tunneling utilities. It leverages Cisco Secure Firewall
-    Threat Defense logs and monitors destination ports against a list of non-standard,
-    high-risk port values often used in post-exploitation scenarios. Adversaries frequently
-    configure tools like netcat, Meterpreter, or other backdoors to listen or connect
-    over uncommon port
+  description: The following analytic detects potential reverse shell activity by identifying connections involving ports commonly associated with remote access tools, shell listeners, or tunneling utilities. It leverages Cisco Secure Firewall Threat Defense logs and monitors destination ports against a list of non-standard, high-risk port values often used in post-exploitation scenarios. Adversaries frequently configure tools like netcat, Meterpreter, or other backdoors to listen or connect over uncommon ports such as 4444, 2222, or 51820 to bypass standard monitoring and firewall rules. If confirmed malicious, this activity may represent command and control (C2) tunneling, lateral movement, or unauthorized remote access.
   author: Nasreddine Bencherchali, Splunk
+  updated: '2026-06-01'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,28 +12,65 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1021
-      name: Technique T1021
+      name: Remote Services
+      tactics:
+      - lateral-movement
     - id: T1055
-      name: Technique T1055
+      name: Process Injection
+      tactics:
+      - privilege-escalation
+      - defense-evasion
     - id: T1059.001
-      name: Technique T1059.001
+      name: PowerShell
+      tactics:
+      - execution
     - id: T1105
-      name: Technique T1105
+      name: Ingress Tool Transfer
+      tactics:
+      - command-and-control
     - id: T1219
-      name: Technique T1219
+      name: Remote Access Tools
+      tactics:
+      - command-and-control
     - id: T1571
-      name: Technique T1571
-    tactics: []
+      name: Non-Standard Port
+      tactics:
+      - command-and-control
+    tactics:
+    - execution
+    - privilege-escalation
+    - defense-evasion
+    - lateral-movement
+    - command-and-control
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/network/cisco_secure_firewall___communication_over_suspicious_ports.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/network/cisco_secure_firewall___communication_over_suspicious_ports.yml
+      rule_sha256: sha256:fd5464edcc36d7b40ed7a885b258d7989a11de3836384af69249f6b2366f9e0f
+      detection_id: d85c05c8-42c0-4e4a-87e7-4e1bb3e844e3
+      source_version: 3
+      source_date: '2026-06-01'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_secure_firewall_threat_defense/connection_event/connection_events.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/cisco_secure_firewall_threat_defense/connection_event/connection_events.log
     description: not_applicable - cisco:sfw:estreamer
     format: auto
     schema: raw
     sourcetype: cisco:sfw:estreamer
+    checksum: sha256:37e737d87c4e8396396f3a69621c127bd943eb733036deb7abaa5a5a7276371d
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

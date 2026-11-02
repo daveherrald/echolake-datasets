@@ -1,19 +1,18 @@
 metadata:
   name: windows-powershell-process-implementing-manual-base64-decoder
   version: 2.0.0
-  description: 'The following analytic identifies Windows PowerShell processes that
-    implement a manual Base64 decoder.
+  description: 'The following analytic identifies Windows PowerShell processes that implement a manual Base64 decoder.
 
-    Threat actors often use Base64 encoding to obfuscate malicious payloads or commands
-    within PowerShell scripts.
+    Threat actors often use Base64 encoding to obfuscate malicious payloads or commands within PowerShell scripts.
 
-    By manually decoding Base64 strings, attackers can evade detection mechanisms
-    that look for standard decoding functions like using the "-enc" flag or the "FromBase64String"
-    function.
+    By manually decoding Base64 strings, attackers can evade detection mechanisms that look for standard decoding functions like using the "-enc" flag or the "FromBase64String" function.
 
-    This detection focuses on PowerShell processes that exhibit characteristics of
-    manual Base64 decoding, '
+    This detection focuses on PowerShell processes that exhibit characteristics of manual Base64 decoding, such as the presence of specific string manipulation methods and bitwise operations.
+
+    Security teams should investigate any instances of such activity, especially if found in conjunction with other suspicious behaviors or on systems that should not be using PowerShell for such tasks.'
   author: Nasreddine Bencherchali
+  updated: '2025-11-19'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -22,20 +21,45 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1027.010
-      name: Technique T1027.010
+      name: Command Obfuscation
+      tactics:
+      - defense-evasion
     - id: T1059.001
-      name: Technique T1059.001
-    tactics: []
+      name: PowerShell
+      tactics:
+      - execution
+    tactics:
+    - execution
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_powershell_process_implementing_manual_base64_decoder.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_powershell_process_implementing_manual_base64_decoder.yml
+      rule_sha256: sha256:9bb4789d51a2fc9890372de8de5991731ab119773a2d6778dff0f4a889d34a43
+      detection_id: 08d67349-0808-4f55-b431-1037269fa517
+      source_version: 2
+      source_date: '2025-11-19'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://github.com/Splunk/attack_data/raw/master/datasets/attack_techniques/T1027.010/manual_b64_decode_pwsh/manual_b64_decode_pwsh.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1027.010/manual_b64_decode_pwsh/manual_b64_decode_pwsh.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:578c02d29fd3b8eec51f9603dd5267636bad190d2c091aaf7f34b8c4e32f5e4c
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

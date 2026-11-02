@@ -1,14 +1,10 @@
 metadata:
   name: linux-auditd-change-file-owner-to-root
   version: 7.0.0
-  description: The following analytic detects the use of the 'chown' command to change
-    a file owner to 'root' on a Linux system. It leverages Linux Auditd telemetry,
-    specifically monitoring command-line executions and process details. This activity
-    is significant as it may indicate an attempt to escalate privileges by adversaries,
-    malware, or red teamers. If confirmed malicious, this action could allow an attacker
-    to gain root-level access, leading to full control over the compromised host and
-    potential persis
+  description: The following analytic detects the use of the 'chown' command to change a file owner to 'root' on a Linux system. It leverages Linux Auditd telemetry, specifically monitoring command-line executions and process details. This activity is significant as it may indicate an attempt to escalate privileges by adversaries, malware, or red teamers. If confirmed malicious, this action could allow an attacker to gain root-level access, leading to full control over the compromised host and potential persistence within the environment.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1222.002
-      name: Technique T1222.002
-    tactics: []
+      name: Linux and Mac File and Directory Permissions Modification
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/linux_auditd_change_file_owner_to_root.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/linux_auditd_change_file_owner_to_root.yml
+      rule_sha256: sha256:51f78fc604cf4ddb9c098b1b5fa6635f0204af66f52105ad3846022541198dca
+      detection_id: 7b87c556-0ca4-47e0-b84c-6cd62a0a3e90
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053.002/linux_auditd_chown_root/auditd_proctitle_chown_root.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1053.002/linux_auditd_chown_root/auditd_proctitle_chown_root.log
     description: auditd - auditd
     format: auto
     schema: raw
     sourcetype: auditd
+    checksum: sha256:605a6d045c86b3593bb09eb1371cf99a91b8d4428ce167c272e4cff585f44b83
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

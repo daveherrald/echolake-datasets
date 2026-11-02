@@ -1,14 +1,10 @@
 metadata:
   name: windows-indirect-command-execution-via-series-of-forfiles
   version: 6.0.0
-  description: The following analytic detects excessive usage of the forfiles.exe
-    process, which is often indicative of post-exploitation activities. The detection
-    leverages data from Endpoint Detection and Response (EDR) agents, focusing on
-    process execution logs that include process GUID, process name, and parent process.
-    This activity is significant because forfiles.exe can be abused to execute commands
-    on multiple files, a technique used by ransomware like Prestige. If confirmed
-    malicious, this behavior co
+  description: The following analytic detects excessive usage of the forfiles.exe process, which is often indicative of post-exploitation activities. The detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process execution logs that include process GUID, process name, and parent process. This activity is significant because forfiles.exe can be abused to execute commands on multiple files, a technique used by ransomware like Prestige. If confirmed malicious, this behavior could allow attackers to enumerate files, potentially leading to data exfiltration or further malicious actions.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1202
-      name: Technique T1202
-    tactics: []
+      name: Indirect Command Execution
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_indirect_command_execution_via_series_of_forfiles.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_indirect_command_execution_via_series_of_forfiles.yml
+      rule_sha256: sha256:448e5ab4499f432cb59b59e8e00dd445ad428009a30c050c9811fdafab84eb53
+      detection_id: bfdaabe7-3db8-48c5-80c1-220f9b8f22be
+      source_version: 6
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/winpeas/sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/winpeas/sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:3d884edd04405659a53f85e3570d96056c01bd58081f175fd9aa9362259872a4
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

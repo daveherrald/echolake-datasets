@@ -1,12 +1,10 @@
 metadata:
   name: windows-unusual-ntlm-authentication-users-by-source
   version: 6.0.0
-  description: The following analytic detects when an unusual number of NTLM authentications
-    is attempted by the same source. This activity generally results when an attacker
-    attempts to brute force, password spray, or otherwise authenticate to a domain
-    joined Windows device using an NTLM based process/attack. This same activity may
-    also generate a large number of EventID 4776 events in as well.
+  description: The following analytic detects when an unusual number of NTLM authentications is attempted by the same source. This activity generally results when an attacker attempts to brute force, password spray, or otherwise authenticate to a domain joined Windows device using an NTLM based process/attack. This same activity may also generate a large number of EventID 4776 events in as well.
   author: Steven Dick
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -14,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1110.003
-      name: Technique T1110.003
-    tactics: []
+      name: Password Spraying
+      tactics:
+      - credential-access
+    tactics:
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_unusual_ntlm_authentication_users_by_source.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_unusual_ntlm_authentication_users_by_source.yml
+      rule_sha256: sha256:ec3636132a028799077394b6a94fb6efea79ec2c24b60d700c37fe25392be565
+      detection_id: 80fcc4d4-fd90-488e-b55a-4e7190ae6ce2
+      source_version: 6
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1110.003/ntlm_bruteforce/ntlm_bruteforce.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1110.003/ntlm_bruteforce/ntlm_bruteforce.log
     description: XmlWinEventLog:Microsoft-Windows-NTLM/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:63a209ac79763e9a54a69559d35e33d848b430dbc719c6ca9258409f34c24aea
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

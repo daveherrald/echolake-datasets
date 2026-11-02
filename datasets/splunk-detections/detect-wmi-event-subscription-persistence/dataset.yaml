@@ -1,14 +1,10 @@
 metadata:
   name: detect-wmi-event-subscription-persistence
   version: 8.0.0
-  description: The following analytic identifies the creation of WMI Event Subscriptions,
-    which can be used to establish persistence or perform privilege escalation. It
-    detects EventID 19 (EventFilter creation), EventID 20 (EventConsumer creation),
-    and EventID 21 (FilterToConsumerBinding creation) from Sysmon logs. This activity
-    is significant because WMI Event Subscriptions can execute code with elevated
-    SYSTEM privileges, making it a powerful persistence mechanism. If confirmed malicious,
-    an attacker could m
+  description: The following analytic identifies the creation of WMI Event Subscriptions, which can be used to establish persistence or perform privilege escalation. It detects EventID 19 (EventFilter creation), EventID 20 (EventConsumer creation), and EventID 21 (FilterToConsumerBinding creation) from Sysmon logs. This activity is significant because WMI Event Subscriptions can execute code with elevated SYSTEM privileges, making it a powerful persistence mechanism. If confirmed malicious, an attacker could maintain long-term access, escalate privileges, and execute arbitrary code, posing a severe threat to the environment.
   author: Michael Haag, Splunk
+  updated: '2025-10-14'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1546.003
-      name: Technique T1546.003
-    tactics: []
+      name: Windows Management Instrumentation Event Subscription
+      tactics:
+      - persistence
+      - privilege-escalation
+    tactics:
+    - persistence
+    - privilege-escalation
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/detect_wmi_event_subscription_persistence.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/detect_wmi_event_subscription_persistence.yml
+      rule_sha256: sha256:cf8f40875e1eadff040318206cd3ae8a5915f6ddd0674bc237cafe3e8e3cae19
+      detection_id: 01d9a0c2-cece-11eb-ab46-acde48001122
+      source_version: 8
+      source_date: '2025-10-14'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1546.003/atomic_red_team/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1546.003/atomic_red_team/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:9e2ca4e98779bafcf3e1904052794250e912494ec4e41983aa0940aa2d683fc0
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

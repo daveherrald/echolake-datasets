@@ -1,14 +1,10 @@
 metadata:
   name: microsoft-intune-manual-device-management
   version: 2.0.0
-  description: Microsoft Intune device management configuration policies, scripts
-    & apps are a all tools administrators can use to remotely manage intune managed
-    devices. Instead of waiting for the devices to poll for changes to polciies, the
-    policies can be manually pushed to expidite delivery.  This may be useful in a
-    pinch, it may also be a sign of an impatient attacker trying to speed up the delivery
-    of their payload.  This detection identifies when a device management configuration
-    policy sync events, on-
+  description: Microsoft Intune device management configuration policies, scripts & apps are a all tools administrators can use to remotely manage intune managed devices. Instead of waiting for the devices to poll for changes to polciies, the policies can be manually pushed to expidite delivery.  This may be useful in a pinch, it may also be a sign of an impatient attacker trying to speed up the delivery of their payload.  This detection identifies when a device management configuration policy sync events, on-demand remediation scripts are triggered or when devices are remotely restarted.
   author: Dean Luxton
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - hunting
   - splunk-security-content
@@ -16,22 +12,51 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1021.007
-      name: Technique T1021.007
+      name: Cloud Services
+      tactics:
+      - lateral-movement
     - id: T1072
-      name: Technique T1072
+      name: Software Deployment Tools
+      tactics:
+      - execution
+      - lateral-movement
     - id: T1529
-      name: Technique T1529
-    tactics: []
+      name: System Shutdown/Reboot
+      tactics:
+      - impact
+    tactics:
+    - execution
+    - lateral-movement
+    - impact
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/microsoft_intune_manual_device_management.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/microsoft_intune_manual_device_management.yml
+      rule_sha256: sha256:a68e479b6685bfdb83dfaf03b7851d3f9ba8420f3e38901fee784b2b843ef0c8
+      detection_id: 5ca7ebee-4ee7-4cf2-b3be-0ea26a00d822
+      source_version: 2
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1072/intune/intune.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1072/intune/intune.log
     description: Azure AD - azure:monitor:activity
     format: auto
     schema: raw
     sourcetype: azure:monitor:activity
+    checksum: sha256:9b70aab1b4dd6d107c2d10da795d2af4d3732f22e8b9aa1fbafd2a6094735a6f
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,14 +1,10 @@
 metadata:
   name: windows-common-abused-cmd-shell-risk-behavior
   version: 7.0.0
-  description: The following analytic identifies instances where four or more distinct
-    detection analytics are associated with malicious command line behavior on a specific
-    host. This detection leverages the Command Line Interface (CLI) data from various
-    sources to identify suspicious activities. This behavior is significant as it
-    often indicates attempts to execute malicious commands, access sensitive data,
-    install backdoors, or perform other nefarious actions. If confirmed malicious,
-    attackers could gain una
+  description: The following analytic identifies instances where four or more distinct detection analytics are associated with malicious command line behavior on a specific host. This detection leverages the Command Line Interface (CLI) data from various sources to identify suspicious activities. This behavior is significant as it often indicates attempts to execute malicious commands, access sensitive data, install backdoors, or perform other nefarious actions. If confirmed malicious, attackers could gain unauthorized control, exfiltrate information, escalate privileges, or launch further attacks within the network, leading to severe compromise.
   author: Teoderick Contreras, Splunk
+  updated: '2025-10-24'
+  license: Apache-2.0
   tags:
   - correlation
   - splunk-security-content
@@ -18,28 +14,63 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1222
-      name: Technique T1222
+      name: File and Directory Permissions Modification
+      tactics:
+      - defense-evasion
     - id: T1049
-      name: Technique T1049
+      name: System Network Connections Discovery
+      tactics:
+      - discovery
     - id: T1033
-      name: Technique T1033
+      name: System Owner/User Discovery
+      tactics:
+      - discovery
     - id: T1529
-      name: Technique T1529
+      name: System Shutdown/Reboot
+      tactics:
+      - impact
     - id: T1016
-      name: Technique T1016
+      name: System Network Configuration Discovery
+      tactics:
+      - discovery
     - id: T1059
-      name: Technique T1059
-    tactics: []
+      name: Command and Scripting Interpreter
+      tactics:
+      - execution
+    tactics:
+    - execution
+    - defense-evasion
+    - discovery
+    - impact
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_common_abused_cmd_shell_risk_behavior.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_common_abused_cmd_shell_risk_behavior.yml
+      rule_sha256: sha256:35c71826b7127b43a75a5d4a0e15331fae69eee6ffb9649211cbba52b77ef2e0
+      detection_id: e99fcc4f-c6b0-4443-aa2a-e3c85126ec9a
+      source_version: 7
+      source_date: '2025-10-24'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059/risk_behavior/abused_commandline/risk_recon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1059/risk_behavior/abused_commandline/risk_recon.log
     description: risk - stash
     format: auto
     schema: raw
     sourcetype: stash
+    checksum: sha256:2852ad51e673f627b421195a0b398501b516b8be7428f366a5810a55a9ee9640
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

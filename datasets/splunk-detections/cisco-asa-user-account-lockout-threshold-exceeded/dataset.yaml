@@ -1,16 +1,16 @@
 metadata:
   name: cisco-asa-user-account-lockout-threshold-exceeded
   version: 1.0.0
-  description: 'This analytic detects user account lockouts on Cisco ASA devices resulting
-    from excessive failed authentication attempts.
+  description: 'This analytic detects user account lockouts on Cisco ASA devices resulting from excessive failed authentication attempts.
 
-    Account lockouts may indicate brute force attacks, password spraying campaigns,
-    credential stuffing attempts using compromised credentials from external breaches,
-    or misconfigured automation attempting authentication with incorrect credentials.
-    These activities represent attempts to gain unauthorized access to network infrastructure.
+    Account lockouts may indicate brute force attacks, password spraying campaigns, credential stuffing attempts using compromised credentials from external breaches, or misconfigured automation attempting authentication with incorrect credentials. These activities represent attempts to gain unauthorized access to network infrastructure.
 
-    The detection monitors for ASA message ID '
+    The detection monitors for ASA message ID 113006, which is generated when a user account is locked out after exceeding the configured maximum number of failed authentication attempts, capturing the locked account name and the failure threshold that was exceeded.
+
+    Investigate account lockouts for privileged or administrative accounts, multiple simultaneous lockouts affecting different accounts (suggesting password spraying), lockouts originating from unusual source IP addresses, lockouts during off-hours, or patterns suggesting automated attack tools.'
   author: Nasreddine Bencherchali, Splunk
+  updated: '2025-11-18'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,20 +18,44 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1110.001
-      name: Technique T1110.001
+      name: Password Guessing
+      tactics:
+      - credential-access
     - id: T1110.003
-      name: Technique T1110.003
-    tactics: []
+      name: Password Spraying
+      tactics:
+      - credential-access
+    tactics:
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/application/cisco_asa___user_account_lockout_threshold_exceeded.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/application/cisco_asa___user_account_lockout_threshold_exceeded.yml
+      rule_sha256: sha256:e55b137f208ad380633ba9bddda7f51bfa0a410b9fbe7766a42414611a80eb4c
+      detection_id: 3e8f9c2a-6d4b-4a7e-9c5f-1b8d7e3a9f2c
+      source_version: 1
+      source_date: '2025-11-18'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_asa/generic/cisco_asa_generic_logs.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/cisco_asa/generic/cisco_asa_generic_logs.log
     description: not_applicable - cisco:asa
     format: auto
     schema: raw
     sourcetype: cisco:asa
+    checksum: sha256:b42d51b1f09c7d447ebf3ca1c1a594a886bbf529b06a4300c9a5a58d191a2385
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

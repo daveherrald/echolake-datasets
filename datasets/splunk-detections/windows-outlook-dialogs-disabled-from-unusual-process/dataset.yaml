@@ -1,14 +1,10 @@
 metadata:
   name: windows-outlook-dialogs-disabled-from-unusual-process
   version: 1.0.0
-  description: The following analytic detects the modification of the Windows Registry
-    key "PONT_STRING" under Outlook Options. This disables certain dialog popups,
-    which could allow malicious scripts to run without notice. This detection leverages
-    data from the Endpoint.Registry datamodel to search for this key changing from
-    an unusual process. This activity is significant as it is commonly associated
-    with some malware infections, indicating potential malicious intent to harvest
-    email information.
+  description: The following analytic detects the modification of the Windows Registry key "PONT_STRING" under Outlook Options. This disables certain dialog popups, which could allow malicious scripts to run without notice. This detection leverages data from the Endpoint.Registry datamodel to search for this key changing from an unusual process. This activity is significant as it is commonly associated with some malware infections, indicating potential malicious intent to harvest email information.
   author: Raven Tait, Splunk
+  updated: '2025-09-08'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,20 +13,46 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1112
-      name: Technique T1112
+      name: Modify Registry
+      tactics:
+      - persistence
+      - defense-evasion
     - id: T1562
-      name: Technique T1562
-    tactics: []
+      name: Impair Defenses
+      tactics:
+      - defense-evasion
+    tactics:
+    - persistence
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_outlook_dialogs_disabled_from_unusual_process.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_outlook_dialogs_disabled_from_unusual_process.yml
+      rule_sha256: sha256:ba243dcc112a8829bd8dc9a5ef387d098dd4bc8f0645f54a9dbbe999f2e53236
+      detection_id: 94e3ba29-6245-4f25-8d47-d5b6b34c40ac
+      source_version: 1
+      source_date: '2025-09-08'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/notdoor/disable_dialogs/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/notdoor/disable_dialogs/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:cc9a6bb62770ced26341092729f79f256b5a1a16d85b3fea2dd5c992fc0d190f
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

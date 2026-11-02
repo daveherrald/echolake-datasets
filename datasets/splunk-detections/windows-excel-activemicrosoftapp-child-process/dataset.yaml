@@ -1,14 +1,10 @@
 metadata:
   name: windows-excel-activemicrosoftapp-child-process
   version: 1.0.0
-  description: The following analytic identifies the execution of the ActiveMicrosoftApp
-    process as a child of Microsoft Excel. Under normal conditions, Excel primarily
-    spawns internal Office-related processes, and the creation of ActiveMicrosoftApp
-    is uncommon in day-to-day business workflows. Adversaries may abuse this behavior
-    to blend malicious activity within trusted applications, execute unauthorized
-    code, or bypass application control mechanisms. This technique aligns with common
-    tradecraft where Office
+  description: The following analytic identifies the execution of the ActiveMicrosoftApp process as a child of Microsoft Excel. Under normal conditions, Excel primarily spawns internal Office-related processes, and the creation of ActiveMicrosoftApp is uncommon in day-to-day business workflows. Adversaries may abuse this behavior to blend malicious activity within trusted applications, execute unauthorized code, or bypass application control mechanisms. This technique aligns with common tradecraft where Office applications are leveraged as initial access or execution vectors due to their prevalence in enterprise environments. Detecting this relationship helps defenders spot suspicious child processes that may indicate malware execution, persistence mechanisms, or attempts to establish command-and-control. Security teams should investigate the parent Excel process, the context of the ActiveMicrosoftApp execution, and any subsequent network or file activity. While certain legitimate Office features could trigger this process in specific environments, its occurrence generally warrants further scrutiny to validate intent and rule out compromise.
   author: Teoderick Contreras, Splunk
+  updated: '2025-08-20'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1021.003
-      name: Technique T1021.003
-    tactics: []
+      name: Distributed Component Object Model
+      tactics:
+      - lateral-movement
+    tactics:
+    - lateral-movement
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_excel_activemicrosoftapp_child_process.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_excel_activemicrosoftapp_child_process.yml
+      rule_sha256: sha256:bf6c8c9a71b3faa41c15a5815edfa95cd36b9f389ea7d8bfbb18c27f6a061e2c
+      detection_id: 4dfd6a58-93b2-4012-bb33-038bb63652b3
+      source_version: 1
+      source_date: '2025-08-20'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1021.003/excel_activemicrosoftapp/sysmon_winprojexe.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1021.003/excel_activemicrosoftapp/sysmon_winprojexe.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:151c77e301c05f9dbb55db88002235c2eecc81cff6d3edd3a614e33d6d4fcad0
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

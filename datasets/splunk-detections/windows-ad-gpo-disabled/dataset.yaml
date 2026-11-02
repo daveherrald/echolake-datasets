@@ -1,9 +1,10 @@
 metadata:
   name: windows-ad-gpo-disabled
   version: 6.0.0
-  description: This detection identifies when an Active Directory Group Policy is
-    disabled using the Group Policy Management Console.
+  description: This detection identifies when an Active Directory Group Policy is disabled using the Group Policy Management Console.
   author: Dean Luxton
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -11,25 +12,52 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1562.001
-      name: Technique T1562.001
+      name: Disable or Modify Tools
+      tactics:
+      - defense-evasion
     - id: T1484.001
-      name: Technique T1484.001
-    tactics: []
+      name: Group Policy Modification
+      tactics:
+      - privilege-escalation
+      - defense-evasion
+    tactics:
+    - privilege-escalation
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_ad_gpo_disabled.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_ad_gpo_disabled.yml
+      rule_sha256: sha256:a95cd385ac3e50a0c3a751ad445e2f822cb4c4be5457e6455810e44bfcc07381
+      detection_id: 72793bc0-c0cd-400e-9e60-fdf36f278917
+      source_version: 6
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1484.001/group_policy_disabled/windows-security.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1484.001/group_policy_disabled/windows-security.log
     description: XmlWinEventLog:Security - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1484.001/group_policy_disabled/windows-admon.log
+    checksum: sha256:b3f947cdc16b83c88123eefa289f113a9fc8fc384c146503e0283682de2dd387
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1484.001/group_policy_disabled/windows-admon.log
     description: ActiveDirectory - ActiveDirectory
     format: auto
     schema: raw
     sourcetype: ActiveDirectory
+    checksum: sha256:8b9d67957273186e7aac339508b036a4f84f747a2eb8980abae4a8686119b729
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

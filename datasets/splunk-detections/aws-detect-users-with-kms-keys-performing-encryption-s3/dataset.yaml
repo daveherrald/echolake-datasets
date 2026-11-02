@@ -1,14 +1,10 @@
 metadata:
   name: aws-detect-users-with-kms-keys-performing-encryption-s3
   version: 7.0.0
-  description: The following analytic identifies users with KMS keys performing encryption
-    operations on S3 buckets. It leverages AWS CloudTrail logs to detect the `CopyObject`
-    event where server-side encryption with AWS KMS is specified. This activity is
-    significant as it may indicate unauthorized or suspicious encryption of data,
-    potentially masking exfiltration or tampering efforts. If confirmed malicious,
-    an attacker could be encrypting sensitive data to evade detection or preparing
-    it for exfiltration, po
+  description: The following analytic identifies users with KMS keys performing encryption operations on S3 buckets. It leverages AWS CloudTrail logs to detect the `CopyObject` event where server-side encryption with AWS KMS is specified. This activity is significant as it may indicate unauthorized or suspicious encryption of data, potentially masking exfiltration or tampering efforts. If confirmed malicious, an attacker could be encrypting sensitive data to evade detection or preparing it for exfiltration, posing a significant risk to data integrity and confidentiality.
   author: Rod Soto, Patrick Bareiss Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1486
-      name: Technique T1486
-    tactics: []
+      name: Data Encrypted for Impact
+      tactics:
+      - impact
+    tactics:
+    - impact
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/aws_detect_users_with_kms_keys_performing_encryption_s3.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/aws_detect_users_with_kms_keys_performing_encryption_s3.yml
+      rule_sha256: sha256:e7df01fd26d83ba607487efd4d82244b12ebdc4870b62e300b54efba9c6aee99
+      detection_id: 884a5f59-eec7-4f4a-948b-dbde18225fdc
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1486/s3_file_encryption/aws_cloudtrail_events.json
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1486/s3_file_encryption/aws_cloudtrail_events.json
     description: aws_cloudtrail - aws:cloudtrail
     format: auto
     schema: raw
     sourcetype: aws:cloudtrail
+    checksum: sha256:29c65aedfdb0a8b8ef56cb77af24842ec7ac5a9ad0497a186a3bda8acc411647
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

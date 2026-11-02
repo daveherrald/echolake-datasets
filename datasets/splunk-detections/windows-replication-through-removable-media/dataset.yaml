@@ -1,14 +1,10 @@
 metadata:
   name: windows-replication-through-removable-media
   version: 12.0.0
-  description: The following analytic detects the creation or dropping of executable
-    or script files in the root directory of a removable drive. It leverages data
-    from the Endpoint.Filesystem datamodel, focusing on specific file types and their
-    creation paths. This activity is significant as it may indicate an attempt to
-    spread malware, such as ransomware, via removable media. If confirmed malicious,
-    this behavior could lead to unauthorized code execution, lateral movement, or
-    persistence within the network, p
+  description: The following analytic detects the creation or dropping of executable or script files in the root directory of a removable drive. It leverages data from the Endpoint.Filesystem datamodel, focusing on specific file types and their creation paths. This activity is significant as it may indicate an attempt to spread malware, such as ransomware, via removable media. If confirmed malicious, this behavior could lead to unauthorized code execution, lateral movement, or persistence within the network, potentially compromising sensitive data and systems.
   author: Teoderick Contreras, Splunk
+  updated: '2025-09-18'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1091
-      name: Technique T1091
-    tactics: []
+      name: Replication Through Removable Media
+      tactics:
+      - initial-access
+      - lateral-movement
+    tactics:
+    - initial-access
+    - lateral-movement
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_replication_through_removable_media.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_replication_through_removable_media.yml
+      rule_sha256: sha256:644207dd2a5bb0d0e978cfb2c78693dcbfb85582d55179ef0ec5723900e4a34e
+      detection_id: 60df805d-4605-41c8-bbba-57baa6a4eb97
+      source_version: 12
+      source_date: '2025-09-18'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/chaos_ransomware/spread_in_root_drives/sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/chaos_ransomware/spread_in_root_drives/sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:e12d3fc9ababe97039a5c027170b19e68242aa0cbee867ac8f9d9f22b34b73a9
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

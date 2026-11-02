@@ -1,14 +1,10 @@
 metadata:
   name: disable-amsi-through-registry
   version: 11.0.0
-  description: The following analytic detects modifications to the Windows registry
-    that disable the Antimalware Scan Interface (AMSI) by setting the "AmsiEnable"
-    value to "0x00000000". This detection leverages data from the Endpoint.Registry
-    data model, specifically monitoring changes to the registry path "*\\SOFTWARE\\Microsoft\\Windows
-    Script\\Settings\\AmsiEnable". Disabling AMSI is significant as it is a common
-    technique used by ransomware, Remote Access Trojans (RATs), and Advanced Persistent
-    Threats (AP
+  description: The following analytic detects modifications to the Windows registry that disable the Antimalware Scan Interface (AMSI) by setting the "AmsiEnable" value to "0x00000000". This detection leverages data from the Endpoint.Registry data model, specifically monitoring changes to the registry path "*\\SOFTWARE\\Microsoft\\Windows Script\\Settings\\AmsiEnable". Disabling AMSI is significant as it is a common technique used by ransomware, Remote Access Trojans (RATs), and Advanced Persistent Threats (APTs) to evade detection and impair defenses. If confirmed malicious, this activity could allow attackers to execute payloads with minimal alerts, leading to potential system compromise and data exfiltration.
   author: Teoderick Contreras, Splunk, Steven Dick
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1562.001
-      name: Technique T1562.001
-    tactics: []
+      name: Disable or Modify Tools
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/disable_amsi_through_registry.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/disable_amsi_through_registry.yml
+      rule_sha256: sha256:5609f387d86411934bda1bfd50ecd01c4c7aac1ecdacfff0d454b032c8792097
+      detection_id: 9c27ec42-d338-11eb-9044-acde48001122
+      source_version: 11
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/ransomware_ttp/data2/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/ransomware_ttp/data2/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:b719f8681acc246580b2bfc27e7d4fde91adffbdc42cf91d08a0731c5d879ba4
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

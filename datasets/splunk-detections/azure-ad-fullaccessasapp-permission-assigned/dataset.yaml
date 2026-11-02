@@ -1,13 +1,10 @@
 metadata:
   name: azure-ad-fullaccessasapp-permission-assigned
   version: 7.0.0
-  description: The following analytic detects the assignment of the 'full_access_as_app'
-    permission to an application within Office 365 Exchange Online. This is identified
-    by the GUID 'dc890d15-9560-4a4c-9b7f-a736ec74ec40' and the ResourceAppId '00000002-0000-0ff1-ce00-000000000000'.
-    The detection leverages the azure_monitor_aad data source, focusing on AuditLogs
-    with the operation name 'Update application'. This activity is significant as
-    it grants broad control over Office 365 operations, including full acce
+  description: The following analytic detects the assignment of the 'full_access_as_app' permission to an application within Office 365 Exchange Online. This is identified by the GUID 'dc890d15-9560-4a4c-9b7f-a736ec74ec40' and the ResourceAppId '00000002-0000-0ff1-ce00-000000000000'. The detection leverages the azure_monitor_aad data source, focusing on AuditLogs with the operation name 'Update application'. This activity is significant as it grants broad control over Office 365 operations, including full access to all mailboxes and the ability to send emails as any user. If malicious, this could lead to unauthorized access and data exfiltration.
   author: Mauricio Velazco, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,20 +13,47 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1098.002
-      name: Technique T1098.002
+      name: Additional Email Delegate Permissions
+      tactics:
+      - persistence
+      - privilege-escalation
     - id: T1098.003
-      name: Technique T1098.003
-    tactics: []
+      name: Additional Cloud Roles
+      tactics:
+      - persistence
+      - privilege-escalation
+    tactics:
+    - persistence
+    - privilege-escalation
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/azure_ad_fullaccessasapp_permission_assigned.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/azure_ad_fullaccessasapp_permission_assigned.yml
+      rule_sha256: sha256:a14545b87df44be3401b545ffdeee775629a46ff9f90230a9dfe6039127660bd
+      detection_id: ae286126-f2ad-421c-b240-4ea83bd1c43a
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1098.002/full_access_as_app_permission_assigned/full_access_as_app_permission_assigned.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1098.002/full_access_as_app_permission_assigned/full_access_as_app_permission_assigned.log
     description: Azure AD - azure:monitor:aad
     format: auto
     schema: raw
     sourcetype: azure:monitor:aad
+    checksum: sha256:6afa35e2e8d1d0339d040995dfe23c4387babcf589dc4d21cdd9b32e979c3f14
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

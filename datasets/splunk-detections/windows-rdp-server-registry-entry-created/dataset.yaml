@@ -1,13 +1,10 @@
 metadata:
   name: windows-rdp-server-registry-entry-created
   version: 1.0.0
-  description: 'This detection identifies the creation of registry keys under HKEY_CURRENT_USER\Software\Microsoft\Terminal
-    Server Client\Servers\, which occur when a user initiates a Remote Desktop Protocol
-    (RDP) connection using the built-in Windows RDP client (mstsc.exe). These registry
-    entries store information about previously connected remote hosts, including usernames
-    and display settings. Their creation is a strong indicator that an outbound RDP
-    session was initiated from the system. While the presence '
+  description: This detection identifies the creation of registry keys under HKEY_CURRENT_USER\Software\Microsoft\Terminal Server Client\Servers\, which occur when a user initiates a Remote Desktop Protocol (RDP) connection using the built-in Windows RDP client (mstsc.exe). These registry entries store information about previously connected remote hosts, including usernames and display settings. Their creation is a strong indicator that an outbound RDP session was initiated from the system. While the presence of these keys is normal during legitimate RDP use, their appearance can be used to track remote access activity, especially in environments where RDP is tightly controlled. In post-compromise scenarios, these artifacts may be created by threat actors using RDP for lateral movement or command-and-control. Monitoring the creation of these registry entries can help defenders detect initial use of RDP from a compromised host, particularly when correlated with unusual user behavior, logon patterns, or network activity.
   author: Teoderick Contreras, Splunk
+  updated: '2025-07-30'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -15,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1021.001
-      name: Technique T1021.001
-    tactics: []
+      name: Remote Desktop Protocol
+      tactics:
+      - lateral-movement
+    tactics:
+    - lateral-movement
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_rdp_server_registry_entry_created.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_rdp_server_registry_entry_created.yml
+      rule_sha256: sha256:83b34d2f9610550a267c5d6f5afa5649181f9ac90f0e45d5f341bee7f3ff079d
+      detection_id: 61f10919-c360-4e56-9cda-f1f34500cfda
+      source_version: 1
+      source_date: '2025-07-30'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1021.001/terminal_server_reg_created/terminal_sever_client_Reg_created.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1021.001/terminal_server_reg_created/terminal_sever_client_Reg_created.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:5342e02893436798ee664d51b0c19098a395b99039e208d4e5e7f6f530cf6c82
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

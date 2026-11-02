@@ -1,14 +1,10 @@
 metadata:
   name: windows-dns-query-request-by-telegram-bot-api
   version: 5.0.0
-  description: The following analytic detects the execution of a DNS query by a process
-    to the associated Telegram API domain, which could indicate access via a Telegram
-    bot commonly used by malware for command and control (C2) communications. By monitoring
-    DNS queries related to Telegram's infrastructure, the detection identifies potential
-    attempts to establish covert communication channels between a compromised system
-    and external malicious actors. This behavior is often observed in cyberattacks
-    where Telegr
+  description: The following analytic detects the execution of a DNS query by a process to the associated Telegram API domain, which could indicate access via a Telegram bot commonly used by malware for command and control (C2) communications. By monitoring DNS queries related to Telegram's infrastructure, the detection identifies potential attempts to establish covert communication channels between a compromised system and external malicious actors. This behavior is often observed in cyberattacks where Telegram bots are used to receive commands or exfiltrate data, making it a key indicator of suspicious or malicious activity within a network.
   author: Teoderick Contreras, Splunk
+  updated: '2025-08-22'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -17,20 +13,44 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1071.004
-      name: Technique T1071.004
+      name: DNS
+      tactics:
+      - command-and-control
     - id: T1102.002
-      name: Technique T1102.002
-    tactics: []
+      name: Bidirectional Communication
+      tactics:
+      - command-and-control
+    tactics:
+    - command-and-control
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/network/windows_dns_query_request_by_telegram_bot_api.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/network/windows_dns_query_request_by_telegram_bot_api.yml
+      rule_sha256: sha256:afd1ada5260585e19bf230db10a605cb47ff5a253f26d107faa6c6e6d0d69782
+      detection_id: 86f66f44-94d9-412d-a71d-5d8ed0fef72e
+      source_version: 5
+      source_date: '2025-08-22'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1102.002/telegram_api_dns/telegram_dns.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1102.002/telegram_api_dns/telegram_dns.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:4b4cd5c56ab3a86c83fd2a1c63e572b8a1baaf0eff29d8dfce32d628ffb9092d
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

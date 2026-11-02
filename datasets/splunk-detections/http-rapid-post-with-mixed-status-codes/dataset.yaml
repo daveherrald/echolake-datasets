@@ -1,12 +1,10 @@
 metadata:
   name: http-rapid-post-with-mixed-status-codes
   version: 1.0.0
-  description: This detection identifies rapid-fire POST request attacks where an
-    attacker sends more than 20 POST requests within a 5-second window, potentially
-    attempting to exploit race conditions or overwhelm request handling. The pattern
-    is particularly suspicious when responses vary in size or status codes, indicating
-    successful exploitation attempts or probing for vulnerable endpoints.
+  description: This detection identifies rapid-fire POST request attacks where an attacker sends more than 20 POST requests within a 5-second window, potentially attempting to exploit race conditions or overwhelm request handling. The pattern is particularly suspicious when responses vary in size or status codes, indicating successful exploitation attempts or probing for vulnerable endpoints.
   author: Raven Tait, Splunk
+  updated: '2025-10-14'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -14,22 +12,50 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1071.001
-      name: Technique T1071.001
+      name: Web Protocols
+      tactics:
+      - command-and-control
     - id: T1190
-      name: Technique T1190
+      name: Exploit Public-Facing Application
+      tactics:
+      - initial-access
     - id: T1595
-      name: Technique T1595
-    tactics: []
+      name: Active Scanning
+      tactics:
+      - reconnaissance
+    tactics:
+    - reconnaissance
+    - initial-access
+    - command-and-control
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/web/http_rapid_post_with_mixed_status_codes.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/web/http_rapid_post_with_mixed_status_codes.yml
+      rule_sha256: sha256:ae8a0f2bb912f0e4388808932b931a2c79450d3c322ef2740e723534cbf79714
+      detection_id: c8c987d6-3a1a-4555-9a52-eea0741b6113
+      source_version: 1
+      source_date: '2025-10-14'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/request_smuggling/nginx_request_smuggling.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1190/request_smuggling/nginx_request_smuggling.log
     description: nginx:plus:kv - nginx:plus:kv
     format: auto
     schema: raw
     sourcetype: nginx:plus:kv
+    checksum: sha256:6d30db9a56755a4961ca33e22ff47f3984de3682373c4c1b05da1b9facfbcede
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

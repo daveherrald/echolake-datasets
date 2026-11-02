@@ -1,14 +1,10 @@
 metadata:
   name: linux-auditd-data-destruction-command
   version: 5.0.0
-  description: The following analytic detects the execution of a Unix shell command
-    designed to wipe root directories on a Linux host. It leverages data from Linux
-    Auditd, focusing on the 'rm' command with force recursive deletion and the '--no-preserve-root'
-    option. This activity is significant as it indicates potential data destruction
-    attempts, often associated with malware like Awfulshred. If confirmed malicious,
-    this behavior could lead to severe data loss, system instability, and compromised
-    integrity of
+  description: The following analytic detects the execution of a Unix shell command designed to wipe root directories on a Linux host. It leverages data from Linux Auditd, focusing on the 'rm' command with force recursive deletion and the '--no-preserve-root' option. This activity is significant as it indicates potential data destruction attempts, often associated with malware like Awfulshred. If confirmed malicious, this behavior could lead to severe data loss, system instability, and compromised integrity of the affected Linux host. Immediate investigation and response are crucial to mitigate potential damage.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1485
-      name: Technique T1485
-    tactics: []
+      name: Data Destruction
+      tactics:
+      - impact
+    tactics:
+    - impact
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/linux_auditd_data_destruction_command.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/linux_auditd_data_destruction_command.yml
+      rule_sha256: sha256:45d469a24c7bc4ab54785ad4cfacbda6f99d87ea9007ab0ddcf2588c5a64dc7d
+      detection_id: 4da5ce1a-f71b-4e71-bb73-c0a3c73f3c3c
+      source_version: 5
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1485/linux_auditd_no_preserve_root/auditd_proctitle_rm_rf.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1485/linux_auditd_no_preserve_root/auditd_proctitle_rm_rf.log
     description: auditd - auditd
     format: auto
     schema: raw
     sourcetype: auditd
+    checksum: sha256:d8378d294001f47ad1102bb3d6a19f9be2b09c33563d2e8a94eb5c5c4ff420d3
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

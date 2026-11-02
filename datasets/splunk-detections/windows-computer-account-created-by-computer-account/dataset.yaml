@@ -1,14 +1,10 @@
 metadata:
   name: windows-computer-account-created-by-computer-account
   version: 6.0.0
-  description: 'The following analytic identifies a computer account creating a new
-    computer account with a specific Service Principal Name (SPN) "RestrictedKrbHost".
-    This detection leverages Windows Security Event Logs, specifically EventCode 4741,
-    to identify such activities. This behavior is significant as it may indicate an
-    attempt to establish unauthorized Kerberos authentication channels, potentially
-    leading to lateral movement or privilege escalation. If confirmed malicious, this
-    activity could allow an '
+  description: The following analytic identifies a computer account creating a new computer account with a specific Service Principal Name (SPN) "RestrictedKrbHost". This detection leverages Windows Security Event Logs, specifically EventCode 4741, to identify such activities. This behavior is significant as it may indicate an attempt to establish unauthorized Kerberos authentication channels, potentially leading to lateral movement or privilege escalation. If confirmed malicious, this activity could allow an attacker to impersonate services, access sensitive information, or maintain persistence within the network.
   author: Michael Haag, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1558
-      name: Technique T1558
-    tactics: []
+      name: Steal or Forge Kerberos Tickets
+      tactics:
+      - credential-access
+    tactics:
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_computer_account_created_by_computer_account.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_computer_account_created_by_computer_account.yml
+      rule_sha256: sha256:d421426f5f8a4a5e6ead90b963c8cb6ea981ad81b9e2f9f27849afd5469a2cb9
+      detection_id: 97a8dc5f-8a7c-4fed-9e3e-ec407fd0268a
+      source_version: 6
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1558/windows_computer_account_created_by_computer_account/windows-xml.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1558/windows_computer_account_created_by_computer_account/windows-xml.log
     description: XmlWinEventLog:Security - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:b97d044264c5851e38e231d8b78f0640c65b1bdcdf7603568aac396d44f83af8
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,14 +1,10 @@
 metadata:
   name: detect-regsvcs-with-network-connection
   version: 12.0.0
-  description: 'The following analytic identifies instances of Regsvcs.exe establishing
-    a network connection to a public IP address, excluding private IP ranges. This
-    detection leverages Sysmon EventID 3 logs to monitor network connections initiated
-    by Regsvcs.exe. This activity is significant as Regsvcs.exe, a legitimate Microsoft-signed
-    binary, can be exploited to bypass application control mechanisms and establish
-    remote Command and Control (C2) channels. If confirmed malicious, this behavior
-    could allow an '
+  description: The following analytic identifies instances of Regsvcs.exe establishing a network connection to a public IP address, excluding private IP ranges. This detection leverages Sysmon EventID 3 logs to monitor network connections initiated by Regsvcs.exe. This activity is significant as Regsvcs.exe, a legitimate Microsoft-signed binary, can be exploited to bypass application control mechanisms and establish remote Command and Control (C2) channels. If confirmed malicious, this behavior could allow an attacker to escalate privileges, persist in the environment, and exfiltrate sensitive data. Immediate investigation and remediation are recommended.
   author: Michael Haag, Splunk
+  updated: '2025-10-20'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1218.009
-      name: Technique T1218.009
-    tactics: []
+      name: Regsvcs/Regasm
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/detect_regsvcs_with_network_connection.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/detect_regsvcs_with_network_connection.yml
+      rule_sha256: sha256:661dfad1187306386ddaee38f85406f9ef560fea45ef7e709ef31efc536400a9
+      detection_id: e3e7a1c0-f2b9-445c-8493-f30a63522d1a
+      source_version: 12
+      source_date: '2025-10-20'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218.009/atomic_red_team/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1218.009/atomic_red_team/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:6e30cfc58deee5ee2df382f790711b8e2e67410bcfbf0cf8cb9169a1760f7e43
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

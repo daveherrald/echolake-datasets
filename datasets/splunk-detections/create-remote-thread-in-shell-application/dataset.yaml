@@ -1,14 +1,10 @@
 metadata:
   name: create-remote-thread-in-shell-application
   version: 8.0.0
-  description: The following analytic detects suspicious process injection in command
-    shell applications, specifically targeting `cmd.exe` and `powershell.exe`. It
-    leverages Sysmon EventCode 8 to identify the creation of remote threads within
-    these shell processes. This activity is significant because it is a common technique
-    used by malware, such as IcedID, to inject malicious code and execute it within
-    legitimate processes. If confirmed malicious, this behavior could allow an attacker
-    to execute arbitrary co
+  description: The following analytic detects suspicious process injection in command shell applications, specifically targeting `cmd.exe` and `powershell.exe`. It leverages Sysmon EventCode 8 to identify the creation of remote threads within these shell processes. This activity is significant because it is a common technique used by malware, such as IcedID, to inject malicious code and execute it within legitimate processes. If confirmed malicious, this behavior could allow an attacker to execute arbitrary code, escalate privileges, or maintain persistence within the environment, posing a severe threat to system security.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1055
-      name: Technique T1055
-    tactics: []
+      name: Process Injection
+      tactics:
+      - privilege-escalation
+      - defense-evasion
+    tactics:
+    - privilege-escalation
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/create_remote_thread_in_shell_application.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/create_remote_thread_in_shell_application.yml
+      rule_sha256: sha256:11a67e139462c5116a0ff2f17ba23329a653b66f4299eac6e6e18e43e5c36463
+      detection_id: 10399c1e-f51e-11eb-b920-acde48001122
+      source_version: 8
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/icedid/simulated_icedid/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/icedid/simulated_icedid/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:0f29018707ad867df89e05b871f53f69c4c6a397c90e8efbf890953b484babdb
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

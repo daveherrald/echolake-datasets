@@ -1,14 +1,10 @@
 metadata:
   name: ollama-possible-model-exfiltration-data-leakage
   version: 1.0.0
-  description: Detects data leakage and exfiltration attempts targeting Ollama model
-    metadata and configuration endpoints. Adversaries repeatedly query /api/show,
-    /api/tags, and /api/v1/models to systematically extract sensitive model information
-    including architecture details, fine-tuning parameters, system paths, Modelfile
-    configurations, and proprietary customizations. Multiple inspection attempts within
-    a 15-minute window indicate automated exfiltration of valuable intellectual property
-    such as custom mode
+  description: Detects data leakage and exfiltration attempts targeting Ollama model metadata and configuration endpoints. Adversaries repeatedly query /api/show, /api/tags, and /api/v1/models to systematically extract sensitive model information including architecture details, fine-tuning parameters, system paths, Modelfile configurations, and proprietary customizations. Multiple inspection attempts within a 15-minute window indicate automated exfiltration of valuable intellectual property such as custom model configurations, system prompts, and internal model specifications. This activity represents unauthorized data disclosure that could enable competitive intelligence gathering, model replication, or preparation for advanced attacks against the AI infrastructure.
   author: Rod Soto
+  updated: '2025-10-05'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1048
-      name: Technique T1048
-    tactics: []
+      name: Exfiltration Over Alternative Protocol
+      tactics:
+      - exfiltration
+    tactics:
+    - exfiltration
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/application/ollama_possible_model_exfiltration_data_leakage.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/application/ollama_possible_model_exfiltration_data_leakage.yml
+      rule_sha256: sha256:f38fa182a3c29475900928ef346382aa80e71fa26664f84c47ad742c3f280d9f
+      detection_id: c9fd1a54-0eab-4470-8970-d5fcc3c740fb
+      source_version: 1
+      source_date: '2025-10-05'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/ollama/server.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/ollama/server.log
     description: server.log - ollama:server
     format: auto
     schema: raw
     sourcetype: ollama:server
+    checksum: sha256:4b147d8d35a897f6e136ed06e5d65e7baa55a9a95407bb0e9d778d5cd91cfa1e
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

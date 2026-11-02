@@ -1,14 +1,10 @@
 metadata:
   name: windows-installutil-url-in-command-line
   version: 12.0.0
-  description: The following analytic detects the use of Windows InstallUtil.exe with
-    an HTTP or HTTPS URL in the command line. This is identified through Endpoint
-    Detection and Response (EDR) telemetry, focusing on command-line executions containing
-    URLs. This activity is significant as it may indicate an attempt to download and
-    execute malicious code, potentially bypassing application control mechanisms.
-    If confirmed malicious, this could lead to unauthorized code execution, privilege
-    escalation, or persiste
+  description: The following analytic detects the use of Windows InstallUtil.exe with an HTTP or HTTPS URL in the command line. This is identified through Endpoint Detection and Response (EDR) telemetry, focusing on command-line executions containing URLs. This activity is significant as it may indicate an attempt to download and execute malicious code, potentially bypassing application control mechanisms. If confirmed malicious, this could lead to unauthorized code execution, privilege escalation, or persistent access within the environment. Analysts should review the parent process, network connections, file modifications, and related processes for further investigation.
   author: Michael Haag, Splunk
+  updated: '2025-09-09'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,23 +14,46 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1218.004
-      name: Technique T1218.004
-    tactics: []
+      name: InstallUtil
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_installutil_url_in_command_line.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_installutil_url_in_command_line.yml
+      rule_sha256: sha256:162f5c0a4c415089db086810f927d49dbe8276fcb2c6feb7713b3fa6cf4720d2
+      detection_id: 28e06670-43df-11ec-a569-acde48001122
+      source_version: 12
+      source_date: '2025-09-09'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218.004/atomic_red_team/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1218.004/atomic_red_team/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_network_visibility_module/cisco_nvm_flowdata/nvm_flowdata.log
+    checksum: sha256:5f751c19cac61fa535293737e741d405f68cd650940e49913613f0b2e7e8e851
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/cisco_network_visibility_module/cisco_nvm_flowdata/nvm_flowdata.log
     description: not_applicable - cisco:nvm:flowdata
     format: auto
     schema: raw
     sourcetype: cisco:nvm:flowdata
+    checksum: sha256:f427b5cc3a60bb3b41ae1c679bda85c1bb9aba78cc9468b94d3eec36adedfaaa
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

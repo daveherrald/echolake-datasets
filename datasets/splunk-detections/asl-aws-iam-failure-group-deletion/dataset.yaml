@@ -1,14 +1,10 @@
 metadata:
   name: asl-aws-iam-failure-group-deletion
   version: 8.0.0
-  description: The following analytic detects failed attempts to delete AWS IAM groups,
-    triggered by access denial, conflicts, or non-existent groups. It operates by
-    monitoring CloudTrail logs for specific error codes related to deletion failures.
-    This behavior is significant for a SOC as it may indicate unauthorized attempts
-    to modify access controls or disrupt operations by removing groups. Such actions
-    could be part of a larger attack aiming to escalate privileges or impair security
-    protocols. Identifying t
+  description: The following analytic detects failed attempts to delete AWS IAM groups, triggered by access denial, conflicts, or non-existent groups. It operates by monitoring CloudTrail logs for specific error codes related to deletion failures. This behavior is significant for a SOC as it may indicate unauthorized attempts to modify access controls or disrupt operations by removing groups. Such actions could be part of a larger attack aiming to escalate privileges or impair security protocols. Identifying these attempts allows for timely investigation and mitigation, preventing potential impact on the organizations security posture.
   author: Patrick Bareiss, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1098
-      name: Technique T1098
-    tactics: []
+      name: Account Manipulation
+      tactics:
+      - persistence
+      - privilege-escalation
+    tactics:
+    - persistence
+    - privilege-escalation
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/asl_aws_iam_failure_group_deletion.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/asl_aws_iam_failure_group_deletion.yml
+      rule_sha256: sha256:101cb24635169371a8b97a7d6a87a1f9a971e289b3bf9fd8f13da01f4dce7d79
+      detection_id: 8d12f268-c567-4557-9813-f8389e235c06
+      source_version: 8
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1098/aws_iam_failure_group_deletion/asl_ocsf_cloudtrail.json
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1098/aws_iam_failure_group_deletion/asl_ocsf_cloudtrail.json
     description: aws_asl - aws:asl
     format: auto
     schema: raw
     sourcetype: aws:asl
+    checksum: sha256:6ef2f8900380c97248f23ab8d832d1e7d3af0795e81cf9fe90786d7a58ee5adf
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

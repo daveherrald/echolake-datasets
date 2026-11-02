@@ -1,14 +1,10 @@
 metadata:
   name: system-user-discovery-with-whoami
   version: 7.0.0
-  description: The following analytic detects the execution of `whoami.exe` without
-    any arguments. It leverages data from Endpoint Detection and Response (EDR) agents,
-    focusing on process execution logs. This activity is significant because both
-    Red Teams and adversaries use `whoami.exe` to identify the current logged-in user,
-    aiding in situational awareness and Active Directory discovery. If confirmed malicious,
-    this behavior could indicate an attacker is gathering information to further compromise
-    the system
+  description: The following analytic detects the execution of `whoami.exe` without any arguments. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process execution logs. This activity is significant because both Red Teams and adversaries use `whoami.exe` to identify the current logged-in user, aiding in situational awareness and Active Directory discovery. If confirmed malicious, this behavior could indicate an attacker is gathering information to further compromise the system, potentially leading to privilege escalation or lateral movement within the network.
   author: Mauricio Velazco, Splunk
+  updated: '2025-08-27'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1033
-      name: Technique T1033
-    tactics: []
+      name: System Owner/User Discovery
+      tactics:
+      - discovery
+    tactics:
+    - discovery
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/system_user_discovery_with_whoami.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/system_user_discovery_with_whoami.yml
+      rule_sha256: sha256:f9e7c5a26941240e53c7a89c1eeeaaf066cfec072e776f6fc36128f493275672
+      detection_id: 894fc43e-6f50-47d5-a68b-ee9ee23e18f4
+      source_version: 7
+      source_date: '2025-08-27'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1033/AD_discovery/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1033/AD_discovery/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:f978fbb3b83ae7af12808f2383423a00f252bc15adc85b5a835bbddda1505afb
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

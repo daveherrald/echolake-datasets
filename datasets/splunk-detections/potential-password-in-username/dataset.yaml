@@ -1,14 +1,10 @@
 metadata:
   name: potential-password-in-username
   version: 6.0.0
-  description: The following analytic identifies instances where users may have mistakenly
-    entered their passwords in the username field during authentication attempts.
-    It detects this by analyzing failed authentication events with usernames longer
-    than 7 characters and high Shannon entropy, followed by a successful authentication
-    from the same source to the same destination. This activity is significant as
-    it can indicate potential security risks, such as password exposure. If confirmed
-    malicious, attackers c
+  description: The following analytic identifies instances where users may have mistakenly entered their passwords in the username field during authentication attempts. It detects this by analyzing failed authentication events with usernames longer than 7 characters and high Shannon entropy, followed by a successful authentication from the same source to the same destination. This activity is significant as it can indicate potential security risks, such as password exposure. If confirmed malicious, attackers could exploit this to gain unauthorized access, leading to potential data breaches or further compromise of the system.
   author: Mikael Bjerkeland, Splunk
+  updated: '2025-06-26'
+  license: Apache-2.0
   tags:
   - hunting
   - splunk-security-content
@@ -17,20 +13,51 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1078.003
-      name: Technique T1078.003
+      name: Local Accounts
+      tactics:
+      - initial-access
+      - persistence
+      - privilege-escalation
+      - defense-evasion
     - id: T1552.001
-      name: Technique T1552.001
-    tactics: []
+      name: Credentials In Files
+      tactics:
+      - credential-access
+    tactics:
+    - initial-access
+    - persistence
+    - privilege-escalation
+    - defense-evasion
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/potential_password_in_username.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/potential_password_in_username.yml
+      rule_sha256: sha256:c3529d29082a31ae927385cd1599120c868460943791ede4aaad0f5c743487c4
+      detection_id: 5ced34b4-ab32-4bb0-8f22-3b8f186f0a38
+      source_version: 6
+      source_date: '2025-06-26'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1552.001/password_in_username/linux_secure.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1552.001/password_in_username/linux_secure.log
     description: /var/log/secure - linux_secure
     format: auto
     schema: raw
     sourcetype: linux_secure
+    checksum: sha256:f699ec722465432009c6133752ee739812e7b97b1d97d733243c5fe85d9062f0
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

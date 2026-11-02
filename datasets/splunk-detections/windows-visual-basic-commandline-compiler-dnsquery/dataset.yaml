@@ -1,14 +1,10 @@
 metadata:
   name: windows-visual-basic-commandline-compiler-dnsquery
   version: 1.0.0
-  description: The following analytic detects instances where vbc.exe, the Visual
-    Basic Command Line Compiler, initiates DNS queries. Normally, vbc.exe operates
-    locally to compile Visual Basic code and does not require internet access or to
-    perform DNS lookups. Therefore, any observed DNS activity originating from vbc.exe
-    is highly suspicious and indicative of potential malicious activity. This behavior
-    often suggests that a malicious payload is masquerading as the legitimate vbc.exe
-    process to establish comma
+  description: The following analytic detects instances where vbc.exe, the Visual Basic Command Line Compiler, initiates DNS queries. Normally, vbc.exe operates locally to compile Visual Basic code and does not require internet access or to perform DNS lookups. Therefore, any observed DNS activity originating from vbc.exe is highly suspicious and indicative of potential malicious activity. This behavior often suggests that a malicious payload is masquerading as the legitimate vbc.exe process to establish command-and-control (C2) communication, resolve domains for data exfiltration, or download additional stages of malware. Security teams should investigate the process's parent, command-line arguments, and the resolved domains for further indicators of compromise.
   author: Teoderick Contreras, Splunk
+  updated: '2025-09-30'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1071.004
-      name: Technique T1071.004
-    tactics: []
+      name: DNS
+      tactics:
+      - command-and-control
+    tactics:
+    - command-and-control
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_visual_basic_commandline_compiler_dnsquery.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_visual_basic_commandline_compiler_dnsquery.yml
+      rule_sha256: sha256:1052aac04ad4a976e5e782b2bc5534492a05526a8801d916cd848d771d73530b
+      detection_id: 8976744a-ae7a-46a4-8128-690df85c2af4
+      source_version: 1
+      source_date: '2025-09-30'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1071.004/vbc_dnsquery/vbc_dns_query.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1071.004/vbc_dnsquery/vbc_dns_query.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:57edefcbfadbe1954fa2867cbf5ad761e0f1a16097f9926d95c515358bc29f44
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

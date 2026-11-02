@@ -1,14 +1,10 @@
 metadata:
   name: kerberos-user-enumeration
   version: 9.0.0
-  description: 'The following analytic detects an unusual number of Kerberos Ticket
-    Granting Ticket (TGT) requests for non-existing users from a single source endpoint.
-    It leverages Event ID 4768 and identifies anomalies using the 3-sigma statistical
-    rule. This behavior is significant as it may indicate an adversary performing
-    a user enumeration attack against Active Directory. If confirmed malicious, the
-    attacker could validate a list of usernames, potentially leading to further attacks
-    such as brute force or '
+  description: The following analytic detects an unusual number of Kerberos Ticket Granting Ticket (TGT) requests for non-existing users from a single source endpoint. It leverages Event ID 4768 and identifies anomalies using the 3-sigma statistical rule. This behavior is significant as it may indicate an adversary performing a user enumeration attack against Active Directory. If confirmed malicious, the attacker could validate a list of usernames, potentially leading to further attacks such as brute force or credential stuffing, compromising the security of the environment.
   author: Mauricio Velazco, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1589.002
-      name: Technique T1589.002
-    tactics: []
+      name: Email Addresses
+      tactics:
+      - reconnaissance
+    tactics:
+    - reconnaissance
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/kerberos_user_enumeration.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/kerberos_user_enumeration.yml
+      rule_sha256: sha256:b600be9bd3c49c6d23261b2e6f3f1597c8829b9f7cf7f995ca41b90d9ef785d0
+      detection_id: d82d4af4-a0bd-11ec-9445-3e22fbd008af
+      source_version: 9
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1589.002/kerberos_user_enumeration/windows-xml.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1589.002/kerberos_user_enumeration/windows-xml.log
     description: XmlWinEventLog:Security - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:e9d5b9349bc3a1785a3105fc142e3add2ec51432726679541f068ec6f2e56a5f
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

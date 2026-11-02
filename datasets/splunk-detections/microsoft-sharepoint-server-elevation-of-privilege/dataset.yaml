@@ -1,14 +1,10 @@
 metadata:
   name: microsoft-sharepoint-server-elevation-of-privilege
   version: 5.0.0
-  description: The following analytic detects potential exploitation attempts against
-    Microsoft SharePoint Server vulnerability CVE-2023-29357. It leverages the Web
-    datamodel to monitor for specific API calls and HTTP methods indicative of privilege
-    escalation attempts. This activity is significant as it may indicate an attacker
-    is trying to gain unauthorized privileged access to the SharePoint environment.
-    If confirmed malicious, the impact could include unauthorized access to sensitive
-    data, potential data t
+  description: The following analytic detects potential exploitation attempts against Microsoft SharePoint Server vulnerability CVE-2023-29357. It leverages the Web datamodel to monitor for specific API calls and HTTP methods indicative of privilege escalation attempts. This activity is significant as it may indicate an attacker is trying to gain unauthorized privileged access to the SharePoint environment. If confirmed malicious, the impact could include unauthorized access to sensitive data, potential data theft, and further compromise of the SharePoint server, leading to a broader security breach.
   author: Michael Haag, Gowthamaraj Rajendran, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1068
-      name: Technique T1068
-    tactics: []
+      name: Exploitation for Privilege Escalation
+      tactics:
+      - privilege-escalation
+    tactics:
+    - privilege-escalation
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/web/microsoft_sharepoint_server_elevation_of_privilege.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/web/microsoft_sharepoint_server_elevation_of_privilege.yml
+      rule_sha256: sha256:a1c7ce4a684ea9be3b54114b57489e3113f5bf82a4a55bfc40ad818a85ac8498
+      detection_id: fcf4bd3f-a79f-4b7a-83bf-2692d60b859d
+      source_version: 5
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/sharepoint/sharepointeop.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1190/sharepoint/sharepointeop.log
     description: suricata - suricata
     format: auto
     schema: raw
     sourcetype: suricata
+    checksum: sha256:b9e9d86a90a6dc35d8ddfd88225a68ad000ca5363a9ca7f69255b179d2d71795
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

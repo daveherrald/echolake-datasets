@@ -1,10 +1,10 @@
 metadata:
   name: esxi-reverse-shell-patterns
   version: 1.0.0
-  description: This detection looks for reverse shell string patterns on an ESXi host,
-    which may indicate that a threat actor is attempting to establish remote control
-    over the system.
+  description: This detection looks for reverse shell string patterns on an ESXi host, which may indicate that a threat actor is attempting to establish remote control over the system.
   author: Raven Tait, Splunk
+  updated: '2025-05-12'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -13,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1059
-      name: Technique T1059
-    tactics: []
+      name: Command and Scripting Interpreter
+      tactics:
+      - execution
+    tactics:
+    - execution
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/application/esxi_reverse_shell_patterns.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/application/esxi_reverse_shell_patterns.yml
+      rule_sha256: sha256:83746aa71d030decbdebd0a18452529ee6259a18106d6a5464dbeb3e4896b7c4
+      detection_id: ee8b16a4-118e-4dd7-af4b-835530415610
+      source_version: 1
+      source_date: '2025-05-12'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059/esxi_reverse_shell/esxi_reverse_shell.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1059/esxi_reverse_shell/esxi_reverse_shell.log
     description: vmware:esxlog - vmw-syslog
     format: auto
     schema: raw
     sourcetype: vmw-syslog
+    checksum: sha256:e67decb5f3d4b9e7e295018deeac05cd70f6c4d3e3747cc07375f91dfce559c5
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

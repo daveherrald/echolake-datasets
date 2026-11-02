@@ -1,13 +1,10 @@
 metadata:
   name: windows-sql-server-startup-procedure
   version: 3.0.0
-  description: This detection identifies when a startup procedure is registered or
-    executed in SQL Server. Startup procedures automatically execute when SQL Server
-    starts, making them an attractive persistence mechanism for attackers. The detection
-    monitors for suspicious stored procedure names and patterns that may indicate
-    malicious activity, such as attempts to execute operating system commands or gain
-    elevated privileges.
+  description: This detection identifies when a startup procedure is registered or executed in SQL Server. Startup procedures automatically execute when SQL Server starts, making them an attractive persistence mechanism for attackers. The detection monitors for suspicious stored procedure names and patterns that may indicate malicious activity, such as attempts to execute operating system commands or gain elevated privileges.
   author: Michael Haag, Splunk
+  updated: '2025-10-14'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1505.001
-      name: Technique T1505.001
-    tactics: []
+      name: SQL Stored Procedures
+      tactics:
+      - persistence
+    tactics:
+    - persistence
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_sql_server_startup_procedure.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_sql_server_startup_procedure.yml
+      rule_sha256: sha256:260baaaa62d6f21857a83cc81fc20ca0bb18e5018de674000a26c76c43212a93
+      detection_id: 7bec7c5c-2262-4adb-ba56-c8028512bc58
+      source_version: 3
+      source_date: '2025-10-14'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1505.001/simulation/sql_startupprocedure_widows-application.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1505.001/simulation/sql_startupprocedure_widows-application.log
     description: XmlWinEventLog:Application - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:1c1265a3473072b2fa27bc317a610b17338693435b029a392bc050e69602de19
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

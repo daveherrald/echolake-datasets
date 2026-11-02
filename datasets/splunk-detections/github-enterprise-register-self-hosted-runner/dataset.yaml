@@ -1,14 +1,10 @@
 metadata:
   name: github-enterprise-register-self-hosted-runner
   version: 3.0.0
-  description: The following analytic identifies when a self-hosted runner is created
-    in GitHub Enterprise. The detection monitors GitHub Enterprise audit logs for
-    actions related to creating new self-hosted runners at the organization or enterprise
-    level. his behavior warrants monitoring because self-hosted runners execute workflow
-    jobs on customer-controlled infrastructure, which could be exploited by attackers
-    to execute malicious code, access sensitive data, or pivot to other systems. While
-    self-hosted run
+  description: The following analytic identifies when a self-hosted runner is created in GitHub Enterprise. The detection monitors GitHub Enterprise audit logs for actions related to creating new self-hosted runners at the organization or enterprise level. his behavior warrants monitoring because self-hosted runners execute workflow jobs on customer-controlled infrastructure, which could be exploited by attackers to execute malicious code, access sensitive data, or pivot to other systems. While self-hosted runners are a legitimate feature, their creation should be carefully controlled as compromised runners pose significant security risks. The impact includes potential remote code execution, data exfiltration, and lateral movement within the environment if a runner is compromised. SOC teams should investigate unexpected runner creation events to verify they are authorized and properly secured, especially if created by unfamiliar users or in unusual contexts.
   author: Patrick Bareiss, Splunk
+  updated: '2025-11-25'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -17,20 +13,45 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1562.001
-      name: Technique T1562.001
+      name: Disable or Modify Tools
+      tactics:
+      - defense-evasion
     - id: T1195
-      name: Technique T1195
-    tactics: []
+      name: Supply Chain Compromise
+      tactics:
+      - initial-access
+    tactics:
+    - initial-access
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/github_enterprise_register_self_hosted_runner.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/github_enterprise_register_self_hosted_runner.yml
+      rule_sha256: sha256:41b56921315d8b6463aaaa4646367c49b632707b9b69ecdbcb2b41a0037b28af
+      detection_id: b27685a2-8826-4123-ab78-2d9d0d419ed0
+      source_version: 3
+      source_date: '2025-11-25'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.001/github_created_self_hosted_runner/github.json
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1562.001/github_created_self_hosted_runner/github.json
     description: http:github - httpevent
     format: auto
     schema: raw
     sourcetype: httpevent
+    checksum: sha256:bc4d846de52d97a1af859b4830bb2bd27e142caaa4fc0bc45fe702cc2168db64
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

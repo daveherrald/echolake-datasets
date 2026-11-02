@@ -1,14 +1,10 @@
 metadata:
   name: short-lived-windows-accounts
   version: 10.0.0
-  description: The following analytic detects the rapid creation and deletion of Windows
-    accounts within a short time frame of 1 hour. It leverages the "Change" data model
-    in Splunk, specifically monitoring events with result IDs 4720 (account creation)
-    and 4726 (account deletion). This behavior is significant as it may indicate an
-    attacker attempting to create and remove accounts quickly to evade detection or
-    gain unauthorized access. If confirmed malicious, this activity could lead to
-    unauthorized access, pr
+  description: The following analytic detects the rapid creation and deletion of Windows accounts within a short time frame of 1 hour. It leverages the "Change" data model in Splunk, specifically monitoring events with result IDs 4720 (account creation) and 4726 (account deletion). This behavior is significant as it may indicate an attacker attempting to create and remove accounts quickly to evade detection or gain unauthorized access. If confirmed malicious, this activity could lead to unauthorized access, privilege escalation, or further malicious actions within the environment. Immediate investigation of flagged events is crucial to mitigate potential damage.
   author: David Dorsey, Bhavin Patel, Splunk
+  updated: '2025-09-16'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,30 +13,62 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1078.003
-      name: Technique T1078.003
+      name: Local Accounts
+      tactics:
+      - initial-access
+      - persistence
+      - privilege-escalation
+      - defense-evasion
     - id: T1136.001
-      name: Technique T1136.001
-    tactics: []
+      name: Local Account
+      tactics:
+      - persistence
+    tactics:
+    - initial-access
+    - persistence
+    - privilege-escalation
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/short_lived_windows_accounts.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/short_lived_windows_accounts.yml
+      rule_sha256: sha256:3cd7317ec0c99a1b419e1a6dd97bde756402d49d6969379d7dbe248936ac316f
+      detection_id: b25f6f62-0782-43c1-b403-083231ffd97d
+      source_version: 10
+      source_date: '2025-09-16'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1136.001/atomic_red_team/windows-security.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1136.001/atomic_red_team/windows-security.log
     description: WinEventLog:Security - WinEventLog
     format: auto
     schema: raw
     sourcetype: WinEventLog
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1136.001/atomic_red_team/windows-system.log
+    checksum: sha256:c6f43003a4defb5bd31776d931de18c4576a8e22de486790fa519aa76a06b153
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1136.001/atomic_red_team/windows-system.log
     description: WinEventLog:System - WinEventLog
     format: auto
     schema: raw
     sourcetype: WinEventLog
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1136.001/atomic_red_team/windows-sysmon.log
+    checksum: sha256:2f64c266ac0aa27c2c76762028c19e2c8d273fd9d4087c2b54ff6c3b9d7abf98
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1136.001/atomic_red_team/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:334fff113e8d15026a7a1a0d3343643ce7e8a73552b1f33ee476eaa7826cbe42
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

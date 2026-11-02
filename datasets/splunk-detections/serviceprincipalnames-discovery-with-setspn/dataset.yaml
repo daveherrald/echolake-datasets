@@ -1,14 +1,10 @@
 metadata:
   name: serviceprincipalnames-discovery-with-setspn
   version: 9.0.0
-  description: The following analytic detects the use of `setspn.exe` to query the
-    domain for Service Principal Names (SPNs). This detection leverages Endpoint Detection
-    and Response (EDR) data, focusing on specific command-line arguments associated
-    with `setspn.exe`. Monitoring this activity is crucial as it often precedes Kerberoasting
-    or Silver Ticket attacks, which can lead to credential theft. If confirmed malicious,
-    an attacker could use the gathered SPNs to escalate privileges or persist within
-    the envi
+  description: The following analytic detects the use of `setspn.exe` to query the domain for Service Principal Names (SPNs). This detection leverages Endpoint Detection and Response (EDR) data, focusing on specific command-line arguments associated with `setspn.exe`. Monitoring this activity is crucial as it often precedes Kerberoasting or Silver Ticket attacks, which can lead to credential theft. If confirmed malicious, an attacker could use the gathered SPNs to escalate privileges or persist within the environment, posing a significant security risk.
   author: Michael Haag, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1558.003
-      name: Technique T1558.003
-    tactics: []
+      name: Kerberoasting
+      tactics:
+      - credential-access
+    tactics:
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/serviceprincipalnames_discovery_with_setspn.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/serviceprincipalnames_discovery_with_setspn.yml
+      rule_sha256: sha256:ba89ad26cc81e3257e082dbcb053800d3d7806c9e7cadc6a333ed54122a1afac
+      detection_id: ae8b3efc-2d2e-11ec-8b57-acde48001122
+      source_version: 9
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1558.003/atomic_red_team/windows-sysmon_setspn.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1558.003/atomic_red_team/windows-sysmon_setspn.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:bfb8c159969b27160534564e99642c737dcf9839bd4e303c37edbc7ff8a102bd
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,14 +1,10 @@
 metadata:
   name: windows-impair-defense-change-win-defender-health-check-intervals
   version: 7.0.0
-  description: The following analytic detects modifications to the Windows registry
-    that change the health check interval of Windows Defender. It leverages data from
-    the Endpoint datamodel, specifically monitoring changes to the "ServiceKeepAlive"
-    registry path with a value of "0x00000001". This activity is significant because
-    altering Windows Defender settings can impair its ability to perform timely health
-    checks, potentially leaving the system vulnerable. If confirmed malicious, this
-    could allow an attacker
+  description: The following analytic detects modifications to the Windows registry that change the health check interval of Windows Defender. It leverages data from the Endpoint datamodel, specifically monitoring changes to the "ServiceKeepAlive" registry path with a value of "0x00000001". This activity is significant because altering Windows Defender settings can impair its ability to perform timely health checks, potentially leaving the system vulnerable. If confirmed malicious, this could allow an attacker to disable or delay security scans, increasing the risk of undetected malware or other malicious activities.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1562.001
-      name: Technique T1562.001
-    tactics: []
+      name: Disable or Modify Tools
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_impair_defense_change_win_defender_health_check_intervals.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_impair_defense_change_win_defender_health_check_intervals.yml
+      rule_sha256: sha256:7787f1b9a30d9c27343c50de444a84ecdcea56ee393827f131316b1fad8219dc
+      detection_id: 5211c260-820e-4366-b983-84bbfb5c263a
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.001/disable-windows-security-defender-features/windefender-bypas-2-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1562.001/disable-windows-security-defender-features/windefender-bypas-2-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:18281db53af013649ebf55d7a600be05b20c3cbedb21d72ae91902d21c6cbac8
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

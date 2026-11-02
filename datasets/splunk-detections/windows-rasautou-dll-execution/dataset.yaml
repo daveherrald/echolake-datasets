@@ -1,14 +1,10 @@
 metadata:
   name: windows-rasautou-dll-execution
   version: 11.0.0
-  description: The following analytic detects the execution of an arbitrary DLL by
-    the Windows Remote Auto Dialer (rasautou.exe). This behavior is identified by
-    analyzing process creation events where rasautou.exe is executed with specific
-    command-line arguments. This activity is significant because it leverages a Living
-    Off The Land Binary (LOLBin) to execute potentially malicious code, bypassing
-    traditional security controls. If confirmed malicious, this technique could allow
-    an attacker to execute arbitrary
+  description: The following analytic detects the execution of an arbitrary DLL by the Windows Remote Auto Dialer (rasautou.exe). This behavior is identified by analyzing process creation events where rasautou.exe is executed with specific command-line arguments. This activity is significant because it leverages a Living Off The Land Binary (LOLBin) to execute potentially malicious code, bypassing traditional security controls. If confirmed malicious, this technique could allow an attacker to execute arbitrary code, potentially leading to system compromise, privilege escalation, or persistent access within the environment.
   author: Michael Haag, Splunk
+  updated: '2025-10-14'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,20 +14,46 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1055.001
-      name: Technique T1055.001
+      name: Dynamic-link Library Injection
+      tactics:
+      - privilege-escalation
+      - defense-evasion
     - id: T1218
-      name: Technique T1218
-    tactics: []
+      name: System Binary Proxy Execution
+      tactics:
+      - defense-evasion
+    tactics:
+    - privilege-escalation
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_rasautou_dll_execution.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_rasautou_dll_execution.yml
+      rule_sha256: sha256:7f0b4f484f530179903110ef58a5c4427eca7f2e9db64637a67f4d4389fab4d1
+      detection_id: 6f42b8be-8e96-11ec-ad5a-acde48001122
+      source_version: 11
+      source_date: '2025-10-14'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1055.001/rasautou/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1055.001/rasautou/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:14017e4054137da4ab9a94f17ba71b5ac4a2750dfd0d56f24f269801747580e6
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

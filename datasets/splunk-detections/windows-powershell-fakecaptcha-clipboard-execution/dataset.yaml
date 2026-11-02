@@ -1,15 +1,10 @@
 metadata:
   name: windows-powershell-fakecaptcha-clipboard-execution
   version: 5.0.0
-  description: 'This detection identifies potential FakeCAPTCHA/ClickFix clipboard
-    hijacking campaigns by looking for PowerShell execution with hidden window parameters
-    and distinctive strings related to fake CAPTCHA verification. These campaigns
-    use social engineering to trick users into pasting malicious PowerShell commands
-    from their clipboard, typically delivering information stealers or remote access
-    trojans.
-
-    '
+  description: This detection identifies potential FakeCAPTCHA/ClickFix clipboard hijacking campaigns by looking for PowerShell execution with hidden window parameters and distinctive strings related to fake CAPTCHA verification. These campaigns use social engineering to trick users into pasting malicious PowerShell commands from their clipboard, typically delivering information stealers or remote access trojans.
   author: Michael Haag, Splunk
+  updated: '2025-11-20'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -19,27 +14,54 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1059.001
-      name: Technique T1059.001
+      name: PowerShell
+      tactics:
+      - execution
     - id: T1204.001
-      name: Technique T1204.001
+      name: Malicious Link
+      tactics:
+      - execution
     - id: T1059.003
-      name: Technique T1059.003
-    tactics: []
+      name: Windows Command Shell
+      tactics:
+      - execution
+    tactics:
+    - execution
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_powershell_fakecaptcha_clipboard_execution.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_powershell_fakecaptcha_clipboard_execution.yml
+      rule_sha256: sha256:d24b45cd2438856bd17f4b3cba49b89db8278146e452fbabb7cfe2959c524e1d
+      detection_id: d81d4d3d-76b5-4f21-ab51-b17d5164c106
+      source_version: 5
+      source_date: '2025-11-20'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/atomic_red_team/captcha_windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1059.001/atomic_red_team/captcha_windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_network_visibility_module/cisco_nvm_flowdata/nvm_flowdata.log
+    checksum: sha256:2349326b9042ba212dc16a4764a2cd1fbfa318a792c5591594b77bbfd20ddc9e
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/cisco_network_visibility_module/cisco_nvm_flowdata/nvm_flowdata.log
     description: not_applicable - cisco:nvm:flowdata
     format: auto
     schema: raw
     sourcetype: cisco:nvm:flowdata
+    checksum: sha256:f427b5cc3a60bb3b41ae1c679bda85c1bb9aba78cc9468b94d3eec36adedfaaa
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

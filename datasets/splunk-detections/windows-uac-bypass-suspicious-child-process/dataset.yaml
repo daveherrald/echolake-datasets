@@ -1,14 +1,10 @@
 metadata:
   name: windows-uac-bypass-suspicious-child-process
   version: 9.0.0
-  description: The following analytic detects when an executable known for User Account
-    Control (UAC) bypass exploitation spawns a child process in a user-controlled
-    location or a command shell executable (e.g., cmd.exe, powershell.exe). This detection
-    leverages Sysmon EventID 1 data, focusing on high or system integrity level processes
-    with specific parent-child process relationships. This activity is significant
-    as it may indicate an attacker has successfully used a UAC bypass exploit to escalate
-    privileges.
+  description: The following analytic detects when an executable known for User Account Control (UAC) bypass exploitation spawns a child process in a user-controlled location or a command shell executable (e.g., cmd.exe, powershell.exe). This detection leverages Sysmon EventID 1 data, focusing on high or system integrity level processes with specific parent-child process relationships. This activity is significant as it may indicate an attacker has successfully used a UAC bypass exploit to escalate privileges. If confirmed malicious, this could allow the attacker to execute arbitrary commands with elevated privileges, potentially compromising the entire system.
   author: Steven Dick
+  updated: '2025-10-31'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1548.002
-      name: Technique T1548.002
-    tactics: []
+      name: Bypass User Account Control
+      tactics:
+      - privilege-escalation
+      - defense-evasion
+    tactics:
+    - privilege-escalation
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_uac_bypass_suspicious_child_process.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_uac_bypass_suspicious_child_process.yml
+      rule_sha256: sha256:ba8e0d96bdb5b4bbeffc249d1103e19123437d3299eb1ce3163d53441bfb56b0
+      detection_id: 453a6b0f-b0ea-48fa-9cf4-20537ffdd22c
+      source_version: 9
+      source_date: '2025-10-31'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1548.002/uac_behavior/uac_behavior_sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1548.002/uac_behavior/uac_behavior_sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:888defe1a65bbb87861535b7b84a511b0d464bcdfabeb88e3938f94434aa9437
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

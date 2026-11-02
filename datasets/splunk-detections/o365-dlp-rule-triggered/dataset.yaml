@@ -1,13 +1,10 @@
 metadata:
   name: o365-dlp-rule-triggered
   version: 7.0.0
-  description: The following analytic detects when Microsoft Office 365 Data Loss
-    Prevention (DLP) rules have been triggered. DLP rules can be configured for any
-    number of security, regulatory, or business compliance reasons, as such this analytic
-    will only be as accurate as the upstream DLP configuration. Detections from this
-    analytic should be evaluated thoroughly to de termine what, if any, security relevance
-    the underlying DLP events contain.
+  description: The following analytic detects when Microsoft Office 365 Data Loss Prevention (DLP) rules have been triggered. DLP rules can be configured for any number of security, regulatory, or business compliance reasons, as such this analytic will only be as accurate as the upstream DLP configuration. Detections from this analytic should be evaluated thoroughly to de termine what, if any, security relevance the underlying DLP events contain.
   author: Steven Dick
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -15,20 +12,44 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1048
-      name: Technique T1048
+      name: Exfiltration Over Alternative Protocol
+      tactics:
+      - exfiltration
     - id: T1567
-      name: Technique T1567
-    tactics: []
+      name: Exfiltration Over Web Service
+      tactics:
+      - exfiltration
+    tactics:
+    - exfiltration
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/o365_dlp_rule_triggered.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/o365_dlp_rule_triggered.yml
+      rule_sha256: sha256:b3041ea3607f03894c807d6bd5891fa906e951f6778825a3e48819ade4aae036
+      detection_id: 63a8a537-36fd-4aac-a3ea-1a96afd2c871
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566/o365_various_alerts/o365_various_alerts.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1566/o365_various_alerts/o365_various_alerts.log
     description: o365 - o365:management:activity
     format: auto
     schema: raw
     sourcetype: o365:management:activity
+    checksum: sha256:e669b123a43b1ca7f707e7ac69e3edb32fe0f7631ced09e5a55e1e93d2aea57a
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

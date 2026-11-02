@@ -1,13 +1,10 @@
 metadata:
   name: disable-etw-through-registry
   version: 11.0.0
-  description: The following analytic detects modifications to the registry that disable
-    the Event Tracing for Windows (ETW) feature. It leverages data from the Endpoint.Registry
-    data model, specifically monitoring changes to the registry path "*\\SOFTWARE\\Microsoft\\.NETFramework\\ETWEnabled"
-    with a value set to "0x00000000". This activity is significant because disabling
-    ETW can allow attackers to evade detection mechanisms, making it harder for security
-    tools to monitor malicious activities. If confirmed m
+  description: The following analytic detects modifications to the registry that disable the Event Tracing for Windows (ETW) feature. It leverages data from the Endpoint.Registry data model, specifically monitoring changes to the registry path "*\\SOFTWARE\\Microsoft\\.NETFramework\\ETWEnabled" with a value set to "0x00000000". This activity is significant because disabling ETW can allow attackers to evade detection mechanisms, making it harder for security tools to monitor malicious activities. If confirmed malicious, this could enable attackers to execute payloads with minimal alerts, impairing defenses and potentially leading to further compromise of the system.
   author: Teoderick Contreras, Splunk, Steven Dick
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1562.001
-      name: Technique T1562.001
-    tactics: []
+      name: Disable or Modify Tools
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/disable_etw_through_registry.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/disable_etw_through_registry.yml
+      rule_sha256: sha256:71b3fc49946c34c03f9c4dd663903abab09ecdf643142e65685d6aca2aa4b989
+      detection_id: f0eacfa4-d33f-11eb-8f9d-acde48001122
+      source_version: 11
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/ransomware_ttp/data2/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/ransomware_ttp/data2/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:b719f8681acc246580b2bfc27e7d4fde91adffbdc42cf91d08a0731c5d879ba4
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,14 +1,10 @@
 metadata:
   name: windows-modify-registry-longpathsenabled
   version: 9.0.0
-  description: The following analytic detects a modification to the Windows registry
-    setting "LongPathsEnabled," which allows file paths longer than 260 characters.
-    This detection leverages data from the Endpoint.Registry datamodel, focusing on
-    changes to the specific registry path and value. This activity is significant
-    because adversaries, including malware like BlackByte, exploit this setting to
-    bypass file path limitations, potentially aiding in evasion techniques. If confirmed
-    malicious, this modification
+  description: The following analytic detects a modification to the Windows registry setting "LongPathsEnabled," which allows file paths longer than 260 characters. This detection leverages data from the Endpoint.Registry datamodel, focusing on changes to the specific registry path and value. This activity is significant because adversaries, including malware like BlackByte, exploit this setting to bypass file path limitations, potentially aiding in evasion techniques. If confirmed malicious, this modification could facilitate the execution of long-path payloads, aiding in persistence and further system compromise.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1112
-      name: Technique T1112
-    tactics: []
+      name: Modify Registry
+      tactics:
+      - persistence
+      - defense-evasion
+    tactics:
+    - persistence
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_modify_registry_longpathsenabled.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_modify_registry_longpathsenabled.yml
+      rule_sha256: sha256:2a02b764e42df28cce9c0fbf528a197b40f295734f79591d2bcad9e850eaa269
+      detection_id: 36f9626c-4272-4808-aadd-267acce681c0
+      source_version: 9
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1112/blackbyte/longpathsenabled/longpath_sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1112/blackbyte/longpathsenabled/longpath_sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:710570474e24b169dfb5f45840d051c555a78271f52d8224646871a32cbb0ba8
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,14 +1,10 @@
 metadata:
   name: windows-credentials-from-password-stores-creation
   version: 8.0.0
-  description: The following analytic detects the execution of the Windows OS tool
-    cmdkey.exe, which is used to create stored usernames, passwords, or credentials.
-    This detection leverages data from Endpoint Detection and Response (EDR) agents,
-    focusing on process execution logs and command-line arguments. This activity is
-    significant because cmdkey.exe is often abused by post-exploitation tools and
-    malware, such as Darkgate, to gain unauthorized access. If confirmed malicious,
-    this behavior could allow attack
+  description: The following analytic detects the execution of the Windows OS tool cmdkey.exe, which is used to create stored usernames, passwords, or credentials. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process execution logs and command-line arguments. This activity is significant because cmdkey.exe is often abused by post-exploitation tools and malware, such as Darkgate, to gain unauthorized access. If confirmed malicious, this behavior could allow attackers to escalate privileges and maintain persistence on the targeted host, facilitating further attacks and potential data breaches.
   author: Teoderick Contreras, Splunk
+  updated: '2025-11-20'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1555
-      name: Technique T1555
-    tactics: []
+      name: Credentials from Password Stores
+      tactics:
+      - credential-access
+    tactics:
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_credentials_from_password_stores_creation.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_credentials_from_password_stores_creation.yml
+      rule_sha256: sha256:ca624b8600605a38535540c12247be958809f1fb69032393fb3d1edcad794193
+      detection_id: c0c5a479-bf57-4ca0-af3a-4c7081e5ba05
+      source_version: 8
+      source_date: '2025-11-20'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1555/cmdkey_create_credential_store/cmdkey_gen_sys.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1555/cmdkey_create_credential_store/cmdkey_gen_sys.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:c661870b0becbb508fdc16efd9f112161eeba966236fcfa4267b412f0854bde8
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

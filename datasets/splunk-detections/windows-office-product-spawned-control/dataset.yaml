@@ -1,14 +1,10 @@
 metadata:
   name: windows-office-product-spawned-control
   version: 5.0.0
-  description: The following analytic identifies instances where `control.exe` is
-    spawned by a Microsoft Office product. It leverages data from Endpoint Detection
-    and Response (EDR) agents, focusing on process and parent process relationships.
-    This activity is significant because it can indicate exploitation attempts related
-    to CVE-2021-40444, where `control.exe` is used to execute malicious .cpl or .inf
-    files. If confirmed malicious, this behavior could allow an attacker to execute
-    arbitrary code, potentially
+  description: The following analytic identifies instances where `control.exe` is spawned by a Microsoft Office product. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process and parent process relationships. This activity is significant because it can indicate exploitation attempts related to CVE-2021-40444, where `control.exe` is used to execute malicious .cpl or .inf files. If confirmed malicious, this behavior could allow an attacker to execute arbitrary code, potentially leading to system compromise, data exfiltration, or further lateral movement within the network.
   author: Michael Haag, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1566.001
-      name: Technique T1566.001
-    tactics: []
+      name: Spearphishing Attachment
+      tactics:
+      - initial-access
+    tactics:
+    - initial-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_office_product_spawned_control.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_office_product_spawned_control.yml
+      rule_sha256: sha256:b84726469d18a5344f53acc0212d6ef63e0dcf2045bb3af02db4a6d674cf0266
+      detection_id: 081c485d-ac8d-4bee-ad4c-525772fead4d
+      source_version: 5
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566.001/macro/windows-sysmon_control.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1566.001/macro/windows-sysmon_control.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:62aadbdae881a585b7b348f135cfc73703c526619c35dcf3d1af737adde32b3b
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

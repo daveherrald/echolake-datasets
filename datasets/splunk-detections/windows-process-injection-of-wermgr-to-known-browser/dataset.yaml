@@ -1,14 +1,10 @@
 metadata:
   name: windows-process-injection-of-wermgr-to-known-browser
   version: 7.0.0
-  description: The following analytic identifies the suspicious remote thread execution
-    of the wermgr.exe process into known browsers such as firefox.exe, chrome.exe,
-    and others. It leverages Sysmon EventCode 8 logs to detect this behavior by monitoring
-    SourceImage and TargetImage fields. This activity is significant because it is
-    indicative of Qakbot malware, which injects malicious code into legitimate processes
-    to steal information. If confirmed malicious, this activity could allow attackers
-    to execute arbi
+  description: The following analytic identifies the suspicious remote thread execution of the wermgr.exe process into known browsers such as firefox.exe, chrome.exe, and others. It leverages Sysmon EventCode 8 logs to detect this behavior by monitoring SourceImage and TargetImage fields. This activity is significant because it is indicative of Qakbot malware, which injects malicious code into legitimate processes to steal information. If confirmed malicious, this activity could allow attackers to execute arbitrary code, escalate privileges, and exfiltrate sensitive data from the compromised host.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +12,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1055.001
-      name: Technique T1055.001
-    tactics: []
+      name: Dynamic-link Library Injection
+      tactics:
+      - privilege-escalation
+      - defense-evasion
+    tactics:
+    - privilege-escalation
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_process_injection_of_wermgr_to_known_browser.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_process_injection_of_wermgr_to_known_browser.yml
+      rule_sha256: sha256:e37cef515eb5ba32a71560b456e67617b55d15bf852488fc229957943da400b3
+      detection_id: aec755a5-3a2c-4be0-ab34-6540e68644e9
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/qakbot/remote_thread/sysmon_wermgr_remote.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/qakbot/remote_thread/sysmon_wermgr_remote.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:f9c08a8b0ba987f31920be2f8e4663c088bf5af77504452f8401dccdb2ada9ae
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

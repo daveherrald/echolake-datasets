@@ -1,14 +1,10 @@
 metadata:
   name: windows-bitlocker-suspicious-command-usage
   version: 3.0.0
-  description: This analytic is developed to detect the usage of BitLocker commands
-    used to disable or impact boot settings. The malware ShrinkLocker uses various
-    commands change how BitLocker handles encryption, potentially bypassing TPM requirements,
-    enabling BitLocker without TPM, and enforcing specific startup key and PIN configurations.
-    Such modifications can weaken system security, making it easier for unauthorized
-    access and data breaches. Detecting these changes is crucial for maintaining robust
-    encryp
+  description: This analytic is developed to detect the usage of BitLocker commands used to disable or impact boot settings. The malware ShrinkLocker uses various commands change how BitLocker handles encryption, potentially bypassing TPM requirements, enabling BitLocker without TPM, and enforcing specific startup key and PIN configurations. Such modifications can weaken system security, making it easier for unauthorized access and data breaches. Detecting these changes is crucial for maintaining robust encryption and data protection.
   author: Steven Dick
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,20 +12,44 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1486
-      name: Technique T1486
+      name: Data Encrypted for Impact
+      tactics:
+      - impact
     - id: T1490
-      name: Technique T1490
-    tactics: []
+      name: Inhibit System Recovery
+      tactics:
+      - impact
+    tactics:
+    - impact
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_bitlocker_suspicious_command_usage.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_bitlocker_suspicious_command_usage.yml
+      rule_sha256: sha256:027c0c854ff71a084d4ed5148b41d69c9cdcbd6bcc7264cd0181bd6f00ee87e9
+      detection_id: d0e6ec70-6e40-41a2-8b93-8d9ff077a746
+      source_version: 3
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1486/bitlocker_sus_commands/bitlocker_sus_commands.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1486/bitlocker_sus_commands/bitlocker_sus_commands.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:9e1e4b875d2ae27e4b2c99e6403cf2f642d087f415af2a06c0b63e0556110002
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

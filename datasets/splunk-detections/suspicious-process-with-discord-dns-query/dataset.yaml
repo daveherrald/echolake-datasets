@@ -1,14 +1,10 @@
 metadata:
   name: suspicious-process-with-discord-dns-query
   version: 10.0.0
-  description: The following analytic identifies a process making a DNS query to Discord,
-    excluding legitimate Discord application paths. It leverages Sysmon logs with
-    Event ID 22 to detect DNS queries containing "discord" in the QueryName field.
-    This activity is significant because Discord can be abused by adversaries to host
-    and download malicious files, as seen in the WhisperGate campaign. If confirmed
-    malicious, this could indicate malware attempting to download additional payloads
-    from Discord, potentiall
+  description: The following analytic identifies a process making a DNS query to Discord, excluding legitimate Discord application paths. It leverages Sysmon logs with Event ID 22 to detect DNS queries containing "discord" in the QueryName field. This activity is significant because Discord can be abused by adversaries to host and download malicious files, as seen in the WhisperGate campaign. If confirmed malicious, this could indicate malware attempting to download additional payloads from Discord, potentially leading to further code execution and compromise of the affected system.
   author: Teoderick Contreras, Mauricio Velazco, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1059.005
-      name: Technique T1059.005
-    tactics: []
+      name: Visual Basic
+      tactics:
+      - execution
+    tactics:
+    - execution
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/network/suspicious_process_with_discord_dns_query.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/network/suspicious_process_with_discord_dns_query.yml
+      rule_sha256: sha256:ef1e034c255af5358a9934a0b56a2a03ee5cd995ec88fc96058980f0019dd437
+      detection_id: 4d4332ae-792c-11ec-89c1-acde48001122
+      source_version: 10
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.005/discord_dnsquery/sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1059.005/discord_dnsquery/sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:6ad60e5232de3cdc229d8eeb1e9eb3d38e2ba99f5f2360fbfd73d78d35bf11c2
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

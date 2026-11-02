@@ -1,14 +1,10 @@
 metadata:
   name: recon-using-wmi-class
   version: 11.0.0
-  description: The following analytic detects suspicious PowerShell activity via EventCode
-    4104, where WMI performs event queries to gather information on running processes
-    or services. This detection leverages PowerShell Script Block Logging to identify
-    specific WMI queries targeting system information classes like Win32_Bios and
-    Win32_OperatingSystem. This activity is significant as it often indicates reconnaissance
-    efforts by an adversary to profile the compromised machine. If confirmed malicious,
-    the attac
+  description: The following analytic detects suspicious PowerShell activity via EventCode 4104, where WMI performs event queries to gather information on running processes or services. This detection leverages PowerShell Script Block Logging to identify specific WMI queries targeting system information classes like Win32_Bios and Win32_OperatingSystem. This activity is significant as it often indicates reconnaissance efforts by an adversary to profile the compromised machine. If confirmed malicious, the attacker could gain detailed system information, aiding in further exploitation or lateral movement within the network.
   author: Teoderick Contreras, Splunk
+  updated: '2025-07-29'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,20 +14,45 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1592
-      name: Technique T1592
+      name: Gather Victim Host Information
+      tactics:
+      - reconnaissance
     - id: T1059.001
-      name: Technique T1059.001
-    tactics: []
+      name: PowerShell
+      tactics:
+      - execution
+    tactics:
+    - reconnaissance
+    - execution
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/recon_using_wmi_class.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/recon_using_wmi_class.yml
+      rule_sha256: sha256:2c6baca5efad8d1a4511b703db0211987833056ca684f24a9afc16bd7a195f58
+      detection_id: 018c1972-ca07-11eb-9473-acde48001122
+      source_version: 11
+      source_date: '2025-07-29'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/powershell_script_block_logging/reconusingwmi.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1059.001/powershell_script_block_logging/reconusingwmi.log
     description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:f5252c6a4d951de4836585f6d2f26ed926f2ec529257fc950b24d76b1e320318
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

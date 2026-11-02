@@ -1,14 +1,10 @@
 metadata:
   name: linux-auditd-auditd-daemon-start
   version: 1.0.0
-  description: The following analytic detects the (re)initialization of the Linux
-    audit daemon (auditd) by identifying log entries of type DAEMON_START. This event
-    indicates that the audit subsystem has resumed logging after being stopped or
-    has started during system boot. While DAEMON_START may be expected during reboots
-    or legitimate configuration changes, it can also signal attempts to re-enable
-    audit logging after evasion, or restarts with modified or reduced rule sets. Monitoring
-    this event in correlation
+  description: The following analytic detects the (re)initialization of the Linux audit daemon (auditd) by identifying log entries of type DAEMON_START. This event indicates that the audit subsystem has resumed logging after being stopped or has started during system boot. While DAEMON_START may be expected during reboots or legitimate configuration changes, it can also signal attempts to re-enable audit logging after evasion, or restarts with modified or reduced rule sets. Monitoring this event in correlation with DAEMON_END, DAEMON_ABORT, and auditctl activity provides visibility into the continuity and integrity of audit logs. Frequent or unexplained DAEMON_START events should be investigated, especially if they are not accompanied by valid administrative or system activity.
   author: Teoderick Contreras, Splunk
+  updated: '2025-06-06'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1562.012
-      name: Technique T1562.012
-    tactics: []
+      name: Disable or Modify Linux Audit System
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/linux_auditd_auditd_daemon_start.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/linux_auditd_auditd_daemon_start.yml
+      rule_sha256: sha256:e282f11c07eac8630d826d756b87f25bfbc556dcd1eec9fd5748a4193a892673
+      detection_id: 6b0cb0ff-9a7e-4475-a687-43827fdb31d6
+      source_version: 1
+      source_date: '2025-06-06'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.012/auditd_daemon_type/linux_auditd_daemon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1562.012/auditd_daemon_type/linux_auditd_daemon.log
     description: auditd - auditd
     format: auto
     schema: raw
     sourcetype: auditd
+    checksum: sha256:711ee340179d64281c7d018b1aea954b17d68bfc4baf557adb0c39d6996de4c6
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

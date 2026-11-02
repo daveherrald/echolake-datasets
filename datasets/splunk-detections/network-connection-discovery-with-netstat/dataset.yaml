@@ -1,14 +1,10 @@
 metadata:
   name: network-connection-discovery-with-netstat
   version: 6.0.0
-  description: The following analytic detects the execution of `netstat.exe` with
-    command-line arguments to list network connections on a system. It leverages data
-    from Endpoint Detection and Response (EDR) agents, focusing on process names,
-    command-line executions, and parent processes. This activity is significant as
-    both Red Teams and adversaries use `netstat.exe` for situational awareness and
-    Active Directory discovery. If confirmed malicious, this behavior could allow
-    attackers to map network connections,
+  description: The following analytic detects the execution of `netstat.exe` with command-line arguments to list network connections on a system. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names, command-line executions, and parent processes. This activity is significant as both Red Teams and adversaries use `netstat.exe` for situational awareness and Active Directory discovery. If confirmed malicious, this behavior could allow attackers to map network connections, identify critical systems, and plan further lateral movement or data exfiltration.
   author: Mauricio Velazco, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - hunting
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1049
-      name: Technique T1049
-    tactics: []
+      name: System Network Connections Discovery
+      tactics:
+      - discovery
+    tactics:
+    - discovery
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/network_connection_discovery_with_netstat.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/network_connection_discovery_with_netstat.yml
+      rule_sha256: sha256:4fc32036548879fdac1e4b6e6de59b8c6aca5c1bce4392f7cd29222e04734487
+      detection_id: 2cf5cc25-f39a-436d-a790-4857e5995ede
+      source_version: 6
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1049/AD_discovery/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1049/AD_discovery/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:c81ad8f1e304bc38d72ed5137e6d2aa4c1d8347bddd152906daff79c8d773d2f
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

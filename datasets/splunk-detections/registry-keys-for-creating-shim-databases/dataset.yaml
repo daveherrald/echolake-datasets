@@ -1,14 +1,10 @@
 metadata:
   name: registry-keys-for-creating-shim-databases
   version: 14.0.0
-  description: The following analytic detects registry activity related to the creation
-    of application compatibility shims. It leverages data from the Endpoint.Registry
-    data model, specifically monitoring registry paths associated with AppCompatFlags.
-    This activity is significant because attackers can use shims to bypass security
-    controls, achieve persistence, or escalate privileges. If confirmed malicious,
-    this could allow an attacker to maintain long-term access, execute arbitrary code,
-    or manipulate applica
+  description: The following analytic detects registry activity related to the creation of application compatibility shims. It leverages data from the Endpoint.Registry data model, specifically monitoring registry paths associated with AppCompatFlags. This activity is significant because attackers can use shims to bypass security controls, achieve persistence, or escalate privileges. If confirmed malicious, this could allow an attacker to maintain long-term access, execute arbitrary code, or manipulate application behavior, posing a severe risk to the integrity and security of the affected systems.
   author: Patrick Bareiss, Teoderick Contreras, Splunk, Steven Dick, Bhavin Patel
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1546.011
-      name: Technique T1546.011
-    tactics: []
+      name: Application Shimming
+      tactics:
+      - persistence
+      - privilege-escalation
+    tactics:
+    - persistence
+    - privilege-escalation
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/registry_keys_for_creating_shim_databases.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/registry_keys_for_creating_shim_databases.yml
+      rule_sha256: sha256:a6b4c5ebf2ce7497a58011bd047c40e02559c40973438a135d53a814bc222756
+      detection_id: f5f6af30-7aa7-4295-bfe9-07fe87c01bbb
+      source_version: 14
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1546.011/atomic_red_team/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1546.011/atomic_red_team/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:f92328c6565a653b760542cd397c58b046e48c8494214e0faa15662a58c4e20f
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

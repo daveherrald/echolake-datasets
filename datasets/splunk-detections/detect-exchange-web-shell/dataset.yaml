@@ -1,14 +1,10 @@
 metadata:
   name: detect-exchange-web-shell
   version: 13.0.0
-  description: The following analytic identifies the creation of suspicious .aspx
-    files in known drop locations for Exchange exploitation, specifically targeting
-    paths associated with HAFNIUM group and vulnerabilities like ProxyShell and ProxyNotShell.
-    It leverages data from the Endpoint datamodel, focusing on process and filesystem
-    events. This activity is significant as it may indicate a web shell deployment,
-    a common method for persistent access and remote code execution. If confirmed
-    malicious, attackers c
+  description: The following analytic identifies the creation of suspicious .aspx files in known drop locations for Exchange exploitation, specifically targeting paths associated with HAFNIUM group and vulnerabilities like ProxyShell and ProxyNotShell. It leverages data from the Endpoint datamodel, focusing on process and filesystem events. This activity is significant as it may indicate a web shell deployment, a common method for persistent access and remote code execution. If confirmed malicious, attackers could gain unauthorized access, execute arbitrary commands, and potentially escalate privileges within the Exchange environment.
   author: Michael Haag, Shannon Davis, David Dorsey, Splunk
+  updated: '2025-09-16'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,22 +14,50 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1133
-      name: Technique T1133
+      name: External Remote Services
+      tactics:
+      - initial-access
+      - persistence
     - id: T1190
-      name: Technique T1190
+      name: Exploit Public-Facing Application
+      tactics:
+      - initial-access
     - id: T1505.003
-      name: Technique T1505.003
-    tactics: []
+      name: Web Shell
+      tactics:
+      - persistence
+    tactics:
+    - initial-access
+    - persistence
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/detect_exchange_web_shell.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/detect_exchange_web_shell.yml
+      rule_sha256: sha256:13084d8af7bd6409409d8b9aae245939938d6d40f01addc6c08fe3972edbf745
+      detection_id: 8c14eeee-2af1-4a4b-bda8-228da0f4862a
+      source_version: 13
+      source_date: '2025-09-16'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1505.003/windows-sysmon_proxylogon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1505.003/windows-sysmon_proxylogon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:24f5133cf233b350777f1093015a04673577d169d2dda048040f5053b3b9a47d
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

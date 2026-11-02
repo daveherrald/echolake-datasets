@@ -1,14 +1,10 @@
 metadata:
   name: asl-aws-multi-factor-authentication-disabled
   version: 8.0.0
-  description: The following analytic detects attempts to disable multi-factor authentication
-    (MFA) for an AWS IAM user. It leverages Amazon Security Lake logs, specifically
-    monitoring for `DeleteVirtualMFADevice` or `DeactivateMFADevice` API operations.
-    This activity is significant as disabling MFA can indicate an adversary attempting
-    to weaken account security to maintain persistence using a compromised account.
-    If confirmed malicious, this action could allow attackers to retain access to
-    the AWS environment
+  description: The following analytic detects attempts to disable multi-factor authentication (MFA) for an AWS IAM user. It leverages Amazon Security Lake logs, specifically monitoring for `DeleteVirtualMFADevice` or `DeactivateMFADevice` API operations. This activity is significant as disabling MFA can indicate an adversary attempting to weaken account security to maintain persistence using a compromised account. If confirmed malicious, this action could allow attackers to retain access to the AWS environment without detection, potentially leading to unauthorized access to sensitive resources and prolonged compromise.
   author: Patrick Bareiss, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,22 +12,53 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1556.006
-      name: Technique T1556.006
+      name: Multi-Factor Authentication
+      tactics:
+      - persistence
+      - defense-evasion
+      - credential-access
     - id: T1586.003
-      name: Technique T1586.003
+      name: Cloud Accounts
+      tactics:
+      - resource-development
     - id: T1621
-      name: Technique T1621
-    tactics: []
+      name: Multi-Factor Authentication Request Generation
+      tactics:
+      - credential-access
+    tactics:
+    - resource-development
+    - persistence
+    - defense-evasion
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/asl_aws_multi_factor_authentication_disabled.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/asl_aws_multi_factor_authentication_disabled.yml
+      rule_sha256: sha256:7ca9ba18489759ac367830805421e22f0db5ad5e061f2dd829b2655de303bc38
+      detection_id: 4d2df5e0-1092-4817-88a8-79c7fa054668
+      source_version: 8
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1621/aws_mfa_disabled/asl_ocsf_cloudtrail.json
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1621/aws_mfa_disabled/asl_ocsf_cloudtrail.json
     description: aws_asl - aws:asl
     format: auto
     schema: raw
     sourcetype: aws:asl
+    checksum: sha256:6e7fa5d16944c96b3f08bb797a9ba2f43d3beed1269635aefa7ce96882e59a12
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

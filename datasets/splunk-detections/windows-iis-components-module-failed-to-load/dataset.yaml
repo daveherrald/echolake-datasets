@@ -1,14 +1,10 @@
 metadata:
   name: windows-iis-components-module-failed-to-load
   version: 6.0.0
-  description: The following analytic detects when an IIS Module DLL fails to load
-    due to a configuration problem, identified by EventCode 2282. This detection leverages
-    Windows Application event logs to identify repeated failures in loading IIS modules.
-    Such failures can indicate misconfigurations or potential tampering with IIS components.
-    If confirmed malicious, this activity could lead to service disruptions or provide
-    an attacker with opportunities to exploit vulnerabilities within the IIS environment.
-    Im
+  description: The following analytic detects when an IIS Module DLL fails to load due to a configuration problem, identified by EventCode 2282. This detection leverages Windows Application event logs to identify repeated failures in loading IIS modules. Such failures can indicate misconfigurations or potential tampering with IIS components. If confirmed malicious, this activity could lead to service disruptions or provide an attacker with opportunities to exploit vulnerabilities within the IIS environment. Immediate investigation is required to determine the legitimacy of the failing module and to mitigate any potential security risks.
   author: Michael Haag, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1505.004
-      name: Technique T1505.004
-    tactics: []
+      name: IIS Components
+      tactics:
+      - persistence
+    tactics:
+    - persistence
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_iis_components_module_failed_to_load.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_iis_components_module_failed_to_load.yml
+      rule_sha256: sha256:db0a0fe72e4dc93de9ff8736020c24d207e580a2f99ce26c64a7630a6aa86753
+      detection_id: 40c2ba5b-dd6a-496b-9e6e-c9524d0be167
+      source_version: 6
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1505.004/2282_windows-application.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1505.004/2282_windows-application.log
     description: XmlWinEventLog:Application - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:74657a30707b93746220c65c486823e40e0bdab5dd29e5a939f55d18ba9c7c5d
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

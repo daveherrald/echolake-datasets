@@ -1,14 +1,10 @@
 metadata:
   name: windows-office-product-spawned-uncommon-process
   version: 6.0.0
-  description: The following analytic detects a Microsoft Office product spawning
-    uncommon processes. This detection leverages data from Endpoint Detection and
-    Response (EDR) agents, focusing on process creation events where Office applications
-    are the parent process. This activity is significant as it may indicate an attempt
-    of a malicious macro execution or exploitation of an unknown vulnerability in
-    an office product, in order to bypass security controls. If confirmed malicious,
-    this behavior could allow an
+  description: The following analytic detects a Microsoft Office product spawning uncommon processes. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process creation events where Office applications are the parent process. This activity is significant as it may indicate an attempt of a malicious macro execution or exploitation of an unknown vulnerability in an office product, in order to bypass security controls. If confirmed malicious, this behavior could allow an attacker to execute arbitrary code, potentially leading to system compromise, data exfiltration, or further lateral movement within the network.
   author: Michael Haag, Teoderick Contreras, Splunk
+  updated: '2025-12-15'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,38 +14,64 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1566.001
-      name: Technique T1566.001
-    tactics: []
+      name: Spearphishing Attachment
+      tactics:
+      - initial-access
+    tactics:
+    - initial-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_office_product_spawned_uncommon_process.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_office_product_spawned_uncommon_process.yml
+      rule_sha256: sha256:b5f3b8d58be136da5bb561241b8c82545e86ffd4cfc222843f516265e80f74b3
+      detection_id: 55d8741c-fa32-4692-8109-410304961eb8
+      source_version: 6
+      source_date: '2025-12-15'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566.001/macro/windows-sysmon_macros.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1566.001/macro/windows-sysmon_macros.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566.001/datasets/windows-sysmon.log
+    checksum: sha256:0db780b153fdabe6be2a94e67e290b52c43076820fa1899e1f07152365d977a6
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1566.001/datasets/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/icedid/phish_icedid/windows-sysmon.log
+    checksum: sha256:b17d1c152087064309d5a01425fcb049aa975b0a2eac08d9c89aeb77ac01b841
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/icedid/phish_icedid/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566.002/atomic_red_team/windows-sysmon.log
+    checksum: sha256:f291b11c1d38b544532f83acad7c12415697c25d917453693547ceff9faaec5b
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1566.002/atomic_red_team/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/trickbot/spear_phish/windows-sysmon.log
+    checksum: sha256:5653eeecf818aa1143060b7eb30d0f08db78e57fba6b3e8ac6473d4762fe78ff
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/trickbot/spear_phish/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:f430a22cf9664ac6c58e4685931e8770d3cd9f56737fb536fc55328cbf5dccd6
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

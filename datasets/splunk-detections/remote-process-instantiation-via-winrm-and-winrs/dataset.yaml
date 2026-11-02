@@ -1,14 +1,10 @@
 metadata:
   name: remote-process-instantiation-via-winrm-and-winrs
   version: 8.0.0
-  description: The following analytic detects the execution of `winrs.exe` with command-line
-    arguments used to start a process on a remote endpoint. It leverages data from
-    Endpoint Detection and Response (EDR) agents, focusing on process names and command-line
-    executions mapped to the `Processes` node of the `Endpoint` data model. This activity
-    is significant as it may indicate lateral movement or remote code execution attempts
-    by adversaries. If confirmed malicious, this could allow attackers to execute
-    arbit
+  description: The following analytic detects the execution of `winrs.exe` with command-line arguments used to start a process on a remote endpoint. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line executions mapped to the `Processes` node of the `Endpoint` data model. This activity is significant as it may indicate lateral movement or remote code execution attempts by adversaries. If confirmed malicious, this could allow attackers to execute arbitrary code on remote systems, potentially leading to further compromise and lateral spread within the network.
   author: Mauricio Velazco, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1021.006
-      name: Technique T1021.006
-    tactics: []
+      name: Windows Remote Management
+      tactics:
+      - lateral-movement
+    tactics:
+    - lateral-movement
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/remote_process_instantiation_via_winrm_and_winrs.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/remote_process_instantiation_via_winrm_and_winrs.yml
+      rule_sha256: sha256:4dcae5781191ee1d37380716bb7cffac3d71bbafc7bff79c07c86aeea8e13e7a
+      detection_id: 0dd296a2-4338-11ec-ba02-3e22fbd008af
+      source_version: 8
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1021.006/lateral_movement/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1021.006/lateral_movement/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:6370f139b06c5de9e6b76ba81d9247c7c869879e74dfee1603f4d8b3682ab1c4
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,14 +1,10 @@
 metadata:
   name: disabling-systemrestore-in-registry
   version: 12.0.0
-  description: The following analytic detects the modification of registry keys to
-    disable System Restore on a machine. It leverages data from the Endpoint.Registry
-    data model, specifically monitoring changes to registry paths associated with
-    System Restore settings. This activity is significant because disabling System
-    Restore can hinder recovery efforts and is a tactic often used by Remote Access
-    Trojans (RATs) to maintain persistence on an infected system. If confirmed malicious,
-    this action could prevent s
+  description: The following analytic detects the modification of registry keys to disable System Restore on a machine. It leverages data from the Endpoint.Registry data model, specifically monitoring changes to registry paths associated with System Restore settings. This activity is significant because disabling System Restore can hinder recovery efforts and is a tactic often used by Remote Access Trojans (RATs) to maintain persistence on an infected system. If confirmed malicious, this action could prevent system recovery, allowing the attacker to sustain their foothold and potentially cause further damage or data loss.
   author: Teoderick Contreras, Splunk, Steven Dick
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,33 +14,58 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1490
-      name: Technique T1490
-    tactics: []
+      name: Inhibit System Recovery
+      tactics:
+      - impact
+    tactics:
+    - impact
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/disabling_systemrestore_in_registry.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/disabling_systemrestore_in_registry.yml
+      rule_sha256: sha256:bd7d7546e5c44d3e631f3eb55ca1ac781db533f190a03fbc7ab57440e92cb6ae
+      detection_id: f4f837e2-91fb-11eb-8bf6-acde48001122
+      source_version: 12
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.001/win_app_defender_disabling/windows-security.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1562.001/win_app_defender_disabling/windows-security.log
     description: WinEventLog:Security - WinEventLog
     format: auto
     schema: raw
     sourcetype: WinEventLog
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.001/win_app_defender_disabling/windows-system.log
+    checksum: sha256:b55c57fd0256fa73f55116f9ad307de3b7403f1ba7536c10431b56426a09bd89
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1562.001/win_app_defender_disabling/windows-system.log
     description: WinEventLog:System - WinEventLog
     format: auto
     schema: raw
     sourcetype: WinEventLog
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.001/win_app_defender_disabling/windows-sysmon.log
+    checksum: sha256:9e3629e9a18bb1c6db424732e137595fd0fcb8c98318c2de2aa1b12b1baf528c
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1562.001/win_app_defender_disabling/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.001/win_app_defender_disabling/windows-xml.log
+    checksum: sha256:8886e363b137555f5a0403783106e656b77e328fab2e503a645015f5e1cc3756
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1562.001/win_app_defender_disabling/windows-xml.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:cfacbb447566204fd06e97745c7d994e1323cda27af99734b071ef0e61d900f5
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,14 +1,10 @@
 metadata:
   name: linux-edit-cron-table-parameter
   version: 7.0.0
-  description: The following analytic detects the suspicious editing of cron jobs
-    in Linux using the crontab command-line parameter (-e). It identifies this activity
-    by monitoring command-line executions involving 'crontab' and the edit parameter.
-    This behavior is significant for a SOC as cron job manipulations can indicate
-    unauthorized persistence attempts or scheduled malicious actions. If confirmed
-    malicious, this activity could lead to system compromise, unauthorized access,
-    or broader network compromise.
+  description: The following analytic detects the suspicious editing of cron jobs in Linux using the crontab command-line parameter (-e). It identifies this activity by monitoring command-line executions involving 'crontab' and the edit parameter. This behavior is significant for a SOC as cron job manipulations can indicate unauthorized persistence attempts or scheduled malicious actions. If confirmed malicious, this activity could lead to system compromise, unauthorized access, or broader network compromise.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - hunting
   - splunk-security-content
@@ -18,18 +14,44 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1053.003
-      name: Technique T1053.003
-    tactics: []
+      name: Cron
+      tactics:
+      - execution
+      - persistence
+      - privilege-escalation
+    tactics:
+    - execution
+    - persistence
+    - privilege-escalation
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/linux_edit_cron_table_parameter.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/linux_edit_cron_table_parameter.yml
+      rule_sha256: sha256:d833985c68ef0ec3a638846956bc51cf2aaa0ab24317abdae4630a13ac5bee0c
+      detection_id: 0d370304-5f26-11ec-a4bb-acde48001122
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053.003/crontab_edit_parameter/sysmon_linux.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1053.003/crontab_edit_parameter/sysmon_linux.log
     description: Syslog:Linux-Sysmon/Operational - sysmon:linux
     format: auto
     schema: raw
     sourcetype: sysmon:linux
+    checksum: sha256:7adcca8fbccf071c41b030af0b7c4542b9bc70d7eaabf539780a950f69a2cfe4
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

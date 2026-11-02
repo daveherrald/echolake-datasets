@@ -1,12 +1,10 @@
 metadata:
   name: windows-sqlservr-spawning-shell
   version: 3.0.0
-  description: This analytic detects instances where the sqlservr.exe process spawns
-    a command shell (cmd.exe) or PowerShell process. This behavior is often indicative
-    of command execution initiated from within the SQL Server process, potentially
-    due to exploitation of SQL injection vulnerabilities or the use of extended stored
-    procedures like xp_cmdshell.
+  description: This analytic detects instances where the sqlservr.exe process spawns a command shell (cmd.exe) or PowerShell process. This behavior is often indicative of command execution initiated from within the SQL Server process, potentially due to exploitation of SQL injection vulnerabilities or the use of extended stored procedures like xp_cmdshell.
   author: Michael Haag, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -14,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1505.001
-      name: Technique T1505.001
-    tactics: []
+      name: SQL Stored Procedures
+      tactics:
+      - persistence
+    tactics:
+    - persistence
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_sqlservr_spawning_shell.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_sqlservr_spawning_shell.yml
+      rule_sha256: sha256:f7ce4dcc288d16eebd9e386048622aac0d07451c8509383d56cbb3cfce5a5d64
+      detection_id: d33aac9f-030c-4830-8701-0c2dd75bb6cb
+      source_version: 3
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1505.001/simulation/sqlservr-windows_sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1505.001/simulation/sqlservr-windows_sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:da8b823f01ce0207777a8dc0e801539fc5f2d5dc425bce333b26f72547c1077d
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

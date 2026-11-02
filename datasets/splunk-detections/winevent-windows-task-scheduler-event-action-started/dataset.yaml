@@ -1,14 +1,10 @@
 metadata:
   name: winevent-windows-task-scheduler-event-action-started
   version: 11.0.0
-  description: The following analytic detects the execution of tasks registered in
-    Windows Task Scheduler by monitoring EventID 200 (action run) and 201 (action
-    completed) from the Task Scheduler logs. This detection leverages Task Scheduler
-    logs to identify potentially suspicious or unauthorized task executions. Monitoring
-    these events is significant for a SOC as it helps uncover evasive techniques used
-    for persistence, unauthorized code execution, or other malicious activities. If
-    confirmed malicious, this a
+  description: The following analytic detects the execution of tasks registered in Windows Task Scheduler by monitoring EventID 200 (action run) and 201 (action completed) from the Task Scheduler logs. This detection leverages Task Scheduler logs to identify potentially suspicious or unauthorized task executions. Monitoring these events is significant for a SOC as it helps uncover evasive techniques used for persistence, unauthorized code execution, or other malicious activities. If confirmed malicious, this activity could lead to unauthorized access, data exfiltration, or the execution of harmful payloads, posing a significant threat to the environment.
   author: Michael Haag, Splunk
+  updated: '2025-12-10'
+  license: Apache-2.0
   tags:
   - hunting
   - splunk-security-content
@@ -18,18 +14,44 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1053.005
-      name: Technique T1053.005
-    tactics: []
+      name: Scheduled Task
+      tactics:
+      - execution
+      - persistence
+      - privilege-escalation
+    tactics:
+    - execution
+    - persistence
+    - privilege-escalation
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/winevent_windows_task_scheduler_event_action_started.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/winevent_windows_task_scheduler_event_action_started.yml
+      rule_sha256: sha256:a7082a7053efd78059b5aa62fa654062a279303fd165883f940608564b89b611
+      detection_id: b3632472-310b-11ec-9aab-acde48001122
+      source_version: 11
+      source_date: '2025-12-10'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053.005/winevent_windows_task_scheduler_event_action_started/windows-xml.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1053.005/winevent_windows_task_scheduler_event_action_started/windows-xml.log
     description: XmlWinEventLog:Microsoft-Windows-TaskScheduler/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:cc3a1fce686c0502eef25c4cae4e1732c2cf59478238bf147404f0195b482fbf
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

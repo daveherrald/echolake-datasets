@@ -1,14 +1,10 @@
 metadata:
   name: rundll32-dnsquery
   version: 8.0.0
-  description: 'The following analytic detects a suspicious `rundll32.exe` process
-    making HTTP connections and performing DNS queries to web domains. It leverages
-    Sysmon EventCode 22 logs to identify these activities. This behavior is significant
-    as it is commonly associated with IcedID malware, where `rundll32.exe` checks
-    internet connectivity and communicates with C&C servers to download configurations
-    and other components. If confirmed malicious, this activity could allow attackers
-    to establish persistence, '
+  description: The following analytic detects a suspicious `rundll32.exe` process making HTTP connections and performing DNS queries to web domains. It leverages Sysmon EventCode 22 logs to identify these activities. This behavior is significant as it is commonly associated with IcedID malware, where `rundll32.exe` checks internet connectivity and communicates with C&C servers to download configurations and other components. If confirmed malicious, this activity could allow attackers to establish persistence, download additional payloads, and exfiltrate sensitive data, posing a severe threat to the network.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1218.011
-      name: Technique T1218.011
-    tactics: []
+      name: Rundll32
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/network/rundll32_dnsquery.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/network/rundll32_dnsquery.yml
+      rule_sha256: sha256:5d91ff42a938df46f201017b188b2281250a3d2eb7a3ad9d2b9232df6425cc6d
+      detection_id: f1483f5e-ee29-11eb-9d23-acde48001122
+      source_version: 8
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/icedid/inf_icedid/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/icedid/inf_icedid/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:9852a056371be0bc7d8eae2cd8ae39a595fc3c7c0346686cd855a79d8db2da8c
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

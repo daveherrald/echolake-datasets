@@ -1,13 +1,10 @@
 metadata:
   name: windows-disable-change-password-through-registry
   version: 11.0.0
-  description: The following analytic detects a suspicious registry modification that
-    disables the Change Password feature on a Windows host. It identifies changes
-    to the registry path "*\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\DisableChangePassword"
-    with a value of "0x00000001". This activity is significant as it can prevent users
-    from changing their passwords, a tactic often used by ransomware to maintain control
-    over compromised systems. If confirmed malicious, this could hinder use
+  description: The following analytic detects a suspicious registry modification that disables the Change Password feature on a Windows host. It identifies changes to the registry path "*\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\DisableChangePassword" with a value of "0x00000001". This activity is significant as it can prevent users from changing their passwords, a tactic often used by ransomware to maintain control over compromised systems. If confirmed malicious, this could hinder user response to an attack, allowing the attacker to persist and potentially escalate their access within the network.
   author: Teoderick Contreras, Splunk, Steven Dick
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +13,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1112
-      name: Technique T1112
-    tactics: []
+      name: Modify Registry
+      tactics:
+      - persistence
+      - defense-evasion
+    tactics:
+    - persistence
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_disable_change_password_through_registry.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_disable_change_password_through_registry.yml
+      rule_sha256: sha256:e54069beb497cba533c39f676f939999c4d57d8ff6daed316d7363ff51e13f1f
+      detection_id: 0df33e1a-9ef6-11ec-a1ad-acde48001122
+      source_version: 11
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1112/ransomware_disable_reg/sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1112/ransomware_disable_reg/sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:a0781f5804e422166b179ac889b4979d406055530077f71b66b4b7020772d5d4
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,14 +1,10 @@
 metadata:
   name: azure-ad-successful-single-factor-authentication
   version: 9.0.0
-  description: The following analytic identifies a successful single-factor authentication
-    event against Azure Active Directory. It leverages Azure SignInLogs data, specifically
-    focusing on events where single-factor authentication succeeded. This activity
-    is significant as it may indicate a misconfiguration, policy violation, or potential
-    account takeover attempt. If confirmed malicious, an attacker could gain unauthorized
-    access to the account, potentially leading to data breaches, privilege escalation,
-    or f
+  description: The following analytic identifies a successful single-factor authentication event against Azure Active Directory. It leverages Azure SignInLogs data, specifically focusing on events where single-factor authentication succeeded. This activity is significant as it may indicate a misconfiguration, policy violation, or potential account takeover attempt. If confirmed malicious, an attacker could gain unauthorized access to the account, potentially leading to data breaches, privilege escalation, or further exploitation within the environment.
   author: Mauricio Velazco, Gowthamaraj Rajendran, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,20 +12,51 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1078.004
-      name: Technique T1078.004
+      name: Cloud Accounts
+      tactics:
+      - initial-access
+      - persistence
+      - privilege-escalation
+      - defense-evasion
     - id: T1586.003
-      name: Technique T1586.003
-    tactics: []
+      name: Cloud Accounts
+      tactics:
+      - resource-development
+    tactics:
+    - resource-development
+    - initial-access
+    - persistence
+    - privilege-escalation
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/azure_ad_successful_single_factor_authentication.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/azure_ad_successful_single_factor_authentication.yml
+      rule_sha256: sha256:a7db3ba7ae0974f223b448d161cf63b607522d2ef1a21091511f5b143df24071
+      detection_id: a560e7f6-1711-4353-885b-40be53101fcd
+      source_version: 9
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1078.004/azuread/azure-audit.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1078.004/azuread/azure-audit.log
     description: Azure AD - azure:monitor:aad
     format: auto
     schema: raw
     sourcetype: azure:monitor:aad
+    checksum: sha256:ff4d058c040d14bf97f22959a5b8d1f1ca330fc797a6afd6c3c2776166f302bd
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

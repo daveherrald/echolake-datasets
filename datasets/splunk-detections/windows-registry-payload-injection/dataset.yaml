@@ -1,14 +1,10 @@
 metadata:
   name: windows-registry-payload-injection
   version: 8.0.0
-  description: The following analytic detects suspiciously long data written to the
-    Windows registry, a behavior often linked to fileless malware or persistence techniques.
-    It leverages Endpoint Detection and Response (EDR) telemetry, focusing on registry
-    events with data lengths exceeding 512 characters. This activity is significant
-    as it can indicate an attempt to evade traditional file-based defenses, making
-    it crucial for SOC monitoring. If confirmed malicious, this technique could allow
-    attackers to maint
+  description: The following analytic detects suspiciously long data written to the Windows registry, a behavior often linked to fileless malware or persistence techniques. It leverages Endpoint Detection and Response (EDR) telemetry, focusing on registry events with data lengths exceeding 512 characters. This activity is significant as it can indicate an attempt to evade traditional file-based defenses, making it crucial for SOC monitoring. If confirmed malicious, this technique could allow attackers to maintain persistence, execute code, or manipulate system configurations without leaving a conventional file footprint.
   author: Steven Dick
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1027.011
-      name: Technique T1027.011
-    tactics: []
+      name: Fileless Storage
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_registry_payload_injection.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_registry_payload_injection.yml
+      rule_sha256: sha256:8c59fd8e3d85ead18bc0ced2a2759b11d209dd0368f13ede3217f9e270db1162
+      detection_id: c6b2d80f-179a-41a1-b95e-ce5601d7427a
+      source_version: 8
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/gootloader/partial_ttps/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/gootloader/partial_ttps/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:8264e3fa99527d694905bf7c9921cb2b18d15d152f6c959a902af65b8a4d2d79
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

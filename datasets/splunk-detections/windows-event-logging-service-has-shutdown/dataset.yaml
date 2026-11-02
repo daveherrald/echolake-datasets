@@ -1,14 +1,10 @@
 metadata:
   name: windows-event-logging-service-has-shutdown
   version: 4.0.0
-  description: The following analytic detects the shutdown of the Windows Event Log
-    service by leveraging Windows Event ID 1100. This event is logged every time the
-    service stops, including during normal system shutdowns. Monitoring this activity
-    is crucial as it can indicate attempts to cover tracks or disable logging. If
-    confirmed malicious, an attacker could hide their activities, making it difficult
-    to trace their actions and investigate further incidents. Analysts should verify
-    if the shutdown was planned
+  description: The following analytic detects the shutdown of the Windows Event Log service by leveraging Windows Event ID 1100. This event is logged every time the service stops, including during normal system shutdowns. Monitoring this activity is crucial as it can indicate attempts to cover tracks or disable logging. If confirmed malicious, an attacker could hide their activities, making it difficult to trace their actions and investigate further incidents. Analysts should verify if the shutdown was planned and review other alerts and data sources for additional suspicious behavior.
   author: Mauricio Velazco, Splunk
+  updated: '2025-10-14'
+  license: Apache-2.0
   tags:
   - hunting
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1070.001
-      name: Technique T1070.001
-    tactics: []
+      name: Clear Windows Event Logs
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_event_logging_service_has_shutdown.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_event_logging_service_has_shutdown.yml
+      rule_sha256: sha256:70b02f1a2d3f4687c766372d861ed8cb9fe3c60e98607d230b9ce7af595ebc91
+      detection_id: d696f622-6b08-4336-b456-696cb5b43ba0
+      source_version: 4
+      source_date: '2025-10-14'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1070.001/suspicious_event_log_service_behavior/windows-xml.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1070.001/suspicious_event_log_service_behavior/windows-xml.log
     description: XmlWinEventLog:Security - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:2e21a593c8d04de1db696bec2e9842360b69ee72ea97e2063a67888e83e8159c
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

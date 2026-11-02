@@ -1,14 +1,10 @@
 metadata:
   name: windows-modify-registry-valleyrat-c2-config
   version: 8.0.0
-  description: The following analytic detects modifications to theregistry related
-    to ValleyRAT C2 configuration. Specifically,  it monitors changes in registry
-    keys where ValleyRAT saves the IP address and port information of its command-and-control
-    (C2) server. This activity is a key indicator of ValleyRAT attempting to establish
-    persistent communication with its C2 infrastructure. By identifying these unauthorized
-    registry modifications, security analysts can quickly detect malicious configurations
-    and inve
+  description: "The following analytic detects modifications to theregistry related to ValleyRAT C2 configuration. Specifically,  it monitors changes in registry keys where ValleyRAT saves the IP address and port information of its command-and-control (C2) server. This activity is a key indicator of ValleyRAT attempting to establish persistent communication with its C2 infrastructure. By identifying these unauthorized registry modifications, security analysts can quickly detect malicious configurations and investigate the associated threats. Early detection of these changes helps prevent further exploitation and limits the malware\u2019s ability to exfiltrate data or control infected systems."
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +12,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1112
-      name: Technique T1112
-    tactics: []
+      name: Modify Registry
+      tactics:
+      - persistence
+      - defense-evasion
+    tactics:
+    - persistence
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_modify_registry_valleyrat_c2_config.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_modify_registry_valleyrat_c2_config.yml
+      rule_sha256: sha256:59a0287a94c72d4bcb3c1077aad7d1879b250723a95e7b490b81dc0b3a2b511b
+      detection_id: ac59298a-8d81-4c02-8c9b-ffdac993891f
+      source_version: 8
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1112/valleyrat_c2_reg2/valleyrat_c2_reg2.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1112/valleyrat_c2_reg2/valleyrat_c2_reg2.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:a0ef4c6d298121d75ceec84b949ec022c14c239f8c1f9a49d2076924771ee487
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,14 +1,10 @@
 metadata:
   name: aws-ec2-snapshot-shared-externally
   version: 8.0.0
-  description: The following analytic detects when an EC2 snapshot is shared with
-    an external AWS account by analyzing AWS CloudTrail events. This detection method
-    leverages CloudTrail logs to identify modifications in snapshot permissions, specifically
-    when the snapshot is shared outside the originating AWS account. This activity
-    is significant as it may indicate an attempt to exfiltrate sensitive data stored
-    in the snapshot. If confirmed malicious, an attacker could gain unauthorized access
-    to the snapshot's
+  description: The following analytic detects when an EC2 snapshot is shared with an external AWS account by analyzing AWS CloudTrail events. This detection method leverages CloudTrail logs to identify modifications in snapshot permissions, specifically when the snapshot is shared outside the originating AWS account. This activity is significant as it may indicate an attempt to exfiltrate sensitive data stored in the snapshot. If confirmed malicious, an attacker could gain unauthorized access to the snapshot's data, potentially leading to data breaches or further exploitation of the compromised information.
   author: Bhavin Patel, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1537
-      name: Technique T1537
-    tactics: []
+      name: Transfer Data to Cloud Account
+      tactics:
+      - exfiltration
+    tactics:
+    - exfiltration
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/aws_ec2_snapshot_shared_externally.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/aws_ec2_snapshot_shared_externally.yml
+      rule_sha256: sha256:a1f8be828255f5ee167819ef3aa9d79527d82856a80b576f8da948b7af97a401
+      detection_id: 2a9b80d3-6340-4345-b5ad-290bf3d222c4
+      source_version: 8
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1537/aws_snapshot_exfil/aws_cloudtrail_events.json
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1537/aws_snapshot_exfil/aws_cloudtrail_events.json
     description: aws_cloudtrail - aws:cloudtrail
     format: auto
     schema: raw
     sourcetype: aws:cloudtrail
+    checksum: sha256:ac343623bd299b4cbd29b1d718e91b51f00da71fee4fe3de26dca83205676cca
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

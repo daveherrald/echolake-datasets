@@ -1,14 +1,10 @@
 metadata:
   name: windows-mshta-execution-in-registry
   version: 7.0.0
-  description: 'The following analytic detects the execution of mshta.exe via registry
-    entries to run malicious scripts. It leverages registry activity logs to identify
-    entries containing "mshta," "javascript," "vbscript," or "WScript.Shell." This
-    behavior is significant as it indicates potential fileless malware, such as Kovter,
-    which uses encoded scripts in the registry to persist and execute without files.
-    If confirmed malicious, this activity could allow attackers to maintain persistence,
-    execute arbitrary '
+  description: The following analytic detects the execution of mshta.exe via registry entries to run malicious scripts. It leverages registry activity logs to identify entries containing "mshta," "javascript," "vbscript," or "WScript.Shell." This behavior is significant as it indicates potential fileless malware, such as Kovter, which uses encoded scripts in the registry to persist and execute without files. If confirmed malicious, this activity could allow attackers to maintain persistence, execute arbitrary code, and evade traditional file-based detection methods, posing a significant threat to system integrity and security.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1218.005
-      name: Technique T1218.005
-    tactics: []
+      name: Mshta
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_mshta_execution_in_registry.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_mshta_execution_in_registry.yml
+      rule_sha256: sha256:ffed11913560e5efd2d965480b8e7ebd8f109af4300ca726a19379d2586b14ae
+      detection_id: e13ceade-b673-4d34-adc4-4d9c01729753
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218.005/mshta_in_registry/sysmon3.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1218.005/mshta_in_registry/sysmon3.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:c73d69c9bf1bee5477f1fc1b1c5977ec37313912087dc04179b7afc6987a6dce
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

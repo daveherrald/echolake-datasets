@@ -1,14 +1,10 @@
 metadata:
   name: windows-multiple-invalid-users-fail-to-authenticate-using-kerberos
   version: 8.0.0
-  description: 'The following analytic identifies a source endpoint failing to authenticate
-    with 30 unique invalid domain users using the Kerberos protocol. This detection
-    leverages EventCode 4768, specifically looking for failure code 0x6, indicating
-    the user is not found in the Kerberos database. This activity is significant as
-    it may indicate a Password Spraying attack, where an adversary attempts to gain
-    initial access or elevate privileges. If confirmed malicious, this could lead
-    to unauthorized access or '
+  description: The following analytic identifies a source endpoint failing to authenticate with 30 unique invalid domain users using the Kerberos protocol. This detection leverages EventCode 4768, specifically looking for failure code 0x6, indicating the user is not found in the Kerberos database. This activity is significant as it may indicate a Password Spraying attack, where an adversary attempts to gain initial access or elevate privileges. If confirmed malicious, this could lead to unauthorized access or privilege escalation within the Active Directory environment, posing a significant security risk.
   author: Mauricio Velazco, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1110.003
-      name: Technique T1110.003
-    tactics: []
+      name: Password Spraying
+      tactics:
+      - credential-access
+    tactics:
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_multiple_invalid_users_fail_to_authenticate_using_kerberos.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_multiple_invalid_users_fail_to_authenticate_using_kerberos.yml
+      rule_sha256: sha256:d5f11a1fb9ba2d1910f60c848dfcc842abf75a115c80de079fd3a47a7efff535
+      detection_id: 001266a6-9d5b-11eb-829b-acde48001122
+      source_version: 8
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1110.003/purplesharp_invalid_users_kerberos_xml/windows-security.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1110.003/purplesharp_invalid_users_kerberos_xml/windows-security.log
     description: XmlWinEventLog:Security - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:5fdf6d4ff1d9495d7b99621de2ac537d4e07d6000d6c24a6b82878ce75085360
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

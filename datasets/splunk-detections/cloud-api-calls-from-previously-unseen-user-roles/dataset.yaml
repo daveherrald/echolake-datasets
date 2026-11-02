@@ -1,14 +1,10 @@
 metadata:
   name: cloud-api-calls-from-previously-unseen-user-roles
   version: 6.0.0
-  description: The following analytic detects cloud API calls executed by user roles
-    that have not previously run these commands. It leverages the Change data model
-    in Splunk to identify commands executed by users with the user_type of AssumedRole
-    and a status of success. This activity is significant because new commands from
-    different user roles can indicate potential malicious activity or unauthorized
-    actions. If confirmed malicious, this behavior could lead to unauthorized access,
-    data breaches, or other da
+  description: The following analytic detects cloud API calls executed by user roles that have not previously run these commands. It leverages the Change data model in Splunk to identify commands executed by users with the user_type of AssumedRole and a status of success. This activity is significant because new commands from different user roles can indicate potential malicious activity or unauthorized actions. If confirmed malicious, this behavior could lead to unauthorized access, data breaches, or other damaging outcomes by exploiting new or unmonitored commands within the cloud environment.
   author: David Dorsey, Splunk
+  updated: '2025-06-10'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,46 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1078
-      name: Technique T1078
-    tactics: []
+      name: Valid Accounts
+      tactics:
+      - initial-access
+      - persistence
+      - privilege-escalation
+      - defense-evasion
+    tactics:
+    - initial-access
+    - persistence
+    - privilege-escalation
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/cloud_api_calls_from_previously_unseen_user_roles.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/cloud_api_calls_from_previously_unseen_user_roles.yml
+      rule_sha256: sha256:3ebac23438582a29c4b7175d51bf438478f17bcbfd4f5a24fb87d68bfb85a44b
+      detection_id: 2181ad1f-1e73-4d0c-9780-e8880482a08f
+      source_version: 6
+      source_date: '2025-06-10'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/suspicious_behaviour/abnormally_high_cloud_instances_launched/cloudtrail_behavioural_detections.json
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/suspicious_behaviour/abnormally_high_cloud_instances_launched/cloudtrail_behavioural_detections.json
     description: aws_cloudtrail - aws:cloudtrail
     format: auto
     schema: raw
     sourcetype: aws:cloudtrail
+    checksum: sha256:8b50b35094902fd94bd7c86b6c48d7e226ee5a63a98436b5da8b9ee716f63d43
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

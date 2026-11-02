@@ -1,14 +1,10 @@
 metadata:
   name: windows-create-local-account
   version: 9.0.0
-  description: The following analytic detects the creation of a new local user account
-    on a Windows system. It leverages Windows Security Audit logs, specifically event
-    ID 4720, to identify this activity. Monitoring the creation of local accounts
-    is crucial for a SOC as it can indicate unauthorized access or lateral movement
-    within the network. If confirmed malicious, this activity could allow an attacker
-    to establish persistence, escalate privileges, or gain unauthorized access to
-    sensitive systems and data.
+  description: The following analytic detects the creation of a new local user account on a Windows system. It leverages Windows Security Audit logs, specifically event ID 4720, to identify this activity. Monitoring the creation of local accounts is crucial for a SOC as it can indicate unauthorized access or lateral movement within the network. If confirmed malicious, this activity could allow an attacker to establish persistence, escalate privileges, or gain unauthorized access to sensitive systems and data.
   author: Michael Haag, Splunk
+  updated: '2025-10-21'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1136.001
-      name: Technique T1136.001
-    tactics: []
+      name: Local Account
+      tactics:
+      - persistence
+    tactics:
+    - persistence
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_create_local_account.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_create_local_account.yml
+      rule_sha256: sha256:d6e90ecb5e2f4a1dd00020eb7bc11feb18bbe538d2be904dc7b45374b6f0cbd1
+      detection_id: 3fb2e8e3-7bc0-4567-9722-c5ab9f8595eb
+      source_version: 9
+      source_date: '2025-10-21'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1136.001/atomic_red_team/4720.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1136.001/atomic_red_team/4720.log
     description: XmlWinEventLog:Security - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:ef9ff5c7a65bbb875cbbd08b23ab4cf13d7bc3d6c44268a1fa4d4b9048d20e77
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,16 +1,16 @@
 metadata:
   name: windows-netsupport-rmm-dll-loaded-by-uncommon-process
   version: 1.0.0
-  description: 'The following analytic detects the loading of specific dynamic-link
-    libraries (DLLs) associated with the NetSupport Remote Manager (RMM) tool by any
-    process on a Windows system.
+  description: 'The following analytic detects the loading of specific dynamic-link libraries (DLLs) associated with the NetSupport Remote Manager (RMM) tool by any process on a Windows system.
 
-    Modules such as CryptPak.dll, HTCTL32.DLL, IPCTL32.DLL, keyshowhook.dll, pcicapi.DLL,
-    PCICL32.DLL, and TCCTL32.DLL, are integral to NetSupport''s functionality.
+    Modules such as CryptPak.dll, HTCTL32.DLL, IPCTL32.DLL, keyshowhook.dll, pcicapi.DLL, PCICL32.DLL, and TCCTL32.DLL, are integral to NetSupport''s functionality.
 
-    This detection is particularly valuable when these modules are loaded by processes
-    running from unusual directories (e.g., Downloads, ProgramData, or user-specifi'
+    This detection is particularly valuable when these modules are loaded by processes running from unusual directories (e.g., Downloads, ProgramData, or user-specific folders) rather than the legitimate Program Files installation path, or by executables that have been renamed but retain the internal "client32" identifier.
+
+    This helps to identify instances where the legitimate NetSupport tool is being misused by adversaries as a Remote Access Trojan (RAT).'
   author: Teoderick Contreras, Splunk
+  updated: '2025-11-20'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,18 +18,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1036
-      name: Technique T1036
-    tactics: []
+      name: Masquerading
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_netsupport_rmm_dll_loaded_by_uncommon_process.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_netsupport_rmm_dll_loaded_by_uncommon_process.yml
+      rule_sha256: sha256:cc32c322a0408ab09e28a737f2c19ad2e24385511d33cd782b3f244bc92ebaf2
+      detection_id: 125f96f9-6f34-418b-b868-c4a8d7fb865f
+      source_version: 1
+      source_date: '2025-11-20'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1036/netsupport_modules/net_support_module.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1036/netsupport_modules/net_support_module.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:8dfcc5222a610c12eebbbd305ef33779f6e454b3e5c7d4ed30f078b1389ff9bc
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

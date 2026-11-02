@@ -1,12 +1,10 @@
 metadata:
   name: windows-chrome-extension-allowed-registry-modification
   version: 1.0.0
-  description: The following analytic detects modifications to the Windows registry
-    keys that control the Chrome Extension Install Allowlist. Unauthorized changes
-    to these keys may indicate attempts to bypass Chrome extension restrictions or
-    install unapproved extensions. This detection helps identify potential security
-    policy violations or malicious activity targeting Chrome extension settings.
+  description: The following analytic detects modifications to the Windows registry keys that control the Chrome Extension Install Allowlist. Unauthorized changes to these keys may indicate attempts to bypass Chrome extension restrictions or install unapproved extensions. This detection helps identify potential security policy violations or malicious activity targeting Chrome extension settings.
   author: Teoderick Contreras, Splunk
+  updated: '2026-01-12'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -14,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1185
-      name: Technique T1185
-    tactics: []
+      name: Browser Session Hijacking
+      tactics:
+      - collection
+    tactics:
+    - collection
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_chrome_extension_allowed_registry_modification.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_chrome_extension_allowed_registry_modification.yml
+      rule_sha256: sha256:7559ffaf7944a547c23f1cb08eb7441967362597cd3ef5bf67aed3a8dd5c36ce
+      detection_id: 2846089a-ffe9-4881-a2a2-43f3be2b8cc7
+      source_version: 1
+      source_date: '2026-01-12'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1185/chrome_allow_list/chrome_extension_allow_list.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1185/chrome_allow_list/chrome_extension_allow_list.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:49a050f421ad3007dd5783ebc999fc27c167b7f976b85e6e815ea9049ae6aa05
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

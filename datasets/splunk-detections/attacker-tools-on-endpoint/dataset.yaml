@@ -1,14 +1,10 @@
 metadata:
   name: attacker-tools-on-endpoint
   version: 13.0.0
-  description: 'The following analytic detects the execution of tools commonly exploited
-    by cybercriminals, such as those used for unauthorized access, network scanning,
-    or data exfiltration. It leverages process activity data from Endpoint Detection
-    and Response (EDR) agents, focusing on known attacker tool names. This activity
-    is significant because it serves as an early warning system for potential security
-    incidents, enabling prompt response. If confirmed malicious, this activity could
-    lead to unauthorized '
+  description: The following analytic detects the execution of tools commonly exploited by cybercriminals, such as those used for unauthorized access, network scanning, or data exfiltration. It leverages process activity data from Endpoint Detection and Response (EDR) agents, focusing on known attacker tool names. This activity is significant because it serves as an early warning system for potential security incidents, enabling prompt response. If confirmed malicious, this activity could lead to unauthorized access, data theft, or further network compromise, posing a severe threat to the organization's security infrastructure.
   author: Bhavin Patel, Splunk, sventec, Github Community
+  updated: '2025-07-29'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,27 +14,56 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1003
-      name: Technique T1003
+      name: OS Credential Dumping
+      tactics:
+      - credential-access
     - id: T1036.005
-      name: Technique T1036.005
+      name: Match Legitimate Resource Name or Location
+      tactics:
+      - defense-evasion
     - id: T1595
-      name: Technique T1595
-    tactics: []
+      name: Active Scanning
+      tactics:
+      - reconnaissance
+    tactics:
+    - reconnaissance
+    - defense-evasion
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/attacker_tools_on_endpoint.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/attacker_tools_on_endpoint.yml
+      rule_sha256: sha256:0c0118de77b22203ffee647e17f2f343249c9fed544ea5803a729be50a77fc7e
+      detection_id: a51bfe1a-94f0-48cc-b4e4-16a110145893
+      source_version: 13
+      source_date: '2025-07-29'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1595/attacker_scan_tools/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1595/attacker_scan_tools/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_network_visibility_module/cisco_nvm_flowdata/nvm_flowdata.log
+    checksum: sha256:386a9a7feb3f23fdff761723606f403fed4f61534a19af8a7c19a7fbca033055
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/cisco_network_visibility_module/cisco_nvm_flowdata/nvm_flowdata.log
     description: not_applicable - cisco:nvm:flowdata
     format: auto
     schema: raw
     sourcetype: cisco:nvm:flowdata
+    checksum: sha256:f427b5cc3a60bb3b41ae1c679bda85c1bb9aba78cc9468b94d3eec36adedfaaa
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

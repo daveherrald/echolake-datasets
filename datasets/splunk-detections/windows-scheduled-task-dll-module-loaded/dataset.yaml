@@ -1,14 +1,10 @@
 metadata:
   name: windows-scheduled-task-dll-module-loaded
   version: 6.0.0
-  description: The following analytic detects instances where the taskschd.dll is
-    loaded by processes running in suspicious or writable directories. This activity
-    is unusual, as legitimate processes that load taskschd.dll typically reside in
-    protected system locations. Malware or threat actors may attempt to load this
-    DLL from writable or non-standard directories to manipulate the Task Scheduler
-    and execute malicious tasks. By identifying processes that load taskschd.dll in
-    these unsafe locations, this detecti
+  description: The following analytic detects instances where the taskschd.dll is loaded by processes running in suspicious or writable directories. This activity is unusual, as legitimate processes that load taskschd.dll typically reside in protected system locations. Malware or threat actors may attempt to load this DLL from writable or non-standard directories to manipulate the Task Scheduler and execute malicious tasks. By identifying processes that load taskschd.dll in these unsafe locations, this detection helps security analysts flag potentially malicious activity and investigate further to prevent unauthorized system modifications.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +12,44 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1053
-      name: Technique T1053
-    tactics: []
+      name: Scheduled Task/Job
+      tactics:
+      - execution
+      - persistence
+      - privilege-escalation
+    tactics:
+    - execution
+    - persistence
+    - privilege-escalation
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_scheduled_task_dll_module_loaded.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_scheduled_task_dll_module_loaded.yml
+      rule_sha256: sha256:e83c3707eaf2ad53cf64215d2759d4d43060b26bb9803d9410f72f71dec10392
+      detection_id: bc5b2304-f241-419b-874a-e927f667b7b6
+      source_version: 6
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053/taskschd_dll/taskschd_dll.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1053/taskschd_dll/taskschd_dll.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:9345c9b0b5ce3b9b40f52c44fab75ff51132fcc89ec74cbcd889c9189c8aeae6
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

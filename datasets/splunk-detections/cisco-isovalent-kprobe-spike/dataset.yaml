@@ -1,14 +1,18 @@
 metadata:
   name: cisco-isovalent-kprobe-spike
   version: 2.0.0
-  description: "This analytic detects excessive kernel probe (kprobe) events in a\
-    \ Kubernetes cluster over a short period of time. \nKprobes are a Linux kernel\
-    \ debugging and instrumentation mechanism that allows dynamic monitoring and tracing\
-    \ of kernel functions and system calls. \nIn containerized or cloud-native environments,\
-    \ kprobes are occasionally used for legitimate low-level diagnostics; however,\
-    \ monitoring a spike in kprobe activity is important because malware or attackers\
-    \ may abuse this mechanism to gain"
+  description: 'This analytic detects excessive kernel probe (kprobe) events in a Kubernetes cluster over a short period of time.
+
+    Kprobes are a Linux kernel debugging and instrumentation mechanism that allows dynamic monitoring and tracing of kernel functions and system calls.
+
+    In containerized or cloud-native environments, kprobes are occasionally used for legitimate low-level diagnostics; however, monitoring a spike in kprobe activity is important because malware or attackers may abuse this mechanism to gain insights into the kernel, attempt privilege escalation, or tamper with host processes.
+
+    More than 10 kprobe events within 5 minutes may indicate suspicious activity, such as an attacker probing the kernel through repeated system calls (e.g., nsenter, mount, sethostname).
+
+    Such abnormal volume and frequency of kprobe usage within application pods or on nodes can signal container escape attempts or low-level tampering with the host, thereby representing a potential security threat.'
   author: Bhavin Patel, Splunk
+  updated: '2026-01-20'
+  license: Apache-2.0
   tags:
   - hunting
   - splunk-security-content
@@ -17,18 +21,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1068
-      name: Technique T1068
-    tactics: []
+      name: Exploitation for Privilege Escalation
+      tactics:
+      - privilege-escalation
+    tactics:
+    - privilege-escalation
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/cisco_isovalent___kprobe_spike.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/cisco_isovalent___kprobe_spike.yml
+      rule_sha256: sha256:ee8ce5b440ffc73013c3d09c6a2f27367687119a122efc805fc0710de10aa999
+      detection_id: 3df0e9a8-7d5e-4b2f-bcd7-bf93e671d1f2
+      source_version: 2
+      source_date: '2026-01-20'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_isovalent/kprobe_spike.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/cisco_isovalent/kprobe_spike.log
     description: not_applicable - cisco:isovalent
     format: auto
     schema: raw
     sourcetype: cisco:isovalent
+    checksum: sha256:d10d308e5840fae4cf7a7f720d7f7c0cb6a5aa41f7962c4fbdac1ba0df246a0e
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

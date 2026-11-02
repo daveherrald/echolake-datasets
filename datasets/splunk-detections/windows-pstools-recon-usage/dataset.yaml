@@ -1,19 +1,18 @@
 metadata:
   name: windows-pstools-recon-usage
   version: 3.0.0
-  description: 'The following analytic identifies execution of Sysinternals PsTools
-    and Sysinternals Suit binaries that are commonly used for reconnaissance and information
-    gathering on
+  description: 'The following analytic identifies execution of Sysinternals PsTools and Sysinternals Suit binaries that are commonly used for reconnaissance and information gathering on
 
     Windows endpoints.
 
-    PsTools (PsExec, PsFile, PsGetSid, PsInfo, PsPing, etc.) or Sysinternals Suit
-    tools, are frequently used by administrators for legitimate maintenance but are
-    also leveraged by threat actors to collect system, account, network and service
-    information during discovery and lateral movement.
+    PsTools (PsExec, PsFile, PsGetSid, PsInfo, PsPing, etc.) or Sysinternals Suit tools, are frequently used by administrators for legitimate maintenance but are also leveraged by threat actors to collect system, account, network and service information during discovery and lateral movement.
 
-    This detection focuses'
+    This detection focuses on process execution and PE metadata telemetry (OriginalFileName).
+
+    If confirmed malicious, this activity can indicate targeted reconnaissance and foothold escalation, enabling subsequent lateral movement or credential abuse.'
   author: Nasreddine Bencherchali
+  updated: '2025-11-19'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -21,22 +20,48 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1082
-      name: Technique T1082
+      name: System Information Discovery
+      tactics:
+      - discovery
     - id: T1046
-      name: Technique T1046
+      name: Network Service Discovery
+      tactics:
+      - discovery
     - id: T1018
-      name: Technique T1018
-    tactics: []
+      name: Remote System Discovery
+      tactics:
+      - discovery
+    tactics:
+    - discovery
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_pstools_recon_usage.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_pstools_recon_usage.yml
+      rule_sha256: sha256:b115db1087baac71f15a643df4a03e5ddc8e369f18dc530e277d1c32eb4da3ed
+      detection_id: 9a5f4b3e-1d2b-4c6f-9a8e-3b7d2f5c1a6e
+      source_version: 3
+      source_date: '2025-11-19'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://github.com/Splunk/attack_data/raw/master/datasets/attack_techniques/T1082/sysinternals_pstools/sysinternals_pstools.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1082/sysinternals_pstools/sysinternals_pstools.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:ceeb24d90b3d08428440a0c50427e12c5fea1d15a6172e5bed25eda46384cd29
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

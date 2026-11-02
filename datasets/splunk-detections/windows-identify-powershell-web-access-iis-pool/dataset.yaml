@@ -1,14 +1,10 @@
 metadata:
   name: windows-identify-powershell-web-access-iis-pool
   version: 4.0.0
-  description: This analytic detects and analyzes PowerShell Web Access (PSWA) usage
-    in Windows environments. It tracks both connection attempts (EventID 4648) and
-    successful logons (EventID 4624) associated with PSWA, providing a comprehensive
-    view of access patterns. The analytic identifies PSWA's operational status, host
-    servers, processes, and connection metrics. It highlights unique target accounts,
-    domains accessed, and verifies logon types. This information is crucial for detecting
-    potential misuse, suc
+  description: This analytic detects and analyzes PowerShell Web Access (PSWA) usage in Windows environments. It tracks both connection attempts (EventID 4648) and successful logons (EventID 4624) associated with PSWA, providing a comprehensive view of access patterns. The analytic identifies PSWA's operational status, host servers, processes, and connection metrics. It highlights unique target accounts, domains accessed, and verifies logon types. This information is crucial for detecting potential misuse, such as lateral movement, brute force attempts, or unusual access patterns. By offering insights into PSWA activity, it enables security teams to quickly assess and investigate potential security incidents involving this powerful administrative tool.
   author: Michael Haag, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - hunting
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1190
-      name: Technique T1190
-    tactics: []
+      name: Exploit Public-Facing Application
+      tactics:
+      - initial-access
+    tactics:
+    - initial-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_identify_powershell_web_access_iis_pool.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_identify_powershell_web_access_iis_pool.yml
+      rule_sha256: sha256:2daa8e7b865893284808e81b471a16601077d19aedfd9a72af33825f191f704f
+      detection_id: d8419343-f0f8-4d8e-91cc-18bb531df87d
+      source_version: 4
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/pswa/4648_4624_pswa_pool.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1190/pswa/4648_4624_pswa_pool.log
     description: XmlWinEventLog:Security - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:19789140997fc63ed2dc67232b73baeb62b1c6866bee825393c1fae9c6819e03
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

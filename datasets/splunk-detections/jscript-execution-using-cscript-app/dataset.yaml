@@ -1,14 +1,10 @@
 metadata:
   name: jscript-execution-using-cscript-app
   version: 8.0.0
-  description: The following analytic detects the execution of JScript using the cscript.exe
-    process. It leverages data from Endpoint Detection and Response (EDR) agents,
-    focusing on process and command-line telemetry. This behavior is significant because
-    JScript files are typically executed by wscript.exe, making cscript.exe execution
-    unusual and potentially indicative of malicious activity, such as the FIN7 group's
-    tactics. If confirmed malicious, this activity could allow attackers to execute
-    arbitrary scri
+  description: The following analytic detects the execution of JScript using the cscript.exe process. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process and command-line telemetry. This behavior is significant because JScript files are typically executed by wscript.exe, making cscript.exe execution unusual and potentially indicative of malicious activity, such as the FIN7 group's tactics. If confirmed malicious, this activity could allow attackers to execute arbitrary scripts, leading to code execution, data exfiltration, or further system compromise.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1059.007
-      name: Technique T1059.007
-    tactics: []
+      name: JavaScript
+      tactics:
+      - execution
+    tactics:
+    - execution
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/jscript_execution_using_cscript_app.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/jscript_execution_using_cscript_app.yml
+      rule_sha256: sha256:0ee4bbea3dcbba9d8731b499cd35c93e37669d9345667554a4d6cf0f8336955e
+      detection_id: 002f1e24-146e-11ec-a470-acde48001122
+      source_version: 8
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/fin7/fin7_macro_js_1/sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/fin7/fin7_macro_js_1/sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:83cd40659e20de5a75837bc2bd0d9f9fb2f8ca5879021b605f17c60fbbdbd0d1
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

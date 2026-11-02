@@ -1,14 +1,10 @@
 metadata:
   name: network-traffic-to-active-directory-web-services-protocol
   version: 9.0.0
-  description: The following analytic identifies network traffic directed to the Active
-    Directory Web Services Protocol (ADWS) on port 9389. It leverages network traffic
-    logs, focusing on source and destination IP addresses, application names, and
-    destination ports. This activity is significant as ADWS is used to manage Active
-    Directory, and unauthorized access could indicate malicious intent. If confirmed
-    malicious, an attacker could manipulate Active Directory, potentially leading
-    to privilege escalation, un
+  description: The following analytic identifies network traffic directed to the Active Directory Web Services Protocol (ADWS) on port 9389. It leverages network traffic logs, focusing on source and destination IP addresses, application names, and destination ports. This activity is significant as ADWS is used to manage Active Directory, and unauthorized access could indicate malicious intent. If confirmed malicious, an attacker could manipulate Active Directory, potentially leading to privilege escalation, unauthorized access, or persistent control over the environment.
   author: Michael Haag, Splunk
+  updated: '2025-06-17'
+  license: Apache-2.0
   tags:
   - hunting
   - splunk-security-content
@@ -16,26 +12,56 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1069.001
-      name: Technique T1069.001
+      name: Local Groups
+      tactics:
+      - discovery
     - id: T1069.002
-      name: Technique T1069.002
+      name: Domain Groups
+      tactics:
+      - discovery
     - id: T1087.001
-      name: Technique T1087.001
+      name: Local Account
+      tactics:
+      - discovery
     - id: T1087.002
-      name: Technique T1087.002
+      name: Domain Account
+      tactics:
+      - discovery
     - id: T1482
-      name: Technique T1482
-    tactics: []
+      name: Domain Trust Discovery
+      tactics:
+      - discovery
+    tactics:
+    - discovery
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/network_traffic_to_active_directory_web_services_protocol.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/network_traffic_to_active_directory_web_services_protocol.yml
+      rule_sha256: sha256:9a409772e55e1118149d8a79f0c12de1d17e0f0af9c4486fd51c780fbfbf7105
+      detection_id: 68a0056c-34cb-455f-b03d-df935ea62c4f
+      source_version: 9
+      source_date: '2025-06-17'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/soaphound/sysmon_soaphound.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1059.001/soaphound/sysmon_soaphound.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:99d01ead83b5a6d435c25fc101a1886a698ca0880c8da769d6914bbd23a475cc
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,14 +1,10 @@
 metadata:
   name: windows-ad-domain-controller-audit-policy-disabled
   version: 6.0.0
-  description: The following analytic detects the disabling of audit policies on a
-    domain controller. It leverages EventCode 4719 from Windows Security Event Logs
-    to identify changes where success or failure auditing is removed. This activity
-    is significant as it suggests an attacker may have gained access to the domain
-    controller and is attempting to evade detection by tampering with audit policies.
-    If confirmed malicious, this could lead to severe consequences, including data
-    theft, privilege escalation, and
+  description: The following analytic detects the disabling of audit policies on a domain controller. It leverages EventCode 4719 from Windows Security Event Logs to identify changes where success or failure auditing is removed. This activity is significant as it suggests an attacker may have gained access to the domain controller and is attempting to evade detection by tampering with audit policies. If confirmed malicious, this could lead to severe consequences, including data theft, privilege escalation, and full network compromise. Immediate investigation is required to determine the source and intent of the change.
   author: Dean Luxton
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1562.001
-      name: Technique T1562.001
-    tactics: []
+      name: Disable or Modify Tools
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_ad_domain_controller_audit_policy_disabled.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_ad_domain_controller_audit_policy_disabled.yml
+      rule_sha256: sha256:94fafe2057d607884990871fb263064cb2c361fc68180504bb495a5c9e3d451c
+      detection_id: fc3ccef1-60a4-4239-bd66-b279511b4d14
+      source_version: 6
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.001/disable_gpo/windows-security-xml.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1562.001/disable_gpo/windows-security-xml.log
     description: XmlWinEventLog:Security - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:920ab550d523392a45f675b35e9a8745c2390eab517e46a886d5dbabacf7c4ed
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

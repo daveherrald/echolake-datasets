@@ -1,15 +1,10 @@
 metadata:
   name: windows-disable-internet-explorer-addons
   version: 1.0.0
-  description: 'The following analytic detects the execution of iexplore.exe (Internet
-    Explorer) with the -extoff command-line flag, which disables all browser extensions.
-    This flag is commonly abused by adversaries to launch a clean browser session
-    that bypasses security controls such as antivirus browser extensions, toolbars,
-    or group policy-enforced add-ons.
-
-    Malicious documents or scripts may leverage iexplore.exe -extoff to open phishing
-    pages, command-and-control interfaces, or download additional payloads'
+  description: "The following analytic detects the execution of iexplore.exe (Internet Explorer) with the -extoff command-line flag, which disables all browser extensions. This flag is commonly abused by adversaries to launch a clean browser session that bypasses security controls such as antivirus browser extensions, toolbars, or group policy-enforced add-ons.\nMalicious documents or scripts may leverage iexplore.exe -extoff to open phishing pages, command-and-control interfaces, or download additional payloads in an environment free from security monitoring plugins. While this flag may be used legitimately by IT administrators for troubleshooting purposes, its use in modern enterprise environments is rare and should be considered suspicious\u2014particularly when launched by Office applications, scripting engines (e.g., PowerShell, WScript), or scheduled tasks."
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-26'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -17,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1176.001
-      name: Technique T1176.001
-    tactics: []
+      name: Browser Extensions
+      tactics:
+      - persistence
+    tactics:
+    - persistence
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_disable_internet_explorer_addons.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_disable_internet_explorer_addons.yml
+      rule_sha256: sha256:0392415fff6536f141489e527e7a287a9cc46796dcf1df89f27ae3c76fdb0093
+      detection_id: 65224d8b-b95d-44ec-bb44-408d830c1258
+      source_version: 1
+      source_date: '2025-05-26'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1176.001/disable_extension/iexplore-extoff.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1176.001/disable_extension/iexplore-extoff.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:42e145e7fa820e3263f0e52467a5f8c5563db4d8c0fb7213a60e08596933750e
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

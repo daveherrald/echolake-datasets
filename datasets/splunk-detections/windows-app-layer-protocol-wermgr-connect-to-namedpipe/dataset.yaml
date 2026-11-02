@@ -1,14 +1,10 @@
 metadata:
   name: windows-app-layer-protocol-wermgr-connect-to-namedpipe
   version: 6.0.0
-  description: The following analytic detects the wermgr.exe process creating or connecting
-    to a named pipe. It leverages Sysmon EventCodes 17 and 18 to identify these actions.
-    This activity is significant because wermgr.exe, a legitimate Windows OS Problem
-    Reporting application, is often abused by malware such as Trickbot and Qakbot
-    to execute malicious code. If confirmed malicious, this behavior could indicate
-    that an attacker has injected code into wermgr.exe, potentially allowing them
-    to communicate covert
+  description: The following analytic detects the wermgr.exe process creating or connecting to a named pipe. It leverages Sysmon EventCodes 17 and 18 to identify these actions. This activity is significant because wermgr.exe, a legitimate Windows OS Problem Reporting application, is often abused by malware such as Trickbot and Qakbot to execute malicious code. If confirmed malicious, this behavior could indicate that an attacker has injected code into wermgr.exe, potentially allowing them to communicate covertly, escalate privileges, or persist within the environment.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1071
-      name: Technique T1071
-    tactics: []
+      name: Application Layer Protocol
+      tactics:
+      - command-and-control
+    tactics:
+    - command-and-control
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_app_layer_protocol_wermgr_connect_to_namedpipe.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_app_layer_protocol_wermgr_connect_to_namedpipe.yml
+      rule_sha256: sha256:e23f4001d44cf349c16a97a55fc10df4fe8f6c1002e868388c46ccb527d99ad1
+      detection_id: 2f3a4092-548b-421c-9caa-84918e1787ef
+      source_version: 6
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/qakbot/qbot_wermgr2/sysmon_wermgr2.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/qakbot/qbot_wermgr2/sysmon_wermgr2.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:50587c0d0e97729ffbd7ae7d5f0ca310db8aeb3084f99a358d4be1930200583e
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

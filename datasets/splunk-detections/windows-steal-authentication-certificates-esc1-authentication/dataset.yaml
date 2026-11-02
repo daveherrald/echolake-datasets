@@ -1,14 +1,10 @@
 metadata:
   name: windows-steal-authentication-certificates-esc1-authentication
   version: 7.0.0
-  description: The following analytic detects when a suspicious certificate with a
-    Subject Alternative Name (SAN) is issued using Active Directory Certificate Services
-    (AD CS) and then immediately used for authentication. This detection leverages
-    Windows Security Event Logs, specifically EventCode 4887, to identify the issuance
-    and subsequent use of the certificate. This activity is significant because improperly
-    configured certificate templates can be exploited for privilege escalation and
-    environment comprom
+  description: The following analytic detects when a suspicious certificate with a Subject Alternative Name (SAN) is issued using Active Directory Certificate Services (AD CS) and then immediately used for authentication. This detection leverages Windows Security Event Logs, specifically EventCode 4887, to identify the issuance and subsequent use of the certificate. This activity is significant because improperly configured certificate templates can be exploited for privilege escalation and environment compromise. If confirmed malicious, an attacker could gain unauthorized access, escalate privileges, and potentially compromise the entire environment.
   author: Steven Dick
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,20 +13,47 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1649
-      name: Technique T1649
+      name: Steal or Forge Authentication Certificates
+      tactics:
+      - credential-access
     - id: T1550
-      name: Technique T1550
-    tactics: []
+      name: Use Alternate Authentication Material
+      tactics:
+      - defense-evasion
+      - lateral-movement
+    tactics:
+    - defense-evasion
+    - credential-access
+    - lateral-movement
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_steal_authentication_certificates___esc1_authentication.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_steal_authentication_certificates___esc1_authentication.yml
+      rule_sha256: sha256:9f2bf34c87222d368b10a43eb4eb3b1ce08ab61ae9db5d6d4509b2cea1a16757
+      detection_id: f0306acf-a6ab-437a-bbc6-8628f8d5c97e
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1649/certify_abuse/certify_esc1_abuse_winsecurity.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1649/certify_abuse/certify_esc1_abuse_winsecurity.log
     description: XmlWinEventLog:Security - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:eff127ee1bff7e55f2413f4a344bb28121f560720a694e73f54450285586f15f
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,14 +1,10 @@
 metadata:
   name: windows-shell-process-from-crushftp
   version: 2.0.0
-  description: 'The following analytic identifies instances where CrushFTP''s service
-    process (crushftpservice.exe) spawns shell processes like cmd.exe or powershell.exe.
-    This detection leverages data from Endpoint Detection and Response (EDR) agents,
-    focusing on process creation events. This activity is significant because CrushFTP
-    should not normally spawn interactive shell processes during regular operations.
-    If confirmed malicious, this behavior could indicate successful exploitation of
-    vulnerabilities like '
+  description: The following analytic identifies instances where CrushFTP's service process (crushftpservice.exe) spawns shell processes like cmd.exe or powershell.exe. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process creation events. This activity is significant because CrushFTP should not normally spawn interactive shell processes during regular operations. If confirmed malicious, this behavior could indicate successful exploitation of vulnerabilities like CVE-2025-31161, potentially allowing attackers to execute arbitrary commands with the privileges of the CrushFTP service.
   author: Michael Haag, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,24 +12,54 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1059.001
-      name: Technique T1059.001
+      name: PowerShell
+      tactics:
+      - execution
     - id: T1059.003
-      name: Technique T1059.003
+      name: Windows Command Shell
+      tactics:
+      - execution
     - id: T1190
-      name: Technique T1190
+      name: Exploit Public-Facing Application
+      tactics:
+      - initial-access
     - id: T1505
-      name: Technique T1505
-    tactics: []
+      name: Server Software Component
+      tactics:
+      - persistence
+    tactics:
+    - initial-access
+    - execution
+    - persistence
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_shell_process_from_crushftp.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_shell_process_from_crushftp.yml
+      rule_sha256: sha256:9967853b6c36785afda4b4ffffba693b93dff630bf0fbe6e78805c751f75e4a0
+      detection_id: 459628e3-1b00-4e9b-9e5b-7da8961aea35
+      source_version: 2
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/crushftp/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1190/crushftp/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:2e9efea0d5421db1f9f2889ba418fc5f868fd38cb9654dc7312a9d31c0e28d0c
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

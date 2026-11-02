@@ -1,14 +1,10 @@
 metadata:
   name: cisco-isovalent-potential-escape-to-host
   version: 2.0.0
-  description: This analytic detects potential container escape or reconnaissance
-    attempts by monitoring for the rapid execution of multiple suspicious Linux commands
-    (nsenter, mount, ps aux, and ls) within a short time window. The search aggregates
-    process execution logs into 5-minute buckets and identifies when two or more distinct
-    commands occur in quick succession. This behavior is noteworthy because attackers
-    often chain these commands together to pivot from a container into the host, enumerate
-    processes,
+  description: This analytic detects potential container escape or reconnaissance attempts by monitoring for the rapid execution of multiple suspicious Linux commands (nsenter, mount, ps aux, and ls) within a short time window. The search aggregates process execution logs into 5-minute buckets and identifies when two or more distinct commands occur in quick succession. This behavior is noteworthy because attackers often chain these commands together to pivot from a container into the host, enumerate processes, or browse filesystems. For a SOC, catching these clustered command executions is important because it highlights possible adversary activity attempting to break isolation and escalate privileges inside a Kubernetes environment.
   author: Bhavin Patel, Splunk
+  updated: '2026-01-20'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1611
-      name: Technique T1611
-    tactics: []
+      name: Escape to Host
+      tactics:
+      - privilege-escalation
+    tactics:
+    - privilege-escalation
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/cisco_isovalent___potential_escape_to_host.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/cisco_isovalent___potential_escape_to_host.yml
+      rule_sha256: sha256:fe04069eef356feaed8f31d0471b155c50d022e684d9203f4f535455b72427d8
+      detection_id: 2b8a7a21-bec6-4e1f-84c4-7b319f45d2ab
+      source_version: 2
+      source_date: '2026-01-20'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1611/cisco_isovalent_k8_escape/cisco_isovalent.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1611/cisco_isovalent_k8_escape/cisco_isovalent.log
     description: not_applicable - cisco:isovalent:processExec
     format: auto
     schema: raw
     sourcetype: cisco:isovalent:processExec
+    checksum: sha256:b27a22a9bcae4e4fdb597ebb7a5b9dcbfe80609608ec76ee833d3f303a684bd5
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

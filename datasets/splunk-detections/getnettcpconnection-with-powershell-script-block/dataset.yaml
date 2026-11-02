@@ -1,14 +1,10 @@
 metadata:
   name: getnettcpconnection-with-powershell-script-block
   version: 8.0.0
-  description: The following analytic detects the execution of the `Get-NetTcpconnection`
-    PowerShell cmdlet using PowerShell Script Block Logging (EventCode=4104). This
-    cmdlet lists network connections on a system, which adversaries may use for situational
-    awareness and Active Directory discovery. Monitoring this activity is crucial
-    as it can indicate reconnaissance efforts by an attacker. If confirmed malicious,
-    this behavior could allow an attacker to map the network, identify critical systems,
-    and plan furt
+  description: The following analytic detects the execution of the `Get-NetTcpconnection` PowerShell cmdlet using PowerShell Script Block Logging (EventCode=4104). This cmdlet lists network connections on a system, which adversaries may use for situational awareness and Active Directory discovery. Monitoring this activity is crucial as it can indicate reconnaissance efforts by an attacker. If confirmed malicious, this behavior could allow an attacker to map the network, identify critical systems, and plan further attacks, potentially leading to data exfiltration or lateral movement within the network.
   author: Mauricio Velazco, Splunk
+  updated: '2025-06-24'
+  license: Apache-2.0
   tags:
   - hunting
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1049
-      name: Technique T1049
-    tactics: []
+      name: System Network Connections Discovery
+      tactics:
+      - discovery
+    tactics:
+    - discovery
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/getnettcpconnection_with_powershell_script_block.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/getnettcpconnection_with_powershell_script_block.yml
+      rule_sha256: sha256:3671680de07710b79ee3b0a596c16242fb84eb05c58c268886df92ed50c1794b
+      detection_id: 091712ff-b02a-4d43-82ed-34765515d95d
+      source_version: 8
+      source_date: '2025-06-24'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/powershell_script_block_logging/nettcpconnection.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1059.001/powershell_script_block_logging/nettcpconnection.log
     description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:d72de9c47e723fa9bc108612400763635c740e8f44a9b8eade73bf1257c4b594
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

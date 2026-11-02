@@ -1,19 +1,18 @@
 metadata:
   name: linux-auditd-possible-access-or-modification-of-sshd-config-file
   version: 8.0.0
-  description: 'The following analytic detects access, deletion or modification of
-    the ssh_config file on Linux systems.
+  description: 'The following analytic detects access, deletion or modification of the ssh_config file on Linux systems.
 
-    It leverages data from Linux Auditd, focusing on events of type PATH with a nametype
-    of ("NORMAL", "CREATE", "DELETE").
+    It leverages data from Linux Auditd, focusing on events of type PATH with a nametype of ("NORMAL", "CREATE", "DELETE").
 
-    This activity could be significant because unauthorized changes to ssh_config
-    can allow threat actors to redirect port connections or use unauthorized keys,
-    potentially compromising the system.
+    This activity could be significant because unauthorized changes to ssh_config can allow threat actors to redirect port connections or use unauthorized keys, potentially compromising the system.
 
-    Correlate this with related EXECVE or PROCTITLE events to identify the process
-    or'
+    Correlate this with related EXECVE or PROCTITLE events to identify the process or user responsible for the access or modification.
+
+    If confirmed malicious, this could lead to unauthorized access, privilege escalation, or persistent backdoor access, posing a severe security risk.'
   author: Teoderick Contreras, Nasreddine Bencherchali, Splunk
+  updated: '2025-11-27'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -23,18 +22,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1098.004
-      name: Technique T1098.004
-    tactics: []
+      name: SSH Authorized Keys
+      tactics:
+      - persistence
+      - privilege-escalation
+    tactics:
+    - persistence
+    - privilege-escalation
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/linux_auditd_possible_access_or_modification_of_sshd_config_file.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/linux_auditd_possible_access_or_modification_of_sshd_config_file.yml
+      rule_sha256: sha256:29ae627a7976ef31169adff8e12b2e72d90ff79711024db039b00a0a24a5f9fc
+      detection_id: acb3ea33-70f7-47aa-b335-643b3aebcb2f
+      source_version: 8
+      source_date: '2025-11-27'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1098.004/auditd_path_ssh_config/path_ssh_config.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1098.004/auditd_path_ssh_config/path_ssh_config.log
     description: auditd - auditd
     format: auto
     schema: raw
     sourcetype: auditd
+    checksum: sha256:221486c9e0f0e8101de8d8f2198586f3119bf6e6548de6804aa00da26e2ea8e4
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

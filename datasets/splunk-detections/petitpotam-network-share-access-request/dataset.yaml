@@ -1,14 +1,10 @@
 metadata:
   name: petitpotam-network-share-access-request
   version: 6.0.0
-  description: The following analytic detects network share access requests indicative
-    of the PetitPotam attack (CVE-2021-36942). It leverages Windows Event Code 5145,
-    which logs attempts to access network share objects. This detection is significant
-    as PetitPotam can coerce authentication from domain controllers, potentially leading
-    to unauthorized access. If confirmed malicious, this activity could allow attackers
-    to escalate privileges or move laterally within the network, posing a severe security
-    risk. Ens
+  description: The following analytic detects network share access requests indicative of the PetitPotam attack (CVE-2021-36942). It leverages Windows Event Code 5145, which logs attempts to access network share objects. This detection is significant as PetitPotam can coerce authentication from domain controllers, potentially leading to unauthorized access. If confirmed malicious, this activity could allow attackers to escalate privileges or move laterally within the network, posing a severe security risk. Ensure Event Code 5145 is enabled via Group Policy to utilize this analytic effectively.
   author: Michael Haag, Mauricio Velazco, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1187
-      name: Technique T1187
-    tactics: []
+      name: Forced Authentication
+      tactics:
+      - credential-access
+    tactics:
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/petitpotam_network_share_access_request.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/petitpotam_network_share_access_request.yml
+      rule_sha256: sha256:2cf50ea55c47e86ddc5d04a987c1eddd75d3485518afa13eccb0f0e9090140c1
+      detection_id: 95b8061a-0a67-11ec-85ec-acde48001122
+      source_version: 6
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1187/petitpotam/windows-xml.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1187/petitpotam/windows-xml.log
     description: XmlWinEventLog:Security - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:2c823041c620c8ddeeb47e99e94134ebf6ec8bc173cee9ac3bc5c80fc399c02d
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

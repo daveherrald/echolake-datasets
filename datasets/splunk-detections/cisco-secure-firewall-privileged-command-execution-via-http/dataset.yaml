@@ -1,16 +1,12 @@
 metadata:
   name: cisco-secure-firewall-privileged-command-execution-via-http
   version: 1.0.0
-  description: 'This analytic detects HTTP requests to privileged execution paths
-    on Cisco routers, specifically targeting the `/level/15/exec/-/*` endpoint using
-    Cisco Secure Firewall Intrusion Events.
+  description: 'This analytic detects HTTP requests to privileged execution paths on Cisco routers, specifically targeting the `/level/15/exec/-/*` endpoint using Cisco Secure Firewall Intrusion Events.
 
-    This detection leverages Snort signature 65370 to identify requests to these sensitive
-    endpoints, which when combined with other indicators may signal active exploitation
-    or post-compromise activity.
-
-    '
+    This detection leverages Snort signature 65370 to identify requests to these sensitive endpoints, which when combined with other indicators may signal active exploitation or post-compromise activity.'
   author: Nasreddine Bencherchali, Michael Haag, Splunk
+  updated: '2026-01-06'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -19,20 +15,45 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1059
-      name: Technique T1059
+      name: Command and Scripting Interpreter
+      tactics:
+      - execution
     - id: T1505.003
-      name: Technique T1505.003
-    tactics: []
+      name: Web Shell
+      tactics:
+      - persistence
+    tactics:
+    - execution
+    - persistence
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/network/cisco_secure_firewall___privileged_command_execution_via_http.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/network/cisco_secure_firewall___privileged_command_execution_via_http.yml
+      rule_sha256: sha256:c657fbddb9f6db186c8ce58b85aa51d72d7db89b2cd718c9c33b062e47e41a40
+      detection_id: 0c1d2e3f-4a5b-6c7d-8e9f-0a1b2c3d4e5f
+      source_version: 1
+      source_date: '2026-01-06'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_secure_firewall_threat_defense/intrusion_event/intrusion_events.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/cisco_secure_firewall_threat_defense/intrusion_event/intrusion_events.log
     description: not_applicable - cisco:sfw:estreamer
     format: auto
     schema: raw
     sourcetype: cisco:sfw:estreamer
+    checksum: sha256:fbb3f751fe1eba2da9fb5214ca14e86d9e9bd3f9976e67c3ffe3874ffc2e5a8b
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

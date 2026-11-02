@@ -1,14 +1,10 @@
 metadata:
   name: windows-dns-query-request-to-tinyurl
   version: 1.0.0
-  description: "The following analytic detects a process located in a potentially\
-    \ suspicious location making DNS queries to known URL shortening services, specifically\
-    \ tinyurl.\nURL shorteners are frequently used by threat actors to obfuscate malicious\
-    \ destinations, including phishing pages, malware distribution sites, or command-and-control\
-    \ (C2) endpoints. \nWhile tinyurl.com is a legitimate service, its use in enterprise\
-    \ environments—particularly by non-browser processes or scripts—should be considered\
-    \ suspicio"
+  description: "The following analytic detects a process located in a potentially suspicious location making DNS queries to known URL shortening services, specifically tinyurl.\nURL shorteners are frequently used by threat actors to obfuscate malicious destinations, including phishing pages, malware distribution sites, or command-and-control (C2) endpoints.\nWhile tinyurl.com is a legitimate service, its use in enterprise environments\u2014particularly by non-browser processes or scripts\u2014should be considered suspicious, especially if correlated with subsequent outbound connections, file downloads, process file path or credential prompts. Analysts should investigate the source process, execution context, and destination domain to determine intent and risk."
   author: Teoderick Contreras, Splunk
+  updated: '2025-06-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1105
-      name: Technique T1105
-    tactics: []
+      name: Ingress Tool Transfer
+      tactics:
+      - command-and-control
+    tactics:
+    - command-and-control
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_dns_query_request_to_tinyurl.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_dns_query_request_to_tinyurl.yml
+      rule_sha256: sha256:17b3582d9d3031596becae4c6ab8aab2a7623880c6f99a2bd2e54283d03073db
+      detection_id: b1ea79da-719c-437c-acaf-5c93f838f425
+      source_version: 1
+      source_date: '2025-06-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1105/tinyurl_dns_query/tinyurl.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1105/tinyurl_dns_query/tinyurl.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:87e7c895938bf64382ebda6b9dc112116f0d054b43eb009cb4a674aa34fd225a
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

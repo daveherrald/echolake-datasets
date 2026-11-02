@@ -1,10 +1,10 @@
 metadata:
   name: windows-ad-dangerous-deny-acl-modification
   version: 6.0.0
-  description: This detection identifies an Active Directory access-control list (ACL)
-    modification event, which applies permissions that deny the ability to enumerate
-    permissions of the object.
+  description: This detection identifies an Active Directory access-control list (ACL) modification event, which applies permissions that deny the ability to enumerate permissions of the object.
   author: Dean Luxton
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -12,20 +12,46 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1222.001
-      name: Technique T1222.001
+      name: Windows File and Directory Permissions Modification
+      tactics:
+      - defense-evasion
     - id: T1484
-      name: Technique T1484
-    tactics: []
+      name: Domain or Tenant Policy Modification
+      tactics:
+      - privilege-escalation
+      - defense-evasion
+    tactics:
+    - privilege-escalation
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_ad_dangerous_deny_acl_modification.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_ad_dangerous_deny_acl_modification.yml
+      rule_sha256: sha256:c47006d7a6860a6a35551adf9aed876c38e7f5dfd5c67a1d306f1e83377df4ed
+      detection_id: 8e897153-2ebd-4cb2-85d3-09ad57db2fb7
+      source_version: 6
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1222.001/dacl_abuse/hidden_object_windows-security-xml.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1222.001/dacl_abuse/hidden_object_windows-security-xml.log
     description: XmlWinEventLog:Security - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:e18a16c790a313520b9ad1e520c088cb616068c2d2cfdd26b7f497b599c51b4b
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

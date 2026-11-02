@@ -1,14 +1,10 @@
 metadata:
   name: m365-copilot-application-usage-pattern-anomalies
   version: 1.0.0
-  description: Detects M365 Copilot users exhibiting suspicious application usage
-    patterns including multi-location access, abnormally high activity volumes, or
-    access to multiple Copilot applications that may indicate account compromise or
-    automated abuse. The detection aggregates M365 Copilot Graph API events per user,
-    calculating metrics like distinct cities/countries accessed, unique IP addresses,
-    number of different Copilot apps used, and average events per day over the observation
-    period. Users are flagg
+  description: Detects M365 Copilot users exhibiting suspicious application usage patterns including multi-location access, abnormally high activity volumes, or access to multiple Copilot applications that may indicate account compromise or automated abuse. The detection aggregates M365 Copilot Graph API events per user, calculating metrics like distinct cities/countries accessed, unique IP addresses, number of different Copilot apps used, and average events per day over the observation period. Users are flagged when they access Copilot from multiple cities (cities_count > 1), generate excessive daily activity (events_per_day > 100), or use more than two different Copilot applications (app_count > 2), which are anomalous patterns suggesting credential compromise or bot-driven abuse.
   author: Rod Soto
+  updated: '2025-09-24'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,46 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1078
-      name: Technique T1078
-    tactics: []
+      name: Valid Accounts
+      tactics:
+      - initial-access
+      - persistence
+      - privilege-escalation
+      - defense-evasion
+    tactics:
+    - initial-access
+    - persistence
+    - privilege-escalation
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/application/m365_copilot_application_usage_pattern_anomalies.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/application/m365_copilot_application_usage_pattern_anomalies.yml
+      rule_sha256: sha256:0e3c63817d710cdb08c36a4fdba7b32a5997df9b6ef04c678f3ccaea12dacc96
+      detection_id: e3308b0c-d1a1-40d5-9486-4500f0d34731
+      source_version: 1
+      source_date: '2025-09-24'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/m365_copilot/m365_copilot_access.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/m365_copilot/m365_copilot_access.log
     description: AuditLogs.SignIns - o365:graph:api
     format: auto
     schema: raw
     sourcetype: o365:graph:api
+    checksum: sha256:8e4810642666d461b9233e58035946a915a83e5b1f205a8824c35d608a2be823
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

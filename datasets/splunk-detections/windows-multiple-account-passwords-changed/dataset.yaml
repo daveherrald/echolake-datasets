@@ -1,14 +1,10 @@
 metadata:
   name: windows-multiple-account-passwords-changed
   version: 7.0.0
-  description: The following analytic detects instances where more than five unique
-    Windows account passwords are changed within a 10-minute interval. It leverages
-    Event Code 4724 from the Windows Security Event Log, using the wineventlog_security
-    dataset to monitor and count distinct TargetUserName values. This behavior is
-    significant as rapid password changes across multiple accounts are unusual and
-    may indicate unauthorized access or internal compromise. If confirmed malicious,
-    this activity could lead to w
+  description: The following analytic detects instances where more than five unique Windows account passwords are changed within a 10-minute interval. It leverages Event Code 4724 from the Windows Security Event Log, using the wineventlog_security dataset to monitor and count distinct TargetUserName values. This behavior is significant as rapid password changes across multiple accounts are unusual and may indicate unauthorized access or internal compromise. If confirmed malicious, this activity could lead to widespread account compromise, unauthorized access to sensitive information, and potential disruption of services.
   author: Mauricio Velazco, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,20 +12,51 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1098
-      name: Technique T1098
+      name: Account Manipulation
+      tactics:
+      - persistence
+      - privilege-escalation
     - id: T1078
-      name: Technique T1078
-    tactics: []
+      name: Valid Accounts
+      tactics:
+      - initial-access
+      - persistence
+      - privilege-escalation
+      - defense-evasion
+    tactics:
+    - initial-access
+    - persistence
+    - privilege-escalation
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_multiple_account_passwords_changed.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_multiple_account_passwords_changed.yml
+      rule_sha256: sha256:d6cc85bfd06a76919edcdcacb26a2917048e3e47db3b35bc18fbd492f898e059
+      detection_id: faefb681-14be-4f0d-9cac-0bc0160c7280
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1098/windows_multiple_passwords_changed/windows_multiple_passwords_changed.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1098/windows_multiple_passwords_changed/windows_multiple_passwords_changed.log
     description: XmlWinEventLog:Security - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:2855dedf40a5c1c7af7e228db7b2201f5ccf2e567a769af9b012388bf0169b45
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

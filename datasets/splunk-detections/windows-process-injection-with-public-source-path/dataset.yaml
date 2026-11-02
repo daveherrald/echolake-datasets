@@ -1,14 +1,10 @@
 metadata:
   name: windows-process-injection-with-public-source-path
   version: 9.0.0
-  description: The following analytic detects a process from a non-standard file path
-    on Windows attempting to create a remote thread in another process. This is identified
-    using Sysmon EventCode 8, focusing on processes not originating from typical system
-    directories. This behavior is significant as it often indicates process injection,
-    a technique used by adversaries to evade detection or escalate privileges. If
-    confirmed malicious, this activity could allow an attacker to execute arbitrary
-    code within anoth
+  description: The following analytic detects a process from a non-standard file path on Windows attempting to create a remote thread in another process. This is identified using Sysmon EventCode 8, focusing on processes not originating from typical system directories. This behavior is significant as it often indicates process injection, a technique used by adversaries to evade detection or escalate privileges. If confirmed malicious, this activity could allow an attacker to execute arbitrary code within another process, potentially leading to unauthorized actions and further compromise of the system.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - hunting
   - splunk-security-content
@@ -17,18 +13,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1055.002
-      name: Technique T1055.002
-    tactics: []
+      name: Portable Executable Injection
+      tactics:
+      - privilege-escalation
+      - defense-evasion
+    tactics:
+    - privilege-escalation
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_process_injection_with_public_source_path.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_process_injection_with_public_source_path.yml
+      rule_sha256: sha256:ec0e002a055bc759bd1332d0aca039d37f21d393b83aa1c70d7f2880f73e3e7f
+      detection_id: 492f09cf-5d60-4d87-99dd-0bc325532dda
+      source_version: 9
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/brute_ratel/create_remote_thread/sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/brute_ratel/create_remote_thread/sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:3bbe594b0ce8019f3be0f56d992bd2c38dd9bd369047bc366a3201bed851c7e0
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,14 +1,10 @@
 metadata:
   name: gsuite-email-suspicious-attachment
   version: 6.0.0
-  description: The following analytic detects suspicious attachment file extensions
-    in GSuite emails, potentially indicating a spear-phishing attack. It leverages
-    GSuite Gmail logs to identify emails with attachments having file extensions commonly
-    associated with malware, such as .exe, .bat, and .js. This activity is significant
-    as these file types are often used to deliver malicious payloads, posing a risk
-    of compromising targeted machines. If confirmed malicious, this could lead to
-    unauthorized code executi
+  description: The following analytic detects suspicious attachment file extensions in GSuite emails, potentially indicating a spear-phishing attack. It leverages GSuite Gmail logs to identify emails with attachments having file extensions commonly associated with malware, such as .exe, .bat, and .js. This activity is significant as these file types are often used to deliver malicious payloads, posing a risk of compromising targeted machines. If confirmed malicious, this could lead to unauthorized code execution, data breaches, or further network infiltration.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1566.001
-      name: Technique T1566.001
-    tactics: []
+      name: Spearphishing Attachment
+      tactics:
+      - initial-access
+    tactics:
+    - initial-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/gsuite_email_suspicious_attachment.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/gsuite_email_suspicious_attachment.yml
+      rule_sha256: sha256:3bbe7a713d2dd49edec971c67c81ad753e9b38b9eae5f3aab76b4522cc8adde7
+      detection_id: 6d663014-fe92-11eb-ab07-acde48001122
+      source_version: 6
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566.001/gsuite_susp_attachment_ext/gsuite_gmail_file_ext.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1566.001/gsuite_susp_attachment_ext/gsuite_gmail_file_ext.log
     description: http:gsuite - gsuite:gmail:bigquery
     format: auto
     schema: raw
     sourcetype: gsuite:gmail:bigquery
+    checksum: sha256:02ef67f3ef073febe36b16bbd567cc9c494dbc9b57434e052d233dfb83d02505
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

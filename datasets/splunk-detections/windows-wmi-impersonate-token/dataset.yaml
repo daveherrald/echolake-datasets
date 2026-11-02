@@ -1,14 +1,10 @@
 metadata:
   name: windows-wmi-impersonate-token
   version: 7.0.0
-  description: The following analytic detects potential WMI token impersonation activities
-    in a process or command. It leverages Sysmon EventCode 10 to identify instances
-    where `wmiprvse.exe` has a duplicate handle or full granted access in a target
-    process. This behavior is significant as it is commonly used by malware like Qakbot
-    for privilege escalation or defense evasion. If confirmed malicious, this activity
-    could allow an attacker to gain elevated privileges, evade defenses, and maintain
-    persistence with
+  description: The following analytic detects potential WMI token impersonation activities in a process or command. It leverages Sysmon EventCode 10 to identify instances where `wmiprvse.exe` has a duplicate handle or full granted access in a target process. This behavior is significant as it is commonly used by malware like Qakbot for privilege escalation or defense evasion. If confirmed malicious, this activity could allow an attacker to gain elevated privileges, evade defenses, and maintain persistence within the environment.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1047
-      name: Technique T1047
-    tactics: []
+      name: Windows Management Instrumentation
+      tactics:
+      - execution
+    tactics:
+    - execution
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_wmi_impersonate_token.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_wmi_impersonate_token.yml
+      rule_sha256: sha256:520b79821108240415f2ca7e8eb990f0bfcc0e53dd64b52265539baf448c1827
+      detection_id: cf192860-2d94-40db-9a51-c04a2e8a8f8b
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1047/wmi_impersonate/sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1047/wmi_impersonate/sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:c5959a3ea71f381f7a7b1916bf966fd7204e5e11fc76b7dba535d02a191fbc9f
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

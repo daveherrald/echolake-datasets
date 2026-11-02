@@ -1,14 +1,10 @@
 metadata:
   name: windows-service-create-remcomsvc
   version: 6.0.0
-  description: The following analytic detects the creation of the RemComSvc service
-    on a Windows endpoint, typically indicating lateral movement using RemCom.exe.
-    It leverages Windows EventCode 7045 from the System event log, specifically looking
-    for the "RemCom Service" name. This activity is significant as it often signifies
-    unauthorized lateral movement within the network, which is a common tactic used
-    by attackers to spread malware or gain further access. If confirmed malicious,
-    this could lead to unauthor
+  description: The following analytic detects the creation of the RemComSvc service on a Windows endpoint, typically indicating lateral movement using RemCom.exe. It leverages Windows EventCode 7045 from the System event log, specifically looking for the "RemCom Service" name. This activity is significant as it often signifies unauthorized lateral movement within the network, which is a common tactic used by attackers to spread malware or gain further access. If confirmed malicious, this could lead to unauthorized access to sensitive systems, data exfiltration, or further compromise of the network.
   author: Michael Haag, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1543.003
-      name: Technique T1543.003
-    tactics: []
+      name: Windows Service
+      tactics:
+      - persistence
+      - privilege-escalation
+    tactics:
+    - persistence
+    - privilege-escalation
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_service_create_remcomsvc.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_service_create_remcomsvc.yml
+      rule_sha256: sha256:6de613da777f70264653889c1abb0534e128b6debcb067fcec3af46a5544f16b
+      detection_id: 0be4b5d6-c449-4084-b945-2392b519c33b
+      source_version: 6
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1543.003/atomic_red_team/remcom_windows-system.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1543.003/atomic_red_team/remcom_windows-system.log
     description: XmlWinEventLog:System - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:e7e1c732c173d6d3dbb114d2c2bb5fba2d336f9dd83b7bcacfcbc191183c4717
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,14 +1,10 @@
 metadata:
   name: powershell-remote-services-add-trustedhost
   version: 8.0.0
-  description: 'The following analytic detects the execution of a PowerShell script
-    that modifies the ''TrustedHosts'' configuration via EventCode 4104. It leverages
-    PowerShell Script Block Logging to identify commands targeting WSMan settings,
-    specifically those altering or concatenating trusted hosts. This activity is significant
-    as it can indicate attempts to manipulate remote connection settings, potentially
-    allowing unauthorized remote access. If confirmed malicious, this could enable
-    attackers to establish '
+  description: The following analytic detects the execution of a PowerShell script that modifies the 'TrustedHosts' configuration via EventCode 4104. It leverages PowerShell Script Block Logging to identify commands targeting WSMan settings, specifically those altering or concatenating trusted hosts. This activity is significant as it can indicate attempts to manipulate remote connection settings, potentially allowing unauthorized remote access. If confirmed malicious, this could enable attackers to establish persistent remote connections, bypass security protocols, and gain unauthorized access to sensitive systems and data.
   author: Teoderick Contreras, Splunk
+  updated: '2025-06-24'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1021.006
-      name: Technique T1021.006
-    tactics: []
+      name: Windows Remote Management
+      tactics:
+      - lateral-movement
+    tactics:
+    - lateral-movement
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/powershell_remote_services_add_trustedhost.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/powershell_remote_services_add_trustedhost.yml
+      rule_sha256: sha256:c26bf183c20c71db5cfad2df8ee921141013d5b2b128e0de3803bf05c244b375
+      detection_id: bef21d24-297e-45e3-9b9a-c6ac45450474
+      source_version: 8
+      source_date: '2025-06-24'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1021.006/wsman_trustedhost/wsman_pwh.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1021.006/wsman_trustedhost/wsman_pwh.log
     description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:17654c941a11e47ee26c7d316ec1c29b684b7dde95d1c23eb2c6473b318c1c66
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

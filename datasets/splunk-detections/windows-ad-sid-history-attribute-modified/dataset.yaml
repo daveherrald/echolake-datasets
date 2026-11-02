@@ -1,14 +1,10 @@
 metadata:
   name: windows-ad-sid-history-attribute-modified
   version: 7.0.0
-  description: The following analytic detects modifications to the SID History attribute
-    in Active Directory by leveraging event code 5136. This detection uses logs from
-    the `wineventlog_security` data source to identify changes to the sIDHistory attribute.
-    Monitoring this activity is crucial as the SID History attribute can be exploited
-    by adversaries to inherit permissions from other accounts, potentially granting
-    unauthorized access. If confirmed malicious, this activity could allow attackers
-    to maintain pe
+  description: The following analytic detects modifications to the SID History attribute in Active Directory by leveraging event code 5136. This detection uses logs from the `wineventlog_security` data source to identify changes to the sIDHistory attribute. Monitoring this activity is crucial as the SID History attribute can be exploited by adversaries to inherit permissions from other accounts, potentially granting unauthorized access. If confirmed malicious, this activity could allow attackers to maintain persistent access and escalate privileges within the domain, posing a significant security risk.
   author: Mauricio Velazco, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +12,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1134.005
-      name: Technique T1134.005
-    tactics: []
+      name: SID-History Injection
+      tactics:
+      - privilege-escalation
+      - defense-evasion
+    tactics:
+    - privilege-escalation
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_ad_sid_history_attribute_modified.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_ad_sid_history_attribute_modified.yml
+      rule_sha256: sha256:87b5e683051b5ce270b4cf647ce83600e86a9bd645503a0e52127f793c496251
+      detection_id: 1155e47d-307f-4247-beab-71071e3a458c
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1134.005/sid_history2/windows-security.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1134.005/sid_history2/windows-security.log
     description: XmlWinEventLog:Security - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:d62d653bbd2b8c7bd3161037a405cbf80a11abc6ed0abc695511db8118784673
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

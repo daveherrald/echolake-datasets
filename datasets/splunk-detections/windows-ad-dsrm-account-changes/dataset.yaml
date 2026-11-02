@@ -1,14 +1,10 @@
 metadata:
   name: windows-ad-dsrm-account-changes
   version: 9.0.0
-  description: The following analytic identifies changes to the Directory Services
-    Restore Mode (DSRM) account behavior via registry modifications. It detects alterations
-    in the registry path "*\\System\\CurrentControlSet\\Control\\Lsa\\DSRMAdminLogonBehavior"
-    with specific values indicating potential misuse. This activity is significant
-    because the DSRM account, if misconfigured, can be exploited to persist within
-    a domain, similar to a local administrator account. If confirmed malicious, an
-    attacker could ga
+  description: The following analytic identifies changes to the Directory Services Restore Mode (DSRM) account behavior via registry modifications. It detects alterations in the registry path "*\\System\\CurrentControlSet\\Control\\Lsa\\DSRMAdminLogonBehavior" with specific values indicating potential misuse. This activity is significant because the DSRM account, if misconfigured, can be exploited to persist within a domain, similar to a local administrator account. If confirmed malicious, an attacker could gain persistent administrative access to a Domain Controller, leading to potential domain-wide compromise and unauthorized access to sensitive information.
   author: Dean Luxton
+  updated: '2025-10-14'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1098
-      name: Technique T1098
-    tactics: []
+      name: Account Manipulation
+      tactics:
+      - persistence
+      - privilege-escalation
+    tactics:
+    - persistence
+    - privilege-escalation
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_ad_dsrm_account_changes.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_ad_dsrm_account_changes.yml
+      rule_sha256: sha256:20628cfa3860998037ea29df1ec3f1d8f8d19763af6346c4cf076084b4ed56e0
+      detection_id: 08cb291e-ea77-48e8-a95a-0799319bf056
+      source_version: 9
+      source_date: '2025-10-14'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1098/dsrm_account/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1098/dsrm_account/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:fd1b721d76d5a0d718f08554ccaa162a01acca882c30cef0bf60b1576dcf7378
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

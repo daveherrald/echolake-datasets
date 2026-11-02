@@ -1,14 +1,10 @@
 metadata:
   name: enumerate-users-local-group-using-telegram
   version: 9.0.0
-  description: The following analytic detects a Telegram process enumerating all network
-    users in a local group. It leverages EventCode 4798, which is generated when a
-    process enumerates a user's security-enabled local groups on a computer or device.
-    This activity is significant as it may indicate an attempt to gather information
-    on user accounts, a common precursor to further malicious actions. If confirmed
-    malicious, this behavior could allow an attacker to map out user accounts, potentially
-    leading to privi
+  description: The following analytic detects a Telegram process enumerating all network users in a local group. It leverages EventCode 4798, which is generated when a process enumerates a user's security-enabled local groups on a computer or device. This activity is significant as it may indicate an attempt to gather information on user accounts, a common precursor to further malicious actions. If confirmed malicious, this behavior could allow an attacker to map out user accounts, potentially leading to privilege escalation or lateral movement within the network.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1087
-      name: Technique T1087
-    tactics: []
+      name: Account Discovery
+      tactics:
+      - discovery
+    tactics:
+    - discovery
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/enumerate_users_local_group_using_telegram.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/enumerate_users_local_group_using_telegram.yml
+      rule_sha256: sha256:f6c6d7652a389f5021e1727f58c66a43870dea9958c39d71e48ffe114b043c20
+      detection_id: fcd74532-ae54-11eb-a5ab-acde48001122
+      source_version: 9
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1087/enumerate_users_local_group_using_telegram/windows-xml.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1087/enumerate_users_local_group_using_telegram/windows-xml.log
     description: XmlWinEventLog:Security - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:a5279b6df59f822656b44729bd00c337bec2925047438734495da45010feaa27
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

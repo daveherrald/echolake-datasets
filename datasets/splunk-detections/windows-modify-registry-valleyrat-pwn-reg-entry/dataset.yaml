@@ -1,14 +1,10 @@
 metadata:
   name: windows-modify-registry-valleyrat-pwn-reg-entry
   version: 9.0.0
-  description: The following analytic detects modifications to the Windows Registry
-    specifically targeting `.pwn` file associations related to the ValleyRAT malware.
-    ValleyRAT may create or alter registry entries to associate `.pwn` files with
-    malicious processes, allowing it to execute harmful scripts or commands when these
-    files are opened. By monitoring for unusual changes in registry keys linked to
-    `.pwn` extensions, this detection enables security analysts to identify potential
-    ValleyRAT infection attempt
+  description: The following analytic detects modifications to the Windows Registry specifically targeting `.pwn` file associations related to the ValleyRAT malware. ValleyRAT may create or alter registry entries to associate `.pwn` files with malicious processes, allowing it to execute harmful scripts or commands when these files are opened. By monitoring for unusual changes in registry keys linked to `.pwn` extensions, this detection enables security analysts to identify potential ValleyRAT infection attempts. Early detection of these modifications helps mitigate unauthorized execution and prevents further exploitation of the system.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +12,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1112
-      name: Technique T1112
-    tactics: []
+      name: Modify Registry
+      tactics:
+      - persistence
+      - defense-evasion
+    tactics:
+    - persistence
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_modify_registry_valleyrat_pwn_reg_entry.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_modify_registry_valleyrat_pwn_reg_entry.yml
+      rule_sha256: sha256:534e5ee0409a322783de2200f355c7573095442090a1976c6c97a39e97315818
+      detection_id: 6947c44e-be1f-4dd9-b198-bc42be5be196
+      source_version: 9
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1112/pwn_reg/pwn_reg.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1112/pwn_reg/pwn_reg.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:82748e7db3e7c2dc3a2f0160b255067a47d4e83550a17d3937dd278feedc0374
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

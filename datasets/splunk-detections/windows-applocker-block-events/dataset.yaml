@@ -1,14 +1,10 @@
 metadata:
   name: windows-applocker-block-events
   version: 6.0.0
-  description: The following analytic detects attempts to bypass application restrictions
-    by identifying Windows AppLocker policy violations. It leverages Windows AppLocker
-    event logs, specifically EventCodes 8007, 8004, 8022, 8025, 8029, and 8040, to
-    pinpoint blocked actions. This activity is significant for a SOC as it highlights
-    potential unauthorized application executions, which could indicate malicious
-    intent or policy circumvention. If confirmed malicious, this activity could allow
-    an attacker to execut
+  description: The following analytic detects attempts to bypass application restrictions by identifying Windows AppLocker policy violations. It leverages Windows AppLocker event logs, specifically EventCodes 8007, 8004, 8022, 8025, 8029, and 8040, to pinpoint blocked actions. This activity is significant for a SOC as it highlights potential unauthorized application executions, which could indicate malicious intent or policy circumvention. If confirmed malicious, this activity could allow an attacker to execute unauthorized applications, potentially leading to further system compromise or data exfiltration.
   author: Michael Haag, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1218
-      name: Technique T1218
-    tactics: []
+      name: System Binary Proxy Execution
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_applocker_block_events.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_applocker_block_events.yml
+      rule_sha256: sha256:c04058389470d4f6c179f612c55fe9082378bc5501f70bf0c12481c1e8e3e1b7
+      detection_id: e369afe8-cd35-47a3-9c1e-d813efc1f7dd
+      source_version: 6
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562/applocker/applocker.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1562/applocker/applocker.log
     description: XmlWinEventLog:Microsoft-Windows-AppLocker/MSI and Script - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:5e494fdf4a51102aaee474dc39b94671970d57349b25d4d3fa606822a79407f4
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

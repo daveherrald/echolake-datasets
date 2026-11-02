@@ -1,14 +1,10 @@
 metadata:
   name: linux-auditd-unload-module-via-modprobe
   version: 6.0.0
-  description: The following analytic detects suspicious use of the `modprobe` command
-    to unload kernel modules, which may indicate an attempt to disable critical system
-    components or evade detection. The `modprobe` utility manages kernel modules,
-    and unauthorized unloading of modules can disrupt system security features, remove
-    logging capabilities, or conceal malicious activities. By monitoring for unusual
-    or unauthorized `modprobe` operations involving module unloading, this analytic
-    helps identify potentia
+  description: The following analytic detects suspicious use of the `modprobe` command to unload kernel modules, which may indicate an attempt to disable critical system components or evade detection. The `modprobe` utility manages kernel modules, and unauthorized unloading of modules can disrupt system security features, remove logging capabilities, or conceal malicious activities. By monitoring for unusual or unauthorized `modprobe` operations involving module unloading, this analytic helps identify potential tampering with kernel functionality, enabling security teams to investigate and address possible threats to system integrity.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1547.006
-      name: Technique T1547.006
-    tactics: []
+      name: Kernel Modules and Extensions
+      tactics:
+      - persistence
+      - privilege-escalation
+    tactics:
+    - persistence
+    - privilege-escalation
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/linux_auditd_unload_module_via_modprobe.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/linux_auditd_unload_module_via_modprobe.yml
+      rule_sha256: sha256:6e96a75dec896e0e4c56c8edfda32d6a4da3c8d557d52e1064785d2e9c867554
+      detection_id: 90964d6a-4b5f-409a-85bd-95e261e03fe9
+      source_version: 6
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1547.006/linux_auditd_modprobe_unload_module/auditd_execve_modprobe.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1547.006/linux_auditd_modprobe_unload_module/auditd_execve_modprobe.log
     description: auditd - auditd
     format: auto
     schema: raw
     sourcetype: auditd
+    checksum: sha256:d9ba18feae86b3b66eb3c7ae048b59d926d6739a0a224c2ee650730b05cbdce8
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

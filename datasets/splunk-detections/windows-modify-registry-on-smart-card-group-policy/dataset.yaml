@@ -1,13 +1,10 @@
 metadata:
   name: windows-modify-registry-on-smart-card-group-policy
   version: 6.0.0
-  description: This analytic is developed to detect suspicious registry modifications
-    targeting the "scforceoption" key. Altering this key enforces smart card login
-    for all users, potentially disrupting normal access methods. Unauthorized changes
-    to this setting could indicate an attempt to restrict access or force a specific
-    authentication method, possibly signifying malicious intent to manipulate system
-    security protocols.
+  description: This analytic is developed to detect suspicious registry modifications targeting the "scforceoption" key. Altering this key enforces smart card login for all users, potentially disrupting normal access methods. Unauthorized changes to this setting could indicate an attempt to restrict access or force a specific authentication method, possibly signifying malicious intent to manipulate system security protocols.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -15,18 +12,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1112
-      name: Technique T1112
-    tactics: []
+      name: Modify Registry
+      tactics:
+      - persistence
+      - defense-evasion
+    tactics:
+    - persistence
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_modify_registry_on_smart_card_group_policy.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_modify_registry_on_smart_card_group_policy.yml
+      rule_sha256: sha256:59c43f1c577e7483e467375430514b6f0332824e77596a00a6d90fefab925db0
+      detection_id: 1522145a-8e86-4f83-89a8-baf62a8f489d
+      source_version: 6
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1112/smart_card_group_policy/scforceoption-reg.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1112/smart_card_group_policy/scforceoption-reg.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:d7e69fef0be565cc2a02de146b334645c562e8b872e7b70b07e9134cf3e6d482
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

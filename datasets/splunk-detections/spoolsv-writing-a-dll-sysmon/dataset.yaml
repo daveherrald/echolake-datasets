@@ -1,14 +1,10 @@
 metadata:
   name: spoolsv-writing-a-dll-sysmon
   version: 8.0.0
-  description: The following analytic detects `spoolsv.exe` writing a `.dll` file,
-    which is unusual behavior and may indicate exploitation of vulnerabilities like
-    CVE-2021-34527 (PrintNightmare). This detection leverages Sysmon EventID 11 to
-    monitor file creation events in the `\spool\drivers\x64\` directory. This activity
-    is significant because `spoolsv.exe` typically does not write DLL files, and such
-    behavior could signify an ongoing attack. If confirmed malicious, this could allow
-    an attacker to execute ar
+  description: The following analytic detects `spoolsv.exe` writing a `.dll` file, which is unusual behavior and may indicate exploitation of vulnerabilities like CVE-2021-34527 (PrintNightmare). This detection leverages Sysmon EventID 11 to monitor file creation events in the `\spool\drivers\x64\` directory. This activity is significant because `spoolsv.exe` typically does not write DLL files, and such behavior could signify an ongoing attack. If confirmed malicious, this could allow an attacker to execute arbitrary code, escalate privileges, or maintain persistence on the compromised system.
   author: Mauricio Velazco, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1547.012
-      name: Technique T1547.012
-    tactics: []
+      name: Print Processors
+      tactics:
+      - persistence
+      - privilege-escalation
+    tactics:
+    - persistence
+    - privilege-escalation
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/spoolsv_writing_a_dll___sysmon.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/spoolsv_writing_a_dll___sysmon.yml
+      rule_sha256: sha256:7748e2860ff7cdc229e1aaa429b1d8ae3136d65bca5bdef111e9977b00413de3
+      detection_id: 347fd388-da87-11eb-836d-acde48001122
+      source_version: 8
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1547.012/printnightmare/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1547.012/printnightmare/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:9e71f4c59caa60932c40fe56e8f1ea51c13baf113709775044ce5828a35ebd6f
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

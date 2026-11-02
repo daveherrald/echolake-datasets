@@ -1,13 +1,10 @@
 metadata:
   name: windows-lolbas-executed-as-renamed-file
   version: 7.0.0
-  description: The following analytic identifies a LOLBAS process being executed where
-    it's process name does not match it's original file name attribute. Processes
-    that have been renamed and executed may be an indicator that an adversary is attempting
-    to evade defenses or execute malicious code. The LOLBAS project documents Windows
-    native binaries that can be abused by threat actors to perform tasks like executing
-    malicious code.
+  description: The following analytic identifies a LOLBAS process being executed where it's process name does not match it's original file name attribute. Processes that have been renamed and executed may be an indicator that an adversary is attempting to evade defenses or execute malicious code. The LOLBAS project documents Windows native binaries that can be abused by threat actors to perform tasks like executing malicious code.
   author: Steven Dick
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,20 +14,44 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1036.003
-      name: Technique T1036.003
+      name: Rename Legitimate Utilities
+      tactics:
+      - defense-evasion
     - id: T1218.011
-      name: Technique T1218.011
-    tactics: []
+      name: Rundll32
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_lolbas_executed_as_renamed_file.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_lolbas_executed_as_renamed_file.yml
+      rule_sha256: sha256:40038497842599e4b7c20cd193e19c811a12f799af58a6b47cba80498f3aea9b
+      detection_id: fd496996-7d9e-4894-8d40-bb85b6192dc6
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1036/cmd_lolbas_usage/cmd_lolbas_usage.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1036/cmd_lolbas_usage/cmd_lolbas_usage.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:498b62af6fe8753e73d8973e4ff843aef2efca7a59d346d779d4258fddb258cb
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

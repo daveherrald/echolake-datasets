@@ -1,13 +1,10 @@
 metadata:
   name: windows-modify-registry-disable-rdp
   version: 7.0.0
-  description: This analytic is developed to detect suspicious registry modifications
-    that disable Remote Desktop Protocol (RDP) by altering the "fDenyTSConnections"
-    key. Changing this key's value to 1 prevents remote connections, which can disrupt
-    remote management and access. Such modifications could indicate an attempt to
-    hinder remote administration or isolate the system from remote intervention, potentially
-    signifying malicious activity.
+  description: This analytic is developed to detect suspicious registry modifications that disable Remote Desktop Protocol (RDP) by altering the "fDenyTSConnections" key. Changing this key's value to 1 prevents remote connections, which can disrupt remote management and access. Such modifications could indicate an attempt to hinder remote administration or isolate the system from remote intervention, potentially signifying malicious activity.
   author: Teoderick Contreras, Splunk
+  updated: '2025-08-01'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +13,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1112
-      name: Technique T1112
-    tactics: []
+      name: Modify Registry
+      tactics:
+      - persistence
+      - defense-evasion
+    tactics:
+    - persistence
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_modify_registry_disable_rdp.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_modify_registry_disable_rdp.yml
+      rule_sha256: sha256:1eb718ec3dccb5e0dd6a85c98fb902bfd216deb3eb9d182751df0294325b1af5
+      detection_id: 11ed764f-eb9c-4be7-bdad-2209b9d33ee1
+      source_version: 7
+      source_date: '2025-08-01'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1112/disable_rdp//fdenytsconnection-reg.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1112/disable_rdp/fdenytsconnection-reg.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:04e68b9e1c4289af5b62ba325aa9c753313a520469e176c98a8bc113b1972c1b
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

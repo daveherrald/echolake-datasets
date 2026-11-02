@@ -1,14 +1,10 @@
 metadata:
   name: time-provider-persistence-registry
   version: 11.0.0
-  description: The following analytic detects suspicious modifications to the time
-    provider registry for persistence and autostart. It leverages data from the Endpoint.Registry
-    data model, focusing on changes to the "CurrentControlSet\\Services\\W32Time\\TimeProviders"
-    registry path. This activity is significant because such modifications are uncommon
-    and can indicate an attempt to establish persistence on a compromised host. If
-    confirmed malicious, this technique allows an attacker to maintain access and
-    exec
+  description: The following analytic detects suspicious modifications to the time provider registry for persistence and autostart. It leverages data from the Endpoint.Registry data model, focusing on changes to the "CurrentControlSet\\Services\\W32Time\\TimeProviders" registry path. This activity is significant because such modifications are uncommon and can indicate an attempt to establish persistence on a compromised host. If confirmed malicious, this technique allows an attacker to maintain access and execute code automatically upon system boot, potentially leading to further exploitation and control over the affected system.
   author: Teoderick Contreras, Splunk, Steven Dick
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1547.003
-      name: Technique T1547.003
-    tactics: []
+      name: Time Providers
+      tactics:
+      - persistence
+      - privilege-escalation
+    tactics:
+    - persistence
+    - privilege-escalation
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/time_provider_persistence_registry.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/time_provider_persistence_registry.yml
+      rule_sha256: sha256:025c64f04b4287cde450d06ed78b91cc9a21eaeca88c2ebbbfdf1add9917789a
+      detection_id: 5ba382c4-2105-11ec-8d8f-acde48001122
+      source_version: 11
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1547.003/timeprovider_reg/sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1547.003/timeprovider_reg/sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:9e09d4f161216094ccbde16a535e9e684f264afdf30a5216a3fb64b9e19df841
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

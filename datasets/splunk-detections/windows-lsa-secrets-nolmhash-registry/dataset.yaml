@@ -1,14 +1,10 @@
 metadata:
   name: windows-lsa-secrets-nolmhash-registry
   version: 9.0.0
-  description: The following analytic detects modifications to the Windows registry
-    related to the Local Security Authority (LSA) NoLMHash setting. It identifies
-    when the registry value is set to 0, indicating that the system will store passwords
-    in the weaker Lan Manager (LM) hash format. This detection leverages registry
-    activity logs from endpoint data sources like Sysmon or EDR tools. Monitoring
-    this activity is crucial as it can indicate attempts to weaken password storage
-    security. If confirmed malicious
+  description: The following analytic detects modifications to the Windows registry related to the Local Security Authority (LSA) NoLMHash setting. It identifies when the registry value is set to 0, indicating that the system will store passwords in the weaker Lan Manager (LM) hash format. This detection leverages registry activity logs from endpoint data sources like Sysmon or EDR tools. Monitoring this activity is crucial as it can indicate attempts to weaken password storage security. If confirmed malicious, this could allow attackers to exploit weaker LM hashes, potentially leading to unauthorized access and credential theft.
   author: Teoderick Contreras, Splunk
+  updated: '2025-10-14'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1003.004
-      name: Technique T1003.004
-    tactics: []
+      name: LSA Secrets
+      tactics:
+      - credential-access
+    tactics:
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_lsa_secrets_nolmhash_registry.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_lsa_secrets_nolmhash_registry.yml
+      rule_sha256: sha256:957fed7fee34fcda229604c23cbcad96909b0e787708c1ba3229953054008d63
+      detection_id: 48cc1605-538c-4223-8382-e36bee5b540d
+      source_version: 9
+      source_date: '2025-10-14'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1003.004/NoLMHash/lsa-reg-settings-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1003.004/NoLMHash/lsa-reg-settings-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:8c8f63fb8ce8685f2b071f2249db601656036c21533601bcacd4ffb79ce7c894
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

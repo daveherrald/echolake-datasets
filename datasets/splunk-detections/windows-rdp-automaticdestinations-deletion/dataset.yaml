@@ -1,14 +1,10 @@
 metadata:
   name: windows-rdp-automaticdestinations-deletion
   version: 1.0.0
-  description: This detection identifies the deletion of files within the AutomaticDestinations
-    folder, located under a user’s AppData\Roaming\Microsoft\Windows\Recent directory.
-    These files are part of the Windows Jump List feature, which records recently
-    accessed files and folders tied to specific applications. Each .automaticDestinations-ms
-    file corresponds to a program (e.g., Explorer, Word, Notepad) and can be valuable
-    for forensic analysis of user activity. Adversaries may target this folder to
-    erase evi
+  description: "This detection identifies the deletion of files within the AutomaticDestinations folder, located under a user\u2019s AppData\\Roaming\\Microsoft\\Windows\\Recent directory. These files are part of the Windows Jump List feature, which records recently accessed files and folders tied to specific applications. Each .automaticDestinations-ms file corresponds to a program (e.g., Explorer, Word, Notepad) and can be valuable for forensic analysis of user activity. Adversaries may target this folder to erase evidence of their actions, such as which documents or directories were accessed during a session. This type of deletion is rarely seen during normal user activity and may indicate deliberate anti-forensic behavior. When correlated with suspicious logon events, RDP usage, or script execution, this activity may represent an attempt to cover tracks after data access, lateral movement, or staging for exfiltration. Detecting removal of these artifacts can highlight post-compromise cleanup efforts and help analysts reconstruct attacker behavior."
   author: Teoderick Contreras, Splunk
+  updated: '2025-07-30'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1070.004
-      name: Technique T1070.004
-    tactics: []
+      name: File Deletion
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_rdp_automaticdestinations_deletion.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_rdp_automaticdestinations_deletion.yml
+      rule_sha256: sha256:ff156346519826651a04f1ad0f3230745398dfe24b46b53ef3e9f86400543547
+      detection_id: e40a40a1-9fea-4554-abdf-b164422f0627
+      source_version: 1
+      source_date: '2025-07-30'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1070.004/automatic_file_deleted/automatic_file_deleted.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1070.004/automatic_file_deleted/automatic_file_deleted.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:f9c8d1b18a31990e5a0b741f8624e92b90b7733db2be3e3c84fb3a27fbc87e37
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

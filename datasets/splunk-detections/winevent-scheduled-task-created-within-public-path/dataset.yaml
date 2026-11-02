@@ -1,14 +1,10 @@
 metadata:
   name: winevent-scheduled-task-created-within-public-path
   version: 21.0.0
-  description: The following analytic detects the creation of scheduled tasks within
-    user-writable paths using Windows Security EventCode 4698. It identifies tasks
-    registered via schtasks.exe or TaskService that execute commands from directories
-    like Public, ProgramData, Temp, and AppData. This behavior is significant as it
-    may indicate an attempt to establish persistence or execute unauthorized commands.
-    If confirmed malicious, an attacker could maintain long-term access, escalate
-    privileges, or execute arbit
+  description: The following analytic detects the creation of scheduled tasks within user-writable paths using Windows Security EventCode 4698. It identifies tasks registered via schtasks.exe or TaskService that execute commands from directories like Public, ProgramData, Temp, and AppData. This behavior is significant as it may indicate an attempt to establish persistence or execute unauthorized commands. If confirmed malicious, an attacker could maintain long-term access, escalate privileges, or execute arbitrary code, posing a severe threat to system integrity and security.
   author: Michael Haag, Splunk
+  updated: '2025-12-10'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,44 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1053.005
-      name: Technique T1053.005
-    tactics: []
+      name: Scheduled Task
+      tactics:
+      - execution
+      - persistence
+      - privilege-escalation
+    tactics:
+    - execution
+    - persistence
+    - privilege-escalation
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/winevent_scheduled_task_created_within_public_path.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/winevent_scheduled_task_created_within_public_path.yml
+      rule_sha256: sha256:e466c0d8706786b63e6b714e4db281c608e4e4f23d57d091d13dac47f0edabec
+      detection_id: 5d9c6eee-988c-11eb-8253-acde48001122
+      source_version: 21
+      source_date: '2025-12-10'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053.005/winevent_scheduled_task_created_to_spawn_shell/windows-xml.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1053.005/winevent_scheduled_task_created_to_spawn_shell/windows-xml.log
     description: XmlWinEventLog:Security - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:a6c0a6f8cfffd860b8c3d41ff37f9b6d926ecd6a00ea1f77358569d39943384e
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

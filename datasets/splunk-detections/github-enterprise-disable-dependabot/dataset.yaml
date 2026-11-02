@@ -1,14 +1,10 @@
 metadata:
   name: github-enterprise-disable-dependabot
   version: 2.0.0
-  description: The following analytic detects when a user disables Dependabot security
-    features within a GitHub repository. Dependabot helps automatically identify and
-    fix security vulnerabilities in dependencies. The detection monitors GitHub Enterprise
-    logs for configuration changes that disable Dependabot functionality. This behavior
-    could indicate an attacker attempting to prevent the automatic detection of vulnerable
-    dependencies, which would allow them to exploit known vulnerabilities that would
-    otherwis
+  description: The following analytic detects when a user disables Dependabot security features within a GitHub repository. Dependabot helps automatically identify and fix security vulnerabilities in dependencies. The detection monitors GitHub Enterprise logs for configuration changes that disable Dependabot functionality. This behavior could indicate an attacker attempting to prevent the automatic detection of vulnerable dependencies, which would allow them to exploit known vulnerabilities that would otherwise be patched. For a SOC, identifying the disabling of security features like Dependabot is critical as it may be a precursor to supply chain attacks where attackers exploit vulnerable dependencies. The impact could be severe if vulnerabilities remain unpatched, potentially leading to code execution, data theft, or other compromises through the software supply chain.
   author: Patrick Bareiss, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,20 +12,45 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1562.001
-      name: Technique T1562.001
+      name: Disable or Modify Tools
+      tactics:
+      - defense-evasion
     - id: T1195
-      name: Technique T1195
-    tactics: []
+      name: Supply Chain Compromise
+      tactics:
+      - initial-access
+    tactics:
+    - initial-access
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/github_enterprise_disable_dependabot.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/github_enterprise_disable_dependabot.yml
+      rule_sha256: sha256:f903347c0aa6fc16179fe81cdb4ba89ce30e1911deb60d1ae3444f7a521704be
+      detection_id: 787dd1c1-eb3a-4a31-8e8c-2ad24b214bc8
+      source_version: 2
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.001/disable_dependabot/github.json
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1562.001/disable_dependabot/github.json
     description: http:github - httpevent
     format: auto
     schema: raw
     sourcetype: httpevent
+    checksum: sha256:79505c5a3df8d35887d6e1810450bec337aa4a4f0f2d4ce14e5723a9c0ca84a9
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

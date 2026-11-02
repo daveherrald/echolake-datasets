@@ -1,14 +1,10 @@
 metadata:
   name: windows-modify-registry-disablesecuritysettings
   version: 8.0.0
-  description: The following analytic detects modifications to the Windows registry
-    that disable security settings for Terminal Services. It leverages the Endpoint
-    data model, specifically monitoring changes to the registry path associated with
-    Terminal Services security settings. This activity is significant because altering
-    these settings can weaken the security posture of Remote Desktop Services, potentially
-    allowing unauthorized remote access. If confirmed malicious, such modifications
-    could enable attacke
+  description: The following analytic detects modifications to the Windows registry that disable security settings for Terminal Services. It leverages the Endpoint data model, specifically monitoring changes to the registry path associated with Terminal Services security settings. This activity is significant because altering these settings can weaken the security posture of Remote Desktop Services, potentially allowing unauthorized remote access. If confirmed malicious, such modifications could enable attackers to gain persistent remote access to the system, facilitating further exploitation and data exfiltration.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1112
-      name: Technique T1112
-    tactics: []
+      name: Modify Registry
+      tactics:
+      - persistence
+      - defense-evasion
+    tactics:
+    - persistence
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_modify_registry_disablesecuritysettings.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_modify_registry_disablesecuritysettings.yml
+      rule_sha256: sha256:84bb33df10f39acf14a1a3446deedc18859cd8efc8cf6b299408b27b192fe720
+      detection_id: 989019b4-b7aa-418a-9a17-2293e91288b6
+      source_version: 8
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1112/disablesecuritysetting.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1112/disablesecuritysetting.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:e9aa847780498c1df7448295403311ae998787c953580bcc707e5fc50310ed8f
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

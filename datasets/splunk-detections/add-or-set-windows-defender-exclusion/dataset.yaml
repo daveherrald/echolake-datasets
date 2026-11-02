@@ -13,8 +13,12 @@ metadata:
 
     If confirmed malicious, this behavior could enable attackers to evade antivirus
 
-    det'
+    detection, maintain persistence, and execute further malicious activities without
+
+    interference from Windows Defender.'
   author: Teoderick Contreras, Nasreddine Bencherchali, Splunk
+  updated: '2025-11-20'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -24,18 +28,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1562.001
-      name: Technique T1562.001
-    tactics: []
+      name: Disable or Modify Tools
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/add_or_set_windows_defender_exclusion.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/add_or_set_windows_defender_exclusion.yml
+      rule_sha256: sha256:0b38e52e8831d265819893a5a44ee9ddeced80b9e63a35ae3d54519583a943b6
+      detection_id: 773b66fe-4dd9-11ec-8289-acde48001122
+      source_version: 12
+      source_date: '2025-11-20'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.001/defender_exclusion_sysmon/sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1562.001/defender_exclusion_sysmon/sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:9898052d0f26516f344af733a7f58bcfe863848cdf1195549d94737c350bcd28
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

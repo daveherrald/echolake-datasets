@@ -1,14 +1,10 @@
 metadata:
   name: o365-email-send-and-hard-delete-suspicious-behavior
   version: 2.0.0
-  description: The following analytic identifies when an O365 email account sends
-    and then hard deletes email with within a short period (within 1 hour). This behavior
-    may indicate a compromised account where the threat actor is attempting to remove
-    forensic artifacts or evidence of activity. Threat actors often use this technique
-    to prevent defenders and victims from knowing the account has been compromised.
-    --- Some account owner legitimate behaviors can trigger this alert, however these
-    actions may not be a
+  description: The following analytic identifies when an O365 email account sends and then hard deletes email with within a short period (within 1 hour). This behavior may indicate a compromised account where the threat actor is attempting to remove forensic artifacts or evidence of activity. Threat actors often use this technique to prevent defenders and victims from knowing the account has been compromised. --- Some account owner legitimate behaviors can trigger this alert, however these actions may not be aligned with organizational expectations / best practice behaviors.
   author: Steven Dick
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,22 +14,50 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1114.001
-      name: Technique T1114.001
+      name: Local Email Collection
+      tactics:
+      - collection
     - id: T1070.008
-      name: Technique T1070.008
+      name: Clear Mailbox Data
+      tactics:
+      - defense-evasion
     - id: T1485
-      name: Technique T1485
-    tactics: []
+      name: Data Destruction
+      tactics:
+      - impact
+    tactics:
+    - defense-evasion
+    - collection
+    - impact
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/o365_email_send_and_hard_delete_suspicious_behavior.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/o365_email_send_and_hard_delete_suspicious_behavior.yml
+      rule_sha256: sha256:e89f80d8873921f7b68a89a985e90cb4d18e2c9bad722fb9e74ebcc4a5c46073
+      detection_id: c97b3d72-0a47-46f9-b742-b89f1cc2d551
+      source_version: 2
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1114/o365_suspect_email_actions/o365_exchange_suspect_events.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1114/o365_suspect_email_actions/o365_exchange_suspect_events.log
     description: o365 - o365:management:activity
     format: auto
     schema: raw
     sourcetype: o365:management:activity
+    checksum: sha256:34a11765788b8f38d9a7d499eeeac5f5ea8acd6e5a81af7cf3ebf8bd4a3e01c9
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

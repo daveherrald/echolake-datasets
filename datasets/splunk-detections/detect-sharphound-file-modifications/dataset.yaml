@@ -1,14 +1,10 @@
 metadata:
   name: detect-sharphound-file-modifications
   version: 9.0.0
-  description: The following analytic detects the creation of files typically associated
-    with SharpHound, a reconnaissance tool used for gathering domain and trust data.
-    It leverages file modification events from the Endpoint.Filesystem data model,
-    focusing on default file naming patterns like `*_BloodHound.zip` and various JSON
-    files. This activity is significant as it indicates potential domain enumeration,
-    which is a precursor to more targeted attacks. If confirmed malicious, an attacker
-    could gain detailed
+  description: The following analytic detects the creation of files typically associated with SharpHound, a reconnaissance tool used for gathering domain and trust data. It leverages file modification events from the Endpoint.Filesystem data model, focusing on default file naming patterns like `*_BloodHound.zip` and various JSON files. This activity is significant as it indicates potential domain enumeration, which is a precursor to more targeted attacks. If confirmed malicious, an attacker could gain detailed insights into the domain structure, facilitating lateral movement and privilege escalation.
   author: Michael Haag, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,26 +14,56 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1069.001
-      name: Technique T1069.001
+      name: Local Groups
+      tactics:
+      - discovery
     - id: T1069.002
-      name: Technique T1069.002
+      name: Domain Groups
+      tactics:
+      - discovery
     - id: T1087.001
-      name: Technique T1087.001
+      name: Local Account
+      tactics:
+      - discovery
     - id: T1087.002
-      name: Technique T1087.002
+      name: Domain Account
+      tactics:
+      - discovery
     - id: T1482
-      name: Technique T1482
-    tactics: []
+      name: Domain Trust Discovery
+      tactics:
+      - discovery
+    tactics:
+    - discovery
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/detect_sharphound_file_modifications.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/detect_sharphound_file_modifications.yml
+      rule_sha256: sha256:6c417447d9f01515ef56be018a4a76e891a5d16e25ec4ad80cd25899189bae6c
+      detection_id: 42b4b438-beed-11eb-ba1d-acde48001122
+      source_version: 9
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/sharphound/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1059.001/sharphound/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:29f4f1a561c219f2fe98db0e1269417a7632804c1431a9f1fadfccfba4f170c0
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

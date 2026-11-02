@@ -1,14 +1,10 @@
 metadata:
   name: windows-modify-registry-regedit-silent-reg-import
   version: 7.0.0
-  description: The following analytic detects the modification of the Windows registry
-    using the regedit.exe application with the silent mode parameter. It leverages
-    data from Endpoint Detection and Response (EDR) agents, focusing on process names
-    and command-line executions. This activity is significant because the silent mode
-    allows registry changes without user confirmation, which can be exploited by adversaries
-    to import malicious registry settings. If confirmed malicious, this could enable
-    attackers to pe
+  description: The following analytic detects the modification of the Windows registry using the regedit.exe application with the silent mode parameter. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line executions. This activity is significant because the silent mode allows registry changes without user confirmation, which can be exploited by adversaries to import malicious registry settings. If confirmed malicious, this could enable attackers to persist in the environment, escalate privileges, or manipulate system configurations, leading to potential system compromise.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1112
-      name: Technique T1112
-    tactics: []
+      name: Modify Registry
+      tactics:
+      - persistence
+      - defense-evasion
+    tactics:
+    - persistence
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_modify_registry_regedit_silent_reg_import.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_modify_registry_regedit_silent_reg_import.yml
+      rule_sha256: sha256:a8dd1bca46b254fb11cc53fa7e327f88ac55474e53ab3527164f58602d3ec1f8
+      detection_id: 824dd598-71be-4203-bc3b-024f4cda340e
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/azorult/sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/azorult/sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:00b51f8b994ee390d7305f35b43fd2a92570d41261576ebd548d5e9c5b187429
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,14 +1,10 @@
 metadata:
   name: detect-outbound-smb-traffic
   version: 12.0.0
-  description: The following analytic detects outbound SMB (Server Message Block)
-    connections from internal hosts to external servers. It identifies this activity
-    by monitoring network traffic for SMB requests directed towards the Internet,
-    which are unusual for standard operations. This detection is significant for a
-    SOC as it can indicate an attacker's attempt to retrieve credential hashes through
-    compromised servers, a key step in lateral movement and privilege escalation.
-    If confirmed malicious, this activ
+  description: The following analytic detects outbound SMB (Server Message Block) connections from internal hosts to external servers. It identifies this activity by monitoring network traffic for SMB requests directed towards the Internet, which are unusual for standard operations. This detection is significant for a SOC as it can indicate an attacker's attempt to retrieve credential hashes through compromised servers, a key step in lateral movement and privilege escalation. If confirmed malicious, this activity could lead to unauthorized access to sensitive data and potential full system compromise.
   author: Bhavin Patel, Stuart Hopkins, Patrick Bareiss
+  updated: '2025-06-10'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1071.002
-      name: Technique T1071.002
-    tactics: []
+      name: File Transfer Protocols
+      tactics:
+      - command-and-control
+    tactics:
+    - command-and-control
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/network/detect_outbound_smb_traffic.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/network/detect_outbound_smb_traffic.yml
+      rule_sha256: sha256:52ab6a2dbac62931440fbddf30b734bc9e966f5e6832a297038e7203e54acda1
+      detection_id: 1bed7774-304a-4e8f-9d72-d80e45ff492b
+      source_version: 12
+      source_date: '2025-06-10'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_secure_firewall_threat_defense/connection_event/connection_events.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/cisco_secure_firewall_threat_defense/connection_event/connection_events.log
     description: not_applicable - cisco:sfw:estreamer
     format: auto
     schema: raw
     sourcetype: cisco:sfw:estreamer
+    checksum: sha256:37e737d87c4e8396396f3a69621c127bd943eb733036deb7abaa5a5a7276371d
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

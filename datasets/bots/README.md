@@ -20,7 +20,32 @@ The `-2026` versions are identical to the originals except that all timestamps h
 
 ## Format
 
-CSV files exported from Splunk with columns: `_serial`, `_time`, `source`, `sourcetype`, `host`, `index`, `splunk_server`, `_raw`.
+Gzip-compressed native logs in text, JSONL, and Windows Event Log XML formats. Each manifest records the format and sourcetype for every object.
+
+## Integrity maintenance
+
+Every remote object in the BOTS manifests has an immutable SHA-256 digest. A completed checkpoint is treated as final, so an ordinary rerun performs no S3 requests. To refresh the catalog after an intentional source change, build a separate checkpoint first:
+
+```bash
+python3 scripts/acquire_bots_checksums.py \
+  --output scripts/data/bots_sha256.next.json \
+  --head-only
+```
+
+The metadata-only pass exits nonzero when S3 does not return full-object SHA-256 values. Resume with the same output path to stream and hash those objects. Validate the completed checkpoint before replacing the committed catalog:
+
+```bash
+python3 scripts/acquire_bots_checksums.py \
+  --output scripts/data/bots_sha256.next.json
+python3 scripts/acquire_bots_checksums.py \
+  --output scripts/data/bots_sha256.next.json \
+  --validate-only
+mv scripts/data/bots_sha256.next.json scripts/data/bots_sha256.json
+python3 scripts/generate_splunk_metadata.py --write
+python3 scripts/generate_splunk_metadata.py --check
+```
+
+The bucket uses requester-pays access. The acquisition script checkpoints each result in the selected output file, records S3 audit metadata, and never treats an ETag as a SHA-256 digest.
 
 ## License
 

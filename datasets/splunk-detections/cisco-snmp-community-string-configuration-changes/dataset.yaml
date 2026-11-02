@@ -1,14 +1,10 @@
 metadata:
   name: cisco-snmp-community-string-configuration-changes
   version: 1.0.0
-  description: This analytic detects changes to SNMP community strings on Cisco devices,
-    which could indicate an attacker establishing persistence or attempting to extract
-    credentials. After gaining initial access to network devices, threat actors like
-    Static Tundra often modify SNMP configurations to enable unauthorized monitoring
-    and data collection. This detection specifically looks for the configuration of
-    SNMP community strings with read-write (rw) or read-only (ro) permissions, as
-    well as the configurati
+  description: This analytic detects changes to SNMP community strings on Cisco devices, which could indicate an attacker establishing persistence or attempting to extract credentials. After gaining initial access to network devices, threat actors like Static Tundra often modify SNMP configurations to enable unauthorized monitoring and data collection. This detection specifically looks for the configuration of SNMP community strings with read-write (rw) or read-only (ro) permissions, as well as the configuration of SNMP hosts that may be used to exfiltrate data. These activities are particularly concerning as they may represent attempts to establish persistent access or extract sensitive information from compromised devices.
   author: Bhavin Patel, Michael Haag, Splunk
+  updated: '2025-08-21'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,22 +12,51 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1562.001
-      name: Technique T1562.001
+      name: Disable or Modify Tools
+      tactics:
+      - defense-evasion
     - id: T1040
-      name: Technique T1040
+      name: Network Sniffing
+      tactics:
+      - credential-access
+      - discovery
     - id: T1552
-      name: Technique T1552
-    tactics: []
+      name: Unsecured Credentials
+      tactics:
+      - credential-access
+    tactics:
+    - defense-evasion
+    - credential-access
+    - discovery
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/network/cisco_snmp_community_string_configuration_changes.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/network/cisco_snmp_community_string_configuration_changes.yml
+      rule_sha256: sha256:1ab70917463183f0f079030af9c8708352b6143d75e59511c5a4241aaa92d965
+      detection_id: b0ce5521-2533-4f24-b8d5-c2ff977aae08
+      source_version: 1
+      source_date: '2025-08-21'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/cisco/cisco_smart_install/cisco_ios.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1190/cisco/cisco_smart_install/cisco_ios.log
     description: cisco:ios - cisco:ios
     format: auto
     schema: raw
     sourcetype: cisco:ios
+    checksum: sha256:ae903908503ba93ad0dd9d5be452a38137344f927659db5577acd4fa2695709f
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

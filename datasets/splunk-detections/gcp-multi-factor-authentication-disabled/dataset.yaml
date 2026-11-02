@@ -1,14 +1,10 @@
 metadata:
   name: gcp-multi-factor-authentication-disabled
   version: 9.0.0
-  description: The following analytic detects an attempt to disable multi-factor authentication
-    (MFA) for a Google Cloud Platform (GCP) user. It leverages Google Workspace Admin
-    log events, specifically the `UNENROLL_USER_FROM_STRONG_AUTH` command. This activity
-    is significant because disabling MFA can allow an adversary to maintain persistence
-    within the environment using a compromised account without raising suspicion.
-    If confirmed malicious, this action could enable attackers to bypass additional
-    security l
+  description: The following analytic detects an attempt to disable multi-factor authentication (MFA) for a Google Cloud Platform (GCP) user. It leverages Google Workspace Admin log events, specifically the `UNENROLL_USER_FROM_STRONG_AUTH` command. This activity is significant because disabling MFA can allow an adversary to maintain persistence within the environment using a compromised account without raising suspicion. If confirmed malicious, this action could enable attackers to bypass additional security layers, potentially leading to unauthorized access, data exfiltration, or further exploitation of the compromised account.
   author: Bhavin Patel, Mauricio Velazco, Splunk
+  updated: '2025-10-14'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,20 +13,49 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1556.006
-      name: Technique T1556.006
+      name: Multi-Factor Authentication
+      tactics:
+      - persistence
+      - defense-evasion
+      - credential-access
     - id: T1586.003
-      name: Technique T1586.003
-    tactics: []
+      name: Cloud Accounts
+      tactics:
+      - resource-development
+    tactics:
+    - resource-development
+    - persistence
+    - defense-evasion
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/gcp_multi_factor_authentication_disabled.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/gcp_multi_factor_authentication_disabled.yml
+      rule_sha256: sha256:315667222592c683057aacdef49a0f5c639c3823b4c20e9c68956dee59238c14
+      detection_id: b9bc5513-6fc1-4821-85a3-e1d81e451c83
+      source_version: 9
+      source_date: '2025-10-14'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1556/gcp_disable_mfa/gws_admin.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1556/gcp_disable_mfa/gws_admin.log
     description: gws:reports:admin - gws:reports:admin
     format: auto
     schema: raw
     sourcetype: gws:reports:admin
+    checksum: sha256:f3d2fa6a1e78857bf03d606276a19fecb3c26869c423052c401ce34be4be1924
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

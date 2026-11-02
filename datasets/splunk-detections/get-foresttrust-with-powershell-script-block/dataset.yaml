@@ -1,14 +1,10 @@
 metadata:
   name: get-foresttrust-with-powershell-script-block
   version: 8.0.0
-  description: The following analytic detects the execution of the Get-ForestTrust
-    command from PowerSploit using PowerShell Script Block Logging (EventCode=4104).
-    This method captures the full command sent to PowerShell, providing detailed visibility
-    into potentially suspicious activities. Monitoring this behavior is crucial as
-    it can indicate an attempt to gather domain trust information, which is often
-    a precursor to lateral movement or privilege escalation. If confirmed malicious,
-    this activity could allow
+  description: The following analytic detects the execution of the Get-ForestTrust command from PowerSploit using PowerShell Script Block Logging (EventCode=4104). This method captures the full command sent to PowerShell, providing detailed visibility into potentially suspicious activities. Monitoring this behavior is crucial as it can indicate an attempt to gather domain trust information, which is often a precursor to lateral movement or privilege escalation. If confirmed malicious, this activity could allow an attacker to map trust relationships within the domain, facilitating further exploitation and access to sensitive resources.
   author: Michael Haag, Splunk
+  updated: '2025-06-24'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,20 +12,45 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1482
-      name: Technique T1482
+      name: Domain Trust Discovery
+      tactics:
+      - discovery
     - id: T1059.001
-      name: Technique T1059.001
-    tactics: []
+      name: PowerShell
+      tactics:
+      - execution
+    tactics:
+    - execution
+    - discovery
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/get_foresttrust_with_powershell_script_block.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/get_foresttrust_with_powershell_script_block.yml
+      rule_sha256: sha256:5c6208373adefb737fdb17f1a9e465251ab1127e0959be4e0de76d7586ae5808
+      detection_id: 70fac80e-0bf1-11ec-9ba0-acde48001122
+      source_version: 8
+      source_date: '2025-06-24'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1482/discovery/windows-powershell-xml.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1482/discovery/windows-powershell-xml.log
     description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:10509ead4284000aa71a3d4d963dca49e7f5b53a3b04991b3f6b28063ca87208
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,13 +1,10 @@
 metadata:
   name: aws-credential-access-rds-password-reset
   version: 9.0.0
-  description: The following analytic detects the resetting of the master user password
-    for an Amazon RDS DB instance. It leverages AWS CloudTrail logs to identify events
-    where the `ModifyDBInstance` API call includes a new `masterUserPassword` parameter.
-    This activity is significant because unauthorized password resets can grant attackers
-    access to sensitive data stored in production databases, such as credit card information,
-    PII, and healthcare data. If confirmed malicious, this could lead to data breaches,
+  description: The following analytic detects the resetting of the master user password for an Amazon RDS DB instance. It leverages AWS CloudTrail logs to identify events where the `ModifyDBInstance` API call includes a new `masterUserPassword` parameter. This activity is significant because unauthorized password resets can grant attackers access to sensitive data stored in production databases, such as credit card information, PII, and healthcare data. If confirmed malicious, this could lead to data breaches, regulatory non-compliance, and significant reputational damage. Immediate investigation is required to determine the legitimacy of the password reset.
   author: Gowthamaraj Rajendran, Splunk
+  updated: '2025-10-14'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,20 +13,45 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1110
-      name: Technique T1110
+      name: Brute Force
+      tactics:
+      - credential-access
     - id: T1586.003
-      name: Technique T1586.003
-    tactics: []
+      name: Cloud Accounts
+      tactics:
+      - resource-development
+    tactics:
+    - resource-development
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/aws_credential_access_rds_password_reset.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/aws_credential_access_rds_password_reset.yml
+      rule_sha256: sha256:c365259782daee7ceb69deb1504bca9da759aa1bafddef441c2c2b310717c6ef
+      detection_id: 6153c5ea-ed30-4878-81e6-21ecdb198189
+      source_version: 9
+      source_date: '2025-10-14'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1110.002/aws_rds_password_reset/aws_cloudtrail_events.json
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1110.002/aws_rds_password_reset/aws_cloudtrail_events.json
     description: aws_cloudtrail - aws:cloudtrail
     format: auto
     schema: raw
     sourcetype: aws:cloudtrail
+    checksum: sha256:7015688e41e2afca485d25fcf1fc2e655402fc036e372ca0ad6d2fefc9430c1f
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,14 +1,10 @@
 metadata:
   name: windows-remote-desktop-network-bruteforce-attempt
   version: 5.0.0
-  description: The following analytic identifies potential Remote Desktop Protocol
-    (RDP) brute force attacks by monitoring network traffic for RDP application activity.
-    This query detects potential RDP brute force attacks by identifying source IPs
-    that have made more than 10 connection attempts to the same RDP port on a host
-    within a one-hour window. The results are presented in a table that includes the
-    source and destination IPs, destination port, number of attempts, and the times
-    of the first and last conne
+  description: The following analytic identifies potential Remote Desktop Protocol (RDP) brute force attacks by monitoring network traffic for RDP application activity. This query detects potential RDP brute force attacks by identifying source IPs that have made more than 10 connection attempts to the same RDP port on a host within a one-hour window. The results are presented in a table that includes the source and destination IPs, destination port, number of attempts, and the times of the first and last connection attempts, helping to prioritize IPs based on the intensity of activity.
   author: Jose Hernandez, Bhavin Patel, Splunk
+  updated: '2025-08-01'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1110.001
-      name: Technique T1110.001
-    tactics: []
+      name: Password Guessing
+      tactics:
+      - credential-access
+    tactics:
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/network/windows_remote_desktop_network_bruteforce_attempt.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/network/windows_remote_desktop_network_bruteforce_attempt.yml
+      rule_sha256: sha256:9765e33805ab65e2e6408fe0c59310065e11ab3a0047dfd5547c9004148bf67c
+      detection_id: 908bf0d5-0983-4afd-b6a4-e9eb5d361a7d
+      source_version: 5
+      source_date: '2025-08-01'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1110.001/rdp_brute_sysmon/sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1110.001/rdp_brute_sysmon/sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:b015189928b8b892dfd7b3cb7e7314015bdfb8cc06019a59f68f3e46ca359b96
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

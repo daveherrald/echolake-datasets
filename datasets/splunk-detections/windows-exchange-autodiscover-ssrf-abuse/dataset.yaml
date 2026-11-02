@@ -1,14 +1,10 @@
 metadata:
   name: windows-exchange-autodiscover-ssrf-abuse
   version: 6.0.0
-  description: 'This analytic identifies potential exploitation attempts of ProxyShell
-    (CVE-2021-34473, CVE-2021-34523, CVE-2021-31207) and ProxyNotShell (CVE-2022-41040,
-    CVE-2022-41082) vulnerabilities in Microsoft Exchange Server. The detection focuses
-    on identifying the SSRF attack patterns used in these exploit chains. The analytic
-    monitors for suspicious POST requests to /autodiscover/autodiscover.json endpoints
-    that may indicate attempts to enumerate LegacyDN attributes as part of initial
-    reconnaissance. '
+  description: This analytic identifies potential exploitation attempts of ProxyShell (CVE-2021-34473, CVE-2021-34523, CVE-2021-31207) and ProxyNotShell (CVE-2022-41040, CVE-2022-41082) vulnerabilities in Microsoft Exchange Server. The detection focuses on identifying the SSRF attack patterns used in these exploit chains. The analytic monitors for suspicious POST requests to /autodiscover/autodiscover.json endpoints that may indicate attempts to enumerate LegacyDN attributes as part of initial reconnaissance. It also detects requests containing X-Rps-CAT parameters that could indicate attempts to impersonate Exchange users and access the PowerShell backend. Additionally, it looks for MAPI requests that may be used to obtain user SIDs, along with suspicious user agents (particularly Python-based) commonly used in automated exploit attempts. If successful, these attacks can lead to remote code execution as SYSTEM, allowing attackers to deploy webshells, access mailboxes, or gain persistent access to the Exchange server and potentially the broader network environment.
   author: Michael Haag, Nathaniel Stearns, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,20 +14,46 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1190
-      name: Technique T1190
+      name: Exploit Public-Facing Application
+      tactics:
+      - initial-access
     - id: T1133
-      name: Technique T1133
-    tactics: []
+      name: External Remote Services
+      tactics:
+      - initial-access
+      - persistence
+    tactics:
+    - initial-access
+    - persistence
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/web/windows_exchange_autodiscover_ssrf_abuse.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/web/windows_exchange_autodiscover_ssrf_abuse.yml
+      rule_sha256: sha256:6a554c3d981d26744cc338d7dea9174a0dfe3b20dfec13f90ee816206a454706
+      detection_id: d436f9e7-0ee7-4a47-864b-6dea2c4e2752
+      source_version: 6
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/proxyshell/proxyshell.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1190/proxyshell/proxyshell.log
     description: ms:iis:splunk - ms:iis:splunk
     format: auto
     schema: raw
     sourcetype: ms:iis:splunk
+    checksum: sha256:8e65adece8da112eac659bd03ca8bd652d8f237601a077f316f97a2cee805b6c
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,14 +1,10 @@
 metadata:
   name: conti-common-exec-parameter
   version: 10.0.0
-  description: The following analytic detects the execution of suspicious command-line
-    arguments commonly associated with Conti ransomware, specifically targeting local
-    drives and network shares for encryption. It leverages data from Endpoint Detection
-    and Response (EDR) agents, focusing on process execution logs that include command-line
-    details. This activity is significant because it indicates a potential ransomware
-    attack, which can lead to widespread data encryption and operational disruption.
-    If confirme
+  description: The following analytic detects the execution of suspicious command-line arguments commonly associated with Conti ransomware, specifically targeting local drives and network shares for encryption. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process execution logs that include command-line details. This activity is significant because it indicates a potential ransomware attack, which can lead to widespread data encryption and operational disruption. If confirmed malicious, the impact could be severe, resulting in data loss, system downtime, and potential ransom demands.
   author: Teoderick Contreras, Splunk
+  updated: '2025-10-14'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1204
-      name: Technique T1204
-    tactics: []
+      name: User Execution
+      tactics:
+      - execution
+    tactics:
+    - execution
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/conti_common_exec_parameter.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/conti_common_exec_parameter.yml
+      rule_sha256: sha256:74fa041a5ddccd3abc6f0035bfc86e0aba85b3542b6a24eaf67193cb28181a7c
+      detection_id: 624919bc-c382-11eb-adcc-acde48001122
+      source_version: 10
+      source_date: '2025-10-14'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/conti/inf1/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/conti/inf1/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:18e8fa48c78c064b56d99a59d7b7845d67df9afc28fdcfa308acee75960b17c8
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

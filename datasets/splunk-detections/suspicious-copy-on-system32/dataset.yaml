@@ -1,14 +1,26 @@
 metadata:
   name: suspicious-copy-on-system32
   version: 12.0.0
-  description: "The following analytic detects potentially suspicious file copy operations\
-    \ targeting the\nSystem32 or SysWow64 directories as source, often indicative\
-    \ of malicious activity.\nIt leverages data from Endpoint Detection and Response\
-    \ (EDR) agents, \nfocusing on activity initiated by command-line tools like cmd.exe\
-    \ or PowerShell.\nThis behavior is significant as it may indicate an attempt to\
-    \ evade defenses by copying\nan existing binary from the system directory and\
-    \ renaming it.\nIf confirmed malicious, th"
+  description: 'The following analytic detects potentially suspicious file copy operations targeting the
+
+    System32 or SysWow64 directories as source, often indicative of malicious activity.
+
+    It leverages data from Endpoint Detection and Response (EDR) agents,
+
+    focusing on activity initiated by command-line tools like cmd.exe or PowerShell.
+
+    This behavior is significant as it may indicate an attempt to evade defenses by copying
+
+    an existing binary from the system directory and renaming it.
+
+    If confirmed malicious, this activity could allow an attacker to execute
+
+    code undetected and potentially leading to system compromise or further lateral movement
+
+    within the network.'
   author: Teoderick Contreras, Nasreddine Bencherchali, Splunk
+  updated: '2025-12-18'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,18 +30,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1036.003
-      name: Technique T1036.003
-    tactics: []
+      name: Rename Legitimate Utilities
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/suspicious_copy_on_system32.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/suspicious_copy_on_system32.yml
+      rule_sha256: sha256:6964b26cb6b3975160f783cacac6a5bbcf2b1c8fa8258e0e25e2795077c17c49
+      detection_id: ce633e56-25b2-11ec-9e76-acde48001122
+      source_version: 12
+      source_date: '2025-12-18'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1036.003/copy_sysmon/sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1036.003/copy_sysmon/sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:c51aee2eef5d10ac1b9814ac48dc408d5cd9bcad3c848e0ec68b6f9a94ef4d75
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

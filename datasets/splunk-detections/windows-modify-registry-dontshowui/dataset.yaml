@@ -1,14 +1,10 @@
 metadata:
   name: windows-modify-registry-dontshowui
   version: 8.0.0
-  description: 'The following analytic detects modifications to the Windows Error
-    Reporting registry key "DontShowUI" to suppress error reporting dialogs. It leverages
-    data from the Endpoint datamodel''s Registry node to identify changes where the
-    registry value is set to 0x00000001. This activity is significant as it is commonly
-    associated with DarkGate malware, which uses this modification to avoid detection
-    during its installation. If confirmed malicious, this behavior could allow attackers
-    to maintain a low '
+  description: The following analytic detects modifications to the Windows Error Reporting registry key "DontShowUI" to suppress error reporting dialogs. It leverages data from the Endpoint datamodel's Registry node to identify changes where the registry value is set to 0x00000001. This activity is significant as it is commonly associated with DarkGate malware, which uses this modification to avoid detection during its installation. If confirmed malicious, this behavior could allow attackers to maintain a low profile, avoiding user alerts and potentially enabling further malicious activities without user intervention.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +12,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1112
-      name: Technique T1112
-    tactics: []
+      name: Modify Registry
+      tactics:
+      - persistence
+      - defense-evasion
+    tactics:
+    - persistence
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_modify_registry_dontshowui.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_modify_registry_dontshowui.yml
+      rule_sha256: sha256:f9c43ff2bd7136bbbae49b0cdfe6b12ebb8af34f7d1e210ae3aac3c414312d42
+      detection_id: 4ff9767b-fdf2-489c-83a5-c6c34412d72e
+      source_version: 8
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1112/wer_dontshowui/dontshowui_sys.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1112/wer_dontshowui/dontshowui_sys.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:e80d336729e1f1bdbb265d0250fc3a98f7b997950bddd66a7718fb1fdec08d76
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

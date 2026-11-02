@@ -1,14 +1,10 @@
 metadata:
   name: get-wmiobject-group-discovery
   version: 7.0.0
-  description: The following analytic detects the use of the `Get-WMIObject Win32_Group`
-    command executed via PowerShell to enumerate local groups on an endpoint. This
-    detection leverages data from Endpoint Detection and Response (EDR) agents, focusing
-    on process names and command-line executions. Identifying local groups can be
-    a precursor to privilege escalation or lateral movement. If confirmed malicious,
-    this activity could allow an attacker to map out group memberships, aiding in
-    further exploitation or u
+  description: The following analytic detects the use of the `Get-WMIObject Win32_Group` command executed via PowerShell to enumerate local groups on an endpoint. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line executions. Identifying local groups can be a precursor to privilege escalation or lateral movement. If confirmed malicious, this activity could allow an attacker to map out group memberships, aiding in further exploitation or unauthorized access to sensitive resources.
   author: Michael Haag, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - hunting
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1069.001
-      name: Technique T1069.001
-    tactics: []
+      name: Local Groups
+      tactics:
+      - discovery
+    tactics:
+    - discovery
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/get_wmiobject_group_discovery.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/get_wmiobject_group_discovery.yml
+      rule_sha256: sha256:38a6969be8a90d5ec30bf727972c911f3db61a498595406a14f477ae7aecec02
+      detection_id: 5434f670-155d-11ec-8cca-acde48001122
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1069.001/atomic_red_team/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1069.001/atomic_red_team/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:ffee39348e7c01954c0b3689e2eaf309a395cd5aca7f1365a651f6fa4c99216c
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

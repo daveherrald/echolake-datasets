@@ -1,14 +1,10 @@
 metadata:
   name: windows-unsigned-dll-side-loading-in-same-process-path
   version: 15.0.0
-  description: This detection identifies unsigned DLLs loaded through DLL side-loading
-    with same file path with the process loaded the DLL, a technique observed in DarkGate
-    malware. This detection monitors DLL loading, verifies signatures, and flags unsigned
-    DLLs. Suspicious file paths and known executable associations are checked. Detecting
-    such suspicious DLLs is crucial in preventing privilege escalation attacks and
-    other potential security breaches. Regular security assessments, thorough monitoring,
-    and im
+  description: This detection identifies unsigned DLLs loaded through DLL side-loading with same file path with the process loaded the DLL, a technique observed in DarkGate malware. This detection monitors DLL loading, verifies signatures, and flags unsigned DLLs. Suspicious file paths and known executable associations are checked. Detecting such suspicious DLLs is crucial in preventing privilege escalation attacks and other potential security breaches. Regular security assessments, thorough monitoring, and implementing security best practices are essential in safeguarding systems from such threats.
   author: Teoderick Contreras, Splunk
+  updated: '2025-09-30'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,44 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1574.001
-      name: Technique T1574.001
-    tactics: []
+      name: DLL
+      tactics:
+      - persistence
+      - privilege-escalation
+      - defense-evasion
+    tactics:
+    - persistence
+    - privilege-escalation
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_unsigned_dll_side_loading_in_same_process_path.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_unsigned_dll_side_loading_in_same_process_path.yml
+      rule_sha256: sha256:6c1d1bf66309d3acad13eb202f1742a6f0283d7f7f113712ccb7e4c8bff5d4d3
+      detection_id: 3cf85c02-f9d6-4186-bf3c-e70ee99fbc7f
+      source_version: 15
+      source_date: '2025-09-30'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1574.002/unsigned_dll_loaded_same_process_path/unsigned_dll_process_path.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1574.002/unsigned_dll_loaded_same_process_path/unsigned_dll_process_path.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:fb92d4b100e883d9f6890f583b531836d99a9a3d958a8a8975c8ca38b572cd37
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

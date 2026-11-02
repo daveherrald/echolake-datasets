@@ -1,13 +1,10 @@
 metadata:
   name: aws-bedrock-high-number-list-foundation-model-failures
   version: 2.0.0
-  description: The following analytic identifies an high number of AccessDenied attempts
-    to list AWS Bedrock foundation models. It leverages AWS CloudTrail logs to detect
-    when a user or service experiences multiple failures when calling the ListFoundationModels
-    API. This activity is significant as it may indicate an adversary performing reconnaissance
-    of available AI models after compromising credentials with limited permissions.
-    Repeated failures could suggest brute force attempts to enumerate accessible reso
+  description: The following analytic identifies an high number of AccessDenied attempts to list AWS Bedrock foundation models. It leverages AWS CloudTrail logs to detect when a user or service experiences multiple failures when calling the ListFoundationModels API. This activity is significant as it may indicate an adversary performing reconnaissance of available AI models after compromising credentials with limited permissions. Repeated failures could suggest brute force attempts to enumerate accessible resources or misconfigured access controls. If confirmed malicious, this could represent early-stage reconnaissance before attempting to access or manipulate Bedrock models or knowledge bases.
   author: Bhavin Patel, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -15,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1580
-      name: Technique T1580
-    tactics: []
+      name: Cloud Infrastructure Discovery
+      tactics:
+      - discovery
+    tactics:
+    - discovery
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/aws_bedrock_high_number_list_foundation_model_failures.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/aws_bedrock_high_number_list_foundation_model_failures.yml
+      rule_sha256: sha256:980cf8815cccdce9a1642d9eb8b783221fcb6e45ee94ed69e587488053f76ef7
+      detection_id: e84b3c74-f742-11ee-9f6e-acde48001122
+      source_version: 2
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1580/aws_bedrock_list_foundation_model_failures/cloudtrail.json
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1580/aws_bedrock_list_foundation_model_failures/cloudtrail.json
     description: aws_cloudtrail - aws:cloudtrail
     format: auto
     schema: raw
     sourcetype: aws:cloudtrail
+    checksum: sha256:9e9d2a8e6eb06cc322f9065556a374ee77fa43b659141de7c2e99473c60b40e3
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

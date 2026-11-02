@@ -1,14 +1,10 @@
 metadata:
   name: azure-ad-user-immutableid-attribute-updated
   version: 9.0.0
-  description: The following analytic identifies the modification of the SourceAnchor
-    (ImmutableId) attribute for an Azure Active Directory user. This detection leverages
-    Azure AD audit logs, specifically monitoring the "Update user" operation and changes
-    to the SourceAnchor attribute. This activity is significant as it is a step in
-    setting up an Azure AD identity federation backdoor, allowing an adversary to
-    establish persistence. If confirmed malicious, the attacker could impersonate
-    any user, bypassing pass
+  description: The following analytic identifies the modification of the SourceAnchor (ImmutableId) attribute for an Azure Active Directory user. This detection leverages Azure AD audit logs, specifically monitoring the "Update user" operation and changes to the SourceAnchor attribute. This activity is significant as it is a step in setting up an Azure AD identity federation backdoor, allowing an adversary to establish persistence. If confirmed malicious, the attacker could impersonate any user, bypassing password and MFA requirements, leading to unauthorized access and potential data breaches.
   author: Mauricio Velazco, Gowthamaraj Rajendran, Splunk
+  updated: '2025-10-14'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1098
-      name: Technique T1098
-    tactics: []
+      name: Account Manipulation
+      tactics:
+      - persistence
+      - privilege-escalation
+    tactics:
+    - persistence
+    - privilege-escalation
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/azure_ad_user_immutableid_attribute_updated.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/azure_ad_user_immutableid_attribute_updated.yml
+      rule_sha256: sha256:69d4811650333a7dfec31136226d2bb8c118859d8da3249fd8d22ed6133b99bd
+      detection_id: 0c0badad-4536-4a84-a561-5ff760f3c00e
+      source_version: 9
+      source_date: '2025-10-14'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1098/azure_ad_set_immutableid/azure-audit.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1098/azure_ad_set_immutableid/azure-audit.log
     description: Azure AD - azure:monitor:aad
     format: auto
     schema: raw
     sourcetype: azure:monitor:aad
+    checksum: sha256:0d94384457988341c6be23cb71385b75ee04f93cfab5360c03d13ee4141351f6
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

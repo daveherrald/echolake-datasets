@@ -1,14 +1,10 @@
 metadata:
   name: gcp-multiple-failed-mfa-requests-for-user
   version: 8.0.0
-  description: The following analytic detects multiple failed multi-factor authentication
-    (MFA) requests for a single user within a Google Cloud Platform (GCP) tenant.
-    It triggers when 10 or more MFA prompts fail within a 5-minute window, using Google
-    Workspace login failure events. This behavior is significant as it may indicate
-    an adversary attempting to bypass MFA by bombarding the user with repeated authentication
-    requests. If confirmed malicious, this activity could lead to unauthorized access,
-    allowing a
+  description: The following analytic detects multiple failed multi-factor authentication (MFA) requests for a single user within a Google Cloud Platform (GCP) tenant. It triggers when 10 or more MFA prompts fail within a 5-minute window, using Google Workspace login failure events. This behavior is significant as it may indicate an adversary attempting to bypass MFA by bombarding the user with repeated authentication requests. If confirmed malicious, this activity could lead to unauthorized access, allowing attackers to compromise accounts and potentially escalate privileges within the GCP environment.
   author: Mauricio Velazco, Splunk
+  updated: '2025-10-14'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,22 +13,56 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1078.004
-      name: Technique T1078.004
+      name: Cloud Accounts
+      tactics:
+      - initial-access
+      - persistence
+      - privilege-escalation
+      - defense-evasion
     - id: T1586.003
-      name: Technique T1586.003
+      name: Cloud Accounts
+      tactics:
+      - resource-development
     - id: T1621
-      name: Technique T1621
-    tactics: []
+      name: Multi-Factor Authentication Request Generation
+      tactics:
+      - credential-access
+    tactics:
+    - resource-development
+    - initial-access
+    - persistence
+    - privilege-escalation
+    - defense-evasion
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/gcp_multiple_failed_mfa_requests_for_user.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/gcp_multiple_failed_mfa_requests_for_user.yml
+      rule_sha256: sha256:dc213ec75675e6514ceec2b0b89899dc430c54f4e31d4645ef0b139d2b3feed0
+      detection_id: cbb3cb84-c06f-4393-adcc-5cb6195621f1
+      source_version: 8
+      source_date: '2025-10-14'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1621/multiple_failed_mfa_gws/gws_login.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1621/multiple_failed_mfa_gws/gws_login.log
     description: gws:reports:login - gws:reports:login
     format: auto
     schema: raw
     sourcetype: gws:reports:login
+    checksum: sha256:47564819e66c99b9991c5690f41eef4ccf1d6f4ee2f676f4a38c02855e088d1b
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

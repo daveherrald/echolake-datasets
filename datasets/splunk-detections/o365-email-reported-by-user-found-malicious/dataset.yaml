@@ -1,12 +1,10 @@
 metadata:
   name: o365-email-reported-by-user-found-malicious
   version: 7.0.0
-  description: The following analytic detects when an email submitted to Microsoft
-    using the built-in report button in Outlook is found to be malicious. This capability
-    is an enhanced protection feature that can be used within o365 tenants by users
-    to report potentially malicious emails. This correlation looks for any submission
-    that returns a Phish or Malware verdict upon submission.
+  description: The following analytic detects when an email submitted to Microsoft using the built-in report button in Outlook is found to be malicious. This capability is an enhanced protection feature that can be used within o365 tenants by users to report potentially malicious emails. This correlation looks for any submission that returns a Phish or Malware verdict upon submission.
   author: Steven Dick
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -15,20 +13,44 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1566.001
-      name: Technique T1566.001
+      name: Spearphishing Attachment
+      tactics:
+      - initial-access
     - id: T1566.002
-      name: Technique T1566.002
-    tactics: []
+      name: Spearphishing Link
+      tactics:
+      - initial-access
+    tactics:
+    - initial-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/o365_email_reported_by_user_found_malicious.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/o365_email_reported_by_user_found_malicious.yml
+      rule_sha256: sha256:a39d9bf5151b234280db91fe664409cb4d826c5fd0bedd7c35192152aebd7dd3
+      detection_id: 7698b945-238e-4bb9-b172-81f5ca1685a1
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566/o365_various_alerts/o365_various_alerts.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1566/o365_various_alerts/o365_various_alerts.log
     description: o365 - o365:management:activity
     format: auto
     schema: raw
     sourcetype: o365:management:activity
+    checksum: sha256:e669b123a43b1ca7f707e7ac69e3edb32fe0f7631ced09e5a55e1e93d2aea57a
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

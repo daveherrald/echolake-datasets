@@ -1,14 +1,10 @@
 metadata:
   name: linux-possible-access-or-modification-of-sshd-config-file
   version: 7.0.0
-  description: The following analytic detects suspicious access or modification of
-    the sshd_config file on Linux systems. It leverages data from Endpoint Detection
-    and Response (EDR) agents, focusing on command-line executions involving processes
-    like "cat," "nano," "vim," and "vi" accessing the sshd_config file. This activity
-    is significant because unauthorized changes to sshd_config can allow threat actors
-    to redirect port connections or use unauthorized keys, potentially compromising
-    the system. If confirme
+  description: The following analytic detects suspicious access or modification of the sshd_config file on Linux systems. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on command-line executions involving processes like "cat," "nano," "vim," and "vi" accessing the sshd_config file. This activity is significant because unauthorized changes to sshd_config can allow threat actors to redirect port connections or use unauthorized keys, potentially compromising the system. If confirmed malicious, this could lead to unauthorized access, privilege escalation, or persistent backdoor access, posing a severe security risk.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,18 +14,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1098.004
-      name: Technique T1098.004
-    tactics: []
+      name: SSH Authorized Keys
+      tactics:
+      - persistence
+      - privilege-escalation
+    tactics:
+    - persistence
+    - privilege-escalation
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/linux_possible_access_or_modification_of_sshd_config_file.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/linux_possible_access_or_modification_of_sshd_config_file.yml
+      rule_sha256: sha256:2188ffea6e5c50dfc62664fafa0def26e77f2ae8f6a4393ce1d79be28e1740c4
+      detection_id: 7a85eb24-72da-11ec-ac76-acde48001122
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1098.004/ssh_authorized_keys/sysmon_linux.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1098.004/ssh_authorized_keys/sysmon_linux.log
     description: Syslog:Linux-Sysmon/Operational - sysmon:linux
     format: auto
     schema: raw
     sourcetype: sysmon:linux
+    checksum: sha256:54f44dde127ccb048ef43b9e4978e5d17710b30da3b7df45b8a3adaac841bb77
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

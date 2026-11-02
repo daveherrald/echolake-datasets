@@ -1,13 +1,10 @@
 metadata:
   name: internal-horizontal-port-scan-nmap-top-20
   version: 8.0.0
-  description: This analytic identifies instances where an internal host has attempted
-    to communicate with 250 or more destination IP addresses using on of the NMAP
-    top 20 ports. Horizontal port scans from internal hosts can indicate reconnaissance
-    or scanning activities, potentially signaling malicious intent or misconfiguration.
-    By monitoring network traffic logs, this detection helps detect and respond to
-    such behavior promptly, enhancing network security and preventing potential threats.
+  description: This analytic identifies instances where an internal host has attempted to communicate with 250 or more destination IP addresses using on of the NMAP top 20 ports. Horizontal port scans from internal hosts can indicate reconnaissance or scanning activities, potentially signaling malicious intent or misconfiguration. By monitoring network traffic logs, this detection helps detect and respond to such behavior promptly, enhancing network security and preventing potential threats.
   author: Dean Luxton
+  updated: '2025-12-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,23 +14,46 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1046
-      name: Technique T1046
-    tactics: []
+      name: Network Service Discovery
+      tactics:
+      - discovery
+    tactics:
+    - discovery
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/network/internal_horizontal_port_scan_nmap_top_20.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/network/internal_horizontal_port_scan_nmap_top_20.yml
+      rule_sha256: sha256:e91f960d12438768c8fdf59db34eb2b1273957d61aa2cdff8e9dc50d88f30cce
+      detection_id: 3141a041-4f57-4277-9faa-9305ca1f8e5b
+      source_version: 8
+      source_date: '2025-12-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1046/nmap/horizontal.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1046/nmap/horizontal.log
     description: aws:cloudwatchlogs:vpcflow - aws:cloudwatchlogs:vpcflow
     format: auto
     schema: raw
     sourcetype: aws:cloudwatchlogs:vpcflow
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_secure_firewall_threat_defense/connection_event/connection_events.log
+    checksum: sha256:14550c40b75de0cc19a0a922fb0b183f04ddabb68c5defa3bb12c09bbd7215ad
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/cisco_secure_firewall_threat_defense/connection_event/connection_events.log
     description: not_applicable - cisco:sfw:estreamer
     format: auto
     schema: raw
     sourcetype: cisco:sfw:estreamer
+    checksum: sha256:37e737d87c4e8396396f3a69621c127bd943eb733036deb7abaa5a5a7276371d
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

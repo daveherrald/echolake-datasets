@@ -1,14 +1,10 @@
 metadata:
   name: linux-auditd-auditd-daemon-abort
   version: 1.0.0
-  description: The following analytic detects the abnormal termination of the Linux
-    audit daemon (auditd) by identifying DAEMON_ABORT events in audit logs. These
-    terminations suggest a serious failure of the auditing subsystem, potentially
-    due to resource exhaustion, corruption, or malicious interference. Unlike a clean
-    shutdown, DAEMON_ABORT implies that audit logging may have been disabled without
-    system administrator intent. Alerts should be generated on detection and correlated
-    with DAEMON_START, DAEMON_EN
+  description: The following analytic detects the abnormal termination of the Linux audit daemon (auditd) by identifying DAEMON_ABORT events in audit logs. These terminations suggest a serious failure of the auditing subsystem, potentially due to resource exhaustion, corruption, or malicious interference. Unlike a clean shutdown, DAEMON_ABORT implies that audit logging may have been disabled without system administrator intent. Alerts should be generated on detection and correlated with DAEMON_START, DAEMON_END, and system logs to determine root cause. If no DAEMON_START follows soon after, or this pattern repeats, it indicates a high-severity issue that impacts log integrity and should be immediately investigated.
   author: Teoderick Contreras, Splunk
+  updated: '2025-06-06'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1562.012
-      name: Technique T1562.012
-    tactics: []
+      name: Disable or Modify Linux Audit System
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/linux_auditd_auditd_daemon_abort.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/linux_auditd_auditd_daemon_abort.yml
+      rule_sha256: sha256:bbe9365a7c49f0f5aed129e4c28cb09eb16f6ea6fe17ab2e4327f19321e4dca0
+      detection_id: 76d6573f-c4ab-4fa1-8390-c036416d4add
+      source_version: 1
+      source_date: '2025-06-06'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.012/auditd_daemon_type/linux_auditd_daemon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1562.012/auditd_daemon_type/linux_auditd_daemon.log
     description: auditd - auditd
     format: auto
     schema: raw
     sourcetype: auditd
+    checksum: sha256:711ee340179d64281c7d018b1aea954b17d68bfc4baf557adb0c39d6996de4c6
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

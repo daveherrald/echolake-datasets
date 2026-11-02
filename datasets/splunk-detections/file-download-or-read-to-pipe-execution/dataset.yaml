@@ -1,18 +1,16 @@
 metadata:
   name: file-download-or-read-to-pipe-execution
   version: 2.0.0
-  description: 'The following analytic detects the use of download or file reading
-    utilities from Windows, Linux or MacOS to download or read the contents of a file
-    from a remote or local source and pipe it directly to a shell for execution.
+  description: 'The following analytic detects the use of download or file reading utilities from Windows, Linux or MacOS to download or read the contents of a file from a remote or local source and pipe it directly to a shell for execution.
 
-    This detection leverages data from Endpoint Detection and Response (EDR) agents,
-    focusing on command-line executions.
+    This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on command-line executions.
 
-    This activity is significant as it is commonly associated with malicious actions
-    like coinminers and exploits such as CVE-2021-44228 in Log4j.
+    This activity is significant as it is commonly associated with malicious actions like coinminers and exploits such as CVE-2021-44228 in Log4j.
 
-    If confirmed '
+    If confirmed malicious, this behavior could allow attackers to execute arbitrary code, potentially leading to system compromise and unauthorized access to sensitive data.'
   author: Michael Haag, Nasreddine Bencherchali, Splunk, DipsyTipsy
+  updated: '2025-11-25'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -22,23 +20,46 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1105
-      name: Technique T1105
-    tactics: []
+      name: Ingress Tool Transfer
+      tactics:
+      - command-and-control
+    tactics:
+    - command-and-control
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/file_download_or_read_to_pipe_execution.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/file_download_or_read_to_pipe_execution.yml
+      rule_sha256: sha256:7c45108eff7d609b8a11c54fc3868ed0f747bdca3b410cab0be66b1fc026c871
+      detection_id: 26f86252-1549-45e1-a212-eb26840e86bc
+      source_version: 2
+      source_date: '2025-11-25'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1105/download_to_pipe_exec/download_to_pipe_exec.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1105/download_to_pipe_exec/download_to_pipe_exec.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1105/download_to_pipe_exec/download_to_pipe_exec_linux.log
+    checksum: sha256:00816cd9278f3eab0fcb1596d284da35a15dbef9db15a8b4973fac10ebd5dbf3
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1105/download_to_pipe_exec/download_to_pipe_exec_linux.log
     description: Syslog:Linux-Sysmon/Operational - sysmon:linux
     format: auto
     schema: raw
     sourcetype: sysmon:linux
+    checksum: sha256:9c629b51765f290038bef423acf717960cc3da6bf3e4d40d406627854335be7a
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

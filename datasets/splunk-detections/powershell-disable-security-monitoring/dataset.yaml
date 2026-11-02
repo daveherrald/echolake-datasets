@@ -9,13 +9,14 @@ metadata:
 
     is significant as it is commonly used by malware such as RATs, bots, or Trojans
 
-    to evade detection by disabling antivirus protections. If confirmed malicious,
-    this
+    to evade detection by disabling antivirus protections. If confirmed malicious, this
 
     action could allow an attacker to operate undetected, leading to potential data
 
-    exfiltration, f'
+    exfiltration, further system compromise, or persistent access within the environment.'
   author: Michael Haag, Nasreddine Bencherchali, Splunk
+  updated: '2025-07-10'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -25,18 +26,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1562.001
-      name: Technique T1562.001
-    tactics: []
+      name: Disable or Modify Tools
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/powershell_disable_security_monitoring.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/powershell_disable_security_monitoring.yml
+      rule_sha256: sha256:db3caae23a5eabfb6fa150ac794a9b10115ab5cc95d5fa19ed00a6c6f889252c
+      detection_id: c148a894-dd93-11eb-bf2a-acde48001122
+      source_version: 11
+      source_date: '2025-07-10'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.001/pwh_defender_disabling/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1562.001/pwh_defender_disabling/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:8ab3d091f0a6fa2c6bff98af1ae1f6b523c9f450666a64bf0185c37d76480981
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

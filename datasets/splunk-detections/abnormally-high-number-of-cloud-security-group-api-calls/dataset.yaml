@@ -1,14 +1,10 @@
 metadata:
   name: abnormally-high-number-of-cloud-security-group-api-calls
   version: 8.0.0
-  description: The following analytic detects a spike in the number of API calls made
-    to cloud security groups by a user. It leverages data from the Change data model,
-    focusing on successful firewall-related changes. This activity is significant
-    because an abnormal increase in security group API calls can indicate potential
-    malicious activity, such as unauthorized access or configuration changes. If confirmed
-    malicious, this could allow an attacker to manipulate security group settings,
-    potentially exposing se
+  description: The following analytic detects a spike in the number of API calls made to cloud security groups by a user. It leverages data from the Change data model, focusing on successful firewall-related changes. This activity is significant because an abnormal increase in security group API calls can indicate potential malicious activity, such as unauthorized access or configuration changes. If confirmed malicious, this could allow an attacker to manipulate security group settings, potentially exposing sensitive resources or disrupting network security controls.
   author: David Dorsey, Splunk
+  updated: '2025-06-10'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,46 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1078.004
-      name: Technique T1078.004
-    tactics: []
+      name: Cloud Accounts
+      tactics:
+      - initial-access
+      - persistence
+      - privilege-escalation
+      - defense-evasion
+    tactics:
+    - initial-access
+    - persistence
+    - privilege-escalation
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/abnormally_high_number_of_cloud_security_group_api_calls.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/abnormally_high_number_of_cloud_security_group_api_calls.yml
+      rule_sha256: sha256:dc9aa56e152de2ef8eada151b9fe28b8d5d5a122049a9ab4ef8f568fcf364358
+      detection_id: d4dfb7f3-7a37-498a-b5df-f19334e871af
+      source_version: 8
+      source_date: '2025-06-10'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/suspicious_behaviour/abnormally_high_cloud_instances_launched/cloudtrail_behavioural_detections.json
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/suspicious_behaviour/abnormally_high_cloud_instances_launched/cloudtrail_behavioural_detections.json
     description: aws_cloudtrail - aws:cloudtrail
     format: auto
     schema: raw
     sourcetype: aws:cloudtrail
+    checksum: sha256:8b50b35094902fd94bd7c86b6c48d7e226ee5a63a98436b5da8b9ee716f63d43
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

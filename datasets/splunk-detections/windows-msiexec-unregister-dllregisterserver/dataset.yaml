@@ -1,14 +1,10 @@
 metadata:
   name: windows-msiexec-unregister-dllregisterserver
   version: 8.0.0
-  description: The following analytic detects the use of msiexec.exe with the /z switch
-    parameter, which is used to unload DLLRegisterServer. This detection leverages
-    data from Endpoint Detection and Response (EDR) agents, focusing on process execution
-    logs, including command-line arguments. This activity is significant because unloading
-    DLLRegisterServer can be indicative of an attempt to deregister a DLL, potentially
-    disrupting legitimate services or hiding malicious activity. If confirmed malicious,
-    this co
+  description: The following analytic detects the use of msiexec.exe with the /z switch parameter, which is used to unload DLLRegisterServer. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process execution logs, including command-line arguments. This activity is significant because unloading DLLRegisterServer can be indicative of an attempt to deregister a DLL, potentially disrupting legitimate services or hiding malicious activity. If confirmed malicious, this could allow an attacker to disable security controls, evade detection, or disrupt system functionality, leading to further compromise of the environment.
   author: Michael Haag, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1218.007
-      name: Technique T1218.007
-    tactics: []
+      name: Msiexec
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_msiexec_unregister_dllregisterserver.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_msiexec_unregister_dllregisterserver.yml
+      rule_sha256: sha256:339db832f42d23e83d5428de40268ec4c96aec60f27190e8e39c8433eb9fb196
+      detection_id: a27db3c5-1a9a-46df-a577-765d3f1a3c24
+      source_version: 8
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218.007/atomic_red_team/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1218.007/atomic_red_team/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:f40aa55a99ea5e6c002b1ddbea5e56bcf529b4a08dbd5bf088269803da778939
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

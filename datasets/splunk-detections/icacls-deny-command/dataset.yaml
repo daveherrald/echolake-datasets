@@ -3,22 +3,22 @@ metadata:
   version: 9.0.0
   description: 'The following analytic detects instances where an adversary modifies
 
-    security permissions of a file or directory using commands like "icacls.exe",
-    "cacls.exe",
+    security permissions of a file or directory using commands like "icacls.exe", "cacls.exe",
 
     or "xcacls.exe" with deny options. It leverages data from Endpoint Detection and
 
-    Response (EDR) agents, focusing on process names and command-line executions.
-    This
+    Response (EDR) agents, focusing on process names and command-line executions. This
 
-    activity is significant as it is commonly used by Advanced Persistent Threats
-    (APTs)
+    activity is significant as it is commonly used by Advanced Persistent Threats (APTs)
 
-    and coinminer scripts to evade detection and impede access to critical files.
-    If
+    and coinminer scripts to evade detection and impede access to critical files. If
 
-    confirmed '
+    confirmed malicious, this could allow attackers to maintain persistence and hinder
+
+    incident response efforts.'
   author: Teoderick Contreras, Splunk
+  updated: '2025-06-17'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -28,18 +28,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1222
-      name: Technique T1222
-    tactics: []
+      name: File and Directory Permissions Modification
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/icacls_deny_command.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/icacls_deny_command.yml
+      rule_sha256: sha256:bba3a73cb7c573c32a91df2ee32dd70766cb346123eb874a7d55bb018a673e9c
+      detection_id: cf8d753e-a8fe-11eb-8f58-acde48001122
+      source_version: 9
+      source_date: '2025-06-17'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/xmrig_miner/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/xmrig_miner/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:279cbbeda641d10e093a4a3339d04d17c814da164a354a1d57b93ae5b82d2172
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

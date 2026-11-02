@@ -1,14 +1,10 @@
 metadata:
   name: windows-powerview-constrained-delegation-discovery
   version: 7.0.0
-  description: The following analytic detects the use of PowerView commandlets to
-    discover Windows endpoints with Kerberos Constrained Delegation. It leverages
-    PowerShell Script Block Logging (EventCode=4104) to identify specific commandlets
-    like `Get-DomainComputer` or `Get-NetComputer` with the `-TrustedToAuth` parameter.
-    This activity is significant as it indicates potential reconnaissance efforts
-    by adversaries or Red Teams to map out privileged delegation settings in Active
-    Directory. If confirmed malicio
+  description: The following analytic detects the use of PowerView commandlets to discover Windows endpoints with Kerberos Constrained Delegation. It leverages PowerShell Script Block Logging (EventCode=4104) to identify specific commandlets like `Get-DomainComputer` or `Get-NetComputer` with the `-TrustedToAuth` parameter. This activity is significant as it indicates potential reconnaissance efforts by adversaries or Red Teams to map out privileged delegation settings in Active Directory. If confirmed malicious, this could allow attackers to identify high-value targets for further exploitation, potentially leading to privilege escalation or lateral movement within the network.
   author: Mauricio Velazco, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1018
-      name: Technique T1018
-    tactics: []
+      name: Remote System Discovery
+      tactics:
+      - discovery
+    tactics:
+    - discovery
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_powerview_constrained_delegation_discovery.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_powerview_constrained_delegation_discovery.yml
+      rule_sha256: sha256:57de06ac1dbbe2222dccb507fdd9f3e7372fca0dc83a5ac99b99165855fba8a7
+      detection_id: 86dc8176-6e6c-42d6-9684-5444c6557ab3
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1018/windows_powerview_constrained_delegation_discovery/windows-xml.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1018/windows_powerview_constrained_delegation_discovery/windows-xml.log
     description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:ccd53d097b64b76d990ee1fe9d09d7f52401115e4fa5a9116dade6948e1dac56
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

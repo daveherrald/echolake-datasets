@@ -1,14 +1,10 @@
 metadata:
   name: windows-com-hijacking-inprocserver32-modification
   version: 10.0.0
-  description: The following analytic detects the modification of the InProcServer32
-    registry key by reg.exe, indicative of potential COM hijacking. This detection
-    leverages data from Endpoint Detection and Response (EDR) agents, focusing on
-    process and command-line execution logs. COM hijacking is significant as it allows
-    adversaries to insert malicious code that executes in place of legitimate software,
-    providing a means for persistence. If confirmed malicious, this activity could
-    enable attackers to execute
+  description: The following analytic detects the modification of the InProcServer32 registry key by reg.exe, indicative of potential COM hijacking. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process and command-line execution logs. COM hijacking is significant as it allows adversaries to insert malicious code that executes in place of legitimate software, providing a means for persistence. If confirmed malicious, this activity could enable attackers to execute arbitrary code, disrupt legitimate system components, and maintain long-term access to the compromised environment.
   author: Michael Haag, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1546.015
-      name: Technique T1546.015
-    tactics: []
+      name: Component Object Model Hijacking
+      tactics:
+      - persistence
+      - privilege-escalation
+    tactics:
+    - persistence
+    - privilege-escalation
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_com_hijacking_inprocserver32_modification.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_com_hijacking_inprocserver32_modification.yml
+      rule_sha256: sha256:42401a0e204c3477363f4d60fc2503f86f1031c28212f5979770374648ad103e
+      detection_id: b7bd83c0-92b5-4fc7-b286-23eccfa2c561
+      source_version: 10
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1546.015/atomic_red_team/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1546.015/atomic_red_team/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:7f05a6ee827e8fc7ff4130172feea93e29b342305d52cb2cace9f82daea621b0
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

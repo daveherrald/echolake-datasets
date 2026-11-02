@@ -1,14 +1,10 @@
 metadata:
   name: windows-registry-delete-task-sd
   version: 8.0.0
-  description: The following analytic detects a process attempting to delete a scheduled
-    task's Security Descriptor (SD) from the registry path of that task. It leverages
-    the Endpoint.Registry data model to identify registry actions performed by the
-    SYSTEM user, specifically targeting deletions or modifications of the SD value.
-    This activity is significant as it may indicate an attempt to remove evidence
-    of a scheduled task for defense evasion. If confirmed malicious, it suggests an
-    attacker with privileged ac
+  description: The following analytic detects a process attempting to delete a scheduled task's Security Descriptor (SD) from the registry path of that task. It leverages the Endpoint.Registry data model to identify registry actions performed by the SYSTEM user, specifically targeting deletions or modifications of the SD value. This activity is significant as it may indicate an attempt to remove evidence of a scheduled task for defense evasion. If confirmed malicious, it suggests an attacker with privileged access trying to hide their tracks, potentially compromising system integrity and security. Immediate investigation is required.
   author: Michael Haag, Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,20 +14,49 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1053.005
-      name: Technique T1053.005
+      name: Scheduled Task
+      tactics:
+      - execution
+      - persistence
+      - privilege-escalation
     - id: T1562
-      name: Technique T1562
-    tactics: []
+      name: Impair Defenses
+      tactics:
+      - defense-evasion
+    tactics:
+    - execution
+    - persistence
+    - privilege-escalation
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_registry_delete_task_sd.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_registry_delete_task_sd.yml
+      rule_sha256: sha256:c2e1d51dfe76ab1c116b440654c3706df1006e5e53a1255b68b097092e08ffb3
+      detection_id: ffeb7893-ff06-446f-815b-33ca73224e92
+      source_version: 8
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053.005/taskschedule/sd_delete_windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1053.005/taskschedule/sd_delete_windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:dc674b9030db4675edb2c205c71e8366850e7c7dc8ab3d94de1001a2c35a691f
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

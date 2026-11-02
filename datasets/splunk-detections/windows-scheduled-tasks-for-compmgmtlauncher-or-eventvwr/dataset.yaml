@@ -1,14 +1,10 @@
 metadata:
   name: windows-scheduled-tasks-for-compmgmtlauncher-or-eventvwr
   version: 7.0.0
-  description: The following analytic detects the creation or modification of Windows
-    Scheduled Tasks related to CompMgmtLauncher or Eventvwr. These legitimate system
-    utilities, used for launching the Computer Management Console and Event Viewer,
-    can be abused by attackers to execute malicious payloads under the guise of normal
-    system processes. By leveraging these tasks, adversaries can establish persistence
-    or elevate privileges without raising suspicion. This detection helps security
-    analysts identify unusu
+  description: The following analytic detects the creation or modification of Windows Scheduled Tasks related to CompMgmtLauncher or Eventvwr. These legitimate system utilities, used for launching the Computer Management Console and Event Viewer, can be abused by attackers to execute malicious payloads under the guise of normal system processes. By leveraging these tasks, adversaries can establish persistence or elevate privileges without raising suspicion. This detection helps security analysts identify unusual or unauthorized scheduled tasks involving these executables, allowing for timely investigation and remediation of potential threats.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,44 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1053
-      name: Technique T1053
-    tactics: []
+      name: Scheduled Task/Job
+      tactics:
+      - execution
+      - persistence
+      - privilege-escalation
+    tactics:
+    - execution
+    - persistence
+    - privilege-escalation
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_scheduled_tasks_for_compmgmtlauncher_or_eventvwr.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_scheduled_tasks_for_compmgmtlauncher_or_eventvwr.yml
+      rule_sha256: sha256:3442531fb3a962885cf24597aaa3b664bc651e9663b1b80c2058a5f01bd45062
+      detection_id: feb43b86-8c38-46cd-865e-20ce8a96c26c
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053/valleyrat_schedtask/valleyrat_schedtask.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1053/valleyrat_schedtask/valleyrat_schedtask.log
     description: XmlWinEventLog:Security - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:04415e7dde9622955cfd0df20ab1e66d0de08e605dd8fb8f53341048f67161f9
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

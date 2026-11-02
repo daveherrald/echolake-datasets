@@ -1,14 +1,10 @@
 metadata:
   name: windows-chromium-browser-no-security-sandbox-process
   version: 1.0.0
-  description: The following analytic detects instances where a Chrome or Chromium-based
-    browser is launched with the --no-sandbox flag, a known indicator of potentially
-    malicious or suspicious behavior. While this flag is occasionally used during
-    software development or testing, it is rarely seen in normal user activity. Threat
-    actors often abuse this setting to disable Chrome's built-in security sandbox,
-    making it easier to execute malicious code or escape browser isolation. This behavior
-    is commonly observe
+  description: The following analytic detects instances where a Chrome or Chromium-based browser is launched with the --no-sandbox flag, a known indicator of potentially malicious or suspicious behavior. While this flag is occasionally used during software development or testing, it is rarely seen in normal user activity. Threat actors often abuse this setting to disable Chrome's built-in security sandbox, making it easier to execute malicious code or escape browser isolation. This behavior is commonly observed in malware droppers or loaders that embed Chromium components for command and control, credential theft, or UI spoofing. Analysts should investigate such events, especially if they originate from unusual parent processes (e.g., powershell.exe, cmd.exe, or unknown binaries), or if accompanied by other indicators such as file drops, process injection, or outbound network activity. Filtering by command-line arguments and process ancestry can help reduce false positives and surface high-fidelity detections.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-26'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +12,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1497
-      name: Technique T1497
-    tactics: []
+      name: Virtualization/Sandbox Evasion
+      tactics:
+      - defense-evasion
+      - discovery
+    tactics:
+    - defense-evasion
+    - discovery
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_chromium_browser_no_security_sandbox_process.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_chromium_browser_no_security_sandbox_process.yml
+      rule_sha256: sha256:879aa78ec390f6b4936bf85d7e550f1182c0ae8b7a732419d0c6312f258a2908
+      detection_id: 314cb263-7eeb-4d45-b693-bb21699c73d2
+      source_version: 1
+      source_date: '2025-05-26'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1497/chrom_no_sandbox/chrome-no_sandbox.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1497/chrom_no_sandbox/chrome-no_sandbox.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:8d407e5c516063f267694431f34640fa60c9c98f32449f0fcb74ad55904dd0a2
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

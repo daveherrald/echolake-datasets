@@ -1,14 +1,10 @@
 metadata:
   name: m365-copilot-non-compliant-devices-accessing-m365-copilot
   version: 1.0.0
-  description: Detects M365 Copilot access from non-compliant or unmanaged devices
-    that violate corporate security policies, indicating potential shadow IT usage,
-    BYOD policy violations, or compromised endpoint access. The detection filters
-    M365 Copilot Graph API events where deviceDetail.isCompliant=false or deviceDetail.isManaged=false,
-    then aggregates by user, operating system, and browser to calculate metrics including
-    event counts, unique IPs and locations, and compliance/management status over
-    time. User
+  description: Detects M365 Copilot access from non-compliant or unmanaged devices that violate corporate security policies, indicating potential shadow IT usage, BYOD policy violations, or compromised endpoint access. The detection filters M365 Copilot Graph API events where deviceDetail.isCompliant=false or deviceDetail.isManaged=false, then aggregates by user, operating system, and browser to calculate metrics including event counts, unique IPs and locations, and compliance/management status over time. Users accessing Copilot from non-compliant or unmanaged devices are flagged and sorted by activity volume and geographic spread, enabling security teams to identify unauthorized endpoints that may lack proper security controls, encryption, or MDM enrollment.
   author: Rod Soto
+  updated: '2025-09-24'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1562
-      name: Technique T1562
-    tactics: []
+      name: Impair Defenses
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/application/m365_copilot_non_compliant_devices_accessing_m365_copilot.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/application/m365_copilot_non_compliant_devices_accessing_m365_copilot.yml
+      rule_sha256: sha256:8eb0d189c1608db0b8ec6b099e29df4e88bea0e41c863fdbfa1924f297feabbe
+      detection_id: e26bc52d-9cbc-4743-9745-e8781d935042
+      source_version: 1
+      source_date: '2025-09-24'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/m365_copilot/m365_copilot_access.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/m365_copilot/m365_copilot_access.log
     description: AuditLogs.SignIns - o365:graph:api
     format: auto
     schema: raw
     sourcetype: o365:graph:api
+    checksum: sha256:8e4810642666d461b9233e58035946a915a83e5b1f205a8824c35d608a2be823
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

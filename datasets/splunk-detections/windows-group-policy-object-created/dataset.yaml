@@ -1,14 +1,10 @@
 metadata:
   name: windows-group-policy-object-created
   version: 8.0.0
-  description: The following analytic detects the creation of a new Group Policy Object
-    (GPO) by leveraging Event IDs 5136 and 5137. This detection uses directory service
-    change events to identify when a new GPO is created. Monitoring GPO creation is
-    crucial as adversaries can exploit GPOs to escalate privileges or deploy malware
-    across an Active Directory network. If confirmed malicious, this activity could
-    allow attackers to control system configurations, deploy ransomware, or propagate
-    malware, leading to w
+  description: The following analytic detects the creation of a new Group Policy Object (GPO) by leveraging Event IDs 5136 and 5137. This detection uses directory service change events to identify when a new GPO is created. Monitoring GPO creation is crucial as adversaries can exploit GPOs to escalate privileges or deploy malware across an Active Directory network. If confirmed malicious, this activity could allow attackers to control system configurations, deploy ransomware, or propagate malware, leading to widespread compromise and significant operational disruption.
   author: Mauricio Velazco
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,20 +13,51 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1078.002
-      name: Technique T1078.002
+      name: Domain Accounts
+      tactics:
+      - initial-access
+      - persistence
+      - privilege-escalation
+      - defense-evasion
     - id: T1484.001
-      name: Technique T1484.001
-    tactics: []
+      name: Group Policy Modification
+      tactics:
+      - privilege-escalation
+      - defense-evasion
+    tactics:
+    - initial-access
+    - persistence
+    - privilege-escalation
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_group_policy_object_created.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_group_policy_object_created.yml
+      rule_sha256: sha256:56f18ca7de48ddf33eb8a2bf9b13667edbd04fb1c5e466c260f705a35a4d8479
+      detection_id: 23add2a8-ea22-4fd4-8bc0-8c0b822373a1
+      source_version: 8
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1484.001/group_policy_created/windows-security.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1484.001/group_policy_created/windows-security.log
     description: XmlWinEventLog:Security - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:fb57d94637f0e10b80eff6dd414bc6eec20dd9418f41fc56e42ad8c19bb55cae
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

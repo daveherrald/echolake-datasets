@@ -1,14 +1,10 @@
 metadata:
   name: windows-browser-process-launched-with-unusual-flags
   version: 1.0.0
-  description: 'The following analytic detects the use of unusual browser flags, specifically
-    --mute-audio and --do-not-elevate, which deviate from standard browser launch
-    behavior. These flags may indicate automated scripts, testing environments, or
-    attempts to modify browser functionality for silent operation or restricted privilege
-    execution. Detection focuses on non-standard launch parameters, unexpected process
-    behavior, or deviations from baseline configurations. Monitoring such flag usage
-    helps identify '
+  description: The following analytic detects the use of unusual browser flags, specifically --mute-audio and --do-not-elevate, which deviate from standard browser launch behavior. These flags may indicate automated scripts, testing environments, or attempts to modify browser functionality for silent operation or restricted privilege execution. Detection focuses on non-standard launch parameters, unexpected process behavior, or deviations from baseline configurations. Monitoring such flag usage helps identify potentially suspicious activity, misconfigurations, or policy violations, enabling security teams to investigate anomalies, ensure system compliance, and differentiate legitimate administrative or testing uses from unusual or unauthorized operations.
   author: Teoderick Contreras, Splunk
+  updated: '2025-10-31'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1185
-      name: Technique T1185
-    tactics: []
+      name: Browser Session Hijacking
+      tactics:
+      - collection
+    tactics:
+    - collection
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_browser_process_launched_with_unusual_flags.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_browser_process_launched_with_unusual_flags.yml
+      rule_sha256: sha256:d1888c28bd1c4eeb665625be1cd3b3d8e252a53b2719ad881bdfc1b0057ceae1
+      detection_id: 841e2abc-0442-4e7f-b445-b22680632a08
+      source_version: 1
+      source_date: '2025-10-31'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1185/browser_unusual_flag/castle_chrome_shell32.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1185/browser_unusual_flag/castle_chrome_shell32.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:c786c3ff82efdd1a76a939fbf18003f576975252fe8e1983d750e22a790a152e
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

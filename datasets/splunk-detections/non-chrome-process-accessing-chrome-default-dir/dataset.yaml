@@ -1,13 +1,10 @@
 metadata:
   name: non-chrome-process-accessing-chrome-default-dir
   version: 14.0.0
-  description: The following analytic detects a non-Chrome process accessing files
-    in the Chrome user default folder. It leverages Windows Security Event logs, specifically
-    event code 4663, to identify unauthorized access attempts. This activity is significant
-    because the Chrome default folder contains sensitive user data such as login credentials,
-    browsing history, and cookies. If confirmed malicious, this behavior could indicate
-    an attempt to exfiltrate sensitive information, often associated with RATs, troj
+  description: The following analytic detects a non-Chrome process accessing files in the Chrome user default folder. It leverages Windows Security Event logs, specifically event code 4663, to identify unauthorized access attempts. This activity is significant because the Chrome default folder contains sensitive user data such as login credentials, browsing history, and cookies. If confirmed malicious, this behavior could indicate an attempt to exfiltrate sensitive information, often associated with RATs, trojans, and advanced persistent threats like FIN7. Such access could lead to data theft and further compromise of the affected system.
   author: Teoderick Contreras, Splunk
+  updated: '2025-12-16'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -17,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1555.003
-      name: Technique T1555.003
-    tactics: []
+      name: Credentials from Web Browsers
+      tactics:
+      - credential-access
+    tactics:
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/non_chrome_process_accessing_chrome_default_dir.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/non_chrome_process_accessing_chrome_default_dir.yml
+      rule_sha256: sha256:42c5750264b5c01ad5e20c84131e888d9d4e76015dac7719f51bc833ee3356b7
+      detection_id: 81263de4-160a-11ec-944f-acde48001122
+      source_version: 14
+      source_date: '2025-12-16'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1555/non_chrome_process_accessing_chrome_default_dir/windows-xml.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1555/non_chrome_process_accessing_chrome_default_dir/windows-xml.log
     description: XmlWinEventLog:Security - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:f8cfe7081aaf210146945fe0fa68a8aea843c3b08149172a0147b0065722a3e8
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

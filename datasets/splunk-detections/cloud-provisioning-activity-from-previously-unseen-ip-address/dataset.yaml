@@ -1,14 +1,10 @@
 metadata:
   name: cloud-provisioning-activity-from-previously-unseen-ip-address
   version: 5.0.0
-  description: The following analytic detects cloud provisioning activities originating
-    from previously unseen IP addresses. It leverages cloud infrastructure logs to
-    identify events where resources are created or started, and cross-references these
-    with a baseline of known IP addresses. This activity is significant as it may
-    indicate unauthorized access or potential misuse of cloud resources. If confirmed
-    malicious, an attacker could gain unauthorized control over cloud resources, leading
-    to data breaches, se
+  description: The following analytic detects cloud provisioning activities originating from previously unseen IP addresses. It leverages cloud infrastructure logs to identify events where resources are created or started, and cross-references these with a baseline of known IP addresses. This activity is significant as it may indicate unauthorized access or potential misuse of cloud resources. If confirmed malicious, an attacker could gain unauthorized control over cloud resources, leading to data breaches, service disruptions, or increased operational costs.
   author: Rico Valdez, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,46 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1078
-      name: Technique T1078
-    tactics: []
+      name: Valid Accounts
+      tactics:
+      - initial-access
+      - persistence
+      - privilege-escalation
+      - defense-evasion
+    tactics:
+    - initial-access
+    - persistence
+    - privilege-escalation
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/cloud_provisioning_activity_from_previously_unseen_ip_address.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/cloud_provisioning_activity_from_previously_unseen_ip_address.yml
+      rule_sha256: sha256:8e7d7f4035ea9c1b0a074c890b9455d7086bc90b967497e42b0a26e519131534
+      detection_id: f86a8ec9-b042-45eb-92f4-e9ed1d781078
+      source_version: 5
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/suspicious_behaviour/abnormally_high_cloud_instances_launched/cloudtrail_behavioural_detections.json
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/suspicious_behaviour/abnormally_high_cloud_instances_launched/cloudtrail_behavioural_detections.json
     description: aws_cloudtrail - aws:cloudtrail
     format: auto
     schema: raw
     sourcetype: aws:cloudtrail
+    checksum: sha256:8b50b35094902fd94bd7c86b6c48d7e226ee5a63a98436b5da8b9ee716f63d43
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

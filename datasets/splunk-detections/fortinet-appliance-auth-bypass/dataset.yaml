@@ -1,14 +1,10 @@
 metadata:
   name: fortinet-appliance-auth-bypass
   version: 5.0.0
-  description: 'The following analytic detects attempts to exploit CVE-2022-40684,
-    a Fortinet appliance authentication bypass vulnerability. It identifies REST API
-    requests to the /api/v2/ endpoint using various HTTP methods (GET, POST, PUT,
-    DELETE) that may indicate unauthorized modifications, such as adding SSH keys
-    or creating new users. This detection leverages the Web datamodel to monitor specific
-    URL patterns and HTTP methods. This activity is significant as it can lead to
-    unauthorized access and control '
+  description: The following analytic detects attempts to exploit CVE-2022-40684, a Fortinet appliance authentication bypass vulnerability. It identifies REST API requests to the /api/v2/ endpoint using various HTTP methods (GET, POST, PUT, DELETE) that may indicate unauthorized modifications, such as adding SSH keys or creating new users. This detection leverages the Web datamodel to monitor specific URL patterns and HTTP methods. This activity is significant as it can lead to unauthorized access and control over the appliance. If confirmed malicious, attackers could gain persistent access, reroute network traffic, or capture sensitive information.
   author: Michael Haag, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,20 +12,46 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1190
-      name: Technique T1190
+      name: Exploit Public-Facing Application
+      tactics:
+      - initial-access
     - id: T1133
-      name: Technique T1133
-    tactics: []
+      name: External Remote Services
+      tactics:
+      - initial-access
+      - persistence
+    tactics:
+    - initial-access
+    - persistence
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/web/fortinet_appliance_auth_bypass.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/web/fortinet_appliance_auth_bypass.yml
+      rule_sha256: sha256:22086a2ff9c5d3bd46467ec64caa7af65301f46acc5fe9206349311c92e03844
+      detection_id: a83122f2-fa09-4868-a230-544dbc54bc1c
+      source_version: 5
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/fortigate/fortinetcve202240684.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1190/fortigate/fortinetcve202240684.log
     description: pan:threat - pan:threat
     format: auto
     schema: raw
     sourcetype: pan:threat
+    checksum: sha256:0859a24067009985ce89e8b721b3641931b82f6937a6fb4720d17faf47f05f87
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

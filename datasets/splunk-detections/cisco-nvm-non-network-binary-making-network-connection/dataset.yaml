@@ -1,18 +1,16 @@
 metadata:
   name: cisco-nvm-non-network-binary-making-network-connection
   version: 2.0.0
-  description: 'This analytic detects network connections initiated by binaries that
-    are not typically associated with network communication,
+  description: 'This analytic detects network connections initiated by binaries that are not typically associated with network communication,
 
     such as ''notepad.exe'', ''calc.exe'' or ''write.exe''.
 
-    It leverages Cisco Network Visibility Module logs to correlate network flow activity
-    with process context, including command-line arguments, process path, and parent
-    process information.
+    It leverages Cisco Network Visibility Module logs to correlate network flow activity with process context, including command-line arguments, process path, and parent process information.
 
-    These applications are normally used for locally and do not require outbound network
-    access. When they do initiate such connections, it m'
+    These applications are normally used for locally and do not require outbound network access. When they do initiate such connections, it may indicate process hollowing, code injection, or proxy execution, where adversaries abuse a trusted process to mask malicious activity.'
   author: Nasreddine Bencherchali, Splunk
+  updated: '2025-09-09'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -20,20 +18,46 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1055
-      name: Technique T1055
+      name: Process Injection
+      tactics:
+      - privilege-escalation
+      - defense-evasion
     - id: T1036
-      name: Technique T1036
-    tactics: []
+      name: Masquerading
+      tactics:
+      - defense-evasion
+    tactics:
+    - privilege-escalation
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/cisco_nvm___non_network_binary_making_network_connection.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/cisco_nvm___non_network_binary_making_network_connection.yml
+      rule_sha256: sha256:e6c41c4c47d49ef1d785b649740e229b367e9a9923f620a7c497ded7125ad2c6
+      detection_id: c6db35af-8a0e-4b61-88ed-738e66f15715
+      source_version: 2
+      source_date: '2025-09-09'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_network_visibility_module/cisco_nvm_flowdata/nvm_flowdata.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/cisco_network_visibility_module/cisco_nvm_flowdata/nvm_flowdata.log
     description: not_applicable - cisco:nvm:flowdata
     format: auto
     schema: raw
     sourcetype: cisco:nvm:flowdata
+    checksum: sha256:f427b5cc3a60bb3b41ae1c679bda85c1bb9aba78cc9468b94d3eec36adedfaaa
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

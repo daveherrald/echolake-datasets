@@ -1,14 +1,10 @@
 metadata:
   name: windows-screen-capture-in-temp-folder
   version: 8.0.0
-  description: The following analytic detects the creation of screen capture files
-    by the Braodo stealer malware. This stealer is known to capture screenshots of
-    the victim's desktop as part of its data theft activities. The detection focuses
-    on identifying unusual screen capture activity, especially when images are saved
-    in directories often used by malware, such as temporary or hidden folders. Monitoring
-    for these files helps to quickly identify malicious screen capture attempts, allowing
-    security teams to r
+  description: The following analytic detects the creation of screen capture files by the Braodo stealer malware. This stealer is known to capture screenshots of the victim's desktop as part of its data theft activities. The detection focuses on identifying unusual screen capture activity, especially when images are saved in directories often used by malware, such as temporary or hidden folders. Monitoring for these files helps to quickly identify malicious screen capture attempts, allowing security teams to respond and mitigate potential information exposure before sensitive data is compromised.
   author: Teoderick Contreras, Splunk
+  updated: '2025-12-16'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1113
-      name: Technique T1113
-    tactics: []
+      name: Screen Capture
+      tactics:
+      - collection
+    tactics:
+    - collection
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_screen_capture_in_temp_folder.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_screen_capture_in_temp_folder.yml
+      rule_sha256: sha256:55747ee5c0fb3ae9bc32944d65260e5a4962756e5484cd5dd3a7d2eb7399d7b6
+      detection_id: 00524d1f-a032-46f5-9108-e7d9f01bfb3c
+      source_version: 8
+      source_date: '2025-12-16'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1113/braodo_screenshot/braodo_screenshot.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1113/braodo_screenshot/braodo_screenshot.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:c1f557f9b6d157631d4100a5a0d669aad5d27cd53a99ae74a7e7b3b2edff0eb4
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

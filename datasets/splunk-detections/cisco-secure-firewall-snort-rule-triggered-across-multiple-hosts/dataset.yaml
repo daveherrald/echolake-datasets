@@ -1,14 +1,10 @@
 metadata:
   name: cisco-secure-firewall-snort-rule-triggered-across-multiple-hosts
   version: 3.0.0
-  description: This analytic identifies Snort intrusion signatures that have been
-    triggered by ten or more distinct internal IP addresses within a one-hour window.
-    It leverages Cisco Secure Firewall Threat Defense logs and focuses on the IntrusionEvent
-    event type to detect activity that may indicate broad targeting or mass exploitation
-    attempts. This behavior is often associated with opportunistic scanning, worm
-    propagation, or automated exploitation of known vulnerabilities across multiple
-    systems. If confirm
+  description: This analytic identifies Snort intrusion signatures that have been triggered by ten or more distinct internal IP addresses within a one-hour window. It leverages Cisco Secure Firewall Threat Defense logs and focuses on the IntrusionEvent event type to detect activity that may indicate broad targeting or mass exploitation attempts. This behavior is often associated with opportunistic scanning, worm propagation, or automated exploitation of known vulnerabilities across multiple systems. If confirmed malicious, this could represent the early phase of a coordinated attack aiming to gain a foothold on several hosts or move laterally across the environment.
   author: Nasreddine Bencherchali, Splunk
+  updated: '2026-06-01'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,20 +12,45 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1105
-      name: Technique T1105
+      name: Ingress Tool Transfer
+      tactics:
+      - command-and-control
     - id: T1027
-      name: Technique T1027
-    tactics: []
+      name: Obfuscated Files or Information
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+    - command-and-control
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/network/cisco_secure_firewall___snort_rule_triggered_across_multiple_hosts.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/network/cisco_secure_firewall___snort_rule_triggered_across_multiple_hosts.yml
+      rule_sha256: sha256:a2c8242419872a5975dac48203563044abf772d256ebb8fd7094e444614fbfba
+      detection_id: a4c76d0a-56b6-44be-814b-939746c4d406
+      source_version: 3
+      source_date: '2026-06-01'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_secure_firewall_threat_defense/intrusion_event/intrusion_events.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/cisco_secure_firewall_threat_defense/intrusion_event/intrusion_events.log
     description: not_applicable - cisco:sfw:estreamer
     format: auto
     schema: raw
     sourcetype: cisco:sfw:estreamer
+    checksum: sha256:fbb3f751fe1eba2da9fb5214ca14e86d9e9bd3f9976e67c3ffe3874ffc2e5a8b
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

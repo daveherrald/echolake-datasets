@@ -1,14 +1,10 @@
 metadata:
   name: windows-defender-asr-rules-stacking
   version: 6.0.0
-  description: The following analytic identifies security events from Microsoft Defender,
-    focusing on Exploit Guard and Attack Surface Reduction (ASR) features. It detects
-    Event IDs 1121, 1126, 1131, and 1133 for blocked operations, and Event IDs 1122,
-    1125, 1132, and 1134 for audit logs. Event ID 1129 indicates user overrides, while
-    Event ID 5007 signals configuration changes. This detection uses a lookup to correlate
-    ASR rule GUIDs with descriptive names. Monitoring these events is crucial for
-    identifying un
+  description: The following analytic identifies security events from Microsoft Defender, focusing on Exploit Guard and Attack Surface Reduction (ASR) features. It detects Event IDs 1121, 1126, 1131, and 1133 for blocked operations, and Event IDs 1122, 1125, 1132, and 1134 for audit logs. Event ID 1129 indicates user overrides, while Event ID 5007 signals configuration changes. This detection uses a lookup to correlate ASR rule GUIDs with descriptive names. Monitoring these events is crucial for identifying unauthorized operations, potential security breaches, and policy enforcement issues. If confirmed malicious, attackers could bypass security measures, execute unauthorized actions, or alter system configurations.
   author: Michael Haag, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - hunting
   - splunk-security-content
@@ -16,22 +12,49 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1566.001
-      name: Technique T1566.001
+      name: Spearphishing Attachment
+      tactics:
+      - initial-access
     - id: T1566.002
-      name: Technique T1566.002
+      name: Spearphishing Link
+      tactics:
+      - initial-access
     - id: T1059
-      name: Technique T1059
-    tactics: []
+      name: Command and Scripting Interpreter
+      tactics:
+      - execution
+    tactics:
+    - initial-access
+    - execution
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_defender_asr_rules_stacking.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_defender_asr_rules_stacking.yml
+      rule_sha256: sha256:3130e31c72166acb7763251831d49e8e5367b3bcba09308e95840d2baf30413c
+      detection_id: 425a6657-c5e4-4cbb-909e-fc9e5d326f01
+      source_version: 6
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059/defender/asr_defender_operational.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1059/defender/asr_defender_operational.log
     description: WinEventLog:Microsoft-Windows-Windows Defender/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:cad3567c035dd20c319d3279ea67a8af38340104db4b5311c838ffac82fe6e5f
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

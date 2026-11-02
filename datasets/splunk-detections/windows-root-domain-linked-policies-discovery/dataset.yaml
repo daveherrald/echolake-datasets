@@ -1,14 +1,10 @@
 metadata:
   name: windows-root-domain-linked-policies-discovery
   version: 7.0.0
-  description: The following analytic detects the use of the `[Adsisearcher]` type
-    accelerator in PowerShell to query Active Directory for root domain linked policies.
-    It leverages PowerShell Script Block Logging (EventCode=4104) to identify this
-    activity. This behavior is significant as it may indicate an attempt by adversaries
-    or Red Teams to gain situational awareness and perform Active Directory Discovery.
-    If confirmed malicious, this activity could allow attackers to map out domain
-    policies, potentially a
+  description: The following analytic detects the use of the `[Adsisearcher]` type accelerator in PowerShell to query Active Directory for root domain linked policies. It leverages PowerShell Script Block Logging (EventCode=4104) to identify this activity. This behavior is significant as it may indicate an attempt by adversaries or Red Teams to gain situational awareness and perform Active Directory Discovery. If confirmed malicious, this activity could allow attackers to map out domain policies, potentially aiding in further exploitation or lateral movement within the network.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1087.002
-      name: Technique T1087.002
-    tactics: []
+      name: Domain Account
+      tactics:
+      - discovery
+    tactics:
+    - discovery
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_root_domain_linked_policies_discovery.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_root_domain_linked_policies_discovery.yml
+      rule_sha256: sha256:9a5306742dae041713e80f05e4a42ceaabffe74288ed096c00434f008b26faf8
+      detection_id: 80ffaede-1f12-49d5-a86e-b4b599b68b3c
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1087.002/adsi_discovery/windows-powershell-xml1.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1087.002/adsi_discovery/windows-powershell-xml1.log
     description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:80488cb716665b3d2b7c6a55986967493fa204826f80654ac3b5633a3751b360
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

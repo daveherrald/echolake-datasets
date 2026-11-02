@@ -1,22 +1,48 @@
 # Splunk Detection Datasets
 
-1,867 datasets of sample attack data paired with detection logic from Splunk's [Security Content](https://github.com/splunk/security_content) project. Each dataset provides the telemetry needed to validate a specific detection rule.
+1,866 datasets of sample attack data paired with detection logic from Splunk Security Content. Each manifest is generated from a pinned upstream rule and contains integrity-checked sample references.
 
-## Structure
+## Current package facts
 
+- Datasets: 1,866
+- Sample references: 1,934
+- Unique attack-data objects: 1,267
+- Datasets with ATT&CK mappings: 1,853
+- Reviewed upstream-unmapped datasets: 13
+
+## Source lock
+
+- `splunk/security_content`: `29ece397e8ab7f95fd9055e586dd541859075a9f`
+- `splunk/attack_data`: `f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3`
+- MITRE ATT&CK Enterprise: v18.1 at `7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7`
+
+The immutable source definitions are recorded in [upstream.lock.yaml](upstream.lock.yaml). Each dataset README links to its pinned rule and sample objects.
+
+## Metadata maintenance
+
+Check generated manifests and documentation:
+
+```bash
+python3 scripts/generate_splunk_metadata.py --check
 ```
-abnormally-high-number-of-cloud-infrastructure-api-calls/
-  dataset.yaml    # Metadata, description, MITRE mapping, data source references
-  README.md       # Quick summary and usage
+
+Regenerate after changing the committed source catalogs:
+
+```bash
+python3 scripts/generate_splunk_metadata.py --write
 ```
 
-## Data Sources
+Refresh the source catalogs from local checkouts at the revisions in `upstream.lock.yaml`:
 
-Each dataset references sample attack data hosted in Splunk's [attack_data](https://github.com/splunk/attack_data) repository. The `dataset.yaml` file contains URIs pointing to the original source files.
+```bash
+python3 scripts/generate_splunk_metadata.py --refresh-catalog \
+  --security-content /path/to/security_content \
+  --attack-data /path/to/attack_data \
+  --attack-stix /path/to/enterprise-attack-18.1.json
+```
 
-## License
+## License and attribution
 
-Both the detection logic and sample attack data are released under the [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0) by Splunk, Inc.
+Splunk Security Content and attack data are provided under [Apache License 2.0](LICENSE). See [ATTRIBUTION.md](ATTRIBUTION.md) for copyright, source revisions, and EchoLake modifications.
 
-- **Detection logic:** [splunk/security_content](https://github.com/splunk/security_content) (Apache 2.0)
-- **Sample attack data:** [splunk/attack_data](https://github.com/splunk/attack_data) (Apache 2.0)
+MITRE ATT&CK names and tactics are provided under the [MITRE ATT&CK license](MITRE-ATTACK-LICENSE.txt).

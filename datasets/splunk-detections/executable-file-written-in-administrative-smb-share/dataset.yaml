@@ -1,14 +1,10 @@
 metadata:
   name: executable-file-written-in-administrative-smb-share
   version: 10.0.0
-  description: The following analytic detects executable files (.exe or .dll) being
-    written to Windows administrative SMB shares (Admin$, IPC$, C$). It leverages
-    Windows Security Event Logs with EventCode 5145 to identify this activity. This
-    behavior is significant as it is commonly used by tools like PsExec/PaExec for
-    staging binaries before creating and starting services on remote endpoints, a
-    technique often employed for lateral movement and remote code execution. If confirmed
-    malicious, this activity could
+  description: The following analytic detects executable files (.exe or .dll) being written to Windows administrative SMB shares (Admin$, IPC$, C$). It leverages Windows Security Event Logs with EventCode 5145 to identify this activity. This behavior is significant as it is commonly used by tools like PsExec/PaExec for staging binaries before creating and starting services on remote endpoints, a technique often employed for lateral movement and remote code execution. If confirmed malicious, this activity could allow an attacker to execute arbitrary code remotely, potentially compromising additional systems within the network.
   author: Teoderick Contreras, Mauricio Velazco, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1021.002
-      name: Technique T1021.002
-    tactics: []
+      name: SMB/Windows Admin Shares
+      tactics:
+      - lateral-movement
+    tactics:
+    - lateral-movement
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/executable_file_written_in_administrative_smb_share.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/executable_file_written_in_administrative_smb_share.yml
+      rule_sha256: sha256:eb491f8a1102e8814078cb82db47733196bcd6b940157c05b4caabf96a341897
+      detection_id: f63c34fe-a435-11eb-935a-acde48001122
+      source_version: 10
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/trickbot/exe_smbshare/windows-xml.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/trickbot/exe_smbshare/windows-xml.log
     description: XmlWinEventLog:Security - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:037d6c5491fb157c5f708034461db0dcbe156ed5e551cd82c98c9e28c2769090
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

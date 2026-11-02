@@ -1,14 +1,10 @@
 metadata:
   name: detect-rclone-command-line-usage
   version: 16.0.0
-  description: The following analytic detects the usage of `rclone.exe` with specific
-    command-line arguments indicative of file transfer activities. It leverages data
-    from Endpoint Detection and Response (EDR) agents, focusing on command-line executions
-    and process details. This activity is significant as `rclone.exe` is often used
-    by adversaries for data exfiltration, especially during ransomware attacks. If
-    confirmed malicious, this behavior could lead to unauthorized data transfer, resulting
-    in data breache
+  description: The following analytic detects the usage of `rclone.exe` with specific command-line arguments indicative of file transfer activities. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on command-line executions and process details. This activity is significant as `rclone.exe` is often used by adversaries for data exfiltration, especially during ransomware attacks. If confirmed malicious, this behavior could lead to unauthorized data transfer, resulting in data breaches and potential loss of sensitive information. Immediate isolation of the affected endpoint and further investigation are recommended.
   author: Michael Haag, Splunk
+  updated: '2026-01-20'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,23 +14,46 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1020
-      name: Technique T1020
-    tactics: []
+      name: Automated Exfiltration
+      tactics:
+      - exfiltration
+    tactics:
+    - exfiltration
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/detect_rclone_command_line_usage.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/detect_rclone_command_line_usage.yml
+      rule_sha256: sha256:35be51f5a0467a1a60d05c5b22399b1086e5fb31ae62bf1bd0dba052c7e93dac
+      detection_id: 32e0baea-b3f1-11eb-a2ce-acde48001122
+      source_version: 16
+      source_date: '2026-01-20'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1020/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1020/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_network_visibility_module/cisco_nvm_flowdata/nvm_flowdata.log
+    checksum: sha256:51570af79600ebe51b015976d68ef63581e8c4916c24891c21ccca7ef3bef8f0
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/cisco_network_visibility_module/cisco_nvm_flowdata/nvm_flowdata.log
     description: not_applicable - cisco:nvm:flowdata
     format: auto
     schema: raw
     sourcetype: cisco:nvm:flowdata
+    checksum: sha256:f427b5cc3a60bb3b41ae1c679bda85c1bb9aba78cc9468b94d3eec36adedfaaa
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

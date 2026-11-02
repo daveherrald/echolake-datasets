@@ -1,14 +1,10 @@
 metadata:
   name: linux-ssh-authorized-keys-modification
   version: 10.0.0
-  description: 'The following analytic detects the modification of SSH Authorized
-    Keys on Linux systems. It leverages process execution data from Endpoint Detection
-    and Response (EDR) agents, specifically monitoring commands like "bash" and "cat"
-    interacting with "authorized_keys" files. This activity is significant as adversaries
-    often modify SSH Authorized Keys to establish persistent access to compromised
-    endpoints. If confirmed malicious, this behavior could allow attackers to maintain
-    unauthorized access, '
+  description: The following analytic detects the modification of SSH Authorized Keys on Linux systems. It leverages process execution data from Endpoint Detection and Response (EDR) agents, specifically monitoring commands like "bash" and "cat" interacting with "authorized_keys" files. This activity is significant as adversaries often modify SSH Authorized Keys to establish persistent access to compromised endpoints. If confirmed malicious, this behavior could allow attackers to maintain unauthorized access, bypassing traditional authentication mechanisms and potentially leading to further exploitation or data exfiltration.
   author: Michael Haag, Splunk
+  updated: '2026-01-20'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,18 +14,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1098.004
-      name: Technique T1098.004
-    tactics: []
+      name: SSH Authorized Keys
+      tactics:
+      - persistence
+      - privilege-escalation
+    tactics:
+    - persistence
+    - privilege-escalation
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/linux_ssh_authorized_keys_modification.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/linux_ssh_authorized_keys_modification.yml
+      rule_sha256: sha256:a1b07fdd0c684640639b14841a368648baa8eb9f1a3b53e26ac1fe5351fc1bbb
+      detection_id: f5ab595e-28e5-4327-8077-5008ba97c850
+      source_version: 10
+      source_date: '2026-01-20'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1098.004/ssh_authorized_keys/authkey_linux-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1098.004/ssh_authorized_keys/authkey_linux-sysmon.log
     description: Syslog:Linux-Sysmon/Operational - sysmon:linux
     format: auto
     schema: raw
     sourcetype: sysmon:linux
+    checksum: sha256:ee6cf8015705fc1877f27181613b2550d46be47e4853b77fb41c2f79ac48d380
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,14 +1,10 @@
 metadata:
   name: windows-powershell-invoke-restmethod-ip-information-collection
   version: 3.0.0
-  description: The following analytic detects the use of PowerShell's Invoke-RestMethod
-    cmdlet to collect geolocation data from ipinfo.io or IP address information from
-    api.ipify.org. This behavior leverages PowerShell Script Block Logging to identify
-    scripts that gather external IP information and potential geolocation data. This
-    activity is significant as it may indicate reconnaissance efforts, where threat
-    actors are attempting to determine the geographical location or network details
-    of a compromised syste
+  description: The following analytic detects the use of PowerShell's Invoke-RestMethod cmdlet to collect geolocation data from ipinfo.io or IP address information from api.ipify.org. This behavior leverages PowerShell Script Block Logging to identify scripts that gather external IP information and potential geolocation data. This activity is significant as it may indicate reconnaissance efforts, where threat actors are attempting to determine the geographical location or network details of a compromised system. While some legitimate software may use these services, this pattern is commonly observed in malware and post-exploitation toolkits like those used by Water Gamayun threat actors.
   author: Michael Haag, Splunk
+  updated: '2025-06-24'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,22 +12,49 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1082
-      name: Technique T1082
+      name: System Information Discovery
+      tactics:
+      - discovery
     - id: T1016
-      name: Technique T1016
+      name: System Network Configuration Discovery
+      tactics:
+      - discovery
     - id: T1059.001
-      name: Technique T1059.001
-    tactics: []
+      name: PowerShell
+      tactics:
+      - execution
+    tactics:
+    - execution
+    - discovery
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_powershell_invoke_restmethod_ip_information_collection.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_powershell_invoke_restmethod_ip_information_collection.yml
+      rule_sha256: sha256:9b7a8ead2ff3fac56ee86dd0fef75f2dcc2c0aee1c80c1f2579e1ddc0d40f1c7
+      detection_id: 8db47e12-9c3e-4f5a-b0d6-e42a1895cd4f
+      source_version: 3
+      source_date: '2025-06-24'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/atomic_red_team/irm_powershell.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1059.001/atomic_red_team/irm_powershell.log
     description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:b9112d39b0e88759dd221629b829668947521132bce155812830d29093e728ce
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

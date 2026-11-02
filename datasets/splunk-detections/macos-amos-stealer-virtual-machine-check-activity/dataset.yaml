@@ -1,16 +1,12 @@
 metadata:
   name: macos-amos-stealer-virtual-machine-check-activity
   version: 2.0.0
-  description: 'The following analytic detects AMOS Stealer VM check activity on macOS.
-    It leverages osquery to monitor process events and identifies the execution of
-    the "osascript" command along with specific commandline strings. This activity
-    is significant
+  description: 'The following analytic detects AMOS Stealer VM check activity on macOS. It leverages osquery to monitor process events and identifies the execution of the "osascript" command along with specific commandline strings. This activity is significant
 
-    as AMOS stealer was seen using this pattern in order to check if the host is a
-    Virtual Machine or not. If confirmed malicious, this behavior indicate that the
-    host is already infected by the AMOS stealer, which could allow attackers to execute
-    arbitrary c'
+    as AMOS stealer was seen using this pattern in order to check if the host is a Virtual Machine or not. If confirmed malicious, this behavior indicate that the host is already infected by the AMOS stealer, which could allow attackers to execute arbitrary code, escalate privileges, steal information, or persist within the environment, posing a significant security risk.'
   author: Nasreddine Bencherchali, Splunk, Alex Karkins
+  updated: '2025-10-14'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -19,18 +15,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1059.002
-      name: Technique T1059.002
-    tactics: []
+      name: AppleScript
+      tactics:
+      - execution
+    tactics:
+    - execution
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/macos_amos_stealer___virtual_machine_check_activity.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/macos_amos_stealer___virtual_machine_check_activity.yml
+      rule_sha256: sha256:6509dfe825abf62669e2c2c6f6bbf6bcca0b39790051766bb3dc99fee0e3345d
+      detection_id: 4e41ad21-9761-426d-8aa1-083712ff9f30
+      source_version: 2
+      source_date: '2025-10-14'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.002/amos_stealer/amos_stealer.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1059.002/amos_stealer/amos_stealer.log
     description: osquery - osquery:results
     format: auto
     schema: raw
     sourcetype: osquery:results
+    checksum: sha256:7f35270f16a81ac348de41c253f409a0ce8120eb2bef1d60d6e128b04922b3f5
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

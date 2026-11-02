@@ -1,14 +1,10 @@
 metadata:
   name: okta-idp-lifecycle-modifications
   version: 5.0.0
-  description: The following analytic identifies modifications to Okta Identity Provider
-    (IDP) lifecycle events, including creation, activation, deactivation, and deletion
-    of IDP configurations. It uses OktaIm2 logs ingested via the Splunk Add-on for
-    Okta Identity Cloud. Monitoring these events is crucial for maintaining the integrity
-    and security of authentication mechanisms. Unauthorized or anomalous changes could
-    indicate potential security breaches or misconfigurations. If confirmed malicious,
-    attackers co
+  description: The following analytic identifies modifications to Okta Identity Provider (IDP) lifecycle events, including creation, activation, deactivation, and deletion of IDP configurations. It uses OktaIm2 logs ingested via the Splunk Add-on for Okta Identity Cloud. Monitoring these events is crucial for maintaining the integrity and security of authentication mechanisms. Unauthorized or anomalous changes could indicate potential security breaches or misconfigurations. If confirmed malicious, attackers could manipulate authentication processes, potentially gaining unauthorized access or disrupting identity management systems.
   author: Bhavin Patel, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1087.004
-      name: Technique T1087.004
-    tactics: []
+      name: Cloud Account
+      tactics:
+      - discovery
+    tactics:
+    - discovery
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/application/okta_idp_lifecycle_modifications.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/application/okta_idp_lifecycle_modifications.yml
+      rule_sha256: sha256:1eef36037f6a8211e57f43e7cdf471aa05190ff8a6c6569ae04f9fe6fba96960
+      detection_id: e0be2c83-5526-4219-a14f-c3db2e763d15
+      source_version: 5
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1556/okta_idp/okta.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1556/okta_idp/okta.log
     description: Okta - OktaIM2:log
     format: auto
     schema: raw
     sourcetype: OktaIM2:log
+    checksum: sha256:68ad23906ec5fdf8a9fa46e259550f5a3662a419011de9bcf5792ee33ee43a6f
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

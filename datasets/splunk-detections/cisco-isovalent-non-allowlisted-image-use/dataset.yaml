@@ -1,22 +1,10 @@
 metadata:
   name: cisco-isovalent-non-allowlisted-image-use
   version: 1.0.0
-  description: 'The following analytic detects use of container images that fall outside
-    an approved
-
-    allowlist, leveraging Cisco Isovalent/Tetragon runtime telemetry (image name and
-
-    workload identity). Adversaries commonly introduce untrusted or newly published
-
-    images to deploy tooling, establish persistence, or abuse supply‑chain trust.
-    This
-
-    behavior may indicate image pulls from unauthorized registries, execution of
-
-    unvetted software, or a drift from established deployment baselines. Extra scrutiny
-
-    is warrant'
+  description: "The following analytic detects use of container images that fall outside an approved\nallowlist, leveraging Cisco Isovalent/Tetragon runtime telemetry (image name and\nworkload identity). Adversaries commonly introduce untrusted or newly published\nimages to deploy tooling, establish persistence, or abuse supply\u2011chain trust. This\nbehavior may indicate image pulls from unauthorized registries, execution of\nunvetted software, or a drift from established deployment baselines. Extra scrutiny\nis warranted for namespaces and workloads that normally source images from restricted\nregistries, and for pods that suddenly begin running images outside expected\nprefixes.\nMaintain an environment\u2011specific allowlist via the macro `cisco_isovalent_allowed_images`\n(for example, allow trusted registries/prefixes such as ImageName=\"gcr.io/org/*\",\n\"registry.local/*\", or \"myco/*\") and keep it updated as new baseline images are\nintroduced. This analytic alerts on images NOT matching the allowlist."
   author: Bhavin Patel, Splunk
+  updated: '2026-01-05'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -24,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1204.003
-      name: Technique T1204.003
-    tactics: []
+      name: Malicious Image
+      tactics:
+      - execution
+    tactics:
+    - execution
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/cisco_isovalent___non_allowlisted_image_use.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/cisco_isovalent___non_allowlisted_image_use.yml
+      rule_sha256: sha256:4ac01bcc484ff38199b30621cb861a4c8ec12342adfeeebf901eee23578cb5ca
+      detection_id: 9f2b7b1d-6c2f-4f2d-9a8b-8a1d7c5f2e11
+      source_version: 1
+      source_date: '2026-01-05'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_isovalent/cisco_isovalent.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/cisco_isovalent/cisco_isovalent.log
     description: not_applicable - cisco:isovalent:processExec
     format: auto
     schema: raw
     sourcetype: cisco:isovalent:processExec
+    checksum: sha256:2cb7e1ad95df218a8823f7f7d517be3f57ee067716c7efb35edc9bb0e1fa7914
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

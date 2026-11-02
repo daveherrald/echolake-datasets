@@ -1,14 +1,10 @@
 metadata:
   name: windows-query-registry-browser-list-application
   version: 7.0.0
-  description: The following analytic detects a suspicious process accessing the registry
-    entries for default internet browsers. It leverages Windows Security Event logs,
-    specifically event code 4663, to identify access attempts to these registry paths.
-    This activity is significant because adversaries can exploit this registry key
-    to gather information about installed browsers and their settings, potentially
-    leading to the theft of sensitive data such as login credentials and browsing
-    history. If confirmed mal
+  description: The following analytic detects a suspicious process accessing the registry entries for default internet browsers. It leverages Windows Security Event logs, specifically event code 4663, to identify access attempts to these registry paths. This activity is significant because adversaries can exploit this registry key to gather information about installed browsers and their settings, potentially leading to the theft of sensitive data such as login credentials and browsing history. If confirmed malicious, this behavior could enable attackers to exfiltrate sensitive information and compromise user accounts.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1012
-      name: Technique T1012
-    tactics: []
+      name: Query Registry
+      tactics:
+      - discovery
+    tactics:
+    - discovery
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_query_registry_browser_list_application.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_query_registry_browser_list_application.yml
+      rule_sha256: sha256:88edc8642c174bce3962c4ef3ef2fd50b7d22240cb4bc2f9a960680e275e778a
+      detection_id: 45ebd21c-f4bf-4ced-bd49-d25b6526cebb
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/redline/browser_list/ar3_4663_redline_reg.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/redline/browser_list/ar3_4663_redline_reg.log
     description: XmlWinEventLog:Security - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:a4c4a324e4fab15ffa65fdbc3da954a2c8dffdb6568fa0c45b204f72eac5f9d4
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

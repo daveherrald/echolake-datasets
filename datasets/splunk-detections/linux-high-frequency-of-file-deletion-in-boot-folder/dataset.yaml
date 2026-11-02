@@ -1,14 +1,10 @@
 metadata:
   name: linux-high-frequency-of-file-deletion-in-boot-folder
   version: 8.0.0
-  description: The following analytic detects a high frequency of file deletions in
-    the /boot/ folder on Linux systems. It leverages filesystem event logs to identify
-    when 200 or more files are deleted within an hour by the same process. This behavior
-    is significant as it may indicate the presence of wiper malware, such as Industroyer2,
-    which targets critical system directories. If confirmed malicious, this activity
-    could lead to system instability or failure, hindering the boot process and potentially
-    causing
+  description: The following analytic detects a high frequency of file deletions in the /boot/ folder on Linux systems. It leverages filesystem event logs to identify when 200 or more files are deleted within an hour by the same process. This behavior is significant as it may indicate the presence of wiper malware, such as Industroyer2, which targets critical system directories. If confirmed malicious, this activity could lead to system instability or failure, hindering the boot process and potentially causing a complete system compromise.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,20 +14,45 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1070.004
-      name: Technique T1070.004
+      name: File Deletion
+      tactics:
+      - defense-evasion
     - id: T1485
-      name: Technique T1485
-    tactics: []
+      name: Data Destruction
+      tactics:
+      - impact
+    tactics:
+    - defense-evasion
+    - impact
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/linux_high_frequency_of_file_deletion_in_boot_folder.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/linux_high_frequency_of_file_deletion_in_boot_folder.yml
+      rule_sha256: sha256:0dc5f3676a777e34cf4fc1e84b7ab37d30e08f2673d6abf7ee3d2e7d34f4b5a1
+      detection_id: e27fbc5d-0445-4c4a-bc39-87f060d5c602
+      source_version: 8
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1485/rm_boot_dir/sysmon_linux.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1485/rm_boot_dir/sysmon_linux.log
     description: Syslog:Linux-Sysmon/Operational - sysmon:linux
     format: auto
     schema: raw
     sourcetype: sysmon:linux
+    checksum: sha256:fcdb695b0184227a23383aa1ff9b515f9641a9c4dad868bb6553cc2c5e8437c5
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

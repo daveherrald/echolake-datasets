@@ -1,12 +1,10 @@
 metadata:
   name: esxi-lockdown-mode-disabled
   version: 1.0.0
-  description: This detection identifies when Lockdown Mode is disabled on an ESXi
-    host, which can indicate that a threat actor is attempting to weaken host security
-    controls. Disabling Lockdown Mode allows broader remote access via SSH or the
-    host client and may precede further malicious actions such as data exfiltration,
-    lateral movement, or VM tampering.
+  description: This detection identifies when Lockdown Mode is disabled on an ESXi host, which can indicate that a threat actor is attempting to weaken host security controls. Disabling Lockdown Mode allows broader remote access via SSH or the host client and may precede further malicious actions such as data exfiltration, lateral movement, or VM tampering.
   author: Raven Tait, Splunk
+  updated: '2025-05-12'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -15,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1562
-      name: Technique T1562
-    tactics: []
+      name: Impair Defenses
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/application/esxi_lockdown_mode_disabled.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/application/esxi_lockdown_mode_disabled.yml
+      rule_sha256: sha256:2738fb5efb791a9af9178cfdc918bcd8dd43e5c85fcfb5ec709d61fdd2bc2c3c
+      detection_id: 07c0d28a-9a9b-409f-8d4b-65355bd19ead
+      source_version: 1
+      source_date: '2025-05-12'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562/esxi_lockdown_disabled/esxi_lockdown_disabled.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1562/esxi_lockdown_disabled/esxi_lockdown_disabled.log
     description: vmware:esxlog - vmw-syslog
     format: auto
     schema: raw
     sourcetype: vmw-syslog
+    checksum: sha256:12ece619eeada18020899ecefca2ba28eea5a5c5fe32b3640f5c368ab8d80058
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,14 +1,10 @@
 metadata:
   name: windows-indicator-removal-via-rmdir
   version: 7.0.0
-  description: The following analytic detects the execution of the 'rmdir' command
-    with '/s' and '/q' options to delete files and directory trees. This detection
-    leverages data from Endpoint Detection and Response (EDR) agents, focusing on
-    command-line executions and process metadata. This activity is significant as
-    it may indicate malware attempting to remove traces or components during cleanup
-    operations. If confirmed malicious, this behavior could allow attackers to eliminate
-    forensic evidence, hinder incid
+  description: The following analytic detects the execution of the 'rmdir' command with '/s' and '/q' options to delete files and directory trees. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on command-line executions and process metadata. This activity is significant as it may indicate malware attempting to remove traces or components during cleanup operations. If confirmed malicious, this behavior could allow attackers to eliminate forensic evidence, hinder incident response efforts, and maintain persistence by removing indicators of compromise.
   author: Teoderick Contreras, Splunk
+  updated: '2025-09-18'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1070
-      name: Technique T1070
-    tactics: []
+      name: Indicator Removal
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_indicator_removal_via_rmdir.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_indicator_removal_via_rmdir.yml
+      rule_sha256: sha256:a6ad79cc5353b69d4bdb685ac0c019cff2afee6fdbde2bd46d315de0dcbd7569
+      detection_id: c4566d2c-b094-48a1-9c59-d66e22065560
+      source_version: 7
+      source_date: '2025-09-18'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1070/rmdir_delete_files_and_dir/rmdir.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1070/rmdir_delete_files_and_dir/rmdir.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:411c7c804d42e2d82391ec9ae441ccf40a9f8c186012577455213fdcda025181
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

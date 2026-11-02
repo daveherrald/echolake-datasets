@@ -1,10 +1,10 @@
 metadata:
   name: windows-ad-object-owner-updated
   version: 7.0.0
-  description: AD Object Owner Updated. The owner provides Full control level privileges
-    over the target AD Object. This event has significant impact alone and is also
-    a precursor activity for hiding an AD object.
+  description: AD Object Owner Updated. The owner provides Full control level privileges over the target AD Object. This event has significant impact alone and is also a precursor activity for hiding an AD object.
   author: Dean Luxton
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -12,20 +12,46 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1222.001
-      name: Technique T1222.001
+      name: Windows File and Directory Permissions Modification
+      tactics:
+      - defense-evasion
     - id: T1484
-      name: Technique T1484
-    tactics: []
+      name: Domain or Tenant Policy Modification
+      tactics:
+      - privilege-escalation
+      - defense-evasion
+    tactics:
+    - privilege-escalation
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_ad_object_owner_updated.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_ad_object_owner_updated.yml
+      rule_sha256: sha256:b78afee6b0529da8342b7ee11c81b1919ed4e9443a4729a969e0be8fc68e95fa
+      detection_id: 4af01f6b-d8d4-4f96-8635-758a01557130
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1222.001/dacl_abuse/owner_updated_windows-security-xml.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1222.001/dacl_abuse/owner_updated_windows-security-xml.log
     description: XmlWinEventLog:Security - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:0bcca6d39b07bb0aa99c7e2ce9239f24dae82282c014b618b74687f7d320121b
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

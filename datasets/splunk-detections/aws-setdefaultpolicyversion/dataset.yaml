@@ -1,14 +1,10 @@
 metadata:
   name: aws-setdefaultpolicyversion
   version: 7.0.0
-  description: The following analytic detects when a user sets a default policy version
-    in AWS. It leverages AWS CloudTrail logs to identify the `SetDefaultPolicyVersion`
-    event from the IAM service. This activity is significant because attackers may
-    exploit this technique for privilege escalation, especially if previous policy
-    versions grant more extensive permissions than the current one. If confirmed malicious,
-    this could allow an attacker to gain elevated access to AWS resources, potentially
-    leading to unau
+  description: The following analytic detects when a user sets a default policy version in AWS. It leverages AWS CloudTrail logs to identify the `SetDefaultPolicyVersion` event from the IAM service. This activity is significant because attackers may exploit this technique for privilege escalation, especially if previous policy versions grant more extensive permissions than the current one. If confirmed malicious, this could allow an attacker to gain elevated access to AWS resources, potentially leading to unauthorized actions and data breaches.
   author: Bhavin Patel, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +12,46 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1078.004
-      name: Technique T1078.004
-    tactics: []
+      name: Cloud Accounts
+      tactics:
+      - initial-access
+      - persistence
+      - privilege-escalation
+      - defense-evasion
+    tactics:
+    - initial-access
+    - persistence
+    - privilege-escalation
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/aws_setdefaultpolicyversion.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/aws_setdefaultpolicyversion.yml
+      rule_sha256: sha256:e70315389efe868262de2c5c77717227b0a3043312a4c2a8c8aff8890c9353d7
+      detection_id: 2a9b80d3-6340-4345-11ad-212bf3d0dac4
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1078/aws_setdefaultpolicyversion/aws_cloudtrail_events.json
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1078/aws_setdefaultpolicyversion/aws_cloudtrail_events.json
     description: aws_cloudtrail - aws:cloudtrail
     format: auto
     schema: raw
     sourcetype: aws:cloudtrail
+    checksum: sha256:2efef04769c68629d65daedfb44d3776c76f5ef5007ad8ddced9ca89ca15672d
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

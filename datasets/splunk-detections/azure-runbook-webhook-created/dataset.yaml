@@ -1,14 +1,10 @@
 metadata:
   name: azure-runbook-webhook-created
   version: 11.0.0
-  description: The following analytic detects the creation of a new Automation Runbook
-    Webhook within an Azure tenant. It leverages Azure Audit events, specifically
-    the "Create or Update an Azure Automation webhook" operation, to identify this
-    activity. This behavior is significant because Webhooks can trigger Automation
-    Runbooks via unauthenticated URLs exposed to the Internet, posing a security risk.
-    If confirmed malicious, an attacker could use this to execute code, create users,
-    or maintain persistence wit
+  description: The following analytic detects the creation of a new Automation Runbook Webhook within an Azure tenant. It leverages Azure Audit events, specifically the "Create or Update an Azure Automation webhook" operation, to identify this activity. This behavior is significant because Webhooks can trigger Automation Runbooks via unauthenticated URLs exposed to the Internet, posing a security risk. If confirmed malicious, an attacker could use this to execute code, create users, or maintain persistence within the environment, potentially leading to unauthorized access and control over Azure resources.
   author: Mauricio Velazco, Brian Serocki, Splunk
+  updated: '2025-09-03'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +12,46 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1078.004
-      name: Technique T1078.004
-    tactics: []
+      name: Cloud Accounts
+      tactics:
+      - initial-access
+      - persistence
+      - privilege-escalation
+      - defense-evasion
+    tactics:
+    - initial-access
+    - persistence
+    - privilege-escalation
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/azure_runbook_webhook_created.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/azure_runbook_webhook_created.yml
+      rule_sha256: sha256:8d8a967ecf762959faeed378328c2beec2fdcd23ec8fa896ccf7ddaf616a3ec5
+      detection_id: e98944a9-92e4-443c-81b8-a322e33ce75a
+      source_version: 11
+      source_date: '2025-09-03'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1078.004/azure_runbook_webhook/azure-activity.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1078.004/azure_runbook_webhook/azure-activity.log
     description: mscs:azure:audit - mscs:azure:audit
     format: auto
     schema: raw
     sourcetype: mscs:azure:audit
+    checksum: sha256:027404bb7cae5475a6bac0963c268ff8233e5e47cb64689cc4994d6c94e2f87e
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

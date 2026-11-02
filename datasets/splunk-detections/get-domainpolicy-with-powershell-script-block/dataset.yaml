@@ -1,14 +1,10 @@
 metadata:
   name: get-domainpolicy-with-powershell-script-block
   version: 7.0.0
-  description: The following analytic detects the execution of the `Get-DomainPolicy`
-    cmdlet using PowerShell Script Block Logging (EventCode=4104). It leverages logs
-    capturing script block text to identify attempts to obtain the password policy
-    in a Windows domain. This activity is significant as it indicates potential reconnaissance
-    efforts by adversaries or Red Teams to gather domain policy information, which
-    is crucial for planning further attacks. If confirmed malicious, this behavior
-    could lead to detail
+  description: The following analytic detects the execution of the `Get-DomainPolicy` cmdlet using PowerShell Script Block Logging (EventCode=4104). It leverages logs capturing script block text to identify attempts to obtain the password policy in a Windows domain. This activity is significant as it indicates potential reconnaissance efforts by adversaries or Red Teams to gather domain policy information, which is crucial for planning further attacks. If confirmed malicious, this behavior could lead to detailed knowledge of domain security settings, aiding in privilege escalation or lateral movement within the network.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1201
-      name: Technique T1201
-    tactics: []
+      name: Password Policy Discovery
+      tactics:
+      - discovery
+    tactics:
+    - discovery
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/get_domainpolicy_with_powershell_script_block.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/get_domainpolicy_with_powershell_script_block.yml
+      rule_sha256: sha256:7a920f081930cfc56c43ab3bb8bf29e1d3dc17ac4a61bae8cc02577d035d964b
+      detection_id: a360d2b2-065a-11ec-b0bf-acde48001122
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/powershell_script_block_logging/domainpolicy.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1059.001/powershell_script_block_logging/domainpolicy.log
     description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:558ec3aac827e2859b98291d016efd8fd159ad4673ab9053f425edaa4f844ff8
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

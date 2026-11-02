@@ -1,13 +1,10 @@
 metadata:
   name: crowdstrike-medium-identity-risk-severity
   version: 4.0.0
-  description: The following analytic detects CrowdStrike alerts for Medium Identity
-    Risk Severity with a risk score of 55 or higher. These alerts indicate significant
-    vulnerabilities in user identities, such as suspicious behavior or compromised
-    credentials. Promptly investigating and addressing these alerts is crucial to
-    prevent potential security breaches and ensure the integrity and protection of
-    sensitive information and systems.
+  description: The following analytic detects CrowdStrike alerts for Medium Identity Risk Severity with a risk score of 55 or higher. These alerts indicate significant vulnerabilities in user identities, such as suspicious behavior or compromised credentials. Promptly investigating and addressing these alerts is crucial to prevent potential security breaches and ensure the integrity and protection of sensitive information and systems.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -15,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1110
-      name: Technique T1110
-    tactics: []
+      name: Brute Force
+      tactics:
+      - credential-access
+    tactics:
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/crowdstrike_medium_identity_risk_severity.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/crowdstrike_medium_identity_risk_severity.yml
+      rule_sha256: sha256:84ee5a2e699182f195b65de0326835c8ba6700370c33eb87e44ac86e0d86b08e
+      detection_id: c23b425c-9024-4bd7-b526-c18a4a51d93e
+      source_version: 4
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/suspicious_behaviour/crowdstrike_stream/riskscore/crowdstrike_riskscore_cleaned.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/suspicious_behaviour/crowdstrike_stream/riskscore/crowdstrike_riskscore_cleaned.log
     description: crowdstrike:identities - crowdstrike:identities
     format: auto
     schema: raw
     sourcetype: crowdstrike:identities
+    checksum: sha256:41b1a5593ef48a53e359c94e6ba0e319495f81270d6f4681f85001fda79a8fcc
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

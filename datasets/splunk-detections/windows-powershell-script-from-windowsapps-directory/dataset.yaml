@@ -1,14 +1,10 @@
 metadata:
   name: windows-powershell-script-from-windowsapps-directory
   version: 1.0.0
-  description: 'The following analytic identifies the execution of PowerShell scripts
-    from the WindowsApps directory, which is a common technique used in malicious
-    MSIX package execution. This detection leverages data from Endpoint Detection
-    and Response (EDR) agents, focusing on process command lines and parent process
-    paths. This activity is significant as adversaries have been observed using MSIX
-    packages with embedded PowerShell scripts (particularly StartingScriptWrapper.ps1)
-    to execute malicious code. If '
+  description: The following analytic identifies the execution of PowerShell scripts from the WindowsApps directory, which is a common technique used in malicious MSIX package execution. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process command lines and parent process paths. This activity is significant as adversaries have been observed using MSIX packages with embedded PowerShell scripts (particularly StartingScriptWrapper.ps1) to execute malicious code. If confirmed malicious, this could allow attackers to execute arbitrary code, establish persistence, or deliver malware while evading traditional detection mechanisms.
   author: Michael Haag, Splunk
+  updated: '2025-08-05'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,20 +13,44 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1059.001
-      name: Technique T1059.001
+      name: PowerShell
+      tactics:
+      - execution
     - id: T1204.002
-      name: Technique T1204.002
-    tactics: []
+      name: Malicious File
+      tactics:
+      - execution
+    tactics:
+    - execution
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_powershell_script_from_windowsapps_directory.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_powershell_script_from_windowsapps_directory.yml
+      rule_sha256: sha256:8629298820960fb2e08dc2fada702b5e783196ae4440bf09c7748bba0e203ead
+      detection_id: 8c3d1f2e-7b4a-45e3-9d8f-6a2e4c9b1234
+      source_version: 1
+      source_date: '2025-08-05'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/msix_powershell/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1059.001/msix_powershell/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:3f349b90eead3e2eda89bcc776b5f250f1ece2bd1a2c9d128ca79ad087d72e93
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

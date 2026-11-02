@@ -1,13 +1,10 @@
 metadata:
   name: windows-rdp-server-registry-deletion
   version: 1.0.0
-  description: This detection identifies the deletion of registry keys under HKEY_CURRENT_USER\Software\Microsoft\Terminal
-    Server Client\Servers\, which store records of previously connected remote systems
-    via Remote Desktop Protocol (RDP). These keys are created automatically when a
-    user connects to a remote host using the native Windows RDP client (mstsc.exe)
-    and can be valuable forensic artifacts for tracking remote access activity. Malicious
-    actors aware of this behavior may delete these keys after using R
+  description: "This detection identifies the deletion of registry keys under HKEY_CURRENT_USER\\Software\\Microsoft\\Terminal Server Client\\Servers\\, which store records of previously connected remote systems via Remote Desktop Protocol (RDP). These keys are created automatically when a user connects to a remote host using the native Windows RDP client (mstsc.exe) and can be valuable forensic artifacts for tracking remote access activity. Malicious actors aware of this behavior may delete these keys after using RDP to hide evidence of their activity and avoid detection during incident response. This form of artifact cleanup is a known defense evasion technique, often performed during or after lateral movement. Legitimate users rarely delete these keys manually, making such actions highly suspicious\u2014especially when correlated with RDP usage, unusual logon behavior, or other signs of compromise. Detecting the deletion of these registry entries can provide crucial insight into attempts to cover tracks following interactive remote access."
   author: Teoderick Contreras, Splunk
+  updated: '2025-07-30'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -15,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1070.004
-      name: Technique T1070.004
-    tactics: []
+      name: File Deletion
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_rdp_server_registry_deletion.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_rdp_server_registry_deletion.yml
+      rule_sha256: sha256:634228cc98683f64eed22be3c89ee46966b1d9460ed6b4924580e21eb91e9db9
+      detection_id: 1a058296-7c68-4d66-9560-464764d6e26c
+      source_version: 1
+      source_date: '2025-07-30'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1070.004/terminal_server_reg_deleted/terminal_server_client_reg_deleted.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1070.004/terminal_server_reg_deleted/terminal_server_client_reg_deleted.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:493010eceea55098ea984de69250fc32e36d4fcbf11a04fd218c7e2134a77e7c
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

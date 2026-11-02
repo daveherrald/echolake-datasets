@@ -1,14 +1,10 @@
 metadata:
   name: azure-ad-multiple-failed-mfa-requests-for-user
   version: 10.0.0
-  description: The following analytic identifies multiple failed multi-factor authentication
-    (MFA) requests for a single user within an Azure AD tenant. It leverages Azure
-    AD Sign-in Logs, specifically error code 500121, to detect more than 10 failed
-    MFA attempts within 10 minutes. This behavior is significant as it may indicate
-    an adversary attempting to bypass MFA by bombarding the user with repeated authentication
-    prompts. If confirmed malicious, this activity could lead to unauthorized access,
-    allowing att
+  description: The following analytic identifies multiple failed multi-factor authentication (MFA) requests for a single user within an Azure AD tenant. It leverages Azure AD Sign-in Logs, specifically error code 500121, to detect more than 10 failed MFA attempts within 10 minutes. This behavior is significant as it may indicate an adversary attempting to bypass MFA by bombarding the user with repeated authentication prompts. If confirmed malicious, this activity could lead to unauthorized access, allowing attackers to compromise user accounts and potentially escalate their privileges within the environment.
   author: Mauricio Velazco, Gowthamaraj Rajendran, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,22 +12,56 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1078.004
-      name: Technique T1078.004
+      name: Cloud Accounts
+      tactics:
+      - initial-access
+      - persistence
+      - privilege-escalation
+      - defense-evasion
     - id: T1586.003
-      name: Technique T1586.003
+      name: Cloud Accounts
+      tactics:
+      - resource-development
     - id: T1621
-      name: Technique T1621
-    tactics: []
+      name: Multi-Factor Authentication Request Generation
+      tactics:
+      - credential-access
+    tactics:
+    - resource-development
+    - initial-access
+    - persistence
+    - privilege-escalation
+    - defense-evasion
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/azure_ad_multiple_failed_mfa_requests_for_user.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/azure_ad_multiple_failed_mfa_requests_for_user.yml
+      rule_sha256: sha256:22ef5595f1a2969ecb744269921ff40e9fd79dec3cf5124b388c2e5cbbf824e8
+      detection_id: 264ea131-ab1f-41b8-90e0-33ad1a1888ea
+      source_version: 10
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1621/multiple_failed_mfa_requests/azure-audit.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1621/multiple_failed_mfa_requests/azure-audit.log
     description: Azure AD - azure:monitor:aad
     format: auto
     schema: raw
     sourcetype: azure:monitor:aad
+    checksum: sha256:5d8f745e133cd72ab407af5b15696ba10780a7b08f9ecba79584d880e4333709
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

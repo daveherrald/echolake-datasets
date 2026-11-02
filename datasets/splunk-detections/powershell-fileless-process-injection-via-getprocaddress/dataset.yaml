@@ -1,14 +1,10 @@
 metadata:
   name: powershell-fileless-process-injection-via-getprocaddress
   version: 10.0.0
-  description: The following analytic detects the use of `GetProcAddress` in PowerShell
-    script blocks, leveraging PowerShell Script Block Logging (EventCode=4104). This
-    method captures the full command sent to PowerShell, which is then logged in Windows
-    event logs. The presence of `GetProcAddress` is unusual for typical PowerShell
-    scripts and often indicates malicious activity, as many attack toolkits use it
-    to achieve code execution. If confirmed malicious, this activity could allow an
-    attacker to execute arb
+  description: The following analytic detects the use of `GetProcAddress` in PowerShell script blocks, leveraging PowerShell Script Block Logging (EventCode=4104). This method captures the full command sent to PowerShell, which is then logged in Windows event logs. The presence of `GetProcAddress` is unusual for typical PowerShell scripts and often indicates malicious activity, as many attack toolkits use it to achieve code execution. If confirmed malicious, this activity could allow an attacker to execute arbitrary code, potentially leading to system compromise. Analysts should review parallel processes and the entire logged script block for further investigation.
   author: Michael Haag, Splunk
+  updated: '2025-10-14'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,20 +14,47 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1055
-      name: Technique T1055
+      name: Process Injection
+      tactics:
+      - privilege-escalation
+      - defense-evasion
     - id: T1059.001
-      name: Technique T1059.001
-    tactics: []
+      name: PowerShell
+      tactics:
+      - execution
+    tactics:
+    - execution
+    - privilege-escalation
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/powershell_fileless_process_injection_via_getprocaddress.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/powershell_fileless_process_injection_via_getprocaddress.yml
+      rule_sha256: sha256:4ee13d0b290e2ad3c9159d1beb82cb13358eda554ec862dd1873953c7d74ba22
+      detection_id: a26d9db4-c883-11eb-9d75-acde48001122
+      source_version: 10
+      source_date: '2025-10-14'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/powershell_script_block_logging/sbl_xml.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1059.001/powershell_script_block_logging/sbl_xml.log
     description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:6f0c23eeef584afd7403cbdad06206b6f0861d7d01c8051a7478eae00b012487
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

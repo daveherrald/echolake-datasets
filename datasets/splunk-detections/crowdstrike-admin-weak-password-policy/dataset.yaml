@@ -1,13 +1,10 @@
 metadata:
   name: crowdstrike-admin-weak-password-policy
   version: 4.0.0
-  description: The following analytic detects CrowdStrike alerts for admin weak password
-    policy violations, identifying instances where administrative passwords do not
-    meet security standards. These alerts highlight significant vulnerabilities that
-    could be exploited by attackers to gain unauthorized access. Promptly addressing
-    these alerts is crucial for maintaining robust security and protecting critical
-    systems and data from potential threats.
+  description: The following analytic detects CrowdStrike alerts for admin weak password policy violations, identifying instances where administrative passwords do not meet security standards. These alerts highlight significant vulnerabilities that could be exploited by attackers to gain unauthorized access. Promptly addressing these alerts is crucial for maintaining robust security and protecting critical systems and data from potential threats.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -15,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1110
-      name: Technique T1110
-    tactics: []
+      name: Brute Force
+      tactics:
+      - credential-access
+    tactics:
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/crowdstrike_admin_weak_password_policy.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/crowdstrike_admin_weak_password_policy.yml
+      rule_sha256: sha256:b6c3a82b06ffe28519462b5151041c98bca3694726b3f5290536fd6df0a0b99f
+      detection_id: bb1481fd-23c0-4195-b6a0-94d746c9637c
+      source_version: 4
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/suspicious_behaviour/crowdstrike_stream/admin_weak_password_policy/crowdstrike_weak_password_admin_cleaned.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/suspicious_behaviour/crowdstrike_stream/admin_weak_password_policy/crowdstrike_weak_password_admin_cleaned.log
     description: crowdstrike:identities - crowdstrike:identities
     format: auto
     schema: raw
     sourcetype: crowdstrike:identities
+    checksum: sha256:b131c12fb88306b5f84a0e54d70ab30f052df2640d015137ef99ab29a1c9a31e
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

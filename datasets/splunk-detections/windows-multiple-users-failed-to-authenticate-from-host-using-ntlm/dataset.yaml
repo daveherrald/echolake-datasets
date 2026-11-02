@@ -1,14 +1,10 @@
 metadata:
   name: windows-multiple-users-failed-to-authenticate-from-host-using-ntlm
   version: 9.0.0
-  description: The following analytic identifies a single source endpoint failing
-    to authenticate with 30 unique valid users using the NTLM protocol. It leverages
-    EventCode 4776 from Domain Controller logs, focusing on error code 0xC000006A,
-    which indicates a bad password. This behavior is significant as it may indicate
-    a Password Spraying attack, where an adversary attempts to gain initial access
-    or elevate privileges. If confirmed malicious, this activity could lead to unauthorized
-    access to sensitive inform
+  description: The following analytic identifies a single source endpoint failing to authenticate with 30 unique valid users using the NTLM protocol. It leverages EventCode 4776 from Domain Controller logs, focusing on error code 0xC000006A, which indicates a bad password. This behavior is significant as it may indicate a Password Spraying attack, where an adversary attempts to gain initial access or elevate privileges. If confirmed malicious, this activity could lead to unauthorized access to sensitive information or further compromise of the Active Directory environment.
   author: Mauricio Velazco, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1110.003
-      name: Technique T1110.003
-    tactics: []
+      name: Password Spraying
+      tactics:
+      - credential-access
+    tactics:
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_multiple_users_failed_to_authenticate_from_host_using_ntlm.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_multiple_users_failed_to_authenticate_from_host_using_ntlm.yml
+      rule_sha256: sha256:ab1926b5517a303422d699e6ac87276eb6b153f387e4f87d4c3d0c8b49abce28
+      detection_id: 7ed272a4-9c77-11eb-af22-acde48001122
+      source_version: 9
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1110.003/purplesharp_valid_users_ntlm_xml/windows-security.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1110.003/purplesharp_valid_users_ntlm_xml/windows-security.log
     description: XmlWinEventLog:Security - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:e3d316fde69dc39af7cd391f9141329a2693d531facbba30a564683cbc8d941a
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

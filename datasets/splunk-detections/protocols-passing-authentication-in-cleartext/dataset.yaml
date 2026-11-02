@@ -1,30 +1,50 @@
 metadata:
   name: protocols-passing-authentication-in-cleartext
   version: 9.0.0
-  description: The following analytic identifies the use of cleartext protocols that
-    risk leaking sensitive information. It detects network traffic on legacy protocols
-    such as Telnet (port 23), POP3 (port 110), IMAP (port 143), and non-anonymous
-    FTP (port 21). The detection leverages the Network_Traffic data model to identify
-    TCP traffic on these ports. Monitoring this activity is crucial as it can expose
-    credentials and other sensitive data to interception. If confirmed malicious,
-    attackers could capture auth
+  description: The following analytic identifies the use of cleartext protocols that risk leaking sensitive information. It detects network traffic on legacy protocols such as Telnet (port 23), POP3 (port 110), IMAP (port 143), and non-anonymous FTP (port 21). The detection leverages the Network_Traffic data model to identify TCP traffic on these ports. Monitoring this activity is crucial as it can expose credentials and other sensitive data to interception. If confirmed malicious, attackers could capture authentication details, leading to unauthorized access and potential data breaches.
   author: Rico Valdez, Splunk
+  updated: '2025-10-14'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
   - use-of-cleartext-protocols
   - cisco-secure-firewall-threat-defense-analytics
   - scattered-lapsus$-hunters
+  mitre_attack:
+    techniques: []
+    tactics: []
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/network/protocols_passing_authentication_in_cleartext.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/network/protocols_passing_authentication_in_cleartext.yml
+      rule_sha256: sha256:87ff2bac1f1a8b7fc6a5cd247c299c46dd2a0da2b30e92db0c87c6c031f7575a
+      detection_id: 6923cd64-17a0-453c-b945-81ac2d8c6db9
+      source_version: 9
+      source_date: '2025-10-14'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: upstream-unmapped
+        reviewed: '2026-11-02'
+        rationale: This rule detects an exposure condition rather than one stable adversary technique.
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_secure_firewall_threat_defense/connection_event/connection_events.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/cisco_secure_firewall_threat_defense/connection_event/connection_events.log
     description: not_applicable - cisco:sfw:estreamer
     format: auto
     schema: raw
     sourcetype: cisco:sfw:estreamer
+    checksum: sha256:37e737d87c4e8396396f3a69621c127bd943eb733036deb7abaa5a5a7276371d
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

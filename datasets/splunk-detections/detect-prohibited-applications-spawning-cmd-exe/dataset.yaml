@@ -1,14 +1,10 @@
 metadata:
   name: detect-prohibited-applications-spawning-cmd-exe
   version: 14.0.0
-  description: The following analytic detects executions of cmd.exe spawned by processes
-    that are commonly abused by attackers and do not typically launch cmd.exe. It
-    leverages data from Endpoint Detection and Response (EDR) agents, focusing on
-    process GUID, process name, parent process, and command-line executions. This
-    activity is significant because it may indicate an attempt to execute unauthorized
-    commands or scripts, often a precursor to further malicious actions. If confirmed
-    malicious, this behavior co
+  description: The following analytic detects executions of cmd.exe spawned by processes that are commonly abused by attackers and do not typically launch cmd.exe. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process GUID, process name, parent process, and command-line executions. This activity is significant because it may indicate an attempt to execute unauthorized commands or scripts, often a precursor to further malicious actions. If confirmed malicious, this behavior could lead to unauthorized code execution, privilege escalation, or persistence within the environment.
   author: Bhavin Patel, Splunk
+  updated: '2025-12-15'
+  license: Apache-2.0
   tags:
   - hunting
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1059.003
-      name: Technique T1059.003
-    tactics: []
+      name: Windows Command Shell
+      tactics:
+      - execution
+    tactics:
+    - execution
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/detect_prohibited_applications_spawning_cmd_exe.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/detect_prohibited_applications_spawning_cmd_exe.yml
+      rule_sha256: sha256:a184cc0f60b9d7efd954f5e4e3cb01a21ae207529478e567d55f24ab47294015
+      detection_id: dcfd6b40-42f9-469d-a433-2e53f7486664
+      source_version: 14
+      source_date: '2025-12-15'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.003/powershell_spawn_cmd/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1059.003/powershell_spawn_cmd/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:ee1f07df0c6c5b9f76cb139bdc5d575a4b50b7e832465b5c3ba9dd5ea5f32cec
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

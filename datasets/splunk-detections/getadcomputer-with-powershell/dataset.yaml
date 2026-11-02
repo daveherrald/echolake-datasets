@@ -1,14 +1,10 @@
 metadata:
   name: getadcomputer-with-powershell
   version: 6.0.0
-  description: 'The following analytic detects the execution of `powershell.exe` with
-    the `Get-AdComputer` commandlet, which is used to discover remote systems within
-    a domain. This detection leverages data from Endpoint Detection and Response (EDR)
-    agents, focusing on process names and command-line arguments. This activity is
-    significant because it indicates potential reconnaissance efforts by adversaries
-    to map out domain computers, which is a common step in the attack lifecycle. If
-    confirmed malicious, this '
+  description: The following analytic detects the execution of `powershell.exe` with the `Get-AdComputer` commandlet, which is used to discover remote systems within a domain. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line arguments. This activity is significant because it indicates potential reconnaissance efforts by adversaries to map out domain computers, which is a common step in the attack lifecycle. If confirmed malicious, this behavior could allow attackers to gain situational awareness and plan further attacks, potentially leading to unauthorized access and data exfiltration.
   author: Mauricio Velazco, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - hunting
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1018
-      name: Technique T1018
-    tactics: []
+      name: Remote System Discovery
+      tactics:
+      - discovery
+    tactics:
+    - discovery
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/getadcomputer_with_powershell.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/getadcomputer_with_powershell.yml
+      rule_sha256: sha256:6a4390540c3ddeff1c76a88cdee31b7b6755210efc34c2cd87ac2201cd9cd1e2
+      detection_id: c5a31f80-5888-4d81-9f78-1cc65026316e
+      source_version: 6
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1018/AD_discovery/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1018/AD_discovery/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:14e3617eac4e42926e56adcf5597fe3ca45f6a66e63facb5d408e9f718570e60
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

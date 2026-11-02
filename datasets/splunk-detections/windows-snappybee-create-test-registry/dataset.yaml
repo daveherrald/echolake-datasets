@@ -1,14 +1,10 @@
 metadata:
   name: windows-snappybee-create-test-registry
   version: 4.0.0
-  description: The following analytic detects modifications to the Windows registry
-    under `SOFTWARE\Microsoft\Test`, a location rarely used by legitimate applications
-    in a production environment. Monitoring this key is crucial, as adversaries may
-    create or alter values here for monitoring update of itself file path, updated
-    configuration file, or system mark compromised. The detection leverages **Sysmon
-    Event ID 13** (Registry Value Set) to identify unauthorized changes. Analysts
-    should investigate processes a
+  description: The following analytic detects modifications to the Windows registry under `SOFTWARE\Microsoft\Test`, a location rarely used by legitimate applications in a production environment. Monitoring this key is crucial, as adversaries may create or alter values here for monitoring update of itself file path, updated configuration file, or system mark compromised. The detection leverages **Sysmon Event ID 13** (Registry Value Set) to identify unauthorized changes. Analysts should investigate processes associated with these modifications, particularly unsigned executables or suspicious command-line activity, as they may indicate malware or unauthorized software behavior.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1112
-      name: Technique T1112
-    tactics: []
+      name: Modify Registry
+      tactics:
+      - persistence
+      - defense-evasion
+    tactics:
+    - persistence
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_snappybee_create_test_registry.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_snappybee_create_test_registry.yml
+      rule_sha256: sha256:828dcbb2aefe4b9342672e7ed07f29a194a7ba1cef95d06bfcb712584d533666
+      detection_id: 80402396-d78a-4c6e-ade5-7697ea670adf
+      source_version: 4
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1112/test_registry/test_reg.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1112/test_registry/test_reg.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:b4c5fd2eb1533b0cbd2a793c767a858d3493877822701be7944103cd9922ee06
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

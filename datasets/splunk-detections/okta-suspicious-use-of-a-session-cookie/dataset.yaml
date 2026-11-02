@@ -1,14 +1,10 @@
 metadata:
   name: okta-suspicious-use-of-a-session-cookie
   version: 8.0.0
-  description: The following analytic identifies suspicious use of a session cookie
-    by detecting multiple client values (IP, User Agent, etc.) changing for the same
-    Device Token associated with a specific user. It leverages policy evaluation events
-    from successful authentication logs in Okta. This activity is significant as it
-    may indicate an adversary attempting to reuse a stolen web session cookie, potentially
-    bypassing authentication mechanisms. If confirmed malicious, this could allow
-    unauthorized access t
+  description: The following analytic identifies suspicious use of a session cookie by detecting multiple client values (IP, User Agent, etc.) changing for the same Device Token associated with a specific user. It leverages policy evaluation events from successful authentication logs in Okta. This activity is significant as it may indicate an adversary attempting to reuse a stolen web session cookie, potentially bypassing authentication mechanisms. If confirmed malicious, this could allow unauthorized access to user accounts, leading to data breaches or further exploitation within the environment.
   author: Scott Dermott, Felicity Robson, Okta, Michael Haag, Bhavin Patel, Splunk
+  updated: '2025-10-14'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1539
-      name: Technique T1539
-    tactics: []
+      name: Steal Web Session Cookie
+      tactics:
+      - credential-access
+    tactics:
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/application/okta_suspicious_use_of_a_session_cookie.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/application/okta_suspicious_use_of_a_session_cookie.yml
+      rule_sha256: sha256:f4ecbb44936d92b8b403caacf43b82296abbbfb01b69dd08ef2f74e077331e18
+      detection_id: 71ad47d1-d6bd-4e0a-b35c-020ad9a6959e
+      source_version: 8
+      source_date: '2025-10-14'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1539/okta_web_session_multiple_ip/okta_web_session_multiple_ip.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1539/okta_web_session_multiple_ip/okta_web_session_multiple_ip.log
     description: Okta - OktaIM2:log
     format: auto
     schema: raw
     sourcetype: OktaIM2:log
+    checksum: sha256:88262a0ccadd5699a50f60d2f6ab628c601ba508db3eccee9e02b0f1266697c9
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

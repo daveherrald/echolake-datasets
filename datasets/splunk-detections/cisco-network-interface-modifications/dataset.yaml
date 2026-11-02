@@ -1,14 +1,10 @@
 metadata:
   name: cisco-network-interface-modifications
   version: 1.0.0
-  description: This analytic detects the creation or modification of network interfaces
-    on Cisco devices, which could indicate an attacker establishing persistence or
-    preparing for lateral movement. After gaining initial access to network devices,
-    threat actors like Static Tundra often create new interfaces (particularly loopback
-    interfaces) to establish covert communication channels or maintain persistence.
-    This detection specifically looks for the configuration of new interfaces, interface
-    state changes, and
+  description: This analytic detects the creation or modification of network interfaces on Cisco devices, which could indicate an attacker establishing persistence or preparing for lateral movement. After gaining initial access to network devices, threat actors like Static Tundra often create new interfaces (particularly loopback interfaces) to establish covert communication channels or maintain persistence. This detection specifically looks for the configuration of new interfaces, interface state changes, and the assignment of IP addresses to interfaces. These activities are particularly concerning when they involve unusual interface names or descriptions containing suspicious terms.
   author: Bhavin Patel, Michael Haag, Splunk
+  updated: '2025-08-21'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,22 +12,55 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1556
-      name: Technique T1556
+      name: Modify Authentication Process
+      tactics:
+      - persistence
+      - defense-evasion
+      - credential-access
     - id: T1021
-      name: Technique T1021
+      name: Remote Services
+      tactics:
+      - lateral-movement
     - id: T1133
-      name: Technique T1133
-    tactics: []
+      name: External Remote Services
+      tactics:
+      - initial-access
+      - persistence
+    tactics:
+    - initial-access
+    - persistence
+    - defense-evasion
+    - credential-access
+    - lateral-movement
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/network/cisco_network_interface_modifications.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/network/cisco_network_interface_modifications.yml
+      rule_sha256: sha256:ba958a88a2fc571119bca7638027a7b21b044aa61ca7a5d26e0e0606c19be350
+      detection_id: 61ae09c2-079e-44b1-8be0-74e35c5a679e
+      source_version: 1
+      source_date: '2025-08-21'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/cisco/cisco_smart_install/cisco_ios.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1190/cisco/cisco_smart_install/cisco_ios.log
     description: cisco:ios - cisco:ios
     format: auto
     schema: raw
     sourcetype: cisco:ios
+    checksum: sha256:ae903908503ba93ad0dd9d5be452a38137344f927659db5577acd4fa2695709f
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

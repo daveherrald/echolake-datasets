@@ -1,14 +1,10 @@
 metadata:
   name: nginx-connectwise-screenconnect-authentication-bypass
   version: 7.0.0
-  description: The following analytic detects attempts to exploit the ConnectWise
-    ScreenConnect CVE-2024-1709 vulnerability, which allows attackers to bypass authentication
-    via alternate paths or channels. It leverages Nginx access logs to identify web
-    requests to the SetupWizard.aspx page, indicating potential exploitation. This
-    activity is significant as it can lead to unauthorized administrative access and
-    remote code execution. If confirmed malicious, attackers could create administrative
-    users and gain fu
+  description: The following analytic detects attempts to exploit the ConnectWise ScreenConnect CVE-2024-1709 vulnerability, which allows attackers to bypass authentication via alternate paths or channels. It leverages Nginx access logs to identify web requests to the SetupWizard.aspx page, indicating potential exploitation. This activity is significant as it can lead to unauthorized administrative access and remote code execution. If confirmed malicious, attackers could create administrative users and gain full control over the affected ScreenConnect instance, posing severe security risks. Immediate remediation by updating to version 23.9.8 or above is recommended.
   author: Michael Haag, Splunk
+  updated: '2025-10-14'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1190
-      name: Technique T1190
-    tactics: []
+      name: Exploit Public-Facing Application
+      tactics:
+      - initial-access
+    tactics:
+    - initial-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/web/nginx_connectwise_screenconnect_authentication_bypass.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/web/nginx_connectwise_screenconnect_authentication_bypass.yml
+      rule_sha256: sha256:7403863a3763816bb7c49ff6f99d65d1711476cd6e79d1e1594dadcce69995af
+      detection_id: b3f7a803-e802-448b-8eb2-e796b223bccc
+      source_version: 7
+      source_date: '2025-10-14'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/screenconnect/nginx_screenconnect.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1190/screenconnect/nginx_screenconnect.log
     description: nginx:plus:kv - nginx:plus:kv
     format: auto
     schema: raw
     sourcetype: nginx:plus:kv
+    checksum: sha256:b521fb6ae93a3bf8b49db6099d94a7866774b66e7cb1800b7a5df10d3fb31b08
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

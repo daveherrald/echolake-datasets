@@ -1,14 +1,10 @@
 metadata:
   name: linux-system-reboot-via-system-request-key
   version: 6.0.0
-  description: The following analytic detects the execution of the SysReq hack to
-    reboot a Linux system host. It leverages Endpoint Detection and Response (EDR)
-    data to identify processes executing the command to pipe 'b' to /proc/sysrq-trigger.
-    This activity is significant as it is an uncommon method to reboot a system and
-    was observed in the Awfulshred malware wiper. If confirmed malicious, this technique
-    could indicate the presence of suspicious processes and potential system compromise,
-    leading to unauthor
+  description: The following analytic detects the execution of the SysReq hack to reboot a Linux system host. It leverages Endpoint Detection and Response (EDR) data to identify processes executing the command to pipe 'b' to /proc/sysrq-trigger. This activity is significant as it is an uncommon method to reboot a system and was observed in the Awfulshred malware wiper. If confirmed malicious, this technique could indicate the presence of suspicious processes and potential system compromise, leading to unauthorized reboots and disruption of services.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1529
-      name: Technique T1529
-    tactics: []
+      name: System Shutdown/Reboot
+      tactics:
+      - impact
+    tactics:
+    - impact
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/linux_system_reboot_via_system_request_key.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/linux_system_reboot_via_system_request_key.yml
+      rule_sha256: sha256:111f328216edc0c7e683fd9549e6248afd75d62737d25278d5978b5a46ce0834
+      detection_id: e1912b58-ed9c-422c-bbb0-2dbc70398345
+      source_version: 6
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/awfulshred/test2/sysmon_linux.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/awfulshred/test2/sysmon_linux.log
     description: Syslog:Linux-Sysmon/Operational - sysmon:linux
     format: auto
     schema: raw
     sourcetype: sysmon:linux
+    checksum: sha256:e8b9ca191dff31daf9b2836847af78c99df272e5e050b549b2b5f32091532da0
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

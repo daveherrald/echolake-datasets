@@ -1,14 +1,10 @@
 metadata:
   name: windows-vulnerable-driver-installed
   version: 5.0.0
-  description: 'The following analytic detects the loading of known vulnerable Windows
-    drivers, which may indicate potential persistence or privilege escalation attempts.
-    It leverages Windows System service install EventCode 7045 to identify driver
-    loading events and cross-references them with a list of vulnerable drivers. This
-    activity is significant as attackers often exploit vulnerable drivers to gain
-    elevated privileges or maintain persistence on a system. If confirmed malicious,
-    this could allow attackers '
+  description: The following analytic detects the loading of known vulnerable Windows drivers, which may indicate potential persistence or privilege escalation attempts. It leverages Windows System service install EventCode 7045 to identify driver loading events and cross-references them with a list of vulnerable drivers. This activity is significant as attackers often exploit vulnerable drivers to gain elevated privileges or maintain persistence on a system. If confirmed malicious, this could allow attackers to execute arbitrary code with high privileges, leading to further system compromise and potential data exfiltration. This detection is a Windows Event Log adaptation of the Sysmon driver loaded detection written by Michael Haag.
   author: Dean Luxton
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +12,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1543.003
-      name: Technique T1543.003
-    tactics: []
+      name: Windows Service
+      tactics:
+      - persistence
+      - privilege-escalation
+    tactics:
+    - persistence
+    - privilege-escalation
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_vulnerable_driver_installed.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_vulnerable_driver_installed.yml
+      rule_sha256: sha256:0f86df8f1e89ab106f8c97beafcbcac4b677c9b227855da59a1f1b22ad820cf3
+      detection_id: 1dda7586-57be-4a1b-8de1-a9ad802b9a7f
+      source_version: 5
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1014/windows-system.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1014/windows-system.log
     description: XmlWinEventLog:System - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:33e6f72f893a469c4aaff50a94d37c157e51b1f2bcf6bacb90a1c44f23781735
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,14 +1,10 @@
 metadata:
   name: m365-copilot-agentic-jailbreak-attack
   version: 1.0.0
-  description: Detects agentic AI jailbreak attempts that try to establish persistent
-    control over M365 Copilot through rule injection, universal triggers, response
-    automation, system overrides, and persona establishment techniques. The detection
-    analyzes the PromptText field for keywords like "from now on," "always respond,"
-    "ignore previous," "new rule," "override," and role-playing commands (e.g., "act
-    as," "you are now") that attempt to inject persistent instructions. The search
-    computes risk by counting d
+  description: Detects agentic AI jailbreak attempts that try to establish persistent control over M365 Copilot through rule injection, universal triggers, response automation, system overrides, and persona establishment techniques. The detection analyzes the PromptText field for keywords like "from now on," "always respond," "ignore previous," "new rule," "override," and role-playing commands (e.g., "act as," "you are now") that attempt to inject persistent instructions. The search computes risk by counting distinct jailbreak indicators per user session, flagging coordinated manipulation attempts.
   author: Rod Soto
+  updated: '2025-09-25'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1562
-      name: Technique T1562
-    tactics: []
+      name: Impair Defenses
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/application/m365_copilot_agentic_jailbreak_attack.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/application/m365_copilot_agentic_jailbreak_attack.yml
+      rule_sha256: sha256:33a4aa9fa0b8d3babf0df1e1f02f2904ee1ccfc66246822959c753657abcfc77
+      detection_id: e5c7b380-19da-42e9-9e53-0af4cd27aee3
+      source_version: 1
+      source_date: '2025-09-25'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://raw.githubusercontent.com/splunk/attack_data/master/datasets/m365_copilot/copilot_prompt_logs.csv
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/m365_copilot/copilot_prompt_logs.csv
     description: csv - csv
     format: csv
     schema: raw
     sourcetype: csv
+    checksum: sha256:40cd34109cba4d1d117b7a56d33c13a9035253f254e20cbc8eba85c8549fec38
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,14 +1,10 @@
 metadata:
   name: windows-steal-or-forge-kerberos-tickets-klist
   version: 6.0.0
-  description: The following analytic identifies the execution of the Windows OS tool
-    klist.exe, often used by post-exploitation tools like winpeas. This detection
-    leverages data from Endpoint Detection and Response (EDR) agents, focusing on
-    process and parent process details. Monitoring klist.exe is significant as it
-    can indicate attempts to list or gather cached Kerberos tickets, which are crucial
-    for lateral movement or privilege escalation. If confirmed malicious, this activity
-    could enable attackers to mo
+  description: The following analytic identifies the execution of the Windows OS tool klist.exe, often used by post-exploitation tools like winpeas. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process and parent process details. Monitoring klist.exe is significant as it can indicate attempts to list or gather cached Kerberos tickets, which are crucial for lateral movement or privilege escalation. If confirmed malicious, this activity could enable attackers to move laterally within the network or escalate privileges, posing a severe security risk.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - hunting
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1558
-      name: Technique T1558
-    tactics: []
+      name: Steal or Forge Kerberos Tickets
+      tactics:
+      - credential-access
+    tactics:
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_steal_or_forge_kerberos_tickets_klist.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_steal_or_forge_kerberos_tickets_klist.yml
+      rule_sha256: sha256:2748624990f6753bf4e839e2bac4840fb8fce3cfd70669d86dfa9da1deef062c
+      detection_id: 09d88404-1e29-46cb-806c-1eedbc85ad5d
+      source_version: 6
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/winpeas/sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/winpeas/sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:3d884edd04405659a53f85e3570d96056c01bd58081f175fd9aa9362259872a4
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,14 +1,10 @@
 metadata:
   name: excessive-number-of-taskhost-processes
   version: 8.0.0
-  description: The following analytic identifies an excessive number of taskhost.exe
-    and taskhostex.exe processes running within a short time frame. It leverages data
-    from Endpoint Detection and Response (EDR) agents, focusing on process names and
-    their counts. This behavior is significant as it is commonly associated with post-exploitation
-    tools like Meterpreter and Koadic, which use multiple instances of these processes
-    for actions such as discovery and lateral movement. If confirmed malicious, this
-    activity
+  description: The following analytic identifies an excessive number of taskhost.exe and taskhostex.exe processes running within a short time frame. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and their counts. This behavior is significant as it is commonly associated with post-exploitation tools like Meterpreter and Koadic, which use multiple instances of these processes for actions such as discovery and lateral movement. If confirmed malicious, this activity could indicate an ongoing attack, allowing attackers to execute code, escalate privileges, or move laterally within the network.
   author: Michael Hart
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1059
-      name: Technique T1059
-    tactics: []
+      name: Command and Scripting Interpreter
+      tactics:
+      - execution
+    tactics:
+    - execution
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/excessive_number_of_taskhost_processes.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/excessive_number_of_taskhost_processes.yml
+      rule_sha256: sha256:0b37f8a0e9221ed7e4b91b08d76d611ab4a7529a9199b001fa0288b9cc02b7e9
+      detection_id: f443dac2-c7cf-11eb-ab51-acde48001122
+      source_version: 8
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059/excessive_distinct_processes_from_windows_temp/windows-xml.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1059/excessive_distinct_processes_from_windows_temp/windows-xml.log
     description: XmlWinEventLog:Security - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:344344ba7a13b4137cd286a522e93db5cd5aa616d42e52dcde3d6f76bbca1ebd
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

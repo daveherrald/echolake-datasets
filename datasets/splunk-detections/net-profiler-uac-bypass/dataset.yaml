@@ -1,14 +1,10 @@
 metadata:
   name: net-profiler-uac-bypass
   version: 8.0.0
-  description: 'The following analytic detects modifications to the registry aimed
-    at bypassing the User Account Control (UAC) feature in Windows. It identifies
-    changes to the .NET COR_PROFILER_PATH registry key, which can be exploited to
-    load a malicious DLL via mmc.exe. This detection leverages data from the Endpoint.Registry
-    datamodel, focusing on specific registry paths and values. Monitoring this activity
-    is crucial as it can indicate an attempt to escalate privileges or persist within
-    the environment. If '
+  description: The following analytic detects modifications to the registry aimed at bypassing the User Account Control (UAC) feature in Windows. It identifies changes to the .NET COR_PROFILER_PATH registry key, which can be exploited to load a malicious DLL via mmc.exe. This detection leverages data from the Endpoint.Registry datamodel, focusing on specific registry paths and values. Monitoring this activity is crucial as it can indicate an attempt to escalate privileges or persist within the environment. If confirmed malicious, this could allow an attacker to execute arbitrary code with elevated privileges, compromising system integrity.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +12,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1548.002
-      name: Technique T1548.002
-    tactics: []
+      name: Bypass User Account Control
+      tactics:
+      - privilege-escalation
+      - defense-evasion
+    tactics:
+    - privilege-escalation
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/net_profiler_uac_bypass.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/net_profiler_uac_bypass.yml
+      rule_sha256: sha256:2d8a0bb4c80833f3a3b2efb386cc161ff2e9095937e31bf970f208e6e546317d
+      detection_id: 0252ca80-e30d-11eb-8aa3-acde48001122
+      source_version: 8
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1548/uac_bypass/windows-sysmon2.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1548/uac_bypass/windows-sysmon2.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:cd32f8271438c50abc45a38425a4d04485214a1978cbe9bf58c0c0885368557a
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

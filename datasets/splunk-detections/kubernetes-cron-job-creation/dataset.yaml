@@ -1,14 +1,10 @@
 metadata:
   name: kubernetes-cron-job-creation
   version: 5.0.0
-  description: The following analytic detects the creation of a Kubernetes cron job,
-    which is a task scheduled to run automatically at specified intervals. It identifies
-    this activity by monitoring Kubernetes Audit logs for the creation events of cron
-    jobs. This behavior is significant for a SOC as it could allow an attacker to
-    execute malicious tasks repeatedly and automatically, posing a threat to the Kubernetes
-    infrastructure. If confirmed malicious, this activity could lead to persistent
-    attacks, service d
+  description: The following analytic detects the creation of a Kubernetes cron job, which is a task scheduled to run automatically at specified intervals. It identifies this activity by monitoring Kubernetes Audit logs for the creation events of cron jobs. This behavior is significant for a SOC as it could allow an attacker to execute malicious tasks repeatedly and automatically, posing a threat to the Kubernetes infrastructure. If confirmed malicious, this activity could lead to persistent attacks, service disruptions, or unauthorized access to sensitive information.
   author: Patrick Bareiss, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,44 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1053.007
-      name: Technique T1053.007
-    tactics: []
+      name: Container Orchestration Job
+      tactics:
+      - execution
+      - persistence
+      - privilege-escalation
+    tactics:
+    - execution
+    - persistence
+    - privilege-escalation
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/kubernetes_cron_job_creation.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/kubernetes_cron_job_creation.yml
+      rule_sha256: sha256:3c342fe39c01903034e1d19a64737dcf48499e4ab826301456fba2e7ce92a312
+      detection_id: 5984dbe8-572f-47d7-9251-3dff6c3f0c0d
+      source_version: 5
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053.007/kubernetes_audit_cron_job_creation/kubernetes_audit_cron_job_creation.json
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1053.007/kubernetes_audit_cron_job_creation/kubernetes_audit_cron_job_creation.json
     description: kubernetes - _json
     format: auto
     schema: raw
     sourcetype: _json
+    checksum: sha256:9826b39d9c2d2998f7313414980429af6600ee8db118cec80dabb81461ee5974
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

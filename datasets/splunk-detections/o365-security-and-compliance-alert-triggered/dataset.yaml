@@ -1,14 +1,10 @@
 metadata:
   name: o365-security-and-compliance-alert-triggered
   version: 8.0.0
-  description: The following analytic identifies alerts triggered by the Office 365
-    Security and Compliance Center, indicating potential threats or policy violations.
-    It leverages data from the `o365_management_activity` dataset, focusing on events
-    where the workload is SecurityComplianceCenter and the operation is AlertTriggered.
-    This activity is significant as it highlights security and compliance issues within
-    the O365 environment, which are crucial for maintaining organizational security.
-    If confirmed mali
+  description: The following analytic identifies alerts triggered by the Office 365 Security and Compliance Center, indicating potential threats or policy violations. It leverages data from the `o365_management_activity` dataset, focusing on events where the workload is SecurityComplianceCenter and the operation is AlertTriggered. This activity is significant as it highlights security and compliance issues within the O365 environment, which are crucial for maintaining organizational security. If confirmed malicious, these alerts could indicate attempts to breach security policies, leading to unauthorized access, data exfiltration, or other malicious activities.
   author: Mauricio Velazco, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +12,46 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1078.004
-      name: Technique T1078.004
-    tactics: []
+      name: Cloud Accounts
+      tactics:
+      - initial-access
+      - persistence
+      - privilege-escalation
+      - defense-evasion
+    tactics:
+    - initial-access
+    - persistence
+    - privilege-escalation
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/cloud/o365_security_and_compliance_alert_triggered.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/cloud/o365_security_and_compliance_alert_triggered.yml
+      rule_sha256: sha256:d50bdad6dbc98da1b94a59f68dbcdd5d79ad55f2e256b7b9f3fbd3d9973be0a0
+      detection_id: 5b367cdd-8dfc-49ac-a9b7-6406cf27f33e
+      source_version: 8
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1078.004/o365_security_and_compliance_alert_triggered/o365_security_and_compliance_alert_triggered.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1078.004/o365_security_and_compliance_alert_triggered/o365_security_and_compliance_alert_triggered.log
     description: o365 - o365:management:activity
     format: auto
     schema: raw
     sourcetype: o365:management:activity
+    checksum: sha256:0c8ffc8ceab5460e5c33382d727ef988564937c11d8069fb3f9745275d46413e
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,14 +1,10 @@
 metadata:
   name: windows-audit-policy-auditing-option-modified-registry
   version: 4.0.0
-  description: The following analytic detects potentially suspicious modifications
-    to the Audit Policy auditing options registry values. It leverages data from the
-    Endpoint.Registry data model, focusing on changes to one of the following auditing
-    option values "CrashOnAuditFail", "FullPrivilegeAuditing", "AuditBaseObjects"
-    and "AuditBaseDirectories" within the "HKLM\\System\\CurrentControlSet\\Control\\Lsa\\"
-    registry key. This activity is significant as it could be a sign of a threat actor
-    trying to tamper wi
+  description: The following analytic detects potentially suspicious modifications to the Audit Policy auditing options registry values. It leverages data from the Endpoint.Registry data model, focusing on changes to one of the following auditing option values "CrashOnAuditFail", "FullPrivilegeAuditing", "AuditBaseObjects" and "AuditBaseDirectories" within the "HKLM\\System\\CurrentControlSet\\Control\\Lsa\\" registry key. This activity is significant as it could be a sign of a threat actor trying to tamper with the audit policy configuration, and disabling SACLs configuration. If confirmed malicious, this behavior could allow attackers to bypass defenses, and plan further attacks, potentially leading to full machine compromise or lateral movement.
   author: Nasreddine Bencherchali, Bhavin Patel, Splunk
+  updated: '2025-07-30'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1547.014
-      name: Technique T1547.014
-    tactics: []
+      name: Active Setup
+      tactics:
+      - persistence
+      - privilege-escalation
+    tactics:
+    - persistence
+    - privilege-escalation
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_audit_policy_auditing_option_modified___registry.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_audit_policy_auditing_option_modified___registry.yml
+      rule_sha256: sha256:3fdb20434c5dcf98da8899524610fb6714b0e9fad8587492573ee6a2c85fa0fa
+      detection_id: 27914692-9c62-44ea-9129-ceb429b61bd0
+      source_version: 4
+      source_date: '2025-07-30'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.002/auditpol_tampering/auditpol_tampering_sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1562.002/auditpol_tampering/auditpol_tampering_sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:a417ec3d8d48c9cdcf4d5bcfc834fe100ba8a03105bcf08305f5af40a830b363
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

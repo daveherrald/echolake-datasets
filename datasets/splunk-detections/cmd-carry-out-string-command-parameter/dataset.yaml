@@ -1,14 +1,10 @@
 metadata:
   name: cmd-carry-out-string-command-parameter
   version: 16.0.0
-  description: The following analytic detects the use of `cmd.exe /c` to execute commands,
-    a technique often employed by adversaries and malware to run batch commands or
-    invoke other shells like PowerShell. This detection leverages data from Endpoint
-    Detection and Response (EDR) agents, focusing on command-line executions and process
-    metadata. Monitoring this activity is crucial as it can indicate script-based
-    attacks or unauthorized command execution. If confirmed malicious, this behavior
-    could lead to unauth
+  description: The following analytic detects the use of `cmd.exe /c` to execute commands, a technique often employed by adversaries and malware to run batch commands or invoke other shells like PowerShell. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on command-line executions and process metadata. Monitoring this activity is crucial as it can indicate script-based attacks or unauthorized command execution. If confirmed malicious, this behavior could lead to unauthorized code execution, privilege escalation, or persistence within the environment.
   author: Teoderick Contreras, Bhavin Patel, Splunk
+  updated: '2025-12-16'
+  license: Apache-2.0
   tags:
   - hunting
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1059.003
-      name: Technique T1059.003
-    tactics: []
+      name: Windows Command Shell
+      tactics:
+      - execution
+    tactics:
+    - execution
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/cmd_carry_out_string_command_parameter.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/cmd_carry_out_string_command_parameter.yml
+      rule_sha256: sha256:23ba0d9bcd8ae16d6c0cbc34feffd326adf09eeca6f77f78dacb5e09aa6a92f6
+      detection_id: 54a6ed00-3256-11ec-b031-acde48001122
+      source_version: 16
+      source_date: '2025-12-16'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/icedid/cmd_carry_str_param/sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/icedid/cmd_carry_str_param/sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:6cec51c32bef2dc0eca57ca619a2e7017c43dcad88658adb588dedf5676abbbb
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,13 +1,10 @@
 metadata:
   name: windows-iis-components-new-module-added
   version: 7.0.0
-  description: The following analytic detects the addition of new IIS modules on a
-    Windows IIS server. It leverages the Windows Event log - Microsoft-IIS-Configuration/Operational,
-    specifically EventCode 29, to identify this activity. This behavior is significant
-    because IIS modules are rarely added to production servers, and unauthorized modules
-    could indicate malicious activity. If confirmed malicious, an attacker could use
-    these modules to execute arbitrary code, escalate privileges, or maintain persistence
+  description: The following analytic detects the addition of new IIS modules on a Windows IIS server. It leverages the Windows Event log - Microsoft-IIS-Configuration/Operational, specifically EventCode 29, to identify this activity. This behavior is significant because IIS modules are rarely added to production servers, and unauthorized modules could indicate malicious activity. If confirmed malicious, an attacker could use these modules to execute arbitrary code, escalate privileges, or maintain persistence within the environment, potentially compromising the server and sensitive data.
   author: Michael Haag, Splunk
+  updated: '2025-09-16'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1505.004
-      name: Technique T1505.004
-    tactics: []
+      name: IIS Components
+      tactics:
+      - persistence
+    tactics:
+    - persistence
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_iis_components_new_module_added.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_iis_components_new_module_added.yml
+      rule_sha256: sha256:52b8ac104d234be64bdb783e5a2a9f6e75e3ccaec2889c8f47e5b3347623bde9
+      detection_id: 55f22929-cfd3-4388-ba5c-4d01fac7ee7e
+      source_version: 7
+      source_date: '2025-09-16'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1505.004/IIS-Configuration-Operational.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1505.004/IIS-Configuration-Operational.log
     description: IIS:Configuration:Operational - IIS:Configuration:Operational
     format: auto
     schema: raw
     sourcetype: IIS:Configuration:Operational
+    checksum: sha256:264fa3f2c40a79d7cdfd6499acbe91dce9c45a0689c5a0658248204c74cf7883
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

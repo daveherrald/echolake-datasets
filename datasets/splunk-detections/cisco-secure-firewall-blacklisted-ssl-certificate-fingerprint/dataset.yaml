@@ -1,14 +1,10 @@
 metadata:
   name: cisco-secure-firewall-blacklisted-ssl-certificate-fingerprint
   version: 3.0.0
-  description: The following analytic detects the use of known suspicious SSL certificates
-    in any observed event where the SSL_CertFingerprint field is present. It leverages
-    Cisco Secure Firewall logs and compares the SSL certificate SHA1 fingerprint against
-    a blacklist of certificates associated with malware distribution, command and
-    control (C2) infrastructure, or phishing campaigns. This activity is significant
-    as adversaries often reuse or self-sign certificates across malicious infrastructure,
-    allowing de
+  description: The following analytic detects the use of known suspicious SSL certificates in any observed event where the SSL_CertFingerprint field is present. It leverages Cisco Secure Firewall logs and compares the SSL certificate SHA1 fingerprint against a blacklist of certificates associated with malware distribution, command and control (C2) infrastructure, or phishing campaigns. This activity is significant as adversaries often reuse or self-sign certificates across malicious infrastructure, allowing defenders to track and detect encrypted sessions even when domains or IPs change. If confirmed malicious, this may indicate beaconing, malware download, or data exfiltration over TLS/SSL.
   author: Nasreddine Bencherchali, Splunk
+  updated: '2026-06-01'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,24 +12,53 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1587.002
-      name: Technique T1587.002
+      name: Code Signing Certificates
+      tactics:
+      - resource-development
     - id: T1588.004
-      name: Technique T1588.004
+      name: Digital Certificates
+      tactics:
+      - resource-development
     - id: T1071.001
-      name: Technique T1071.001
+      name: Web Protocols
+      tactics:
+      - command-and-control
     - id: T1573.002
-      name: Technique T1573.002
-    tactics: []
+      name: Asymmetric Cryptography
+      tactics:
+      - command-and-control
+    tactics:
+    - resource-development
+    - command-and-control
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/network/cisco_secure_firewall___blacklisted_ssl_certificate_fingerprint.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/network/cisco_secure_firewall___blacklisted_ssl_certificate_fingerprint.yml
+      rule_sha256: sha256:cb8661d003257deeea9601baffbde3a883572fb37933e8d478c87aa4df6a5343
+      detection_id: c43f7b49-2dab-4e76-892e-7f971c2f20f1
+      source_version: 3
+      source_date: '2026-06-01'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_secure_firewall_threat_defense/connection_event/connection_events.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/cisco_secure_firewall_threat_defense/connection_event/connection_events.log
     description: not_applicable - cisco:sfw:estreamer
     format: auto
     schema: raw
     sourcetype: cisco:sfw:estreamer
+    checksum: sha256:37e737d87c4e8396396f3a69621c127bd943eb733036deb7abaa5a5a7276371d
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

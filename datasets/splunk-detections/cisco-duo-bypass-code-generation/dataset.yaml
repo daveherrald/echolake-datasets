@@ -1,14 +1,24 @@
 metadata:
   name: cisco-duo-bypass-code-generation
   version: 1.0.0
-  description: "The following analytic detects when a Duo user generates a bypass\
-    \ code, which allows them to circumvent multi-factor authentication (2FA) protections.\
-    \ \nIt works by monitoring Duo activity logs for the 'bypass_create' action, renaming\
-    \ the affected object as the user, and aggregating events to identify \ninstances\
-    \ where a bypass code is issued. This behavior is significant for a Security Operations\
-    \ Center (SOC) because generating a bypass code can enable \nattackers, malicious\
-    \ insiders, or unauthori"
+  description: 'The following analytic detects when a Duo user generates a bypass code, which allows them to circumvent multi-factor authentication (2FA) protections.
+
+    It works by monitoring Duo activity logs for the ''bypass_create'' action, renaming the affected object as the user, and aggregating events to identify
+
+    instances where a bypass code is issued. This behavior is significant for a Security Operations Center (SOC) because generating a bypass code can enable
+
+    attackers, malicious insiders, or unauthorized administrators to gain access to sensitive systems without the required second authentication factor.
+
+    Such activity may indicate account compromise, privilege abuse, or attempts to weaken security controls. Early detection of bypass code generation is
+
+    critical, as it allows the SOC to investigate and respond before an attacker can exploit the reduced authentication requirements, helping to prevent
+
+    unauthorized access, data breaches, or further lateral movement within the environment. Monitoring for this action helps maintain strong authentication
+
+    standards and reduces the risk of credential-based attacks.'
   author: Patrick Bareiss, Splunk
+  updated: '2025-07-08'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +26,44 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1556
-      name: Technique T1556
-    tactics: []
+      name: Modify Authentication Process
+      tactics:
+      - persistence
+      - defense-evasion
+      - credential-access
+    tactics:
+    - persistence
+    - defense-evasion
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/application/cisco_duo_bypass_code_generation.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/application/cisco_duo_bypass_code_generation.yml
+      rule_sha256: sha256:cc165b333ad9ad1229de1c70afc06d8bfc1011d3daa0bbbacc2d29e1666d9969
+      detection_id: 446e81ff-ce06-4925-9c7d-4073f9b5abf5
+      source_version: 1
+      source_date: '2025-07-08'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1556/cisco_duo_bypass_code/cisco_duo_activity.json
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1556/cisco_duo_bypass_code/cisco_duo_activity.json
     description: duo - cisco:duo:administrator
     format: auto
     schema: raw
     sourcetype: cisco:duo:administrator
+    checksum: sha256:858d3cfb2f5ad7dfb9f02b8fa37c60a8bb8b923a26a2d15082991d02ac0d2189
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

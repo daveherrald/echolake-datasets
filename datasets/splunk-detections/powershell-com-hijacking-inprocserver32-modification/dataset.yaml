@@ -1,14 +1,10 @@
 metadata:
   name: powershell-com-hijacking-inprocserver32-modification
   version: 7.0.0
-  description: The following analytic detects attempts to modify or add a Component
-    Object Model (COM) entry to the InProcServer32 path within the registry using
-    PowerShell. It leverages PowerShell ScriptBlock Logging (EventCode 4104) to identify
-    suspicious script blocks that target the InProcServer32 registry path. This activity
-    is significant because modifying COM objects can be used for persistence or privilege
-    escalation by attackers. If confirmed malicious, this could allow an attacker
-    to execute arbitrar
+  description: The following analytic detects attempts to modify or add a Component Object Model (COM) entry to the InProcServer32 path within the registry using PowerShell. It leverages PowerShell ScriptBlock Logging (EventCode 4104) to identify suspicious script blocks that target the InProcServer32 registry path. This activity is significant because modifying COM objects can be used for persistence or privilege escalation by attackers. If confirmed malicious, this could allow an attacker to execute arbitrary code or maintain persistent access to the compromised system, posing a severe security risk.
   author: Michael Haag, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,20 +12,47 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1059.001
-      name: Technique T1059.001
+      name: PowerShell
+      tactics:
+      - execution
     - id: T1546.015
-      name: Technique T1546.015
-    tactics: []
+      name: Component Object Model Hijacking
+      tactics:
+      - persistence
+      - privilege-escalation
+    tactics:
+    - execution
+    - persistence
+    - privilege-escalation
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/powershell_com_hijacking_inprocserver32_modification.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/powershell_com_hijacking_inprocserver32_modification.yml
+      rule_sha256: sha256:73134e1bfd9e130c3138a6057148e5c03621dd7d4fd76274cd24c0a326dbf455
+      detection_id: ea61e291-af05-4716-932a-67faddb6ae6f
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1546.015/atomic_red_team/windows-powershell.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1546.015/atomic_red_team/windows-powershell.log
     description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:b9a0333a5a75e66fbbe3f67ad500a94cc587e8c1e8cc15c8dc76374c94527d1e
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

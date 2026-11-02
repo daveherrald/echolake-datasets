@@ -1,14 +1,10 @@
 metadata:
   name: windows-steal-authentication-certificates-certificate-request
   version: 5.0.0
-  description: The following analytic detects when a new certificate is requested
-    from Certificate Services - AD CS. It leverages Event ID 4886, which indicates
-    that a certificate request has been received. This activity is significant because
-    unauthorized certificate requests can be part of credential theft or lateral movement
-    tactics. If confirmed malicious, an attacker could use the certificate to impersonate
-    users, gain unauthorized access to resources, or establish persistent access within
-    the environment
+  description: The following analytic detects when a new certificate is requested from Certificate Services - AD CS. It leverages Event ID 4886, which indicates that a certificate request has been received. This activity is significant because unauthorized certificate requests can be part of credential theft or lateral movement tactics. If confirmed malicious, an attacker could use the certificate to impersonate users, gain unauthorized access to resources, or establish persistent access within the environment. Monitoring and correlating this event with other suspicious activities is crucial for identifying potential security incidents.
   author: Michael Haag, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +12,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1649
-      name: Technique T1649
-    tactics: []
+      name: Steal or Forge Authentication Certificates
+      tactics:
+      - credential-access
+    tactics:
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_steal_authentication_certificates_certificate_request.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_steal_authentication_certificates_certificate_request.yml
+      rule_sha256: sha256:314ec38f282a0c80330082cd91cbe91875842fb8de45d10f8133b12edf18ee54
+      detection_id: 747d7800-2eaa-422d-b994-04d8bb9e06d0
+      source_version: 5
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1649/atomic_red_team/4886_windows-security.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1649/atomic_red_team/4886_windows-security.log
     description: XmlWinEventLog:Security - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:88718d6059a6c310f8931c26e1bbdb829792ddcb2c0a941a3c59e930d7e22976
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

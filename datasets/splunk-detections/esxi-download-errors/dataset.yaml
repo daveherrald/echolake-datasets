@@ -1,11 +1,10 @@
 metadata:
   name: esxi-download-errors
   version: 1.0.0
-  description: This detection identifies failed file download attempts on ESXi hosts
-    by looking for specific error messages in the system logs. These failures may
-    indicate unauthorized or malicious attempts to install or update components—such
-    as VIBs or scripts
+  description: "This detection identifies failed file download attempts on ESXi hosts by looking for specific error messages in the system logs. These failures may indicate unauthorized or malicious attempts to install or update components\u2014such as VIBs or scripts"
   author: Raven Tait, Splunk
+  updated: '2025-05-12'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -14,20 +13,44 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1601.001
-      name: Technique T1601.001
+      name: Patch System Image
+      tactics:
+      - defense-evasion
     - id: T1562.001
-      name: Technique T1562.001
-    tactics: []
+      name: Disable or Modify Tools
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/application/esxi_download_errors.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/application/esxi_download_errors.yml
+      rule_sha256: sha256:e497876497803a3b39ef9a997dffedd101c42e34221d0a7f66451815e6eb1fc1
+      detection_id: 515cccd0-c4d8-4427-92d9-8a8f8b5a71dc
+      source_version: 1
+      source_date: '2025-05-12'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1601.001/esxi_download_errors/esxi_download_errors.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1601.001/esxi_download_errors/esxi_download_errors.log
     description: vmware:esxlog - vmw-syslog
     format: auto
     schema: raw
     sourcetype: vmw-syslog
+    checksum: sha256:26ac5d8afa9fe98c0a7b125d923252ed90fc7e3bd77f000caf13807e5c7736c1
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

@@ -1,14 +1,10 @@
 metadata:
   name: cmd-echo-pipe-escalation
   version: 11.0.0
-  description: The following analytic identifies the use of named-pipe impersonation
-    for privilege escalation, commonly associated with Cobalt Strike and similar frameworks.
-    It detects command-line executions where `cmd.exe` uses `echo` to write to a named
-    pipe, such as `cmd.exe /c echo 4sgryt3436 > \\.\Pipe\5erg53`. This detection leverages
-    data from Endpoint Detection and Response (EDR) agents, focusing on process and
-    command-line telemetry. This activity is significant as it indicates potential
-    privilege es
+  description: The following analytic identifies the use of named-pipe impersonation for privilege escalation, commonly associated with Cobalt Strike and similar frameworks. It detects command-line executions where `cmd.exe` uses `echo` to write to a named pipe, such as `cmd.exe /c echo 4sgryt3436 > \\.\Pipe\5erg53`. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process and command-line telemetry. This activity is significant as it indicates potential privilege escalation attempts. If confirmed malicious, attackers could gain elevated privileges, enabling further compromise and persistence within the environment.
   author: Michael Haag, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,20 +14,47 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1059.003
-      name: Technique T1059.003
+      name: Windows Command Shell
+      tactics:
+      - execution
     - id: T1543.003
-      name: Technique T1543.003
-    tactics: []
+      name: Windows Service
+      tactics:
+      - persistence
+      - privilege-escalation
+    tactics:
+    - execution
+    - persistence
+    - privilege-escalation
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/cmd_echo_pipe___escalation.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/cmd_echo_pipe___escalation.yml
+      rule_sha256: sha256:8ccec13aa6d1fb8f29bca783ca677e317a94192830da334c99ad0cc00abe92c0
+      detection_id: eb277ba0-b96b-11eb-b00e-acde48001122
+      source_version: 11
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1055/cobalt_strike/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1055/cobalt_strike/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:9065443020ab3e7c6b4787bce83ecd2cca09353ba9f91ef3c4e990b1f41f0a55
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

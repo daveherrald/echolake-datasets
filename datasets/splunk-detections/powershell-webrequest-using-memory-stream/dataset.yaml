@@ -1,14 +1,10 @@
 metadata:
   name: powershell-webrequest-using-memory-stream
   version: 6.0.0
-  description: The following analytic detects the use of .NET classes in PowerShell
-    to download a URL payload directly into memory, a common fileless malware staging
-    technique. It leverages PowerShell Script Block Logging (EventCode=4104) to identify
-    suspicious PowerShell commands involving `system.net.webclient`, `system.net.webrequest`,
-    and `IO.MemoryStream`. This activity is significant as it indicates potential
-    fileless malware execution, which is harder to detect and can bypass traditional
-    file-based defe
+  description: The following analytic detects the use of .NET classes in PowerShell to download a URL payload directly into memory, a common fileless malware staging technique. It leverages PowerShell Script Block Logging (EventCode=4104) to identify suspicious PowerShell commands involving `system.net.webclient`, `system.net.webrequest`, and `IO.MemoryStream`. This activity is significant as it indicates potential fileless malware execution, which is harder to detect and can bypass traditional file-based defenses. If confirmed malicious, this technique could allow attackers to execute code in memory, evade detection, and maintain persistence in the environment.
   author: Steven Dick
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,22 +14,50 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1059.001
-      name: Technique T1059.001
+      name: PowerShell
+      tactics:
+      - execution
     - id: T1105
-      name: Technique T1105
+      name: Ingress Tool Transfer
+      tactics:
+      - command-and-control
     - id: T1027.011
-      name: Technique T1027.011
-    tactics: []
+      name: Fileless Storage
+      tactics:
+      - defense-evasion
+    tactics:
+    - execution
+    - defense-evasion
+    - command-and-control
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/powershell_webrequest_using_memory_stream.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/powershell_webrequest_using_memory_stream.yml
+      rule_sha256: sha256:82adecf33e487cfda0a7577d89a46435df25c99bba93a8cd13a01b9077698906
+      detection_id: 103affa6-924a-4b53-aff4-1d5075342aab
+      source_version: 6
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/gootloader/partial_ttps/windows-powershell-xml.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/gootloader/partial_ttps/windows-powershell-xml.log
     description: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:45e9de910686f5a030dab76db3305686e58700cb571968a16c97e8334cadf453
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

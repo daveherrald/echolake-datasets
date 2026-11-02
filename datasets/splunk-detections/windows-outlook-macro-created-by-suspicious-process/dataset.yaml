@@ -1,14 +1,10 @@
 metadata:
   name: windows-outlook-macro-created-by-suspicious-process
   version: 1.0.0
-  description: The following analytic detects the creation of an Outlook Macro (VbaProject.OTM)
-    by a suspicious process. This file is normally created when you create a macro
-    from within Outlook. If this file is created by a process other than Outlook.exe
-    it may be maliciously created. This detection leverages data from the Filesystem
-    datamodel, specifically looking for the file creation event for VbaProject.OTM.
-    This activity is significant as it is commonly associated with some malware infections,
-    indicating
+  description: The following analytic detects the creation of an Outlook Macro (VbaProject.OTM) by a suspicious process. This file is normally created when you create a macro from within Outlook. If this file is created by a process other than Outlook.exe it may be maliciously created. This detection leverages data from the Filesystem datamodel, specifically looking for the file creation event for VbaProject.OTM. This activity is significant as it is commonly associated with some malware infections, indicating potential malicious intent to harvest email information.
   author: Raven Tait, Splunk
+  updated: '2025-09-09'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,20 +12,45 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1137
-      name: Technique T1137
+      name: Office Application Startup
+      tactics:
+      - persistence
     - id: T1059.005
-      name: Technique T1059.005
-    tactics: []
+      name: Visual Basic
+      tactics:
+      - execution
+    tactics:
+    - execution
+    - persistence
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_outlook_macro_created_by_suspicious_process.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_outlook_macro_created_by_suspicious_process.yml
+      rule_sha256: sha256:334093ee5e22495d0ba6ccf860b5287fc5084bd737f13e7ab468cc2eb382a455
+      detection_id: 3ec347e3-a94a-4a8b-a918-8306ea403182
+      source_version: 1
+      source_date: '2025-09-09'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/notdoor/outlook_macro/windows-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/notdoor/outlook_macro/windows-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:b77d784369294d71581012bc729013271ca23ad5a39f7509676ba9bd12e75094
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

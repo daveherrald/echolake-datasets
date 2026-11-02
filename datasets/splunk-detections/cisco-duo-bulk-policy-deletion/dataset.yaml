@@ -1,14 +1,10 @@
 metadata:
   name: cisco-duo-bulk-policy-deletion
   version: 1.0.0
-  description: 'The following analytic detects instances where a Duo administrator
-    performs a bulk deletion of more than three policies in a single action. It identifies
-    this behavior by searching Duo activity logs for the policy_bulk_delete action,
-    extracting the names of deleted policies, and counting them. If the count exceeds
-    three, the event is flagged. This behavior is significant for a Security Operations
-    Center (SOC) because mass deletion of security policies can indicate malicious
-    activity, such as an '
+  description: The following analytic detects instances where a Duo administrator performs a bulk deletion of more than three policies in a single action. It identifies this behavior by searching Duo activity logs for the policy_bulk_delete action, extracting the names of deleted policies, and counting them. If the count exceeds three, the event is flagged. This behavior is significant for a Security Operations Center (SOC) because mass deletion of security policies can indicate malicious activity, such as an attacker or rogue administrator attempting to weaken or disable security controls, potentially paving the way for further compromise. Detecting and investigating such actions promptly is critical, as the impact of this attack could include reduced security posture, increased risk of unauthorized access, and potential data breaches. Monitoring for bulk policy deletions helps ensure that any suspicious or unauthorized changes to security configurations are quickly identified and addressed to protect organizational assets and maintain compliance.
   author: Patrick Bareiss, Splunk
+  updated: '2025-07-10'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,18 +12,44 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1556
-      name: Technique T1556
-    tactics: []
+      name: Modify Authentication Process
+      tactics:
+      - persistence
+      - defense-evasion
+      - credential-access
+    tactics:
+    - persistence
+    - defense-evasion
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/application/cisco_duo_bulk_policy_deletion.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/application/cisco_duo_bulk_policy_deletion.yml
+      rule_sha256: sha256:7a7d50921659c71239f3681344a1aa0b988a4b9046fc6aa4e2df9875bdc5eb91
+      detection_id: 983be012-e408-4cb0-b87f-6756bb5f7047
+      source_version: 1
+      source_date: '2025-07-10'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1556/cisco_duo_bulk_policy_deletion/cisco_duo_administrator.json
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1556/cisco_duo_bulk_policy_deletion/cisco_duo_administrator.json
     description: duo - cisco:duo:administrator
     format: auto
     schema: raw
     sourcetype: cisco:duo:administrator
+    checksum: sha256:efb0188ba7bca7fa541230f7d1c778ecfb25ebfca7e34767b46e528a9fdfc2de
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

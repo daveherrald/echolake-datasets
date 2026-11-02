@@ -1,14 +1,10 @@
 metadata:
   name: logon-script-event-trigger-execution
   version: 7.0.0
-  description: The following analytic detects the modification of the UserInitMprLogonScript
-    registry entry, which is often used by attackers to establish persistence and
-    gain privilege escalation upon system boot. It leverages data from the Endpoint.Registry
-    data model, focusing on changes to the specified registry path. This activity
-    is significant because it is a common technique used by APT groups and malware
-    to ensure their payloads execute automatically when the system starts. If confirmed
-    malicious, thi
+  description: The following analytic detects the modification of the UserInitMprLogonScript registry entry, which is often used by attackers to establish persistence and gain privilege escalation upon system boot. It leverages data from the Endpoint.Registry data model, focusing on changes to the specified registry path. This activity is significant because it is a common technique used by APT groups and malware to ensure their payloads execute automatically when the system starts. If confirmed malicious, this could allow attackers to maintain persistent access and potentially escalate their privileges on the compromised host.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -18,18 +14,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1037.001
-      name: Technique T1037.001
-    tactics: []
+      name: Logon Script (Windows)
+      tactics:
+      - persistence
+      - privilege-escalation
+    tactics:
+    - persistence
+    - privilege-escalation
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/logon_script_event_trigger_execution.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/logon_script_event_trigger_execution.yml
+      rule_sha256: sha256:c0b808413adbfa94750edacabb3c3f8b5e73f08738d585265b1633b128936c1a
+      detection_id: 4c38c264-1f74-11ec-b5fa-acde48001122
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1037.001/logonscript_reg/sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1037.001/logonscript_reg/sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:47f5cfe452ccfb39bdda44187c1c6057030834a31f21cce0c5ac54a176ce2827
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

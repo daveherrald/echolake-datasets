@@ -1,14 +1,10 @@
 metadata:
   name: linux-auditd-system-network-configuration-discovery
   version: 5.0.0
-  description: The following analytic detects suspicious system network configuration
-    discovery activities, which may indicate an adversary's attempt to gather information
-    about the network environment. Such actions typically involve commands or tools
-    used to identify network interfaces, routing tables, and active connections. Detecting
-    these activities is crucial, as they often precede more targeted attacks like
-    lateral movement or data exfiltration. By identifying unusual or unauthorized
-    network discovery ef
+  description: The following analytic detects suspicious system network configuration discovery activities, which may indicate an adversary's attempt to gather information about the network environment. Such actions typically involve commands or tools used to identify network interfaces, routing tables, and active connections. Detecting these activities is crucial, as they often precede more targeted attacks like lateral movement or data exfiltration. By identifying unusual or unauthorized network discovery efforts, this analytic helps security teams to swiftly detect and respond to potential reconnaissance operations, mitigating the risk of further compromise.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -18,18 +14,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1016
-      name: Technique T1016
-    tactics: []
+      name: System Network Configuration Discovery
+      tactics:
+      - discovery
+    tactics:
+    - discovery
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/linux_auditd_system_network_configuration_discovery.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/linux_auditd_system_network_configuration_discovery.yml
+      rule_sha256: sha256:0417d5501ae305cc48e640b1c369e7790815aa2c5d7aa0700f7e9115c488185b
+      detection_id: 5db16825-81bd-4923-a8d6-d6a13a59832a
+      source_version: 5
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1016/linux_auditd_net_tool_new/linux_auditd_net_tool_bucket_new.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1016/linux_auditd_net_tool_new/linux_auditd_net_tool_bucket_new.log
     description: auditd - auditd
     format: auto
     schema: raw
     sourcetype: auditd
+    checksum: sha256:7b0f24e6f490a5f59bb92aa09740b6f0d1b5898cca788f00aff5c3efb80199a3
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

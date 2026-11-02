@@ -1,13 +1,10 @@
 metadata:
   name: windows-debugger-tool-execution
   version: 6.0.0
-  description: This analysis detects the use of debugger tools within a production
-    environment. While these tools are legitimate for file analysis and debugging,
-    they are abused by malware like PlugX and DarkGate for malicious DLL side-loading.
-    The hunting query aids Security Operations Centers (SOCs) in identifying potentially
-    suspicious tool executions, particularly for non-technical users in the production
-    network.
+  description: This analysis detects the use of debugger tools within a production environment. While these tools are legitimate for file analysis and debugging, they are abused by malware like PlugX and DarkGate for malicious DLL side-loading. The hunting query aids Security Operations Centers (SOCs) in identifying potentially suspicious tool executions, particularly for non-technical users in the production network.
   author: Teoderick Contreras, Splunk
+  updated: '2025-10-21'
+  license: Apache-2.0
   tags:
   - hunting
   - splunk-security-content
@@ -16,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1036
-      name: Technique T1036
-    tactics: []
+      name: Masquerading
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_debugger_tool_execution.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_debugger_tool_execution.yml
+      rule_sha256: sha256:3cf695bc26959e1f0f3c49690641e7f629e51aa903224c0e6365f395508323e1
+      detection_id: e14d94a3-07fb-4b47-8406-f5e37180d422
+      source_version: 6
+      source_date: '2025-10-21'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1036/debugger_execution/debugger.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1036/debugger_execution/debugger.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:738a7150e94b4d761efe1021713027b068965e68d68493ed534ce6173b2e9659
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

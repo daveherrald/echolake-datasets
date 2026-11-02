@@ -1,14 +1,18 @@
 metadata:
   name: windows-rundll32-apply-user-settings-changes
   version: 8.0.0
-  description: "The following analytic detects the execution of rundll32 with a call\
-    \ to the user32 DLL, specifically the UpdatePerUserSystemParameters function.\n\
-    This function is responsible for updating system parameters, such as desktop backgrounds,\
-    \ display settings, and visual themes. \nIt leverages data from Endpoint Detection\
-    \ and Response (EDR) agents, focusing on command-line executions.\nThis activity\
-    \ can be significant as it is an uncommon way to apply settings. It was also observed\
-    \ as part of Rhysida Rans"
+  description: 'The following analytic detects the execution of rundll32 with a call to the user32 DLL, specifically the UpdatePerUserSystemParameters function.
+
+    This function is responsible for updating system parameters, such as desktop backgrounds, display settings, and visual themes.
+
+    It leverages data from Endpoint Detection and Response (EDR) agents, focusing on command-line executions.
+
+    This activity can be significant as it is an uncommon way to apply settings. It was also observed as part of Rhysida Ransomware activity.
+
+    If confirmed malicious, this could allow an attacker to disguise activities or make unauthorized system changes, potentially leading to persistent unauthorized access.'
   author: Teoderick Contreras, Nasreddine Bencherchali, Splunk
+  updated: '2025-10-07'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -16,18 +20,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1218.011
-      name: Technique T1218.011
-    tactics: []
+      name: Rundll32
+      tactics:
+      - defense-evasion
+    tactics:
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_rundll32_apply_user_settings_changes.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_rundll32_apply_user_settings_changes.yml
+      rule_sha256: sha256:0a4d060b960b6926c9b9d469d08c2c038c68fd414f2c4b663537f785636dfb0b
+      detection_id: b9fb8d97-dbc9-4a09-804c-ff0e3862bb2d
+      source_version: 8
+      source_date: '2025-10-07'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218.011/update_per_user_system/rundll32_updateperusersystem.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1218.011/update_per_user_system/rundll32_updateperusersystem.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:458df92c3189c54c80d656600bd3a9a9892b585a77f4abbba0d13bf321d4e024
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

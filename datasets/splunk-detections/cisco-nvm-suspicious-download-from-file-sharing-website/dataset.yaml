@@ -1,18 +1,20 @@
 metadata:
   name: cisco-nvm-suspicious-download-from-file-sharing-website
   version: 3.0.0
-  description: 'This analytic detects suspicious downloads from common file sharing
-    and content delivery platforms using known living-off-the-land binaries (LOLBins)
+  description: 'This analytic detects suspicious downloads from common file sharing and content delivery platforms using known living-off-the-land binaries (LOLBins)
 
-    such as ''curl.exe'', ''certutil.exe'', ''msiexec.exe'', ''powershell.exe'', ''wmic.exe'',
-    and others.
+    such as ''curl.exe'', ''certutil.exe'', ''msiexec.exe'', ''powershell.exe'', ''wmic.exe'', and others.
 
-    It leverages Cisco Network Visibility Module logs to correlate network flow activity
-    with process context, including command-line arguments, process path,
+    It leverages Cisco Network Visibility Module logs to correlate network flow activity with process context, including command-line arguments, process path,
 
-    and parent process information. These tools are often abused by adversaries and
-    malware to retrieve pa'
+    and parent process information. These tools are often abused by adversaries and malware to retrieve payloads from public hosting platforms
+
+    such as GitHub, Discord CDN, Transfer.sh, or Pastebin.
+
+    This detection helps identify potential initial access, payload staging, or command and control activity using legitimate services.'
   author: Nasreddine Bencherchali, Splunk
+  updated: '2025-09-18'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -21,18 +23,42 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1197
-      name: Technique T1197
-    tactics: []
+      name: BITS Jobs
+      tactics:
+      - persistence
+      - defense-evasion
+    tactics:
+    - persistence
+    - defense-evasion
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/cisco_nvm___suspicious_download_from_file_sharing_website.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/cisco_nvm___suspicious_download_from_file_sharing_website.yml
+      rule_sha256: sha256:030823574c8b8513fce739c83c68eb34d8c6f012548c76251e6433d12ac75bd7
+      detection_id: 94ebc001-35e7-4ae8-9b0e-52766b2f99c7
+      source_version: 3
+      source_date: '2025-09-18'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_network_visibility_module/cisco_nvm_flowdata/nvm_flowdata.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/cisco_network_visibility_module/cisco_nvm_flowdata/nvm_flowdata.log
     description: not_applicable - cisco:nvm:flowdata
     format: auto
     schema: raw
     sourcetype: cisco:nvm:flowdata
+    checksum: sha256:f427b5cc3a60bb3b41ae1c679bda85c1bb9aba78cc9468b94d3eec36adedfaaa
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

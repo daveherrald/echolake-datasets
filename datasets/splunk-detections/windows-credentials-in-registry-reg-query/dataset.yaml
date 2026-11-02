@@ -1,14 +1,10 @@
 metadata:
   name: windows-credentials-in-registry-reg-query
   version: 7.0.0
-  description: The following analytic identifies processes querying the registry for
-    potential passwords or credentials. It leverages data from Endpoint Detection
-    and Response (EDR) agents, focusing on command-line executions that access specific
-    registry paths known to store sensitive information. This activity is significant
-    as it may indicate credential theft attempts, often used by adversaries or post-exploitation
-    tools like winPEAS. If confirmed malicious, this behavior could lead to privilege
-    escalation,
+  description: The following analytic identifies processes querying the registry for potential passwords or credentials. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on command-line executions that access specific registry paths known to store sensitive information. This activity is significant as it may indicate credential theft attempts, often used by adversaries or post-exploitation tools like winPEAS. If confirmed malicious, this behavior could lead to privilege escalation, persistence, or lateral movement within the network, posing a severe security risk.
   author: Teoderick Contreras, Splunk
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - anomaly
   - splunk-security-content
@@ -17,18 +13,40 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1552.002
-      name: Technique T1552.002
-    tactics: []
+      name: Credentials in Registry
+      tactics:
+      - credential-access
+    tactics:
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/endpoint/windows_credentials_in_registry_reg_query.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/endpoint/windows_credentials_in_registry_reg_query.yml
+      rule_sha256: sha256:97df946c107a34cf6d753a11f2deefe4379b906b9945d087be0b4d7d0a408dee
+      detection_id: a8b3124e-2278-4b73-ae9c-585117079fb2
+      source_version: 7
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/winpeas/winpeas_search_pwd/query-putty-sysmon.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/malware/winpeas/winpeas_search_pwd/query-putty-sysmon.log
     description: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational - XmlWinEventLog
     format: auto
     schema: raw
     sourcetype: XmlWinEventLog
+    checksum: sha256:3e3f2e7015e867d89d0b99d4134a9cb10f69f4235fe1729bfe3e233130bf2220
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h

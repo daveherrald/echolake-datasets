@@ -1,14 +1,10 @@
 metadata:
   name: pingid-mismatch-auth-source-and-verification-response
   version: 6.0.0
-  description: The following analytic identifies discrepancies between the IP address
-    of an authentication event and the IP address of the verification response event,
-    focusing on differences in the originating countries. It leverages JSON logs from
-    PingID, comparing the 'auth_Country' and 'verify_Country' fields. This activity
-    is significant as it may indicate suspicious sign-in behavior, such as account
-    compromise or unauthorized access attempts. If confirmed malicious, this could
-    allow attackers to bypass a
+  description: The following analytic identifies discrepancies between the IP address of an authentication event and the IP address of the verification response event, focusing on differences in the originating countries. It leverages JSON logs from PingID, comparing the 'auth_Country' and 'verify_Country' fields. This activity is significant as it may indicate suspicious sign-in behavior, such as account compromise or unauthorized access attempts. If confirmed malicious, this could allow attackers to bypass authentication mechanisms, potentially leading to unauthorized access to sensitive systems and data.
   author: Steven Dick
+  updated: '2025-05-02'
+  license: Apache-2.0
   tags:
   - ttp
   - splunk-security-content
@@ -16,22 +12,54 @@ metadata:
   mitre_attack:
     techniques:
     - id: T1621
-      name: Technique T1621
+      name: Multi-Factor Authentication Request Generation
+      tactics:
+      - credential-access
     - id: T1556.006
-      name: Technique T1556.006
+      name: Multi-Factor Authentication
+      tactics:
+      - persistence
+      - defense-evasion
+      - credential-access
     - id: T1098.005
-      name: Technique T1098.005
-    tactics: []
+      name: Device Registration
+      tactics:
+      - persistence
+      - privilege-escalation
+    tactics:
+    - persistence
+    - privilege-escalation
+    - defense-evasion
+    - credential-access
+  source_url: https://github.com/splunk/security_content/blob/29ece397e8ab7f95fd9055e586dd541859075a9f/detections/application/pingid_mismatch_auth_source_and_verification_response.yml
+  extensions:
+    org.echolake.upstream:
+      project: splunk/security_content
+      revision: 29ece397e8ab7f95fd9055e586dd541859075a9f
+      path: detections/application/pingid_mismatch_auth_source_and_verification_response.yml
+      rule_sha256: sha256:691023336eddeeafe67b9884f99dbf1cfeb07fa6ac2faa492a119ef507146426
+      detection_id: 15b0694e-caa2-4009-8d83-a1f98b86d086
+      source_version: 6
+      source_date: '2025-05-02'
+      attack_data_project: splunk/attack_data
+      attack_data_revision: f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3
+      mitre_attack_version: '18.1'
+      mitre_attack_revision: 7ad8a86f41edc91dd37de0487b0c2f44ae3a3af7
+      modified_by: EchoLake
+      modification: Pinned upstream references, added integrity hashes, and normalized metadata for EchoLake.
+      attack_mapping:
+        status: mapped
 files:
   bundled: []
   references:
-  - uri: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1621/pingid/pingid.log
+  - uri: https://media.githubusercontent.com/media/splunk/attack_data/f5cea3c0980ca3f3c4c5dafc72330278b35ddbd3/datasets/attack_techniques/T1621/pingid/pingid.log
     description: PINGID - _json
     format: auto
     schema: raw
     sourcetype: _json
+    checksum: sha256:163c609b082050aa5fb9ac9704e46dc14472f77de7db8576789fb7408cfcda68
 defaults:
-  replay:
+  echo:
     delta_factor: 1.0
     base_time: earliest
     target_time: now-1h
