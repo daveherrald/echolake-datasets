@@ -1,30 +1,51 @@
 metadata:
   name: paws-operation-yarn-ball
-  version: 1.0.0
-  description: PAWS (Pawsitive Vibes) Operation Yarn Ball - Full multi-stage attack simulation on a Windows Active Directory environment with 7 VMs. Includes agentic persona simulation (6 employees generating realistic background activity) plus a 10-stage Sliver C2 attack chain covering recon, beacon deployment, credential harvesting, lateral movement via WinRM/PsExec, data exfiltration, ransomware, and log clearing. ~820K events across Windows (Sysmon, Security, PowerShell), Squid proxy, and Zeek network logs.
+  version: 1.1.0
+  description: >-
+    PAWS (Pawsitive Vibes) Windows Active Directory capture with background lab
+    activity across seven hosts and a short scripted intrusion prelude on
+    PAWS-WS02. The evidenced sequence includes QEMU guest-agent PowerShell
+    staging, Defender exclusion changes, OpenClaw-style host and domain
+    discovery, attempted HTTP transfer commands, scheduled-task registration,
+    staged-binary execution, and one outbound PowerShell connection to a lab
+    host. The capture does not evidence the intended later stages of credential
+    dumping, WinRM or PsExec lateral movement, bulk file encryption, or Windows
+    event-log clearing. Contains 1,295,883 replayable events across Windows,
+    Squid, and Zeek sources.
   author: EchoLake Project
   created: '2026-03-18'
   license: CC0-1.0
   tags:
   - paws
   - operation-yarn-ball
-  - ctf
   - attack-simulation
+  - attack-prelude
   - agentic-simulation
-  - sliver-c2
+  - scripted-intrusion
   - windows
   - active-directory
   - sysmon
   - zeek
   - proxy
-  - lateral-movement
-  - ransomware
-  - credential-access
-  - exfiltration
+  - discovery
+  - defense-evasion
+  - scheduled-task
   - multi-host
   - echolake
   mitre_attack:
     techniques:
+    - id: T1059.001
+      name: 'Command and Scripting Interpreter: PowerShell'
+      tactics:
+      - execution
+    - id: T1059.003
+      name: 'Command and Scripting Interpreter: Windows Command Shell'
+      tactics:
+      - execution
+    - id: T1059.007
+      name: 'Command and Scripting Interpreter: JavaScript/JScript'
+      tactics:
+      - execution
     - id: T1082
       name: System Information Discovery
       tactics:
@@ -37,76 +58,34 @@ metadata:
       name: System Owner/User Discovery
       tactics:
       - discovery
-    - id: T1069
-      name: Permission Groups Discovery
+    - id: T1087.001
+      name: 'Account Discovery: Local Account'
+      tactics:
+      - discovery
+    - id: T1069.002
+      name: 'Permission Groups Discovery: Domain Groups'
       tactics:
       - discovery
     - id: T1018
       name: Remote System Discovery
       tactics:
       - discovery
-    - id: T1071
-      name: Application Layer Protocol
-      tactics:
-      - command-and-control
-    - id: T1071.004
-      name: 'Application Layer Protocol: DNS'
-      tactics:
-      - command-and-control
-    - id: T1218
-      name: System Binary Proxy Execution
-      tactics:
-      - defense-evasion
-    - id: T1053
-      name: Scheduled Task/Job
+    - id: T1053.005
+      name: 'Scheduled Task/Job: Scheduled Task'
       tactics:
       - execution
       - persistence
       - privilege-escalation
-    - id: T1547.001
-      name: 'Boot or Logon Autostart Execution: Registry Run Keys'
-      tactics:
-      - persistence
-      - privilege-escalation
-    - id: T1552
-      name: Unsecured Credentials
-      tactics:
-      - credential-access
-    - id: T1021.006
-      name: 'Remote Services: Windows Remote Management'
-      tactics:
-      - lateral-movement
-    - id: T1021.002
-      name: 'Remote Services: SMB/Windows Admin Shares'
-      tactics:
-      - lateral-movement
-    - id: T1569.002
-      name: 'System Services: Service Execution'
-      tactics:
-      - execution
-    - id: T1041
-      name: Exfiltration Over C2 Channel
-      tactics:
-      - exfiltration
-    - id: T1486
-      name: Data Encrypted for Impact
-      tactics:
-      - impact
-    - id: T1070.001
-      name: 'Indicator Removal: Clear Windows Event Logs'
+    - id: T1562.001
+      name: 'Impair Defenses: Disable or Modify Tools'
       tactics:
       - defense-evasion
     tactics:
-    - discovery
-    - command-and-control
-    - defense-evasion
     - execution
     - persistence
     - privilege-escalation
-    - credential-access
-    - lateral-movement
-    - exfiltration
-    - impact
+    - defense-evasion
+    - discovery
   timestamp_range:
     earliest: '2026-03-18T00:00:00Z'
     latest: '2026-03-18T14:48:57Z'
@@ -228,7 +207,7 @@ files:
       product: Windows
       category: Other
   - path: data/proxylog.log.gz
-    description: Squid proxy access logs from PAWS-DC01 (includes C2 beacon traffic)
+    description: Squid proxy access logs from PAWS-DC01, including recurring lab service traffic
     format: text
     sourcetype: squid:access
     schema: raw
@@ -238,7 +217,7 @@ files:
       product: Squid Proxy
       category: Access Log
   - path: data/zeek_conn.jsonl.gz
-    description: Zeek connection logs for PAWS network segment
+    description: Zeek connection logs from the capture segment, including PAWS and neighboring lab traffic
     format: jsonl
     sourcetype: zeek:conn
     schema: raw
@@ -248,7 +227,7 @@ files:
       product: Zeek
       category: conn
   - path: data/zeek_dns.jsonl.gz
-    description: Zeek DNS logs for PAWS network segment (includes C2 domain lookups)
+    description: Zeek DNS logs from the capture segment, including PAWS and neighboring lab traffic
     format: jsonl
     sourcetype: zeek:dns
     schema: raw
@@ -258,7 +237,7 @@ files:
       product: Zeek
       category: dns
   - path: data/zeek_http.jsonl.gz
-    description: Zeek HTTP logs for PAWS network segment (includes C2 beacon HTTP and proxy CONNECT)
+    description: Zeek HTTP logs from the capture segment, including proxy-forwarded and lab service traffic
     format: jsonl
     sourcetype: zeek:http
     schema: raw
@@ -277,8 +256,8 @@ environment:
     platform: Proxmox/QEMU
   execution:
     user: badactors
-    method: QEMU guest agent + Sliver C2
-    tool: badactors persona engine + paws-attack.py
+    method: QEMU guest agent and lab services
+    tool: badactors persona engine + PAWS scripted scenario runner
     tool_version: March 2026
     isolation: dedicated VLAN (192.168.4.20-26)
   collection:
@@ -332,8 +311,17 @@ provenance:
     timestamps:
       start_epoch: 1773792000
       end_epoch: 1773845337
-    tool: badactors + paws-attack.py
-    notes: Background activity generated by agentic persona engine (6 personas with LLM-driven day plans). Attack executed by paws-attack.py driving Sliver C2 framework through 10 stages (1, 2, 2b, 2c, 2d, 3, 3b, 4, 4b, 5, 6, 7). C2 infra at 192.168.4.200. Beacon traffic routed through Squid proxy on DC01.
+    tool: badactors persona engine + PAWS scripted scenario runner
+    notes: >-
+      Background activity was generated by the agentic persona engine. On
+      PAWS-WS02, the capture evidences QEMU guest-agent staging, OpenClaw-style
+      Defender exclusion changes, discovery, scheduled-task registration,
+      staged-binary execution, and one outbound PowerShell TCP connection.
+      Scripts named for lateral movement, exfiltration, ransomware, and cleanup
+      were written but are not evidenced as executed. Recurring direct endpoint
+      connections to the lab host are attributed to a Python service on
+      PAWS-DC01. This package does not claim the intended full Sliver attack
+      chain.
   verification:
     source_counts:
       sysmon: 566793
@@ -361,6 +349,10 @@ provenance:
       zeek_conn: 129341
       zeek_dns: 1845
       zeek_http: 39399
+    note: >-
+      source_counts and dest_counts are historical pre-regeneration values from
+      the original JSONL package. regenerated.total_events and the bundled file
+      event counts describe the current XML and network package.
   regenerated:
     from: source winevtlog (+ zeek_*/proxy for paws)
     reason: original .jsonl.gz were UTF-8-corrupted in git; rebuilt from bronze

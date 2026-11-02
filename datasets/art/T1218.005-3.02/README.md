@@ -6,12 +6,14 @@
 
 | Field | Value |
 |---|---|
-| Description | Atomic Red Team T1218.005-3: Mshta (Mshta Executes Remote HTML Application (HTA)) on Windows 11 Enterprise domain workstation. |
+| Description | Unresolved empty package for Atomic Red Team T1218.005-3: Mshta Executes Remote HTML Application (HTA). |
+| Package status | `empty-unresolved` |
+| Status note | Packaged XML files contain zero events. Historical source counts record 117 events, but the event content was not recovered during regeneration. |
 | MITRE ATT&CK | [T1218.005](https://attack.mitre.org/techniques/T1218/005/) |
 | Tactics | defense-evasion |
 | ART command | `Invoke-AtomicTest T1218.005 -TestNumbers 3` |
 | Collection host | ACME-WS06 |
-| Dataset version | 3.0.0 |
+| Dataset version | 3.0.1 |
 
 ## Packaged telemetry
 
