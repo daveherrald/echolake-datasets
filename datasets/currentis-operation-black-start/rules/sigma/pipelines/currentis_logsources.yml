@@ -1,7 +1,7 @@
 name: currentis logsources (source mapping)
 priority: 20
-# Maps the Windows and Zeek logsources used by the Operation Black Start rules to
-# Splunk/Lucene source filters. Replace the sources with your own index or
+# Maps the Windows, Zeek, and Exchange logsources used by the Operation Black Start
+# rules to Splunk/Lucene source filters. Replace the sources with your own index or
 # sourcetype. Loki needs no pipeline (it matches on the stream directly). The
 # standard pysigma windows/sysmon pipelines can be used instead of this one.
 transformations:
@@ -54,3 +54,11 @@ transformations:
       - type: logsource
         product: zeek
         service: conn
+  - id: exchange_message_tracking_source
+    type: add_condition
+    conditions:
+      source: 'MSExchange:MessageTracking'
+    rule_conditions:
+      - type: logsource
+        product: exchange
+        service: message_tracking

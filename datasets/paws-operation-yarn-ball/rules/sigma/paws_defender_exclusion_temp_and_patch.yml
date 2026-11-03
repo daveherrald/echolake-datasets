@@ -1,0 +1,29 @@
+title: Defender Exclusions for the Staging Directory and Patch Binary
+id: 6e5b8a1d-2f74-4b09-9c31-8a4e5c67f0a2
+status: experimental
+description: |
+  Detects PowerShell disabling Defender coverage for the intrusion staging path and
+  binary: an Add-MpPreference call excluding C:\Windows\Temp and patch-kb5041234.exe.
+  In Operation Yarn Ball this runs as the first scripted action on PAWS-WS02, before
+  the agent simulation launches, so the target host is unprotected when the staged
+  binary executes.
+references:
+  - https://github.com/daveherrald/echolake-datasets/tree/main/datasets/paws-operation-yarn-ball
+author: Dave Herrald
+date: 2026-11-03
+logsource:
+  product: windows
+  category: ps_scriptblock
+detection:
+  selection:
+    ScriptBlockText|contains|all:
+      - 'Add-MpPreference'
+      - 'Exclusion'
+  condition: selection
+falsepositives:
+  - Administrators tuning exclusions deliberately. The C:\Windows\Temp exclusion
+    and a fake-KB process name are the anomalies here.
+level: high
+tags:
+  - attack.defense-impairment
+  - attack.t1685

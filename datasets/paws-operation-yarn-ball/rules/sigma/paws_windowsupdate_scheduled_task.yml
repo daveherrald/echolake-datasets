@@ -1,0 +1,35 @@
+title: WindowsUpdate-Named Scheduled Task for a Temp-Folder Binary
+id: f01d84a3-5b92-46ce-9d4f-83a2c7be6018
+status: experimental
+description: |
+  Detects the SecurityPatchRecovery scheduled task created in Operation Yarn Ball:
+  schtasks /create under the Microsoft\Windows\WindowsUpdate\ path namespace, running
+  C:\Windows\TEMP\patch-kb5041234.exe at logon with HIGHEST privileges. The task
+  name masquerades as a Windows Update recovery action while launching the staged
+  patch-named binary from the temp staging directory.
+references:
+  - https://github.com/daveherrald/echolake-datasets/tree/main/datasets/paws-operation-yarn-ball
+author: Dave Herrald
+date: 2026-11-03
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection:
+    Image|endswith: '\schtasks.exe'
+    CommandLine|contains|all:
+      - '/create'
+      - 'WindowsUpdate'
+      - 'patch-kb5041234.exe'
+  condition: selection
+falsepositives:
+  - Genuine Windows Update repair tasks. A /create naming a task under
+    Microsoft\Windows\WindowsUpdate\ that runs a binary from the temp staging
+    directory is the anomaly.
+level: high
+tags:
+  - attack.persistence
+  - attack.execution
+  - attack.t1053.005
+  - attack.stealth
+  - attack.t1036.004

@@ -1,0 +1,30 @@
+title: Poisoned Compliance Email from the NERC Portal Sender
+id: 7e4a92c0-b153-4f68-8d27-96c3e1f5a0b4
+status: experimental
+description: |
+  Detects the delivery of the poisoned NERC CIP-010 message in Operation Black
+  Start: the "ACTION REQUIRED: CIP-010-4 Configuration Baseline Verification" email
+  from cip010-20260609-unit3-scada@nerc-cip-portal.org to rchen and two colleagues.
+  Rachel had wired her OpenClaw assistant to auto-process mail from this trusted
+  compliance sender, so this delivery is the stage-0 initial-access event; the
+  embedded instruction drives the assistant to run the base64 PowerShell stager.
+  Message-tracking lines are the only Exchange telemetry in the dataset, so the
+  rule keys on the sender domain within the message line.
+references:
+  - https://github.com/daveherrald/echolake-datasets/tree/main/datasets/currentis-operation-black-start
+author: Dave Herrald
+date: 2026-11-03
+logsource:
+  product: exchange
+  service: message_tracking
+detection:
+  selection:
+    message|contains: 'nerc-cip-portal.org'
+  condition: selection
+falsepositives:
+  - Genuine NERC compliance mail. In a real deployment scope by sender reputation,
+    attachment type, and whether the recipient population matches compliance roles.
+level: high
+tags:
+  - attack.initial-access
+  - attack.t1566

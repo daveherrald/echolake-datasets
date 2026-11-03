@@ -1,0 +1,35 @@
+title: OT Jump Host Egress to the C2 Indicator
+id: 4f8b03a7-c69d-4e15-b272-85d0a3c94e16
+status: experimental
+description: |
+  Detects the stage-6 exfiltration in Operation Black Start: connections from the
+  SCADA jump host (192.168.4.244) to the documented Cobalt Strike C2 indicator
+  121.43.243.13. In this dataset the jump host is the only OT-segment host talking
+  to the indicator, using ports 8080, 8443, and 9009 over a fourteen-minute window
+  and moving roughly 907 KB out, while the IT workstation's beacon (a different
+  internal address, port 8080 only, small periodic check-ins) is covered by the
+  c2_indicator_outbound rule. Endpoint telemetry corroborates four outbound
+  connection events on the jump host itself. Treat the indicator as a pivot, not
+  a verdict.
+references:
+  - https://github.com/daveherrald/echolake-datasets/tree/main/datasets/currentis-operation-black-start
+author: Dave Herrald
+date: 2026-11-03
+logsource:
+  product: zeek
+  service: conn
+detection:
+  selection:
+    id.orig_h: '192.168.4.244'
+    id.resp_h: '121.43.243.13'
+  condition: selection
+falsepositives:
+  - None expected from an OT jump host to an external C2 indicator. The address is
+    a point-in-time indicator; confirm it is still listed before alerting in
+    production.
+level: high
+tags:
+  - attack.exfiltration
+  - attack.t1041
+  - attack.command-and-control
+  - attack.t1071.001

@@ -342,6 +342,29 @@ observables:
   techniques:
   - T1071.001
   confidence: 60
+- id: poison-email-rule
+  type: indicator
+  name: Poisoned Compliance Email Detection
+  rule: https://github.com/daveherrald/echolake-datasets/blob/main/datasets/currentis-operation-black-start/rules/sigma/currentis_poisoned_compliance_email.yml
+  indicator_types:
+  - malicious-activity
+  kill_chain_phases:
+  - initial-access
+  techniques:
+  - T1566
+  confidence: 80
+- id: ot-egress-rule
+  type: indicator
+  name: OT Egress to C2 Detection
+  rule: https://github.com/daveherrald/echolake-datasets/blob/main/datasets/currentis-operation-black-start/rules/sigma/currentis_ot_egress_to_c2.yml
+  indicator_types:
+  - malicious-activity
+  kill_chain_phases:
+  - exfiltration
+  techniques:
+  - T1041
+  - T1071.001
+  confidence: 80
 - id: phish-domain
   type: domain-name
   value: nerc-cip-portal.org
@@ -731,6 +754,7 @@ kill_chain:
   - openclaw-run-agent
   - encoded-ps
   - cip010-review
+  - poison-email-rule
   execution_start: '2026-06-09T01:38:27Z'
   execution_end: '2026-06-09T01:40:43Z'
   description: 'The poisoned NERC CIP-010 baseline diff from the trusted compliance sender is received at 01:38:27
@@ -860,6 +884,7 @@ kill_chain:
   - c2-ip
   - c2-exfil-8080
   - c2-exfil-8443
+  - ot-egress-rule
   execution_start: '2026-06-09T02:15:51Z'
   execution_end: '2026-06-09T02:45:15Z'
   description: 'The staged unit3_export.dat (456,204 bytes) trickles out over the C2 channel: a first curl POST

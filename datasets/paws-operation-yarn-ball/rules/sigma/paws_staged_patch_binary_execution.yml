@@ -1,0 +1,29 @@
+title: Execution of the Temp-Staged Patch-Named Binary
+id: a93f0c57-8d24-4e1a-b6c3-5f0d92e47b41
+status: experimental
+description: |
+  Detects the staged patch-kb5041234.exe executing from C:\Windows\Temp on PAWS-WS02,
+  the final scripted action in this capture. The binary name impersonates a Windows
+  update patch (kb-prefixed) while running from the temp staging directory the
+  Defender exclusions had already opened. Once running it generates a large volume
+  of outbound connection events.
+references:
+  - https://github.com/daveherrald/echolake-datasets/tree/main/datasets/paws-operation-yarn-ball
+author: Dave Herrald
+date: 2026-11-03
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection:
+    Image|endswith: '\patch-kb5041234.exe'
+    Image|contains: '\Windows\Temp\'
+  condition: selection
+falsepositives:
+  - None expected. Legitimate Windows update binaries do not execute from
+    C:\Windows\Temp.
+level: high
+tags:
+  - attack.execution
+  - attack.stealth
+  - attack.t1036.005

@@ -2,6 +2,17 @@
 
 Generated with sigma-cli; see `pipelines/currentis_logsources.yml` for the Splunk/Lucene source mapping (Loki needs none). Replace the source paths with your own index or sourcetype.
 
+## Poisoned Compliance Email from the NERC Portal Sender
+```splunk
+source="MSExchange:MessageTracking" message="*nerc-cip-portal.org*"
+```
+```logql
+{job=~".+"} | logfmt | message=~`(?i).*nerc\-cip\-portal\.org.*`
+```
+```lucene
+source:MSExchange\:MessageTracking AND message:*nerc\-cip\-portal.org*
+```
+
 ## AI Coding Assistant Spawns a Windows Shell
 ```splunk
 source IN ("WinEventLog:Microsoft-Windows-Sysmon/Operational", "WinEventLog:Security") ParentImage="*\\node.exe" Image IN ("*\\powershell.exe", "*\\cmd.exe")
@@ -110,6 +121,17 @@ source="WinEventLog:Security" EventID=4663 ObjectName IN ("*\\OT\\*", "*Helix Gr
 ```
 ```lucene
 source:WinEventLog\:Security AND (EventID:4663 AND (ObjectName:(*\\OT\\* OR *Helix\ Grid\ Systems*)))
+```
+
+## OT Jump Host Egress to the C2 Indicator
+```splunk
+source IN ("zeek_conn", "/opt/zeek/logs/current/conn.log") id.orig_h="192.168.4.244" id.resp_h="121.43.243.13"
+```
+```logql
+{job=~".+"} | json | id_orig_h=~`(?i)^192\.168\.4\.244$` and id_resp_h=~`(?i)^121\.43\.243\.13$`
+```
+```lucene
+(source:(zeek_conn OR \/opt\/zeek\/logs\/current\/conn.log)) AND (id.orig_h:192.168.4.244 AND id.resp_h:121.43.243.13)
 ```
 
 ## Scheduled Task Launching a Script from a World-Writable Path

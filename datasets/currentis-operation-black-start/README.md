@@ -63,12 +63,14 @@ Every file is in its source's native format, gzipped. Each file's `sourcetype` i
 
 ## Detection Rules
 
-Thirteen sample [Sigma](https://sigmahq.io/) rules for the signals above live in
+Fifteen sample [Sigma](https://sigmahq.io/) rules for the signals above live in
 [`rules/sigma/`](rules/sigma/), following the kill chain, each matching records present
 in these logs. Every rule passes `sigma check` and converts to Splunk, Loki, and
 Lucene. The highest-fidelity signals are the LSASS read from the masqueraded implant,
 the `cmdkey` staging of the stolen vendor account, and the Security log clear; the
-outbound-to-C2-indicator rule is the low-confidence threat-intel seed. See the
+outbound-to-C2-indicator rule is the low-confidence threat-intel seed. The set starts
+at the poisoned compliance email itself and separates the OT jump host's exfiltration
+egress from the workstation beacon. See the
 [Sigma rules README](rules/sigma/README.md) for the full list, the per-rule
 verification table with dataset match counts, and the field-mapping caveats.
 
