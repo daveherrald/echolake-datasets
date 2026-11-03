@@ -5,7 +5,7 @@ more than one kind of rule.
 
 | Directory | Format | Contents |
 |-----------|--------|----------|
-| [`sigma/`](sigma/) | [Sigma](https://sigmahq.io/) | 7 rules spanning the kill chain across all five log sources, each verified against this dataset's logs, with backend conversions and a pySigma pipeline. See [`sigma/README.md`](sigma/README.md). |
+| [`sigma/`](sigma/) | [Sigma](https://sigmahq.io/) | 1 entry-point rule (the leaked-key secret-scanning alert, the first signal of the chain), verified against this dataset's logs, with backend conversions and a pySigma pipeline. See [`sigma/README.md`](sigma/README.md). |
 
 Additional formats such as YARA or Suricata would be added as sibling directories
 (`yara/`, `suricata/`).

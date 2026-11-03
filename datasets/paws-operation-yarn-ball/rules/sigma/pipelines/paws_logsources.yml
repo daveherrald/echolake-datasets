@@ -1,23 +1,11 @@
 name: paws-operation-yarn-ball logsources (source mapping)
 priority: 20
-# Maps the Windows and Zeek logsources used by the Operation Yarn Ball rules to
+# Maps the PowerShell script-block logsource used by the entry-point rule to
 # Splunk/Lucene source filters. The dataset ships one XmlWinEventLog sourcetype
-# across eight channel files (sysmon, security, powershell, wmi, taskscheduler,
-# system, application, other); the filters below select the channels each rule
-# category needs. Replace the sources with your own index or sourcetype. Loki
-# needs no pipeline (it matches on the stream directly). The standard pysigma
-# windows/sysmon pipelines can be used instead of this one.
+# across eight channel files; the filter selects the PowerShell channel. Replace
+# the source with your own index or sourcetype. Loki needs no pipeline. The
+# standard pysigma windows pipelines can be used instead of this one.
 transformations:
-  - id: win_process_creation_source
-    type: add_condition
-    conditions:
-      source:
-        - 'WinEventLog:Microsoft-Windows-Sysmon/Operational'
-        - 'WinEventLog:Security'
-    rule_conditions:
-      - type: logsource
-        category: process_creation
-        product: windows
   - id: win_powershell_source
     type: add_condition
     conditions:
@@ -26,13 +14,3 @@ transformations:
       - type: logsource
         category: ps_scriptblock
         product: windows
-  - id: zeek_conn_source
-    type: add_condition
-    conditions:
-      source:
-        - 'zeek_conn'
-        - '/opt/zeek/logs/current/conn.log'
-    rule_conditions:
-      - type: logsource
-        product: zeek
-        service: conn

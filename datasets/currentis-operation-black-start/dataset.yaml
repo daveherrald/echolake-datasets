@@ -213,7 +213,6 @@ entities:
   - c2-beacon-uri
   - c2-exfil-8080
   - c2-exfil-8443
-  - c2-beacon-ua
 - id: phish-sender
   type: infrastructure
   name: nerc-cip-portal.org compliance sender
@@ -331,10 +330,10 @@ observables:
   first_seen: '2026-06-09T02:43:58Z'
   description: Exfiltration POST from the jump host at 02:43:58; the 02:45:12 transfer on tcp 9009 is a raw socket
     write with no HTTP record.
-- id: c2-beacon-ua
+- id: c2-indicator-rule
   type: indicator
-  name: Beacon User-Agent
-  rule: https://github.com/daveherrald/echolake-datasets/blob/main/datasets/currentis-operation-black-start/rules/sigma/currentis_c2_beacon_user_agent.yml
+  name: Outbound connection to a known C2 indicator
+  rule: https://github.com/daveherrald/echolake-datasets/blob/main/datasets/currentis-operation-black-start/rules/sigma/currentis_c2_indicator_outbound.yml
   indicator_types:
   - malicious-activity
   kill_chain_phases:
@@ -342,29 +341,6 @@ observables:
   techniques:
   - T1071.001
   confidence: 60
-- id: poison-email-rule
-  type: indicator
-  name: Poisoned Compliance Email Detection
-  rule: https://github.com/daveherrald/echolake-datasets/blob/main/datasets/currentis-operation-black-start/rules/sigma/currentis_poisoned_compliance_email.yml
-  indicator_types:
-  - malicious-activity
-  kill_chain_phases:
-  - initial-access
-  techniques:
-  - T1566
-  confidence: 80
-- id: ot-egress-rule
-  type: indicator
-  name: OT Egress to C2 Detection
-  rule: https://github.com/daveherrald/echolake-datasets/blob/main/datasets/currentis-operation-black-start/rules/sigma/currentis_ot_egress_to_c2.yml
-  indicator_types:
-  - malicious-activity
-  kill_chain_phases:
-  - exfiltration
-  techniques:
-  - T1041
-  - T1071.001
-  confidence: 80
 - id: phish-domain
   type: domain-name
   value: nerc-cip-portal.org
@@ -434,39 +410,6 @@ observables:
   confidence: 70
   first_seen: '2026-06-09T01:40:00Z'
   description: Proof file written to C:\Users\Public by the injected instruction, later removed with Remove-Item.
-- id: encoded-ps
-  type: indicator
-  name: Encoded PowerShell stager launched by the AI assistant
-  rule: https://github.com/daveherrald/echolake-datasets/blob/main/datasets/currentis-operation-black-start/rules/sigma/currentis_agentic_ai_shell_spawn.yml
-  indicator_types:
-  - malicious-activity
-  kill_chain_phases:
-  - execution
-  techniques:
-  - T1059.001
-  - T1027
-  - T1204
-  confidence: 85
-- id: recon-cmds
-  type: indicator
-  name: Living-off-the-land domain recon burst
-  rule: https://github.com/daveherrald/echolake-datasets/blob/main/datasets/currentis-operation-black-start/rules/sigma/currentis_lotl_domain_recon.yml
-  indicator_types:
-  - anomalous-activity
-  kill_chain_phases:
-  - discovery
-  techniques:
-  - T1087.002
-  - T1482
-  - T1069.002
-  - T1018
-  - T1033
-  confidence: 60
-  first_seen: '2026-06-09T01:40:41Z'
-  last_seen: '2026-06-09T01:52:54Z'
-  description: First from the agent chain as rchen (whoami, hostname), then the 01:52:53 burst spawned by the beacon
-    as SYSTEM, ending with net user helixgrid-svc /domain. ipconfig, netstat, and Get-Process were not used by the
-    attacker.
 - id: implant-bin
   type: file
   name: kb5041234-v3.exe
@@ -542,50 +485,6 @@ observables:
   - T1053.005
   confidence: 80
   description: Relaunches kb5041234-v3.exe as SYSTEM on CURRENTIS-WS-RACHEL.
-- id: lsass-access
-  type: indicator
-  name: LSASS memory access from the implant
-  rule: https://github.com/daveherrald/echolake-datasets/blob/main/datasets/currentis-operation-black-start/rules/sigma/currentis_lsass_access_masqueraded_binary.yml
-  indicator_types:
-  - malicious-activity
-  kill_chain_phases:
-  - credential-access
-  techniques:
-  - T1003.001
-  confidence: 85
-  first_seen: '2026-06-09T02:01:39Z'
-  last_seen: '2026-06-09T02:01:40Z'
-  description: Sysmon EID 10 with a CallTrace through dbgcore.dll, on the workstation only.
-- id: rdp-cmdkey
-  type: indicator
-  name: Stolen vendor credential staged with cmdkey for RDP
-  rule: https://github.com/daveherrald/echolake-datasets/blob/main/datasets/currentis-operation-black-start/rules/sigma/currentis_vendor_credential_cmdkey_rdp.yml
-  indicator_types:
-  - malicious-activity
-  kill_chain_phases:
-  - lateral-movement
-  techniques:
-  - T1021.001
-  - T1078
-  confidence: 85
-  first_seen: '2026-06-09T02:06:12Z'
-  description: cmdkey targets TERMSRV/currentis-scada-jh-02.currentis.local as CURRENTIS\helixgrid-svc, then mstsc
-    opens the session.
-- id: rdp-pivot
-  type: indicator
-  name: Vendor service account RDP logon to the OT jump host
-  rule: https://github.com/daveherrald/echolake-datasets/blob/main/datasets/currentis-operation-black-start/rules/sigma/currentis_vendor_account_rdp_logon_ot.yml
-  indicator_types:
-  - anomalous-activity
-  kill_chain_phases:
-  - lateral-movement
-  techniques:
-  - T1021.001
-  - T1078
-  confidence: 75
-  first_seen: '2026-06-09T02:06:24Z'
-  description: 'The account is the anomaly: a vendor remote-access account interactively logging on to the SCADA
-    jump host, with 4768/4769 on CURRENTIS-DC01 on the way.'
 - id: ot-dir
   type: directory
   name: OT configuration directory
@@ -689,46 +588,6 @@ observables:
   confidence: 80
   first_seen: '2026-06-09T02:15:51Z'
   description: Staged exfiltration archive at C:\Users\Public (456,204 bytes).
-- id: sched-task-otread
-  type: indicator
-  name: OTRead scheduled task on the jump host
-  rule: https://github.com/daveherrald/echolake-datasets/blob/main/datasets/currentis-operation-black-start/rules/sigma/currentis_otread_scheduled_task.yml
-  indicator_types:
-  - malicious-activity
-  kill_chain_phases:
-  - persistence
-  - defense-evasion
-  techniques:
-  - T1053.005
-  confidence: 85
-  first_seen: '2026-06-09T02:11:22Z'
-  description: Created 02:11:22 on CURRENTIS-SCADA-JH-02 to run read_ot.ps1 as CURRENTIS\helixgrid-svc; the staged
-    setpoint capability that is never fired.
-- id: log-clear-cmd
-  type: indicator
-  name: wevtutil clears the Security log
-  rule: https://github.com/daveherrald/echolake-datasets/blob/main/datasets/currentis-operation-black-start/rules/sigma/currentis_wevtutil_security_log_clear.yml
-  indicator_types:
-  - malicious-activity
-  kill_chain_phases:
-  - defense-evasion
-  techniques:
-  - T1070.001
-  confidence: 90
-  first_seen: '2026-06-09T02:29:57Z'
-- id: security-log-clear
-  type: indicator
-  name: Security event log cleared on the OT jump host
-  rule: https://github.com/daveherrald/echolake-datasets/blob/main/datasets/currentis-operation-black-start/rules/sigma/currentis_security_eventlog_cleared.yml
-  indicator_types:
-  - malicious-activity
-  kill_chain_phases:
-  - defense-evasion
-  techniques:
-  - T1070.001
-  confidence: 90
-  first_seen: '2026-06-09T02:29:57Z'
-  description: Security 1102 on CURRENTIS-SCADA-JH-02 at 02:29:57.219 (SubjectUserName SYSTEM).
 kill_chain:
 - id: S0
   name: Prompt-injection initial access
@@ -752,9 +611,7 @@ kill_chain:
   - poison-msg
   - poison-eml
   - openclaw-run-agent
-  - encoded-ps
   - cip010-review
-  - poison-email-rule
   execution_start: '2026-06-09T01:38:27Z'
   execution_end: '2026-06-09T01:40:43Z'
   description: 'The poisoned NERC CIP-010 baseline diff from the trusted compliance sender is received at 01:38:27
@@ -773,8 +630,6 @@ kill_chain:
   assets:
   - ws-rachel
   - dc01
-  observables:
-  - recon-cmds
   execution_start: '2026-06-09T01:40:41Z'
   execution_end: '2026-06-09T01:52:54Z'
   description: 'whoami and hostname from the agent chain as rchen, then at 01:52:53 a burst spawned by the beacon
@@ -797,7 +652,7 @@ kill_chain:
   - implant-bin
   - c2-ip
   - c2-beacon-uri
-  - c2-beacon-ua
+  - c2-indicator-rule
   - run-key
   - clientsync-ps1
   - sched-task-wua
@@ -816,8 +671,6 @@ kill_chain:
   assets:
   - ws-rachel
   - helixgrid-svc
-  observables:
-  - lsass-access
   execution_start: '2026-06-09T02:01:39Z'
   execution_end: '2026-06-09T02:01:40Z'
   description: At 02:01:39 the implant reads LSASS (Sysmon EID 10, GrantedAccess 0x1FFFFF, CallTrace through dbgcore.dll)
@@ -838,8 +691,6 @@ kill_chain:
   - scada-jh-02
   - helixgrid-svc
   observables:
-  - rdp-cmdkey
-  - rdp-pivot
   - clientsync-ps1
   execution_start: '2026-06-09T02:06:12Z'
   execution_end: '2026-06-09T02:06:25Z'
@@ -884,7 +735,6 @@ kill_chain:
   - c2-ip
   - c2-exfil-8080
   - c2-exfil-8443
-  - ot-egress-rule
   execution_start: '2026-06-09T02:15:51Z'
   execution_end: '2026-06-09T02:45:15Z'
   description: 'The staged unit3_export.dat (456,204 bytes) trickles out over the C2 channel: a first curl POST
@@ -901,10 +751,6 @@ kill_chain:
   assets:
   - scada-jh-02
   - helixgrid-svc
-  observables:
-  - sched-task-otread
-  - log-clear-cmd
-  - security-log-clear
   execution_start: '2026-06-09T02:11:22Z'
   execution_end: '2026-06-09T02:29:58Z'
   description: The OTRead task (02:11:22) and read_ot.ps1 stage a Unit 3 setpoint-read capability, but nothing writes

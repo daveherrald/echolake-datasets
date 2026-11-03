@@ -85,15 +85,15 @@ The haystack the needle sits in:
 
 ## Detection Rules
 
-Seven sample [Sigma](https://sigmahq.io/) rules for the signals above live in
-[`rules/sigma/`](rules/sigma/), spanning the kill chain across all five log sources
-(GitHub audit, Linux OpenSSH, CrowdStrike FDR, CloudTrail, and VPC flow). Every rule
-passes `sigma check` and converts to Splunk, Loki, and Lucene. The highest-fidelity
-signals are the leaked-SSH-key secret-scanning alert, the IMDS credential access from a
-shell, and the mass read of the named training-data bucket; the intruder-address rules
-are low-confidence threat-intel seeds. See the [Sigma rules README](rules/sigma/README.md)
-for the full list, the per-rule verification table with dataset match counts, and the
-field-mapping caveats.
+One entry-point [Sigma](https://sigmahq.io/) rule lives in
+[`rules/sigma/`](rules/sigma/): the GitHub secret-scanning alert for the leaked SSH
+private key, the first signal of the chain and the opening stage of the Attack Flow
+bundle. It passes `sigma check` and converts to Splunk, Loki, and Lucene. The
+downstream stages (the SSH use of the key, the IMDS theft, the bucket reads, the SFTP
+pull, the VPC egress) are left as investigation material rather than rules; the
+entry-point alert is where the hunt starts. See the
+[Sigma rules README](rules/sigma/README.md) for the verification table with dataset
+match counts and the field-mapping caveats.
 
 ## Investigation Notes
 

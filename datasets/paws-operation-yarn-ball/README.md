@@ -60,17 +60,15 @@ Use this package to evaluate scripted staging, defense impairment, discovery, sc
 
 ## Detection Rules
 
-Seven sample [Sigma](https://sigmahq.io/) rules for the scripted prelude above live in
-[`rules/sigma/`](rules/sigma/), following the sequence, each matching records present
-in these logs. Every rule passes `sigma check` and converts to Splunk, Loki, and
-Lucene. The set stops at what the telemetry evidences: the Defender exclusions, the
-`openclaw_sim.js` launch from Public and its discovery burst, the `yarn-ball.xyz`
-contacts, the WindowsUpdate-named scheduled task, the temp-staged patch binary, and
-the outbound 9090 connection. There are deliberately no rules for the unevidenced
-later stages, and the recurring port 8080 traffic is not flagged because the capture
-attributes it to a Python service on PAWS-DC01. See the
-[Sigma rules README](rules/sigma/README.md) for the full list, the per-rule
-verification table with dataset match counts, and the field-mapping caveats.
+One entry-point [Sigma](https://sigmahq.io/) rule lives in
+[`rules/sigma/`](rules/sigma/): the PowerShell script block setting Defender
+exclusions for the staging directory and patch binary, the first scripted
+action of the prelude. It passes `sigma check` and converts to Splunk, Loki,
+and Lucene. The rest of the scripted sequence is investigation material
+rather than rules, and the recurring port 8080 traffic is not flagged because
+the capture attributes it to a Python service on PAWS-DC01. See the
+[Sigma rules README](rules/sigma/README.md) for the verification table with
+dataset match counts and the field-mapping caveats.
 
 ## Environment
 

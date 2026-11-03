@@ -268,20 +268,6 @@ observables:
   - T1087.004
   confidence: 50
   description: An AWS CLI unpacked under /var/tmp ran the identity, IAM, and S3 discovery calls.
-- id: sftp-read
-  type: indicator
-  name: sftp-server bulk read from a non-home address
-  rule: https://github.com/daveherrald/echolake-datasets/blob/main/datasets/cloud-data-exfiltration/rules/sigma/cloudexfil_sftp_bulk_file_read.yml
-  indicator_types:
-  - anomalous-activity
-  kill_chain_phases:
-  - exfiltration
-  techniques:
-  - T1048.002
-  confidence: 70
-  first_seen: '2026-10-13T19:07:43Z'
-  last_seen: '2026-10-13T19:07:46Z'
-  description: Seven files, about 507 MB per sftp-server, read in four seconds by the second key login.
 kill_chain:
 - id: S1
   name: Leaked private key found in a public repository
@@ -383,7 +369,6 @@ kill_chain:
   - intruder
   observables:
   - intruder-ip
-  - sftp-read
   execution_start: '2026-10-13T19:07:42Z'
   execution_end: '2026-10-13T19:07:46Z'
   description: 'At 19:07:42 a second key login opens an SFTP session that reads 7 files (about 507 MB per sftp-server)
