@@ -80,17 +80,17 @@ files:
     event_count: 12293
     log_source: {vendor: CrowdStrike, product: Falcon Data Replicator, category: edr}
   - path: data/github_audit.jsonl.gz
-    description: GitHub organization audit log. Contains the key leak push, the secret-scanning alert and its resolution, plus organization background. Time fields timestamp and created_at (epoch ms).
+    description: GitHub organization audit log. Contains the key leak push, the secret-scanning alert and its resolution, plus organization background. Time fields @timestamp and created_at (epoch ms), the audit-streaming shape; secret scanning carries secret_types as an array.
     format: jsonl
     schema: raw
     sourcetype: 'github:audit'
     event_count: 230
     log_source: {vendor: GitHub, product: GitHub Enterprise Cloud, category: audit}
-  - path: data/linux_auth.jsonl.gz
-    description: /var/log/auth.log from the victim host, shipped by Fluent Bit (syslog line in message). Internet SSH brute force, the developer's five work sessions, and the attacker's two publickey logins and SFTP session. Time is the RFC3339 timestamp at the start of message.
-    format: jsonl
-    schema: raw
-    sourcetype: 'linux_secure:fluentbit'
+  - path: data/linux_auth.log.gz
+    description: /var/log/auth.log from the victim host, one raw line per event with its RFC3339 timestamp at line start. Internet SSH brute force, the developer's five work sessions, and the attacker's two publickey logins and SFTP session.
+    format: text
+    schema: native
+    sourcetype: linux_secure
     event_count: 887
     log_source: {vendor: Linux, product: OpenSSH, category: authentication}
 defaults:

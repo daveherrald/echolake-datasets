@@ -54,8 +54,8 @@ All times are original capture times on 2026-10-13 UTC unless noted. EchoLake sh
 | `data/aws_cloudtrail.jsonl.gz` | `aws:cloudtrail` | 261,801 | Management and S3 data events for the account. Time field `eventTime`. |
 | `data/aws_vpc_flow.jsonl.gz` | `aws:vpcflow:json` | 73,752 | Flow records for the victim interface, one JSON object per record. Time fields `start` and `end`, epoch seconds. |
 | `data/crowdstrike_fdr.jsonl.gz` | `crowdstrike:fdr` | 12,293 | Falcon Data Replicator events from the victim host, plus Falcon API audit events. Time field `timestamp`, an epoch-ms string for sensor events and ISO8601 for audit events. |
-| `data/linux_auth.jsonl.gz` | `linux_secure:fluentbit` | 887 | `/var/log/auth.log` from the victim host. The syslog line is in `message`, and its RFC3339 prefix is the event time. |
-| `data/github_audit.jsonl.gz` | `github:audit` | 230 | Organization audit log across the four orgs. Time fields `timestamp` and `created_at`, epoch ms. |
+| `data/linux_auth.log.gz` | `linux_secure` | 887 | `/var/log/auth.log` from the victim host, one raw line per event with its RFC3339 timestamp at line start. |
+| `data/github_audit.jsonl.gz` | `github:audit` | 230 | Organization audit log across the four orgs. Time fields `@timestamp` and `created_at`, epoch ms, the audit-streaming shape. Secret scanning carries `secret_types` as an array. |
 
 Every line is the original JSON record as the source produced it, with no envelope, and each file is sorted by event time.
 
