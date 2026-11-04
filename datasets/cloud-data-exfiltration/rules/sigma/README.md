@@ -25,7 +25,7 @@ dataset records that satisfy the rule's full condition.
 
 | Rule | `sigma check` | Dataset matches | Splunk | Loki | Lucene |
 |------|:---:|:---:|:---:|:---:|:---:|
-| github_leaked_ssh_key_alert | pass | 2 | yes | yes | yes |
+| github_leaked_ssh_key_alert | pass | 1 | yes | yes | yes |
 
 Converted queries are in [`conversions.md`](conversions.md). The Splunk and Lucene
 conversions use [`pipelines/cloudexfil_logsources.yml`](pipelines/cloudexfil_logsources.yml),

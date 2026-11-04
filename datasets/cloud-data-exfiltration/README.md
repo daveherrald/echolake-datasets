@@ -6,7 +6,7 @@ The scenario is built around one judgment: is the secret-scanning alert closed, 
 
 ## What it is
 
-- **348,963 events** across 5 data sources, 2026-10-11 01:00 to 2026-10-14 00:00 UTC (71 hours)
+- **348,961 events** across 5 data sources, 2026-10-11 01:00 to 2026-10-14 00:00 UTC (71 hours)
 - **One victim host**, an Ubuntu EC2 instance with a CrowdStrike Falcon sensor, whose instance role can read an S3 training-data bucket
 - **Background** is real account traffic: a SaaS application's own Lambda and ECS infrastructure, daily audit scanners, internet SSH brute force against the host, and GitHub activity across four organizations
 - **The developer's own work sessions are in the lead-in**, from his usual IP, and the intrusion begins three minutes after his last one ends
@@ -55,7 +55,7 @@ All times are original capture times on 2026-10-13 UTC unless noted. EchoLake sh
 | `data/aws_vpc_flow.jsonl.gz` | `aws:vpcflow:json` | 73,752 | Flow records for the victim interface, one JSON object per record. Time fields `start` and `end`, epoch seconds. |
 | `data/crowdstrike_fdr.jsonl.gz` | `crowdstrike:fdr` | 12,293 | Falcon Data Replicator events from the victim host, plus Falcon API audit events. Time field `timestamp`, an epoch-ms string for sensor events and ISO8601 for audit events. |
 | `data/linux_auth.log.gz` | `linux_secure` | 887 | `/var/log/auth.log` from the victim host, one raw line per event with its RFC3339 timestamp at line start. |
-| `data/github_audit.jsonl.gz` | `github:audit` | 230 | Organization audit log across the four orgs. Time fields `@timestamp` and `created_at`, epoch ms, the audit-streaming shape. Secret scanning carries `secret_types` as an array. |
+| `data/github_audit.jsonl.gz` | `github:audit` | 228 | Organization audit log across the four orgs. Time fields `@timestamp` and `created_at`, epoch ms, the audit-streaming shape. Secret scanning carries `secret_types` as an array. |
 
 Every line is the original JSON record as the source produced it, with no envelope, and each file is sorted by event time.
 
@@ -69,7 +69,7 @@ The haystack the needle sits in:
 - Daily audit-scanner sweeps enumerate every IAM role, policy and bucket, including the victim role and the training-data bucket.
 - The host faces the internet: SSH pre-auth failures, connection penalties and brute-force bursts from scanning addresses, and VPC REJECT records for the rest.
 - GitHub shows 25 to 31 actors a day across the four organizations: clones, pushes, fetches, pull requests.
-- Eight other secret-scanning alerts fire across the orgs in the window, on other repos and other actors, including two other `ssh_private_key` alerts. One of those is resolved by `f.santos` at 09:15 UTC on 2026-10-13, ten hours before the scenario alert.
+- Six other secret-scanning events fall in the window, on other repos and for other secret types. None of them is an `ssh_private_key` alert.
 - The developer's own working sessions: five SSH sessions across the three days, with git, python and pytest activity that lines up with his GitHub audit events.
 
 ## MITRE ATT&CK Coverage
@@ -99,7 +99,7 @@ match counts and the field-mapping caveats.
 
 - **The IP is the pivot, not the key.** The account's legitimate sessions, including one that ends at 18:52 on 2026-10-13, all come from 75.125.237.59 with the same key fingerprint the intruder uses at 18:55. Same credential, new source address.
 - **The leaked key has a visible origin.** The Oct 12 14:40 `cp` into `training/fixtures/` and the 18:50:14 push from the host reconstruct exactly how the key reached a public repository.
-- **The alert is not the only alert.** Nine secret-scanning events exist in the window. The scenario one is the only `ssh_private_key` alert on `datalake-utils`; confirming which repository, which actor and which push requires reading the audit rows, not just the alert type.
+- **The alert is one of several secret-scanning events.** Seven exist in the window, and the scenario alert on `datalake-utils` is the only `ssh_private_key` one. Tying it to the push that leaked the key means reading the audit rows around it, not just the alert.
 - **Genuine background looks suspicious too.** The audit scanners call Get/List on the victim role and the training-data bucket every day. Separating that from S5 depends on the principal and the source IP.
 - Each SSH login on the host produces FDR `CriticalFileAccessed` events on `/etc/shadow` alongside `unix_chkpwd`. That is the PAM password-expiry check, not credential dumping.
 - The three exfiltration figures measure different things. 507 MB is file bytes read by sftp-server, 526 MB is flow-log egress with protocol overhead, and about 514 MB is S3 ingress to the host.
@@ -118,7 +118,7 @@ The logs were captured in an isolated lab AWS account. The intrusion was scripte
 
 Before release, identifying values were replaced: person, company, product and account names became fictional ones, AWS account IDs became 11-digit values that cannot match any real account (including inside session tokens, which were re-encoded), and third-party secrets were removed. A decode-everything audit confirms no real account ID survives in plain text or in base64.
 
-`dataset.yaml` carries per-file event counts and sourcetypes, and was verified by replaying the full dataset: 348,963 events processed, zero errors, every time field moved by an identical delta with no type changes.
+`dataset.yaml` carries per-file event counts and sourcetypes, and was verified by replaying the full dataset: every event processed, zero errors, every time field moved by an identical delta with no type changes.
 
 ## Scenario Metadata and Attack Flow
 

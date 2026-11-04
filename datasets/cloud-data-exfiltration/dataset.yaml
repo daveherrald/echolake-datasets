@@ -5,7 +5,7 @@ metadata:
     schema_version: "2.0.0"
     description: S1-S8 leaked SSH key to S3 training-data exfiltration chain
   name: cloud-data-exfiltration
-  version: 1.1.0
+  version: 1.1.1
   description: >-
     A leaked SSH private key leads to theft of ML training data from an AWS account. A developer
     pushes a private key to a GitHub repository, and secret scanning raises an alert under three
@@ -15,7 +15,7 @@ metadata:
     back over SFTP (526 MB of flow-log egress). The developer later resolves the alert and pushes a follow-up commit. Neither
     step revokes the key or the role credentials. Five telemetry sources must be correlated: GitHub
     organization audit, the host's auth.log, CrowdStrike Falcon Data Replicator events from the
-    host, AWS CloudTrail, and VPC flow logs. 348,963 events over 71 hours
+    host, AWS CloudTrail, and VPC flow logs. 348,961 events over 71 hours
     (2026-10-11 01:00 to 2026-10-14 00:00 UTC), mostly account and internet background, with the
     intrusion on 2026-10-13 between 18:50 and 19:47 UTC.
   author: Dave Herrald
@@ -84,7 +84,7 @@ files:
     format: jsonl
     schema: raw
     sourcetype: 'github:audit'
-    event_count: 230
+    event_count: 228
     log_source: {vendor: GitHub, product: GitHub Enterprise Cloud, category: audit}
   - path: data/linux_auth.log.gz
     description: /var/log/auth.log from the victim host, one raw line per event with its RFC3339 timestamp at line start. Internet SSH brute force, the developer's five work sessions, and the attacker's two publickey logins and SFTP session.
@@ -240,8 +240,8 @@ observables:
   - T1552.004
   confidence: 80
   first_seen: '2026-10-13T18:52:41Z'
-  description: Nine secret-scanning events fire across the orgs in the window; the scenario alert is the only ssh_private_key
-    alert on datalake-utils, resolved at 19:22:46 without the key being revoked.
+  description: Seven secret-scanning events fall in the window, and the scenario alert is the only ssh_private_key
+    alert among them. It is resolved at 19:22:46 without the key being revoked.
 - id: training-bucket
   type: url
   value: s3://jn-model-training-data-5233
@@ -397,8 +397,8 @@ provenance:
       accounts and third-party secrets were removed or replaced with fictional values before
       export.
   verification:
-    source_counts: {aws_cloudtrail: 261801, aws_vpc_flow: 73752, crowdstrike_fdr: 12293, github_audit: 230, linux_auth: 887}
-    total_events: 348963
+    source_counts: {aws_cloudtrail: 261801, aws_vpc_flow: 73752, crowdstrike_fdr: 12293, github_audit: 228, linux_auth: 887}
+    total_events: 348961
     note: Every line parses as JSON, and EchoLake extracts a base timestamp from every line using the listed sourcetypes. The lead-in includes the developer's own benign SSH sessions and git/python work, correlated with his GitHub audit events.
 cases:
 - id: leaked-key-entry
