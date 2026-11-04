@@ -80,16 +80,40 @@ metadata:
       name: 'Impair Defenses: Disable or Modify Tools'
       tactics:
       - defense-evasion
+    - id: T1685
+      name: Disable or Modify Tools
+      tactics:
+      - defense-evasion
+    - id: T1071.001
+      name: 'Application Layer Protocol: Web Protocols'
+      tactics:
+      - command-and-control
+    - id: T1105
+      name: Ingress Tool Transfer
+      tactics:
+      - command-and-control
+    - id: T1036.005
+      name: 'Masquerading: Match Legitimate Resource Name or Location'
+      tactics:
+      - defense-evasion
     tactics:
     - execution
     - persistence
     - privilege-escalation
     - defense-evasion
     - discovery
+    - command-and-control
   timestamp_range:
     earliest: '2026-03-18T00:00:00Z'
     latest: '2026-03-18T14:48:57Z'
     field: _time
+  attack_flow:
+    path: attack_flow.json
+    format: stix-2.1
+    schema_version: '2.0.0'
+    description: Evidenced prelude S1-S7, Defender exclusions through staged-binary
+      execution; scripts for the intended later stages are file writes only and
+      are not evidenced as executed.
 files:
   bundled:
   - path: data/sysmon.xml.gz
@@ -363,3 +387,245 @@ defaults:
     base_time: earliest
     target_time: now-1h
   schema: raw
+entities:
+- id: ws02
+  type: infrastructure
+  name: PAWS-WS02
+  role: victim
+  description: Software engineer workstation on the PAWS lab segment; the prelude's
+    only target host.
+  infrastructure_types:
+  - workstation
+  observables:
+  - ws02-ip
+- id: orchestrator
+  type: infrastructure
+  name: lab orchestrator host
+  role: attacker
+  description: Lab orchestrator and Sliver TCP-relay host. The prelude touches it only
+    through the 9090 retrieval connection; the recurring 8080 traffic to it belongs to
+    the lab's own Python service on PAWS-DC01 and is not part of the intrusion.
+  infrastructure_types:
+  - command-and-control
+  observables:
+  - orchestrator-ip
+- id: yarn-ball
+  type: threat-actor
+  name: Yarn Ball
+  role: attacker
+  description: Fictional financially motivated threat group behind the scripted prelude.
+    Its later-stage tooling (lateral movement, exfiltration, ransomware, cleanup scripts)
+    is staged on the target as file writes only; this capture contains no execution
+    evidence for those stages.
+  threat_actor_types:
+  - crime-syndicate
+- id: pawsitive-vibes
+  type: identity
+  name: Pawsitive Vibes Pet Co.
+  identity_class: organization
+  role: victim-organization
+  description: Fictional pet wellness e-commerce company; Active Directory domain
+    pawsitivevibes.local across the PAWS lab segment.
+  sectors:
+  - e-commerce
+observables:
+- id: ws02-ip
+  type: ipv4-addr
+  value: 192.168.4.24
+  description: PAWS-WS02 address on the lab VLAN.
+- id: orchestrator-ip
+  type: ipv4-addr
+  value: 192.168.4.200
+  description: Lab orchestrator and Sliver relay host; the 9090 retrieval returned
+    roughly 327 KB to the workstation.
+- id: yarn-ball-domain
+  type: domain-name
+  value: yarn-ball.xyz
+  indicator_types:
+  - malicious-activity
+  kill_chain_phases:
+  - command-and-control
+  techniques:
+  - T1071.001
+  confidence: 70
+  description: Attacker-controlled domain contacted only from command lines in this
+    capture; no DNS resolution or HTTP session for it appears in the network telemetry.
+- id: yarn-ball-diag-url
+  type: url
+  value: https://yarn-ball.xyz/api/v1/diagnostics
+  indicator_types:
+  - malicious-activity
+  kill_chain_phases:
+  - command-and-control
+  techniques:
+  - T1071.001
+  confidence: 70
+  first_seen: '2026-03-18T00:19:21Z'
+  description: Attempted HTTPS POST of the staging file diag.txt; command-line
+    evidence only.
+- id: yarn-ball-patch-url
+  type: url
+  value: https://yarn-ball.xyz/api/v1/patch
+  indicator_types:
+  - malicious-activity
+  kill_chain_phases:
+  - command-and-control
+  techniques:
+  - T1105
+  confidence: 70
+  first_seen: '2026-03-18T00:19:24Z'
+  description: Attempted retrieval of patch-kb5041234.exe into the Temp staging
+    directory; command-line evidence only.
+- id: openclaw-sim
+  type: file
+  name: openclaw_sim.js
+  description: Agent simulation script at C:\Users\Public\openclaw_sim.js, executed
+    twice by node.exe; every later prelude command descends from these launches.
+- id: patch-binary
+  type: file
+  name: patch-kb5041234.exe
+  description: Staged at C:\Windows\Temp\patch-kb5041234.exe.
+  indicator_types:
+  - malicious-activity
+  kill_chain_phases:
+  - defense-evasion
+  techniques:
+  - T1036.005
+  confidence: 80
+  first_seen: '2026-03-18T00:20:29Z'
+  description: kb-named staged binary executed from the Temp staging directory the
+    Defender exclusions opened; generates heavy outbound-connection volume after
+    execution.
+- id: defender-exclusion-rule
+  type: indicator
+  name: Defender exclusion detection
+  rule: https://github.com/daveherrald/echolake-datasets/blob/main/datasets/paws-operation-yarn-ball/rules/sigma/paws_defender_exclusion_temp_and_patch.yml
+  indicator_types:
+  - malicious-activity
+  kill_chain_phases:
+  - defense-evasion
+  techniques:
+  - T1685
+  confidence: 80
+kill_chain:
+- id: S1
+  name: Defender exclusions staged
+  tactic: defense-evasion
+  techniques:
+  - T1685
+  assets:
+  - ws02
+  observables:
+  - defender-exclusion-rule
+  execution_start: '2026-03-18T00:17:51Z'
+  execution_end: '2026-03-18T00:17:52Z'
+  description: 'An Add-MpPreference script block excludes C:\Windows\Temp and patch-kb5041234.exe
+    from Defender coverage, the first scripted action of the prelude, run through the
+    guest-agent PowerShell chain. Evidence: PowerShell 4104 script block, PAWS-WS02.'
+- id: S2
+  name: Staging retrieval from the orchestrator host
+  tactic: command-and-control
+  techniques:
+  - T1105
+  assets:
+  - ws02
+  - orchestrator
+  observables:
+  - ws02-ip
+  - orchestrator-ip
+  execution_start: '2026-03-18T00:18:13Z'
+  execution_end: '2026-03-18T00:18:13Z'
+  description: 'One outbound powershell.exe TCP connection from PAWS-WS02 to the
+    orchestrator host on port 9090 returns roughly 327 KB to the workstation. Attribution
+    to the prelude is by timing and host; the capture does not label the channel.
+    Evidence: zeek_conn 192.168.4.24 to 192.168.4.200:9090.'
+- id: S3
+  name: Agent simulation launched
+  tactic: execution
+  techniques:
+  - T1059.007
+  assets:
+  - ws02
+  observables:
+  - openclaw-sim
+  execution_start: '2026-03-18T00:18:57Z'
+  execution_end: '2026-03-18T00:19:11Z'
+  description: 'node.exe executes openclaw_sim.js from C:\Users\Public twice, once with
+    --recon-only; the rest of the prelude descends from these launches. Evidence:
+    Sysmon EID 1 process creations, PAWS-WS02.'
+- id: S4
+  name: Host and domain discovery
+  tactic: discovery
+  techniques:
+  - T1082
+  - T1016
+  - T1033
+  - T1087.001
+  - T1069.002
+  - T1018
+  assets:
+  - ws02
+  execution_start: '2026-03-18T00:18:57Z'
+  execution_end: '2026-03-18T00:19:15Z'
+  description: 'A seven-command discovery burst (whoami /all, hostname, ipconfig /all,
+    systeminfo, net user, net group "Domain Admins" /domain, net view) runs as cmd.exe
+    children of node.exe, once per simulation launch. Evidence: Sysmon EID 1, PAWS-WS02.'
+- id: S5
+  name: Lab-domain contact attempts
+  tactic: command-and-control
+  techniques:
+  - T1071.001
+  - T1105
+  assets:
+  - ws02
+  - orchestrator
+  observables:
+  - yarn-ball-domain
+  - yarn-ball-diag-url
+  - yarn-ball-patch-url
+  execution_start: '2026-03-18T00:19:21Z'
+  execution_end: '2026-03-18T00:19:24Z'
+  description: 'curl commands against yarn-ball.xyz: an HTTPS POST of the staging
+    diagnostics file and a GET retrieving the patch binary into Temp. Attempts only;
+    no DNS resolution or HTTP session for the domain appears in the network telemetry.
+    Evidence: Sysmon EID 1 command lines, PAWS-WS02.'
+- id: S6
+  name: Scheduled task registration and staging cleanup
+  tactic: persistence
+  techniques:
+  - T1053.005
+  assets:
+  - ws02
+  execution_start: '2026-03-18T00:19:27Z'
+  execution_end: '2026-03-18T00:19:28Z'
+  description: 'schtasks /create registers SecurityPatchRecovery under the
+    Microsoft\Windows\WindowsUpdate\ namespace to run the Temp binary at logon with
+    HIGHEST privileges; the staging files diag.txt and validate.txt are deleted
+    immediately after. Evidence: Sysmon EID 1 and Security 4688 command lines, PAWS-WS02.'
+- id: S7
+  name: Staged binary execution, prelude ends
+  tactic: defense-evasion
+  techniques:
+  - T1036.005
+  assets:
+  - ws02
+  observables:
+  - patch-binary
+  execution_start: '2026-03-18T00:20:29Z'
+  execution_end: '2026-03-18T00:20:29Z'
+  description: 'patch-kb5041234.exe executes from C:\Windows\Temp through the agent''s
+    cmd chain, its name impersonating a Windows update patch. The prelude ends here:
+    scripts named for the later stages remain file writes only, and credential dumping,
+    lateral movement, bulk encryption, and event-log clearing are not evidenced in this
+    capture. Evidence: Sysmon EID 1, PAWS-WS02.'
+cases:
+- id: defender-exclusion-entry
+  name: Defender exclusions for the staging directory and patch binary
+  rule: https://github.com/daveherrald/echolake-datasets/blob/main/datasets/paws-operation-yarn-ball/rules/sigma/paws_defender_exclusion_temp_and_patch.yml
+  disposition: true-positive
+  benign_explanations:
+  - An administrator deliberately tuned Defender exclusions during software deployment
+    or troubleshooting.
+  notes: Entry point. The evidenced prelude S1 through S7 is in the attack flow; the
+    investigation from this alert is what the exclusions opened and what later executed
+    from the excluded paths.

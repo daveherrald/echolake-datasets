@@ -1,0 +1,1007 @@
+{
+  "type": "bundle",
+  "id": "bundle--d5efc251-7d15-5755-82d1-34c78dc3497a",
+  "objects": [
+    {
+      "type": "extension-definition",
+      "id": "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4",
+      "spec_version": "2.1",
+      "name": "Attack Flow",
+      "description": "Extends STIX 2.1 with features to create Attack Flows.",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "created_by_ref": "identity--d673f8cb-c168-42da-8ed4-0cb26725f86c",
+      "schema": "https://center-for-threat-informed-defense.github.io/attack-flow/stix/attack-flow-schema-2.0.0.json",
+      "version": "2.0.0",
+      "extension_types": [
+        "new-sdo"
+      ],
+      "external_references": [
+        {
+          "source_name": "Documentation",
+          "description": "Documentation for Attack Flow",
+          "url": "https://center-for-threat-informed-defense.github.io/attack-flow"
+        },
+        {
+          "source_name": "GitHub",
+          "description": "Source code repository for Attack Flow",
+          "url": "https://github.com/center-for-threat-informed-defense/attack-flow"
+        }
+      ]
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--d673f8cb-c168-42da-8ed4-0cb26725f86c",
+      "created_by_ref": "identity--d673f8cb-c168-42da-8ed4-0cb26725f86c",
+      "created": "2022-08-02T19:34:35.143Z",
+      "modified": "2022-08-02T19:34:35.143Z",
+      "name": "MITRE Center for Threat-Informed Defense",
+      "identity_class": "organization"
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "EchoLake Project",
+      "identity_class": "organization"
+    },
+    {
+      "type": "ipv4-addr",
+      "spec_version": "2.1",
+      "id": "ipv4-addr--c71c09d5-d1c9-5baf-addb-239862e2e093",
+      "value": "192.168.4.24"
+    },
+    {
+      "type": "ipv4-addr",
+      "spec_version": "2.1",
+      "id": "ipv4-addr--9384ef1d-5724-5e55-a130-cbff7e5e6561",
+      "value": "192.168.4.200"
+    },
+    {
+      "type": "domain-name",
+      "spec_version": "2.1",
+      "id": "domain-name--0ea13807-548a-5b0d-a235-0632d1000a8d",
+      "value": "yarn-ball.xyz"
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--9dbd4b70-6255-530b-90a7-7fbe12e348b1",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-03-18T00:00:00.000Z",
+      "modified": "2026-03-18T00:00:00.000Z",
+      "name": "yarn-ball.xyz",
+      "description": "Attacker-controlled domain contacted only from command lines in this capture; no DNS resolution or HTTP session for it appears in the network telemetry.",
+      "indicator_types": [
+        "malicious-activity"
+      ],
+      "pattern": "[domain-name:value = 'yarn-ball.xyz']",
+      "pattern_type": "stix",
+      "pattern_version": "2.1",
+      "valid_from": "2026-03-18T00:00:00Z",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "mitre-attack",
+          "phase_name": "command-and-control"
+        }
+      ],
+      "labels": [
+        "T1071.001"
+      ],
+      "confidence": 70
+    },
+    {
+      "type": "url",
+      "spec_version": "2.1",
+      "id": "url--7cd63d4a-1053-5770-b6ce-5df3bf8088fb",
+      "value": "https://yarn-ball.xyz/api/v1/diagnostics"
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--5b6a144a-c784-5062-a234-2c0a18e9ea4e",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-03-18T00:00:00.000Z",
+      "modified": "2026-03-18T00:00:00.000Z",
+      "name": "https://yarn-ball.xyz/api/v1/diagnostics",
+      "description": "Attempted HTTPS POST of the staging file diag.txt; command-line evidence only.",
+      "indicator_types": [
+        "malicious-activity"
+      ],
+      "pattern": "[url:value = 'https://yarn-ball.xyz/api/v1/diagnostics']",
+      "pattern_type": "stix",
+      "pattern_version": "2.1",
+      "valid_from": "2026-03-18T00:19:21Z",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "mitre-attack",
+          "phase_name": "command-and-control"
+        }
+      ],
+      "labels": [
+        "T1071.001"
+      ],
+      "confidence": 70
+    },
+    {
+      "type": "url",
+      "spec_version": "2.1",
+      "id": "url--a8e5c912-bb08-532f-80f8-3d07dd0cb98d",
+      "value": "https://yarn-ball.xyz/api/v1/patch"
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--d49068bf-b7ed-5948-aee7-8eb74ad778cb",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-03-18T00:00:00.000Z",
+      "modified": "2026-03-18T00:00:00.000Z",
+      "name": "https://yarn-ball.xyz/api/v1/patch",
+      "description": "Attempted retrieval of patch-kb5041234.exe into the Temp staging directory; command-line evidence only.",
+      "indicator_types": [
+        "malicious-activity"
+      ],
+      "pattern": "[url:value = 'https://yarn-ball.xyz/api/v1/patch']",
+      "pattern_type": "stix",
+      "pattern_version": "2.1",
+      "valid_from": "2026-03-18T00:19:24Z",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "mitre-attack",
+          "phase_name": "command-and-control"
+        }
+      ],
+      "labels": [
+        "T1105"
+      ],
+      "confidence": 70
+    },
+    {
+      "type": "file",
+      "spec_version": "2.1",
+      "id": "file--88d0dc30-236a-503d-ad83-fc0467c3cb2a",
+      "name": "openclaw_sim.js"
+    },
+    {
+      "type": "file",
+      "spec_version": "2.1",
+      "id": "file--2dcacf3b-1ba0-597d-a531-7f9916bd37d3",
+      "name": "patch-kb5041234.exe"
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--37eec1fc-75c8-53f2-ab9c-b7faefe56407",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-03-18T00:00:00.000Z",
+      "modified": "2026-03-18T00:00:00.000Z",
+      "name": "patch-kb5041234.exe",
+      "description": "kb-named staged binary executed from the Temp staging directory the Defender exclusions opened; generates heavy outbound-connection volume after execution.",
+      "indicator_types": [
+        "malicious-activity"
+      ],
+      "pattern": "[file:name = 'patch-kb5041234.exe']",
+      "pattern_type": "stix",
+      "pattern_version": "2.1",
+      "valid_from": "2026-03-18T00:20:29Z",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "mitre-attack",
+          "phase_name": "defense-evasion"
+        }
+      ],
+      "labels": [
+        "T1036.005"
+      ],
+      "confidence": 80
+    },
+    {
+      "type": "infrastructure",
+      "spec_version": "2.1",
+      "id": "infrastructure--d991dab3-743b-5cf8-afec-116400152395",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-03-18T00:00:00.000Z",
+      "modified": "2026-03-18T00:00:00.000Z",
+      "name": "PAWS-WS02",
+      "description": "Software engineer workstation on the PAWS lab segment; the prelude's only target host.",
+      "infrastructure_types": [
+        "workstation"
+      ]
+    },
+    {
+      "type": "attack-asset",
+      "spec_version": "2.1",
+      "id": "attack-asset--5162e1c2-2e77-5058-af72-c179e83dd094",
+      "created": "2026-03-18T00:00:00Z",
+      "modified": "2026-03-18T00:00:00Z",
+      "name": "PAWS-WS02",
+      "object_ref": "infrastructure--d991dab3-743b-5cf8-afec-116400152395",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      },
+      "description": "victim. Software engineer workstation on the PAWS lab segment; the prelude's only target host"
+    },
+    {
+      "type": "infrastructure",
+      "spec_version": "2.1",
+      "id": "infrastructure--d6a1b5ff-8fc9-5a9a-8087-a7d7a5445c1a",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-03-18T00:00:00.000Z",
+      "modified": "2026-03-18T00:00:00.000Z",
+      "name": "lab orchestrator host",
+      "description": "Lab orchestrator and Sliver TCP-relay host. The prelude touches it only through the 9090 retrieval connection; the recurring 8080 traffic to it belongs to the lab's own Python service on PAWS-DC01 and is not part of the intrusion.",
+      "infrastructure_types": [
+        "command-and-control"
+      ]
+    },
+    {
+      "type": "attack-asset",
+      "spec_version": "2.1",
+      "id": "attack-asset--c852a7f2-5a9c-54cb-a8cf-e77e2b66fba1",
+      "created": "2026-03-18T00:00:00Z",
+      "modified": "2026-03-18T00:00:00Z",
+      "name": "lab orchestrator host",
+      "object_ref": "infrastructure--d6a1b5ff-8fc9-5a9a-8087-a7d7a5445c1a",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      },
+      "description": "attacker. Lab orchestrator and Sliver TCP-relay host. The prelude touches it only through the 9090 retrieval connection; the recurring 8080 traffic to it belongs to the lab's own Python service on PAWS-DC01 and is not part of the intrusion"
+    },
+    {
+      "type": "threat-actor",
+      "spec_version": "2.1",
+      "id": "threat-actor--19abe967-8801-54c8-ab01-aee08fe73af9",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-03-18T00:00:00.000Z",
+      "modified": "2026-03-18T00:00:00.000Z",
+      "name": "Yarn Ball",
+      "description": "Fictional financially motivated threat group behind the scripted prelude. Its later-stage tooling (lateral movement, exfiltration, ransomware, cleanup scripts) is staged on the target as file writes only; this capture contains no execution evidence for those stages.",
+      "threat_actor_types": [
+        "crime-syndicate"
+      ]
+    },
+    {
+      "type": "attack-asset",
+      "spec_version": "2.1",
+      "id": "attack-asset--a84bca92-e4d3-5d81-afdf-90a717298770",
+      "created": "2026-03-18T00:00:00Z",
+      "modified": "2026-03-18T00:00:00Z",
+      "name": "Yarn Ball",
+      "object_ref": "threat-actor--19abe967-8801-54c8-ab01-aee08fe73af9",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      },
+      "description": "attacker. Fictional financially motivated threat group behind the scripted prelude. Its later-stage tooling (lateral movement, exfiltration, ransomware, cleanup scripts) is staged on the target as file writes only; this capture contains no execution evidence for those stages"
+    },
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--8b3bdb8a-7b7d-576d-bdd7-d9ed103931dc",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-03-18T00:00:00.000Z",
+      "modified": "2026-03-18T00:00:00.000Z",
+      "name": "Pawsitive Vibes Pet Co.",
+      "description": "Fictional pet wellness e-commerce company; Active Directory domain pawsitivevibes.local across the PAWS lab segment.",
+      "identity_class": "organization",
+      "sectors": [
+        "e-commerce"
+      ]
+    },
+    {
+      "type": "attack-asset",
+      "spec_version": "2.1",
+      "id": "attack-asset--39c79624-422b-55c3-b4ae-641d6f4e2fde",
+      "created": "2026-03-18T00:00:00Z",
+      "modified": "2026-03-18T00:00:00Z",
+      "name": "Pawsitive Vibes Pet Co.",
+      "object_ref": "identity--8b3bdb8a-7b7d-576d-bdd7-d9ed103931dc",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      },
+      "description": "victim-organization. Fictional pet wellness e-commerce company; Active Directory domain pawsitivevibes.local across the PAWS lab segment"
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--a05da2de-16bd-5fe8-a423-90a404256c7b",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Disable or Modify Tools",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1685",
+          "url": "https://attack.mitre.org/techniques/T1685/"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--48aa6faa-c903-5699-ba20-ebc05d8243a2",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Ingress Tool Transfer",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1105",
+          "url": "https://attack.mitre.org/techniques/T1105/"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--ea4f9da1-bab7-5794-bbd7-8a3df8576e02",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Command and Scripting Interpreter: JavaScript/JScript",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1059.007",
+          "url": "https://attack.mitre.org/techniques/T1059/007/"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--d71804a5-aa3f-531f-8bf3-b636958bd11e",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "System Information Discovery",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1082",
+          "url": "https://attack.mitre.org/techniques/T1082/"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--553f5530-6e8c-5418-8f46-dc19d0713285",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "System Network Configuration Discovery",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1016",
+          "url": "https://attack.mitre.org/techniques/T1016/"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--80fbce05-e5fd-50f6-a2d7-11f40297e7a5",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "System Owner/User Discovery",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1033",
+          "url": "https://attack.mitre.org/techniques/T1033/"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--c0bc2395-a0bd-5800-91e2-10f7b209d77d",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Account Discovery: Local Account",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1087.001",
+          "url": "https://attack.mitre.org/techniques/T1087/001/"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--dff758e3-8630-5116-852f-68a87884920f",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Permission Groups Discovery: Domain Groups",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1069.002",
+          "url": "https://attack.mitre.org/techniques/T1069/002/"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--d5fa6f73-a4f9-5e45-88c6-45b7f259dbc9",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Remote System Discovery",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1018",
+          "url": "https://attack.mitre.org/techniques/T1018/"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--f678215b-bc38-5058-b8d2-fd2cf2dade70",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Application Layer Protocol: Web Protocols",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1071.001",
+          "url": "https://attack.mitre.org/techniques/T1071/001/"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--f32f974b-facb-5c3a-8448-2cbd7d5a713d",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Scheduled Task/Job: Scheduled Task",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1053.005",
+          "url": "https://attack.mitre.org/techniques/T1053/005/"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--8ae01e18-07c9-5a79-bd52-9dd6a7b854d6",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-09-08T00:00:00.000Z",
+      "modified": "2026-09-08T00:00:00.000Z",
+      "name": "Masquerading: Match Legitimate Resource Name or Location",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1036.005",
+          "url": "https://attack.mitre.org/techniques/T1036/005/"
+        }
+      ]
+    },
+    {
+      "type": "attack-flow",
+      "spec_version": "2.1",
+      "id": "attack-flow--b4b8331f-52b7-5558-ad2f-c1a43314ff87",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-03-18T00:00:00Z",
+      "modified": "2026-03-18T00:00:00Z",
+      "name": "paws-operation-yarn-ball",
+      "description": "PAWS (Pawsitive Vibes) Windows Active Directory capture with background lab activity across seven hosts and a short scripted intrusion prelude on PAWS-WS02. The evidenced sequence includes QEMU guest-agent PowerShell staging, Defender exclusion changes, OpenClaw-style host and domain discovery, attempted HTTP transfer commands, scheduled-task registration, staged-binary execution, and one outbound PowerShell connection to a lab host. The capture does not evidence the intended later stages of credential dumping, WinRM or PsExec lateral movement, bulk file encryption, or Windows event-log clearing. Contains 1,295,883 replayable events across Windows, Squid, and Zeek sources.",
+      "scope": "incident",
+      "start_refs": [
+        "attack-action--ad58042f-8dae-5c2f-95b5-e30bb470ce47"
+      ],
+      "external_references": [
+        {
+          "source_name": "echolake-dataset",
+          "description": "paws-operation-yarn-ball v1.1.0"
+        }
+      ],
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      }
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--ad58042f-8dae-5c2f-95b5-e30bb470ce47",
+      "created": "2026-03-18T00:00:00Z",
+      "modified": "2026-03-18T00:00:00Z",
+      "name": "S1 Defender exclusions staged",
+      "technique_id": "T1685",
+      "technique_ref": "attack-pattern--a05da2de-16bd-5fe8-a423-90a404256c7b",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      },
+      "tactic_id": "TA0005",
+      "description": "An Add-MpPreference script block excludes C:\\Windows\\Temp and patch-kb5041234.exe from Defender coverage, the first scripted action of the prelude, run through the guest-agent PowerShell chain. Evidence: PowerShell 4104 script block, PAWS-WS02.",
+      "execution_start": "2026-03-18T00:17:51Z",
+      "execution_end": "2026-03-18T00:17:52Z",
+      "asset_refs": [
+        "attack-asset--5162e1c2-2e77-5058-af72-c179e83dd094"
+      ],
+      "effect_refs": [
+        "attack-action--491bdfd8-13c8-5f56-ae0d-519f3985cd41"
+      ],
+      "external_references": [
+        {
+          "source_name": "sigma-rule",
+          "external_id": "paws_defender_exclusion_temp_and_patch",
+          "url": "https://github.com/daveherrald/echolake-datasets/blob/main/datasets/paws-operation-yarn-ball/rules/sigma/paws_defender_exclusion_temp_and_patch.yml"
+        }
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--491bdfd8-13c8-5f56-ae0d-519f3985cd41",
+      "created": "2026-03-18T00:00:00Z",
+      "modified": "2026-03-18T00:00:00Z",
+      "name": "S2 Staging retrieval from the orchestrator host",
+      "technique_id": "T1105",
+      "technique_ref": "attack-pattern--48aa6faa-c903-5699-ba20-ebc05d8243a2",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      },
+      "tactic_id": "TA0011",
+      "description": "One outbound powershell.exe TCP connection from PAWS-WS02 to the orchestrator host on port 9090 returns roughly 327 KB to the workstation. Attribution to the prelude is by timing and host; the capture does not label the channel. Evidence: zeek_conn 192.168.4.24 to 192.168.4.200:9090.",
+      "execution_start": "2026-03-18T00:18:13Z",
+      "execution_end": "2026-03-18T00:18:13Z",
+      "asset_refs": [
+        "attack-asset--5162e1c2-2e77-5058-af72-c179e83dd094",
+        "attack-asset--c852a7f2-5a9c-54cb-a8cf-e77e2b66fba1"
+      ],
+      "effect_refs": [
+        "attack-action--2b95808d-29da-527c-885e-ce686a4f2cc9"
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--2b95808d-29da-527c-885e-ce686a4f2cc9",
+      "created": "2026-03-18T00:00:00Z",
+      "modified": "2026-03-18T00:00:00Z",
+      "name": "S3 Agent simulation launched",
+      "technique_id": "T1059.007",
+      "technique_ref": "attack-pattern--ea4f9da1-bab7-5794-bbd7-8a3df8576e02",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      },
+      "tactic_id": "TA0002",
+      "description": "node.exe executes openclaw_sim.js from C:\\Users\\Public twice, once with --recon-only; the rest of the prelude descends from these launches. Evidence: Sysmon EID 1 process creations, PAWS-WS02.",
+      "execution_start": "2026-03-18T00:18:57Z",
+      "execution_end": "2026-03-18T00:19:11Z",
+      "asset_refs": [
+        "attack-asset--5162e1c2-2e77-5058-af72-c179e83dd094"
+      ],
+      "effect_refs": [
+        "attack-action--3caf5efe-1581-5cb0-baf5-8eb5a551dac2"
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--3caf5efe-1581-5cb0-baf5-8eb5a551dac2",
+      "created": "2026-03-18T00:00:00Z",
+      "modified": "2026-03-18T00:00:00Z",
+      "name": "S4 Host and domain discovery (T1082)",
+      "technique_id": "T1082",
+      "technique_ref": "attack-pattern--d71804a5-aa3f-531f-8bf3-b636958bd11e",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      },
+      "tactic_id": "TA0007",
+      "description": "A seven-command discovery burst (whoami /all, hostname, ipconfig /all, systeminfo, net user, net group \"Domain Admins\" /domain, net view) runs as cmd.exe children of node.exe, once per simulation launch. Evidence: Sysmon EID 1, PAWS-WS02.",
+      "execution_start": "2026-03-18T00:18:57Z",
+      "execution_end": "2026-03-18T00:19:15Z",
+      "asset_refs": [
+        "attack-asset--5162e1c2-2e77-5058-af72-c179e83dd094"
+      ],
+      "effect_refs": [
+        "attack-action--da6f48a4-3405-52b7-9bdb-de3aeebf1577"
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--da6f48a4-3405-52b7-9bdb-de3aeebf1577",
+      "created": "2026-03-18T00:00:00Z",
+      "modified": "2026-03-18T00:00:00Z",
+      "name": "S4 Host and domain discovery (T1016)",
+      "technique_id": "T1016",
+      "technique_ref": "attack-pattern--553f5530-6e8c-5418-8f46-dc19d0713285",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      },
+      "tactic_id": "TA0007",
+      "description": "Part of stage S4: Host and domain discovery.",
+      "execution_start": "2026-03-18T00:18:57Z",
+      "execution_end": "2026-03-18T00:19:15Z",
+      "asset_refs": [
+        "attack-asset--5162e1c2-2e77-5058-af72-c179e83dd094"
+      ],
+      "effect_refs": [
+        "attack-action--1fe441c9-78a9-52bb-9ad2-8c1fa6dd2a71"
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--1fe441c9-78a9-52bb-9ad2-8c1fa6dd2a71",
+      "created": "2026-03-18T00:00:00Z",
+      "modified": "2026-03-18T00:00:00Z",
+      "name": "S4 Host and domain discovery (T1033)",
+      "technique_id": "T1033",
+      "technique_ref": "attack-pattern--80fbce05-e5fd-50f6-a2d7-11f40297e7a5",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      },
+      "tactic_id": "TA0007",
+      "description": "Part of stage S4: Host and domain discovery.",
+      "execution_start": "2026-03-18T00:18:57Z",
+      "execution_end": "2026-03-18T00:19:15Z",
+      "asset_refs": [
+        "attack-asset--5162e1c2-2e77-5058-af72-c179e83dd094"
+      ],
+      "effect_refs": [
+        "attack-action--208d501d-5c0d-5a3d-8c66-42d6e16aa803"
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--208d501d-5c0d-5a3d-8c66-42d6e16aa803",
+      "created": "2026-03-18T00:00:00Z",
+      "modified": "2026-03-18T00:00:00Z",
+      "name": "S4 Host and domain discovery (T1087.001)",
+      "technique_id": "T1087.001",
+      "technique_ref": "attack-pattern--c0bc2395-a0bd-5800-91e2-10f7b209d77d",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      },
+      "tactic_id": "TA0007",
+      "description": "Part of stage S4: Host and domain discovery.",
+      "execution_start": "2026-03-18T00:18:57Z",
+      "execution_end": "2026-03-18T00:19:15Z",
+      "asset_refs": [
+        "attack-asset--5162e1c2-2e77-5058-af72-c179e83dd094"
+      ],
+      "effect_refs": [
+        "attack-action--5d4bbadb-bfd8-57fd-bafe-56e1f1d9da85"
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--5d4bbadb-bfd8-57fd-bafe-56e1f1d9da85",
+      "created": "2026-03-18T00:00:00Z",
+      "modified": "2026-03-18T00:00:00Z",
+      "name": "S4 Host and domain discovery (T1069.002)",
+      "technique_id": "T1069.002",
+      "technique_ref": "attack-pattern--dff758e3-8630-5116-852f-68a87884920f",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      },
+      "tactic_id": "TA0007",
+      "description": "Part of stage S4: Host and domain discovery.",
+      "execution_start": "2026-03-18T00:18:57Z",
+      "execution_end": "2026-03-18T00:19:15Z",
+      "asset_refs": [
+        "attack-asset--5162e1c2-2e77-5058-af72-c179e83dd094"
+      ],
+      "effect_refs": [
+        "attack-action--c528c1e0-b535-5bf7-b03d-0ffcc3dbd4a9"
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--c528c1e0-b535-5bf7-b03d-0ffcc3dbd4a9",
+      "created": "2026-03-18T00:00:00Z",
+      "modified": "2026-03-18T00:00:00Z",
+      "name": "S4 Host and domain discovery (T1018)",
+      "technique_id": "T1018",
+      "technique_ref": "attack-pattern--d5fa6f73-a4f9-5e45-88c6-45b7f259dbc9",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      },
+      "tactic_id": "TA0007",
+      "description": "Part of stage S4: Host and domain discovery.",
+      "execution_start": "2026-03-18T00:18:57Z",
+      "execution_end": "2026-03-18T00:19:15Z",
+      "asset_refs": [
+        "attack-asset--5162e1c2-2e77-5058-af72-c179e83dd094"
+      ],
+      "effect_refs": [
+        "attack-action--24a86c06-3bc4-5b8d-99a3-1ccae936f9a1"
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--24a86c06-3bc4-5b8d-99a3-1ccae936f9a1",
+      "created": "2026-03-18T00:00:00Z",
+      "modified": "2026-03-18T00:00:00Z",
+      "name": "S5 Lab-domain contact attempts (T1071.001)",
+      "technique_id": "T1071.001",
+      "technique_ref": "attack-pattern--f678215b-bc38-5058-b8d2-fd2cf2dade70",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      },
+      "tactic_id": "TA0011",
+      "description": "curl commands against yarn-ball.xyz: an HTTPS POST of the staging diagnostics file and a GET retrieving the patch binary into Temp. Attempts only; no DNS resolution or HTTP session for the domain appears in the network telemetry. Evidence: Sysmon EID 1 command lines, PAWS-WS02.",
+      "execution_start": "2026-03-18T00:19:21Z",
+      "execution_end": "2026-03-18T00:19:24Z",
+      "asset_refs": [
+        "attack-asset--5162e1c2-2e77-5058-af72-c179e83dd094",
+        "attack-asset--c852a7f2-5a9c-54cb-a8cf-e77e2b66fba1"
+      ],
+      "effect_refs": [
+        "attack-action--091e6f7a-c933-5eec-b5fb-a6f414954ca3"
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--091e6f7a-c933-5eec-b5fb-a6f414954ca3",
+      "created": "2026-03-18T00:00:00Z",
+      "modified": "2026-03-18T00:00:00Z",
+      "name": "S5 Lab-domain contact attempts (T1105)",
+      "technique_id": "T1105",
+      "technique_ref": "attack-pattern--48aa6faa-c903-5699-ba20-ebc05d8243a2",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      },
+      "tactic_id": "TA0011",
+      "description": "Part of stage S5: Lab-domain contact attempts.",
+      "execution_start": "2026-03-18T00:19:21Z",
+      "execution_end": "2026-03-18T00:19:24Z",
+      "asset_refs": [
+        "attack-asset--5162e1c2-2e77-5058-af72-c179e83dd094",
+        "attack-asset--c852a7f2-5a9c-54cb-a8cf-e77e2b66fba1"
+      ],
+      "effect_refs": [
+        "attack-action--4d5c3a18-5987-5af4-b329-6894db03518c"
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--4d5c3a18-5987-5af4-b329-6894db03518c",
+      "created": "2026-03-18T00:00:00Z",
+      "modified": "2026-03-18T00:00:00Z",
+      "name": "S6 Scheduled task registration and staging cleanup",
+      "technique_id": "T1053.005",
+      "technique_ref": "attack-pattern--f32f974b-facb-5c3a-8448-2cbd7d5a713d",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      },
+      "tactic_id": "TA0003",
+      "description": "schtasks /create registers SecurityPatchRecovery under the Microsoft\\Windows\\WindowsUpdate\\ namespace to run the Temp binary at logon with HIGHEST privileges; the staging files diag.txt and validate.txt are deleted immediately after. Evidence: Sysmon EID 1 and Security 4688 command lines, PAWS-WS02.",
+      "execution_start": "2026-03-18T00:19:27Z",
+      "execution_end": "2026-03-18T00:19:28Z",
+      "asset_refs": [
+        "attack-asset--5162e1c2-2e77-5058-af72-c179e83dd094"
+      ],
+      "effect_refs": [
+        "attack-action--5c4fa993-df19-5c10-862d-31f22180d445"
+      ]
+    },
+    {
+      "type": "attack-action",
+      "spec_version": "2.1",
+      "id": "attack-action--5c4fa993-df19-5c10-862d-31f22180d445",
+      "created": "2026-03-18T00:00:00Z",
+      "modified": "2026-03-18T00:00:00Z",
+      "name": "S7 Staged binary execution, prelude ends",
+      "technique_id": "T1036.005",
+      "technique_ref": "attack-pattern--8ae01e18-07c9-5a79-bd52-9dd6a7b854d6",
+      "extensions": {
+        "extension-definition--fb9c968a-745b-4ade-9b25-c324172197f4": {
+          "extension_type": "new-sdo"
+        }
+      },
+      "tactic_id": "TA0005",
+      "description": "patch-kb5041234.exe executes from C:\\Windows\\Temp through the agent's cmd chain, its name impersonating a Windows update patch. The prelude ends here: scripts named for the later stages remain file writes only, and credential dumping, lateral movement, bulk encryption, and event-log clearing are not evidenced in this capture. Evidence: Sysmon EID 1, PAWS-WS02.",
+      "execution_start": "2026-03-18T00:20:29Z",
+      "execution_end": "2026-03-18T00:20:29Z",
+      "asset_refs": [
+        "attack-asset--5162e1c2-2e77-5058-af72-c179e83dd094"
+      ]
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--839b5205-7357-5586-9a52-ba201d579010",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-03-18T00:00:00.000Z",
+      "modified": "2026-03-18T00:00:00.000Z",
+      "relationship_type": "based-on",
+      "source_ref": "indicator--9dbd4b70-6255-530b-90a7-7fbe12e348b1",
+      "target_ref": "domain-name--0ea13807-548a-5b0d-a235-0632d1000a8d"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--7631cde9-1e54-59b5-967a-934363b2ea9b",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-03-18T00:00:00.000Z",
+      "modified": "2026-03-18T00:00:00.000Z",
+      "relationship_type": "based-on",
+      "source_ref": "indicator--5b6a144a-c784-5062-a234-2c0a18e9ea4e",
+      "target_ref": "url--7cd63d4a-1053-5770-b6ce-5df3bf8088fb"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--36d57227-b389-5582-8ca6-09b471414da4",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-03-18T00:00:00.000Z",
+      "modified": "2026-03-18T00:00:00.000Z",
+      "relationship_type": "based-on",
+      "source_ref": "indicator--d49068bf-b7ed-5948-aee7-8eb74ad778cb",
+      "target_ref": "url--a8e5c912-bb08-532f-80f8-3d07dd0cb98d"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--5ae49cbd-b5d1-5654-8d8f-14e4b5eb7ea2",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-03-18T00:00:00.000Z",
+      "modified": "2026-03-18T00:00:00.000Z",
+      "relationship_type": "based-on",
+      "source_ref": "indicator--37eec1fc-75c8-53f2-ab9c-b7faefe56407",
+      "target_ref": "file--2dcacf3b-1ba0-597d-a531-7f9916bd37d3"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--e5720dbf-527a-53cb-9633-ac52a23c2f5a",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-03-18T00:00:00.000Z",
+      "modified": "2026-03-18T00:00:00.000Z",
+      "relationship_type": "consists-of",
+      "source_ref": "infrastructure--d991dab3-743b-5cf8-afec-116400152395",
+      "target_ref": "ipv4-addr--c71c09d5-d1c9-5baf-addb-239862e2e093"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--7b1b4519-0125-50be-8c0a-66565d6288a4",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-03-18T00:00:00.000Z",
+      "modified": "2026-03-18T00:00:00.000Z",
+      "relationship_type": "consists-of",
+      "source_ref": "infrastructure--d6a1b5ff-8fc9-5a9a-8087-a7d7a5445c1a",
+      "target_ref": "ipv4-addr--9384ef1d-5724-5e55-a130-cbff7e5e6561"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--16c57d2b-4a83-59e6-841d-fd33ca38b0d5",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-03-18T00:00:00.000Z",
+      "modified": "2026-03-18T00:00:00.000Z",
+      "relationship_type": "related-to",
+      "source_ref": "ipv4-addr--c71c09d5-d1c9-5baf-addb-239862e2e093",
+      "target_ref": "attack-action--491bdfd8-13c8-5f56-ae0d-519f3985cd41"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--19e551ba-536a-5e9e-8a46-9fc44a66687e",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-03-18T00:00:00.000Z",
+      "modified": "2026-03-18T00:00:00.000Z",
+      "relationship_type": "related-to",
+      "source_ref": "ipv4-addr--9384ef1d-5724-5e55-a130-cbff7e5e6561",
+      "target_ref": "attack-action--491bdfd8-13c8-5f56-ae0d-519f3985cd41"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--ec263fd5-d92b-530a-9ecb-009cb4633fe0",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-03-18T00:00:00.000Z",
+      "modified": "2026-03-18T00:00:00.000Z",
+      "relationship_type": "related-to",
+      "source_ref": "file--88d0dc30-236a-503d-ad83-fc0467c3cb2a",
+      "target_ref": "attack-action--2b95808d-29da-527c-885e-ce686a4f2cc9"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--d5dfdc80-443c-558e-b6bf-f3aeaba02588",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-03-18T00:00:00.000Z",
+      "modified": "2026-03-18T00:00:00.000Z",
+      "relationship_type": "related-to",
+      "source_ref": "indicator--9dbd4b70-6255-530b-90a7-7fbe12e348b1",
+      "target_ref": "attack-action--24a86c06-3bc4-5b8d-99a3-1ccae936f9a1"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--a37e12de-0f05-586d-9fe1-588f6f7089be",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-03-18T00:00:00.000Z",
+      "modified": "2026-03-18T00:00:00.000Z",
+      "relationship_type": "related-to",
+      "source_ref": "indicator--5b6a144a-c784-5062-a234-2c0a18e9ea4e",
+      "target_ref": "attack-action--24a86c06-3bc4-5b8d-99a3-1ccae936f9a1"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--692982b8-a7f5-5121-a5bb-37a517496673",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-03-18T00:00:00.000Z",
+      "modified": "2026-03-18T00:00:00.000Z",
+      "relationship_type": "related-to",
+      "source_ref": "indicator--d49068bf-b7ed-5948-aee7-8eb74ad778cb",
+      "target_ref": "attack-action--24a86c06-3bc4-5b8d-99a3-1ccae936f9a1"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--07905203-3499-5bba-b4bf-f4d884a98055",
+      "created_by_ref": "identity--9aab5679-38f7-55db-920c-5163cc72b44d",
+      "created": "2026-03-18T00:00:00.000Z",
+      "modified": "2026-03-18T00:00:00.000Z",
+      "relationship_type": "related-to",
+      "source_ref": "indicator--37eec1fc-75c8-53f2-ab9c-b7faefe56407",
+      "target_ref": "attack-action--5c4fa993-df19-5c10-862d-31f22180d445"
+    }
+  ]
+}

@@ -19,7 +19,7 @@ Six scripts named for later scenario stages are evidenced as file writes only. T
 
 Recurring proxy and HTTP records to the lab host on port 8080 are also present. Endpoint telemetry attributes the direct connections to a Python service on PAWS-DC01, so this package does not label them as a Sliver beacon from PAWS-WS02.
 
-No Attack Flow is attached. A formal flow for the intended full operation would overstate the evidence in this capture.
+An Attack Flow covering only the evidenced prelude is attached (`attack_flow.json`, stages S1-S7 from the Defender exclusions through the staged-binary execution). A formal flow for the intended full operation would overstate the evidence in this capture, so the flow stops where the evidence does and says so in its final stage.
 
 ## Capture summary
 
@@ -53,7 +53,8 @@ No Attack Flow is attached. A formal flow for the intended full operation would 
 | Execution | T1059.001 PowerShell, T1059.003 Windows Command Shell, T1059.007 JavaScript/JScript, T1053.005 Scheduled Task |
 | Persistence | T1053.005 Scheduled Task |
 | Privilege Escalation | T1053.005 Scheduled Task |
-| Defense Evasion | T1562.001 Disable or Modify Tools |
+| Defense Evasion | T1685 Disable or Modify Tools (carried as T1562.001 before the ATT&CK v20 renumber), T1036.005 Match Legitimate Resource Name or Location |
+| Command and Control | T1071.001 Application Layer Protocol: Web Protocols (contact attempts only), T1105 Ingress Tool Transfer |
 | Discovery | T1082 System Information Discovery, T1016 System Network Configuration Discovery, T1033 System Owner/User Discovery, T1087.001 Local Account Discovery, T1069.002 Domain Groups Discovery, T1018 Remote System Discovery |
 
 Use this package to evaluate scripted staging, defense impairment, discovery, scheduled-task persistence, and mixed background-activity analytics. It is not a full-chain ransomware, lateral-movement, or log-clearing evaluation dataset.
@@ -66,7 +67,7 @@ exclusions for the staging directory and patch binary, the first scripted
 action of the prelude. It passes `sigma check` and converts to Splunk, Loki,
 and Lucene. The rest of the scripted sequence is investigation material
 rather than rules, and the recurring port 8080 traffic is not flagged because
-the capture attributes it to a Python service on PAWS-DC01. See the
+the capture attributes it to a Python service on PAWS-DC01. The manifest's `cases` section pairs this rule with its expected disposition and benign explanations as eval ground truth. See the
 [Sigma rules README](rules/sigma/README.md) for the verification table with
 dataset match counts and the field-mapping caveats.
 

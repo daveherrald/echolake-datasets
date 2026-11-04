@@ -400,3 +400,14 @@ provenance:
     source_counts: {aws_cloudtrail: 261801, aws_vpc_flow: 73752, crowdstrike_fdr: 12293, github_audit: 230, linux_auth: 887}
     total_events: 348963
     note: Every line parses as JSON, and EchoLake extracts a base timestamp from every line using the listed sourcetypes. The lead-in includes the developer's own benign SSH sessions and git/python work, correlated with his GitHub audit events.
+cases:
+- id: leaked-key-entry
+  name: Leaked SSH key secret-scanning alert
+  rule: https://github.com/daveherrald/echolake-datasets/blob/main/datasets/cloud-data-exfiltration/rules/sigma/cloudexfil_github_leaked_ssh_key_alert.yml
+  disposition: true-positive
+  benign_explanations:
+  - A test or example SSH key intentionally committed to a repository; the secret-scanning
+    alert is genuine but the exposure is deliberate and harmless.
+  notes: Entry point. The full chain (SSH use of the key, IMDS credential theft,
+    training-bucket reads, SFTP pull, VPC egress) is in the attack flow; the investigation
+    from this alert is which push introduced the key and where the key is being used.

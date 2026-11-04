@@ -792,3 +792,15 @@ defaults:
     base_time: earliest
     target_time: now
   schema: raw
+cases:
+- id: c2-indicator-entry
+  name: Outbound connection to a known C2 indicator
+  rule: https://github.com/daveherrald/echolake-datasets/blob/main/datasets/currentis-operation-black-start/rules/sigma/currentis_c2_indicator_outbound.yml
+  disposition: true-positive
+  benign_explanations:
+  - The indicator has aged out and the address was reassigned to a benign service;
+    current threat-intel listings should be confirmed before treating the match as
+    malicious.
+  notes: Entry point. Both the workstation beacon and the OT jump host egress appear
+    in this alert; separating the two internal sources and tracing each host is the
+    investigation. Full chain in the attack flow.

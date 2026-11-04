@@ -91,7 +91,7 @@ private key, the first signal of the chain and the opening stage of the Attack F
 bundle. It passes `sigma check` and converts to Splunk, Loki, and Lucene. The
 downstream stages (the SSH use of the key, the IMDS theft, the bucket reads, the SFTP
 pull, the VPC egress) are left as investigation material rather than rules; the
-entry-point alert is where the hunt starts. See the
+entry-point alert is where the hunt starts. The manifest's `cases` section pairs this rule with its expected disposition and benign explanations as eval ground truth. See the
 [Sigma rules README](rules/sigma/README.md) for the verification table with dataset
 match counts and the field-mapping caveats.
 
