@@ -629,3 +629,18 @@ cases:
   notes: Entry point. The evidenced prelude S1 through S7 is in the attack flow; the
     investigation from this alert is what the exclusions opened and what later executed
     from the excluded paths.
+  alert:
+    title: PowerShell set Defender exclusions on PAWS-WS02.pawsitivevibes.local
+    description: '{count} PowerShell script blocks on PAWS-WS02.pawsitivevibes.local ran Add-MpPreference
+      to exclude the path C:\Windows\Temp and the process patch-kb5041234.exe from Microsoft Defender, at
+      {first_seen}. Pivot on who ran the script, what landed in the excluded path, and what executed from
+      it.'
+    severity: High
+    anchors:
+    - PAWS-WS02.pawsitivevibes.local
+    - patch-kb5041234.exe
+    evidence:
+      table: winevtlog
+      where: event_id = 4104 AND EXISTS(try_cast(event_data AS array<variant>), v -> v:_Name::string = 'ScriptBlockText'
+        AND v:_VALUE::string LIKE '%Add-MpPreference%' AND v:_VALUE::string LIKE '%Exclusion%')
+      expected_count: 3

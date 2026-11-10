@@ -82,3 +82,26 @@ dataset match counts and the field-mapping caveats.
 ## License
 
 CC0 1.0 Universal (Public Domain Dedication). See [LICENSE](../../LICENSE).
+
+<!-- echolake:alerts:start -->
+## Entry alerts
+
+Generated from the `alert` blocks in `dataset.yaml` by `echolake render-alerts`; edit the manifest, not this section. Each alert is created through the Lakewatch alert API by `echolake create-lakewatch-alerts`, which first confirms the evidence below is present in the loaded catalog. API-created alerts carry no linked events, so the description is the alert's full content.
+
+### defender-exclusion-entry
+
+- **Title:** PowerShell set Defender exclusions on PAWS-WS02.pawsitivevibes.local
+- **Severity:** High
+- **Description:** {count} PowerShell script blocks on PAWS-WS02.pawsitivevibes.local ran Add-MpPreference to exclude the path C:\Windows\Temp and the process patch-kb5041234.exe from Microsoft Defender, at {first_seen}. Pivot on who ran the script, what landed in the excluded path, and what executed from it.
+- **Expected disposition:** true-positive
+- **Detection rule:** [paws_defender_exclusion_temp_and_patch.yml](https://github.com/daveherrald/echolake-datasets/blob/main/datasets/paws-operation-yarn-ball/rules/sigma/paws_defender_exclusion_temp_and_patch.yml)
+- **Evidence:** 3 row(s) in `winevtlog`
+- **Anchors:** `PAWS-WS02.pawsitivevibes.local`, `patch-kb5041234.exe`
+
+```sql
+FROM <catalog>.<schema>.winevtlog
+|> WHERE event_id = 4104 AND EXISTS(try_cast(event_data AS array<variant>), v -> v:_Name::string = 'ScriptBlockText' AND v:_VALUE::string LIKE '%Add-MpPreference%' AND v:_VALUE::string LIKE '%Exclusion%')
+|> AGGREGATE count(*) AS events, min(time) AS first_seen, max(time) AS last_seen
+```
+
+<!-- echolake:alerts:end -->
