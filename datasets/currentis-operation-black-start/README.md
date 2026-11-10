@@ -117,3 +117,26 @@ The dataset carries an EchoLake `dataset.yaml` with the ATT&CK mapping, an envir
 ## License
 
 CC0 1.0 Universal (Public Domain Dedication). See [LICENSE](../../LICENSE).
+
+<!-- echolake:alerts:start -->
+## Entry alerts
+
+Generated from the `alert` blocks in `dataset.yaml` by `echolake render-alerts`; edit the manifest, not this section. Each alert is created through the Lakewatch alert API by `echolake create-lakewatch-alerts`, which first confirms the evidence below is present in the loaded catalog. API-created alerts carry no linked events, so the description is the alert's full content.
+
+### c2-indicator-entry
+
+- **Title:** Outbound connections to known C2 indicator 121.43.243.13 from 192.168.4.233 and 192.168.4.244
+- **Severity:** Medium
+- **Description:** {count} outbound connections from 192.168.4.233 and 192.168.4.244 to 121.43.243.13, a publicly documented Cobalt Strike C2 indicator, between {first_seen} and {last_seen}. Low-confidence threat-intel seed; treat a match as a pivot, not a verdict.
+- **Expected disposition:** true-positive
+- **Detection rule:** [currentis_c2_indicator_outbound.yml](https://github.com/daveherrald/echolake-datasets/blob/main/datasets/currentis-operation-black-start/rules/sigma/currentis_c2_indicator_outbound.yml)
+- **Evidence:** 38 row(s) in `zeek_conn`
+- **Anchors:** `121.43.243.13`, `192.168.4.233`, `192.168.4.244`
+
+```sql
+FROM <catalog>.<schema>.zeek_conn
+|> WHERE dst_ip = '121.43.243.13'
+|> AGGREGATE count(*) AS events, min(time) AS first_seen, max(time) AS last_seen
+```
+
+<!-- echolake:alerts:end -->

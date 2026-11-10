@@ -139,3 +139,26 @@ EchoLake applies the future ceiling to each time field on its own, not to each e
 ## License
 
 CC0 1.0 Universal (Public Domain Dedication). See [LICENSE](../../LICENSE).
+
+<!-- echolake:alerts:start -->
+## Entry alerts
+
+Generated from the `alert` blocks in `dataset.yaml` by `echolake render-alerts`; edit the manifest, not this section. Each alert is created through the Lakewatch alert API by `echolake create-lakewatch-alerts`, which first confirms the evidence below is present in the loaded catalog. API-created alerts carry no linked events, so the description is the alert's full content.
+
+### leaked-key-entry
+
+- **Title:** GitHub secret scanning raised SSH private key alert #7 in acme-platform/datalake-utils
+- **Severity:** High
+- **Description:** GitHub secret scanning raised an alert for an SSH private key pushed to the repository acme-platform/datalake-utils (alert #7) at {first_seen}. Pivot on who pushed the key, which hosts accept it, and what authenticated with it afterward.
+- **Expected disposition:** true-positive
+- **Detection rule:** [cloudexfil_github_leaked_ssh_key_alert.yml](https://github.com/daveherrald/echolake-datasets/blob/main/datasets/cloud-data-exfiltration/rules/sigma/cloudexfil_github_leaked_ssh_key_alert.yml)
+- **Evidence:** 1 row(s) in `github_audit`
+- **Anchors:** `acme-platform/datalake-utils`, `ssh_private_key`
+
+```sql
+FROM <catalog>.<schema>.github_audit
+|> WHERE action = 'secret_scanning_alert.create' AND array_contains(secret_types, 'ssh_private_key')
+|> AGGREGATE count(*) AS events, min(time) AS first_seen, max(time) AS last_seen
+```
+
+<!-- echolake:alerts:end -->

@@ -411,3 +411,16 @@ cases:
   notes: Entry point. The full chain (SSH use of the key, IMDS credential theft,
     training-bucket reads, SFTP pull, VPC egress) is in the attack flow; the investigation
     from this alert is which push introduced the key and where the key is being used.
+  alert:
+    title: 'GitHub secret scanning raised SSH private key alert #7 in acme-platform/datalake-utils'
+    description: 'GitHub secret scanning raised an alert for an SSH private key pushed to the repository
+      acme-platform/datalake-utils (alert #7) at {first_seen}. Pivot on who pushed the key, which hosts
+      accept it, and what authenticated with it afterward.'
+    severity: High
+    anchors:
+    - acme-platform/datalake-utils
+    - ssh_private_key
+    evidence:
+      table: github_audit
+      where: action = 'secret_scanning_alert.create' AND array_contains(secret_types, 'ssh_private_key')
+      expected_count: 1

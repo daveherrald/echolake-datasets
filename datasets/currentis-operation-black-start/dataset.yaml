@@ -804,3 +804,17 @@ cases:
   notes: Entry point. Both the workstation beacon and the OT jump host egress appear
     in this alert; separating the two internal sources and tracing each host is the
     investigation. Full chain in the attack flow.
+  alert:
+    title: Outbound connections to known C2 indicator 121.43.243.13 from 192.168.4.233 and 192.168.4.244
+    description: '{count} outbound connections from 192.168.4.233 and 192.168.4.244 to 121.43.243.13, a
+      publicly documented Cobalt Strike C2 indicator, between {first_seen} and {last_seen}. Low-confidence
+      threat-intel seed; treat a match as a pivot, not a verdict.'
+    severity: Medium
+    anchors:
+    - 121.43.243.13
+    - 192.168.4.233
+    - 192.168.4.244
+    evidence:
+      table: zeek_conn
+      where: dst_ip = '121.43.243.13'
+      expected_count: 38
